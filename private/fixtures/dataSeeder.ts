@@ -5,12 +5,7 @@ import { Connection } from 'typeorm/connection/Connection';
 import Logger from '../libs/logger';
 
 export default class DataSeeder {
-	private static _readJson(location: string): Object[] {
-		const JsonObjects = JSON.parse(Fs.readFileSync(location, 'utf8'));
-		return JsonObjects;
-	}
-
-	private static _dataSeeder(model: any, datas: Object[], connection: Connection): void {
+	public static SeedData(model: any, datas: Object[], connection: Connection): void {
 		let repository = connection.getRepository(model);
 		datas.forEach(async dataObject => {
 			let _model = new (<any>model);
@@ -31,7 +26,8 @@ export default class DataSeeder {
 		});
 	}
 
-	public static SeedData(model: any, location: string, connection: Connection): void {
-		DataSeeder._dataSeeder(model, DataSeeder._readJson(location), connection);
+	public static readJson(location: string): Object[] {
+		const JsonObjects = JSON.parse(Fs.readFileSync(location, 'utf8'));
+		return JsonObjects;
 	}
 }

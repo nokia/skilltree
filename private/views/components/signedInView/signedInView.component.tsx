@@ -33,7 +33,7 @@ export default class extends React.Component<Props, State> {
 			</main>
 			<main style={Object.assign({},
 				Style.mainContainer(this.props.containerSize),
-				Style.contentContainer)}>Timeline</main>
+				Style.contentContainer)}>{this.props.token}</main>
 			<main style={Object.assign({},
 				Style.mainContainer(this.props.containerSize),
 				Style.contentContainer)}>Dashboard</main>
