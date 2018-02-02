@@ -11,7 +11,8 @@
     "make": "webpack -w",
     "build": "tsc -w",
     "serve": "env-cmd .env forever start --minUptime 3000 --spinSleepTime 1000 -s -w public/* ./forever/development.json",
-    "serve-dev": "env-cmd .env nodemon -w public public/index.js"
+    "serve-dev": "env-cmd .env nodemon -w public public/index.js",
+    "migrate": "env-cmd .env ts-node public/fixtures/index.js"
   },
   "dependencies": {
     "@nestjs/common": "^4.5.6",

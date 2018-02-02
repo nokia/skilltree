@@ -1,11 +1,11 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { ManyToOne } from 'typeorm/decorator/relations/ManyToOne';
 
-import { Badge } from './badge,model';
+import { Badge } from './badge.model';
 import { User } from './user.model';
 
 @Entity()
-export class UserBadges {
+export class UserBadge {
 	@PrimaryGeneratedColumn()
 	ID: number;
 
