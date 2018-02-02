@@ -3,6 +3,7 @@ import Snackbar from 'material-ui/Snackbar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Typography from 'material-ui/Typography';
 import * as React from 'react';
+import { DOMNode, findDOMNode } from 'react-dom';
 import * as ReactObserver from 'react-event-observer';
 
 import { SocketIO } from '../libs/socketIO';
@@ -14,7 +15,6 @@ import SignedInView from './components/signedInView';
 import SignedOutBar from './components/signedOutBar';
 import { isBrowser } from './misc';
 import { Dark } from './themes';
-import { findDOMNode, DOMNode } from 'react-dom';
 
 export default class extends React.Component<{}, State> {
 	private _connection: SocketIO;
@@ -48,7 +48,7 @@ export default class extends React.Component<{}, State> {
 				this.setState({ userIsLoggedIn: true, user: response.user });
 				let date: Date = new Date();
 				date.setMinutes(date.getMinutes() + 60);
-				setCookie('token', response.token, { expires: date });
+				setCookie('token', response.token, { expires: date, secure: true });
 			} else {
 				this.setState({ errorMessage: 'Wrong username or password' });
 			}

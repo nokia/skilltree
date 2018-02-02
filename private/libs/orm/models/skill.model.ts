@@ -6,6 +6,10 @@ export class Skill {
 	@PrimaryGeneratedColumn()
 	ID: number;
 
+	@Column({ unique: true })
+	@IsNotEmpty()
+	Name: string;
+
 	@Column()
 	@IsNotEmpty()
 	Type: string;

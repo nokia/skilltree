@@ -18,7 +18,8 @@ export default class DataSeeder {
 			} else {
 				try {
 					await repository.save(_model);
-					Logger.info(`Migration is complete: ${ JSON.stringify(_model).substring(0, 30) }...`);
+					Logger.info(`Migration is complete: ${JSON.stringify(_model)
+						.substring(0, 30)}...`);
 				} catch (error) {
 					Logger.error(error.message);
 				}

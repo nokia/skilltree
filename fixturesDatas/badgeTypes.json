@@ -1,0 +1,9 @@
+{
+	"Model": "BadgeType",
+	"Datas": [
+		{
+			"Name": "Development",
+			"Description": "Dev achievement"
+		}
+	]
+}
