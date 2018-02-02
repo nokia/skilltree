@@ -1,0 +1,7 @@
+{
+  "uid": "skilltree",
+  "append": true,
+  "watch": true,
+  "script": "index.js",
+  "sourceDir": "./public/index.js"
+}
