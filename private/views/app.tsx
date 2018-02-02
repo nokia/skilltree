@@ -77,7 +77,7 @@ export default class extends React.Component<{}, State> {
 		this.setState({ userIsLoggedIn: false, user: undefined });
 	}
 
-	private _calculateContainerHeight() {
+	private _calculateContainerSize() {
 		let appBarDOMNode: DOMNode = findDOMNode(this.refs.AppBar);
 		let height: number = window.innerHeight - appBarDOMNode.clientHeight;
 		let width: number = appBarDOMNode.clientWidth;
@@ -86,7 +86,8 @@ export default class extends React.Component<{}, State> {
 	}
 
 	public componentDidMount() {
-		this._calculateContainerHeight();
+		window.addEventListener('resize', this._calculateContainerSize.bind(this));
+		this._calculateContainerSize();
 		this.setState({ token: getCookie('token') });
 		if (this.state.token) {
 			this._connection = SocketIO.getInstance();
@@ -123,8 +124,8 @@ export default class extends React.Component<{}, State> {
 			</AppBar>
 			{ !this.state.user
 				? <div></div>
-				: <SignedInView observer={ this._observer }
-					containerSize={ this.state.containerSize } />
+				: <SignedInView observer={ this._observer } user={ this.state.user }
+					containerSize={ this.state.containerSize } token={ this.state.token } />
 			}
 			<Snackbar
 				open={ this.state.errorMessage !== '' }
@@ -135,5 +136,3 @@ export default class extends React.Component<{}, State> {
 		</MuiThemeProvider>)
 	}
 }
-
-//console.log(`http://whereareyou.eecloud.dynamic.nsn-net.net/user/${this.state.user.Username}`);

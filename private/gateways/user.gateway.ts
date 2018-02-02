@@ -37,19 +37,24 @@ export class UserGateway {
 
 	@SubscribeMessage('loginWithToken')
 	loginWithToken(client: any, token: string): void {
-		let encryptedToken: { username: string } = this._keyManager.decryptToken(token);
-		if (encryptedToken && encryptedToken.username) {
-			(async () => {
-				let user: User | undefined = await this._databaseManager.findUserByUsername(encryptedToken.username);
-				if (user) {
-					this._server.to(client.id).emit('acceptLogin', { user: <IUser>{ ...user } });
-				} else {
-					this._server.to(client.id).emit('deniedLogin', 'Account is not found');
-				}
-			})()
+		let decryptedToken: { username: string, nbf: number, iat: number } =
+			this._keyManager.decryptToken(token);
+		if (this._keyManager.verifyToken(decryptedToken)) {
+			if (decryptedToken && decryptedToken.username) {
+				(async () => {
+					let user: User | undefined = await this._databaseManager
+						.findUserByUsername(decryptedToken.username);
+					if (user) {
+						this._server.to(client.id).emit('acceptLogin', { user: <IUser>{ ...user } });
+					} else {
+						this._server.to(client.id).emit('deniedLogin', 'Account is not found');
+					}
+				})()
+			} else {
+				this._server.to(client.id).emit('deniedLogin', 'Wrong token');
+			}
 		} else {
 			this._server.to(client.id).emit('deniedLogin', 'Wrong token');
 		}
-		
 	}
 }
