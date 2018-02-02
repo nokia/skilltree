@@ -84,8 +84,8 @@ export default class DatabaseManager {
 		let role: Role | undefined = await this.findRoleByName('employee') ||
 			await this.createNewRole('employee');
 		_user = Object.assign(_user, { ...user, Rank: 1, Role: role, WillingToTeach: false });
-		await userRepository.save(user);
-		return await this.findUserByUsername(user.Username);
+		await userRepository.save(_user);
+		return await this.findUserByUsername(_user.Username);
 	}
 
 	/**
