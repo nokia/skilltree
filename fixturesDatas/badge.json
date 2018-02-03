@@ -1,0 +1,11 @@
+{
+	"Model": "Badge",
+	"Datas": [
+		{
+			"Name": "Development in lvl 5",
+			"Description": "Dev achievement",
+			"ImgUrl": "http://dslsa.org/ed/wp-content/uploads/2015/08/achievement.png",
+			"Type": 1
+		}
+	]
+}

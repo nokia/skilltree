@@ -5,3 +5,6 @@ public
 *.log
 old
 *.pem
+*.crt
+*.csr
+*.key
