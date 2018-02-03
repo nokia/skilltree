@@ -61,10 +61,11 @@ export default class KeyManager {
 	public generateToken(datas: Object): string {
 		let alg: string = 'RS256';
 		let oHeader: Object = { alg: alg, typ: 'JWT' };
-		let tNow: number = Rs.jws.IntDate.get('now');
-		let tEnd: number = Rs.jws.IntDate.get('now + 1hour');
+		let tNow: Date = new Date();
+		let tEnd: Date = new Date();
+		tEnd.setHours(tNow.getHours() + 1);
 		let sHeader: string = JSON.stringify(oHeader);
-		let fullObject = JSON.stringify({ ...datas, nbf: tNow, iat: tEnd });
+		let fullObject = JSON.stringify({ ...datas, nbf: tNow.getTime(), iat: tEnd.getTime() });
 		let sPayload: string = JSON.stringify({ encryptedData: this.encryptText(JSON.stringify(fullObject)) });
 		return Rs.jws.JWS.sign(alg, sHeader, sPayload, this._privateKey);
 	}
@@ -83,6 +84,27 @@ export default class KeyManager {
 			return JSON.parse(JSON.parse(this.decryptText(decodedToken.encryptedData)));
 		} catch (err) {
 			return undefined;
+		}
+	}
+
+	/**
+	 * Verify decrypted token
+	 *
+	 * @class KeyManager
+	 * @method verifyToken
+	 * @param { Object } token
+	 * @returns { Boolean } IsValid
+	 */
+	public verifyToken(token: { username: string, nbf: number, iat: number }): boolean {
+		try {
+			if(token.username && token.nbf && token.iat && ((token.iat - token.nbf) === 3600000) &&
+				(new Date() < new Date(token.iat) && new Date() > new Date(token.nbf))) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (err) {
+			return false;
 		}
 	}
 

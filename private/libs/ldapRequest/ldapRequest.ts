@@ -1,5 +1,6 @@
 import * as Env from 'env-var';
 import * as Ldapjs from 'ldapjs';
+import Logger from '../logger/logger';
 
 export default class LdapRequest {
 	private static _instance: LdapRequest = new LdapRequest(
@@ -45,12 +46,13 @@ export default class LdapRequest {
 		let opts = {
 			filter: `(uid=${user.username})`,
 			scope: 'sub',
-			attributes: ['dn','cn']
+			attributes: ['dn','cn', 'name']
 		}
 		this._client.search('o=NSN', opts, (err, res) => {
 			if (!err) {
 				let userIsExist = false;
 				res.on('searchEntry', (entry) => {
+					console.log(entry.object)
 					userIsExist = true;
 					this._client.bind(entry.object.dn, user.password, (err) => {
 						if (err === null) {
@@ -64,6 +66,7 @@ export default class LdapRequest {
 					!userIsExist && callback('Wrong password or username', null);
 				});
 			} else {
+				Logger.error(err);
 				callback(err, null);
 			}
 		});
