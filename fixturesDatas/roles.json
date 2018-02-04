@@ -1,0 +1,14 @@
+{
+	"Model": "Role",
+	"Datas": [
+		{
+			"Name:": "Employee"
+		},
+		{
+			"Name:": "Manager"
+		},
+		{
+			"Name:": "Developer"
+		}
+	]
+}

@@ -2,7 +2,7 @@
     "compilerOptions": {
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "lib": [ "dom", "es7" ],
+        "lib": [ "dom", "es7", "es6" ],
         "locale": "en-US",
         "module": "commonjs",
         "moduleResolution": "node",
@@ -15,7 +15,8 @@
         "strictNullChecks": true,
         "target": "es5",
         "types": [ "reflect-metadata" ],
-        "jsx": "react"
+        "jsx": "react",
+        "strictPropertyInitialization": false
     },
     "include": [
         "private/**/*"
