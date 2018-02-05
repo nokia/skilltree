@@ -25,11 +25,19 @@ export class User {
 	@IsNotEmpty()
 	Username: string;
 
-	@ManyToOne(type => User, { cascadeAll: true })
+	@ManyToOne(type => User, User => User.ID, {
+		cascadeInsert: true,
+		cascadeUpdate: true,
+		cascadeRemove: true
+	})
 	@ValidateNested()
 	Manager: User;
 
-	@ManyToOne(type => Role, { cascadeAll: true })
+	@ManyToOne(type => Role, Role => Role.ID, {
+		cascadeInsert: true,
+		cascadeUpdate: true,
+		cascadeRemove: true
+	})
 	@ValidateNested()
 	Role: Role;
 }

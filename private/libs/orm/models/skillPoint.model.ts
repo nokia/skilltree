@@ -18,7 +18,11 @@ export class SkillPoint {
 	@IsBoolean()
 	Accepted: boolean;
 
-	@ManyToOne(type => User, { cascadeAll: true })
+	@ManyToOne(type => User, User => User.ID, {
+		cascadeInsert: true,
+		cascadeUpdate: true,
+		cascadeRemove: true
+	})
 	@ValidateNested()
 	AcceptedBy: User;
 
@@ -26,9 +30,19 @@ export class SkillPoint {
 	@IsDate()
 	AcceptedDate: Date;
 
-	@ManyToOne(type => User, { cascadeAll: true })
+	@ManyToOne(type => User, User => User.ID, {
+		cascadeInsert: true,
+		cascadeUpdate: true,
+		cascadeRemove: true
+	})
+	@ValidateNested()
 	User: User;
 
-	@ManyToOne(type => Skill, { cascadeAll: true })
+	@ManyToOne(type => Skill, Skill => Skill.ID, {
+		cascadeInsert: true,
+		cascadeUpdate: true,
+		cascadeRemove: true
+	})
+	@ValidateNested()
 	Skill: Skill;
 }

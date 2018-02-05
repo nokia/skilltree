@@ -9,9 +9,17 @@ export class Parent {
 	@PrimaryGeneratedColumn()
 	ID: number;
 
-	@ManyToOne(type => Skill, { cascadeAll: true})
+	@ManyToOne(type => Skill, Skill => Skill.ID, {
+		cascadeInsert: true,
+		cascadeUpdate: true,
+		cascadeRemove: true
+	})
 	From: Skill;
 
-	@ManyToOne(type => Skill, { cascadeAll: true})
+	@ManyToOne(type => Skill, Skill => Skill.ID, {
+		cascadeInsert: true,
+		cascadeUpdate: true,
+		cascadeRemove: true
+	})
 	To: Skill;
 }

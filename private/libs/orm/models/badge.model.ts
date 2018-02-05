@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { ClosureEntity, Column, Entity, PrimaryGeneratedColumn, JoinColumn, TreeParent } from 'typeorm';
 import { ManyToOne } from 'typeorm/decorator/relations/ManyToOne';
 
 import { BadgeType } from './badgeType.model';
@@ -17,6 +17,10 @@ export class Badge {
 	@Column()
 	ImgUrl: string;
 
-	@ManyToOne(type => BadgeType)
+	@ManyToOne(type => BadgeType, Type => Type.ID, {
+		cascadeInsert: true,
+		cascadeUpdate: true,
+		cascadeRemove: true
+	})
 	Type: BadgeType;
 }

@@ -1,0 +1,19 @@
+{
+	"Model": "Parent",
+	"Relations": [
+		{
+			"Repository": "Skill",
+			"Column": "From"
+		},
+		{
+			"Repository": "Skill",
+			"Column": "To"
+		}
+	],
+	"Datas": [
+		{
+			"From": 2,
+			"To": 1
+		}
+	]
+}

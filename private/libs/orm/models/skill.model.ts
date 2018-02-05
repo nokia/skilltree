@@ -11,10 +11,6 @@ export class Skill {
 	Name: string;
 
 	@Column()
-	@IsNotEmpty()
-	Type: string;
-
-	@Column()
 	@Min(1)
 	MaxLevel: number;
 

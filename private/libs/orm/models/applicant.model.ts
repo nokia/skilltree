@@ -9,10 +9,18 @@ export class Applicant {
 	@PrimaryGeneratedColumn()
 	ID: number;
 
-	@ManyToOne(type => User, { cascadeAll: true })
+	@ManyToOne(type => User, User => User.ID, {
+		cascadeInsert: true,
+		cascadeUpdate: true,
+		cascadeRemove: true
+	})
 	User: User;
 
-	@ManyToOne(type => Skill, { cascadeAll: true })
+	@ManyToOne(type => Skill, Skill => Skill.ID, {
+		cascadeInsert: true,
+		cascadeUpdate: true,
+		cascadeRemove: true
+	})
 	Skill: Skill;
 
 	@Column()
