@@ -69,7 +69,7 @@ createConnection({
 						seedData(fileNamesWithRelation, connection, (transactions: Promise<any>[]) =>
 							transactionsHandler(transactions, connection, () => start = false));
 					} else {
-						//Do notnhing
+						//Do nothing
 					}
 				}, 100);
 			} else {

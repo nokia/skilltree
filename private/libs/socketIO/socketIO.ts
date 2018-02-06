@@ -118,14 +118,10 @@ export class SocketIO {
 			this._socket.close();
 			callback(errorMessage, null);
 		});
-		console.log('ydsadzps');
 		this._tryMultiple((errorMessage: string) => {
 			if (errorMessage) {
-				console.log('ydzssps');
-				console.log(errorMessage);
 				callback(errorMessage, null);
 			} else {
-				console.log('ydzps');
 				this._socket.emit('querySkillTree', token);
 			}
 		});

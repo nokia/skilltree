@@ -22,7 +22,6 @@ export default class extends React.Component<Props, State> {
 		this._connection = SocketIO.getInstance();
 		this._connection.querySkillTree(this.props.token, (err, graph) => {
 			if(!err) {
-				console.log(graph);
 				this.setState({ graph });
 			} else {
 				console.log(err)
@@ -45,9 +44,12 @@ export default class extends React.Component<Props, State> {
 		}
 	}
 
+
 	render() {
 		return (
-			<NodeGraph graph={this.state.graph} options={this.state.options} events={{ select: this._selectHandler.bind(this) }} />
+			<NodeGraph graph={this.state.graph} options={this.state.options} events={{
+				select: this._selectHandler.bind(this)
+			}} />
 		);
 	}
 }

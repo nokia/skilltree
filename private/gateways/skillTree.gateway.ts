@@ -4,8 +4,6 @@ import * as Env from 'env-var';
 import DatabaseManager from '../libs/databaseManager/databaseManager';
 import KeyManager from '../libs/keyManager';
 import { User } from '../libs/orm/models/user.model';
-import { IUser } from '../models';
-import { Skill } from '../libs/orm/models/skill.model';
 
 @WebSocketGateway({ port: Env.get('SOCKET_PORT').asIntPositive() || 81 })
 export class SkillTreeGateway {

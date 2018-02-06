@@ -6,7 +6,7 @@ export default {
 		}
 	},
 	physics: {
-		enabled: false,
+		enabled: false
 	},
 	interaction: {
 		dragNodes: false
@@ -25,6 +25,6 @@ export default {
 		},
 	},
 	nodes: {
-		shape: 'box'
+		shape: 'circularImage'
 	}
 }
