@@ -106,7 +106,33 @@ export class SocketIO {
 		});
 	}
 
-	private _tryMultiple(callback: Function, timout: number = 250, maximumTryCount: number = 3): void {
+	public querySkillTree(token: string | undefined, callback: Function) {
+		
+		this._socket.on('acceptSkillTreeQuery', (response: { user: IUser }) => {
+			this._socket.removeAllListeners('acceptSkillTreeQuery');
+			this._socket.close();
+			callback(null, response);
+		});
+		this._socket.on('deniedSkillTreeQuery', (errorMessage: string) => {
+			this._socket.removeAllListeners('deniedSkillTreeQuery');
+			this._socket.close();
+			callback(errorMessage, null);
+		});
+		console.log('ydsadzps');
+		this._tryMultiple((errorMessage: string) => {
+			if (errorMessage) {
+				console.log('ydzssps');
+				console.log(errorMessage);
+				callback(errorMessage, null);
+			} else {
+				console.log('ydzps');
+				this._socket.emit('querySkillTree', token);
+			}
+		});
+	}
+
+	private _tryMultiple(callback: Function, timout: number = 1000, maximumTryCount: number = 3): void {
+		console.log(this._socket.connected);
 		!this._socket.connected && this._socket.open();
 		let counter = 1;
 		let timer = setInterval(() => {

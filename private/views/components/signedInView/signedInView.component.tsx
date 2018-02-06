@@ -29,7 +29,8 @@ export default class extends React.Component<Props, State> {
 			<main style={Object.assign({},
 				Style.mainContainer(this.props.containerSize),
 				Style.contentContainer)}>
-				<SkillTree observer={this.props.observer} />
+				<SkillTree observer={this.props.observer}
+					token={this.props.token} />
 			</main>
 			<main style={Object.assign({},
 				Style.mainContainer(this.props.containerSize),

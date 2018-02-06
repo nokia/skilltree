@@ -7,6 +7,7 @@ export default class LdapRequest {
 		Env.get('LDAP_URL').required().asString()
 	);
 	private _client: Ldapjs.Client;
+	private _ldapUrl: string;
 
 	/**
 	 * Constructor.
@@ -19,7 +20,7 @@ export default class LdapRequest {
 		if (LdapRequest._instance){
 			throw new Error('Error: Instantiation failed: Use LdapRequest.getInstance() instead of new.');
 		} else {
-			this._client = Ldapjs.createClient({ url: ldapUrl });
+			this._ldapUrl = ldapUrl;
 		}
 	}
 
@@ -43,6 +44,7 @@ export default class LdapRequest {
 	 * @param { Function(error, user) } callback
 	 */
 	public requestLogin(user: { username: string, password: string }, callback: Function) {
+		this._client = Ldapjs.createClient({ url: this._ldapUrl });
 		let opts = {
 			filter: `(uid=${user.username})`,
 			scope: 'sub',
@@ -52,7 +54,6 @@ export default class LdapRequest {
 			if (!err) {
 				let userIsExist = false;
 				res.on('searchEntry', (entry) => {
-					console.log(entry.object)
 					userIsExist = true;
 					this._client.bind(entry.object.dn, user.password, (err) => {
 						if (err === null) {
@@ -60,6 +61,7 @@ export default class LdapRequest {
 						} else {
 							callback('Wrong password or username', null);
 						}
+						this._client.unbind();
 					});
 				});
 				res.on('end', (result) => {
