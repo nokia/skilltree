@@ -2,7 +2,6 @@
 	"Model": "Skill",
 	"Datas": [
 		{
-			"Type": "Development",
 			"Name": "Programming in C++",
 			"MaxLevel": 5,
 			"Description": "The extent of one's ability to write, debug, review, refactor code in C++.",
@@ -10,7 +9,6 @@
 			"ImgUrl": "https://lh3.googleusercontent.com/oKsgcsHtHu_nIkpNd-mNCAyzUD8xo68laRPOfvFuO0hqv6nDXVNNjEMmoiv9tIDgTj8=w170"
 		},
 		{
-			"Type": "Development",
 			"Name": "Programming in C#",
 			"MaxLevel": 5,
 			"Description": "The extent of one's ability to write, debug, review, refactor code in C#.",
@@ -18,7 +16,6 @@
 			"ImgUrl": "https://lh3.googleusercontent.com/oKsgcsHtHu_nIkpNd-mNCAyzUD8xo68laRPOfvFuO0hqv6nDXVNNjEMmoiv9tIDgTj8=w170"
 		},
 		{
-			"Type": "Development",
 			"Name": "Development in Laravel",
 			"MaxLevel": 5,
 			"Description": "The extent of one's ability to work with the Laravel framework.",
@@ -26,4 +23,3 @@
 			"ImgUrl": "https://lh3.googleusercontent.com/oKsgcsHtHu_nIkpNd-mNCAyzUD8xo68laRPOfvFuO0hqv6nDXVNNjEMmoiv9tIDgTj8=w170"
 		}
 	]
-}

@@ -14,7 +14,7 @@ export class SkillTreeGateway {
 	private _keyManager: KeyManager = KeyManager.getInstance();
 	private _databaseManager: DatabaseManager = DatabaseManager.getInstance();
 
-	@SubscribeMessage('loginWithToken')
+	@SubscribeMessage('querySkillTree')
 	loginWithToken(client: any, token: string): void {
 		let decryptedToken: { username: string, nbf: number, iat: number } =
 			this._keyManager.decryptToken(token);
@@ -24,16 +24,25 @@ export class SkillTreeGateway {
 					let user: User | undefined = await this._databaseManager
 						.findUserByUsername(decryptedToken.username);
 					if (user) {
-						this._server.to(client.id).emit('acceptLogin', { user: <IUser>{ ...user } });
+						let graph: {
+							nodes: { id: number, label: string }[],
+							edges: { from: number, to: number }[]
+						} | undefined = await this._databaseManager.querySkillTree();
+						if(graph) {
+							console.log('ok');
+							this._server.to(client.id).emit('acceptSkillTreeQuery', graph);
+						} else {
+							this._server.to(client.id).emit('deniedSkillTreeQuery', 'No skill in tree');
+						}
 					} else {
-						this._server.to(client.id).emit('deniedLogin', 'Account is not found');
+						this._server.to(client.id).emit('deniedSkillTreeQuery', 'Account is not found');
 					}
 				})()
 			} else {
-				this._server.to(client.id).emit('deniedLogin', 'Wrong token');
+				this._server.to(client.id).emit('deniedSkillTreeQuery', 'Wrong token');
 			}
 		} else {
-			this._server.to(client.id).emit('deniedLogin', 'Wrong token');
+			this._server.to(client.id).emit('deniedSkillTreeQuery', 'Wrong token');
 		}
 	}
 }

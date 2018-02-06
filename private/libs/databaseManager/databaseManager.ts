@@ -2,6 +2,8 @@ import Logger from '../logger';
 import Orm from '../orm';
 import { Role } from '../orm/models/role.model';
 import { User } from '../orm/models/user.model';
+import { Skill } from '../orm/models/skill.model';
+import { Parent } from '../orm/models/parent.model';
 
 /**
  * The database manager.
@@ -68,6 +70,41 @@ export default class DatabaseManager {
 	private async findRoleByName(roleName: string): Promise<Role | undefined> {
 		let roleRepository = this._orm.connection.getRepository(Role);
 		return await roleRepository.findOne({ Name: roleName });
+	}
+
+	/**
+	 * Query all skill
+	 *
+	 * @class DatabaseManager
+	 * @method findRoleByName
+	 * @param { string } username
+	 * @returns { Promise<Role | undefined> }
+	 */
+	public async querySkillTree():
+		Promise<{
+			nodes: { id: number, label: string }[],
+			edges: { from: number, to: number }[]
+		} | undefined> {
+		let skillRepository = this._orm.connection.getRepository(Skill);
+		let parentRepository = this._orm.connection.getRepository(Parent);
+		let nodesTmp: Skill[] | undefined = await skillRepository.find();
+		let edgesTmp: Parent[] | undefined = await parentRepository.find({
+			relations: [ 'From', 'To' ]
+		});
+		if (edgesTmp && nodesTmp) {
+			let nodes: { id: number, label: string }[] = nodesTmp.map((skill: Skill) => {
+				return { id: skill.ID, label: skill.Name };
+			});
+			let edges: { from: number, to: number }[] = edgesTmp.map((parent: Parent) => {
+				return { from: parent.From.ID, to: parent.To.ID };
+			});
+			let graph = { nodes, edges };
+			return { nodes, edges };
+		} else {
+			return undefined;
+		}
+		
+		//return await roleRepository.findOne({ Name: roleName });
 	}
 
 	/**

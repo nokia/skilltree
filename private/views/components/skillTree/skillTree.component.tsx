@@ -2,43 +2,32 @@ import * as React from 'react';
 import NodeGraph from 'react-graph-vis';
 import { isArray, isUndefined } from 'util';
 
+import { SocketIO } from '../../../libs/socketIO';
 import Options from './skillTree.options';
 import Props from './skillTree.props';
 import State from './skillTree.state';
 
 export default class extends React.Component<Props, State> {
+	private _connection: SocketIO;
+
 	constructor(props) {
 		super(props);
 		this.state = {
-			graph: {},
+			graph: { nodes: [], edges: [] },
 			options: Options
 		}
 	}
 
 	componentWillMount() {
-		let graph = {
-			nodes: [
-				{ id: 0, label: 'Node 1' },
-				{ id: 1, label: 'Node 2' },
-				{ id: 2, label: 'Node 3' },
-				{ id: 3, label: 'Node 4' },
-				{ id: 4, label: 'Node 5' },
-				{ id: 5, label: 'Node 6' },
-				{ id: 6, label: 'Node 7' }
-			],
-			edges: [
-				{ from: 0, to: 1 },
-				{ from: 0, to: 2 },
-				{ from: 1, to: 3 },
-				{ from: 1, to: 4 },
-				{ from: 1, to: 2 },
-				{ from: 2, to: 5 },
-				{ from: 4, to: 5 },
-				{ from: 5, to: 6 },
-				{ from: 2, to: 6 }
-			]
-		}
-		this.setState({ graph: graph });
+		this._connection = SocketIO.getInstance();
+		this._connection.querySkillTree(this.props.token, (err, graph) => {
+			if(!err) {
+				console.log(graph);
+				this.setState({ graph });
+			} else {
+				console.log(err)
+			}
+		});
 	}
 
 	_selectHandler(events) {

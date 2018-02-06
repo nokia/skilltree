@@ -2,13 +2,12 @@
 	"Model": "Role",
 	"Datas": [
 		{
-			"Name:": "Employee"
+			"Name": "Employee"
 		},
 		{
-			"Name:": "Manager"
+			"Name": "Manager"
 		},
 		{
-			"Name:": "Developer"
+			"Name": "Developer"
 		}
 	]
-}
