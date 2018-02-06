@@ -1,0 +1,17 @@
+{
+	"Model": "SkillType",
+	"Datas": [
+		{
+			"Name": "Development",
+			"Description": "Skills related to software engineering directly."
+		},
+		{
+			"Name": "Management",
+			"Description": "Skills related to leading projects, coordinating teams, managing groups etc.."
+		},
+		{
+			"Name": "Human Resources",
+			"Description": "Skills related to administration, communication, laws, paperwork, statistics etc.."
+		}
+	]
+}
