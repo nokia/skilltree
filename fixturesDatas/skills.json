@@ -1,5 +1,11 @@
 {
 	"Model": "Skill",
+	"Relations": [
+		{
+			"Repository": "SkillType",
+			"Column": "Type"
+		}
+	],
 	"Datas": [
 		{
 			"Name": "Programming in C++",

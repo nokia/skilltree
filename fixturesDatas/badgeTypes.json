@@ -1,5 +1,11 @@
 {
 	"Model": "BadgeType",
+	"Relations": [
+		{
+			"Repository": "Badge",
+			"Column": "Type"
+		}
+	],
 	"Datas": [
 		{
 			"Name": "Skill Mastery",
