@@ -27,7 +27,6 @@ export class SkillTreeGateway {
 							edges: { from: number, to: number }[]
 						} | undefined = await this._databaseManager.querySkillTree();
 						if(graph) {
-							console.log('ok');
 							this._server.to(client.id).emit('acceptSkillTreeQuery', graph);
 						} else {
 							this._server.to(client.id).emit('deniedSkillTreeQuery', 'No skill in tree');
