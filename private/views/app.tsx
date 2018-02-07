@@ -12,6 +12,7 @@ import State from './app.state';
 import AppBar from './components/appBar';
 import SignedInBar from './components/signedInBar';
 import SignedInView from './components/signedInView';
+import SignedOutView from './components/signedOutView';
 import SignedOutBar from './components/signedOutBar';
 import { isBrowser } from './misc';
 import { Dark } from './themes';
@@ -88,7 +89,7 @@ export default class extends React.Component<{}, State> {
 
 	private _emitSkillTreeRequest() {
 		this._connection.querySkillTree(this.state.token, (err, graph) => {
-			if(err) {
+			if (err) {
 				this._observer.publish('_showErrorMessage', err);
 			} else {
 				this._observer.publish('_skillTreeRequest', graph);
@@ -136,7 +137,7 @@ export default class extends React.Component<{}, State> {
 				}
 			</AppBar>
 			{!this.state.user
-				? <div></div>
+				? <SignedOutView containerSize={this.state.containerSize} />
 				: <SignedInView observer={this._observer} user={this.state.user}
 					containerSize={this.state.containerSize} token={this.state.token} />
 			}

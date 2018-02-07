@@ -18,21 +18,12 @@ export default class extends React.Component<Props, State> {
 		}
 	}
 
-	public componentDidMount() {
-		this.props.observer.subscribe('_swipescreen',
-			(currentIndex) => this.setState({ currentIndex }));
-	}
-
-	public componentWillUnmount() {
-		this.props.observer.unsubscribe('_swipescreen');
-	}
-
 	public render() {
-		return (<SwipeableViews axis='x' index={ this.state.currentIndex }
+		return (<SwipeableViews axis='x' index={ 0 }
 			style={ Style.mainContainer(this.props.containerSize) }>
 			<main style={ Object.assign({},
 				Style.mainContainer(this.props.containerSize),
-				Style.contentContainer)}>Please log in</main>
+				Style.contentContainer)}>Please login</main>
 		</SwipeableViews>);
 	}
 }

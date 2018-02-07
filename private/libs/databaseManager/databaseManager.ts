@@ -82,7 +82,11 @@ export default class DatabaseManager {
 	 */
 	public async querySkillTree():
 		Promise<{
-			nodes: { id: number, label: string }[],
+			nodes: {
+				id: number,
+				image: string,
+				label: string,
+				description: string }[],
 			edges: { from: number, to: number }[]
 		} | undefined> {
 		let skillRepository = this._orm.connection.getRepository(Skill);
@@ -92,8 +96,18 @@ export default class DatabaseManager {
 			relations: ['From', 'To']
 		});
 		if (edgesTmp && nodesTmp) {
-			let nodes: { id: number, label: string }[] = nodesTmp.map((skill: Skill) => {
-				return { id: skill.ID, label: skill.Name, image: skill.ImgUrl };
+			let nodes: {
+				id: number,
+				label: string,
+				image: string,
+				description: string
+			}[] = nodesTmp.map((skill: Skill) => {
+				return {
+					id: skill.ID,
+					label: skill.Name,
+					image: skill.ImgUrl,
+					description: skill.Description
+				};
 			});
 			let edges: { from: number, to: number }[] = edgesTmp.map((parent: Parent) => {
 				return { from: parent.From.ID, to: parent.To.ID };

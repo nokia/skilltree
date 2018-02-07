@@ -2,14 +2,17 @@ import * as React from 'react';
 import NodeGraph from 'react-graph-vis';
 import { isArray, isUndefined } from 'util';
 
-import { SocketIO } from '../../../libs/socketIO';
 import Options from './skillTree.options';
 import Props from './skillTree.props';
 import State from './skillTree.state';
+import Dialog from 'material-ui/Dialog/Dialog';
+import DialogTitle from 'material-ui/Dialog/DialogTitle';
+import DialogContent from 'material-ui/Dialog/DialogContent';
+import DialogContentText from 'material-ui/Dialog/DialogContentText';
+import DialogActions from 'material-ui/Dialog/DialogActions';
+import Button from 'material-ui/Button/Button';
 
 export default class extends React.Component<Props, State> {
-	private _connection: SocketIO;
-
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -29,9 +32,15 @@ export default class extends React.Component<Props, State> {
 	}
 
 	private _skillTreeRequestCallback(graph: {
-		nodes: { id: number, label: string }[],
+		nodes: {
+			id: number,
+			label: string,
+			image: string,
+			description: string
+		}[],
 		edges: { from: number, to: number }[]
 	}) {
+		console.log(graph.nodes)
 		this.setState({ graph });
 	}
 
@@ -44,16 +53,33 @@ export default class extends React.Component<Props, State> {
 					this.props.observer.publish('_nodeEvent', node);
 				});
 			} else {
-				console.error('Invalid search');
+				this.props.observer.publish('_showErrorMessage', 'Invalid search');
 			}
 		}
 	}
 
 	render() {
 		return (
-			<NodeGraph graph={this.state.graph} options={this.state.options} events={{
-				select: this._selectHandler.bind(this)
-			}} />
+			<main style={this.props.style} >
+				<NodeGraph graph={this.state.graph} options={this.state.options} events={{
+					select: this._selectHandler.bind(this)
+				}} />
+				<Dialog open={true}>
+					<DialogTitle>
+						Programming in C++ (LVL.: 5)
+					</DialogTitle>
+					<DialogContent>
+						<DialogContentText>
+						The extent of one's ability to write, debug, review, refactor code in C++.
+						</DialogContentText>
+					</DialogContent>
+					<DialogActions>
+						<Button color='primary' fullWidth>
+							Level Up
+						</Button>
+					</DialogActions>
+				</Dialog>
+			</main>
 		);
 	}
 }

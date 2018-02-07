@@ -23,18 +23,20 @@ export default class extends React.Component<Props, State> {
 		this.props.observer.unsubscribe('_swipescreen');
 	}
 
+	private _getStyle(): JSX.IntrinsicAttributes {
+		return Object.assign({},
+			Style.mainContainer(this.props.containerSize),
+			Style.contentContainer);
+	}
+
 	public render() {
 		return (<SwipeableViews axis='x' index={this.state.currentIndex}
 			style={Style.mainContainer(this.props.containerSize)}>
-			<main style={Object.assign({},
-				Style.mainContainer(this.props.containerSize),
-				Style.contentContainer)}>
-				<SkillTree observer={this.props.observer}
-					token={this.props.token} />
+			<main style={this._getStyle()}>
+				<SkillTree style={this._getStyle()}
+					observer={this.props.observer} />
 			</main>
-			<main style={Object.assign({},
-				Style.mainContainer(this.props.containerSize),
-				Style.contentContainer)}>{this.props.token}</main>
+			<main style={this._getStyle()}>{this.props.token}</main>
 			<main style={Object.assign({},
 				Style.mainContainer(this.props.containerSize),
 				Style.contentContainer)}>Dashboard</main>

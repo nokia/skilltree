@@ -21,7 +21,7 @@ export default {
 		},
 		arrowStrikethrough: false,
 		smooth: {
-			type: 'vertical'
+			type: 'cubicBezier'
 		},
 	},
 	nodes: {

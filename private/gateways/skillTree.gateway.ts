@@ -23,7 +23,12 @@ export class SkillTreeGateway {
 						.findUserByUsername(decryptedToken.username);
 					if (user) {
 						let graph: {
-							nodes: { id: number, label: string }[],
+							nodes: {
+								id: number,
+								label: string,
+								image: string,
+								description: string
+							}[],
 							edges: { from: number, to: number }[]
 						} | undefined = await this._databaseManager.querySkillTree();
 						if(graph) {
