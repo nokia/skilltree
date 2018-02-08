@@ -42,31 +42,43 @@ export default class extends React.Component<{}, State> {
 	}
 
 	private _loginRequestWithoutTokenCallback(err: string, response: { token: string, user: IUser }) {
-		this._loginUser(err, response.user, () => {
-			let date: Date = new Date();
-			date.setMinutes(date.getMinutes() + 60);
-			setCookie('token', response.token, { expires: date, secure: true });
-			this.setState({ token: response.token });
-		});
-	}
-
-	private _loginRequestWithTokenCallback(err: string, response: { user: IUser }) {
-		this._loginUser(err, response.user);
-	}
-
-	private _loginUser(err: string, user: IUser, callback?: Function) {
-		if (err) {
-			removeCookie('token');
-			this._observer.publish('_showErrorMessage', err);
-		} else {
-			if (user) {
-				this.setState({ userIsLoggedIn: true, user: user });
-				(callback) && callback();
+		if (!err) {
+			if (response.user) {
+				this._loginUser(response.user, () => {
+					let date: Date = new Date();
+					date.setMinutes(date.getMinutes() + 60);
+					setCookie('token', response.token, { expires: date, secure: true });
+					this.setState({ token: response.token });
+				});
 			} else {
+				this.setState({ loaded: true });
 				removeCookie('token');
 				this._observer.publish('_showErrorMessage', 'User is not valid');
 			}
+		} else {
+			this.setState({ loaded: true });
+			this._observer.publish('_showErrorMessage', err);
 		}
+	}
+
+	private _loginRequestWithTokenCallback(err: string, response: { user: IUser }) {
+		if (!err) {
+			if (response.user) {
+				this._loginUser(response.user);
+			} else {
+				this.setState({ loaded: true });
+				removeCookie('token');
+				this._observer.publish('_showErrorMessage', 'User is not valid');
+			}
+		} else {
+			this.setState({ loaded: true });
+			this._observer.publish('_showErrorMessage', err);
+		}
+	}
+
+	private _loginUser(user: IUser, callback?: Function) {
+		this.setState({ userIsLoggedIn: true, user: user });
+		(callback) && callback();
 		this.setState({ loaded: true });
 	}
 
@@ -143,7 +155,7 @@ export default class extends React.Component<{}, State> {
 			}
 			<Snackbar
 				open={this.state.errorMessage !== ''}
-				message={<Typography noWrap type='title' color='inherit'>
+				message={<Typography noWrap color='inherit'>
 					{this.state.errorMessage}
 				</Typography>}
 			/>

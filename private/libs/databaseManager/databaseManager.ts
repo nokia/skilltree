@@ -86,12 +86,15 @@ export default class DatabaseManager {
 				id: number,
 				image: string,
 				label: string,
-				description: string }[],
+				description: string
+			}[],
 			edges: { from: number, to: number }[]
 		} | undefined> {
 		let skillRepository = this._orm.connection.getRepository(Skill);
 		let parentRepository = this._orm.connection.getRepository(Parent);
-		let nodesTmp: Skill[] | undefined = await skillRepository.find();
+		let nodesTmp: Skill[] | undefined = await skillRepository.find({
+			relations: ['Type']
+		});
 		let edgesTmp: Parent[] | undefined = await parentRepository.find({
 			relations: ['From', 'To']
 		});
@@ -109,9 +112,12 @@ export default class DatabaseManager {
 					description: skill.Description
 				};
 			});
+			console.log(nodes)
 			let edges: { from: number, to: number }[] = edgesTmp.map((parent: Parent) => {
+				console.log(parent)
 				return { from: parent.From.ID, to: parent.To.ID };
 			});
+			console.log(edges)
 			let graph = { nodes, edges };
 			return { nodes, edges };
 		} else {

@@ -18,7 +18,7 @@ export default class Logger {
 	 * @constructor
 	 */
 	constructor() {
-		if (Logger._instance){
+		if (Logger._instance) {
 			throw new Error('Error: Instantiation failed: Use Logger.getInstance() instead of new.');
 		} else {
 			Logger._instance = this;
@@ -49,8 +49,8 @@ export default class Logger {
 	private config(level: string = 'DEBUG', name: string = 'APP'): void {
 		this._logger = new TsLogger.Logger(name);
 		this._logger.appenders
-			.set('stdout', {type: 'stdout', level: ['debug', 'info', 'trace']})
-			.set('file', { type: 'file', filename: Env.get('LOGGER_FILE_URL').asString() || 'logfile.log'});
+			.set('stdout', { type: 'stdout', level: ['debug', 'info', 'trace'] })
+			.set('file', { type: 'file', filename: Env.get('LOGGER_FILE_URL').asString() || 'logfile.log' });
 	}
 
 	/**

@@ -1,5 +1,11 @@
 {
 	"Model": "Badge",
+	"Relations": [
+		{
+			"Repository": "BadgeType",
+			"Column": "Type"
+		}
+	],
 	"Datas": [
 		{
 			"Name": "Clever boy",
@@ -66,7 +72,7 @@
 			"Description": "You have unlocked at least five different skills in your skill tree.",
 			"ImgUrl": "http://dslsa.org/ed/wp-content/uploads/2015/08/achievement.png",
 			"Type": 3
-		},	
+		},
 		{
 			"Name": "Hemlock",
 			"Description": "You have unlocked at least ten different skills in your skill tree.",
@@ -91,5 +97,5 @@
 			"ImgUrl": "http://dslsa.org/ed/wp-content/uploads/2015/08/achievement.png",
 			"Type": 3
 		}
-			]
+	]
 }

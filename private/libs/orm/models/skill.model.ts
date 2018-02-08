@@ -1,5 +1,7 @@
 import { IsNotEmpty, Min } from 'class-validator';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+
+import { SkillType } from './skillType.model';
 
 @Entity()
 export class Skill {
@@ -25,4 +27,7 @@ export class Skill {
 	@Column()
 	@IsNotEmpty()
 	ImgUrl: string;
+
+	@ManyToOne(type => SkillType)
+	Type: SkillType;
 }

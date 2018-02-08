@@ -11,6 +11,7 @@ import DialogContent from 'material-ui/Dialog/DialogContent';
 import DialogContentText from 'material-ui/Dialog/DialogContentText';
 import DialogActions from 'material-ui/Dialog/DialogActions';
 import Button from 'material-ui/Button/Button';
+import withMobileDialog from 'material-ui/Dialog/withMobileDialog';
 
 export default class extends React.Component<Props, State> {
 	constructor(props) {
@@ -74,7 +75,7 @@ export default class extends React.Component<Props, State> {
 						</DialogContentText>
 					</DialogContent>
 					<DialogActions>
-						<Button color='primary' fullWidth>
+						<Button color='primary'>
 							Level Up
 						</Button>
 					</DialogActions>

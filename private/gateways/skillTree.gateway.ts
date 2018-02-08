@@ -22,6 +22,7 @@ export class SkillTreeGateway {
 					let user: User | undefined = await this._databaseManager
 						.findUserByUsername(decryptedToken.username);
 					if (user) {
+						console.log('sasad');
 						let graph: {
 							nodes: {
 								id: number,
@@ -31,6 +32,7 @@ export class SkillTreeGateway {
 							}[],
 							edges: { from: number, to: number }[]
 						} | undefined = await this._databaseManager.querySkillTree();
+						console.log('sad');
 						if(graph) {
 							this._server.to(client.id).emit('acceptSkillTreeQuery', graph);
 						} else {

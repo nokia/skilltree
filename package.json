@@ -40,7 +40,7 @@
     "react-swipeable-views": "^0.12.12",
     "recharts": "^1.0.0-beta.9",
     "ts-log-debug": "^4.0.2",
-    "typeorm": "^0.1.12",
+    "typeorm": "^0.2.0-alpha.18",
     "validator": "^9.4.0"
   },
   "devDependencies": {

@@ -2,7 +2,7 @@ import 'reflect-metadata';
 
 import * as Env from 'env-var';
 import * as Fs from 'fs';
-import { setInterval } from 'timers';
+import { setInterval, setTimeout } from 'timers';
 import { createConnection } from 'typeorm';
 import { Connection } from 'typeorm/connection/Connection';
 import { Repository } from 'typeorm/repository/Repository';
@@ -16,13 +16,14 @@ import { Parent } from '../libs/orm/models/parent.model';
 import { Role } from '../libs/orm/models/role.model';
 import { Skill } from '../libs/orm/models/skill.model';
 import { SkillPoint } from '../libs/orm/models/skillPoint.model';
+import { SkillType } from '../libs/orm/models/skillType.model';
 import { Training } from '../libs/orm/models/training.model';
 import { User } from '../libs/orm/models/user.model';
 import { UserBadge } from '../libs/orm/models/userBadge.model';
 import dataSeeder from './dataSeeder';
 
 const ModelsArray = [Applicant, Badge, BadgeType, Endorsement, Parent,
-	Role, Skill, SkillPoint, Training, User, UserBadge];
+	Role, Skill, SkillPoint, SkillType, Training, User, UserBadge];
 
 createConnection({
 	type: 'mariadb',
@@ -61,20 +62,20 @@ createConnection({
 			});
 			let start = fileNamesWithoutRelation.length > 0;
 			seedData(fileNamesWithoutRelation, connection, (transactions: Promise<any>[]) =>
-				transactionsHandler(transactions, connection, () => start = false));
+				transactionsHandler(transactions, connection, () => { start = false }));
 			if (start) {
 				let timer = setInterval(() => {
 					if (!start) {
 						clearInterval(timer);
 						seedData(fileNamesWithRelation, connection, (transactions: Promise<any>[]) =>
-							transactionsHandler(transactions, connection, () => start = false));
+							transactionsHandler(transactions, connection, () => { start = false }));
 					} else {
 						//Do nothing
 					}
 				}, 100);
 			} else {
 				seedData(fileNamesWithRelation, connection, (transactions: Promise<any>[]) =>
-					transactionsHandler(transactions, connection, () => start = false));
+					transactionsHandler(transactions, connection, () => { start = false }));
 			}
 		} else {
 			Logger.error(err);
@@ -87,6 +88,7 @@ createConnection({
 
 const seedData = (fileNames: string[], connection: Connection,
 	callback: Function) => {
+	Logger.info(fileNames);
 	let transactions: Promise<any>[] = [];
 	let maxLength: number = 0;
 	fileNames.forEach(fileName => {
@@ -122,14 +124,17 @@ const transactionsHandler = async (transactions: Promise<any>[], connection: Con
 	callback: Function) => {
 	let queryRunner = connection.createQueryRunner();
 	await queryRunner.connect();
+	await queryRunner.manager.query('SET FOREIGN_KEY_CHECKS=0;');
 	Promise.all(transactions).then(async transactions => {
+		Logger.info('Transactions started');
 		await queryRunner.startTransaction();
-		Logger.info('Transactions started')
 		transactions.forEach(async transaction => {
-			await queryRunner.manager.save(transaction);
-			await queryRunner.commitTransaction();
-			Logger.info('Transaction commited');
+			await queryRunner.manager.insert(transaction.constructor.name, transaction, {
+			});
 		});
-		callback();
+		await queryRunner.commitTransaction();
+		await queryRunner.manager.query('SET FOREIGN_KEY_CHECKS=1;');
+		Logger.info('Transactions commited');
+		setTimeout(() => callback(), 1000);
 	});
 }

@@ -28,7 +28,7 @@ export default class KeyManager {
 	 * @param { string = 'secret_passpharse' } password
 	 */
 	constructor(privateKeyName: string, publicKeyName: string, password: string) {
-		if (KeyManager._instance){
+		if (KeyManager._instance) {
 			throw new Error('Error: Instantiation failed: Use KeyManager.getInstance() instead of new.');
 		} else {
 			KeyManager._instance = this;
@@ -97,7 +97,7 @@ export default class KeyManager {
 	 */
 	public verifyToken(token: { username: string, nbf: number, iat: number }): boolean {
 		try {
-			if(token.username && token.nbf && token.iat && ((token.iat - token.nbf) === 3600000) &&
+			if (token.username && token.nbf && token.iat && ((token.iat - token.nbf) === 3600000) &&
 				(new Date() < new Date(token.iat) && new Date() > new Date(token.nbf))) {
 				return true;
 			} else {

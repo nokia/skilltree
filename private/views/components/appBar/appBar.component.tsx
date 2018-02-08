@@ -10,7 +10,7 @@ export default class extends React.Component<Props, {}> {
 	render() {
 		return (<AppBar color='primary' position='static'>
 			<Toolbar>
-				<Typography noWrap type='title' color='inherit' style={ Style.flex }>
+				<Typography noWrap color='inherit' style={ Style.flex }>
 					{ this.props.title }
 				</Typography>
 				{ this.props.children }
