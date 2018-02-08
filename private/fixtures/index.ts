@@ -85,7 +85,6 @@ createConnection({
 	Logger.error(err);
 });
 
-
 const seedData = (fileNames: string[], connection: Connection,
 	callback: Function) => {
 	Logger.info(fileNames);

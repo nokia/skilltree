@@ -22,7 +22,7 @@ export default class DataSeeder {
 							repository => {
 								return repository.metadata.name === filteredRelation[0]['Repository'];
 							});
-						return _model[value] =await relationRepositories[0]
+						return _model[value] = await relationRepositories[0]
 							.findByIds(dataObject[value])[0] | dataObject[value];
 					} else {
 						return _model[value] = dataObject[value];
