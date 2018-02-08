@@ -12,22 +12,26 @@
 			"MaxLevel": 5,
 			"Description": "The extent of one's ability to write, debug, review, refactor code in C++.",
 			"SkillLink": "www.cplusplhhhus.com",
-			"ImgUrl": "https://lh3.googleusercontent.com/oKsgcsHtHu_nIkpNd-mNCAyzUD8xo68laRPOfvFuO0hqv6nDXVNNjEMmoiv9tIDgTj8=w170"
+			"ImgUrl": "https://lh3.googleusercontent.com/oKsgcsHtHu_nIkpNd-mNCAyzUD8xo68laRPOfvFuO0hqv6nDXVNNjEMmoiv9tIDgTj8=w170",
+			"Type": 1
 		},
 		{
 			"Name": "Programming in C#",
 			"MaxLevel": 5,
 			"Description": "The extent of one's ability to write, debug, review, refactor code in C#.",
 			"SkillLink": "www.cplusplus.com",
-			"ImgUrl": "https://lh3.googleusercontent.com/oKsgcsHtHu_nIkpNd-mNCAyzUD8xo68laRPOfvFuO0hqv6nDXVNNjEMmoiv9tIDgTj8=w170"
+			"ImgUrl": "https://lh3.googleusercontent.com/oKsgcsHtHu_nIkpNd-mNCAyzUD8xo68laRPOfvFuO0hqv6nDXVNNjEMmoiv9tIDgTj8=w170",
+			"Type": 1
 		},
 		{
 			"Name": "Development in Laravel",
 			"MaxLevel": 5,
 			"Description": "The extent of one's ability to work with the Laravel framework.",
 			"SkillLink": "www.laravel.com",
-			"ImgUrl": "https://lh3.googleusercontent.com/oKsgcsHtHu_nIkpNd-mNCAyzUD8xo68laRPOfvFuO0hqv6nDXVNNjEMmoiv9tIDgTj8=w170"
+			"ImgUrl": "https://lh3.googleusercontent.com/oKsgcsHtHu_nIkpNd-mNCAyzUD8xo68laRPOfvFuO0hqv6nDXVNNjEMmoiv9tIDgTj8=w170",
+			"Type": 1
 		}
 	
 	]
 }
+

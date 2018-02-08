@@ -8,17 +8,9 @@ export class Endorsement {
 	@PrimaryGeneratedColumn()
 	ID: number;
 
-	@ManyToOne(type => User, User => User.ID, {
-		cascadeInsert: true,
-		cascadeUpdate: true,
-		cascadeRemove: true
-	})
+	@ManyToOne(type => User)
 	From: User;
 
-	@ManyToOne(type => User, User => User.ID, {
-		cascadeInsert: true,
-		cascadeUpdate: true,
-		cascadeRemove: true
-	})
+	@ManyToOne(type => User)
 	To: User;
 }

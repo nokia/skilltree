@@ -21,7 +21,7 @@ export class SocketIO {
 	 * @constructor
 	 */
 	constructor() {
-		if (SocketIO._instance){
+		if (SocketIO._instance) {
 			throw new Error('Error: Instantiation failed: Use SocketIO.getInstance() instead of new.');
 		} else {
 			SocketIO._instance = this;
@@ -107,7 +107,6 @@ export class SocketIO {
 	}
 
 	public querySkillTree(token: string | undefined, callback: Function) {
-		
 		this._socket.on('acceptSkillTreeQuery', (response: { user: IUser }) => {
 			this._socket.removeAllListeners('acceptSkillTreeQuery');
 			this._socket.close();
@@ -118,21 +117,16 @@ export class SocketIO {
 			this._socket.close();
 			callback(errorMessage, null);
 		});
-		console.log('ydsadzps');
 		this._tryMultiple((errorMessage: string) => {
 			if (errorMessage) {
-				console.log('ydzssps');
-				console.log(errorMessage);
 				callback(errorMessage, null);
 			} else {
-				console.log('ydzps');
 				this._socket.emit('querySkillTree', token);
 			}
 		});
 	}
 
-	private _tryMultiple(callback: Function, timout: number = 1000, maximumTryCount: number = 3): void {
-		console.log(this._socket.connected);
+	private _tryMultiple(callback: Function, timout: number = 1000, maximumTryCount: number = 5): void {
 		!this._socket.connected && this._socket.open();
 		let counter = 1;
 		let timer = setInterval(() => {

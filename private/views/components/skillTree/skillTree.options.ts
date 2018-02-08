@@ -6,7 +6,7 @@ export default {
 		}
 	},
 	physics: {
-		enabled: false,
+		enabled: false
 	},
 	interaction: {
 		dragNodes: false
@@ -21,10 +21,10 @@ export default {
 		},
 		arrowStrikethrough: false,
 		smooth: {
-			type: 'vertical'
+			type: 'cubicBezier'
 		},
 	},
 	nodes: {
-		shape: 'box'
+		shape: 'circularImage'
 	}
 }

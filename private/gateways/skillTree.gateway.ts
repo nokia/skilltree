@@ -4,8 +4,6 @@ import * as Env from 'env-var';
 import DatabaseManager from '../libs/databaseManager/databaseManager';
 import KeyManager from '../libs/keyManager';
 import { User } from '../libs/orm/models/user.model';
-import { IUser } from '../models';
-import { Skill } from '../libs/orm/models/skill.model';
 
 @WebSocketGateway({ port: Env.get('SOCKET_PORT').asIntPositive() || 81 })
 export class SkillTreeGateway {
@@ -24,12 +22,18 @@ export class SkillTreeGateway {
 					let user: User | undefined = await this._databaseManager
 						.findUserByUsername(decryptedToken.username);
 					if (user) {
+						console.log('sasad');
 						let graph: {
-							nodes: { id: number, label: string }[],
+							nodes: {
+								id: number,
+								label: string,
+								image: string,
+								description: string
+							}[],
 							edges: { from: number, to: number }[]
 						} | undefined = await this._databaseManager.querySkillTree();
+						console.log('sad');
 						if(graph) {
-							console.log('ok');
 							this._server.to(client.id).emit('acceptSkillTreeQuery', graph);
 						} else {
 							this._server.to(client.id).emit('deniedSkillTreeQuery', 'No skill in tree');

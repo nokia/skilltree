@@ -12,6 +12,7 @@ import State from './app.state';
 import AppBar from './components/appBar';
 import SignedInBar from './components/signedInBar';
 import SignedInView from './components/signedInView';
+import SignedOutView from './components/signedOutView';
 import SignedOutBar from './components/signedOutBar';
 import { isBrowser } from './misc';
 import { Dark } from './themes';
@@ -40,41 +41,50 @@ export default class extends React.Component<{}, State> {
 			this._loginRequestWithoutTokenCallback.bind(this));
 	}
 
-	private _loginRequestWithoutTokenCallback(error: string, response: { token: string, user: IUser }) {
-		if (error) {
-			this.setState({ errorMessage: error });
-		} else {
+	private _loginRequestWithoutTokenCallback(err: string, response: { token: string, user: IUser }) {
+		if (!err) {
 			if (response.user) {
-				this.setState({ userIsLoggedIn: true, user: response.user });
-				let date: Date = new Date();
-				date.setMinutes(date.getMinutes() + 60);
-				setCookie('token', response.token, { expires: date, secure: true });
+				this._loginUser(response.user, () => {
+					let date: Date = new Date();
+					date.setMinutes(date.getMinutes() + 60);
+					setCookie('token', response.token, { expires: date, secure: true });
+					this.setState({ token: response.token });
+				});
 			} else {
-				this.setState({ errorMessage: 'Wrong username or password' });
+				this.setState({ loaded: true });
+				removeCookie('token');
+				this._observer.publish('_showErrorMessage', 'User is not valid');
 			}
+		} else {
+			this.setState({ loaded: true });
+			this._observer.publish('_showErrorMessage', err);
 		}
-		this.setState({ loaded: true });
 	}
 
-	private _loginRequestWithTokenCallback(error: string, response: { user: IUser }) {
-		if (error) {
-			removeCookie('token');
-			this.setState({ errorMessage: error });
-		} else {
+	private _loginRequestWithTokenCallback(err: string, response: { user: IUser }) {
+		if (!err) {
 			if (response.user) {
-				this.setState({ userIsLoggedIn: true, user: response.user });
-				
+				this._loginUser(response.user);
 			} else {
+				this.setState({ loaded: true });
 				removeCookie('token');
-				this.setState({ errorMessage: 'User is not valid' });
+				this._observer.publish('_showErrorMessage', 'User is not valid');
 			}
+		} else {
+			this.setState({ loaded: true });
+			this._observer.publish('_showErrorMessage', err);
 		}
+	}
+
+	private _loginUser(user: IUser, callback?: Function) {
+		this.setState({ userIsLoggedIn: true, user: user });
+		(callback) && callback();
 		this.setState({ loaded: true });
 	}
 
 	private _logout() {
 		removeCookie('token');
-		this.setState({ userIsLoggedIn: false, user: undefined });
+		this.setState({ userIsLoggedIn: false, user: undefined, token: undefined });
 	}
 
 	private _calculateContainerSize() {
@@ -85,12 +95,26 @@ export default class extends React.Component<{}, State> {
 		this.setState({ containerSize });
 	}
 
+	private _showErrorMessage(errorMessage: string) {
+		this.setState({ errorMessage: errorMessage });
+	}
+
+	private _emitSkillTreeRequest() {
+		this._connection.querySkillTree(this.state.token, (err, graph) => {
+			if (err) {
+				this._observer.publish('_showErrorMessage', err);
+			} else {
+				this._observer.publish('_skillTreeRequest', graph);
+			}
+		});
+	}
+
 	public componentDidMount() {
 		window.addEventListener('resize', this._calculateContainerSize.bind(this));
 		this._calculateContainerSize();
 		this.setState({ token: getCookie('token') });
+		this._connection = SocketIO.getInstance();
 		if (this.state.token) {
-			this._connection = SocketIO.getInstance();
 			this._connection.emitLoginWithTokenRequest(this.state.token,
 				this._loginRequestWithTokenCallback.bind(this));
 		} else {
@@ -98,6 +122,8 @@ export default class extends React.Component<{}, State> {
 		}
 		this._observer.subscribe('_logout', this._logout.bind(this));
 		this._observer.subscribe('_emitLoginRequest', this._emitLoginRequest.bind(this));
+		this._observer.subscribe('_showErrorMessage', this._showErrorMessage.bind(this));
+		this._observer.subscribe('_emitSkillTreeRequest', this._emitSkillTreeRequest.bind(this));
 	}
 
 	public componentWillUnmount() {
@@ -113,24 +139,24 @@ export default class extends React.Component<{}, State> {
 		} else {
 			//Do nothing
 		}
-		return (<MuiThemeProvider theme={ Dark }>
+		return (<MuiThemeProvider theme={Dark}>
 			<AppBar ref='AppBar' title='Skill Tree'>
-				{ !this.state.loaded
-				? <main>Loading...</main>
-				: (!this.state.user
-					? <SignedOutBar observer={ this._observer } />
-					: <SignedInBar observer={ this._observer } /> )
+				{!this.state.loaded
+					? <main>Loading...</main>
+					: (!this.state.user
+						? <SignedOutBar observer={this._observer} />
+						: <SignedInBar observer={this._observer} />)
 				}
 			</AppBar>
-			{ !this.state.user
-				? <div></div>
-				: <SignedInView observer={ this._observer } user={ this.state.user }
-					containerSize={ this.state.containerSize } token={ this.state.token } />
+			{!this.state.user
+				? <SignedOutView containerSize={this.state.containerSize} />
+				: <SignedInView observer={this._observer} user={this.state.user}
+					containerSize={this.state.containerSize} token={this.state.token} />
 			}
 			<Snackbar
-				open={ this.state.errorMessage !== '' }
-				message={<Typography noWrap type='title' color='inherit'>
-					{ this.state.errorMessage }
+				open={this.state.errorMessage !== ''}
+				message={<Typography noWrap color='inherit'>
+					{this.state.errorMessage}
 				</Typography>}
 			/>
 		</MuiThemeProvider>)

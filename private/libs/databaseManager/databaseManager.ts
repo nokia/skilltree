@@ -1,9 +1,9 @@
 import Logger from '../logger';
 import Orm from '../orm';
-import { Role } from '../orm/models/role.model';
-import { User } from '../orm/models/user.model';
-import { Skill } from '../orm/models/skill.model';
 import { Parent } from '../orm/models/parent.model';
+import { Role } from '../orm/models/role.model';
+import { Skill } from '../orm/models/skill.model';
+import { User } from '../orm/models/user.model';
 
 /**
  * The database manager.
@@ -22,7 +22,7 @@ export default class DatabaseManager {
 	 * @constructor
 	 */
 	constructor() {
-		if (DatabaseManager._instance){
+		if (DatabaseManager._instance) {
 			throw new Error('Error: Instantiation failed: Use DatabaseManager.getInstance() instead of new.');
 		} else {
 			this._connnectToDatabase((error: Error) => {
@@ -73,7 +73,7 @@ export default class DatabaseManager {
 	}
 
 	/**
-	 * Query all skill
+	 * Query all skill and their connections
 	 *
 	 * @class DatabaseManager
 	 * @method findRoleByName
@@ -82,29 +82,47 @@ export default class DatabaseManager {
 	 */
 	public async querySkillTree():
 		Promise<{
-			nodes: { id: number, label: string }[],
+			nodes: {
+				id: number,
+				image: string,
+				label: string,
+				description: string
+			}[],
 			edges: { from: number, to: number }[]
 		} | undefined> {
 		let skillRepository = this._orm.connection.getRepository(Skill);
 		let parentRepository = this._orm.connection.getRepository(Parent);
-		let nodesTmp: Skill[] | undefined = await skillRepository.find();
+		let nodesTmp: Skill[] | undefined = await skillRepository.find({
+			relations: ['Type']
+		});
 		let edgesTmp: Parent[] | undefined = await parentRepository.find({
-			relations: [ 'From', 'To' ]
+			relations: ['From', 'To']
 		});
 		if (edgesTmp && nodesTmp) {
-			let nodes: { id: number, label: string }[] = nodesTmp.map((skill: Skill) => {
-				return { id: skill.ID, label: skill.Name };
+			let nodes: {
+				id: number,
+				label: string,
+				image: string,
+				description: string
+			}[] = nodesTmp.map((skill: Skill) => {
+				return {
+					id: skill.ID,
+					label: skill.Name,
+					image: skill.ImgUrl,
+					description: skill.Description
+				};
 			});
+			console.log(nodes)
 			let edges: { from: number, to: number }[] = edgesTmp.map((parent: Parent) => {
+				console.log(parent)
 				return { from: parent.From.ID, to: parent.To.ID };
 			});
+			console.log(edges)
 			let graph = { nodes, edges };
 			return { nodes, edges };
 		} else {
 			return undefined;
 		}
-		
-		//return await roleRepository.findOne({ Name: roleName });
 	}
 
 	/**

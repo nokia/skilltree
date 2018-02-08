@@ -9,28 +9,16 @@ export class UserBadge {
 	@PrimaryGeneratedColumn()
 	ID: number;
 
-	@ManyToOne(type => User, User => User.ID, {
-		cascadeInsert: true,
-		cascadeUpdate: true,
-		cascadeRemove: true
-	})
+	@ManyToOne(type => User)
 	User: User;
 
-	@ManyToOne(type => Badge, Badge => Badge.ID, {
-		cascadeInsert: true,
-		cascadeUpdate: true,
-		cascadeRemove: true
-	})
+	@ManyToOne(type => Badge)
 	Badge: Badge;
 
 	@Column({ default: false })
 	Accepted: boolean;
 
-	@ManyToOne(type => User, User => User.ID, {
-		cascadeInsert: true,
-		cascadeUpdate: true,
-		cascadeRemove: true
-	})
+	@ManyToOne(type => User)
 	AcceptedBy: User;
 
 	@Column()
