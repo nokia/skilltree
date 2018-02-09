@@ -1,39 +1,39 @@
 {
-    "Model": "User",
-    "Relations": [
-        {
-            "Repository": "User",
-            "Column": "Manager"
-        },
-        {
-            "Repository": "Role",
-            "Column": "Role"
-        }
-    ],
-    "Datas": [
-        {
-            "Name": "Mate Balogh",
-            "Rank": 1,
-            "WillingToTeach": false,
-            "Username": "mbalogh",
-            "Manager": 4,
-            "Role": 1
-        },
-        {
-            "Name": "Zarandi David",
-            "Rank": 1,
-            "WillingToTeach": false,
-            "Username": "zarandi",
-            "Manager": 4,
-            "Role": 1
-        },
-        {
-            "Name": "Balint Ujvari",
-            "Rank": 1,
-            "WillingToTeach": false,
-            "Username": "mbalogh",
-            "Manager": 4,
-            "Role": 1
-        }
-    ]
+	"Model": "User",
+	"Relations": [
+		{
+			"Repository": "Role",
+			"Column": "Role"
+		}
+	],
+	"Datas": [
+		{
+			"Name": "Mate Balogh",
+			"Rank": 1,
+			"WillingToTeach": false,
+			"Username": "mbalogh",
+			"Role": 1
+		},
+		{
+			"Name": "Zarandi David",
+			"Rank": 1,
+			"WillingToTeach": false,
+			"Username": "zarandi",
+			"Role": 1
+		},
+		{
+			"Name": "Balint Ujvari",
+			"Rank": 1,
+			"WillingToTeach": false,
+			"Username": "bujvari",
+			"Role": 1
+		},
+		{
+			"Name": "Incze Gaspar",
+			"Rank": 1,
+			"WillingToTeach": false,
+			"Username": "gincze",
+			"Role": 2
+		}
+	]
 }

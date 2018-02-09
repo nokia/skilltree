@@ -18,7 +18,10 @@ export default class extends React.Component<Props, State> {
 		super(props);
 		this.state = {
 			graph: { nodes: [], edges: [] },
-			options: Options
+			options: Options,
+			isOpen: false,
+			selectedNode: undefined,
+			isLoading: false
 		}
 	}
 
@@ -37,11 +40,12 @@ export default class extends React.Component<Props, State> {
 			id: number,
 			label: string,
 			image: string,
-			description: string
+			description: string,
+			accepted: boolean,
+			skillLevel: number
 		}[],
 		edges: { from: number, to: number }[]
 	}) {
-		console.log(graph.nodes)
 		this.setState({ graph });
 	}
 
@@ -51,7 +55,7 @@ export default class extends React.Component<Props, State> {
 			let nodes = this.state.graph['nodes'].filter(node => node.id === events.nodes[0]);
 			if (nodes.length > 0) {
 				nodes.forEach(node => {
-					this.props.observer.publish('_nodeEvent', node);
+					this.setState({ selectedNode: node, isOpen: true })
 				});
 			} else {
 				this.props.observer.publish('_showErrorMessage', 'Invalid search');
@@ -59,25 +63,82 @@ export default class extends React.Component<Props, State> {
 		}
 	}
 
-	render() {
+	private _requestLevelUp() {
+		if (this.state.selectedNode) {
+			this.props.observer.publish('_requestLevelUp', this.state.selectedNode.id);
+			this.setState({ isLoading: true });
+		} else {
+			this.setState({ isOpen: false });
+			this.props.observer.publish('_showErrorMessage', 'No skill selected');
+		}
+	}
+
+	private _levelUpRequest(response:
+		{
+			err: string,
+			node: {
+				accepted: boolean,
+				skillLevel: number
+			}
+		}) {
+		if (!response.err && this.state.selectedNode) {
+			this.state.selectedNode.accepted = response.node.accepted;
+			this.state.selectedNode.skillLevel = response.node.skillLevel;
+			this.setState({ isLoading: false });
+		} else {
+			this.setState({ isOpen: false, isLoading: false });
+			this.props.observer.publish('_showErrorMessage', response.err);
+		}
+	}
+
+	public componentDidMount() {
+		this.props.observer.subscribe('_levelUpRequest', this._levelUpRequest.bind(this));
+	}
+
+	public render() {
 		return (
 			<main style={this.props.style} >
 				<NodeGraph graph={this.state.graph} options={this.state.options} events={{
 					select: this._selectHandler.bind(this)
 				}} />
-				<Dialog open={true}>
+				<Dialog open={this.state.isOpen}>
 					<DialogTitle>
-						Programming in C++ (LVL.: 5)
+						{this.state.selectedNode
+							? (this.state.selectedNode.accepted
+								|| this.state.selectedNode.skillLevel === 0
+								? `${this.state.selectedNode.label} (${
+								this.state.selectedNode.skillLevel
+								})`
+								: `${this.state.selectedNode.label} (${
+								this.state.selectedNode.skillLevel - 1
+								}) + 1`
+							) : 'Not selcted node'
+						}
 					</DialogTitle>
 					<DialogContent>
 						<DialogContentText>
-						The extent of one's ability to write, debug, review, refactor code in C++.
+							{this.state.selectedNode
+								? this.state.selectedNode.description
+								: 'Not selcted node'
+							}
 						</DialogContentText>
 					</DialogContent>
 					<DialogActions>
-						<Button color='primary'>
-							Level Up
-						</Button>
+						{!this.state.isLoading
+							&& <Button color='secondary'
+								onClick={() => this.setState({ isOpen: false })}>
+								Exit
+							</Button>
+						}
+						{this.state.selectedNode && (this.state.selectedNode.accepted
+							|| this.state.selectedNode.skillLevel === 0) &&
+							(!this.state.isLoading
+								? <Button color='primary'
+									onClick={this._requestLevelUp.bind(this)}>
+									Level Up
+								</Button>
+								: <main>Loading...</main>)
+						}
 					</DialogActions>
 				</Dialog>
 			</main>

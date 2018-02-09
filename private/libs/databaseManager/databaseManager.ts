@@ -1,8 +1,11 @@
+import * as Env from 'env-var';
+
 import Logger from '../logger';
 import Orm from '../orm';
 import { Parent } from '../orm/models/parent.model';
 import { Role } from '../orm/models/role.model';
 import { Skill } from '../orm/models/skill.model';
+import { SkillPoint } from '../orm/models/skillPoint.model';
 import { User } from '../orm/models/user.model';
 
 /**
@@ -72,6 +75,18 @@ export default class DatabaseManager {
 		return await roleRepository.findOne({ Name: roleName });
 	}
 
+	private async findSkillPointByUserAndSkill(user: User, skill: Skill)
+		: Promise<SkillPoint | undefined> {
+		let skillPointRepository = this._orm.connection.getRepository(SkillPoint);
+		return await skillPointRepository.findOne({ User: user, Skill: skill });
+	}
+
+	private async findSkillById(skillId: number)
+		: Promise<Skill | undefined> {
+		let skillRepository = this._orm.connection.getRepository(Skill);
+		return await skillRepository.findOne({ ID: skillId });
+	}
+
 	/**
 	 * Query all skill and their connections
 	 *
@@ -80,13 +95,15 @@ export default class DatabaseManager {
 	 * @param { string } username
 	 * @returns { Promise<Role | undefined> }
 	 */
-	public async querySkillTree():
+	public async querySkillTree(user: User):
 		Promise<{
 			nodes: {
 				id: number,
 				image: string,
 				label: string,
-				description: string
+				description: string,
+				accepted: boolean,
+				skillLevel: number
 			}[],
 			edges: { from: number, to: number }[]
 		} | undefined> {
@@ -103,22 +120,26 @@ export default class DatabaseManager {
 				id: number,
 				label: string,
 				image: string,
-				description: string
-			}[] = nodesTmp.map((skill: Skill) => {
+				description: string,
+				accepted: boolean,
+				skillLevel: number
+			}[] = await Promise.all(nodesTmp.map(async (skill: Skill) => {
+				let skillPoint: SkillPoint | undefined =
+					await this.findSkillPointByUserAndSkill(user, skill);
 				return {
 					id: skill.ID,
 					label: skill.Name,
 					image: skill.ImgUrl,
-					description: skill.Description
-				};
-			});
-			console.log(nodes)
+					description: skill.Description,
+					accepted: skillPoint
+						? skillPoint.Accepted
+						: !Env.get('HAVE_TO_ACCEPT_LEVEL_UP').asBool(),
+					skillLevel: skillPoint ? skillPoint.Level : 0
+				}
+			}));
 			let edges: { from: number, to: number }[] = edgesTmp.map((parent: Parent) => {
-				console.log(parent)
 				return { from: parent.From.ID, to: parent.To.ID };
 			});
-			console.log(edges)
-			let graph = { nodes, edges };
 			return { nodes, edges };
 		} else {
 			return undefined;
@@ -162,6 +183,41 @@ export default class DatabaseManager {
 			Logger.warn(`${roleName} is already in the role table`);
 		}
 		return role;
+	}
+
+	public async requestLevelUp(user: User, skillId: number): Promise<string | {
+		accepted: boolean,
+		skillLevel: number
+	}> {
+		let skill: Skill | undefined = await this.findSkillById(skillId);
+		if (skill) {
+			let skillPoint: SkillPoint | undefined =
+				await this.findSkillPointByUserAndSkill(user, skill);
+			if (skillPoint) {
+				if (Env.get('HAVE_TO_ACCEPT_LEVEL_UP').asBool() && skillPoint.Accepted) {
+					skillPoint.Accepted = false;
+				} else if (Env.get('HAVE_TO_ACCEPT_LEVEL_UP').asBool() && !skillPoint.Accepted) {
+					return 'The last lavel is not accepted yet.'
+				} else {
+					//Do nothing
+				}
+				skillPoint.Level += 1;
+			} else {
+				skillPoint = new SkillPoint();
+				skillPoint.Skill = skill;
+				skillPoint.User = user;
+			}
+			if (await this._orm.connection.getRepository(SkillPoint).save(skillPoint)) {
+				return {
+					accepted: skillPoint.Accepted,
+					skillLevel: skillPoint.Level
+				};
+			} else {
+				return 'Something wrong rty again later!';
+			}
+		} else {
+			return 'Not found that skill!';
+		}
 	}
 
 	/**

@@ -16,7 +16,7 @@ export class Skill {
 	@Min(1)
 	MaxLevel: number;
 
-	@Column()
+	@Column({ type: 'text' })
 	@IsNotEmpty()
 	Description: string;
 

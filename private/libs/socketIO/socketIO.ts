@@ -126,6 +126,33 @@ export class SocketIO {
 		});
 	}
 
+	public requestLevelUp(skillId: number, token: string | undefined, callback: Function) {
+		this._socket.on('acceptLevelUp', (node: {
+			accepted: boolean,
+			skillLevel: number
+		}) => {
+			this._socket.removeAllListeners('acceptLevelUp');
+			this._socket.close();
+			callback(null, node);
+		});
+		this._socket.on('deniedLevelUp', (errorMessage: string) => {
+			this._socket.removeAllListeners('deniedLevelUp');
+			this._socket.close();
+			console.log(errorMessage);
+			callback(errorMessage, null);
+		});
+		this._tryMultiple((errorMessage: string) => {
+			if (errorMessage) {
+				callback(errorMessage);
+			} else {
+				let lvlUpRequest: { skillId: number, token: string | undefined } = {
+					skillId, token
+				}
+				this._socket.emit('requestLevelUp', lvlUpRequest);
+			}
+		});
+	}
+
 	private _tryMultiple(callback: Function, timout: number = 1000, maximumTryCount: number = 5): void {
 		!this._socket.connected && this._socket.open();
 		let counter = 1;
