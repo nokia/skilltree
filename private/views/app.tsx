@@ -128,7 +128,7 @@ export default class extends React.Component<{}, State> {
 			}
 			<Snackbar
 				open={ this.state.errorMessage !== '' }
-				message={<Typography noWrap type='title' color='inherit'>
+				message={<Typography noWrap color='inherit'>
 					{ this.state.errorMessage }
 				</Typography>}
 			/>
