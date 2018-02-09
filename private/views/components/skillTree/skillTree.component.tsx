@@ -42,7 +42,8 @@ export default class extends React.Component<Props, State> {
 			image: string,
 			description: string,
 			accepted: boolean,
-			skillLevel: number
+			skillLevel: number,
+			hidden: boolean
 		}[],
 		edges: { from: number, to: number }[]
 	}) {

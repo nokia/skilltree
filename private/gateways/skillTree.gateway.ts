@@ -30,7 +30,8 @@ export class SkillTreeGateway {
 								image: string,
 								description: string,
 								accepted: boolean,
-								skillLevel: number
+								skillLevel: number,
+								hidden: boolean
 							}[],
 							edges: { from: number, to: number }[]
 						} | undefined = await this._databaseManager.querySkillTree(user);

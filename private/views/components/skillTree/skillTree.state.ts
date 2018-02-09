@@ -6,7 +6,8 @@ export default interface State {
 			image: string,
 			description: string,
 			accepted: boolean,
-			skillLevel: number
+			skillLevel: number,
+			hidden: boolean
 		}[],
 		edges: { from: number, to: number }[]
 	},
@@ -18,7 +19,8 @@ export default interface State {
 		image: string,
 		description: string,
 		accepted: boolean,
-		skillLevel: number
+		skillLevel: number,
+		hidden: boolean
 	} | undefined,
 	isLoading: boolean
 }

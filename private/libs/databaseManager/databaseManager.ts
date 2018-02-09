@@ -7,6 +7,7 @@ import { Role } from '../orm/models/role.model';
 import { Skill } from '../orm/models/skill.model';
 import { SkillPoint } from '../orm/models/skillPoint.model';
 import { User } from '../orm/models/user.model';
+import { QueryRunner } from 'typeorm/query-runner/QueryRunner';
 
 /**
  * The database manager.
@@ -66,32 +67,43 @@ export default class DatabaseManager {
 	 * Find role by name
 	 *
 	 * @class DatabaseManager
-	 * @method findRoleByName
+	 * @method _findRoleByName
 	 * @param { string } username
 	 * @returns { Promise<Role | undefined> }
 	 */
-	private async findRoleByName(roleName: string): Promise<Role | undefined> {
+	private async _findRoleByName(roleName: string): Promise<Role | undefined> {
 		let roleRepository = this._orm.connection.getRepository(Role);
 		return await roleRepository.findOne({ Name: roleName });
 	}
 
-	private async findSkillPointByUserAndSkill(user: User, skill: Skill)
+	private async _findSkillPointByUserAndSkill(user: User, skill: Skill)
 		: Promise<SkillPoint | undefined> {
 		let skillPointRepository = this._orm.connection.getRepository(SkillPoint);
 		return await skillPointRepository.findOne({ User: user, Skill: skill });
 	}
 
-	private async findSkillById(skillId: number)
+	private async _findSkillById(skillId: number)
 		: Promise<Skill | undefined> {
 		let skillRepository = this._orm.connection.getRepository(Skill);
 		return await skillRepository.findOne({ ID: skillId });
+	}
+
+	private async _findParentsBySkill(skill: Skill)
+		: Promise<Parent[] | undefined> {
+		let parentRepository = this._orm.connection.getRepository(Parent);
+		return await parentRepository.find({
+			relations: ['From', 'To'],
+			where: {
+				To: skill,
+			}
+		});
 	}
 
 	/**
 	 * Query all skill and their connections
 	 *
 	 * @class DatabaseManager
-	 * @method findRoleByName
+	 * @method _findRoleByName
 	 * @param { string } username
 	 * @returns { Promise<Role | undefined> }
 	 */
@@ -103,7 +115,8 @@ export default class DatabaseManager {
 				label: string,
 				description: string,
 				accepted: boolean,
-				skillLevel: number
+				skillLevel: number,
+				hidden: boolean
 			}[],
 			edges: { from: number, to: number }[]
 		} | undefined> {
@@ -116,16 +129,38 @@ export default class DatabaseManager {
 			relations: ['From', 'To']
 		});
 		if (edgesTmp && nodesTmp) {
+			let edges: { from: number, to: number }[] = edgesTmp.map((parent: Parent) => {
+				return { from: parent.From.ID, to: parent.To.ID };
+			});
 			let nodes: {
 				id: number,
 				label: string,
 				image: string,
 				description: string,
 				accepted: boolean,
-				skillLevel: number
+				skillLevel: number,
+				hidden: boolean
 			}[] = await Promise.all(nodesTmp.map(async (skill: Skill) => {
 				let skillPoint: SkillPoint | undefined =
-					await this.findSkillPointByUserAndSkill(user, skill);
+					await this._findSkillPointByUserAndSkill(user, skill);
+				let canOpen = false;
+				if (skillPoint) {
+					canOpen = true;
+				} else {
+					let parents: Parent[] | undefined = await this._findParentsBySkill(skill);
+					if (parents) {
+						canOpen = true;
+						await Promise.all(parents.map(async parent => {
+							skillPoint = await this._findSkillPointByUserAndSkill(user, parent.From);
+							if (!skillPoint || (skillPoint && !skillPoint.Accepted
+								&& skillPoint.Level - 1 === 0)) {
+								canOpen = false;
+							}
+						}));
+					} else {
+						canOpen = true;
+					}
+				}
 				return {
 					id: skill.ID,
 					label: skill.Name,
@@ -134,12 +169,10 @@ export default class DatabaseManager {
 					accepted: skillPoint
 						? skillPoint.Accepted
 						: !Env.get('HAVE_TO_ACCEPT_LEVEL_UP').asBool(),
-					skillLevel: skillPoint ? skillPoint.Level : 0
+					skillLevel: skillPoint ? skillPoint.Level : 0,
+					hidden: !canOpen
 				}
 			}));
-			let edges: { from: number, to: number }[] = edgesTmp.map((parent: Parent) => {
-				return { from: parent.From.ID, to: parent.To.ID };
-			});
 			return { nodes, edges };
 		} else {
 			return undefined;
@@ -157,7 +190,7 @@ export default class DatabaseManager {
 	public async createNewUser(user: { Name: string, Username: string }): Promise<User | undefined> {
 		let userRepository = this._orm.connection.getRepository(User);
 		let _user = new User();
-		let role: Role | undefined = await this.findRoleByName('employee') ||
+		let role: Role | undefined = await this._findRoleByName('employee') ||
 			await this.createNewRole('employee');
 		_user = Object.assign(_user, { ...user, Rank: 1, Role: role, WillingToTeach: false });
 		await userRepository.save(_user);
@@ -173,7 +206,7 @@ export default class DatabaseManager {
 	 * @returns { Promise<Role> }
 	 */
 	public async createNewRole(roleName: string): Promise<Role> {
-		let role: Role | undefined = await this.findRoleByName(roleName);
+		let role: Role | undefined = await this._findRoleByName(roleName);
 		if (!role) {
 			role = new Role();
 			role.Name = roleName;
@@ -189,10 +222,10 @@ export default class DatabaseManager {
 		accepted: boolean,
 		skillLevel: number
 	}> {
-		let skill: Skill | undefined = await this.findSkillById(skillId);
+		let skill: Skill | undefined = await this._findSkillById(skillId);
 		if (skill) {
 			let skillPoint: SkillPoint | undefined =
-				await this.findSkillPointByUserAndSkill(user, skill);
+				await this._findSkillPointByUserAndSkill(user, skill);
 			if (skillPoint) {
 				if (Env.get('HAVE_TO_ACCEPT_LEVEL_UP').asBool() && skillPoint.Accepted) {
 					skillPoint.Accepted = false;

@@ -107,10 +107,18 @@ export class SocketIO {
 	}
 
 	public querySkillTree(token: string | undefined, callback: Function) {
-		this._socket.on('acceptSkillTreeQuery', (response: { user: IUser }) => {
+		this._socket.on('acceptSkillTreeQuery', (graph: {
+			id: number,
+			label: string,
+			image: string,
+			description: string,
+			accepted: boolean,
+			skillLevel: number,
+			hidden: boolean
+		}) => {
 			this._socket.removeAllListeners('acceptSkillTreeQuery');
 			this._socket.close();
-			callback(null, response);
+			callback(null, graph);
 		});
 		this._socket.on('deniedSkillTreeQuery', (errorMessage: string) => {
 			this._socket.removeAllListeners('deniedSkillTreeQuery');
