@@ -27,4 +27,7 @@ export class User {
 
 	@ManyToOne(type => Role)
 	Role: Role;
+
+	@Column({ default: false })
+	AcceptDataShare: boolean;
 }

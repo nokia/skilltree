@@ -146,7 +146,6 @@ export class SocketIO {
 		this._socket.on('deniedLevelUp', (errorMessage: string) => {
 			this._socket.removeAllListeners('deniedLevelUp');
 			this._socket.close();
-			console.log(errorMessage);
 			callback(errorMessage, null);
 		});
 		this._tryMultiple((errorMessage: string) => {
@@ -157,6 +156,26 @@ export class SocketIO {
 					skillId, token
 				}
 				this._socket.emit('requestLevelUp', lvlUpRequest);
+			}
+		});
+	}
+
+	public emitAcceptDataShare(token: string | undefined, callback: Function): void {
+		this._socket.on('acceptDataShare', () => {
+			this._socket.removeAllListeners('acceptDataShare');
+			this._socket.close();
+			callback(null);
+		});
+		this._socket.on('deniedDataShare', (errorMessage: string) => {
+			this._socket.removeAllListeners('deniedDataShare');
+			this._socket.close();
+			callback(errorMessage);
+		});
+		this._tryMultiple((errorMessage: string) => {
+			if (!errorMessage) {
+				this._socket.emit('requestAcceptDataShare', token);
+			} else {
+				callback(errorMessage);
 			}
 		});
 	}

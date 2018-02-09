@@ -15,6 +15,7 @@ import SignedInView from './components/signedInView';
 import SignedOutView from './components/signedOutView';
 import SignedOutBar from './components/signedOutBar';
 import { isBrowser } from './misc';
+import DataShareDialog from './components/dataShareDialog';
 import { Dark } from './themes';
 
 export default class extends React.Component<{}, State> {
@@ -30,7 +31,8 @@ export default class extends React.Component<{}, State> {
 			token: isBrowser ? getCookie('token') : undefined,
 			loaded: false,
 			errorMessage: '',
-			containerSize: { height: 0, width: 0 }
+			containerSize: { height: 0, width: 0 },
+			showDataShareDialog: false
 		}
 	}
 
@@ -43,8 +45,15 @@ export default class extends React.Component<{}, State> {
 
 	private _loginRequestWithoutTokenCallback(err: string, response: { token: string, user: IUser }) {
 		if (!err) {
-			if (response.user) {
+			if (response.user && response.user.AcceptDataShare) {
 				this._loginUser(response.user, () => {
+					let date: Date = new Date();
+					date.setMinutes(date.getMinutes() + 60);
+					setCookie('token', response.token, { expires: date, secure: true });
+					this.setState({ token: response.token });
+				});
+			} else if (response.user && !response.user.AcceptDataShare) {
+				this._showDataShareDialog(response.user, () => {
 					let date: Date = new Date();
 					date.setMinutes(date.getMinutes() + 60);
 					setCookie('token', response.token, { expires: date, secure: true });
@@ -63,8 +72,10 @@ export default class extends React.Component<{}, State> {
 
 	private _loginRequestWithTokenCallback(err: string, response: { user: IUser }) {
 		if (!err) {
-			if (response.user) {
+			if (response.user && response.user.AcceptDataShare) {
 				this._loginUser(response.user);
+			} else if (response.user && !response.user.AcceptDataShare) {
+				this._showDataShareDialog(response.user);
 			} else {
 				this.setState({ loaded: true });
 				removeCookie('token');
@@ -80,6 +91,11 @@ export default class extends React.Component<{}, State> {
 		this.setState({ userIsLoggedIn: true, user: user });
 		(callback) && callback();
 		this.setState({ loaded: true });
+	}
+
+	private _showDataShareDialog(user: IUser, callback?: Function) {
+		this.setState({ showDataShareDialog: true, user: user });
+		(callback) && callback();
 	}
 
 	private _logout() {
@@ -112,7 +128,7 @@ export default class extends React.Component<{}, State> {
 	private _requestLevelUp(skillId: number) {
 		this._connection.requestLevelUp(skillId, this.state.token, (err, node) => {
 			if (!err) {
-				this._observer.publish('_levelUpRequest',{
+				this._observer.publish('_levelUpRequest', {
 					err: null,
 					node: node
 				});
@@ -121,6 +137,18 @@ export default class extends React.Component<{}, State> {
 					err: err,
 					node: null
 				});
+			}
+		});
+	}
+
+	private _emitAcceptDataShare() {
+		this._connection.emitAcceptDataShare(this.state.token, err => {
+			if(!err && this.state.user) {
+				this.state.user.AcceptDataShare = true;
+				this._loginUser(this.state.user);
+			} else {
+				this._logout();
+				this._observer.publish('_showErrorMessage', err);
 			}
 		});
 	}
@@ -141,6 +169,7 @@ export default class extends React.Component<{}, State> {
 		this._observer.subscribe('_showErrorMessage', this._showErrorMessage.bind(this));
 		this._observer.subscribe('_emitSkillTreeRequest', this._emitSkillTreeRequest.bind(this));
 		this._observer.subscribe('_requestLevelUp', this._requestLevelUp.bind(this));
+		this._observer.subscribe('_emitAcceptDataShare', this._emitAcceptDataShare.bind(this));
 	}
 
 	public componentWillUnmount() {
@@ -167,8 +196,11 @@ export default class extends React.Component<{}, State> {
 			</AppBar>
 			{!this.state.user
 				? <SignedOutView containerSize={this.state.containerSize} />
-				: <SignedInView observer={this._observer} user={this.state.user}
-					containerSize={this.state.containerSize} token={this.state.token} />
+				: (this.state.user && this.state.user.AcceptDataShare
+					? <SignedInView observer={this._observer} user={this.state.user}
+						containerSize={this.state.containerSize} token={this.state.token} />
+					: <DataShareDialog observer={this._observer} />
+				)
 			}
 			<Snackbar
 				open={this.state.errorMessage !== ''}

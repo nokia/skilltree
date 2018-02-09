@@ -179,6 +179,17 @@ export default class DatabaseManager {
 		}
 	}
 
+	public async requestAcceptDataShare(user: User): Promise<boolean> {
+		try {
+			let userRepository = this._orm.connection.getRepository(User);
+			user.AcceptDataShare = true;
+			await userRepository.save(user);
+			return user.AcceptDataShare;
+		} catch(err) {
+			return false;
+		}
+	}
+
 	/**
 	 * Create new user by username and full name
 	 *

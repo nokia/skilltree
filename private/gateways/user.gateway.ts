@@ -57,4 +57,31 @@ export class UserGateway {
 			this._server.to(client.id).emit('deniedLogin', 'Wrong token');
 		}
 	}
+
+	@SubscribeMessage('requestAcceptDataShare')
+	requestAcceptDataShare(client: any, token: string): void {
+		let decryptedToken: { username: string, nbf: number, iat: number } =
+			this._keyManager.decryptToken(token);
+		if (this._keyManager.verifyToken(decryptedToken)) {
+			if (decryptedToken && decryptedToken.username) {
+				(async () => {
+					let user: User | undefined = await this._databaseManager
+						.findUserByUsername(decryptedToken.username);
+					if (user) {
+						if(await this._databaseManager.requestAcceptDataShare(user)) {
+							this._server.to(client.id).emit('acceptDataShare');
+						} else {
+							this._server.to(client.id).emit('deniedDataShare', 'Something wrong happened');
+						}
+					} else {
+						this._server.to(client.id).emit('deniedLogin', 'Account is not found');
+					}
+				})()
+			} else {
+				this._server.to(client.id).emit('deniedLogin', 'Wrong token');
+			}
+		} else {
+			this._server.to(client.id).emit('deniedLogin', 'Wrong token');
+		}
+	}
 }
