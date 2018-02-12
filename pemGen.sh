@@ -1,7 +1,7 @@
 rm key.pem
 rm pubkey.pem
-rm pubkey.pem
-rm pubkey.pem
+rm domain.key
+rm domain.crt
 openssl genrsa -out key.pem -passout file:pass.txt 4096
 openssl rsa -in key.pem -pubout -out pubkey.pem
 openssl req -new -newkey rsa:2048 -nodes -out domain.csr -keyout domain.key
