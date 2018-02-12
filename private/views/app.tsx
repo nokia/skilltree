@@ -119,7 +119,7 @@ export default class extends React.Component<{}, State> {
 		this._connection.querySkillTree(this.state.token, (err, graph) => {
 			if (!err) {
 				this._observer.publish('_skillTreeRequest', graph);
-				this._observer.publish('_emitTimelineRequest');
+				this._emitTimelineRequest();
 			} else {
 				this._observer.publish('_showErrorMessage', err);
 			}
@@ -133,7 +133,7 @@ export default class extends React.Component<{}, State> {
 					err: null,
 					node: node
 				});
-				this._observer.publish('_emitTimelineRequest');
+				this._emitTimelineRequest();
 			} else {
 				this._observer.publish('_levelUpRequest', {
 					err: err,
@@ -185,7 +185,6 @@ export default class extends React.Component<{}, State> {
 		this._observer.subscribe('_emitSkillTreeRequest', this._emitSkillTreeRequest.bind(this));
 		this._observer.subscribe('_requestLevelUp', this._requestLevelUp.bind(this));
 		this._observer.subscribe('_emitAcceptDataShare', this._emitAcceptDataShare.bind(this));
-		this._observer.subscribe('_emitTimelineRequest', this._emitTimelineRequest.bind(this));
 	}
 
 	public componentWillUnmount() {
