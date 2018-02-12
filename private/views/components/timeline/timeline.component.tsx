@@ -11,6 +11,8 @@ import DialogContentText from 'material-ui/Dialog/DialogContentText';
 import DialogActions from 'material-ui/Dialog/DialogActions';
 import Button from 'material-ui/Button/Button';
 import withMobileDialog from 'material-ui/Dialog/withMobileDialog';
+import { List, ListItem, ListItemText } from 'material-ui';
+import LoadingView from '../loadingView';
 
 export default class extends React.Component<Props, State> {
 	constructor(props) {
@@ -28,23 +30,24 @@ export default class extends React.Component<Props, State> {
 		Message: string,
 		When: Date
 	}[]) {
-		console.log('sad');
-		console.log(events);
 		this.setState({ events });
 	}
 
 	public componentDidMount() {
 		this.props.observer.subscribe('_timelineRequest',
-				this._timelineRequestCallback.bind(this));
+			this._timelineRequestCallback.bind(this));
 	}
 
 	public render() {
-		return (
-			<main style={this.props.style} >
+		return (this.state.events.length > 0 ? <main style={this.props.style}>
+			<List component="nav">
 				{this.state.events.map((event, index) => {
-					return <div key={index}>{event.Message}</div>
-				})}
-			</main>
-		);
+					return (<ListItem key={index}>
+						<ListItemText primary={event.Message}
+							secondary={new Date(event.When).toLocaleDateString()} />
+					</ListItem>);
+				}).reverse()}
+			</List>
+		</main> : <LoadingView style={this.props.style} />);
 	}
 }
