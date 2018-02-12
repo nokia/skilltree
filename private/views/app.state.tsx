@@ -7,4 +7,5 @@ export default interface State {
 	loaded: boolean;
 	errorMessage: string;
 	containerSize: { height: number, width: number };
+	showDataShareDialog: boolean;
 }

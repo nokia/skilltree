@@ -1,22 +1,33 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { IsNotEmpty, Min } from 'class-validator';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+
+import { SkillType } from './skillType.model';
 
 @Entity()
 export class Skill {
 	@PrimaryGeneratedColumn()
 	ID: number;
 
-	@Column()
-	Type: string;
+	@Column({ unique: true })
+	@IsNotEmpty()
+	Name: string;
 
 	@Column()
+	@Min(1)
 	MaxLevel: number;
 
-	@Column()
+	@Column({ type: 'text' })
+	@IsNotEmpty()
 	Description: string;
 
 	@Column()
+	@IsNotEmpty()
 	SkillLink: string;
 
 	@Column()
+	@IsNotEmpty()
 	ImgUrl: string;
+
+	@ManyToOne(type => SkillType)
+	Type: SkillType;
 }

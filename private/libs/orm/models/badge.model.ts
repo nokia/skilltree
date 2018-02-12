@@ -17,6 +17,6 @@ export class Badge {
 	@Column()
 	ImgUrl: string;
 
-	@ManyToOne(type => BadgeType, { cascadeAll: true })
+	@ManyToOne(type => BadgeType)
 	Type: BadgeType;
 }

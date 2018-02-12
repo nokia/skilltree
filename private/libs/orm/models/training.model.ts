@@ -3,6 +3,7 @@ import { ManyToOne } from 'typeorm/decorator/relations/ManyToOne';
 
 import { Skill } from './skill.model';
 import { User } from './user.model';
+import { ValidateNested } from 'class-validator';
 
 @Entity()
 export class Training {
@@ -15,12 +16,12 @@ export class Training {
 	@Column({ default: false })
 	Accepted: boolean;
 
-	@ManyToOne(type => User, { cascadeAll: true })
+	@ManyToOne(type => User)
 	AcceptedBy: User;
 
 	@Column()
 	AcceptedDate: Date;
 
-	@ManyToOne(type => Skill, { cascadeAll: true })
+	@ManyToOne(type => Skill)
 	Skill: Skill;
 }

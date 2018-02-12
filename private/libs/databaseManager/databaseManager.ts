@@ -1,6 +1,12 @@
+import * as Env from 'env-var';
+
 import Logger from '../logger';
 import Orm from '../orm';
+import { Parent } from '../orm/models/parent.model';
 import { Role } from '../orm/models/role.model';
+import { Skill } from '../orm/models/skill.model';
+import { SkillPoint } from '../orm/models/skillPoint.model';
+import { Timeline } from '../orm/models/timeline.model';
 import { User } from '../orm/models/user.model';
 
 /**
@@ -20,7 +26,7 @@ export default class DatabaseManager {
 	 * @constructor
 	 */
 	constructor() {
-		if (DatabaseManager._instance){
+		if (DatabaseManager._instance) {
 			throw new Error('Error: Instantiation failed: Use DatabaseManager.getInstance() instead of new.');
 		} else {
 			this._connnectToDatabase((error: Error) => {
@@ -61,13 +67,155 @@ export default class DatabaseManager {
 	 * Find role by name
 	 *
 	 * @class DatabaseManager
-	 * @method findRoleByName
+	 * @method _findRoleByName
 	 * @param { string } username
 	 * @returns { Promise<Role | undefined> }
 	 */
-	private async findRoleByName(roleName: string): Promise<Role | undefined> {
+	private async _findRoleByName(roleName: string): Promise<Role | undefined> {
 		let roleRepository = this._orm.connection.getRepository(Role);
 		return await roleRepository.findOne({ Name: roleName });
+	}
+
+	private async _findSkillPointByUserAndSkill(user: User, skill: Skill)
+		: Promise<SkillPoint | undefined> {
+		let skillPointRepository = this._orm.connection.getRepository(SkillPoint);
+		return await skillPointRepository.findOne({ User: user, Skill: skill });
+	}
+
+	private async _findSkillById(skillId: number)
+		: Promise<Skill | undefined> {
+		let skillRepository = this._orm.connection.getRepository(Skill);
+		return await skillRepository.findOne({ ID: skillId });
+	}
+
+	private async _findParentsBySkill(skill: Skill)
+		: Promise<Parent[] | undefined> {
+		let parentRepository = this._orm.connection.getRepository(Parent);
+		return await parentRepository.find({
+			relations: ['From', 'To'],
+			where: {
+				To: skill,
+			}
+		});
+	}
+
+	public async queryTimeline(user: User): Promise<Timeline[] | undefined> {
+		try {
+			let timelineRepository = this._orm.connection.getRepository(Timeline);
+			return await timelineRepository.find({
+				relations: ['WhitWho'],
+				where: {
+					WhitWho: user,
+				}
+			});
+		} catch (err) {
+			return undefined;
+		}
+	}
+
+	/**
+	 * Query all skill and their connections
+	 *
+	 * @class DatabaseManager
+	 * @method _findRoleByName
+	 * @param { string } username
+	 * @returns { Promise<Role | undefined> }
+	 */
+	public async querySkillTree(user: User):
+		Promise<{
+			nodes: {
+				id: number,
+				image: string,
+				label: string,
+				description: string,
+				accepted: boolean,
+				skillLevel: number,
+				hidden: boolean
+			}[],
+			edges: { from: number, to: number }[]
+		} | undefined> {
+		let skillRepository = this._orm.connection.getRepository(Skill);
+		let parentRepository = this._orm.connection.getRepository(Parent);
+		let nodesTmp: Skill[] | undefined = await skillRepository.find({
+			relations: ['Type']
+		});
+		let edgesTmp: Parent[] | undefined = await parentRepository.find({
+			relations: ['From', 'To']
+		});
+		if (edgesTmp && nodesTmp) {
+			let edges: { from: number, to: number }[] = edgesTmp.map((parent: Parent) => {
+				return { from: parent.From.ID, to: parent.To.ID };
+			});
+			let nodes: {
+				id: number,
+				label: string,
+				image: string,
+				description: string,
+				accepted: boolean,
+				skillLevel: number,
+				hidden: boolean
+			}[] = await Promise.all(nodesTmp.map(async (skill: Skill) => {
+				let skillPoint: SkillPoint | undefined =
+					await this._findSkillPointByUserAndSkill(user, skill);
+				let canOpen = false;
+				if (skillPoint) {
+					canOpen = true;
+				} else {
+					let parents: Parent[] | undefined = await this._findParentsBySkill(skill);
+					if (parents) {
+						canOpen = true;
+						await Promise.all(parents.map(async parent => {
+							skillPoint = await this._findSkillPointByUserAndSkill(user, parent.From);
+							if (!skillPoint || (skillPoint && !skillPoint.Accepted
+								&& skillPoint.Level - 1 === 0)) {
+								canOpen = false;
+							}
+						}));
+					} else {
+						canOpen = true;
+					}
+				}
+				return {
+					id: skill.ID,
+					label: skill.Name,
+					image: skill.ImgUrl,
+					description: skill.Description,
+					accepted: skillPoint
+						? skillPoint.Accepted
+						: !Env.get('HAVE_TO_ACCEPT_LEVEL_UP').asBool(),
+					skillLevel: skillPoint ? skillPoint.Level : 0,
+					hidden: !canOpen
+				}
+			}));
+			return { nodes, edges };
+		} else {
+			return undefined;
+		}
+	}
+
+	private async _addEventToTimeline(user: User, message: string): Promise<boolean> {
+		try {
+			let timelineRepository = this._orm.connection.getRepository(Timeline);
+			let _event = new Timeline();
+			_event.WhitWho = user;
+			_event.Message = message;
+			await timelineRepository.save(_event);
+			return true;
+		} catch (err) {
+			return false;
+		}
+	}
+
+	public async requestAcceptDataShare(user: User): Promise<boolean> {
+		try {
+			let userRepository = this._orm.connection.getRepository(User);
+			user.AcceptDataShare = true;
+			await userRepository.save(user);
+			await this._addEventToTimeline(user, 'Accept data share');
+			return user.AcceptDataShare;
+		} catch (err) {
+			return false;
+		}
 	}
 
 	/**
@@ -81,11 +229,11 @@ export default class DatabaseManager {
 	public async createNewUser(user: { Name: string, Username: string }): Promise<User | undefined> {
 		let userRepository = this._orm.connection.getRepository(User);
 		let _user = new User();
-		let role: Role | undefined = await this.findRoleByName('employee') ||
+		let role: Role | undefined = await this._findRoleByName('employee') ||
 			await this.createNewRole('employee');
 		_user = Object.assign(_user, { ...user, Rank: 1, Role: role, WillingToTeach: false });
-		await userRepository.save(user);
-		return await this.findUserByUsername(user.Username);
+		await userRepository.save(_user);
+		return await this.findUserByUsername(_user.Username);
 	}
 
 	/**
@@ -97,7 +245,7 @@ export default class DatabaseManager {
 	 * @returns { Promise<Role> }
 	 */
 	public async createNewRole(roleName: string): Promise<Role> {
-		let role: Role | undefined = await this.findRoleByName(roleName);
+		let role: Role | undefined = await this._findRoleByName(roleName);
 		if (!role) {
 			role = new Role();
 			role.Name = roleName;
@@ -107,6 +255,48 @@ export default class DatabaseManager {
 			Logger.warn(`${roleName} is already in the role table`);
 		}
 		return role;
+	}
+
+	public async requestLevelUp(user: User, skillId: number): Promise<string | {
+		accepted: boolean,
+		skillLevel: number
+	}> {
+		let skill: Skill | undefined = await this._findSkillById(skillId);
+		if (skill) {
+			let skillPoint: SkillPoint | undefined =
+				await this._findSkillPointByUserAndSkill(user, skill);
+			if (skillPoint) {
+				if (Env.get('HAVE_TO_ACCEPT_LEVEL_UP').asBool() && skillPoint.Accepted) {
+					skillPoint.Accepted = false;
+				} else if (Env.get('HAVE_TO_ACCEPT_LEVEL_UP').asBool() && !skillPoint.Accepted) {
+					return 'The last lavel is not accepted yet.'
+				} else {
+					//Do nothing
+				}
+				skillPoint.Level += 1;
+			} else {
+				skillPoint = new SkillPoint();
+				skillPoint.Skill = skill;
+				skillPoint.User = user;
+			}
+			if (await this._orm.connection.getRepository(SkillPoint).save(skillPoint)) {
+				if (skillPoint.Accepted) {
+					await this._addEventToTimeline(user,
+						`Level up ${skillPoint.Skill.Name} to LVL ${skillPoint.Level}`);
+				} else {
+					await this._addEventToTimeline(user,
+						`Level up request ${skillPoint.Skill.Name} to LVL ${skillPoint.Level}`);
+				}
+				return {
+					accepted: skillPoint.Accepted,
+					skillLevel: skillPoint.Level
+				};
+			} else {
+				return 'Something wrong rty again later!';
+			}
+		} else {
+			return 'Not found that skill!';
+		}
 	}
 
 	/**

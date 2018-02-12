@@ -10,4 +10,5 @@ export interface IUser {
 	Rank: number;
 	WillingToTeach: boolean;
 	Username: string;
+	AcceptDataShare: boolean;
 }

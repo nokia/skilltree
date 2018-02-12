@@ -5,7 +5,7 @@ export class BadgeType {
 	@PrimaryGeneratedColumn()
 	ID: number;
 
-	@Column()
+	@Column({ unique: true })
 	Name: string;
 
 	@Column()

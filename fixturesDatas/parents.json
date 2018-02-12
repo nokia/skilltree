@@ -1,0 +1,55 @@
+{
+	"Model": "Parent",
+	"Relations": [
+		{
+			"Repository": "Skill",
+			"Column": "From"
+		},
+		{
+			"Repository": "Skill",
+			"Column": "To"
+		}
+	],
+	"Datas": [
+		{
+			"From": 1,
+			"To": 3
+		},
+		{
+			"From": 1,
+			"To": 2
+		},
+		{
+			"From": 4,
+			"To": 5
+		},
+		{
+			"From": 4,
+			"To": 6
+		},
+		{
+			"From": 7,
+			"To": 8
+		},
+		{
+			"From": 7,
+			"To": 9
+		},
+		{
+			"From": 10,
+			"To": 11
+		},
+		{
+			"From": 10,
+			"To": 12
+		},
+		{
+			"From": 13,
+			"To": 14
+		},
+		{
+			"From": 13,
+			"To": 15
+		}
+	]
+}

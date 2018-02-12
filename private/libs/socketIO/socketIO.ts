@@ -21,7 +21,7 @@ export class SocketIO {
 	 * @constructor
 	 */
 	constructor() {
-		if (SocketIO._instance){
+		if (SocketIO._instance) {
 			throw new Error('Error: Instantiation failed: Use SocketIO.getInstance() instead of new.');
 		} else {
 			SocketIO._instance = this;
@@ -106,7 +106,104 @@ export class SocketIO {
 		});
 	}
 
-	private _tryMultiple(callback: Function, timout: number = 250, maximumTryCount: number = 3): void {
+	public querySkillTree(token: string | undefined, callback: Function) {
+		this._socket.on('acceptSkillTreeQuery', (graph: {
+			id: number,
+			label: string,
+			image: string,
+			description: string,
+			accepted: boolean,
+			skillLevel: number,
+			hidden: boolean
+		}) => {
+			this._socket.removeAllListeners('acceptSkillTreeQuery');
+			this._socket.close();
+			callback(null, graph);
+		});
+		this._socket.on('deniedSkillTreeQuery', (errorMessage: string) => {
+			this._socket.removeAllListeners('deniedSkillTreeQuery');
+			this._socket.close();
+			callback(errorMessage, null);
+		});
+		this._tryMultiple((errorMessage: string) => {
+			if (errorMessage) {
+				callback(errorMessage, null);
+			} else {
+				this._socket.emit('querySkillTree', token);
+			}
+		});
+	}
+
+	public queryTimeline(token: string | undefined, callback: Function) {
+		this._socket.on('acceptTimelineQuery', (events: {
+			Message: string, When: Date
+		}[]) => {
+			this._socket.removeAllListeners('acceptTimelineQuery');
+			this._socket.close();
+			callback(null, events);
+		});
+		this._socket.on('deniedTimelineQuery', (errorMessage: string) => {
+			this._socket.removeAllListeners('deniedTimelineQuery');
+			this._socket.close();
+			callback(errorMessage, null);
+		});
+		this._tryMultiple((errorMessage: string) => {
+			if (errorMessage) {
+				callback(errorMessage, null);
+			} else {
+				this._socket.emit('queryTimeline', token);
+			}
+		});
+	}
+
+
+	public requestLevelUp(skillId: number, token: string | undefined, callback: Function) {
+		this._socket.on('acceptLevelUp', (node: {
+			accepted: boolean,
+			skillLevel: number
+		}) => {
+			this._socket.removeAllListeners('acceptLevelUp');
+			this._socket.close();
+			callback(null, node);
+		});
+		this._socket.on('deniedLevelUp', (errorMessage: string) => {
+			this._socket.removeAllListeners('deniedLevelUp');
+			this._socket.close();
+			callback(errorMessage, null);
+		});
+		this._tryMultiple((errorMessage: string) => {
+			if (errorMessage) {
+				callback(errorMessage);
+			} else {
+				let lvlUpRequest: { skillId: number, token: string | undefined } = {
+					skillId, token
+				}
+				this._socket.emit('requestLevelUp', lvlUpRequest);
+			}
+		});
+	}
+
+	public emitAcceptDataShare(token: string | undefined, callback: Function): void {
+		this._socket.on('acceptDataShare', () => {
+			this._socket.removeAllListeners('acceptDataShare');
+			this._socket.close();
+			callback(null);
+		});
+		this._socket.on('deniedDataShare', (errorMessage: string) => {
+			this._socket.removeAllListeners('deniedDataShare');
+			this._socket.close();
+			callback(errorMessage);
+		});
+		this._tryMultiple((errorMessage: string) => {
+			if (!errorMessage) {
+				this._socket.emit('requestAcceptDataShare', token);
+			} else {
+				callback(errorMessage);
+			}
+		});
+	}
+
+	private _tryMultiple(callback: Function, timout: number = 1000, maximumTryCount: number = 5): void {
 		!this._socket.connected && this._socket.open();
 		let counter = 1;
 		let timer = setInterval(() => {

@@ -9,10 +9,10 @@ export class Applicant {
 	@PrimaryGeneratedColumn()
 	ID: number;
 
-	@ManyToOne(type => User, { cascadeAll: true })
+	@ManyToOne(type => User)
 	User: User;
 
-	@ManyToOne(type => Skill, { cascadeAll: true })
+	@ManyToOne(type => Skill)
 	Skill: Skill;
 
 	@Column()

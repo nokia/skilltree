@@ -1,0 +1,23 @@
+{
+	"Model": "BadgeType",
+	"Relations": [
+		{
+			"Repository": "Badge",
+			"Column": "Type"
+		}
+	],
+	"Datas": [
+		{
+			"Name": "Skill Mastery",
+			"Description": "You can earn badges of Skill Mastery by reaching the maximum level in as many skills as possible."
+		},
+		{
+			"Name": "Assistance",
+			"Description": "You can earn Assistance badges throught helping, assisting others with problems they ask you to help solve."
+		},
+		{
+			"Name": "Versatility",
+			"Description": "You can earn badges of Versatility by aquiring as many different skills as possible."
+		}
+	]
+}

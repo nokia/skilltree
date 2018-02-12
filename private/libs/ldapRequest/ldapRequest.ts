@@ -1,11 +1,22 @@
 import * as Env from 'env-var';
 import * as Ldapjs from 'ldapjs';
 
+import Logger from '../logger/logger';
+
+/**
+ * The ldap requester.
+ * By: David Zarandi (Azuwey)
+ *
+ * @class LdapRequest
+ */
 export default class LdapRequest {
 	private static _instance: LdapRequest = new LdapRequest(
-		Env.get('LDAP_URL').required().asString()
+		Env.get('LDAP_URL').required().asString(),
+		Env.get('LDAP_ORGANIZATION').required().asString()
 	);
 	private _client: Ldapjs.Client;
+	private _ldapUrl: string;
+	private _ldapOrg: string;
 
 	/**
 	 * Constructor.
@@ -14,11 +25,12 @@ export default class LdapRequest {
 	 * @param { string } ldapUrl
 	 * @constructor
 	 */
-	constructor(ldapUrl: string) {
-		if (LdapRequest._instance){
+	constructor(ldapUrl: string, ldapOrg: string) {
+		if (LdapRequest._instance) {
 			throw new Error('Error: Instantiation failed: Use LdapRequest.getInstance() instead of new.');
 		} else {
-			this._client = Ldapjs.createClient({ url: ldapUrl });
+			this._ldapUrl = ldapUrl;
+			this._ldapOrg = ldapOrg;
 		}
 	}
 
@@ -42,12 +54,13 @@ export default class LdapRequest {
 	 * @param { Function(error, user) } callback
 	 */
 	public requestLogin(user: { username: string, password: string }, callback: Function) {
+		this._client = Ldapjs.createClient({ url: this._ldapUrl });
 		let opts = {
 			filter: `(uid=${user.username})`,
 			scope: 'sub',
-			attributes: ['dn','cn']
+			attributes: ['dn', 'cn']
 		}
-		this._client.search('o=NSN', opts, (err, res) => {
+		this._client.search(`o=${this._ldapOrg}`, opts, (err, res) => {
 			if (!err) {
 				let userIsExist = false;
 				res.on('searchEntry', (entry) => {
@@ -58,12 +71,14 @@ export default class LdapRequest {
 						} else {
 							callback('Wrong password or username', null);
 						}
+						this._client.unbind();
 					});
 				});
 				res.on('end', (result) => {
 					!userIsExist && callback('Wrong password or username', null);
 				});
 			} else {
+				Logger.error(err);
 				callback(err, null);
 			}
 		});

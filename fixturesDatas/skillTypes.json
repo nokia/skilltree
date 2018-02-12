@@ -1,0 +1,25 @@
+{
+	"Model": "SkillType",
+	"Datas": [
+		{
+			"Name": "Software engineering",
+			"Description": "Skills related to software engineering/development directly."
+		},
+		{
+			"Name": "Management",
+			"Description": "Skills related to leading projects, coordinating teams, managing groups etc.."
+		},
+		{
+			"Name": "Human Resources",
+			"Description": "Skills related to administration, communication, laws, paperwork, statistics etc.."
+		},
+		{
+			"Name": "Telecommunications",
+			"Description": "Skills related to understanding, building, configuring, installing ( etc.. ) telecommunication networks."
+		},
+		{
+			"Name": "Hardware Engineering",
+			"Description": "Skills related to the hardware portion of IT directly."
+		}
+	]
+}

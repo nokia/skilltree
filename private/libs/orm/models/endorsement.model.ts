@@ -4,13 +4,13 @@ import { ManyToOne } from 'typeorm/decorator/relations/ManyToOne';
 import { User } from './user.model';
 
 @Entity()
-export class Endorsment {
+export class Endorsement {
 	@PrimaryGeneratedColumn()
 	ID: number;
 
-	@ManyToOne(type => User, { cascadeAll: true })
+	@ManyToOne(type => User)
 	From: User;
 
-	@ManyToOne(type => User, { cascadeAll: true })
+	@ManyToOne(type => User)
 	To: User;
 }

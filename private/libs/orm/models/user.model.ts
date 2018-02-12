@@ -1,3 +1,4 @@
+import { IsBoolean, IsNotEmpty, Min, ValidateNested } from 'class-validator';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { ManyToOne } from 'typeorm/decorator/relations/ManyToOne';
 
@@ -9,20 +10,24 @@ export class User {
 	ID: number;
 
 	@Column()
+	@IsNotEmpty()
 	Name: string;
 
 	@Column()
+	@Min(1)
 	Rank: number;
 
 	@Column()
+	@IsBoolean()
 	WillingToTeach: boolean;
 
 	@Column()
+	@IsNotEmpty()
 	Username: string;
 
-	@ManyToOne(type => User, { cascadeAll: true })
-	Manager: User;
-
-	@ManyToOne(type => Role, { cascadeAll: true })
+	@ManyToOne(type => Role)
 	Role: Role;
+
+	@Column({ default: false })
+	AcceptDataShare: boolean;
 }

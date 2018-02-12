@@ -1,14 +1,11 @@
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
 import * as React from 'react';
-import Button from 'material-ui/Button';
-import Props from './signedInView.props';
-import Style from './signedInView.style';
-import State from './signedInView.state';
-import Input from 'material-ui/Input';
 import SwipeableViews from 'react-swipeable-views';
-import Paper from 'material-ui/Paper';
+
+import SkillTree from '../skillTree';
+import Timeline from '../timeline';
+import Props from './signedInView.props';
+import State from './signedInView.state';
+import Style from './signedInView.style';
 
 export default class extends React.Component<Props, State> {
 	constructor(props) {
@@ -27,21 +24,34 @@ export default class extends React.Component<Props, State> {
 		this.props.observer.unsubscribe('_swipescreen');
 	}
 
+	private _getStyle(): JSX.IntrinsicAttributes {
+		return Object.assign({},
+			Style.mainContainer(this.props.containerSize),
+			Style.contentContainer);
+	}
+
 	public render() {
-		return (<SwipeableViews axis='x' index={ this.state.currentIndex }
-			style={ Style.mainContainer(this.props.containerSize) }>
-			<main style={ Object.assign({},
-				Style.mainContainer(this.props.containerSize),
-				Style.contentContainer)}>Skill Tree</main>
-			<main style={ Object.assign({},
-				Style.mainContainer(this.props.containerSize),
-				Style.contentContainer)}>Timeline</main>
-			<main style={ Object.assign({},
+		return (<SwipeableViews axis='x' index={this.state.currentIndex}
+			style={Style.mainContainer(this.props.containerSize)}>
+			<main style={this._getStyle()}>
+				<SkillTree style={this._getStyle()}
+					observer={this.props.observer} />
+			</main>
+			<main style={this._getStyle()}>
+				<Timeline style={this._getStyle()}
+					observer={this.props.observer} />
+			</main>
+			<main style={Object.assign({},
 				Style.mainContainer(this.props.containerSize),
 				Style.contentContainer)}>Dashboard</main>
-			<main style={ Object.assign({},
+			<main style={Object.assign({},
 				Style.mainContainer(this.props.containerSize),
-				Style.contentContainer)}>Profile</main>
+				Style.contentContainer)}>
+				{this.props.user
+					? <div>{`http://whereareyou.eecloud.dynamic.nsn-net.net/user/${this.props.user.Username}`}</div>
+					: <div>Invalid user</div>
+				}
+			</main>
 		</SwipeableViews>);
 	}
 }
