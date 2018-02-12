@@ -6,8 +6,8 @@ import { Parent } from '../orm/models/parent.model';
 import { Role } from '../orm/models/role.model';
 import { Skill } from '../orm/models/skill.model';
 import { SkillPoint } from '../orm/models/skillPoint.model';
+import { Timeline } from '../orm/models/timeline.model';
 import { User } from '../orm/models/user.model';
-import { QueryRunner } from 'typeorm/query-runner/QueryRunner';
 
 /**
  * The database manager.
@@ -99,6 +99,20 @@ export default class DatabaseManager {
 		});
 	}
 
+	public async queryTimeline(user: User): Promise<Timeline[] | undefined> {
+		try {
+			let timelineRepository = this._orm.connection.getRepository(Timeline);
+			return await timelineRepository.find({
+				relations: ['WhitWho'],
+				where: {
+					WhitWho: user,
+				}
+			});
+		} catch (err) {
+			return undefined;
+		}
+	}
+
 	/**
 	 * Query all skill and their connections
 	 *
@@ -179,13 +193,27 @@ export default class DatabaseManager {
 		}
 	}
 
+	private async _addEventToTimeline(user: User, message: string): Promise<boolean> {
+		try {
+			let timelineRepository = this._orm.connection.getRepository(Timeline);
+			let _event = new Timeline();
+			_event.WhitWho = user;
+			_event.Message = message;
+			await timelineRepository.save(_event);
+			return true;
+		} catch (err) {
+			return false;
+		}
+	}
+
 	public async requestAcceptDataShare(user: User): Promise<boolean> {
 		try {
 			let userRepository = this._orm.connection.getRepository(User);
 			user.AcceptDataShare = true;
 			await userRepository.save(user);
+			await this._addEventToTimeline(user, 'Accept data share');
 			return user.AcceptDataShare;
-		} catch(err) {
+		} catch (err) {
 			return false;
 		}
 	}
@@ -252,6 +280,13 @@ export default class DatabaseManager {
 				skillPoint.User = user;
 			}
 			if (await this._orm.connection.getRepository(SkillPoint).save(skillPoint)) {
+				if (skillPoint.Accepted) {
+					await this._addEventToTimeline(user,
+						`Level up ${skillPoint.Skill.Name} to LVL ${skillPoint.Level}`);
+				} else {
+					await this._addEventToTimeline(user,
+						`Level up request ${skillPoint.Skill.Name} to LVL ${skillPoint.Level}`);
+				}
 				return {
 					accepted: skillPoint.Accepted,
 					skillLevel: skillPoint.Level

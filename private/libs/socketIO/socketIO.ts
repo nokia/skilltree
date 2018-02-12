@@ -134,6 +134,29 @@ export class SocketIO {
 		});
 	}
 
+	public queryTimeline(token: string | undefined, callback: Function) {
+		this._socket.on('acceptTimelineQuery', (events: {
+			Message: string, When: Date
+		}[]) => {
+			this._socket.removeAllListeners('acceptTimelineQuery');
+			this._socket.close();
+			callback(null, events);
+		});
+		this._socket.on('deniedTimelineQuery', (errorMessage: string) => {
+			this._socket.removeAllListeners('deniedTimelineQuery');
+			this._socket.close();
+			callback(errorMessage, null);
+		});
+		this._tryMultiple((errorMessage: string) => {
+			if (errorMessage) {
+				callback(errorMessage, null);
+			} else {
+				this._socket.emit('queryTimeline', token);
+			}
+		});
+	}
+
+
 	public requestLevelUp(skillId: number, token: string | undefined, callback: Function) {
 		this._socket.on('acceptLevelUp', (node: {
 			accepted: boolean,

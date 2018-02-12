@@ -1,10 +1,14 @@
 import { Module } from '@nestjs/common';
 
 import { IndexController } from '../controllers';
-import { SkillTreeGateway, UserGateway } from '../gateways';
+import { SkillTreeGateway, TimelineGateway, UserGateway } from '../gateways';
 
 @Module({
-	components: [ SkillTreeGateway, UserGateway ],
+	components: [
+		SkillTreeGateway,
+		TimelineGateway,
+		UserGateway
+	],
 	controllers: [ IndexController ]
 })
 export class ApplicationModule {}
