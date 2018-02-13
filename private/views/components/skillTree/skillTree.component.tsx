@@ -8,6 +8,7 @@ import * as React from 'react';
 import NodeGraph from 'react-graph-vis';
 import { isArray, isUndefined } from 'util';
 
+import LoadingView from '../loadingView';
 import Options from './skillTree.options';
 import Props from './skillTree.props';
 import State from './skillTree.state';
@@ -95,52 +96,50 @@ export default class extends React.Component<Props, State> {
 	}
 
 	public render() {
-		return (
-			<main style={this.props.style} >
-				<NodeGraph graph={this.state.graph} options={this.state.options} events={{
-					select: this._selectHandler.bind(this)
-				}} />
-				<Dialog open={this.state.isOpen}>
-					<DialogTitle>
+		return (this.state.graph.nodes.length > 0 ? <main style={this.props.style} >
+			<NodeGraph graph={this.state.graph} options={this.state.options} events={{
+				select: this._selectHandler.bind(this)
+			}} />
+			<Dialog open={this.state.isOpen}>
+				<DialogTitle>
+					{this.state.selectedNode
+						? (this.state.selectedNode.accepted
+							|| this.state.selectedNode.skillLevel === 0
+							? `${this.state.selectedNode.label} (${
+							this.state.selectedNode.skillLevel
+							})`
+							: `${this.state.selectedNode.label} (${
+							this.state.selectedNode.skillLevel - 1
+							}) + 1`
+						) : 'Not selcted node'
+					}
+				</DialogTitle>
+				<DialogContent>
+					<DialogContentText>
 						{this.state.selectedNode
-							? (this.state.selectedNode.accepted
-								|| this.state.selectedNode.skillLevel === 0
-								? `${this.state.selectedNode.label} (${
-								this.state.selectedNode.skillLevel
-								})`
-								: `${this.state.selectedNode.label} (${
-								this.state.selectedNode.skillLevel - 1
-								}) + 1`
-							) : 'Not selcted node'
+							? this.state.selectedNode.description
+							: 'Not selcted node'
 						}
-					</DialogTitle>
-					<DialogContent>
-						<DialogContentText>
-							{this.state.selectedNode
-								? this.state.selectedNode.description
-								: 'Not selcted node'
-							}
-						</DialogContentText>
-					</DialogContent>
-					<DialogActions>
-						{!this.state.isLoading
-							&& <Button color='secondary'
-								onClick={() => this.setState({ isOpen: false })}>
-								Exit
+					</DialogContentText>
+				</DialogContent>
+				<DialogActions>
+					{!this.state.isLoading
+						&& <Button color='secondary'
+							onClick={() => this.setState({ isOpen: false })}>
+							Exit
 							</Button>
-						}
-						{this.state.selectedNode && (this.state.selectedNode.accepted
-							|| this.state.selectedNode.skillLevel === 0) &&
-							(!this.state.isLoading
-								? <Button color='primary'
-									onClick={this._requestLevelUp.bind(this)}>
-									Level Up
+					}
+					{this.state.selectedNode && (this.state.selectedNode.accepted
+						|| this.state.selectedNode.skillLevel === 0) &&
+						(!this.state.isLoading
+							? <Button color='primary'
+								onClick={this._requestLevelUp.bind(this)}>
+								Level Up
 								</Button>
-								: <main>Loading...</main>)
-						}
-					</DialogActions>
-				</Dialog>
-			</main>
-		);
+							: <main>Loading...</main>)
+					}
+				</DialogActions>
+			</Dialog>
+		</main> : <LoadingView style={this.props.style} />);
 	}
 }
