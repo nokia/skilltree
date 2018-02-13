@@ -11,24 +11,24 @@
 			"Name": "Programming in C++",
 			"MaxLevel": 5,
 			"Description": "The extent of one's ability to write, debug, review, refactor code in C++.",
-			"SkillLink": "www.cplusplhhhus.com",
-			"ImgUrl": "https://lh3.googleusercontent.com/oKsgcsHtHu_nIkpNd-mNCAyzUD8xo68laRPOfvFuO0hqv6nDXVNNjEMmoiv9tIDgTj8=w170",
+			"SkillLink": "https://www.cplusplhhhus.com",
+			"ImgUrl": "/assets/cPlusPlus.png",
 			"Type": 1
 		},
 		{
 			"Name": "Programming in C#",
 			"MaxLevel": 5,
 			"Description": "The extent of one's ability to write, debug, review, refactor code in C#.",
-			"SkillLink": "whttp://www.learncs.org/",
-			"ImgUrl": "https://lh3.googleusercontent.com/oKsgcsHtHu_nIkpNd-mNCAyzUD8xo68laRPOfvFuO0hqv6nDXVNNjEMmoiv9tIDgTj8=w170",
+			"SkillLink": "https://www.learncs.org/",
+			"ImgUrl": "/assets/cSharp.png",
 			"Type": 1
 		},
 		{
 			"Name": "Development in Laravel",
 			"MaxLevel": 5,
 			"Description": "The extent of one's ability to work with the Laravel framework.",
-			"SkillLink": "www.laravel.com",
-			"ImgUrl": "https://lh3.googleusercontent.com/oKsgcsHtHu_nIkpNd-mNCAyzUD8xo68laRPOfvFuO0hqv6nDXVNNjEMmoiv9tIDgTj8=w170",
+			"SkillLink": "https://www.laravel.com",
+			"ImgUrl": "/assets/laravel.png",
 			"Type": 1
 		},
 		{
@@ -36,7 +36,7 @@
 			"MaxLevel": 5,
 			"Description": "The extent of one's ability to manage his own time schedule as efficiently as possible, as well as managing the time of others.",
 			"SkillLink": "https://www.mindtools.com/pages/article/newHTE_00.htm",
-			"ImgUrl": "https://lh3.googleusercontent.com/oKsgcsHtHu_nIkpNd-mNCAyzUD8xo68laRPOfvFuO0hqv6nDXVNNjEMmoiv9tIDgTj8=w170",
+			"ImgUrl": "/assets/timeManagement.png",
 			"Type": 2
 		},
 		{
@@ -44,7 +44,7 @@
 			"MaxLevel": 5,
 			"Description": "The extent of one's ability to organize new ideas, explaining and presenting it in a sophisticated, efficient manner.",
 			"SkillLink": "https://www.mindtools.com/pages/article/newHTE_00.htm",
-			"ImgUrl": "https://lh3.googleusercontent.com/oKsgcsHtHu_nIkpNd-mNCAyzUD8xo68laRPOfvFuO0hqv6nDXVNNjEMmoiv9tIDgTj8=w170",
+			"ImgUrl": "/assets/ideaManagement.png",
 			"Type": 2
 		},
 		{
@@ -52,7 +52,7 @@
 			"MaxLevel": 5,
 			"Description": "The extent of one's ability to make optimal decisions about when to look for a new solution for a given problem and what new approach should be taken.",
 			"SkillLink": "https://www.mindtools.com/pages/article/newHTE_00.htm",
-			"ImgUrl": "https://lh3.googleusercontent.com/oKsgcsHtHu_nIkpNd-mNCAyzUD8xo68laRPOfvFuO0hqv6nDXVNNjEMmoiv9tIDgTj8=w170",
+			"ImgUrl": "/assets/creativeProblemSolving.png",
 			"Type": 2
 		},
 		{
@@ -60,7 +60,7 @@
 			"MaxLevel": 5,
 			"Description": "The extent of one's ability to communicate effectively with people across an organization, from entry-level employees to the CEO.",
 			"SkillLink": "https://www.mindtools.com/pages/article/newHTE_00.htm",
-			"ImgUrl": "https://lh3.googleusercontent.com/oKsgcsHtHu_nIkpNd-mNCAyzUD8xo68laRPOfvFuO0hqv6nDXVNNjEMmoiv9tIDgTj8=w170",
+			"ImgUrl": "/assets/communication.png",
 			"Type": 3
 		},
 		{
@@ -68,7 +68,7 @@
 			"MaxLevel": 5,
 			"Description": "The extent of one's ability to solve a variety of work conflicts, whether they are between two colleagues or an employee and his or her employer. Skills in negotiation and mediation. Listening to both sides, and resolving the issue in a respectful and appropriate way.",
 			"SkillLink": "https://www.mindtools.com/pages/article/newHTE_00.htm",
-			"ImgUrl": "https://lh3.googleusercontent.com/oKsgcsHtHu_nIkpNd-mNCAyzUD8xo68laRPOfvFuO0hqv6nDXVNNjEMmoiv9tIDgTj8=w170",
+			"ImgUrl": "/assets/conflictManagement.png",
 			"Type": 3
 		},
 		{
@@ -76,7 +76,7 @@
 			"MaxLevel": 5,
 			"Description": "The extent of one's ability to handle personal, sensitive information about a company and its employees. Being discrete, only sharing this information with people when it is appropriate. Making sure both employers and employees are following regulations, and being vocal when those regulations are ignored.",
 			"SkillLink": "https://www.mindtools.com/pages/article/newHTE_00.htm",
-			"ImgUrl": "https://lh3.googleusercontent.com/oKsgcsHtHu_nIkpNd-mNCAyzUD8xo68laRPOfvFuO0hqv6nDXVNNjEMmoiv9tIDgTj8=w170",
+			"ImgUrl": "/assets/ethics.png",
 			"Type": 3
 		},
 		{
@@ -84,7 +84,7 @@
 			"MaxLevel": 5,
 			"Description": "The extent of one's ability to run various software in the cloud successfully.",
 			"SkillLink": "https://www.mindtools.com/pages/article/newHTE_00.htm",
-			"ImgUrl": "https://lh3.googleusercontent.com/oKsgcsHtHu_nIkpNd-mNCAyzUD8xo68laRPOfvFuO0hqv6nDXVNNjEMmoiv9tIDgTj8=w170",
+			"ImgUrl": "/assets/cloudComputing.png",
 			"Type": 4
 		},
 		{
@@ -92,7 +92,7 @@
 			"MaxLevel": 5,
 			"Description": "The extent of one's ability to engineer different types of processes wihch are required to maintain, support, troubleshoot and implement communication networks. Being able to create a network infrastructure which is fool proof.",
 			"SkillLink": "https://www.mindtools.com/pages/article/newHTE_00.htm",
-			"ImgUrl": "https://lh3.googleusercontent.com/oKsgcsHtHu_nIkpNd-mNCAyzUD8xo68laRPOfvFuO0hqv6nDXVNNjEMmoiv9tIDgTj8=w170",
+			"ImgUrl": "/assets/networkEngineering.png",
 			"Type": 4
 		},
 		{
@@ -100,7 +100,7 @@
 			"MaxLevel": 5,
 			"Description": "The extent of one's ability to implement quality of service features. This ties back into broad knowledge of telecom and networking protocols, as well as implementation practices.",
 			"SkillLink": "https://www.mindtools.com/pages/article/newHTE_00.htm",
-			"ImgUrl": "https://lh3.googleusercontent.com/oKsgcsHtHu_nIkpNd-mNCAyzUD8xo68laRPOfvFuO0hqv6nDXVNNjEMmoiv9tIDgTj8=w170",
+			"ImgUrl": "/assets/QoSFeatureImplementation.png",
 			"Type": 4
 		},
 		{
@@ -108,7 +108,7 @@
 			"MaxLevel": 5,
 			"Description": "Knowledge and prediction of physical principles, laws, their interrelationships, and applications to understanding fluid, material, and atmospheric dynamics, and mechanical, electrical, atomic and sub- atomic structures and processes.",
 			"SkillLink": "https://www.mindtools.com/pages/article/newHTE_00.htm",
-			"ImgUrl": "https://lh3.googleusercontent.com/oKsgcsHtHu_nIkpNd-mNCAyzUD8xo68laRPOfvFuO0hqv6nDXVNNjEMmoiv9tIDgTj8=w170",
+			"ImgUrl": "/assets/physics.png",
 			"Type": 5
 		},
 		{
@@ -116,7 +116,7 @@
 			"MaxLevel": 5,
 			"Description": "The extent of one's ability to diagnose and troubleshoot failed rotational media and solid state storage devices.",
 			"SkillLink": "https://www.mindtools.com/pages/article/newHTE_00.htm",
-			"ImgUrl": "https://lh3.googleusercontent.com/oKsgcsHtHu_nIkpNd-mNCAyzUD8xo68laRPOfvFuO0hqv6nDXVNNjEMmoiv9tIDgTj8=w170",
+			"ImgUrl": "/assets/diagnosisOfHardware.png",
 			"Type": 5
 		},
 		{
@@ -124,7 +124,7 @@
 			"MaxLevel": 5,
 			"Description": "The extent of one's ability to modify hardware to either enable forensic analysis of the media or to change the functionality of the hardware for other purposes.",
 			"SkillLink": "https://www.mindtools.com/pages/article/newHTE_00.htm",
-			"ImgUrl": "https://lh3.googleusercontent.com/oKsgcsHtHu_nIkpNd-mNCAyzUD8xo68laRPOfvFuO0hqv6nDXVNNjEMmoiv9tIDgTj8=w170",
+			"ImgUrl": "/assets/modificationOfHardware.png",
 			"Type": 5
 		}
 	]
