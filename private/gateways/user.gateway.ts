@@ -23,16 +23,16 @@ export class UserGateway {
 		this._ldapRequest.requestLogin(data, async (err, entry) => {
 			if (err) {
 				Logger.warn(err);
-				this._server.to(client.id).emit('deniedLogin', 'Wrong username or password, or account is locked');
+				this._server.to(client.id).emit('deniedLogin', 'Wrong username or password, or the account is locked.');
 			} else {
 				let user: User | undefined = await this._databaseManager.findUserByUsername(data.username) ||
 					await this._databaseManager.createNewUser({ Name: entry.cn, Username: data.username });
 				if (user) {
-					this._inMemoryDatabaseManager.setCacheByName(user.Name, client.id);
+					this._inMemoryDatabaseManager.setCacheByKey(user.Name, client.id);
 					let token: string = this._keyManager.generateToken({ username: data.username });
 					this._server.to(client.id).emit('acceptLogin', { token: token, user: <IUser>{ ...user } });
 				} else {
-					this._server.to(client.id).emit('deniedLogin', 'Try again later please');
+					this._server.to(client.id).emit('deniedLogin', 'Login failed. This might have happened as a result of delayed response from the database. Please try again a bit later. ');
 				}
 			}
 		});
@@ -48,7 +48,7 @@ export class UserGateway {
 					let user: User | undefined = await this._databaseManager
 						.findUserByUsername(decryptedToken.username);
 					if (user) {
-						this._inMemoryDatabaseManager.setCacheByName(user.Name, client.id);
+						this._inMemoryDatabaseManager.setCacheByKey(user.Name, client.id);
 						this._server.to(client.id).emit('acceptLogin', { user: <IUser>{ ...user } });
 					} else {
 						this._server.to(client.id).emit('deniedLogin', 'Account is not found');
@@ -75,17 +75,17 @@ export class UserGateway {
 						if(await this._databaseManager.requestAcceptDataShare(user)) {
 							this._server.to(client.id).emit('acceptDataShare');
 						} else {
-							this._server.to(client.id).emit('deniedDataShare', 'Something wrong happened');
+							this._server.to(client.id).emit('deniedDataShare', 'The user has denied the site`s request for data sharing.');
 						}
 					} else {
-						this._server.to(client.id).emit('deniedLogin', 'Account is not found');
+						this._server.to(client.id).emit('deniedDataShare', 'Account is not found');
 					}
 				})()
 			} else {
-				this._server.to(client.id).emit('deniedLogin', 'Wrong token');
+				this._server.to(client.id).emit('deniedDataShare', 'Wrong token');
 			}
 		} else {
-			this._server.to(client.id).emit('deniedLogin', 'Wrong token');
+			this._server.to(client.id).emit('deniedDataShare', 'Wrong token');
 		}
 	}
 }
