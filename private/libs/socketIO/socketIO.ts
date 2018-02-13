@@ -2,7 +2,7 @@ import 'reflect-metadata';
 
 import * as SocketIo from 'socket.io-client';
 
-import { IUser } from '../../models';
+import { IEdge, ISkill, IUser } from '../../models';
 
 /**
  * The SocketIO.
@@ -108,13 +108,8 @@ export class SocketIO {
 
 	public querySkillTree(token: string | undefined, callback: Function) {
 		this._socket.on('acceptSkillTreeQuery', (graph: {
-			id: number,
-			label: string,
-			image: string,
-			description: string,
-			accepted: boolean,
-			skillLevel: number,
-			hidden: boolean
+			nodes: ISkill[],
+			edges: IEdge[]
 		}) => {
 			this._socket.removeAllListeners('acceptSkillTreeQuery');
 			this._socket.close();

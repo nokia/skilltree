@@ -3,6 +3,7 @@ import SwipeableViews from 'react-swipeable-views';
 
 import SkillTree from '../skillTree';
 import Timeline from '../timeline';
+import Profile from '../profile';
 import Props from './signedInView.props';
 import State from './signedInView.state';
 import Style from './signedInView.style';
@@ -48,8 +49,11 @@ export default class extends React.Component<Props, State> {
 				Style.mainContainer(this.props.containerSize),
 				Style.contentContainer)}>
 				{this.props.user
-					? <div>{`http://whereareyou.eecloud.dynamic.nsn-net.net/user/${this.props.user.Username}`}</div>
-					: <div>Invalid user</div>
+					? <Profile style={this._getStyle()}
+						width={this.props.containerSize.width}
+						observer={this.props.observer}
+						user={this.props.user} />
+					: <main>Invalid user</main>
 				}
 			</main>
 		</SwipeableViews>);

@@ -8,6 +8,7 @@ import * as React from 'react';
 import NodeGraph from 'react-graph-vis';
 import { isArray, isUndefined } from 'util';
 
+import { IEdge, ISkill } from '../../../models';
 import LoadingView from '../loadingView';
 import Options from './skillTree.options';
 import Props from './skillTree.props';
@@ -31,24 +32,25 @@ export default class extends React.Component<Props, State> {
 	}
 
 	private _skillTreeRequestCallback(graph: {
-		nodes: {
-			id: number,
-			label: string,
-			image: string,
-			description: string,
-			accepted: boolean,
-			skillLevel: number,
-			hidden: boolean
-		}[],
-		edges: { from: number, to: number }[]
+		nodes: ISkill[],
+		edges: IEdge[]
 	}) {
+		graph.nodes = graph.nodes.map(skill => ({
+			...skill,
+			hidden: skill.Hidden,
+			image: skill.Image,
+			label: skill.Label,
+			id: skill.Id
+		}));
 		this.setState({ graph });
 	}
 
 	private _selectHandler(events) {
 		if (!isUndefined(events.nodes[0]) && !isUndefined(this.state.graph['nodes'])
 			&& isArray(this.state.graph['nodes'])) {
-			let nodes = this.state.graph['nodes'].filter(node => node.id === events.nodes[0]);
+			console.log(events);
+			console.log(this.state.graph['nodes'])
+			let nodes = this.state.graph['nodes'].filter(node => node.Id === events.nodes[0]);
 			if (nodes.length > 0) {
 				nodes.forEach(node => {
 					this.setState({ selectedNode: node, isOpen: true })
@@ -61,12 +63,17 @@ export default class extends React.Component<Props, State> {
 
 	private _requestLevelUp() {
 		if (this.state.selectedNode) {
-			this.props.observer.publish('_requestLevelUp', this.state.selectedNode.id);
+			this.props.observer.publish('_requestLevelUp', this.state.selectedNode.Id);
 			this.setState({ isLoading: true });
 		} else {
 			this.setState({ isOpen: false });
 			this.props.observer.publish('_showErrorMessage', 'No skill selected');
 		}
+	}
+
+	private _openSkillLink() {
+		(this.state.selectedNode) &&
+			window.open(`${this.state.selectedNode.SkillLink}`, '_blank')
 	}
 
 	private _levelUpRequest(response: {
@@ -77,8 +84,8 @@ export default class extends React.Component<Props, State> {
 		}
 	}) {
 		if (!response.err && this.state.selectedNode) {
-			this.state.selectedNode.accepted = response.node.accepted;
-			this.state.selectedNode.skillLevel = response.node.skillLevel;
+			this.state.selectedNode.Accepted = response.node.accepted;
+			this.state.selectedNode.SkillLevel = response.node.skillLevel;
 			this.setState({ isLoading: false });
 		} else {
 			this.setState({ isOpen: false, isLoading: false });
@@ -103,13 +110,13 @@ export default class extends React.Component<Props, State> {
 			<Dialog open={this.state.isOpen}>
 				<DialogTitle>
 					{this.state.selectedNode
-						? (this.state.selectedNode.accepted
-							|| this.state.selectedNode.skillLevel === 0
-							? `${this.state.selectedNode.label} (${
-							this.state.selectedNode.skillLevel
+						? (this.state.selectedNode.Accepted
+							|| this.state.selectedNode.SkillLevel === 0
+							? `${this.state.selectedNode.Label} (${
+							this.state.selectedNode.SkillLevel
 							})`
-							: `${this.state.selectedNode.label} (${
-							this.state.selectedNode.skillLevel - 1
+							: `${this.state.selectedNode.Label} (${
+							this.state.selectedNode.SkillLevel - 1
 							}) + 1`
 						) : 'Not selcted node'
 					}
@@ -117,25 +124,28 @@ export default class extends React.Component<Props, State> {
 				<DialogContent>
 					<DialogContentText>
 						{this.state.selectedNode
-							? this.state.selectedNode.description
+							? this.state.selectedNode.Description
 							: 'Not selcted node'
 						}
 					</DialogContentText>
 				</DialogContent>
 				<DialogActions>
 					{!this.state.isLoading
-						&& <Button color='secondary'
-							onClick={() => this.setState({ isOpen: false })}>
-							Exit
-							</Button>
+						&& <Button onClick={ this._openSkillLink.bind(this) }>
+							Skill link
+						</Button>
 					}
-					{this.state.selectedNode && (this.state.selectedNode.accepted
-						|| this.state.selectedNode.skillLevel === 0) &&
+					{!this.state.isLoading
+						&& <Button color='secondary' onClick={() => this.setState({ isOpen: false })}>
+							Exit
+						</Button>
+					}
+					{this.state.selectedNode && (this.state.selectedNode.Accepted
+						|| this.state.selectedNode.SkillLevel === 0) &&
 						(!this.state.isLoading
-							? <Button color='primary'
-								onClick={this._requestLevelUp.bind(this)}>
+							? <Button color='primary' onClick={this._requestLevelUp.bind(this)}>
 								Level Up
-								</Button>
+							</Button>
 							: <main>Loading...</main>)
 					}
 				</DialogActions>

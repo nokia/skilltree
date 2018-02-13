@@ -5,6 +5,7 @@ import DatabaseManager from '../libs/databaseManager/databaseManager';
 import KeyManager from '../libs/keyManager';
 import { User } from '../libs/orm/models/user.model';
 import { isString } from 'util';
+import { ISkill, IEdge } from '../models/index';
 
 @WebSocketGateway({ port: Env.get('SOCKET_PORT').asIntPositive() || 81 })
 export class SkillTreeGateway {
@@ -24,16 +25,8 @@ export class SkillTreeGateway {
 						.findUserByUsername(decryptedToken.username);
 					if (user) {
 						let graph: {
-							nodes: {
-								id: number,
-								label: string,
-								image: string,
-								description: string,
-								accepted: boolean,
-								skillLevel: number,
-								hidden: boolean
-							}[],
-							edges: { from: number, to: number }[]
+							nodes: ISkill[],
+							edges: IEdge[]
 						} | undefined = await this._databaseManager.querySkillTree(user);
 						if (graph) {
 							this._server.to(client.id).emit('acceptSkillTreeQuery', graph);
@@ -69,7 +62,7 @@ export class SkillTreeGateway {
 							skillLevel: number
 						} = await this._databaseManager
 							.requestLevelUp(user, lvlUpRequest.skillId);
-						if(!isString(levelUpRequest)) {
+						if (!isString(levelUpRequest)) {
 							this._server.to(client.id).emit('acceptLevelUp', levelUpRequest);
 						} else {
 							this._server.to(client.id).emit('deniedLevelUp', levelUpRequest);
