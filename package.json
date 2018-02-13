@@ -39,6 +39,7 @@
     "react-intl": "^2.4.0",
     "react-swipeable-views": "^0.12.12",
     "recharts": "^1.0.0-beta.9",
+    "tinycache": "^1.1.0",
     "ts-log-debug": "^4.0.2",
     "typeorm": "^0.2.0-alpha.18",
     "validator": "^9.4.0"

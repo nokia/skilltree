@@ -2,6 +2,7 @@ import { SubscribeMessage, WebSocketGateway, WebSocketServer } from '@nestjs/web
 import * as Env from 'env-var';
 
 import DatabaseManager from '../libs/databaseManager/databaseManager';
+import InMemoryDatabaseManager from '../libs/inMemoryDatabaseManager';
 import KeyManager from '../libs/keyManager';
 import LdapRequest from '../libs/ldapRequest';
 import Logger from '../libs/logger';
@@ -15,6 +16,7 @@ export class UserGateway {
 	private _keyManager: KeyManager = KeyManager.getInstance();
 	private _ldapRequest: LdapRequest = LdapRequest.getInstance();
 	private _databaseManager: DatabaseManager = DatabaseManager.getInstance();
+	private _inMemoryDatabaseManager: InMemoryDatabaseManager = InMemoryDatabaseManager.getInstance();
 
 	@SubscribeMessage('loginWithoutToken')
 	loginWithoutToken(client: any, data: { username: string, password: string }): void {
@@ -26,6 +28,7 @@ export class UserGateway {
 				let user: User | undefined = await this._databaseManager.findUserByUsername(data.username) ||
 					await this._databaseManager.createNewUser({ Name: entry.cn, Username: data.username });
 				if (user) {
+					this._inMemoryDatabaseManager.setCacheByName(user.Name, client.id);
 					let token: string = this._keyManager.generateToken({ username: data.username });
 					this._server.to(client.id).emit('acceptLogin', { token: token, user: <IUser>{ ...user } });
 				} else {
@@ -45,6 +48,7 @@ export class UserGateway {
 					let user: User | undefined = await this._databaseManager
 						.findUserByUsername(decryptedToken.username);
 					if (user) {
+						this._inMemoryDatabaseManager.setCacheByName(user.Name, client.id);
 						this._server.to(client.id).emit('acceptLogin', { user: <IUser>{ ...user } });
 					} else {
 						this._server.to(client.id).emit('deniedLogin', 'Account is not found');
