@@ -71,7 +71,7 @@ export default class extends React.Component<Props, State> {
 			this.setState({ isLoading: true });
 		} else {
 			this.setState({ isOpen: false });
-			this.props.observer.publish('_showErrorMessage', 'No skill selected');
+			this.props.observer.publish('_showErrorMessage', 'None of the skills are selected.');
 		}
 	}
 
@@ -125,14 +125,14 @@ export default class extends React.Component<Props, State> {
 							: `${this.state.selectedNode.Label} (${
 							this.state.selectedNode.SkillLevel - 1
 							}) + 1`
-						) : 'Not selcted node'
+						) : 'None of the nodes are selected.'
 					}
 				</DialogTitle>
 				<DialogContent>
 					<DialogContentText>
 						{this.state.selectedNode
 							? this.state.selectedNode.Description
-							: 'Not selcted node'
+							: 'None of the nodes are selected.'
 						}
 					</DialogContentText>
 				</DialogContent>

@@ -238,7 +238,7 @@ export default class DatabaseManager {
 			let roleRepository = this._orm.connection.getRepository(Role);
 			await roleRepository.save(role);
 		} else {
-			Logger.warn(`${roleName} is already in the role table`);
+			Logger.warn(`${roleName} is already in the role table.`);
 		}
 		return role;
 	}
@@ -274,10 +274,10 @@ export default class DatabaseManager {
 					skillLevel: skillPoint.Level
 				};
 			} else {
-				return 'Something wrong rty again later!';
+				return 'Something went wrong. Please try again later.';
 			}
 		} else {
-			return 'Not found that skill!';
+			return 'That skill does not exist anymore.';
 		}
 	}
 
