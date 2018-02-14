@@ -8,3 +8,4 @@ old
 *.crt
 *.csr
 *.key
+pass.txt
