@@ -60,7 +60,7 @@ export default class extends React.Component<Props, State> {
 						</Typography>
 					</Grid>
 					<Grid item xs={12} sm={3}>
-						<Button raised fullWidth onClick={this._openWhereAreYouLink.bind(this)}>
+						<Button variant="raised" fullWidth onClick={this._openWhereAreYouLink.bind(this)}>
 							Open Where Are You
 						</Button>
 					</Grid>
@@ -69,7 +69,7 @@ export default class extends React.Component<Props, State> {
 							autoComplete='off' type='text' />
 					</Grid>
 					<Grid item xs={12} sm={2}>
-						<Button raised fullWidth onClick={this._openWhereAreYouLink.bind(this)}>
+						<Button variant="raised"fullWidth onClick={this._openWhereAreYouLink.bind(this)}>
 							Find User
 						</Button>
 					</Grid>
@@ -86,7 +86,7 @@ export default class extends React.Component<Props, State> {
 							autoComplete='off' type='text' />
 					</Grid>
 					<Grid item xs={3}>
-						<Button raised fullWidth onClick={this._openWhereAreYouLink.bind(this)}>
+						<Button variant="raised" fullWidth onClick={this._openWhereAreYouLink.bind(this)}>
 							Add comment
 						</Button>
 					</Grid>
