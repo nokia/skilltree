@@ -34,9 +34,17 @@ export default class extends React.Component<Props, State> {
 	public render() {
 		return (<SwipeableViews axis='x' index={this.state.currentIndex}
 			style={Style.mainContainer(this.props.containerSize)}>
-			<main style={this._getStyle()}>
-				<SkillTree style={this._getStyle()}
-					observer={this.props.observer} />
+			<main style={Object.assign({},
+				Style.mainContainer(this.props.containerSize),
+				Style.contentContainer)}>
+				{this.props.user
+					? <Profile style={this._getStyle()}
+						height={this.props.containerSize.height}
+						width={this.props.containerSize.width}
+						observer={this.props.observer}
+						user={this.props.user} />
+					: <main>Invalid user</main>
+				}
 			</main>
 			<main style={this._getStyle()}>
 				<Timeline style={this._getStyle()}
@@ -45,17 +53,15 @@ export default class extends React.Component<Props, State> {
 			<main style={Object.assign({},
 				Style.mainContainer(this.props.containerSize),
 				Style.contentContainer)}>Dashboard</main>
-			<main style={Object.assign({},
-				Style.mainContainer(this.props.containerSize),
-				Style.contentContainer)}>
-				{this.props.user
-					? <Profile style={this._getStyle()}
-						width={this.props.containerSize.width}
-						observer={this.props.observer}
-						user={this.props.user} />
-					: <main>Invalid user</main>
-				}
-			</main>
 		</SwipeableViews>);
 	}
 }
+
+/*
+
+			<main style={this._getStyle()}>
+				<SkillTree style={this._getStyle()}
+					observer={this.props.observer} />
+			</main>
+
+*/

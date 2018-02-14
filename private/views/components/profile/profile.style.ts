@@ -1,8 +1,8 @@
 export default {
-	skillTreeContainer: (height: number) => {
+	skillTreeContainer: (height: number, width: number) => {
 		return {
 			width: '100%',
-			height: height
+			height: height - width * 0.2
 		}
 	},
 	subContainer: {
@@ -15,5 +15,11 @@ export default {
 	},
 	flexView: {
 		flex: 1
+	},
+	hiddenInXS: (width: number) => {
+		return {
+			'visibility': width < 600 ? 'hidden' : 'visible',
+			'height': width < 600 && 0
+		}
 	}
 }

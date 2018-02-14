@@ -1,4 +1,4 @@
-import { Paper, Typography, Grid, Avatar, Input } from 'material-ui';
+import { Paper, Typography, Grid, Avatar, Input, Hidden } from 'material-ui';
 import Button from 'material-ui/Button';
 import * as React from 'react';
 import SkillTree from '../skillTree';
@@ -12,7 +12,8 @@ export default class extends React.Component<Props, State> {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isLoading: false
+			isLoading: false,
+			searchedUsername: undefined
 		}
 	}
 
@@ -24,7 +25,7 @@ export default class extends React.Component<Props, State> {
 
 	private _getStyle(): JSX.IntrinsicAttributes {
 		return Object.assign({},
-			Style.skillTreeContainer(this.props.width),
+			Style.skillTreeContainer(this.props.height, this.props.width),
 			Style.subContainer);
 	}
 
@@ -47,7 +48,7 @@ export default class extends React.Component<Props, State> {
 		return (!this.state.isLoading ? <main style={this.props.style}>
 			<Paper style={Style.paperContent} elevation={4}>
 				<Grid container alignItems='center' justify='center'>
-					<Grid item sm={1}>
+					<Grid style={Style.hiddenInXS(this.props.width)} item sm={1}>
 						<Avatar alt={`${this.props.user.Name}'s avatar`}
 							src={`${process.env.delveUrl
 								}${this.props.user.Username
@@ -76,7 +77,25 @@ export default class extends React.Component<Props, State> {
 			</Paper>
 			<Paper style={this._removePadding()} elevation={4}>
 				<SkillTree observer={this.props.observer}
-					style={this._getStyle()} />
+					style={this._getStyle()} username={this.state.searchedUsername} />
+			</Paper>
+			<Paper style={Style.paperContent} elevation={4}>
+				<Grid container alignItems='center' justify='center'>
+					<Grid item xs={9}>
+						<Input fullWidth placeholder='Comment'
+							autoComplete='off' type='text' />
+					</Grid>
+					<Grid item xs={3}>
+						<Button raised fullWidth onClick={this._openWhereAreYouLink.bind(this)}>
+							Add comment
+						</Button>
+					</Grid>
+					<Grid item xs={12}>
+						<Typography noWrap component='h2'>
+							{this.props.user.Name}
+						</Typography>
+					</Grid>
+				</Grid>
 			</Paper>
 		</main> : <LoadingView style={this.props.style} />);
 	}

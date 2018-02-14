@@ -13,9 +13,14 @@ export class SkillTreeGateway {
 	private _server: any;
 	private _keyManager: KeyManager = KeyManager.getInstance();
 	private _databaseManager: DatabaseManager = DatabaseManager.getInstance();
+	
 
 	@SubscribeMessage('querySkillTree')
 	querySkillTree(client: any, token: string): void {
+		client.on('disconnect', function (reason) {
+			console.log('user disconnected');
+			console.log(reason);
+		});
 		let decryptedToken: { username: string, nbf: number, iat: number } =
 			this._keyManager.decryptToken(token);
 		if (this._keyManager.verifyToken(decryptedToken)) {
@@ -29,8 +34,10 @@ export class SkillTreeGateway {
 							edges: IEdge[]
 						} | undefined = await this._databaseManager.querySkillTree(user);
 						if (graph) {
-							this._server.to(client.id).emit('acceptSkillTreeQuery', graph);
+							console.log('ok');
+							this._server.to(client.id).emit('acceptedSkillTreeQuery', graph);
 						} else {
+							console.log('nope');
 							this._server.to(client.id).emit('deniedSkillTreeQuery', 'No skill in tree');
 						}
 					} else {
@@ -63,7 +70,7 @@ export class SkillTreeGateway {
 						} = await this._databaseManager
 							.requestLevelUp(user, lvlUpRequest.skillId);
 						if (!isString(levelUpRequest)) {
-							this._server.to(client.id).emit('acceptLevelUp', levelUpRequest);
+							this._server.to(client.id).emit('acceptedLevelUp', levelUpRequest);
 						} else {
 							this._server.to(client.id).emit('deniedLevelUp', levelUpRequest);
 						}

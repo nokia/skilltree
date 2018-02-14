@@ -5,5 +5,6 @@ export default interface Props {
 	observer: ReactObserver;
 	style: JSX.IntrinsicAttributes;
 	user: IUser;
+	height: number;
 	width: number;
 }

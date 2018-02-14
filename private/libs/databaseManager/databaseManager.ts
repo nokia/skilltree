@@ -252,26 +252,22 @@ export default class DatabaseManager {
 			let skillPoint: SkillPoint | undefined =
 				await this._findSkillPointByUserAndSkill(user, skill);
 			if (skillPoint) {
-				if (Env.get('HAVE_TO_ACCEPT_LEVEL_UP').asBool() && skillPoint.Accepted) {
-					skillPoint.Accepted = false;
-				} else if (Env.get('HAVE_TO_ACCEPT_LEVEL_UP').asBool() && !skillPoint.Accepted) {
-					return 'The last lavel is not accepted yet.'
-				} else {
-					//Do nothing
-				}
+				skillPoint.Accepted = !Env.get('HAVE_TO_ACCEPT_LEVEL_UP').required().asBool();
 				skillPoint.Level += 1;
 			} else {
 				skillPoint = new SkillPoint();
 				skillPoint.Skill = skill;
 				skillPoint.User = user;
 			}
+			console.log(skillPoint);
 			if (await this._orm.connection.getRepository(SkillPoint).save(skillPoint)) {
+				console.log('save is successfull');
 				if (skillPoint.Accepted) {
 					await this._addEventToTimeline(user,
-						`Level up ${skillPoint.Skill.Name} to LVL ${skillPoint.Level}`);
+						`Level up ${skill.Name} to LVL ${skillPoint.Level}`);
 				} else {
 					await this._addEventToTimeline(user,
-						`Level up request ${skillPoint.Skill.Name} to LVL ${skillPoint.Level}`);
+						`Level up request ${skill.Name} to LVL ${skillPoint.Level}`);
 				}
 				return {
 					accepted: skillPoint.Accepted,

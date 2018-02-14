@@ -35,6 +35,7 @@ export default class extends React.Component<Props, State> {
 		nodes: ISkill[],
 		edges: IEdge[]
 	}) {
+		console.log('skill tree request');
 		graph.nodes = graph.nodes.map(skill => ({
 			...skill,
 			hidden: skill.Hidden,
@@ -42,14 +43,17 @@ export default class extends React.Component<Props, State> {
 			label: skill.Label,
 			id: skill.Id
 		}));
-		this.setState({ graph });
+		graph.edges = graph.edges.map(edge => ({
+			...edge,
+			from: edge.From,
+			to: edge.To
+		}));
+		this.setState({ graph, isLoading: false });
 	}
 
 	private _selectHandler(events) {
 		if (!isUndefined(events.nodes[0]) && !isUndefined(this.state.graph['nodes'])
 			&& isArray(this.state.graph['nodes'])) {
-			console.log(events);
-			console.log(this.state.graph['nodes'])
 			let nodes = this.state.graph['nodes'].filter(node => node.Id === events.nodes[0]);
 			if (nodes.length > 0) {
 				nodes.forEach(node => {
@@ -86,7 +90,8 @@ export default class extends React.Component<Props, State> {
 		if (!response.err && this.state.selectedNode) {
 			this.state.selectedNode.Accepted = response.node.accepted;
 			this.state.selectedNode.SkillLevel = response.node.skillLevel;
-			this.setState({ isLoading: false });
+			(response.node.accepted) && this.props.observer.publish('_emitSkillTreeRequest');
+			(!response.node.accepted) && this.setState({ isLoading: false });
 		} else {
 			this.setState({ isOpen: false, isLoading: false });
 			this.props.observer.publish('_showErrorMessage', response.err);
@@ -94,12 +99,14 @@ export default class extends React.Component<Props, State> {
 	}
 
 	public componentDidMount() {
-		this.props.observer.subscribe('_levelUpRequest',
-			this._levelUpRequest.bind(this));
+		if (!this.props.username) {
+			this.props.observer.subscribe('_levelUpRequest',
+				this._levelUpRequest.bind(this));
+			console.log('ok');
+		} else { }
 		this.props.observer.subscribe('_skillTreeRequest',
 			this._skillTreeRequestCallback.bind(this));
 		this.props.observer.publish('_emitSkillTreeRequest');
-
 	}
 
 	public render() {
@@ -131,7 +138,7 @@ export default class extends React.Component<Props, State> {
 				</DialogContent>
 				<DialogActions>
 					{!this.state.isLoading
-						&& <Button onClick={ this._openSkillLink.bind(this) }>
+						&& <Button onClick={this._openSkillLink.bind(this)}>
 							Skill link
 						</Button>
 					}
@@ -141,7 +148,7 @@ export default class extends React.Component<Props, State> {
 						</Button>
 					}
 					{this.state.selectedNode && (this.state.selectedNode.Accepted
-						|| this.state.selectedNode.SkillLevel === 0) &&
+						|| this.state.selectedNode.SkillLevel === 0) && !this.props.username &&
 						(!this.state.isLoading
 							? <Button color='primary' onClick={this._requestLevelUp.bind(this)}>
 								Level Up

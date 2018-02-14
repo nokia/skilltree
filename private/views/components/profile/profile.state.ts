@@ -1,3 +1,4 @@
 export default interface State {
-	isLoading: boolean
+	isLoading: boolean;
+	searchedUsername: string | undefined;
 }
