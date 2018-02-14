@@ -1,5 +1,6 @@
 import * as Env from 'env-var';
 
+import { IEdge, ISkill } from '../../models';
 import Logger from '../logger';
 import Orm from '../orm';
 import { Parent } from '../orm/models/parent.model';
@@ -123,16 +124,8 @@ export default class DatabaseManager {
 	 */
 	public async querySkillTree(user: User):
 		Promise<{
-			nodes: {
-				id: number,
-				image: string,
-				label: string,
-				description: string,
-				accepted: boolean,
-				skillLevel: number,
-				hidden: boolean
-			}[],
-			edges: { from: number, to: number }[]
+			nodes: ISkill[],
+			edges: IEdge[]
 		} | undefined> {
 		let skillRepository = this._orm.connection.getRepository(Skill);
 		let parentRepository = this._orm.connection.getRepository(Parent);
@@ -143,18 +136,10 @@ export default class DatabaseManager {
 			relations: ['From', 'To']
 		});
 		if (edgesTmp && nodesTmp) {
-			let edges: { from: number, to: number }[] = edgesTmp.map((parent: Parent) => {
-				return { from: parent.From.ID, to: parent.To.ID };
+			let edges: IEdge[] = edgesTmp.map((parent: Parent) => {
+				return { From: parent.From.ID, To: parent.To.ID };
 			});
-			let nodes: {
-				id: number,
-				label: string,
-				image: string,
-				description: string,
-				accepted: boolean,
-				skillLevel: number,
-				hidden: boolean
-			}[] = await Promise.all(nodesTmp.map(async (skill: Skill) => {
+			let nodes: ISkill[] = await Promise.all(nodesTmp.map(async (skill: Skill) => {
 				let skillPoint: SkillPoint | undefined =
 					await this._findSkillPointByUserAndSkill(user, skill);
 				let canOpen = false;
@@ -176,15 +161,16 @@ export default class DatabaseManager {
 					}
 				}
 				return {
-					id: skill.ID,
-					label: skill.Name,
-					image: skill.ImgUrl,
-					description: skill.Description,
-					accepted: skillPoint
+					Id: skill.ID,
+					Label: skill.Name,
+					Image: skill.ImgUrl,
+					Description: skill.Description,
+					SkillLink: skill.SkillLink,
+					Accepted: skillPoint
 						? skillPoint.Accepted
 						: !Env.get('HAVE_TO_ACCEPT_LEVEL_UP').asBool(),
-					skillLevel: skillPoint ? skillPoint.Level : 0,
-					hidden: !canOpen
+					SkillLevel: skillPoint ? skillPoint.Level : 0,
+					Hidden: !canOpen
 				}
 			}));
 			return { nodes, edges };
@@ -266,26 +252,22 @@ export default class DatabaseManager {
 			let skillPoint: SkillPoint | undefined =
 				await this._findSkillPointByUserAndSkill(user, skill);
 			if (skillPoint) {
-				if (Env.get('HAVE_TO_ACCEPT_LEVEL_UP').asBool() && skillPoint.Accepted) {
-					skillPoint.Accepted = false;
-				} else if (Env.get('HAVE_TO_ACCEPT_LEVEL_UP').asBool() && !skillPoint.Accepted) {
-					return 'The last LevelUp hasn`t been accepted yet.'
-				} else {
-					//Do nothing
-				}
+				skillPoint.Accepted = !Env.get('HAVE_TO_ACCEPT_LEVEL_UP').required().asBool();
 				skillPoint.Level += 1;
 			} else {
 				skillPoint = new SkillPoint();
 				skillPoint.Skill = skill;
 				skillPoint.User = user;
 			}
+			console.log(skillPoint);
 			if (await this._orm.connection.getRepository(SkillPoint).save(skillPoint)) {
+				console.log('save is successfull');
 				if (skillPoint.Accepted) {
 					await this._addEventToTimeline(user,
-						`Level up ${skillPoint.Skill.Name} to LVL ${skillPoint.Level}`);
+						`Level up ${skill.Name} to LVL ${skillPoint.Level}`);
 				} else {
 					await this._addEventToTimeline(user,
-						`Level up request ${skillPoint.Skill.Name} to LVL ${skillPoint.Level}`);
+						`Level up request ${skill.Name} to LVL ${skillPoint.Level}`);
 				}
 				return {
 					accepted: skillPoint.Accepted,

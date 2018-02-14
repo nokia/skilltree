@@ -14,12 +14,12 @@ module.exports = {
 			},
 			{
 				test: /\.css$/,
-				use: [ 'style-loader', 'css-loader' ]
+				use: ['style-loader', 'css-loader']
 			}
 		]
 	},
 	resolve: {
-		extensions: [ '.tsx', '.ts', '.js' ],
+		extensions: ['.tsx', '.ts', '.js'],
 	},
 	output: {
 		filename: 'bundle.js',
@@ -28,8 +28,16 @@ module.exports = {
 	plugins: [
 		new webpack.DefinePlugin({
 			'process.env': {
-				'socketAddress': JSON.stringify(process.env.SOCKET_ADDRESS || '127.0.0.1'),
-				'socketPort': JSON.stringify(process.env.SOCKET_PORT || '81')
+				'socketAddress': JSON.stringify(process.env.SOCKET_ADDRESS
+					|| '127.0.0.1'),
+				'socketPort': JSON.stringify(process.env.SOCKET_PORT
+					|| '81'),
+				'whereAreYouBaseURL': JSON.stringify(process.env.WHERE_ARE_YOU_BASE_URL
+					|| 'http://example.com/user/'),
+				'delveUrl': JSON.stringify(process.env.DELVE_BASE_URL
+						|| 'example.com'),
+				'delveEmail': JSON.stringify(process.env.DELVE_EMAIL
+					|| '%40example.com')
 			},
 		})
 	]

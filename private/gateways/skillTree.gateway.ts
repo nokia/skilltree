@@ -5,6 +5,7 @@ import DatabaseManager from '../libs/databaseManager/databaseManager';
 import KeyManager from '../libs/keyManager';
 import { User } from '../libs/orm/models/user.model';
 import { isString } from 'util';
+import { ISkill, IEdge } from '../models/index';
 
 @WebSocketGateway({ port: Env.get('SOCKET_PORT').asIntPositive() || 81 })
 export class SkillTreeGateway {
@@ -12,9 +13,14 @@ export class SkillTreeGateway {
 	private _server: any;
 	private _keyManager: KeyManager = KeyManager.getInstance();
 	private _databaseManager: DatabaseManager = DatabaseManager.getInstance();
+	
 
 	@SubscribeMessage('querySkillTree')
 	querySkillTree(client: any, token: string): void {
+		client.on('disconnect', function (reason) {
+			console.log('user disconnected');
+			console.log(reason);
+		});
 		let decryptedToken: { username: string, nbf: number, iat: number } =
 			this._keyManager.decryptToken(token);
 		if (this._keyManager.verifyToken(decryptedToken)) {
@@ -24,20 +30,14 @@ export class SkillTreeGateway {
 						.findUserByUsername(decryptedToken.username);
 					if (user) {
 						let graph: {
-							nodes: {
-								id: number,
-								label: string,
-								image: string,
-								description: string,
-								accepted: boolean,
-								skillLevel: number,
-								hidden: boolean
-							}[],
-							edges: { from: number, to: number }[]
+							nodes: ISkill[],
+							edges: IEdge[]
 						} | undefined = await this._databaseManager.querySkillTree(user);
 						if (graph) {
-							this._server.to(client.id).emit('acceptSkillTreeQuery', graph);
+							console.log('ok');
+							this._server.to(client.id).emit('acceptedSkillTreeQuery', graph);
 						} else {
+							console.log('nope');
 							this._server.to(client.id).emit('deniedSkillTreeQuery', 'No skill in tree');
 						}
 					} else {
@@ -69,8 +69,8 @@ export class SkillTreeGateway {
 							skillLevel: number
 						} = await this._databaseManager
 							.requestLevelUp(user, lvlUpRequest.skillId);
-						if(!isString(levelUpRequest)) {
-							this._server.to(client.id).emit('acceptLevelUp', levelUpRequest);
+						if (!isString(levelUpRequest)) {
+							this._server.to(client.id).emit('acceptedLevelUp', levelUpRequest);
 						} else {
 							this._server.to(client.id).emit('deniedLevelUp', levelUpRequest);
 						}
