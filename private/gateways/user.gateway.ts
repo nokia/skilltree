@@ -72,7 +72,7 @@ export class UserGateway {
 					let user: User | undefined = await this._databaseManager
 						.findUserByUsername(decryptedToken.username);
 					if (user) {
-						if(await this._databaseManager.requestAcceptDataShare(user)) {
+						if (await this._databaseManager.requestAcceptDataShare(user)) {
 							this._server.to(client.id).emit('acceptDataShare');
 						} else {
 							this._server.to(client.id).emit('deniedDataShare', 'The user has denied the site`s request for data sharing.');
@@ -86,6 +86,17 @@ export class UserGateway {
 			}
 		} else {
 			this._server.to(client.id).emit('deniedDataShare', 'Wrong token');
+		}
+	}
+
+	@SubscribeMessage('findUserByName')
+	async findUserByName(client: any, name: string): Promise<void> {
+		let user: User | undefined = await this._databaseManager
+			.findUserByName(name);
+		if (user) {
+			this._server.to(client.id).emit('acceptedFindUserByName', user);
+		} else {
+			this._server.to(client.id).emit('deniedFindUserByName', 'Account is not found');
 		}
 	}
 }

@@ -27,15 +27,19 @@ export default class extends React.Component<Props, State> {
 	}
 
 	public componentWillUnmount() {
-		this.props.observer.unsubscribe('_levelUpRequest');
-		this.props.observer.unsubscribe('_skillTreeRequest');
+		if (!this.props.username) {
+			this.props.observer.unsubscribe('_levelUpRequest');
+			this.props.observer.unsubscribe('_skillTreeRequest');
+			this.props.observer.unsubscribe('_emitSkillTreeRequest');
+		} else {
+			this.props.observer.unsubscribe('_skillTreeRequestWithUsernameS');
+		}
 	}
 
 	private _skillTreeRequestCallback(graph: {
 		nodes: ISkill[],
 		edges: IEdge[]
 	}) {
-		console.log('skill tree request');
 		graph.nodes = graph.nodes.map(skill => ({
 			...skill,
 			hidden: skill.Hidden,
@@ -90,7 +94,10 @@ export default class extends React.Component<Props, State> {
 		if (!response.err && this.state.selectedNode) {
 			this.state.selectedNode.Accepted = response.node.accepted;
 			this.state.selectedNode.SkillLevel = response.node.skillLevel;
-			(response.node.accepted) && this.props.observer.publish('_emitSkillTreeRequest');
+			if (!this.props.username) {
+				(response.node.accepted) && this.props.observer.publish('_emitSkillTreeRequest');
+			} else {
+			}
 			(!response.node.accepted) && this.setState({ isLoading: false });
 		} else {
 			this.setState({ isOpen: false, isLoading: false });
@@ -102,11 +109,14 @@ export default class extends React.Component<Props, State> {
 		if (!this.props.username) {
 			this.props.observer.subscribe('_levelUpRequest',
 				this._levelUpRequest.bind(this));
-			console.log('ok');
-		} else { }
-		this.props.observer.subscribe('_skillTreeRequest',
-			this._skillTreeRequestCallback.bind(this));
-		this.props.observer.publish('_emitSkillTreeRequest');
+			this.props.observer.subscribe('_skillTreeRequest',
+				this._skillTreeRequestCallback.bind(this));
+			this.props.observer.publish('_emitSkillTreeRequestWithoutUsername');
+		} else {
+			this.props.observer.subscribe('_skillTreeRequestWithUsernameS',
+				this._skillTreeRequestCallback.bind(this));
+			this.props.observer.publish('_emitSkillTreeRequestWithUsername', this.props.username);
+		}
 	}
 
 	public render() {
