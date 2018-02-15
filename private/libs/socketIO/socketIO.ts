@@ -349,7 +349,7 @@ export class SocketIO {
 			if (counter >= maximumTryCount) {
 				clearInterval(timer);
 				this._socket.close();
-				callback('Max try count is reached');
+				callback('Max try count is reached.');
 			} else {
 				if (this._socket.connected) {
 					callback(null);

@@ -13,6 +13,8 @@ import LoadingView from '../loadingView';
 import Options from './skillTree.options';
 import Props from './skillTree.props';
 import State from './skillTree.state';
+import { Grid, Avatar } from 'material-ui';
+import Style from './skillTree.style';
 
 export default class extends React.Component<Props, State> {
 	constructor(props) {
@@ -126,17 +128,24 @@ export default class extends React.Component<Props, State> {
 			}} />
 			<Dialog open={this.state.isOpen}>
 				<DialogTitle>
-					{this.state.selectedNode
-						? (this.state.selectedNode.Accepted
-							|| this.state.selectedNode.SkillLevel === 0
-							? `${this.state.selectedNode.Label} (${
-							this.state.selectedNode.SkillLevel
-							})`
-							: `${this.state.selectedNode.Label} (${
-							this.state.selectedNode.SkillLevel - 1
-							}) + 1`
-						) : 'None of the nodes are selected.'
-					}
+					<Grid style={Style.grid} container justify="space-between" spacing={0}>
+						<Grid style={Style.grid} item>
+							{this.state.selectedNode
+								? (this.state.selectedNode.Accepted
+									|| this.state.selectedNode.SkillLevel === 0
+									? `${this.state.selectedNode.Label} (${
+									this.state.selectedNode.SkillLevel
+									})`
+									: `${this.state.selectedNode.Label} (${
+									this.state.selectedNode.SkillLevel - 1
+									}) + 1`
+								) : 'None of the nodes are selected.'
+							}
+						</Grid>
+						<Grid item>
+							{this.state.selectedNode && <Avatar alt="Skill Icon" src={this.state.selectedNode.Image} style={{ borderRadius: 0 }} />}
+						</Grid>
+					</Grid>
 				</DialogTitle>
 				<DialogContent>
 					<DialogContentText>

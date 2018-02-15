@@ -3,6 +3,7 @@ import SwipeableViews from 'react-swipeable-views';
 
 import SkillTree from '../skillTree';
 import Timeline from '../timeline';
+import Dashboard from '../dashboard';
 import Profile from '../profile';
 import Props from './signedInView.props';
 import State from './signedInView.state';
@@ -50,9 +51,12 @@ export default class extends React.Component<Props, State> {
 				<Timeline style={this._getStyle()}
 					observer={this.props.observer} />
 			</main>
-			<main style={Object.assign({},
-				Style.mainContainer(this.props.containerSize),
-				Style.contentContainer)}>Dashboard</main>
+			<main style={this._getStyle()}>
+				<Dashboard style={this._getStyle()}
+					height={this.props.containerSize.height}
+					width={this.props.containerSize.width}
+					observer={this.props.observer} />
+			</main>
 		</SwipeableViews>);
 	}
 }
