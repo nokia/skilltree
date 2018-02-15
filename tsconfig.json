@@ -16,7 +16,7 @@
         "target": "es5",
         "types": [ "reflect-metadata" ],
         "jsx": "react",
-        "strictPropertyInitialization": false,
+        "strictPropertyInitialization": false
     },
     "include": [
         "private/**/*"
