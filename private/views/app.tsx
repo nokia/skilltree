@@ -17,6 +17,7 @@ import SignedOutBar from './components/signedOutBar';
 import { isBrowser } from './misc';
 import DataShareDialog from './components/dataShareDialog';
 import { Dark } from './themes';
+import { User } from '../libs/orm/models/user.model';
 
 export default class extends React.Component<{}, State> {
 	private _connection: SocketIO;
@@ -154,6 +155,11 @@ export default class extends React.Component<{}, State> {
 		});
 	}
 
+	private _requestAddComment(comment: string, userFrom: string, userTo: string) {
+		this._connection.emitRequestAddComment({ comment, userFrom, userTo}, (err, comment) => {
+		});
+	}
+
 	private _emitAcceptDataShare() {
 		this._connection.emitAcceptDataShare(this.state.token, err => {
 			if (!err && this.state.user) {
@@ -192,6 +198,7 @@ export default class extends React.Component<{}, State> {
 		this._observer.subscribe('_showErrorMessage', this._showErrorMessage.bind(this));
 		this._observer.subscribe('_emitSkillTreeRequestWithoutUsername', this._emitSkillTreeRequest.bind(this));
 		this._observer.subscribe('_requestLevelUp', this._requestLevelUp.bind(this));
+		this._observer.subscribe('_requestAddComment!', this._requestAddComment.bind(this));
 		this._observer.subscribe('_emitAcceptDataShare', this._emitAcceptDataShare.bind(this));
 		this._observer.subscribe('_findUserByName', this._findUserByName.bind(this));
 		this._observer.subscribe('_emitSkillTreeRequestWithUsername',
@@ -214,6 +221,7 @@ export default class extends React.Component<{}, State> {
 		this._observer.unsubscribe('_showErrorMessage');
 		this._observer.unsubscribe('_emitSkillTreeRequestWithoutUsername');
 		this._observer.unsubscribe('_requestLevelUp');
+		this._observer.unsubscribe('_addComment');
 		this._observer.unsubscribe('_emitAcceptDataShare');
 		this._observer.unsubscribe('_findUserByName');
 		this._observer.unsubscribe('_emitSkillTreeRequestWithUsername');

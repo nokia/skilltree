@@ -59,6 +59,8 @@ export default class extends React.Component<Props, State> {
 	}
 
 	private _requestAddComment() {
+		this._commentValidator() &&
+		this.props.observer.publish('_requestAddComment',{ comment: this.state.comment, userFrom: this.props.user.Username, userTo: this.state.searchedUsername } );
 	}
 
 	private _searchValidator = (): boolean => {
@@ -181,7 +183,7 @@ export default class extends React.Component<Props, State> {
 					</Grid>}
 					{this.state.user && <Grid item xs={1}>
 						<IconButton disabled={!this._commentValidator() || !isBrowser}
-							onClick={this._openWhereAreYouLink.bind(this)}>
+							onClick={this._requestAddComment.bind(this)}>
 							<AddCircleOutline />
 						</IconButton>
 					</Grid>}
