@@ -64,7 +64,6 @@ export class SocketIO {
 	public emitLoginWithoutTokenRequest(user: { username: string, password: string }, callback: Function): void {
 		this._socket.on('acceptLogin', (response: { token: string, user: IUser }) => {
 			this._socket.removeAllListeners('acceptLogin');
-			console.log('close');
 			this._socket.close();
 			let timer = setInterval(() => {
 				if (!this._socket.connected) {
@@ -75,7 +74,6 @@ export class SocketIO {
 		});
 		this._socket.on('deniedLogin', (errorMessage: string) => {
 			this._socket.removeAllListeners('deniedLogin');
-			console.log('close');
 			this._socket.close();
 			let timer = setInterval(() => {
 				if (!this._socket.connected) {
@@ -103,7 +101,6 @@ export class SocketIO {
 	public emitLoginWithTokenRequest(token: string, callback: Function): void {
 		this._socket.on('acceptLogin', (response: { user: IUser }) => {
 			this._socket.removeAllListeners('acceptLogin');
-			console.log('close');
 			this._socket.close();
 			let timer = setInterval(() => {
 				if (!this._socket.connected) {
@@ -114,7 +111,6 @@ export class SocketIO {
 		});
 		this._socket.on('deniedLogin', (errorMessage: string) => {
 			this._socket.removeAllListeners('deniedLogin');
-			console.log('close');
 			this._socket.close();
 			let timer = setInterval(() => {
 				if (!this._socket.connected) {
@@ -132,20 +128,49 @@ export class SocketIO {
 		});
 	}
 
-	public querySkillTree(token: string | undefined, callback: Function) {
-		this._socket.on('reconnect_error', (error) => {
-			console.log(error);
+	public findUserByName(name: string, callback: Function) {
+		this._socket.on('acceptedFindUserByName', (user: IUser) => {
+			this._socket.removeAllListeners('acceptedFindUserByName');
+			this._socket.close();
+			let timer = setInterval(() => {
+				if (!this._socket.connected) {
+					clearInterval(timer);
+					callback(null, user);
+				}
+			}, this._timeout);
 		});
+		this._socket.on('deniedFindUserByName', (errorMessage: string) => {
+			this._socket.removeAllListeners('deniedFindUserByName');
+			this._socket.close();
+			let timer = setInterval(() => {
+				if (!this._socket.connected) {
+					clearInterval(timer);
+					callback(errorMessage, null);
+				}
+			}, this._timeout);
+		});
+		this._tryMultiple((errorMessage: string) => {
+			if (errorMessage) {
+				callback(errorMessage, null);
+			} else {
+				this._socket.emit('findUserByName', name);
+			}
+		});
+		let timer = setInterval(() => {
+			if (!this._socket.connected) {
+				clearInterval(timer);
+			}
+		}, this._timeout);
+	}
+
+	public querySkillTree(token: string | undefined, callback: Function) {
 		this._socket.on('acceptedSkillTreeQuery', (graph: {
 			nodes: ISkill[],
 			edges: IEdge[]
 		}) => {
 			this._queryIsRunning = false;
-			console.log('vissza3');
 			this._socket.removeAllListeners('acceptedSkillTreeQuery');
-			console.log('close');
 			this._socket.close();
-			console.log('vissza2');
 			let timer = setInterval(() => {
 				if (!this._socket.connected) {
 					clearInterval(timer);
@@ -154,9 +179,7 @@ export class SocketIO {
 			}, this._timeout);
 		});
 		this._socket.on('deniedSkillTreeQuery', (errorMessage: string) => {
-			console.log('vissza');
 			this._socket.removeAllListeners('deniedSkillTreeQuery');
-			console.log('close');
 			this._socket.close();
 			let timer = setInterval(() => {
 				if (!this._socket.connected) {
@@ -176,7 +199,46 @@ export class SocketIO {
 		let timer = setInterval(() => {
 			if (!this._socket.connected) {
 				clearInterval(timer);
-				console.log(this._socket);
+			}
+		}, this._timeout);
+	}
+
+	public querySkillTreeWithUsername(username: string | undefined, callback: Function) {
+		this._socket.on('acceptedSkillTreeQueryWithUsername', (graph: {
+			nodes: ISkill[],
+			edges: IEdge[]
+		}) => {
+			this._queryIsRunning = false;
+			this._socket.removeAllListeners('acceptedSkillTreeQueryWithUsername');
+			this._socket.close();
+			let timer = setInterval(() => {
+				if (!this._socket.connected) {
+					clearInterval(timer);
+					callback(null, graph);
+				}
+			}, this._timeout);
+		});
+		this._socket.on('deniedSkillTreeQueryWithUsername', (errorMessage: string) => {
+			this._socket.removeAllListeners('deniedSkillTreeQueryWithUsername');
+			this._socket.close();
+			let timer = setInterval(() => {
+				if (!this._socket.connected) {
+					clearInterval(timer);
+					callback(errorMessage, null);
+				}
+			}, this._timeout);
+		});
+		this._tryMultiple((errorMessage: string) => {
+			if (errorMessage) {
+				callback(errorMessage, null);
+			} else {
+				this._queryIsRunning = true;
+				this._socket.emit('querySkillTreeWithUsername', username);
+			}
+		});
+		let timer = setInterval(() => {
+			if (!this._socket.connected) {
+				clearInterval(timer);
 			}
 		}, this._timeout);
 	}
@@ -186,7 +248,6 @@ export class SocketIO {
 			Message: string, When: Date
 		}[]) => {
 			this._socket.removeAllListeners('acceptTimelineQuery');
-			console.log('close');
 			(!this._queryIsRunning) && this._socket.close();
 			let timer = setInterval(() => {
 				if (!this._socket.connected) {
@@ -197,7 +258,6 @@ export class SocketIO {
 		});
 		this._socket.on('deniedTimelineQuery', (errorMessage: string) => {
 			this._socket.removeAllListeners('deniedTimelineQuery');
-			console.log('close');
 			(!this._queryIsRunning) && this._socket.close();
 			let timer = setInterval(() => {
 				if (!this._socket.connected) {
@@ -222,7 +282,6 @@ export class SocketIO {
 			skillLevel: number
 		}) => {
 			this._socket.removeAllListeners('acceptedLevelUp');
-			console.log('close');
 			this._socket.close();
 			let timer = setInterval(() => {
 				if (!this._socket.connected) {
@@ -233,7 +292,6 @@ export class SocketIO {
 		});
 		this._socket.on('deniedLevelUp', (errorMessage: string) => {
 			this._socket.removeAllListeners('deniedLevelUp');
-			console.log('close');
 			this._socket.close();
 			let timer = setInterval(() => {
 				if (!this._socket.connected) {
@@ -257,7 +315,6 @@ export class SocketIO {
 	public emitAcceptDataShare(token: string | undefined, callback: Function): void {
 		this._socket.on('acceptDataShare', () => {
 			this._socket.removeAllListeners('acceptDataShare');
-			console.log('close');
 			this._socket.close();
 			let timer = setInterval(() => {
 				if (!this._socket.connected) {

@@ -65,6 +65,21 @@ export default class DatabaseManager {
 	}
 
 	/**
+	 * Find user by name
+	 *
+	 * @class DatabaseManager
+	 * @method findUserByName
+	 * @param { string } name
+	 * @returns { Promise<User | undefined> }
+	 */
+	public async findUserByName(name: string): Promise<User | undefined> {
+		let userRepository = this._orm.connection.getRepository(User);
+		return await userRepository.findOne({
+				where: `Name like '%${name}%'`
+		});
+	}
+
+	/**
 	 * Find role by name
 	 *
 	 * @class DatabaseManager
@@ -259,9 +274,7 @@ export default class DatabaseManager {
 				skillPoint.Skill = skill;
 				skillPoint.User = user;
 			}
-			console.log(skillPoint);
 			if (await this._orm.connection.getRepository(SkillPoint).save(skillPoint)) {
-				console.log('save is successfull');
 				if (skillPoint.Accepted) {
 					await this._addEventToTimeline(user,
 						`Level up ${skill.Name} to LVL ${skillPoint.Level}`);
