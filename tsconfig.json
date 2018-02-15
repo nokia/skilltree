@@ -15,7 +15,8 @@
         "strictNullChecks": true,
         "target": "es5",
         "types": [ "reflect-metadata" ],
-        "jsx": "react"
+        "jsx": "react",
+        "strictPropertyInitialization": false,
     },
     "include": [
         "private/**/*"
