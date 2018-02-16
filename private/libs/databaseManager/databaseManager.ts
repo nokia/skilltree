@@ -9,6 +9,7 @@ import { Skill } from '../orm/models/skill.model';
 import { SkillPoint } from '../orm/models/skillPoint.model';
 import { Timeline } from '../orm/models/timeline.model';
 import { User } from '../orm/models/user.model';
+import { Endorsement } from '../orm/models/endorsement.model';
 
 /**
  * The database manager.
@@ -256,6 +257,16 @@ export default class DatabaseManager {
 			Logger.warn(`${roleName} is already in the role table.`);
 		}
 		return role;
+	}
+
+	public async requestAddComment(comment: string, userFrom: User, userTo: User): Promise<Endorsement> {
+		let endorsement: Endorsement = new Endorsement();
+		endorsement.Comment = comment;
+		endorsement.From = userFrom;
+		endorsement.To = userTo;
+			let EndorsementRepository = this._orm.connection.getRepository(Endorsement);
+			await EndorsementRepository.save(endorsement);
+		return endorsement;
 	}
 
 	public async requestLevelUp(user: User, skillId: number): Promise<string | {

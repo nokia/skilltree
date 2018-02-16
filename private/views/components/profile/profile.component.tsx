@@ -59,6 +59,8 @@ export default class extends React.Component<Props, State> {
 	}
 
 	private _requestAddComment() {
+		this._commentValidator() &&
+		this.props.observer.publish('_requestAddComment',{ comment: this.state.comment, userFrom: this.props.user.Name, userTo: this.state.user && this.state.user.Name } );
 	}
 
 	private _searchValidator = (): boolean => {
@@ -181,17 +183,18 @@ export default class extends React.Component<Props, State> {
 					</Grid>}
 					{this.state.user && <Grid item xs={1}>
 						<IconButton disabled={!this._commentValidator() || !isBrowser}
-							onClick={this._openWhereAreYouLink.bind(this)}>
+						
+							onClick={this._requestAddComment.bind(this)}>
 							<AddCircleOutline />
 						</IconButton>
 					</Grid>}
 					<Grid item xs={12}>
 						{this.state.user
 							? <Typography noWrap>
-								{this.state.user.Name}'s comment #1 test
+								{this.state.user.Name}'s comment would look something like this.
 							</Typography>
 							: <Typography noWrap>
-								comment #1 test
+								This is an example for what a comment would look like.
 							</Typography>
 						}
 					</Grid>

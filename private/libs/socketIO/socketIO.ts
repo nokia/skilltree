@@ -3,6 +3,7 @@ import 'reflect-metadata';
 import * as SocketIo from 'socket.io-client';
 
 import { IEdge, ISkill, IUser } from '../../models';
+import { User } from '../orm/models/user.model';
 
 /**
  * The SocketIO.
@@ -338,6 +339,36 @@ export class SocketIO {
 				this._socket.emit('requestAcceptDataShare', token);
 			} else {
 				callback(errorMessage);
+			}
+		});
+	}
+
+	public emitRequestAddComment(data: { comment: string, userFrom: string, userTo: string }, callback: Function): void {
+		this._socket.on('acceptedComment', (response: { token: string, user: IUser }) => {
+			this._socket.removeAllListeners('acceptedComment');
+			this._socket.close();
+			let timer = setInterval(() => {
+				if (!this._socket.connected) {
+					clearInterval(timer);
+					callback(null, response);
+				}
+			}, this._timeout);
+		});
+		this._socket.on('deniedComment', (errorMessage: string) => {
+			this._socket.removeAllListeners('deniedComment');
+			this._socket.close();
+			let timer = setInterval(() => {
+				if (!this._socket.connected) {
+					clearInterval(timer);
+					callback(errorMessage, null);
+				}
+			}, this._timeout);
+		});
+		this._tryMultiple((errorMessage: string) => {
+			if (errorMessage) {
+				callback(errorMessage, null);
+			} else {
+				this._socket.emit('requestAddComment', data);
 			}
 		});
 	}
