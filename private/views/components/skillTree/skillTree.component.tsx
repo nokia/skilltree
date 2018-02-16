@@ -97,7 +97,7 @@ export default class extends React.Component<Props, State> {
 			this.state.selectedNode.Accepted = response.node.accepted;
 			this.state.selectedNode.SkillLevel = response.node.skillLevel;
 			if (!this.props.username) {
-				(response.node.accepted) && this.props.observer.publish('_emitSkillTreeRequest');
+				(response.node.accepted) && this.props.observer.publish('_emitSkillTreeRequestWithoutUsername');
 			} else {
 			}
 			(!response.node.accepted) && this.setState({ isLoading: false });
