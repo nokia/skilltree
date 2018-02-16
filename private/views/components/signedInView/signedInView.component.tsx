@@ -60,12 +60,3 @@ export default class extends React.Component<Props, State> {
 		</SwipeableViews>);
 	}
 }
-
-/*
-
-			<main style={this._getStyle()}>
-				<SkillTree style={this._getStyle()}
-					observer={this.props.observer} />
-			</main>
-
-*/
