@@ -17,6 +17,7 @@ import SignedOutBar from './components/signedOutBar';
 import { isBrowser } from './misc';
 import DataShareDialog from './components/dataShareDialog';
 import { Dark } from './themes';
+import { User } from '../libs/orm/models/user.model';
 
 export default class extends React.Component<{}, State> {
 	private _connection: SocketIO;
@@ -126,6 +127,17 @@ export default class extends React.Component<{}, State> {
 		});
 	}
 
+	private _findUserByName(name: string) {
+		this._connection.findUserByName(name, (err, user) => {
+			if (!err) {
+				this._observer.publish('_findUserRequest', user);
+			} else {
+				this._observer.publish('_showErrorMessage', err);
+				this._observer.publish('_userNotfound');
+			}
+		});
+	}
+
 	private _requestLevelUp(skillId: number) {
 		this._connection.requestLevelUp(skillId, this.state.token, (err, node) => {
 			if (!err) {
@@ -143,9 +155,14 @@ export default class extends React.Component<{}, State> {
 		});
 	}
 
+	private _requestAddComment(data: {comment: string, userFrom: string, userTo: string}) {
+		this._connection.emitRequestAddComment( data ,(err, comment) => {
+		});
+	}
+
 	private _emitAcceptDataShare() {
 		this._connection.emitAcceptDataShare(this.state.token, err => {
-			if(!err && this.state.user) {
+			if (!err && this.state.user) {
 				this.state.user.AcceptDataShare = true;
 				this._loginUser(this.state.user);
 			} else {
@@ -157,7 +174,7 @@ export default class extends React.Component<{}, State> {
 
 	private _emitTimelineRequest() {
 		this._connection.queryTimeline(this.state.token, (err, events) => {
-			if(!err) {
+			if (!err) {
 				this._observer.publish('_timelineRequest', events);
 			} else {
 				this._observer.publish('_showErrorMessage', err);
@@ -165,7 +182,27 @@ export default class extends React.Component<{}, State> {
 		});
 	}
 
+	private _emitSkillTreeRequestWithUsername(username: string) {
+		this._connection.querySkillTreeWithUsername(username, (err, graph) => {
+			if (!err) {
+				this._observer.publish('_skillTreeRequest', graph);
+			} else {
+				this._observer.publish('_showErrorMessage', err);
+			}
+		});
+	}
+
 	public componentDidMount() {
+		this._observer.subscribe('_logout', this._logout.bind(this));
+		this._observer.subscribe('_emitLoginRequest', this._emitLoginRequest.bind(this));
+		this._observer.subscribe('_showErrorMessage', this._showErrorMessage.bind(this));
+		this._observer.subscribe('_emitSkillTreeRequestWithoutUsername', this._emitSkillTreeRequest.bind(this));
+		this._observer.subscribe('_requestLevelUp', this._requestLevelUp.bind(this));
+		this._observer.subscribe('_requestAddComment!', this._requestAddComment.bind(this));
+		this._observer.subscribe('_emitAcceptDataShare', this._emitAcceptDataShare.bind(this));
+		this._observer.subscribe('_findUserByName', this._findUserByName.bind(this));
+		this._observer.subscribe('_emitSkillTreeRequestWithUsername',
+			this._emitSkillTreeRequestWithUsername.bind(this));
 		window.addEventListener('resize', this._calculateContainerSize.bind(this));
 		this._calculateContainerSize();
 		this.setState({ token: getCookie('token') });
@@ -178,18 +215,16 @@ export default class extends React.Component<{}, State> {
 		}
 	}
 
-	public componentWillMount() {
-		this._observer.subscribe('_logout', this._logout.bind(this));
-		this._observer.subscribe('_emitLoginRequest', this._emitLoginRequest.bind(this));
-		this._observer.subscribe('_showErrorMessage', this._showErrorMessage.bind(this));
-		this._observer.subscribe('_emitSkillTreeRequest', this._emitSkillTreeRequest.bind(this));
-		this._observer.subscribe('_requestLevelUp', this._requestLevelUp.bind(this));
-		this._observer.subscribe('_emitAcceptDataShare', this._emitAcceptDataShare.bind(this));
-	}
-
 	public componentWillUnmount() {
 		this._observer.unsubscribe('_emitLoginRequest');
 		this._observer.unsubscribe('_logout');
+		this._observer.unsubscribe('_showErrorMessage');
+		this._observer.unsubscribe('_emitSkillTreeRequestWithoutUsername');
+		this._observer.unsubscribe('_requestLevelUp');
+		this._observer.unsubscribe('_addComment');
+		this._observer.unsubscribe('_emitAcceptDataShare');
+		this._observer.unsubscribe('_findUserByName');
+		this._observer.unsubscribe('_emitSkillTreeRequestWithUsername');
 	}
 
 	public render() {
@@ -226,3 +261,7 @@ export default class extends React.Component<{}, State> {
 		</MuiThemeProvider>)
 	}
 }
+
+/*
+
+*/

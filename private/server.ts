@@ -79,6 +79,7 @@ export class Server {
 	 */
 	private configureApp(): void {
 		this._nestApp.use('/static', Express.static(`${__dirname}/static`));
+		this._nestApp.use('/assets', Express.static(`${__dirname}/../assets`));
 		this._nestApp.set('views', `${__dirname}/views`);
 		this._nestApp.set('view engine', 'js');
 		this._nestApp.engine('js', require('express-react-engine')({ wrapper: './components/wrapper/wrapper.component.js' }));

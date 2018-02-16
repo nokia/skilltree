@@ -2,7 +2,8 @@ import 'reflect-metadata';
 
 import * as SocketIo from 'socket.io-client';
 
-import { IUser } from '../../models';
+import { IEdge, ISkill, IUser } from '../../models';
+import { User } from '../orm/models/user.model';
 
 /**
  * The SocketIO.
@@ -13,6 +14,8 @@ import { IUser } from '../../models';
 export class SocketIO {
 	private static _instance: SocketIO = new SocketIO();
 	private _socket: SocketIo;
+	private _timeout: number = 1000;
+	private _queryIsRunning: boolean = false;
 
 	/**
 	 * Constructor.
@@ -63,12 +66,22 @@ export class SocketIO {
 		this._socket.on('acceptLogin', (response: { token: string, user: IUser }) => {
 			this._socket.removeAllListeners('acceptLogin');
 			this._socket.close();
-			callback(null, response);
+			let timer = setInterval(() => {
+				if (!this._socket.connected) {
+					clearInterval(timer);
+					callback(null, response);
+				}
+			}, this._timeout);
 		});
 		this._socket.on('deniedLogin', (errorMessage: string) => {
 			this._socket.removeAllListeners('deniedLogin');
 			this._socket.close();
-			callback(errorMessage, null);
+			let timer = setInterval(() => {
+				if (!this._socket.connected) {
+					clearInterval(timer);
+					callback(errorMessage, null);
+				}
+			}, this._timeout);
 		});
 		this._tryMultiple((errorMessage: string) => {
 			if (errorMessage) {
@@ -90,12 +103,22 @@ export class SocketIO {
 		this._socket.on('acceptLogin', (response: { user: IUser }) => {
 			this._socket.removeAllListeners('acceptLogin');
 			this._socket.close();
-			callback(null, response);
+			let timer = setInterval(() => {
+				if (!this._socket.connected) {
+					clearInterval(timer);
+					callback(null, response);
+				}
+			}, this._timeout);
 		});
 		this._socket.on('deniedLogin', (errorMessage: string) => {
 			this._socket.removeAllListeners('deniedLogin');
 			this._socket.close();
-			callback(errorMessage, null);
+			let timer = setInterval(() => {
+				if (!this._socket.connected) {
+					clearInterval(timer);
+					callback(errorMessage, null);
+				}
+			}, this._timeout);
 		});
 		this._tryMultiple((errorMessage: string) => {
 			if (errorMessage) {
@@ -106,32 +129,119 @@ export class SocketIO {
 		});
 	}
 
-	public querySkillTree(token: string | undefined, callback: Function) {
-		this._socket.on('acceptSkillTreeQuery', (graph: {
-			id: number,
-			label: string,
-			image: string,
-			description: string,
-			accepted: boolean,
-			skillLevel: number,
-			hidden: boolean
-		}) => {
-			this._socket.removeAllListeners('acceptSkillTreeQuery');
+	public findUserByName(name: string, callback: Function) {
+		this._socket.on('acceptedFindUserByName', (user: IUser) => {
+			this._socket.removeAllListeners('acceptedFindUserByName');
 			this._socket.close();
-			callback(null, graph);
+			let timer = setInterval(() => {
+				if (!this._socket.connected) {
+					clearInterval(timer);
+					callback(null, user);
+				}
+			}, this._timeout);
 		});
-		this._socket.on('deniedSkillTreeQuery', (errorMessage: string) => {
-			this._socket.removeAllListeners('deniedSkillTreeQuery');
+		this._socket.on('deniedFindUserByName', (errorMessage: string) => {
+			this._socket.removeAllListeners('deniedFindUserByName');
 			this._socket.close();
-			callback(errorMessage, null);
+			let timer = setInterval(() => {
+				if (!this._socket.connected) {
+					clearInterval(timer);
+					callback(errorMessage, null);
+				}
+			}, this._timeout);
 		});
 		this._tryMultiple((errorMessage: string) => {
 			if (errorMessage) {
 				callback(errorMessage, null);
 			} else {
+				this._socket.emit('findUserByName', name);
+			}
+		});
+		let timer = setInterval(() => {
+			if (!this._socket.connected) {
+				clearInterval(timer);
+			}
+		}, this._timeout);
+	}
+
+	public querySkillTree(token: string | undefined, callback: Function) {
+		this._socket.on('acceptedSkillTreeQuery', (graph: {
+			nodes: ISkill[],
+			edges: IEdge[]
+		}) => {
+			this._queryIsRunning = false;
+			this._socket.removeAllListeners('acceptedSkillTreeQuery');
+			this._socket.close();
+			let timer = setInterval(() => {
+				if (!this._socket.connected) {
+					clearInterval(timer);
+					callback(null, graph);
+				}
+			}, this._timeout);
+		});
+		this._socket.on('deniedSkillTreeQuery', (errorMessage: string) => {
+			this._socket.removeAllListeners('deniedSkillTreeQuery');
+			this._socket.close();
+			let timer = setInterval(() => {
+				if (!this._socket.connected) {
+					clearInterval(timer);
+					callback(errorMessage, null);
+				}
+			}, this._timeout);
+		});
+		this._tryMultiple((errorMessage: string) => {
+			if (errorMessage) {
+				callback(errorMessage, null);
+			} else {
+				this._queryIsRunning = true;
 				this._socket.emit('querySkillTree', token);
 			}
 		});
+		let timer = setInterval(() => {
+			if (!this._socket.connected) {
+				clearInterval(timer);
+			}
+		}, this._timeout);
+	}
+
+	public querySkillTreeWithUsername(username: string | undefined, callback: Function) {
+		this._socket.on('acceptedSkillTreeQueryWithUsername', (graph: {
+			nodes: ISkill[],
+			edges: IEdge[]
+		}) => {
+			this._queryIsRunning = false;
+			this._socket.removeAllListeners('acceptedSkillTreeQueryWithUsername');
+			this._socket.close();
+			let timer = setInterval(() => {
+				if (!this._socket.connected) {
+					clearInterval(timer);
+					callback(null, graph);
+				}
+			}, this._timeout);
+		});
+		this._socket.on('deniedSkillTreeQueryWithUsername', (errorMessage: string) => {
+			this._socket.removeAllListeners('deniedSkillTreeQueryWithUsername');
+			this._socket.close();
+			let timer = setInterval(() => {
+				if (!this._socket.connected) {
+					clearInterval(timer);
+					callback(errorMessage, null);
+				}
+			}, this._timeout);
+		});
+		this._tryMultiple((errorMessage: string) => {
+			if (errorMessage) {
+				callback(errorMessage, null);
+			} else {
+				this._queryIsRunning = true;
+				this._socket.emit('querySkillTreeWithUsername', username);
+			}
+		});
+		let timer = setInterval(() => {
+			if (!this._socket.connected) {
+				clearInterval(timer);
+			}
+		}, this._timeout);
 	}
 
 	public queryTimeline(token: string | undefined, callback: Function) {
@@ -139,13 +249,23 @@ export class SocketIO {
 			Message: string, When: Date
 		}[]) => {
 			this._socket.removeAllListeners('acceptTimelineQuery');
-			this._socket.close();
-			callback(null, events);
+			(!this._queryIsRunning) && this._socket.close();
+			let timer = setInterval(() => {
+				if (!this._socket.connected) {
+					clearInterval(timer);
+					callback(null, events);
+				}
+			}, this._timeout);
 		});
 		this._socket.on('deniedTimelineQuery', (errorMessage: string) => {
 			this._socket.removeAllListeners('deniedTimelineQuery');
-			this._socket.close();
-			callback(errorMessage, null);
+			(!this._queryIsRunning) && this._socket.close();
+			let timer = setInterval(() => {
+				if (!this._socket.connected) {
+					clearInterval(timer);
+					callback(errorMessage, null);
+				}
+			}, this._timeout);
 		});
 		this._tryMultiple((errorMessage: string) => {
 			if (errorMessage) {
@@ -158,18 +278,28 @@ export class SocketIO {
 
 
 	public requestLevelUp(skillId: number, token: string | undefined, callback: Function) {
-		this._socket.on('acceptLevelUp', (node: {
+		this._socket.on('acceptedLevelUp', (node: {
 			accepted: boolean,
 			skillLevel: number
 		}) => {
-			this._socket.removeAllListeners('acceptLevelUp');
+			this._socket.removeAllListeners('acceptedLevelUp');
 			this._socket.close();
-			callback(null, node);
+			let timer = setInterval(() => {
+				if (!this._socket.connected) {
+					clearInterval(timer);
+					callback(null, node);
+				}
+			}, this._timeout);
 		});
 		this._socket.on('deniedLevelUp', (errorMessage: string) => {
 			this._socket.removeAllListeners('deniedLevelUp');
 			this._socket.close();
-			callback(errorMessage, null);
+			let timer = setInterval(() => {
+				if (!this._socket.connected) {
+					clearInterval(timer);
+					callback(errorMessage, null);
+				}
+			}, this._timeout);
 		});
 		this._tryMultiple((errorMessage: string) => {
 			if (errorMessage) {
@@ -187,12 +317,22 @@ export class SocketIO {
 		this._socket.on('acceptDataShare', () => {
 			this._socket.removeAllListeners('acceptDataShare');
 			this._socket.close();
-			callback(null);
+			let timer = setInterval(() => {
+				if (!this._socket.connected) {
+					clearInterval(timer);
+					callback(null);
+				}
+			}, this._timeout);
 		});
 		this._socket.on('deniedDataShare', (errorMessage: string) => {
 			this._socket.removeAllListeners('deniedDataShare');
 			this._socket.close();
-			callback(errorMessage);
+			let timer = setInterval(() => {
+				if (!this._socket.connected) {
+					clearInterval(timer);
+					callback(errorMessage);
+				}
+			}, this._timeout);
 		});
 		this._tryMultiple((errorMessage: string) => {
 			if (!errorMessage) {
@@ -203,14 +343,44 @@ export class SocketIO {
 		});
 	}
 
-	private _tryMultiple(callback: Function, timout: number = 1000, maximumTryCount: number = 5): void {
+	public emitRequestAddComment(data: { comment: string, userFrom: string, userTo: string }, callback: Function): void {
+		this._socket.on('acceptedComment', (response: { token: string, user: IUser }) => {
+			this._socket.removeAllListeners('acceptedComment');
+			this._socket.close();
+			let timer = setInterval(() => {
+				if (!this._socket.connected) {
+					clearInterval(timer);
+					callback(null, response);
+				}
+			}, this._timeout);
+		});
+		this._socket.on('deniedComment', (errorMessage: string) => {
+			this._socket.removeAllListeners('deniedComment');
+			this._socket.close();
+			let timer = setInterval(() => {
+				if (!this._socket.connected) {
+					clearInterval(timer);
+					callback(errorMessage, null);
+				}
+			}, this._timeout);
+		});
+		this._tryMultiple((errorMessage: string) => {
+			if (errorMessage) {
+				callback(errorMessage, null);
+			} else {
+				this._socket.emit('requestAddComment', data);
+			}
+		});
+	}
+
+	private _tryMultiple(callback: Function, maximumTryCount: number = 5): void {
 		!this._socket.connected && this._socket.open();
 		let counter = 1;
 		let timer = setInterval(() => {
 			if (counter >= maximumTryCount) {
 				clearInterval(timer);
 				this._socket.close();
-				callback('Max try count is reached');
+				callback('Max try count is reached.');
 			} else {
 				if (this._socket.connected) {
 					callback(null);
@@ -219,6 +389,6 @@ export class SocketIO {
 					++counter;
 				}
 			}
-		}, timout);
+		}, this._timeout);
 	}
 }

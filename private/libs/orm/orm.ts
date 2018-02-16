@@ -13,12 +13,9 @@ import { Connection } from 'typeorm/connection/Connection';
 export default class Orm {
 	private static _instance: Orm = new Orm();
 	private _connection: Connection;
-
-	public 
 	public get connection() : Connection {
 		return this._connection;
 	}
-	
 
 	/**
 	 * Constructor.
