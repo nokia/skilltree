@@ -5,4 +5,5 @@ export default interface State {
 	searchedUsername: string;
 	comment: string;
 	user: IUser | undefined;
+	endorsments: string[];
 }

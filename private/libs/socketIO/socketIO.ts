@@ -276,6 +276,39 @@ export class SocketIO {
 		});
 	}
 
+	public queryEndorsments(token: string | undefined, callback: Function) {
+		this._socket.on('acceptEndorsmentsQuery', (endorsments: {
+			endorsment: string;
+		}[]) => {
+			this._socket.removeAllListeners('acceptEndorsmentsQuery');
+			(!this._queryIsRunning) && this._socket.close();
+			let timer = setInterval(() => {
+				if (!this._socket.connected) {
+					clearInterval(timer);
+					callback(null, endorsments);
+				}
+			}, this._timeout);
+		});
+		this._socket.on('deniedEndorsmentsQuery', (errorMessage: string) => {
+			this._socket.removeAllListeners('deniedEndorsmentsQuery');
+			(!this._queryIsRunning) && this._socket.close();
+			let timer = setInterval(() => {
+				if (!this._socket.connected) {
+					clearInterval(timer);
+					callback(errorMessage, null);
+				}
+			}, this._timeout);
+		});
+		this._tryMultiple((errorMessage: string) => {
+			if (errorMessage) {
+				callback(errorMessage, null);
+			} else {
+				this._socket.emit('queryEndorsments', token);
+			}
+		});
+	}
+
+
 
 	public requestLevelUp(skillId: number, token: string | undefined, callback: Function) {
 		this._socket.on('acceptedLevelUp', (node: {

@@ -17,7 +17,8 @@ export default class extends React.Component<Props, State> {
 			isLoading: false,
 			searchedUsername: '',
 			comment: '',
-			user: undefined
+			user: undefined,
+			endorsments: ['']
 		}
 	}
 
@@ -113,6 +114,9 @@ export default class extends React.Component<Props, State> {
 		this.props.observer.subscribe('_userNotfound', (user: IUser) => {
 			this.setState({ isLoading: false });
 		});
+
+		this.props.observer.subscribe('_endorsmentsRequest',
+			this._endorsmentsRequestCallback.bind(this));
 	}
 
 	public render() {

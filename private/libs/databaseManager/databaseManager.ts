@@ -130,6 +130,22 @@ export default class DatabaseManager {
 		}
 	}
 
+	public async queryEndorsements(user: User): Promise<Endorsement[] | undefined> {
+		try {
+			let endorsementsRepository = this._orm.connection.getRepository(Endorsement);
+			return await endorsementsRepository.find({
+				relations: 
+				['fromID','toID'],
+				where: {
+					fromID: user,
+					toID: user
+				}
+			});
+		} catch (err) {
+			return undefined;
+		}
+	}
+
 	/**
 	 * Query all skill and their connections
 	 *

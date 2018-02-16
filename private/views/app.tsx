@@ -182,6 +182,16 @@ export default class extends React.Component<{}, State> {
 		});
 	}
 
+	private _emitEndorsmentsRequest() {
+		this._connection.queryEndorsments(this.state.token, (err, endorsments) => {
+			if (!err) {
+				this._observer.publish('_endorsmentsRequest', endorsments);
+			} else {
+				this._observer.publish('_showErrorMessage', err);
+			}
+		});
+	}
+
 	private _emitSkillTreeRequestWithUsername(username: string) {
 		this._connection.querySkillTreeWithUsername(username, (err, graph) => {
 			if (!err) {

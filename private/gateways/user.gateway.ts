@@ -115,4 +115,35 @@ export class UserGateway {
 			this._server.to(client.id).emit('deniedFindUserByName', 'Account is not found');
 		}
 	}
+
+	@SubscribeMessage('queryEndorsments')
+	queryTimeline(client: any, token: string): void {
+		let decryptedToken: { username: string, nbf: number, iat: number } =
+			this._keyManager.decryptToken(token);
+		if (this._keyManager.verifyToken(decryptedToken)) {
+			if (decryptedToken && decryptedToken.username) {
+				(async () => {
+					let user: User | undefined = await this._databaseManager
+						.findUserByUsername(decryptedToken.username);
+					if (user) {
+						let endorsement: { Message: string, When: Date }[] | undefined
+							= await this._databaseManager.queryTimeline(user);
+						if (endorsement) {
+							this._server.to(client.id).emit('acceptEndorsmentsQuery', endorsement);
+						} else {
+							this._server.to(client.id).emit('deniedEndorsmentsQuery',
+								'No endorsements to be found.');
+						}
+					} else {
+						this._server.to(client.id).emit('deniedEndorsmentsQuery',
+							'Account is not found');
+					}
+				})()
+			} else {
+				this._server.to(client.id).emit('deniedEndorsmentsQuery', 'Wrong token');
+			}
+		} else {
+			this._server.to(client.id).emit('deniedEndorsmentsQuery', 'Wrong token');
+		}
+	}
 }
