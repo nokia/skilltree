@@ -344,9 +344,7 @@ export class SocketIO {
 	}
 
 	public emitRequestAddComment(data: { comment: string, userFrom: string, userTo: string }, callback: Function): void {
-		console.log("emitRequestAddComment of socketIO");
 		this._socket.on('acceptedComment', (response: { token: string, user: IUser }) => {
-			console.log("socket.on acceptedComment of socketIO");
 			this._socket.removeAllListeners('acceptedComment');
 			this._socket.close();
 			let timer = setInterval(() => {
@@ -357,7 +355,6 @@ export class SocketIO {
 			}, this._timeout);
 		});
 		this._socket.on('deniedComment', (errorMessage: string) => {
-			console.log("socket.on deniedComment of socketIO");
 			this._socket.removeAllListeners('deniedComment');
 			this._socket.close();
 			let timer = setInterval(() => {
@@ -371,7 +368,6 @@ export class SocketIO {
 			if (errorMessage) {
 				callback(errorMessage, null);
 			} else {
-				console.log("try multiple of socketIO");
 				this._socket.emit('requestAddComment', data);
 			}
 		});

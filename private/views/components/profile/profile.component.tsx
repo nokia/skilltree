@@ -59,8 +59,6 @@ export default class extends React.Component<Props, State> {
 	}
 
 	private _requestAddComment() {
-		console.log("requestAddComment of profile.tsx");
-		console.log("profil component forwards this username: ", this.props.user.Username, this.state.searchedUsername );
 		this._commentValidator() &&
 		this.props.observer.publish('_requestAddComment',{ comment: this.state.comment, userFrom: this.props.user.Name, userTo: this.state.user && this.state.user.Name } );
 	}
@@ -83,7 +81,6 @@ export default class extends React.Component<Props, State> {
 	}
 
 	private _commentValidator = (): boolean => {
-		console.log("commentValidator of profile.ts");
 		if (this.state.comment.trim().length < 20) {
 			return false;
 		} else {

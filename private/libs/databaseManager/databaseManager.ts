@@ -260,7 +260,6 @@ export default class DatabaseManager {
 	}
 
 	public async requestAddComment(comment: string, userFrom: User, userTo: User): Promise<Endorsement> {
-		console.log("requestAddComment of DatabaseManager, data: ", comment, userFrom, userTo);
 		let endorsement: Endorsement = new Endorsement();
 		endorsement.Comment = comment;
 		endorsement.From = userFrom;
