@@ -155,8 +155,9 @@ export default class extends React.Component<{}, State> {
 		});
 	}
 
-	private _requestAddComment(comment: string, userFrom: string, userTo: string) {
-		this._connection.emitRequestAddComment({ comment, userFrom, userTo}, (err, comment) => {
+	private _requestAddComment(data: {comment: string, userFrom: string, userTo: string}) {
+		console.log("_requestAddComment of apptsx, usernames and comment: ", data);
+		this._connection.emitRequestAddComment( data ,(err, comment) => {
 		});
 	}
 

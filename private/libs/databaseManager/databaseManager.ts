@@ -259,14 +259,15 @@ export default class DatabaseManager {
 		return role;
 	}
 
-	public async requestAddComment(commentText: string, userFrom: User, userTo: User): Promise<Endorsement> {
-		let comment: Endorsement = new Endorsement();
-		comment.Comment = commentText;
-		comment.From = userFrom;
-		comment.To = userTo;
-			let EndorsementRepository = this._orm.connection.getRepository(comment.Comment);
-			await EndorsementRepository.save(comment);
-		return comment;
+	public async requestAddComment(comment: string, userFrom: User, userTo: User): Promise<Endorsement> {
+		console.log("requestAddComment of DatabaseManager, data: ", comment, userFrom, userTo);
+		let endorsement: Endorsement = new Endorsement();
+		endorsement.Comment = comment;
+		endorsement.From = userFrom;
+		endorsement.To = userTo;
+			let EndorsementRepository = this._orm.connection.getRepository(Endorsement);
+			await EndorsementRepository.save(endorsement);
+		return endorsement;
 	}
 
 	public async requestLevelUp(user: User, skillId: number): Promise<string | {

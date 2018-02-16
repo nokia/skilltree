@@ -91,16 +91,21 @@ export class UserGateway {
 
 	@SubscribeMessage('requestAddComment')
 	async requestAddComment(client: any, data: { comment: string, userFrom: string, userTo: string }): Promise<void> {
+		console.log("user.gateway.ts: ", data);
 		let fromUser: User | undefined = await this._databaseManager.findUserByName(data.userFrom);
+		console.log("fromUser in usergateway's requestAddComment: ", fromUser);
 		let toUser: User | undefined = await this._databaseManager.findUserByName(data.userTo);
+		console.log("toUser in usergateway's requestAddComment: ", toUser);
 		if (fromUser && toUser) {
 			let comment = this._databaseManager.requestAddComment(data.comment, fromUser, toUser);
 			if (comment) {
 				this._server.to(client.id).emit('acceptedComment', comment);
 			} else {
+				console.log("denying the comment , saving had failed");
 				this._server.to(client.id).emit('deniedComment', 'Saving has failed.');
 			}
 		} else {
+			console.log("denying the comment , account hasnt been found");
 			this._server.to(client.id).emit('deniedComment', 'Account was not found.');
 		}
 	}

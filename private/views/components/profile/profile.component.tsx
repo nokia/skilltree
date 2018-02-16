@@ -59,8 +59,10 @@ export default class extends React.Component<Props, State> {
 	}
 
 	private _requestAddComment() {
+		console.log("requestAddComment of profile.tsx");
+		console.log("profil component forwards this username: ", this.props.user.Username, this.state.searchedUsername );
 		this._commentValidator() &&
-		this.props.observer.publish('_requestAddComment',{ comment: this.state.comment, userFrom: this.props.user.Username, userTo: this.state.searchedUsername } );
+		this.props.observer.publish('_requestAddComment',{ comment: this.state.comment, userFrom: this.props.user.Name, userTo: this.state.user && this.state.user.Name } );
 	}
 
 	private _searchValidator = (): boolean => {
@@ -81,6 +83,7 @@ export default class extends React.Component<Props, State> {
 	}
 
 	private _commentValidator = (): boolean => {
+		console.log("commentValidator of profile.ts");
 		if (this.state.comment.trim().length < 20) {
 			return false;
 		} else {
@@ -183,6 +186,7 @@ export default class extends React.Component<Props, State> {
 					</Grid>}
 					{this.state.user && <Grid item xs={1}>
 						<IconButton disabled={!this._commentValidator() || !isBrowser}
+						
 							onClick={this._requestAddComment.bind(this)}>
 							<AddCircleOutline />
 						</IconButton>
@@ -190,10 +194,10 @@ export default class extends React.Component<Props, State> {
 					<Grid item xs={12}>
 						{this.state.user
 							? <Typography noWrap>
-								{this.state.user.Name}'s comment #1 test
+								{this.state.user.Name}'s comment would look something like this.
 							</Typography>
 							: <Typography noWrap>
-								comment #1 test
+								This is an example for what a comment would look like.
 							</Typography>
 						}
 					</Grid>
