@@ -1,5 +1,6 @@
 import * as Env from 'env-var';
 
+import { IEdge, ISkill } from '../../models';
 import Logger from '../logger';
 import Orm from '../orm';
 import { Parent } from '../orm/models/parent.model';
@@ -8,6 +9,7 @@ import { Skill } from '../orm/models/skill.model';
 import { SkillPoint } from '../orm/models/skillPoint.model';
 import { Timeline } from '../orm/models/timeline.model';
 import { User } from '../orm/models/user.model';
+import { Endorsement } from '../orm/models/endorsement.model';
 
 /**
  * The database manager.
@@ -61,6 +63,21 @@ export default class DatabaseManager {
 	public async findUserByUsername(username: string): Promise<User | undefined> {
 		let userRepository = this._orm.connection.getRepository(User);
 		return await userRepository.findOne({ Username: username });
+	}
+
+	/**
+	 * Find user by name
+	 *
+	 * @class DatabaseManager
+	 * @method findUserByName
+	 * @param { string } name
+	 * @returns { Promise<User | undefined> }
+	 */
+	public async findUserByName(name: string): Promise<User | undefined> {
+		let userRepository = this._orm.connection.getRepository(User);
+		return await userRepository.findOne({
+				where: `Name like '%${name}%'`
+		});
 	}
 
 	/**
@@ -123,16 +140,8 @@ export default class DatabaseManager {
 	 */
 	public async querySkillTree(user: User):
 		Promise<{
-			nodes: {
-				id: number,
-				image: string,
-				label: string,
-				description: string,
-				accepted: boolean,
-				skillLevel: number,
-				hidden: boolean
-			}[],
-			edges: { from: number, to: number }[]
+			nodes: ISkill[],
+			edges: IEdge[]
 		} | undefined> {
 		let skillRepository = this._orm.connection.getRepository(Skill);
 		let parentRepository = this._orm.connection.getRepository(Parent);
@@ -143,18 +152,10 @@ export default class DatabaseManager {
 			relations: ['From', 'To']
 		});
 		if (edgesTmp && nodesTmp) {
-			let edges: { from: number, to: number }[] = edgesTmp.map((parent: Parent) => {
-				return { from: parent.From.ID, to: parent.To.ID };
+			let edges: IEdge[] = edgesTmp.map((parent: Parent) => {
+				return { From: parent.From.ID, To: parent.To.ID };
 			});
-			let nodes: {
-				id: number,
-				label: string,
-				image: string,
-				description: string,
-				accepted: boolean,
-				skillLevel: number,
-				hidden: boolean
-			}[] = await Promise.all(nodesTmp.map(async (skill: Skill) => {
+			let nodes: ISkill[] = await Promise.all(nodesTmp.map(async (skill: Skill) => {
 				let skillPoint: SkillPoint | undefined =
 					await this._findSkillPointByUserAndSkill(user, skill);
 				let canOpen = false;
@@ -176,15 +177,16 @@ export default class DatabaseManager {
 					}
 				}
 				return {
-					id: skill.ID,
-					label: skill.Name,
-					image: skill.ImgUrl,
-					description: skill.Description,
-					accepted: skillPoint
+					Id: skill.ID,
+					Label: skill.Name,
+					Image: skill.ImgUrl,
+					Description: skill.Description,
+					SkillLink: skill.SkillLink,
+					Accepted: skillPoint
 						? skillPoint.Accepted
 						: !Env.get('HAVE_TO_ACCEPT_LEVEL_UP').asBool(),
-					skillLevel: skillPoint ? skillPoint.Level : 0,
-					hidden: !canOpen
+					SkillLevel: skillPoint ? skillPoint.Level : 0,
+					Hidden: !canOpen
 				}
 			}));
 			return { nodes, edges };
@@ -252,9 +254,19 @@ export default class DatabaseManager {
 			let roleRepository = this._orm.connection.getRepository(Role);
 			await roleRepository.save(role);
 		} else {
-			Logger.warn(`${roleName} is already in the role table`);
+			Logger.warn(`${roleName} is already in the role table.`);
 		}
 		return role;
+	}
+
+	public async requestAddComment(comment: string, userFrom: User, userTo: User): Promise<Endorsement> {
+		let endorsement: Endorsement = new Endorsement();
+		endorsement.Comment = comment;
+		endorsement.From = userFrom;
+		endorsement.To = userTo;
+			let EndorsementRepository = this._orm.connection.getRepository(Endorsement);
+			await EndorsementRepository.save(endorsement);
+		return endorsement;
 	}
 
 	public async requestLevelUp(user: User, skillId: number): Promise<string | {
@@ -266,13 +278,7 @@ export default class DatabaseManager {
 			let skillPoint: SkillPoint | undefined =
 				await this._findSkillPointByUserAndSkill(user, skill);
 			if (skillPoint) {
-				if (Env.get('HAVE_TO_ACCEPT_LEVEL_UP').asBool() && skillPoint.Accepted) {
-					skillPoint.Accepted = false;
-				} else if (Env.get('HAVE_TO_ACCEPT_LEVEL_UP').asBool() && !skillPoint.Accepted) {
-					return 'The last lavel is not accepted yet.'
-				} else {
-					//Do nothing
-				}
+				skillPoint.Accepted = !Env.get('HAVE_TO_ACCEPT_LEVEL_UP').required().asBool();
 				skillPoint.Level += 1;
 			} else {
 				skillPoint = new SkillPoint();
@@ -282,20 +288,20 @@ export default class DatabaseManager {
 			if (await this._orm.connection.getRepository(SkillPoint).save(skillPoint)) {
 				if (skillPoint.Accepted) {
 					await this._addEventToTimeline(user,
-						`Level up ${skillPoint.Skill.Name} to LVL ${skillPoint.Level}`);
+						`Level up ${skill.Name} to LVL ${skillPoint.Level}`);
 				} else {
 					await this._addEventToTimeline(user,
-						`Level up request ${skillPoint.Skill.Name} to LVL ${skillPoint.Level}`);
+						`Level up request ${skill.Name} to LVL ${skillPoint.Level}`);
 				}
 				return {
 					accepted: skillPoint.Accepted,
 					skillLevel: skillPoint.Level
 				};
 			} else {
-				return 'Something wrong rty again later!';
+				return 'Something went wrong. Please try again later.';
 			}
 		} else {
-			return 'Not found that skill!';
+			return 'That skill does not exist anymore.';
 		}
 	}
 

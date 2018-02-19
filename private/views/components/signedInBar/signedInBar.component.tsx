@@ -12,15 +12,19 @@ export default class extends React.Component<Props, State> {
 	render() {
 		return (<main>
 			<Button onClick={ () => this.props.observer.publish('_swipescreen', 0) }
-				color='inherit'>Skill Tree</Button>
+				color='inherit'>Profile</Button>
 			<Button onClick={ () => this.props.observer.publish('_swipescreen', 1) }
 				color='inherit'>Timeline</Button>
 			<Button onClick={ () => this.props.observer.publish('_swipescreen', 2) }
 				color='inherit'>Dashboard</Button>
-			<Button onClick={ () => this.props.observer.publish('_swipescreen', 3) }
-				color='inherit'>Profile</Button>
 			<Button onClick={ () => this.props.observer.publish('_logout') }
 				color='inherit'>Logout</Button>
 		</main>);
 	}
 }
+
+/*
+<Button onClick={ () => this.props.observer.publish('_swipescreen', 0) }
+				color='inherit'>Skill Tree</Button>
+
+*/
