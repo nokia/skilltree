@@ -192,8 +192,16 @@ export default class extends React.Component<{}, State> {
 		});
 	}
 
+	private _emitIsManager(){
+		this.state.user && 
+		this._connection.emitIsManager(this.state.user.Username, (isManager: boolean) => {
+			this._observer.publish('_isManager', isManager);
+		});
+	}
+
 	public componentDidMount() {
 		this._observer.subscribe('_logout', this._logout.bind(this));
+		this._observer.subscribe('_emitIsManager', this._emitIsManager.bind(this));
 		this._observer.subscribe('_emitLoginRequest', this._emitLoginRequest.bind(this));
 		this._observer.subscribe('_showErrorMessage', this._showErrorMessage.bind(this));
 		this._observer.subscribe('_emitSkillTreeRequestWithoutUsername', this._emitSkillTreeRequest.bind(this));
@@ -217,6 +225,7 @@ export default class extends React.Component<{}, State> {
 
 	public componentWillUnmount() {
 		this._observer.unsubscribe('_emitLoginRequest');
+		this._observer.unsubscribe('_emitIsManager');
 		this._observer.unsubscribe('_logout');
 		this._observer.unsubscribe('_showErrorMessage');
 		this._observer.unsubscribe('_emitSkillTreeRequestWithoutUsername');

@@ -115,4 +115,11 @@ export class UserGateway {
 			this._server.to(client.id).emit('deniedFindUserByName', 'Account is not found');
 		}
 	}
+
+	@SubscribeMessage('isManager')
+	async isManager(client: any, name: string): Promise<void> {
+		let isManager: boolean = await this._databaseManager
+			.isManager(name);
+		this._server.to(client.id).emit('isManager',isManager);
+	}
 }

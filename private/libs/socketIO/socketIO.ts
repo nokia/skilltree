@@ -163,6 +163,25 @@ export class SocketIO {
 			}
 		}, this._timeout);
 	}
+	public emitIsManager(user: string, callback: Function): void {
+		this._socket.on('isManager', (isManager: boolean) => {
+			this._socket.removeAllListeners('isManager');
+			this._socket.close();
+			let timer = setInterval(() => {
+				if (!this._socket.connected) {
+					clearInterval(timer);
+					callback(isManager);
+				}
+			}, this._timeout);
+		});
+		this._tryMultiple((errorMessage: string) => {
+			if (errorMessage) {
+				callback(errorMessage, null);
+			} else {
+				this._socket.emit('isManager', user);
+			}
+		});
+	}
 
 	public querySkillTree(token: string | undefined, callback: Function) {
 		this._socket.on('acceptedSkillTreeQuery', (graph: {

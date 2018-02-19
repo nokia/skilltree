@@ -93,6 +93,18 @@ export default class DatabaseManager {
 		return await roleRepository.findOne({ Name: roleName });
 	}
 
+	public async isManager(name: string){
+		let userRepository = this._orm.connection.getRepository(User);
+		let user: User | undefined =  await userRepository.findOne({
+			where: `Name like '%${name}%'`
+		});
+		if(user && user.Role.ID === 2){
+			return await true;
+		} else {
+			return await false;
+		}
+	}
+
 	private async _findSkillPointByUserAndSkill(user: User, skill: Skill)
 		: Promise<SkillPoint | undefined> {
 		let skillPointRepository = this._orm.connection.getRepository(SkillPoint);

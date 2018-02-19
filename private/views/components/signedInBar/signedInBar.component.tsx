@@ -7,6 +7,26 @@ import State from './signedInBar.state';
 export default class extends React.Component<Props, State> {
 	constructor(props) {
 		super(props);
+		this.state={
+			isManager: false
+		}
+	}
+
+	_isManager = (): boolean => {
+		this.props.observer.publish('_emitIsManager');
+		if (this.state.isManager) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	componentDidMount(){
+		this.props.observer.subscribe('_isManager', (isManager: boolean) => {this.setState({isManager})});
+	}
+
+	componentWillUnmount(){
+		this.props.observer.unsubscribe('_isManager');
 	}
 
 	render() {
@@ -17,6 +37,9 @@ export default class extends React.Component<Props, State> {
 				color='inherit'>Timeline</Button>
 			<Button onClick={ () => this.props.observer.publish('_swipescreen', 2) }
 				color='inherit'>Dashboard</Button>
+			{(!this._isManager() ? '' :
+			<Button onClick={ () => this.props.observer.publish('_swipescreen', 3) }
+			color='inherit'>Manage</Button>)}
 			<Button onClick={ () => this.props.observer.publish('_logout') }
 				color='inherit'>Logout</Button>
 		</main>);
