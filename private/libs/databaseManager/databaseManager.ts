@@ -93,10 +93,13 @@ export default class DatabaseManager {
 		return await roleRepository.findOne({ Name: roleName });
 	}
 
-	public async isManager(name: string){
+	public async isManagerFromDB(name: string){
 		let userRepository = this._orm.connection.getRepository(User);
-		let user: User | undefined =  await userRepository.findOne({
-			where: `Name like '%${name}%'`
+		let user: User | undefined = await userRepository.findOne({
+			relations: ['Role'],
+			where: {
+				Username: name,
+			}
 		});
 		if(user && user.Role.ID === 2){
 			return await true;

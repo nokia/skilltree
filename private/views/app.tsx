@@ -195,7 +195,7 @@ export default class extends React.Component<{}, State> {
 	private _emitIsManager(){
 		this.state.user && 
 		this._connection.emitIsManager(this.state.user.Username, (isManager: boolean) => {
-			this._observer.publish('_isManager', isManager);
+			this._observer.publish('_isManagertoSgndin', isManager);
 		});
 	}
 

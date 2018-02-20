@@ -8,25 +8,17 @@ export default class extends React.Component<Props, State> {
 	constructor(props) {
 		super(props);
 		this.state={
-			isManager: false
+			isManagerState: false
 		}
 	}
-
-	_isManager = (): boolean => {
-		this.props.observer.publish('_emitIsManager');
-		if (this.state.isManager) {
-			return false;
-		} else {
-			return true;
-		}
-	}
-
+	
 	componentDidMount(){
-		this.props.observer.subscribe('_isManager', (isManager: boolean) => {this.setState({isManager})});
+		this.props.observer.subscribe('_isManagertoSgndin', (isManagerState: boolean) => {this.setState({isManagerState})});
+		this.props.observer.publish('_emitIsManager');
 	}
 
 	componentWillUnmount(){
-		this.props.observer.unsubscribe('_isManager');
+		this.props.observer.unsubscribe('_isManagertoSgndin');
 	}
 
 	render() {
@@ -37,7 +29,7 @@ export default class extends React.Component<Props, State> {
 				color='inherit'>Timeline</Button>
 			<Button onClick={ () => this.props.observer.publish('_swipescreen', 2) }
 				color='inherit'>Dashboard</Button>
-			{(!this._isManager() ? '' :
+			{(!this.state.isManagerState ? '' :
 			<Button onClick={ () => this.props.observer.publish('_swipescreen', 3) }
 			color='inherit'>Manage</Button>)}
 			<Button onClick={ () => this.props.observer.publish('_logout') }

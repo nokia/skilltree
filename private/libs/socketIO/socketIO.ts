@@ -164,9 +164,9 @@ export class SocketIO {
 		}, this._timeout);
 	}
 	public emitIsManager(user: string, callback: Function): void {
-		this._socket.on('isManager', (isManager: boolean) => {
-			this._socket.removeAllListeners('isManager');
-			this._socket.close();
+		this._socket.on('isManagerMngr', (isManager: boolean) => {
+			this._socket.removeAllListeners('isManagerMngr');
+			(!this._queryIsRunning) && this._socket.close();
 			let timer = setInterval(() => {
 				if (!this._socket.connected) {
 					clearInterval(timer);
@@ -178,7 +178,7 @@ export class SocketIO {
 			if (errorMessage) {
 				callback(errorMessage, null);
 			} else {
-				this._socket.emit('isManager', user);
+				this._socket.emit('isManagerSub', user);
 			}
 		});
 	}

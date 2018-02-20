@@ -116,10 +116,10 @@ export class UserGateway {
 		}
 	}
 
-	@SubscribeMessage('isManager')
+	@SubscribeMessage('isManagerSub')
 	async isManager(client: any, name: string): Promise<void> {
 		let isManager: boolean = await this._databaseManager
-			.isManager(name);
-		this._server.to(client.id).emit('isManager',isManager);
+			.isManagerFromDB(name);
+		this._server.to(client.id).emit('isManagerMngr', isManager);
 	}
 }
