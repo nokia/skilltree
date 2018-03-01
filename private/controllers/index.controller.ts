@@ -5,6 +5,6 @@ import { ControllerDecorator, GetDecorator } from 'quartzfw';
 export default class IndexController {
 	@GetDecorator()
 	private test(req: Request, res: Response) {
-		res.send('Hello from QuartzFW')
+		res.send('')
 	}
 }

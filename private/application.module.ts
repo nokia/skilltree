@@ -4,7 +4,7 @@ import { AppDecorator, ModuleDecorator } from 'quartzfw';
 
 import IndexController from './controllers/index.controller';
 import FindUserByNameGateway from './gateways/findUserByName.gateway';
-import LoginWithoutTokenGateway from './gateways/loginWitohutToken.gateway';
+import LoginWithoutTokenGateway from './gateways/loginWithoutToken.gateway';
 import QuerySkillTreeGateway from './gateways/querySkillTree.gateway';
 import LoginWithTokenGateway from './gateways/loginWithToken.gateway';
 import RequestAcceptDataShareGateway from './gateways/requestAcceptDataShare.gateway';
