@@ -4,7 +4,6 @@
   "description": "Skilltree",
   "main": "public/index.js",
   "repository": "https://github.com/nokia/skilltree.git",
-  "author": "Azuwey",
   "license": "BSD-3-Clause",
   "private": false,
   "scripts": {},
