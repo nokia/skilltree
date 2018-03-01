@@ -1,0 +1,19 @@
+{
+  "name": "skilltreenode",
+  "version": "0.0.1",
+  "description": "Skilltree",
+  "main": "public/index.js",
+  "repository": "https://github.com/nokia/skilltree.git",
+  "author": "Azuwey",
+  "license": "BSD-3-Clause",
+  "private": false,
+  "scripts": {},
+  "dependencies": {
+    "express": "^4.16.2",
+    "quartzfw": "^0.0.8",
+    "ws": "^4.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^2.7.2"
+  }
+}
