@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <% include head %>
+</head>
+
+<body class="text-dark">
+  <% include navbar %>
+  <main class="container" role="main">
+    <ul class="list-group mt-5">
+    <% users.forEach(user => { %>
+      <a class="list-group-item" href="<%- `/profile?id=${user.id}` %>">
+        <%= user.firstName %> <%= user.lastName %> (<%= user.displayName %>)
+      </a>
+    <% }); %>
+  </main>
+  <% include errorHandler %>
+</body>
+
+</html>

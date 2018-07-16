@@ -1,0 +1,60 @@
+<header class="navbar sticky-top navbar-light bg-light p-0" role="navigation">
+  <% if (isAuthenticated) { %>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <div class="btn-group navbar-brand" >
+          <button type="button" class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="dropdown-menu">
+            <button class="dropdown-item" type="button">Action</button>
+            <button class="dropdown-item" type="button">Another action</button>
+            <button class="dropdown-item" type="button">Something else here</button>
+            <div class="dropdown-divider"></div>
+            <form class="form-inline " action="/logout" method="post">
+              <button class="dropdown-item " type="submit">Logout</button>
+            </form>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item">
+        
+      </li>
+    </ul>
+    <ul class="navbar-nav navbar-logo mx-auto">
+      <li class="nav-item" style="font-size: x-large;">
+        <a class="nav-link text-dark" href="/" style="font-weight: bold;">Skill Tree</a>
+      </li>
+      <li style="text-align: center;">
+        <div><%= displayName.charAt(0).toUpperCase() + displayName.slice(1) %></div>
+        <div>1337 LEET LVL</div>
+      </li>
+    </ul>
+    <ul class="navbar-nav navbar-logo">
+      <form class="form-inline d-flex dropdown" method="GET" action="/search" id="search">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Type name and press enter"
+            aria-label="Search" aria-describedby="basic-addon2" id="searchParam" name="searchParam"
+            onchange="javascript:document.getElementById('search').submit();">
+          <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon2">
+              <i class="fas fa-search"></i>
+            </span>
+          </div>
+        </div>
+      </form>
+    </ul>
+  <% } else{ %>
+    <a class="navbar-brand nav-link text-dark" href="/">Skill Tree</a>
+    <form class="form-inline" action="/login" method="post">
+      <input id="username" class="form-control mr-sm-2" name="username"
+        type="text" placeholder="Username" aria-label="Username" required>
+      <input id="password" class="form-control mr-sm-2"  name="password"
+        type="password" placeholder="Password" aria-label="Password" required>
+      <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" name="login">
+        Login
+      </button>
+    </form>
+  <% } %>
+</header>

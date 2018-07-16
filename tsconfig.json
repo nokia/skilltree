@@ -1,29 +1,25 @@
 {
-    "compilerOptions": {
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "lib": [ "dom", "es7" ],
-        "locale": "en-US",
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "noImplicitAny": false,
-        "noImplicitReturns": false,
-        "outDir": "public",
-        "removeComments": true,
-        "sourceMap": true,
-        "strict": true,
-        "strictNullChecks": true,
-        "target": "es5",
-        "types": [ "reflect-metadata" ],
-        "strictPropertyInitialization": false,
-        "jsx": "react"
-    },
-    "include": [
-        "private/**/*"
+  "compilerOptions": {
+    "jsx": "react",
+    "lib": [
+      "es5",
+      "dom",
+      "webworker"
     ],
-    "exclude": [
-        "node_modules",
-        "private/webpack/*",
-        "public"
-    ]
-} 
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "outDir": "./static/",
+    "sourceMap": true,
+    "target": "es5",
+    "skipLibCheck": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  },
+  "include": [
+    "tsx/**/*"
+  ],
+  "exclude": [
+    "source/**/*",
+    "node_modules/**/*"
+  ]
+}

@@ -1,0 +1,12 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+foter {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  height: 56px;
+  z-index: 1071;
+}
