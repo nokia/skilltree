@@ -92,27 +92,26 @@ class Item {
         var detailsNameSize = 20;
         var detailsDescSize = 12;
         var detailsTextMargin = 10;
+        var borderSizeDefault = 2;
+        var borderSizeHover = 2;
+        var borderSizeClick = 4;
+        var borderSizeDisabled = 2;
 
         var item = new PIXI.Container();
 
         var mask = new PIXI.Graphics(); // hides image corners
         mask.beginFill();
-        mask.drawRoundedRect(0, 0, imgSize, imgSize, 12);
+        mask.drawRoundedRect(0, 0, imgSize, imgSize, 14);
         mask.endFill();
         item.addChild(mask);
-
-        var glowHover = new PIXI.filters.GlowFilter(10, 5, 5, 0xff0000, 1);
-        //var outlineClick = new PIXI.filters.OutlineFilter(5, 0x)s
 
         var image = new PIXI.Sprite(PIXI.loader.resources[data.image].texture); // item image
         item.addChild(image);
         image.mask = mask;
-        //image.filters = [outlineDefault];
-        image.filters = [outlineHover];
 
         var rect = new PIXI.Graphics(); // border of image
-        rect.lineStyle(2, 0xffffff);
-        rect.drawRoundedRect(2, 2, imgSize, imgSize, 10);
+        rect.lineStyle(borderSizeDefault, 0xffffff);
+        rect.drawRoundedRect(borderSizeClick, borderSizeClick, imgSize - 2, imgSize - 2, 10);
         var rectSprite = new PIXI.Sprite(rect.generateTexture()); // need a sprite for interactivity
         rectSprite.interactive = true;
         rectSprite.buttonMode = true; // sets the cursor
@@ -120,7 +119,7 @@ class Item {
         rectSprite.on("pointerdown", function () { // click on image (and border)
             rect = new PIXI.Graphics();
             rect.lineStyle(4, 0xaa44aa);
-            rect.drawRoundedRect(4, 4, imgSize, imgSize, 10);
+            rect.drawRoundedRect(borderSizeClick, borderSizeClick, imgSize - borderSizeClick, imgSize - borderSizeClick, 10);
             rectSprite.texture = rect.generateTexture();
             item.interactive = false;
             item.buttonMode = false;
@@ -131,7 +130,7 @@ class Item {
             children(level, i, false);
         });
 
-        //item.addChild(rectSprite);
+        item.addChild(rectSprite);
 
         var details = new PIXI.Container(); // details page
 
@@ -170,16 +169,15 @@ class Item {
         item.on("mouseover", function () {
             rect = new PIXI.Graphics();
             rect.lineStyle(2, 0xff0000);
-            rect.drawRoundedRect(2, 2, imgSize, imgSize, 10);
+            rect.drawRoundedRect(borderSizeHover, borderSizeHover, imgSize - borderSizeHover, imgSize - borderSizeHover, 10);
             rectSprite.texture = rect.generateTexture();
-            rectSprite.filters = [glowHover];
 
             item.addChild(details);
         });
         item.on("mouseout", function () {
             rect = new PIXI.Graphics();
             rect.lineStyle(2, 0xffffff);
-            rect.drawRoundedRect(2, 2, imgSize, imgSize, 10);
+            rect.drawRoundedRect(borderSizeDefault, borderSizeDefault, imgSize - borderSizeDefault, imgSize - borderSizeDefault, 10);
             rectSprite.texture = rect.generateTexture();
 
             item.removeChild(details);
@@ -191,12 +189,14 @@ class Item {
         this.rectSprite = rectSprite;
         this.details = details;
         this.imgSize = imgSize;
+        this.borderSizeDefault = borderSizeDefault;
+        this.borderSizeDisabled = borderSizeDisabled;
     }
 
     disable () {
         var rect = new PIXI.Graphics();
-        rect.lineStyle(2, 0x555555);
-        rect.drawRoundedRect(2, 2, this.imgSize, this.imgSize, 10);
+        rect.lineStyle(this.borderSizeDisabled, 0x555555);
+        rect.drawRoundedRect(this.borderSizeDisabled, this.borderSizeDisabled, this.imgSize - this.borderSizeDisabled, this.imgSize - this.borderSizeDisabled, 10);
         this.rectSprite.texture = rect.generateTexture();
         this.item.interactive = false;
         this.item.buttonMode = false;
@@ -207,8 +207,8 @@ class Item {
 
     enable () {
         var rect = new PIXI.Graphics();
-        rect.lineStyle(2, 0xffffff);
-        rect.drawRoundedRect(2, 2, this.imgSize, this.imgSize, 10);
+        rect.lineStyle(this.borderSizeDefault, 0xffffff);
+        rect.drawRoundedRect(this.borderSizeDefault, this.borderSizeDefault, this.imgSize - this.borderSizeDefault, this.imgSize - this.borderSizeDefault, 10);
         this.rectSprite.texture = rect.generateTexture();
         this.item.interactive = true;
         this.item.buttonMode = true;
