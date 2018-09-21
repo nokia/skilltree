@@ -101,8 +101,8 @@ class Item {
         mask.endFill();
         item.addChild(mask);
 
-        var glowHover = new PIXI.filters.GlowFilter(10, 5, 5, 0xff0000, 1);
-        //var outlineClick = new PIXI.filters.OutlineFilter(5, 0x)s
+        var glowHover = new PIXI.filters.GlowFilter(5, 5, 5, 0xff0000, 1);
+        var glowClick = new PIXI.filters.OutlineFilter(10, 5, 5, 0x
 
         var image = new PIXI.Sprite(PIXI.loader.resources[data.image].texture); // item image
         item.addChild(image);
@@ -181,6 +181,7 @@ class Item {
             rect.lineStyle(2, 0xffffff);
             rect.drawRoundedRect(2, 2, imgSize, imgSize, 10);
             rectSprite.texture = rect.generateTexture();
+            rectSprite.filters = null;
 
             item.removeChild(details);
         });
