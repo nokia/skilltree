@@ -61,7 +61,7 @@ function main () {
     app.stage.addChild(t.link);
 }
 
-function children (i, j, draw) {
+function children (i, j, draw) { // draws connection lines if draw is true, enables children if false
     if (itemData[i][j].children !== undefined) {
         for (var k = 0; k < itemData[i][j].children.length; ++k) {
             var child = itemData[itemData[i][j].children[k].level][itemData[i][j].children[k].i];
