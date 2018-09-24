@@ -1,22 +1,26 @@
-var app = new PIXI.Application({
-    width: window.innerWidth, 
-    height: window.innerHeight,
-    antialias: true
+// fps counter
+(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()
+
+//renders the stage (when we want it, with renderer.render(stage); for animations we need requestAnimationFrame() too)
+
+var renderer = new PIXI.WebGLRenderer(window.innerWidth, window.innerHeight, {
+    antialias: true,
+    backgroundColor: 0x000000
 });
 
-document.body.appendChild(app.view);
+document.body.appendChild(renderer.view);
 
-app.renderer.view.style.position = "absolute";
-app.renderer.view.style.display = "block";
-app.renderer.autoResize = true;
+renderer.view.style.position = "absolute";
+renderer.view.style.display = "block";
+renderer.autoResize = true;
 
-app.stage = new PIXI.display.Stage(); // for zOrder
-app.stage.group.enableSort = true;
+var stage = new PIXI.display.Stage();
+stage.group.enableSort = true;
 
 /*window.onresize = function () {
-    app.renderer.resize(window.innerWidth, window.innerHeight);
-    app.renderer.autoResize = true;
-    app.renderer.render(app.stage);
+    renderer.resize(window.innerWidth, window.innerHeight);
+    renderer.autoResize = true;
+    renderer.render(app.stage);
 };*/
 
 PIXI.loader.add("a.png") // load all the images
@@ -28,13 +32,17 @@ var connectionGroup = new PIXI.display.Group(-1, false); // draw connection line
 var itemData = itemsJson;
 
 function main () {
+    //creates the items
+
     for (var i = 0; i < itemData.length; ++i) {
         for (var j = 0; j < itemData[i].length; ++j) {
             itemData[i][j].disp = new Item(itemData[i][j], i, itemData[i].length, j);
         }
     }
     itemLayer.group.enableSort = true;
-    app.stage.addChild(itemLayer);
+    stage.addChild(itemLayer);
+
+    //the canvas will be a bit bigger than the biggest details page in the last row
 
     var endOfDetails = 0;
     for (var i = 0; i < itemData[itemData.length - 1].length; ++i) {
@@ -43,40 +51,46 @@ function main () {
         }
     }
     if (endOfDetails > window.innerHeight) {
-        app.renderer.resize(window.innerWidth, endOfDetails + 10);
+        renderer.resize(window.innerWidth, endOfDetails + 10);
     }
-    app.renderer.autoResize = true;
-    app.renderer.render(app.stage);
-    //app.height = itemData[itemData.length - 1][0].disp.item.position.y + itemData[itemData.length - 1][0].disp.item.height;
+
+    // draws all the connection lines
 
     for (var i = 0; i < itemData.length; ++i) {
         for (var j = 0; j < itemData[i].length; ++j) {
-            children(i, j, true);
+            drawConnection(i, j);
         }
     }
-    app.stage.addChild(new PIXI.display.Layer(connectionGroup));
+    stage.addChild(new PIXI.display.Layer(connectionGroup));
 
     var t = new Link("nokia.com", "https://nokia.com", {fontSize: 12, fill: 0xff0000}, true); // (text, url, text style, underline)
-    t.link.position.set(20, 20);
-    app.stage.addChild(t.link);
+    t.link.position.set(10, 50);
+    stage.addChild(t.link);
+
+    renderer.render(stage);
 }
 
-function children (i, j, draw) { // draws connection lines if draw is true, enables children if false
+function drawConnection (i, j) { // draws connection lines
     if (itemData[i][j].children !== undefined) {
         for (var k = 0; k < itemData[i][j].children.length; ++k) {
             var child = itemData[itemData[i][j].children[k].level][itemData[i][j].children[k].i];
-            if (draw) {
-                var connection = new PIXI.Graphics();
-                connection.lineStyle(3, 0xffffff);
-                connection.moveTo(itemData[i][j].disp.item.position.x + itemData[i][j].disp.item.width / 2, itemData[i][j].disp.item.position.y + itemData[i][j].disp.item.height - 2);
-                connection.lineTo(child.disp.item.position.x + child.disp.item.width / 2, child.disp.item.position.y + 2);
-                app.stage.addChild(connection);
-                connection.parentGroup = connectionGroup;
+            var connection = new PIXI.Graphics();
+            connection.lineStyle(3, 0xffffff);
+            connection.moveTo(itemData[i][j].disp.item.position.x + itemData[i][j].disp.item.width / 2, itemData[i][j].disp.item.position.y + itemData[i][j].disp.item.height - 2);
+            connection.lineTo(child.disp.item.position.x + child.disp.item.width / 2, child.disp.item.position.y + 2);
+            stage.addChild(connection);
+            connection.parentGroup = connectionGroup;
 
-                child.disp.disable();
-            } else {
-                child.disp.enable();
-            }
+            child.disp.disable();
+        }
+    }
+}
+
+function enableChildren (i, j) {
+    if (itemData[i][j].children !== undefined) {
+        for (var k = 0; k < itemData[i][j].children.length; ++k) {
+            var child = itemData[itemData[i][j].children[k].level][itemData[i][j].children[k].i];
+            child.disp.enable();
         }
     }
 }
@@ -105,18 +119,22 @@ class Item {
         mask.endFill();
         item.addChild(mask);
 
-        var image = new PIXI.Sprite(PIXI.loader.resources[data.image].texture); // item image
+        // item image
+
+        var image = new PIXI.Sprite(PIXI.loader.resources[data.image].texture);
         item.addChild(image);
         image.mask = mask;
 
-        var rect = new PIXI.Graphics(); // border of image
+        // border of image (clickable)
+
+        var rect = new PIXI.Graphics();
         rect.lineStyle(borderSizeDefault, 0xffffff);
         rect.drawRoundedRect(borderSizeClick, borderSizeClick, imgSize - 2, imgSize - 2, 10);
         var rectSprite = new PIXI.Sprite(rect.generateTexture()); // need a sprite for interactivity
         rectSprite.interactive = true;
         rectSprite.buttonMode = true; // sets the cursor
 
-        rectSprite.on("pointerdown", function () { // click on image (and border)
+        rectSprite.on("pointerdown", function () { // click on image
             rect = new PIXI.Graphics();
             rect.lineStyle(4, 0xaa44aa);
             rect.drawRoundedRect(borderSizeClick, borderSizeClick, imgSize - borderSizeClick, imgSize - borderSizeClick, 10);
@@ -127,12 +145,16 @@ class Item {
             rectSprite.buttonMode = false;
             item.removeChild(details);
 
-            children(level, i, false);
+            enableChildren(level, i);
+
+            renderer.render(stage);
         });
 
         item.addChild(rectSprite);
 
-        var details = new PIXI.Container(); // details page
+        // details page
+
+        var details = new PIXI.Container();
 
         var detailsForeground = new PIXI.Container(); // everything on details page except the bg rectangle
         var detailsName = new PIXI.Text(data.name, { fontSize: detailsNameSize, fill: 0x000000 });
@@ -153,7 +175,9 @@ class Item {
 
         details.position.set(rectSprite.width + detailsMargin, 0);
 
-        var space = new PIXI.Graphics(); // space between the image and the details page (hover)
+        // space between the image and the details page (for hover)
+
+        var space = new PIXI.Graphics();
         space.beginFill();
         space.drawRect(rectSprite.width, 0, detailsMargin, rectSprite.height);
         space.endFill();
@@ -173,6 +197,8 @@ class Item {
             rectSprite.texture = rect.generateTexture();
 
             item.addChild(details);
+
+            renderer.render(stage);
         });
         item.on("mouseout", function () {
             rect = new PIXI.Graphics();
@@ -181,9 +207,11 @@ class Item {
             rectSprite.texture = rect.generateTexture();
 
             item.removeChild(details);
+
+            renderer.render(stage);
         });
 
-        app.stage.addChild(item);
+        stage.addChild(item);
 
         this.item = item;
         this.rectSprite = rectSprite;
@@ -218,11 +246,11 @@ class Item {
 }
 
 class Link /*extends PIXI.Text*/ { // .link: container, .btn: interactive rectangle, .text; no wordwrap
-    constructor (text, url, style, underline) {
+    constructor (textString, url, style, underline) {
         var link = new PIXI.Container();
 
         //var text = super(text, style, canvas);
-        var text = new PIXI.Text(text, style);
+        var text = new PIXI.Text(textString, style);
         link.addChild(text);
         this.text = text;
 
