@@ -1,21 +1,62 @@
 export class ItemContainer {
-    ItemContainer(picturename)
-    {
-        //var container = new PIXI.Container();
+    constructor(skillicon, skillborder) {
+        //Loading images
+        this.skillicon = new PIXI.Sprite.fromImage(skillicon);
+        this.skillborder = new PIXI.Sprite.fromImage(skillborder);
 
-        //container.addChild(new PIXI.Sprite.fromImage(picturename));
-        this.sprite = new PIXI.Sprite.fromImage(picturename);
+        //Initilaizing container
+        this.container = new PIXI.Container();
+        this.container.addChild(this.skillicon);
+        this.container.addChild(this.skillborder);
+
+        this.skillicon.anchor.set(0.5, 0.5);
+        this.skillborder.anchor.set(0.5, 0.5);
+
+        this.skillicon.position.set(65, 65);
+        this.skillborder.position.set(65, 65);
+
+        this.skillborder.interactive = true;
+        this.skillborder
+            .on("pointerdown", this.onButtonDown)
+            .on('pointerover', this.onButtonOver)
+            .on('pointerout', this.onButtonOut);
+
+        
+
+        
+
+        
 
        
 
-    }
 
-    Sprite(){
-
-        return this.sprite;
     }
 
     
-    
-    
+    onButtonDown()
+    {
+        this.isdown = true;
+        this.filters = [new PIXI.filters.GlowFilter(6,2,2, 0xFF4000, 1)];
+    }
+
+    onButtonOver()
+    {
+        this.isOver = true;
+        if(this.isdown) return;
+        this.filters = [new PIXI.filters.GlowFilter(6,2,2, 0xFFBF00, 1)];
+    }
+
+    onButtonOut()
+    {
+        this.isOver = false;
+
+        if(this.isdown) return;
+       
+        this.filters = null;
+        
+    }
+
+
+
+
 }

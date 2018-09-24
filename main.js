@@ -5,5 +5,7 @@ var app = new PIXI.Application(
 );
 document.body.appendChild(app.view);
 
-var itemcontainer = new ItemContainer("pictures/square.png");
-app.stage.addChild( itemcontainer.sprite );
+var itemcontainer = new ItemContainer('pictures/skillicon.jpg', "pictures/skillborder.png" );
+
+
+app.stage.addChild( itemcontainer.container );
