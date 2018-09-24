@@ -1,37 +1,3 @@
-// fps counter
-(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()
-
-//renders the stage (when we want it, with renderer.render(stage); for animations we need requestAnimationFrame() too)
-
-var renderer = new PIXI.WebGLRenderer(window.innerWidth, window.innerHeight, {
-    antialias: true,
-    backgroundColor: 0x000000
-});
-
-document.body.appendChild(renderer.view);
-
-renderer.view.style.position = "absolute";
-renderer.view.style.display = "block";
-renderer.autoResize = true;
-
-var stage = new PIXI.display.Stage();
-stage.group.enableSort = true;
-
-/*window.onresize = function () {
-    renderer.resize(window.innerWidth, window.innerHeight);
-    renderer.autoResize = true;
-    renderer.render(app.stage);
-};*/
-
-PIXI.loader.add("a.png") // load all the images
-    .load(main);
-
-var itemLayer = new PIXI.display.Layer();
-itemLayer.group.enableSort = true;
-
-var connectionGroup = new PIXI.display.Group(-1, false); // draw connection lines between item
-var itemData = itemsJson;
-
 // IMPORT CLASSES ???? TO-DO
 /*
 import Item from './classes/Item'; 
@@ -42,6 +8,54 @@ const Item = require('./classes/item');
 const Link = require('./classes/link');
 
 */
+
+
+//INITIALIZE ----
+
+// fps counter
+(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()
+
+//renders the stage (when we want it, with renderer.render(stage); for animations we need requestAnimationFrame() too)
+var renderer = new PIXI.WebGLRenderer(window.innerWidth, window.innerHeight, {
+    antialias: true,
+    backgroundColor: 0x000000
+});
+document.body.appendChild(renderer.view);
+
+renderer.view.style.position = "absolute";
+renderer.view.style.display = "block";
+renderer.autoResize = true;
+
+var stage = new PIXI.display.Stage();
+stage.group.enableSort = true;
+
+//Load images/resources
+PIXI.loader
+    .add("a.png") // load all the images
+    .load(main);
+
+var itemData = itemsJson;
+
+
+//Layering for Z-order
+var itemLayer = new PIXI.display.Layer();
+itemLayer.group.enableSort = true;
+    
+var connectionGroup = new PIXI.display.Group(-1, false); // draw connection lines between item
+
+
+
+/*
+window.onresize = function () {
+    renderer.resize(window.innerWidth, window.innerHeight);
+    renderer.autoResize = true;
+    renderer.render(app.stage);
+};
+*/
+
+
+
+
 
 
 function main () {
@@ -236,7 +250,7 @@ class Item {
         details.position.set(rectSprite.width + detailsMargin, 0);
 
         // space between the image and the details page (for hover)
-
+        
         var space = new PIXI.Graphics();
         space.beginFill();
         space.drawRect(rectSprite.width, 0, detailsMargin, rectSprite.height);
@@ -249,6 +263,9 @@ class Item {
         item.interactive = true;
         item.parentLayer = itemLayer;
         item.zOrder = i;
+        
+
+
 
         item.on("mouseover", function () {
             rect = new PIXI.Graphics();
