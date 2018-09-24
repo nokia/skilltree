@@ -3,7 +3,7 @@
 
 //renders the stage (when we want it, with renderer.render(stage); for animations we need requestAnimationFrame() too)
 
-var renderer = new PIXI.WebGLRenderer(window.innerWidth, window.innerHeight, {
+var renderer = new PIXI.WebGLRenderer(document.documentElement.clientWidth, document.documentElement.clientHeight, {
     antialias: true,
     backgroundColor: 0x000000
 });
@@ -50,8 +50,8 @@ function main () {
             endOfDetails = itemData[itemData.length - 1][i].disp.item.position.y + itemData[itemData.length - 1][i].disp.details.position.y + itemData[itemData.length - 1][i].disp.details.height;
         }
     }
-    if (endOfDetails > window.innerHeight) {
-        renderer.resize(window.innerWidth, endOfDetails + 10);
+    if (endOfDetails > document.documentElement.clientHeight) {
+        renderer.resize(document.documentElement.clientWidth, endOfDetails + 10);
     }
 
     // draws all the connection lines
