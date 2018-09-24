@@ -5,7 +5,6 @@ var app = new PIXI.Application(
 );
 document.body.appendChild(app.view);
 
-<<<<<<< HEAD
 var data = [
     {
         skillicon: "skillicon.jpg",
@@ -20,9 +19,3 @@ for (var i = 0; i < data.length; ++i) {
     var itemcontainer = new ItemContainer(data.skillicon, data.skillborder);
     app.stage.addChild(itemcontainer.sprite);
 }
-=======
-var itemcontainer = new ItemContainer('pictures/skillicon.jpg', "pictures/skillborder.png" );
-
-
-app.stage.addChild( itemcontainer.container );
->>>>>>> 2747b86c71da662afa8cecc10d7587adcf6ca3a3
