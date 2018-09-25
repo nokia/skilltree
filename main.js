@@ -13,8 +13,8 @@ var data = [
         skillborder: "pictures/skillborder.png",
     },
     {
-        position_x: 200,
-        position_y: 200,
+        position_x: 100,
+        position_y: 400,
         skillicon: "pictures/skillicon.jpg",
         skillborder: "pictures/skillborder.png",
     },

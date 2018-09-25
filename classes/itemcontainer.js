@@ -19,7 +19,8 @@ export class ItemContainer {
         this.skillborder
             .on("pointerdown", this.onButtonDown)
             .on('pointerover', this.onButtonOver)
-            .on('pointerout', this.onButtonOut);
+            .on('pointerout', this.onButtonOut)
+            .on('rightdown', this.onRightDown);
 
         //Moving container to its spot.
         this.container.position.set(position_x, position_y);
@@ -44,6 +45,12 @@ export class ItemContainer {
         this.isOver = false;
         if(this.isdown) return;
         this.filters = null;
+    }
+
+    onRightDown()
+    {
+        
+        this.filters = [new PIXI.filters.GlowFilter(6,2,2, 0xFFFFFF, 1)];
     }
 
 
