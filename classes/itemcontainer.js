@@ -1,5 +1,5 @@
 export class ItemContainer {
-    constructor(skillicon, skillborder) {
+    constructor(position_x, position_y, skillicon, skillborder) {
         //Loading images
         this.skillicon = new PIXI.Sprite.fromImage(skillicon);
         this.skillborder = new PIXI.Sprite.fromImage(skillborder);
@@ -21,18 +21,11 @@ export class ItemContainer {
             .on('pointerover', this.onButtonOver)
             .on('pointerout', this.onButtonOut);
 
-        
-
-        
-
-        
-
-       
-
+        //Moving container to its spot.
+        this.container.position.set(position_x, position_y);
 
     }
 
-    
     onButtonDown()
     {
         this.isdown = true;
@@ -49,14 +42,9 @@ export class ItemContainer {
     onButtonOut()
     {
         this.isOver = false;
-
         if(this.isdown) return;
-       
         this.filters = null;
-        
     }
-
-
 
 
 }

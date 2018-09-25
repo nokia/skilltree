@@ -7,15 +7,19 @@ document.body.appendChild(app.view);
 
 var data = [
     {
-        skillicon: "skillicon.jpg",
-        skillborder: "skillborder.png",
+        position_x: 100,
+        position_y: 100,
+        skillicon: "pictures/skillicon.jpg",
+        skillborder: "pictures/skillborder.png",
     },
     {
-        skillicon: "skillicon.jpg",
-        skillborder: "skillborder.png",
+        position_x: 200,
+        position_y: 200,
+        skillicon: "pictures/skillicon.jpg",
+        skillborder: "pictures/skillborder.png",
     },
 ];
 for (var i = 0; i < data.length; ++i) {
-    var itemcontainer = new ItemContainer(data.skillicon, data.skillborder);
-    app.stage.addChild(itemcontainer.sprite);
+    var itemcontainer = new ItemContainer(data[i].position_x, data[i].position_y, data[i].skillicon, data[i].skillborder);
+    app.stage.addChild(itemcontainer.container);
 }
