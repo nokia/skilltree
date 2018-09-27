@@ -46,7 +46,6 @@ for (var level = 0; level < data.length; ++level) {
         data[level][i].itemcontainer = new ItemContainer(data, level, i);
 
         // Positioning of the containers dynamically by level and by index inside level
-        console.log(app.width);
         data[level][i].itemcontainer.container.position.x = i * 130 + (app.renderer.width - data[level].length * 130) / 2;
         data[level][i].itemcontainer.container.position.y = level * 150 + 10;
 
@@ -70,8 +69,8 @@ function drawConnectionLines() {
                     // Draw the line
                     var connection = new PIXI.Graphics();
                     connection.lineStyle(3, 0xffffff);
-                    connection.moveTo(data[level][i].itemcontainer.container.position.x + data[level][i].itemcontainer.container.width, data[level][i].itemcontainer.container.position.y + data[level][i].itemcontainer.container.height * 2 - 2);
-                    connection.lineTo(child.itemcontainer.container.position.x + child.itemcontainer.container.width, child.itemcontainer.container.position.y + 2);
+                    connection.moveTo(data[level][i].itemcontainer.container.x + data[level][i].itemcontainer.container.getLocalBounds().x, data[level][i].itemcontainer.container.position.y + data[level][i].itemcontainer.container.getLocalBounds().y * 2 - 7);
+                    connection.lineTo(child.itemcontainer.container.position.x + child.itemcontainer.container.getLocalBounds().x, child.itemcontainer.container.position.y + 4);
 
                     // Add the line
                     treeContainer.addChild(connection);
