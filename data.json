@@ -49,7 +49,7 @@ var dataJson = [
       max_skill_level: 5,
     },
     {
-      name: "Name 3 (level 2)",
+      name: "Name 4 (level 2)",
       description: "This gives you an x value of 32 and a y value of 32. You can see in the example images that the tiger's top left corner is 32 pixels down and to the left of the hedgehog's top left corner. This gives you an x value of 32 and a y value of 32. You can see in the example images that the tiger's top left corner is 32 pixels down and to the left of the hedgehog's top left corner.",
       skillicon: "pictures/skillicon.jpg",
       skillborder: "pictures/skillborder.png",

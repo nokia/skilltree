@@ -25,7 +25,7 @@ app.stage.addChild(skillLayer);
 
 for (var level = 0; level < data.length; ++level) {
     for (var i = 0; i < data[level].length; ++i) {
-        data[level][i].itemcontainer = new ItemContainer(data[level][i], level, i);
+        data[level][i].itemcontainer = new ItemContainer(data, level, i);
 
         // Positioning of the containers dynamically by level and by index inside level
         data[level][i].itemcontainer.container.position.x = i * 130 + (window.innerWidth - data[level].length * 130) / 2;
@@ -48,15 +48,24 @@ function drawConnectionLines() {
                 for (var k = 0; k < data[level][i].children.length; ++k) {
                     var child = data[data[level][i].children[k].level][data[level][i].children[k].i];
 
+                    // Draw the line
                     var connection = new PIXI.Graphics();
                     connection.lineStyle(3, 0xffffff);
                     connection.moveTo(data[level][i].itemcontainer.container.position.x + data[level][i].itemcontainer.container.width, data[level][i].itemcontainer.container.position.y + data[level][i].itemcontainer.container.height * 2 - 2);
                     connection.lineTo(child.itemcontainer.container.position.x + child.itemcontainer.container.width, child.itemcontainer.container.position.y + 2);
+
+                    // Add the line
                     app.stage.addChild(connection);
                     connection.parentGroup = connectionGroup;
 
+                    // Saving child's parents
                     if (data[level][i].skill_level == 0) {
                         child.itemcontainer.disable();
+
+                        if (child.parents === undefined) {
+                            child.parents = new Array();
+                        }
+                        child.parents.push({level: level, i: i});
                     }
                 }
             }
