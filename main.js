@@ -53,10 +53,6 @@ for (var level = 0; level < data.length; ++level) {
 
         data[level][i].itemcontainer.container.parentLayer = skillLayer;
         treeContainer.addChild(data[level][i].itemcontainer.container);
-<<<<<<< HEAD
-        console.log(treeContainer.getGlobalPosition());
-=======
->>>>>>> 596b493edae8ae4274089fa4cce9efbf77fba468
     }
 }
 maxwidth = (app.renderer.width - maxwidth * 130) / 2;
@@ -104,7 +100,7 @@ function drawConnectionLines() {
 
 
 function onDragStart(event) {
-<<<<<<< HEAD
+    event.drag = false;
     var obj = event.currentTarget;
     obj.dragData = event.data;
     obj.dragging = 1;
@@ -113,34 +109,23 @@ function onDragStart(event) {
     obj.dragObjStart.copy(obj.position);
     obj.dragGlobalStart = new PIXI.Point();
     obj.dragGlobalStart.copy(event.data.global);
-    
-=======
-    // store a reference to the data
-    // the reason for this is because of multitouch
-    // we want to track the movement of this particular touch
-    this.data = event.data;
-    //this.alpha = 0.5;
-    this.dragging = true;
-    this.firstDrag = 0;
->>>>>>> 596b493edae8ae4274089fa4cce9efbf77fba468
 }
 
 function onDragEnd(event) {
     var obj = event.currentTarget;
     if (!obj.dragging) return;
-    
 
     obj.dragging = 0;
     obj.dragData = null;
     // set the interaction data to null
 }
 
-<<<<<<< HEAD
 function onDragMove(event) {
     var obj = event.currentTarget;
     if (!obj.dragging) return;
     var data = obj.dragData; // it can be different pointer!
     if (obj.dragging == 1) {
+
         // click or drag?
         if (Math.abs(data.global.x - obj.dragGlobalStart.x) +
             Math.abs(data.global.y - obj.dragGlobalStart.y) >= 5) {
@@ -149,18 +134,12 @@ function onDragMove(event) {
         }
     }
     if (obj.dragging == 2) {
+        event.drag = true;
         var dragPointerEnd = data.getLocalPosition(obj.parent);
         // DRAG
         obj.position.set(
             obj.dragObjStart.x + (dragPointerEnd.x - obj.dragPointerStart.x),
             obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y)
         );
-=======
-function onDragMove() {
-    if (this.dragging) {
-        var newPosition = this.data.getLocalPosition(this.parent);
-        this.x = newPosition.x - maxwidth - this.width / 2 + sx;
-        this.y = newPosition.y - this.height / 2;
->>>>>>> 596b493edae8ae4274089fa4cce9efbf77fba468
     }
 }
