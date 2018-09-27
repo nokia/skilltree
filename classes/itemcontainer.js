@@ -8,7 +8,6 @@ export class ItemContainer {
         //Loading images
         this.skillicon = new PIXI.Sprite.fromImage(this.skillData.skillicon); //100x100
         this.skillborder = new PIXI.Sprite.fromImage(this.skillData.skillborder); //116x116
-        
 
         //Setting border variables
         this.skillborder.skill_level = this.skillData.skill_level;

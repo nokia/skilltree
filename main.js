@@ -41,7 +41,9 @@ var skillLayer = new PIXI.display.Layer();
 skillLayer.group.enableSort = true;
 app.stage.addChild(skillLayer);
 
+var maxwidth = 0;
 for (var level = 0; level < data.length; ++level) {
+    if (data[level].length > maxwidth) maxwidth = data[level].length;
     for (var i = 0; i < data[level].length; ++i) {
         data[level][i].itemcontainer = new ItemContainer(data, level, i);
 
@@ -51,9 +53,14 @@ for (var level = 0; level < data.length; ++level) {
 
         data[level][i].itemcontainer.container.parentLayer = skillLayer;
         treeContainer.addChild(data[level][i].itemcontainer.container);
+<<<<<<< HEAD
 
+=======
+        console.log(treeContainer.getGlobalPosition());
+>>>>>>> 35155d954641fd2e6e2e4d114e7dbaff3e8faaec
     }
 }
+maxwidth = (app.renderer.width - maxwidth * 130) / 2;
 
 drawConnectionLines();
 
@@ -70,8 +77,8 @@ function drawConnectionLines() {
                     // Draw the line
                     var connection = new PIXI.Graphics();
                     connection.lineStyle(3, 0xffffff);
-                    connection.moveTo(data[level][i].itemcontainer.container.position.x + data[level][i].itemcontainer.container.width, data[level][i].itemcontainer.container.position.y + data[level][i].itemcontainer.container.height * 2 - 2);
-                    connection.lineTo(child.itemcontainer.container.position.x + child.itemcontainer.container.width, child.itemcontainer.container.position.y + 2);
+                    connection.moveTo(data[level][i].itemcontainer.container.x + data[level][i].itemcontainer.container.getLocalBounds().x, data[level][i].itemcontainer.container.position.y + data[level][i].itemcontainer.container.getLocalBounds().y * 2 - 7);
+                    connection.lineTo(child.itemcontainer.container.position.x + child.itemcontainer.container.getLocalBounds().x, child.itemcontainer.container.position.y + 4);
 
                     // Add the line
                     treeContainer.addChild(connection);
@@ -92,8 +99,6 @@ function drawConnectionLines() {
     }
 
     treeContainer.addChild(new PIXI.display.Layer(connectionGroup));
-
-
 }
 
 
@@ -104,7 +109,11 @@ function onDragStart(event) {
     this.data = event.data;
     //this.alpha = 0.5;
     this.dragging = true;
+<<<<<<< HEAD
     this.firstDrag = 0;
+=======
+
+>>>>>>> 35155d954641fd2e6e2e4d114e7dbaff3e8faaec
 }
 
 function onDragEnd() {
@@ -116,6 +125,7 @@ function onDragEnd() {
 
 function onDragMove() {
     if (this.dragging) {
+<<<<<<< HEAD
 
         //console.log(this.data.getLocalPosition(this.parent) );
 
@@ -127,6 +137,14 @@ function onDragMove() {
         
         //console.log(this.x);
         //console.log(this.y);
+=======
+        //this.sx = this.data.getLocalPosition(treeContainer).x - maxwidth;
+        //this.sy = this.data.getLocalPosition(treeContainer).y;
+        //console.log(this.sx)
+        var newPosition = this.data.getLocalPosition(this.parent);
+        this.x = newPosition.x - maxwidth - this.width / 2;
+        this.y = newPosition.y - this.height / 2;
+>>>>>>> 35155d954641fd2e6e2e4d114e7dbaff3e8faaec
 
     }
 }
