@@ -86,20 +86,19 @@ export class ItemContainer {
     onClick() {
         // Enable children which doesn't have other parents
         var children = this.parentObj.skillData.children;
-        if (children !== undefined) {
-            for (var k = 0; k < children.length; ++k) {
-                var child = this.parentObj.data[children[k].level][children[k].i];
 
-                for (var j = 0; j < child.parents.length; ++j) {
-                    if (child.parents[j].level == this.parentObj.level && child.parents[j].i == this.parentObj.i) {
-                        child.parents.splice(j, 1);
+        for (var k = 0; children !== undefined && k < children.length; ++k) {
+            var child = this.parentObj.data[children[k].level][children[k].i];
 
-                        if (child.parents.length == 0) {
-                            child.itemcontainer.container.filters = null;
-                            child.itemcontainer.container.interactive = true;
-                            child.itemcontainer.skillborder.interactive = true;
-                            child.itemcontainer.skillborder.buttonMode = true;
-                        }
+            for (var j = 0; child.parents !== undefined && j < child.parents.length; ++j) {
+                if (child.parents[j].level == this.parentObj.level && child.parents[j].i == this.parentObj.i) {
+                    child.parents.splice(j, 1);
+
+                    if (child.parents.length == 0) {
+                        child.itemcontainer.container.filters = null;
+                        child.itemcontainer.container.interactive = true;
+                        child.itemcontainer.skillborder.interactive = true;
+                        child.itemcontainer.skillborder.buttonMode = true;
                     }
                 }
             }
@@ -159,7 +158,7 @@ export class ItemContainer {
             this.levelinfo.text = (this.skill_level + " / " + this.max_skill_level);
         } else return;
 
-        this.filters = [new PIXI.filters.GlowFilter(10,2,2, 0xFFBF00, 1)];
+        this.filters = [new PIXI.filters.GlowFilter(6,2,2, 0xFFBF00, 1)];
     }
 
     onButtonOver() {

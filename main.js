@@ -59,7 +59,7 @@ function drawConnectionLines() {
                     app.stage.addChild(connection);
                     connection.parentGroup = connectionGroup;
 
-                    // Saving child's parents
+                    // Saving child's zero skill level parents
                     if (data[level][i].skill_level == 0) {
                         child.itemcontainer.disable();
 
