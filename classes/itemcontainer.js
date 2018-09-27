@@ -86,17 +86,17 @@ export class ItemContainer {
     }
 
     onClick() {
-        // Enable children which doesn't have other parents
+        // Enable children which doesn't have other parents with 0 skill level
         var children = this.parentObj.skillData.children;
 
         for (var k = 0; children !== undefined && k < children.length; ++k) {
             var child = this.parentObj.data[children[k].level][children[k].i];
 
-            for (var j = 0; child.parents !== undefined && j < child.parents.length; ++j) {
-                if (child.parents[j].level == this.parentObj.level && child.parents[j].i == this.parentObj.i) {
-                    child.parents.splice(j, 1);
+            for (var j = 0; child.zeroSLParents !== undefined && j < child.zeroSLParents.length; ++j) {
+                if (child.zeroSLParents[j].level == this.parentObj.level && child.zeroSLParents[j].i == this.parentObj.i) {
+                    child.zeroSLParents.splice(j, 1);
 
-                    if (child.parents.length == 0) {
+                    if (child.zeroSLParents.length == 0) {
                         child.itemcontainer.container.filters = null;
                         child.itemcontainer.container.interactive = true;
                         child.itemcontainer.skillborder.interactive = true;
@@ -118,7 +118,7 @@ export class ItemContainer {
     }
 
     onRightClick() {
-        // Disable children which doesn't have other parents
+        // Disable children which doesn't have other parents with 0 skill level
         if (this.skill_level == 1) {
             var children = this.parentObj.skillData.children;
 
@@ -126,11 +126,11 @@ export class ItemContainer {
                 for (var k = 0; k < children.length; ++k) {
                     var child = this.parentObj.data[children[k].level][children[k].i];
 
-                    if (child.parents === undefined) {
-                        child.parents = new Array();
+                    if (child.zeroSLParents === undefined) {
+                        child.zeroSLParents = new Array();
                     }
 
-                    if (child.parents.length <= 1) {
+                    if (child.zeroSLParents.length <= 1) {
                         var colorMatrixFilter = new PIXI.filters.ColorMatrixFilter;
                         colorMatrixFilter.brightness(0.4);
                         child.itemcontainer.container.filters = [colorMatrixFilter];
@@ -140,14 +140,14 @@ export class ItemContainer {
                     }
 
                     var newParent = true;
-                    for (var j = 0; j < child.parents.length; ++j) {
-                        if (child.parents[j].level == this.parentObj.level && child.parents[j].i == this.parentObj.i) {
+                    for (var j = 0; j < child.zeroSLParents.length; ++j) {
+                        if (child.zeroSLParents[j].level == this.parentObj.level && child.zeroSLParents[j].i == this.parentObj.i) {
                             newParent = false;
                         }
                     }
                     if (newParent) {
                         var parent = {level: this.parentObj.level, i: this.parentObj.i};
-                        child.parents.push(parent);
+                        child.zeroSLParents.push(parent);
                     }
                 }
             }

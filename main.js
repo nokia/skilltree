@@ -63,10 +63,10 @@ function drawConnectionLines() {
                     if (data[level][i].skill_level == 0) {
                         child.itemcontainer.disable();
 
-                        if (child.parents === undefined) {
-                            child.parents = new Array();
+                        if (child.zeroSLParents === undefined) {
+                            child.zeroSLParents = new Array();
                         }
-                        child.parents.push({level: level, i: i});
+                        child.zeroSLParents.push({level: level, i: i});
                     }
                 }
             }
