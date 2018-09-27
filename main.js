@@ -117,11 +117,11 @@ function onDragEnd() {
 
 function onDragMove() {
     if (this.dragging) {
-        //this.sx = this.data.getLocalPosition(treeContainer).x - maxwidth;
+        var sx = this.data.getLocalPosition(treeContainer).x - maxwidth;
         //this.sy = this.data.getLocalPosition(treeContainer).y;
-        //console.log(this.sx)
+        console.log(sx)
         var newPosition = this.data.getLocalPosition(this.parent);
-        this.x = newPosition.x - maxwidth - this.width / 2;
+        this.x = newPosition.x - maxwidth - this.width / 2 + sx;
         this.y = newPosition.y - this.height / 2;
 
     }
