@@ -1,7 +1,7 @@
 // fps counter
-(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()
+(function () { var script = document.createElement('script'); script.onload = function () { var stats = new Stats(); document.body.appendChild(stats.dom); requestAnimationFrame(function loop() { stats.update(); requestAnimationFrame(loop) }); }; script.src = '//rawgit.com/mrdoob/stats.js/master/build/stats.min.js'; document.head.appendChild(script); })()
 
-import {ItemContainer} from './classes/itemcontainer.js';
+import { ItemContainer } from './classes/itemcontainer.js';
 
 var data = dataJson;
 
@@ -18,6 +18,18 @@ var app = new PIXI.Application(
 
 app.stage = new PIXI.display.Stage();
 app.stage.group.enableSort = true;
+
+//dragging stage with mouse ?can only be done if it has a parent?
+/*
+app.stage.interactive = true;
+
+app.stage
+    .on('pointerdown', onDragStart)
+    .on('pointerup', onDragEnd)
+    .on('pointerupoutside', onDragEnd)
+    .on('pointermove', onDragMove);
+
+app.stage.buttonMode=true;*/
 
 var skillLayer = new PIXI.display.Layer();
 skillLayer.group.enableSort = true;
@@ -66,7 +78,7 @@ function drawConnectionLines() {
                         if (child.zeroSLParents === undefined) {
                             child.zeroSLParents = new Array();
                         }
-                        child.zeroSLParents.push({level: level, i: i});
+                        child.zeroSLParents.push({ level: level, i: i });
                     }
                 }
             }
@@ -74,4 +86,31 @@ function drawConnectionLines() {
     }
 
     app.stage.addChild(new PIXI.display.Layer(connectionGroup));
+
+
+}
+
+
+function onDragStart(event) {
+    // store a reference to the data
+    // the reason for this is because of multitouch
+    // we want to track the movement of this particular touch
+    this.data = event.data;
+    this.alpha = 0.5;
+    this.dragging = true;
+}
+
+function onDragEnd() {
+    this.alpha = 1;
+    this.dragging = false;
+    // set the interaction data to null
+    this.data = null;
+}
+
+function onDragMove() {
+    if (this.dragging) {
+        var newPosition = this.data.getLocalPosition(this.parent);
+        this.x = newPosition.x;
+        this.y = newPosition.y;
+    }
 }

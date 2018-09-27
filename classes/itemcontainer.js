@@ -8,12 +8,12 @@ export class ItemContainer {
         //Loading images
         this.skillicon = new PIXI.Sprite.fromImage(this.skillData.skillicon); //100x100
         this.skillborder = new PIXI.Sprite.fromImage(this.skillData.skillborder); //116x116
-        this.levelborder = new PIXI.Sprite.fromImage(this.skillData.levelborder);
+        
 
         //Setting border variables
         this.skillborder.skill_level = this.skillData.skill_level;
         this.skillborder.max_skill_level = this.skillData.max_skill_level;
-        this.skillborder.levelinfo = new PIXI.Text(this.skillData.skill_level + " / " + this.skillData.max_skill_level);
+        this.skillborder.levelinfo = new PIXI.Text(this.skillData.skill_level + "/" + this.skillData.max_skill_level);
 
         //Creating details page
         var detailsWidth = 200;
@@ -51,7 +51,6 @@ export class ItemContainer {
         //Initilaizing container
         this.container = new PIXI.Container();
         this.container.addChild(this.skillicon);
-        this.container.addChild(this.levelborder);
         this.container.addChild(this.skillborder);
         this.container.addChild(this.skillborder.levelinfo);
         this.container.zOrder = 1;
@@ -59,14 +58,12 @@ export class ItemContainer {
         //Setting size, position of objects in container
         this.skillicon.anchor.set(0.5, 0.5);
         this.skillborder.anchor.set(0.5, 0.5);
-        this.levelborder.anchor.set(1,0);
-        this.skillborder.levelinfo.anchor.set(1,0);
+        this.skillborder.levelinfo.anchor.set(0.5,0.5);
 
-        this.skillicon.position.set(58, 58);
-        this.skillborder.position.set(58, 58);
-        this.levelborder.position.set(115,1);
-        this.skillborder.levelinfo.position.set(105, 15);
-        this.skillborder.levelinfo.scale.set(0.5);
+        this.skillicon.position.set(60, 60);
+        this.skillborder.position.set(60, 60);
+        this.skillborder.levelinfo.position.set(96, 100);
+        this.skillborder.levelinfo.scale.set(0.6);
 
         this.details.position.set(116, 0);
 
@@ -110,9 +107,9 @@ export class ItemContainer {
         if(this.skill_level<this.max_skill_level)
         {
             this.skill_level ++;
-            this.levelinfo.text = (this.skill_level + " / " + this.max_skill_level);
+            this.levelinfo.text = (this.skill_level + "/" + this.max_skill_level);
             if(this.skill_level==this.max_skill_level) {
-                this.filters = [new PIXI.filters.GlowFilter(10,2,2, 0xFF4000, 1)];
+                this.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFF4000, 1)];
             }
         }
     }
@@ -157,10 +154,10 @@ export class ItemContainer {
         if(this.skill_level>0)
         {
             this.skill_level --;
-            this.levelinfo.text = (this.skill_level + " / " + this.max_skill_level);
+            this.levelinfo.text = (this.skill_level + "/" + this.max_skill_level);
         } else return;
 
-        this.filters = [new PIXI.filters.GlowFilter(6,2,2, 0xFFBF00, 1)];
+        this.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFFBF00, 1)];
     }
 
     onButtonOver() {
@@ -173,7 +170,7 @@ export class ItemContainer {
         container.zOrder = 0;
 
         if(skillborder.skill_level == skillborder.max_skill_level) return;
-        skillborder.filters = [new PIXI.filters.GlowFilter(6,2,2, 0xFFBF00, 1)];
+        skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFFBF00, 1)];
     }
 
     onButtonOut() {
