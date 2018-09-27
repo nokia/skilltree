@@ -33,7 +33,7 @@ treeContainer
     .on('pointerdown', onDragStart)
     .on('pointerup', onDragEnd)
     .on('pointerupoutside', onDragEnd)
-    .on('pointermove', onDragMove);
+    .on('pointermove', onDragMove)
 
 app.stage.buttonMode = true;
 
@@ -53,11 +53,7 @@ for (var level = 0; level < data.length; ++level) {
 
         data[level][i].itemcontainer.container.parentLayer = skillLayer;
         treeContainer.addChild(data[level][i].itemcontainer.container);
-<<<<<<< HEAD
-
-=======
         console.log(treeContainer.getGlobalPosition());
->>>>>>> 35155d954641fd2e6e2e4d114e7dbaff3e8faaec
     }
 }
 maxwidth = (app.renderer.width - maxwidth * 130) / 2;
@@ -102,49 +98,48 @@ function drawConnectionLines() {
 }
 
 
+
+
 function onDragStart(event) {
-    // store a reference to the data
-    // the reason for this is because of multitouch
-    // we want to track the movement of this particular touch
-    this.data = event.data;
-    //this.alpha = 0.5;
-    this.dragging = true;
-<<<<<<< HEAD
-    this.firstDrag = 0;
-=======
-
->>>>>>> 35155d954641fd2e6e2e4d114e7dbaff3e8faaec
+    var obj = event.currentTarget;
+    obj.dragData = event.data;
+    obj.dragging = 1;
+    obj.dragPointerStart = event.data.getLocalPosition(obj.parent);
+    obj.dragObjStart = new PIXI.Point();
+    obj.dragObjStart.copy(obj.position);
+    obj.dragGlobalStart = new PIXI.Point();
+    obj.dragGlobalStart.copy(event.data.global);
+    
 }
 
-function onDragEnd() {
-    //this.alpha = 1;
-    this.dragging = false;
+function onDragEnd(event) {
+    var obj = event.currentTarget;
+    if (!obj.dragging) return;
+    
+
+    obj.dragging = 0;
+    obj.dragData = null;
     // set the interaction data to null
-    this.data = null;
 }
 
-function onDragMove() {
-    if (this.dragging) {
-<<<<<<< HEAD
-
-        //console.log(this.data.getLocalPosition(this.parent) );
-
-        var newPosition = this.data.getLocalPosition(this.parent);
-        //console.log(this.x);
-        //console.log(this.y);
-        this.x = newPosition.x - maxwidth - this.width / 2;
-        this.y = newPosition.y - this.height / 2;
-        
-        //console.log(this.x);
-        //console.log(this.y);
-=======
-        //this.sx = this.data.getLocalPosition(treeContainer).x - maxwidth;
-        //this.sy = this.data.getLocalPosition(treeContainer).y;
-        //console.log(this.sx)
-        var newPosition = this.data.getLocalPosition(this.parent);
-        this.x = newPosition.x - maxwidth - this.width / 2;
-        this.y = newPosition.y - this.height / 2;
->>>>>>> 35155d954641fd2e6e2e4d114e7dbaff3e8faaec
-
+function onDragMove(event) {
+    var obj = event.currentTarget;
+    if (!obj.dragging) return;
+    var data = obj.dragData; // it can be different pointer!
+    if (obj.dragging == 1) {
+        // click or drag?
+        if (Math.abs(data.global.x - obj.dragGlobalStart.x) +
+            Math.abs(data.global.y - obj.dragGlobalStart.y) >= 5) {
+            // DRAG
+            obj.dragging = 2;
+        }
+    }
+    if (obj.dragging == 2) {
+        var dragPointerEnd = data.getLocalPosition(obj.parent);
+        // DRAG
+        obj.position.set(
+            obj.dragObjStart.x + (dragPointerEnd.x - obj.dragPointerStart.x),
+            obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y)
+        );
     }
 }
