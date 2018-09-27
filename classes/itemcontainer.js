@@ -91,7 +91,6 @@ export class ItemContainer {
                 var child = this.parentObj.data[children[k].level][children[k].i];
 
                 for (var j = 0; j < child.parents.length; ++j) {
-                    console.log(child.parents);
                     if (child.parents[j].level == this.parentObj.level && child.parents[j].i == this.parentObj.i) {
                         child.parents.splice(j, 1);
 
