@@ -65,6 +65,8 @@ export class ItemContainer {
         this.skillborder.levelinfo.position.set(96, 100);
         this.skillborder.levelinfo.scale.set(0.6);
 
+        this.skillborder.levelinfo.style.fill = 0xFFFFFF;
+
         this.details.position.set(116, 0);
 
         //Adding events

@@ -17,19 +17,25 @@ var app = new PIXI.Application(
 );
 
 app.stage = new PIXI.display.Stage();
-app.stage.group.enableSort = true;
+var treeContainer = new PIXI.Container();
+app.stage.addChild(treeContainer);
+app.stage.group.enableSort = true; 
+
+
+
 
 //dragging stage with mouse ?can only be done if it has a parent?
-/*
-app.stage.interactive = true;
 
-app.stage
+treeContainer.interactive = true;
+
+
+treeContainer
     .on('pointerdown', onDragStart)
     .on('pointerup', onDragEnd)
     .on('pointerupoutside', onDragEnd)
     .on('pointermove', onDragMove);
 
-app.stage.buttonMode=true;*/
+app.stage.buttonMode=true;
 
 var skillLayer = new PIXI.display.Layer();
 skillLayer.group.enableSort = true;
@@ -45,7 +51,7 @@ for (var level = 0; level < data.length; ++level) {
         data[level][i].itemcontainer.container.position.y = level * 150 + 10;
 
         data[level][i].itemcontainer.container.parentLayer = skillLayer;
-        app.stage.addChild(data[level][i].itemcontainer.container);
+        treeContainer.addChild(data[level][i].itemcontainer.container);
     }
 }
 
@@ -68,7 +74,7 @@ function drawConnectionLines() {
                     connection.lineTo(child.itemcontainer.container.position.x + child.itemcontainer.container.width, child.itemcontainer.container.position.y + 2);
 
                     // Add the line
-                    app.stage.addChild(connection);
+                    treeContainer.addChild(connection);
                     connection.parentGroup = connectionGroup;
 
                     // Saving child's zero skill level parents
@@ -85,7 +91,7 @@ function drawConnectionLines() {
         }
     }
 
-    app.stage.addChild(new PIXI.display.Layer(connectionGroup));
+    treeContainer.addChild(new PIXI.display.Layer(connectionGroup));
 
 
 }
