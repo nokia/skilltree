@@ -7,14 +7,14 @@ var data = dataJson;
 
 var app = new PIXI.Application(
     {
-        width: window.innerWidth,
-        height: window.innerHeight,
+        view: pixiCanvas,
+        width: 1000,
+        height: 600,
         backgroundColor: 0x000000,
         antialias: true,
         autoStart: true,
     }
 );
-document.body.appendChild(app.view);
 
 app.stage = new PIXI.display.Stage();
 app.stage.group.enableSort = true;
@@ -28,7 +28,8 @@ for (var level = 0; level < data.length; ++level) {
         data[level][i].itemcontainer = new ItemContainer(data, level, i);
 
         // Positioning of the containers dynamically by level and by index inside level
-        data[level][i].itemcontainer.container.position.x = i * 130 + (window.innerWidth - data[level].length * 130) / 2;
+        console.log(app.width);
+        data[level][i].itemcontainer.container.position.x = i * 130 + (app.renderer.width - data[level].length * 130) / 2;
         data[level][i].itemcontainer.container.position.y = level * 150 + 10;
 
         data[level][i].itemcontainer.container.parentLayer = skillLayer;
