@@ -8,8 +8,8 @@ var data = dataJson;
 var app = new PIXI.Application(
     {
         view: pixiCanvas,
-        width: 1000,
-        height: 600,
+        width: window.innerWidth,
+        height: window.innerHeight,
         backgroundColor: 0x000000,
         antialias: true,
         autoStart: true, // TODO false and rendering only when needed
@@ -19,7 +19,7 @@ var app = new PIXI.Application(
 app.stage = new PIXI.display.Stage();
 var treeContainer = new PIXI.Container();
 app.stage.addChild(treeContainer);
-app.stage.group.enableSort = true; 
+app.stage.group.enableSort = true;
 
 
 
@@ -35,7 +35,7 @@ treeContainer
     .on('pointerupoutside', onDragEnd)
     .on('pointermove', onDragMove);
 
-app.stage.buttonMode=true;
+app.stage.buttonMode = true;
 
 var skillLayer = new PIXI.display.Layer();
 skillLayer.group.enableSort = true;
@@ -53,7 +53,11 @@ for (var level = 0; level < data.length; ++level) {
 
         data[level][i].itemcontainer.container.parentLayer = skillLayer;
         treeContainer.addChild(data[level][i].itemcontainer.container);
+<<<<<<< HEAD
+
+=======
         console.log(treeContainer.getGlobalPosition());
+>>>>>>> 35155d954641fd2e6e2e4d114e7dbaff3e8faaec
     }
 }
 maxwidth = (app.renderer.width - maxwidth * 130) / 2;
@@ -103,13 +107,17 @@ function onDragStart(event) {
     // the reason for this is because of multitouch
     // we want to track the movement of this particular touch
     this.data = event.data;
-    this.alpha = 0.5;
+    //this.alpha = 0.5;
     this.dragging = true;
+<<<<<<< HEAD
+    this.firstDrag = 0;
+=======
 
+>>>>>>> 35155d954641fd2e6e2e4d114e7dbaff3e8faaec
 }
 
 function onDragEnd() {
-    this.alpha = 1;
+    //this.alpha = 1;
     this.dragging = false;
     // set the interaction data to null
     this.data = null;
@@ -117,12 +125,30 @@ function onDragEnd() {
 
 function onDragMove() {
     if (this.dragging) {
+<<<<<<< HEAD
         var sx = this.data.getLocalPosition(treeContainer).x - maxwidth;
+=======
+<<<<<<< HEAD
+
+        //console.log(this.data.getLocalPosition(this.parent) );
+
+        var newPosition = this.data.getLocalPosition(this.parent);
+        //console.log(this.x);
+        //console.log(this.y);
+        this.x = newPosition.x - maxwidth - this.width / 2;
+        this.y = newPosition.y - this.height / 2;
+        
+        //console.log(this.x);
+        //console.log(this.y);
+=======
+        //this.sx = this.data.getLocalPosition(treeContainer).x - maxwidth;
+>>>>>>> 275def65b2feaf22f27aed90231df49b9f646e3c
         //this.sy = this.data.getLocalPosition(treeContainer).y;
         console.log(sx)
         var newPosition = this.data.getLocalPosition(this.parent);
         this.x = newPosition.x - maxwidth - this.width / 2 + sx;
         this.y = newPosition.y - this.height / 2;
+>>>>>>> 35155d954641fd2e6e2e4d114e7dbaff3e8faaec
 
     }
 }
