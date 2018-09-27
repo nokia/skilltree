@@ -8,8 +8,8 @@ var data = dataJson;
 var app = new PIXI.Application(
     {
         view: pixiCanvas,
-        width: 1000,
-        height: 600,
+        width: window.innerWidth,
+        height: window.innerHeight,
         backgroundColor: 0x000000,
         antialias: true,
         autoStart: true, // TODO false and rendering only when needed
@@ -19,7 +19,7 @@ var app = new PIXI.Application(
 app.stage = new PIXI.display.Stage();
 var treeContainer = new PIXI.Container();
 app.stage.addChild(treeContainer);
-app.stage.group.enableSort = true; 
+app.stage.group.enableSort = true;
 
 
 
@@ -35,7 +35,7 @@ treeContainer
     .on('pointerupoutside', onDragEnd)
     .on('pointermove', onDragMove);
 
-app.stage.buttonMode=true;
+app.stage.buttonMode = true;
 
 var skillLayer = new PIXI.display.Layer();
 skillLayer.group.enableSort = true;
@@ -46,12 +46,12 @@ for (var level = 0; level < data.length; ++level) {
         data[level][i].itemcontainer = new ItemContainer(data, level, i);
 
         // Positioning of the containers dynamically by level and by index inside level
-        console.log(app.width);
         data[level][i].itemcontainer.container.position.x = i * 130 + (app.renderer.width - data[level].length * 130) / 2;
         data[level][i].itemcontainer.container.position.y = level * 150 + 10;
 
         data[level][i].itemcontainer.container.parentLayer = skillLayer;
         treeContainer.addChild(data[level][i].itemcontainer.container);
+
     }
 }
 
@@ -102,12 +102,13 @@ function onDragStart(event) {
     // the reason for this is because of multitouch
     // we want to track the movement of this particular touch
     this.data = event.data;
-    this.alpha = 0.5;
+    //this.alpha = 0.5;
     this.dragging = true;
+    this.firstDrag = 0;
 }
 
 function onDragEnd() {
-    this.alpha = 1;
+    //this.alpha = 1;
     this.dragging = false;
     // set the interaction data to null
     this.data = null;
@@ -115,8 +116,17 @@ function onDragEnd() {
 
 function onDragMove() {
     if (this.dragging) {
+
+        //console.log(this.data.getLocalPosition(this.parent) );
+
         var newPosition = this.data.getLocalPosition(this.parent);
-        this.x = newPosition.x;
-        this.y = newPosition.y;
+        //console.log(this.x);
+        //console.log(this.y);
+        this.x = newPosition.x - maxwidth - this.width / 2;
+        this.y = newPosition.y - this.height / 2;
+        
+        //console.log(this.x);
+        //console.log(this.y);
+
     }
 }
