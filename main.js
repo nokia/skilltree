@@ -8,8 +8,8 @@ var data = dataJson;
 var app = new PIXI.Application(
     {
         view: pixiCanvas,
-        width: window.innerWidth,
-        height: window.innerHeight,
+        width: 1000,
+        height: 600,
         backgroundColor: 0x000000,
         antialias: true,
         autoStart: true, // TODO false and rendering only when needed
@@ -71,7 +71,7 @@ function drawConnectionLines() {
 
                     // Draw the line
                     var connection = new PIXI.Graphics();
-                    connection.lineStyle(3, 0xffffff);
+                    connection.lineStyle(5, 0xffffff);
                     connection.moveTo(data[level][i].itemcontainer.container.x + data[level][i].itemcontainer.container.getLocalBounds().x, data[level][i].itemcontainer.container.position.y + data[level][i].itemcontainer.container.getLocalBounds().y * 2 - 7);
                     connection.lineTo(child.itemcontainer.container.position.x + child.itemcontainer.container.getLocalBounds().x, child.itemcontainer.container.position.y + 4);
 
