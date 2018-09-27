@@ -53,7 +53,10 @@ for (var level = 0; level < data.length; ++level) {
 
         data[level][i].itemcontainer.container.parentLayer = skillLayer;
         treeContainer.addChild(data[level][i].itemcontainer.container);
+<<<<<<< HEAD
         console.log(treeContainer.getGlobalPosition());
+=======
+>>>>>>> dd333f7c37940b0faeb6f5a9d6c47316734e1e95
     }
 }
 maxwidth = (app.renderer.width - maxwidth * 130) / 2;
@@ -101,6 +104,10 @@ function drawConnectionLines() {
 
 
 function onDragStart(event) {
+<<<<<<< HEAD
+=======
+    event.drag = false;
+>>>>>>> dd333f7c37940b0faeb6f5a9d6c47316734e1e95
     var obj = event.currentTarget;
     obj.dragData = event.data;
     obj.dragging = 1;
@@ -109,13 +116,15 @@ function onDragStart(event) {
     obj.dragObjStart.copy(obj.position);
     obj.dragGlobalStart = new PIXI.Point();
     obj.dragGlobalStart.copy(event.data.global);
+<<<<<<< HEAD
     
+=======
+>>>>>>> dd333f7c37940b0faeb6f5a9d6c47316734e1e95
 }
 
 function onDragEnd(event) {
     var obj = event.currentTarget;
     if (!obj.dragging) return;
-    
 
     obj.dragging = 0;
     obj.dragData = null;
@@ -127,6 +136,7 @@ function onDragMove(event) {
     if (!obj.dragging) return;
     var data = obj.dragData; // it can be different pointer!
     if (obj.dragging == 1) {
+
         // click or drag?
         if (Math.abs(data.global.x - obj.dragGlobalStart.x) +
             Math.abs(data.global.y - obj.dragGlobalStart.y) >= 5) {
@@ -135,6 +145,7 @@ function onDragMove(event) {
         }
     }
     if (obj.dragging == 2) {
+        event.drag = true;
         var dragPointerEnd = data.getLocalPosition(obj.parent);
         // DRAG
         obj.position.set(

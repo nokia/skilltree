@@ -83,34 +83,35 @@ export class ItemContainer {
             .on('pointerout', this.onButtonOut);
     }
 
-    onClick() {
-        // Enable children which doesn't have other parents with 0 skill level
-        var children = this.parentObj.skillData.children;
+    onClick(event) {
+        if (!event.drag) {
+            // Enable children which doesn't have other parents with 0 skill level
+            var children = this.parentObj.skillData.children;
 
-        for (var k = 0; children !== undefined && k < children.length; ++k) {
-            var child = this.parentObj.data[children[k].level][children[k].i];
+            for (var k = 0; children !== undefined && k < children.length; ++k) {
+                var child = this.parentObj.data[children[k].level][children[k].i];
 
-            for (var j = 0; child.zeroSLParents !== undefined && j < child.zeroSLParents.length; ++j) {
-                if (child.zeroSLParents[j].level == this.parentObj.level && child.zeroSLParents[j].i == this.parentObj.i) {
-                    child.zeroSLParents.splice(j, 1);
+                for (var j = 0; child.zeroSLParents !== undefined && j < child.zeroSLParents.length; ++j) {
+                    if (child.zeroSLParents[j].level == this.parentObj.level && child.zeroSLParents[j].i == this.parentObj.i) {
+                        child.zeroSLParents.splice(j, 1);
 
-                    if (child.zeroSLParents.length == 0) {
-                        child.itemcontainer.container.filters = null;
-                        child.itemcontainer.container.interactive = true;
-                        child.itemcontainer.skillborder.interactive = true;
-                        child.itemcontainer.skillborder.buttonMode = true;
+                        if (child.zeroSLParents.length == 0) {
+                            child.itemcontainer.container.filters = null;
+                            child.itemcontainer.container.interactive = true;
+                            child.itemcontainer.skillborder.interactive = true;
+                            child.itemcontainer.skillborder.buttonMode = true;
+                        }
                     }
                 }
             }
-        }
 
-        // Increase skill level
-        if(this.skill_level<this.max_skill_level)
-        {
-            this.skill_level ++;
-            this.levelinfo.text = (this.skill_level + "/" + this.max_skill_level);
-            if(this.skill_level==this.max_skill_level) {
-                this.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFF4000, 1)];
+            // Increase skill level
+            if (this.skill_level < this.max_skill_level) {
+                this.skill_level++;
+                this.levelinfo.text = (this.skill_level + "/" + this.max_skill_level);
+                if (this.skill_level == this.max_skill_level) {
+                    this.filters = [new PIXI.filters.GlowFilter(10, 4, 4, 0xFF4000, 1)];
+                }
             }
         }
     }
