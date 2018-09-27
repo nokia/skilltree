@@ -12,7 +12,7 @@ var app = new PIXI.Application(
         height: 600,
         backgroundColor: 0x000000,
         antialias: true,
-        autoStart: true,
+        autoStart: true, // TODO false and rendering only when needed
     }
 );
 
