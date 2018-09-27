@@ -41,7 +41,9 @@ var skillLayer = new PIXI.display.Layer();
 skillLayer.group.enableSort = true;
 app.stage.addChild(skillLayer);
 
+var maxwidth = 0;
 for (var level = 0; level < data.length; ++level) {
+    if (data[level].length > maxwidth) maxwidth = data[level].length;
     for (var i = 0; i < data[level].length; ++i) {
         data[level][i].itemcontainer = new ItemContainer(data, level, i);
 
@@ -51,8 +53,10 @@ for (var level = 0; level < data.length; ++level) {
 
         data[level][i].itemcontainer.container.parentLayer = skillLayer;
         treeContainer.addChild(data[level][i].itemcontainer.container);
+        console.log(treeContainer.getGlobalPosition());
     }
 }
+maxwidth = (app.renderer.width - maxwidth * 130) / 2;
 
 drawConnectionLines();
 
@@ -91,8 +95,6 @@ function drawConnectionLines() {
     }
 
     treeContainer.addChild(new PIXI.display.Layer(connectionGroup));
-
-
 }
 
 
@@ -103,6 +105,7 @@ function onDragStart(event) {
     this.data = event.data;
     this.alpha = 0.5;
     this.dragging = true;
+
 }
 
 function onDragEnd() {
@@ -114,8 +117,12 @@ function onDragEnd() {
 
 function onDragMove() {
     if (this.dragging) {
+        //this.sx = this.data.getLocalPosition(treeContainer).x - maxwidth;
+        //this.sy = this.data.getLocalPosition(treeContainer).y;
+        //console.log(this.sx)
         var newPosition = this.data.getLocalPosition(this.parent);
-        this.x = newPosition.x;
-        this.y = newPosition.y;
+        this.x = newPosition.x - maxwidth - this.width / 2;
+        this.y = newPosition.y - this.height / 2;
+
     }
 }
