@@ -136,7 +136,7 @@ class Tree {
     }
 }
 
-var tree = new Tree(allData[0], 0, 0);
+var tree = new Tree(allData[0], 0, 30);
 app.stage.addChild(tree.treeContainer);
 
 function showToast() {
