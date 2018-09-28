@@ -21,11 +21,6 @@ var treeContainer = new PIXI.Container();
 app.stage.addChild(treeContainer);
 app.stage.group.enableSort = true;
 
-
-
-
-//dragging stage with mouse ?can only be done if it has a parent?
-
 treeContainer.interactive = true;
 
 
@@ -41,9 +36,7 @@ var skillLayer = new PIXI.display.Layer();
 skillLayer.group.enableSort = true;
 app.stage.addChild(skillLayer);
 
-var maxwidth = 0;
 for (var level = 0; level < data.length; ++level) {
-    if (data[level].length > maxwidth) maxwidth = data[level].length;
     for (var i = 0; i < data[level].length; ++i) {
         data[level][i].itemcontainer = new ItemContainer(data, level, i);
 
@@ -55,7 +48,6 @@ for (var level = 0; level < data.length; ++level) {
         treeContainer.addChild(data[level][i].itemcontainer.container);
     }
 }
-maxwidth = (app.renderer.width - maxwidth * 130) / 2;
 
 drawConnectionLines();
 
@@ -96,9 +88,6 @@ function drawConnectionLines() {
     treeContainer.addChild(new PIXI.display.Layer(connectionGroup));
 }
 
-
-
-
 function onDragStart(event) {
     event.drag = false;
     var obj = event.currentTarget;
@@ -123,7 +112,7 @@ function onDragEnd(event) {
 function onDragMove(event) {
     var obj = event.currentTarget;
     if (!obj.dragging) return;
-    var data = obj.dragData; // it can be different pointer!
+    var data = obj.dragData;
     if (obj.dragging == 1) {
 
         // click or drag?

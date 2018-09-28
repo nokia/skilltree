@@ -1,7 +1,8 @@
+// not really a json :(
 var dataJson = [
   [{
-      name: "Name 1 (level 1)",
-      description: "This gives you an x value of 32 and a y value of 32. You can see in the example images that the tiger's top left corner is 32 pixels down and to the left of the hedgehog's top left corner.",
+      name: "Skill 1",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget leo sit amet purus tempor dapibus. Praesent in auctor ligula. Ut pretium id massa nec lacinia.",
       skillicon: "pictures/skillicon.jpg",
       skillborder: "pictures/skillborder.png",
       skill_level: 2,
@@ -9,8 +10,8 @@ var dataJson = [
       children: [{level: 1, i: 0}, {level: 1, i: 1}, {level: 1, i: 2}]
     },
     {
-      name: "Name 2 (level 1)",
-      description: "This gives you an x value of 32 and a y value of 32. You can see in the example images that the tiger's top left corner is 32 pixels down and to the left of the hedgehog's top left corner.",
+      name: "Skill 2",
+      description: "Maecenas in tristique massa, sed lobortis justo. Quisque at lacus eget magna egestas elementum. Fusce convallis tortor mattis leo pretium fermentum. Nulla facilisi.",
       skillicon: "pictures/skillicon.jpg",
       skillborder: "pictures/skillborder.png",
       skill_level: 0,
@@ -20,32 +21,32 @@ var dataJson = [
   ],
   [
     {
-      name: "Name 1 (level 2)",
-      description: "This gives you an x value of 32 and a y value of 32. You can see in the example images that the tiger's top left corner is 32 pixels down and to the left of the hedgehog's top left corner.",
+      name: "Skill 3",
+      description: "Suspendisse at sodales ex, tristique ornare sem. Vivamus consequat mauris lacus, at mollis nulla dapibus ut.",
       skillicon: "pictures/skillicon.jpg",
       skillborder: "pictures/skillborder.png",
       skill_level: 0,
       max_skill_level: 5,
     },
     {
-      name: "Name 2 (level 2)",
-      description: "You have to make some compromises if you decide to use a ParticleContainer. Sprites inside a ParticleContainer only have a few basic properties: x, y, width, height, scale, pivot, alpha, visible – and that’s about it.",
+      name: "Skill 4",
+      description: "Sed luctus nulla eu ornare dapibus. Integer metus dolor, blandit eu nisi sit amet, lacinia porta odio.",
       skillicon: "pictures/skillicon.jpg",
       skillborder: "pictures/skillborder.png",
       skill_level: 0,
       max_skill_level: 5,
     },
     {
-      name: "Name 3 (level 2)",
-      description: "This gives you an x value of 32 and a y value of 32. You can see in the example images that the tiger's top left corner is 32 pixels down and to the left of the hedgehog's top left corner. This gives you an x value of 32 and a y value of 32. You can see in the example images that the tiger's top left corner is 32 pixels down and to the left of the hedgehog's top left corner.",
+      name: "Skill 5",
+      description: "Sed suscipit nec magna ac iaculis.",
       skillicon: "pictures/skillicon.jpg",
       skillborder: "pictures/skillborder.png",
       skill_level: 0,
       max_skill_level: 5,
     },
     {
-      name: "Name 4 (level 2)",
-      description: "This gives you an x value of 32 and a y value of 32. You can see in the example images that the tiger's top left corner is 32 pixels down and to the left of the hedgehog's top left corner. This gives you an x value of 32 and a y value of 32. You can see in the example images that the tiger's top left corner is 32 pixels down and to the left of the hedgehog's top left corner.",
+      name: "Skill 6",
+      description: "Phasellus id bibendum ante. Cras sagittis massa nec eleifend vestibulum. Pellentesque mauris lorem, ornare sed tortor luctus, accumsan dictum nibh. Nulla ac porta magna, id aliquet sem. Ut erat nisi, eleifend dictum bibendum eu, imperdiet sit amet dui.",
       skillicon: "pictures/skillicon.jpg",
       skillborder: "pictures/skillborder.png",
       skill_level: 0,

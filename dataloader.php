@@ -1,3 +1,3 @@
 <?php
-echo readfile("data.json");
+echo "sa";
 ?>

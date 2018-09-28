@@ -33,7 +33,7 @@ export class ItemContainer {
 
         // Temporary hardcoded link
         if (level == 0 && i == 0) {
-            var link = this.createLink("Nokia website", "https://nokia.com", {fontSize: 12, fill: 0xff0000}, true);
+            var link = this.createLink("Nokia website", "https://nokia.com", {fontSize: 12, fill: 0x0000ff}, true);
             link.position.set(detailsMargin, description.position.y + description.height + 10);
             detailsForeground.addChild(link);
         }
