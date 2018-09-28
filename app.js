@@ -1,5 +1,3 @@
-PIXI.utils.sayHello("WebGL");
-
 var attempt = 3;
 
 function validate() {
