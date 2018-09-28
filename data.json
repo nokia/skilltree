@@ -1,56 +1,122 @@
 // not really a json :(
 var dataJson = [
-  [{
-      name: "Skill 1",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget leo sit amet purus tempor dapibus. Praesent in auctor ligula. Ut pretium id massa nec lacinia.",
-      skillicon: "pictures/skillicon.jpg",
-      skillborder: "pictures/skillborder.png",
-      skill_level: 2,
-      max_skill_level: 5,
-      children: [{level: 1, i: 0}, {level: 1, i: 1}, {level: 1, i: 2}]
-    },
-    {
-      name: "Skill 2",
-      description: "Maecenas in tristique massa, sed lobortis justo. Quisque at lacus eget magna egestas elementum. Fusce convallis tortor mattis leo pretium fermentum. Nulla facilisi.",
-      skillicon: "pictures/skillicon.jpg",
-      skillborder: "pictures/skillborder.png",
-      skill_level: 0,
-      max_skill_level: 5,
-      children: [{level: 1, i: 3}, {level: 1, i: 2}]
-    }
+  [
+    [
+      {
+        name: "Skill 1",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget leo sit amet purus tempor dapibus. Praesent in auctor ligula. Ut pretium id massa nec lacinia.",
+        skillicon: "pictures/skillicon.jpg",
+        skillborder: "pictures/skillborder.png",
+        skill_level: 2,
+        max_skill_level: 5,
+        children: [
+          {level: 1, i: 0},
+          {level: 1, i: 1},
+          {level: 1, i: 2}
+        ]
+      },
+      {
+        name: "Skill 2",
+        description: "Maecenas in tristique massa, sed lobortis justo. Quisque at lacus eget magna egestas elementum. Fusce convallis tortor mattis leo pretium fermentum. Nulla facilisi.",
+        skillicon: "pictures/skillicon.jpg",
+        skillborder: "pictures/skillborder.png",
+        skill_level: 0,
+        max_skill_level: 5,
+        children: [
+          {level: 1, i: 3},
+          {level: 1, i: 2}
+        ]
+      }
+    ],
+    [
+      {
+        name: "Skill 3",
+        description: "Suspendisse at sodales ex, tristique ornare sem. Vivamus consequat mauris lacus, at mollis nulla dapibus ut.",
+        skillicon: "pictures/skillicon.jpg",
+        skillborder: "pictures/skillborder.png",
+        skill_level: 0,
+        max_skill_level: 5
+      },
+      {
+        name: "Skill 4",
+        description: "Sed luctus nulla eu ornare dapibus. Integer metus dolor, blandit eu nisi sit amet, lacinia porta odio.",
+        skillicon: "pictures/skillicon.jpg",
+        skillborder: "pictures/skillborder.png",
+        skill_level: 0,
+        max_skill_level: 5
+      },
+      {
+        name: "Skill 5",
+        description: "Sed suscipit nec magna ac iaculis.",
+        skillicon: "pictures/skillicon.jpg",
+        skillborder: "pictures/skillborder.png",
+        skill_level: 0,
+        max_skill_level: 5
+      },
+      {
+        name: "Skill 6",
+        description: "Phasellus id bibendum ante. Cras sagittis massa nec eleifend vestibulum. Pellentesque mauris lorem, ornare sed tortor luctus, accumsan dictum nibh. Nulla ac porta magna, id aliquet sem. Ut erat nisi, eleifend dictum bibendum eu, imperdiet sit amet dui.",
+        skillicon: "pictures/skillicon.jpg",
+        skillborder: "pictures/skillborder.png",
+        skill_level: 0,
+        max_skill_level: 5
+      }
+    ]
   ],
   [
-    {
-      name: "Skill 3",
-      description: "Suspendisse at sodales ex, tristique ornare sem. Vivamus consequat mauris lacus, at mollis nulla dapibus ut.",
-      skillicon: "pictures/skillicon.jpg",
-      skillborder: "pictures/skillborder.png",
-      skill_level: 0,
-      max_skill_level: 5,
-    },
-    {
-      name: "Skill 4",
-      description: "Sed luctus nulla eu ornare dapibus. Integer metus dolor, blandit eu nisi sit amet, lacinia porta odio.",
-      skillicon: "pictures/skillicon.jpg",
-      skillborder: "pictures/skillborder.png",
-      skill_level: 0,
-      max_skill_level: 5,
-    },
-    {
-      name: "Skill 5",
-      description: "Sed suscipit nec magna ac iaculis.",
-      skillicon: "pictures/skillicon.jpg",
-      skillborder: "pictures/skillborder.png",
-      skill_level: 0,
-      max_skill_level: 5,
-    },
-    {
-      name: "Skill 6",
-      description: "Phasellus id bibendum ante. Cras sagittis massa nec eleifend vestibulum. Pellentesque mauris lorem, ornare sed tortor luctus, accumsan dictum nibh. Nulla ac porta magna, id aliquet sem. Ut erat nisi, eleifend dictum bibendum eu, imperdiet sit amet dui.",
-      skillicon: "pictures/skillicon.jpg",
-      skillborder: "pictures/skillborder.png",
-      skill_level: 0,
-      max_skill_level: 5,
-    },
-  ],
+    [
+      {
+        name: "Skill 1",
+        description: "Praesent in auctor ligula. Ut pretium id massa nec lacinia.",
+        skillicon: "pictures/skillicon.jpg",
+        skillborder: "pictures/skillborder.png",
+        skill_level: 4,
+        max_skill_level: 6,
+        children: [
+          {level: 1, i: 0},
+          {level: 1, i: 1},
+        ]
+      },
+    ],
+    [
+      {
+        name: "Skill 2",
+        description: "Suspendisse at sodales ex, tristique ornare sem. Vivamus consequat mauris lacus, at mollis nulla dapibus ut.",
+        skillicon: "pictures/skillicon.jpg",
+        skillborder: "pictures/skillborder.png",
+        skill_level: 2,
+        max_skill_level: 5
+      },
+      {
+        name: "Skill 3",
+        description: "Sed luctus nulla eu ornare dapibus. Integer metus dolor, blandit eu nisi sit amet, lacinia porta odio.",
+        skillicon: "pictures/skillicon.jpg",
+        skillborder: "pictures/skillborder.png",
+        skill_level: 0,
+        max_skill_level: 5,
+        children: [
+          {level: 2, i: 0},
+          {level: 2, i: 1},
+        ]
+      },
+    ],
+    [
+      {
+        name: "Skill 4",
+        description: "Sed luctus nulla eu ornare dapibus. Integer metus dolor, blandit eu nisi sit amet, lacinia porta odio.",
+        skillicon: "pictures/skillicon.jpg",
+        skillborder: "pictures/skillborder.png",
+        skill_level: 0,
+        max_skill_level: 5
+      },
+      {
+        name: "Skill 5",
+        description: "Sed suscipit nec magna ac iaculis.",
+        skillicon: "pictures/skillicon.jpg",
+        skillborder: "pictures/skillborder.png",
+        skill_level: 0,
+        max_skill_level: 5
+      },
+    ]
+  ]
 ];

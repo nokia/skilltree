@@ -1,6 +1,6 @@
 import { ItemContainer } from './classes/itemcontainer.js';
 
-var data = dataJson;
+var allData = dataJson;
 
 var app = new PIXI.Application(
     {
@@ -14,74 +14,84 @@ var app = new PIXI.Application(
 );
 
 app.stage = new PIXI.display.Stage();
-var treeContainer = new PIXI.Container();
-app.stage.addChild(treeContainer);
 app.stage.group.enableSort = true;
-
-treeContainer.interactive = true;
-
-treeContainer
-    .on('pointerdown', onDragStart)
-    .on('pointerup', onDragEnd)
-    .on('pointerupoutside', onDragEnd)
-    .on('pointermove', onDragMove);
 
 app.stage.buttonMode = true;
 
-var skillLayer = new PIXI.display.Layer();
-skillLayer.group.enableSort = true;
-app.stage.addChild(skillLayer);
+class Tree {
+    constructor (data, posX, posY) {
+        this.data = data;
+        this.treeContainer = new PIXI.Container();
 
-for (var level = 0; level < data.length; ++level) {
-    for (var i = 0; i < data[level].length; ++i) {
-        data[level][i].itemcontainer = new ItemContainer(data, level, i);
+        this.treeContainer.interactive = true;
 
-        // Positioning of the containers dynamically by level and by index inside level
-        data[level][i].itemcontainer.container.position.x = i * 130 + (app.renderer.width - data[level].length * 130) / 2;
-        data[level][i].itemcontainer.container.position.y = level * 150 + 10;
+        this.treeContainer
+            .on('pointerdown', onDragStart)
+            .on('pointerup', onDragEnd)
+            .on('pointerupoutside', onDragEnd)
+            .on('pointermove', onDragMove);
 
-        data[level][i].itemcontainer.container.parentLayer = skillLayer;
-        treeContainer.addChild(data[level][i].itemcontainer.container);
+        var skillLayer = new PIXI.display.Layer();
+        skillLayer.group.enableSort = true;
+        this.treeContainer.addChild(skillLayer);
+
+        for (var level = 0; level < data.length; ++level) {
+            for (var i = 0; i < data[level].length; ++i) {
+                data[level][i].itemcontainer = new ItemContainer(data, level, i);
+
+                // Positioning of the containers dynamically by level and by index inside level
+                data[level][i].itemcontainer.container.position.x = i * 130 + (app.renderer.width - data[level].length * 130) / 2 + posX;
+                data[level][i].itemcontainer.container.position.y = level * 150 + posY;
+
+                data[level][i].itemcontainer.container.parentLayer = skillLayer;
+                this.treeContainer.addChild(data[level][i].itemcontainer.container);
+            }
+        }
+
+        this.drawConnectionLines();
+
+        app.stage.addChild(this.treeContainer);
     }
-}
 
-drawConnectionLines();
+    drawConnectionLines() {
+        var connectionGroup = new PIXI.display.Group(-1, false);
 
-function drawConnectionLines() {
-    var connectionGroup = new PIXI.display.Group(-1, false);
+        for (var level = 0; level < this.data.length; ++level) {
+            for (var i = 0; i < this.data[level].length; ++i) {
+                if (this.data[level][i].children !== undefined) {
+                    for (var k = 0; k < this.data[level][i].children.length; ++k) {
+                        var child = this.data[this.data[level][i].children[k].level][this.data[level][i].children[k].i];
 
-    for (var level = 0; level < data.length; ++level) {
-        for (var i = 0; i < data[level].length; ++i) {
-            if (data[level][i].children !== undefined) {
+                        // Draw the line
+                        var connection = new PIXI.Graphics();
+                        connection.lineStyle(4, 0xffffff);
+                        connection.moveTo(this.data[level][i].itemcontainer.container.x + this.data[level][i].itemcontainer.container.getLocalBounds().x, this.data[level][i].itemcontainer.container.position.y + this.data[level][i].itemcontainer.container.getLocalBounds().y * 2 - 3);
+                        connection.lineTo(child.itemcontainer.container.position.x + child.itemcontainer.container.getLocalBounds().x, child.itemcontainer.container.position.y + 2);
 
-                for (var k = 0; k < data[level][i].children.length; ++k) {
-                    var child = data[data[level][i].children[k].level][data[level][i].children[k].i];
+                        // Add the line
+                        this.treeContainer.addChild(connection);
+                        connection.parentGroup = connectionGroup;
 
-                    // Draw the line
-                    var connection = new PIXI.Graphics();
-                    connection.lineStyle(4, 0xffffff);
-                    connection.moveTo(data[level][i].itemcontainer.container.x + data[level][i].itemcontainer.container.getLocalBounds().x, data[level][i].itemcontainer.container.position.y + data[level][i].itemcontainer.container.getLocalBounds().y * 2 - 7);
-                    connection.lineTo(child.itemcontainer.container.position.x + child.itemcontainer.container.getLocalBounds().x, child.itemcontainer.container.position.y + 4);
+                        // Saving child's zero skill level parents
+                        if (this.data[level][i].skill_level == 0) {
+                            child.itemcontainer.disable();
 
-                    // Add the line
-                    treeContainer.addChild(connection);
-                    connection.parentGroup = connectionGroup;
-
-                    // Saving child's zero skill level parents
-                    if (data[level][i].skill_level == 0) {
-                        child.itemcontainer.disable();
-
-                        if (child.zeroSLParents === undefined) {
-                            child.zeroSLParents = new Array();
+                            if (child.zeroSLParents === undefined) {
+                                child.zeroSLParents = new Array();
+                            }
+                            child.zeroSLParents.push({ level: level, i: i });
                         }
-                        child.zeroSLParents.push({ level: level, i: i });
                     }
                 }
             }
         }
-    }
 
-    treeContainer.addChild(new PIXI.display.Layer(connectionGroup));
+        this.treeContainer.addChild(new PIXI.display.Layer(connectionGroup));
+    }
+}
+
+for (var i = 0; i < allData.length; ++i) {
+    new Tree(allData[i], i * 100, i * 100);
 }
 
 function onDragStart(event) {
