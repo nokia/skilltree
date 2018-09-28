@@ -1,6 +1,3 @@
-// fps counter
-(function () { var script = document.createElement('script'); script.onload = function () { var stats = new Stats(); document.body.appendChild(stats.dom); requestAnimationFrame(function loop() { stats.update(); requestAnimationFrame(loop) }); }; script.src = '//rawgit.com/mrdoob/stats.js/master/build/stats.min.js'; document.head.appendChild(script); })()
-
 import { ItemContainer } from './classes/itemcontainer.js';
 
 var data = dataJson;
@@ -23,12 +20,11 @@ app.stage.group.enableSort = true;
 
 treeContainer.interactive = true;
 
-
 treeContainer
     .on('pointerdown', onDragStart)
     .on('pointerup', onDragEnd)
     .on('pointerupoutside', onDragEnd)
-    .on('pointermove', onDragMove)
+    .on('pointermove', onDragMove);
 
 app.stage.buttonMode = true;
 
@@ -106,7 +102,6 @@ function onDragEnd(event) {
 
     obj.dragging = 0;
     obj.dragData = null;
-    // set the interaction data to null
 }
 
 function onDragMove(event) {
