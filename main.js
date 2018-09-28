@@ -1,12 +1,14 @@
 import { ItemContainer } from './classes/itemcontainer.js';
 
+showToast();
+
 var allData = dataJson;
 
 var app = new PIXI.Application(
     {
         view: pixiCanvas,
-        width: 1000,
-        height: 600,
+        width: window.innerWidth,
+        height: window.innerHeight,
         backgroundColor: 0x000000,
         antialias: true,
         autoStart: true, // TODO false and rendering only when needed
@@ -22,18 +24,20 @@ class Tree {
     constructor (data, posX, posY) {
         this.data = data;
         this.treeContainer = new PIXI.Container();
+        this.treeContainer.enableSort = true;
 
         this.treeContainer.interactive = true;
 
         this.treeContainer
-            .on('pointerdown', onDragStart)
-            .on('pointerup', onDragEnd)
-            .on('pointerupoutside', onDragEnd)
-            .on('pointermove', onDragMove);
+            .on('pointerdown', this.onDragStart)
+            .on('pointerup', this.onDragEnd)
+            .on('pointerupoutside', this.onDragEnd)
+            .on('pointermove', this.onDragMove);
 
-        var skillLayer = new PIXI.display.Layer();
+        var skillGroup = new PIXI.display.Group(0, true);
+        var skillLayer = new PIXI.display.Layer(skillGroup);
         skillLayer.group.enableSort = true;
-        this.treeContainer.addChild(skillLayer);
+        app.stage.addChild(skillLayer);
 
         for (var level = 0; level < data.length; ++level) {
             for (var i = 0; i < data[level].length; ++i) {
@@ -49,8 +53,6 @@ class Tree {
         }
 
         this.drawConnectionLines();
-
-        app.stage.addChild(this.treeContainer);
     }
 
     drawConnectionLines() {
@@ -65,8 +67,8 @@ class Tree {
                         // Draw the line
                         var connection = new PIXI.Graphics();
                         connection.lineStyle(4, 0xffffff);
-                        connection.moveTo(this.data[level][i].itemcontainer.container.x + this.data[level][i].itemcontainer.container.getLocalBounds().x, this.data[level][i].itemcontainer.container.position.y + this.data[level][i].itemcontainer.container.getLocalBounds().y * 2 - 3);
-                        connection.lineTo(child.itemcontainer.container.position.x + child.itemcontainer.container.getLocalBounds().x, child.itemcontainer.container.position.y + 2);
+                        connection.moveTo(this.data[level][i].itemcontainer.container.x + this.data[level][i].itemcontainer.container.getLocalBounds().x, this.data[level][i].itemcontainer.container.position.y + this.data[level][i].itemcontainer.container.getLocalBounds().y * 2 - 7);
+                        connection.lineTo(child.itemcontainer.container.position.x + child.itemcontainer.container.getLocalBounds().x, child.itemcontainer.container.position.y + 5);
 
                         // Add the line
                         this.treeContainer.addChild(connection);
@@ -86,54 +88,63 @@ class Tree {
             }
         }
 
-        this.treeContainer.addChild(new PIXI.display.Layer(connectionGroup));
+        app.stage.addChild(new PIXI.display.Layer(connectionGroup));
     }
-}
 
-for (var i = 0; i < allData.length; ++i) {
-    new Tree(allData[i], i * 100, i * 100);
-}
+    onDragStart(event) {
+        event.drag = false;
+        var obj = event.currentTarget;
+        obj.dragData = event.data;
+        obj.dragging = 1;
+        obj.dragPointerStart = event.data.getLocalPosition(obj.parent);
+        obj.dragObjStart = new PIXI.Point();
+        obj.dragObjStart.copy(obj.position);
+        obj.dragGlobalStart = new PIXI.Point();
+        obj.dragGlobalStart.copy(event.data.global);
+    }
 
-function onDragStart(event) {
-    event.drag = false;
-    var obj = event.currentTarget;
-    obj.dragData = event.data;
-    obj.dragging = 1;
-    obj.dragPointerStart = event.data.getLocalPosition(obj.parent);
-    obj.dragObjStart = new PIXI.Point();
-    obj.dragObjStart.copy(obj.position);
-    obj.dragGlobalStart = new PIXI.Point();
-    obj.dragGlobalStart.copy(event.data.global);
-}
+    onDragEnd(event) {
+        var obj = event.currentTarget;
+        if (!obj.dragging) return;
 
-function onDragEnd(event) {
-    var obj = event.currentTarget;
-    if (!obj.dragging) return;
+        obj.dragging = 0;
+        obj.dragData = null;
+    }
 
-    obj.dragging = 0;
-    obj.dragData = null;
-}
+    onDragMove(event) {
+        var obj = event.currentTarget;
+        if (!obj.dragging) return;
+        var data = obj.dragData;
+        if (obj.dragging == 1) {
 
-function onDragMove(event) {
-    var obj = event.currentTarget;
-    if (!obj.dragging) return;
-    var data = obj.dragData;
-    if (obj.dragging == 1) {
-
-        // click or drag?
-        if (Math.abs(data.global.x - obj.dragGlobalStart.x) +
-            Math.abs(data.global.y - obj.dragGlobalStart.y) >= 5) {
+            // click or drag?
+            if (Math.abs(data.global.x - obj.dragGlobalStart.x) +
+                Math.abs(data.global.y - obj.dragGlobalStart.y) >= 5) {
+                // DRAG
+                obj.dragging = 2;
+            }
+        }
+        if (obj.dragging == 2) {
+            event.drag = true;
+            var dragPointerEnd = data.getLocalPosition(obj.parent);
             // DRAG
-            obj.dragging = 2;
+            obj.position.set(
+                obj.dragObjStart.x + (dragPointerEnd.x - obj.dragPointerStart.x),
+                obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y)
+            );
         }
     }
-    if (obj.dragging == 2) {
-        event.drag = true;
-        var dragPointerEnd = data.getLocalPosition(obj.parent);
-        // DRAG
-        obj.position.set(
-            obj.dragObjStart.x + (dragPointerEnd.x - obj.dragPointerStart.x),
-            obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y)
-        );
-    }
+}
+
+var tree = new Tree(allData[0], 0, 0);
+app.stage.addChild(tree.treeContainer);
+
+function showToast() {
+    var toast = document.getElementById("toast");
+
+    toast.className = "show";
+
+    setTimeout(function(){
+        toast.className = ""
+    }, 3000);
 }
