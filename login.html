@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Skill Tree</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div id="loginBox">
+      <img src="tree.png" id="avatar">
+      <h1>Welcome to the Skill Tree!</h1>
+      <form onsubmit="return false">
+        <p>Username</p>
+        <input type="text" id="username" placeholder="Enter Username">
+        <p>Password</p>
+        <input type="password" id="password" placeholder="Enter Password">
+        <input type="submit" id="submit" value="Login" onclick="validate()"> 
+        <a href="#">You don't remember the password, do you?</a><br>
+        <a href="#">Not a user yet?</a>
+      </form>
+    </div>
+	
+	<div id="toast">
+    Welcome back!
+  </div>
+  
+  <script src="app.js"></script>
+</body>
+</html>
