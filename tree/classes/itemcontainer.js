@@ -1,13 +1,14 @@
 export class ItemContainer {
-    constructor(data, level, i) {
+    constructor(app, data, level, i) {
+        this.app = app;
         this.data = data;
         this.skillData = data[level][i];
         this.level = level;
         this.i = i;
 
-        //Loading images
-        this.skillicon = new PIXI.Sprite.fromImage(this.skillData.skillicon); //100x100
-        this.skillborder = new PIXI.Sprite.fromImage(this.skillData.skillborder); //116x116
+        //Creating images
+        this.skillicon = new PIXI.Sprite(PIXI.loader.resources[this.skillData.skillicon].texture); //100x100
+        this.skillborder = new PIXI.Sprite(PIXI.loader.resources["pictures/skillborder.png"].texture); //116x116
 
         //Setting border variables
         this.skillborder.skill_level = this.skillData.skill_level;
@@ -113,6 +114,8 @@ export class ItemContainer {
                     this.filters = [new PIXI.filters.GlowFilter(10, 4, 4, 0xFF4000, 1)];
                 }
             }
+
+            this.parentObj.app.renderer.render(this.parentObj.app.stage);
         }
     }
 
@@ -160,6 +163,8 @@ export class ItemContainer {
         } else return;
 
         this.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFFBF00, 1)];
+
+        this.parentObj.app.renderer.render(this.parentObj.app.stage);
     }
 
     onButtonOver() {
@@ -173,6 +178,8 @@ export class ItemContainer {
 
         if(skillborder.skill_level == skillborder.max_skill_level) return;
         skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFFBF00, 1)];
+
+        this.parentObj.app.renderer.render(this.parentObj.app.stage);
     }
 
     onButtonOut() {
@@ -185,6 +192,8 @@ export class ItemContainer {
 
         if(skillborder.skill_level == skillborder.max_skill_level) return;
         skillborder.filters = null;
+
+        this.parentObj.app.renderer.render(this.parentObj.app.stage);
     }
 
     enable () {
@@ -192,6 +201,8 @@ export class ItemContainer {
         this.container.interactive = true;
         this.skillborder.interactive = true;
         this.skillborder.buttonMode = true;
+
+        this.app.renderer.render(this.app.stage);
     }
 
     disable () {
@@ -201,6 +212,8 @@ export class ItemContainer {
         this.container.interactive = false;
         this.skillborder.interactive = false;
         this.skillborder.buttonMode = false;
+
+        this.app.renderer.render(this.app.stage);
     }
 
     // TODO Can it be in separate class???
