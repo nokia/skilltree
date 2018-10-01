@@ -11,9 +11,23 @@ var app = new PIXI.Application(
         height: window.innerHeight,
         backgroundColor: 0x000000,
         antialias: true,
-        autoStart: true, // TODO false and rendering only when needed
+        autoStart: false, // TODO false and rendering only when needed
     }
 );
+
+var imgs = new Array();
+for (var i = 0; i < allData.length; ++i) {
+    for (var j = 0; j < allData[i].length; ++j) {
+        for (var k = 0; k < allData[i][j].length; ++k) {
+            if (!imgs.includes(allData[i][j][k].skillicon)) {
+                imgs.push(allData[i][j][k].skillicon);
+                PIXI.loader.add(allData[i][j][k].skillicon.toString());
+            }
+        }
+    }
+}
+PIXI.loader.add("pictures/skillborder.png");
+PIXI.loader.load(init);
 
 app.stage = new PIXI.display.Stage();
 app.stage.group.enableSort = true;
@@ -41,7 +55,7 @@ class Tree {
 
         for (var level = 0; level < data.length; ++level) {
             for (var i = 0; i < data[level].length; ++i) {
-                data[level][i].itemcontainer = new ItemContainer(data, level, i);
+                data[level][i].itemcontainer = new ItemContainer(app, data, level, i);
 
                 // Positioning of the containers dynamically by level and by index inside level
                 data[level][i].itemcontainer.container.position.x = i * 130 + (app.renderer.width - data[level].length * 130) / 2 + posX;
@@ -67,8 +81,8 @@ class Tree {
                         // Draw the line
                         var connection = new PIXI.Graphics();
                         connection.lineStyle(4, 0xffffff);
-                        connection.moveTo(this.data[level][i].itemcontainer.container.x + this.data[level][i].itemcontainer.container.getLocalBounds().x, this.data[level][i].itemcontainer.container.position.y + this.data[level][i].itemcontainer.container.getLocalBounds().y * 2 - 7);
-                        connection.lineTo(child.itemcontainer.container.position.x + child.itemcontainer.container.getLocalBounds().x, child.itemcontainer.container.position.y + 5);
+                        connection.moveTo(this.data[level][i].itemcontainer.container.x + this.data[level][i].itemcontainer.skillborder.width / 2, this.data[level][i].itemcontainer.container.position.y + this.data[level][i].itemcontainer.skillborder.height  - 8);
+                        connection.lineTo(child.itemcontainer.container.position.x + child.itemcontainer.skillborder.width / 2, child.itemcontainer.container.position.y + 5);
 
                         // Add the line
                         this.treeContainer.addChild(connection);
@@ -101,6 +115,8 @@ class Tree {
         obj.dragObjStart.copy(obj.position);
         obj.dragGlobalStart = new PIXI.Point();
         obj.dragGlobalStart.copy(event.data.global);
+
+        app.start();
     }
 
     onDragEnd(event) {
@@ -109,6 +125,8 @@ class Tree {
 
         obj.dragging = 0;
         obj.dragData = null;
+
+        app.stop();
     }
 
     onDragMove(event) {
@@ -136,8 +154,11 @@ class Tree {
     }
 }
 
-var tree = new Tree(allData[0], 0, 30);
-app.stage.addChild(tree.treeContainer);
+function init () {
+    var tree = new Tree(allData[0], 0, 30);
+    app.stage.addChild(tree.treeContainer);
+    app.renderer.render(app.stage);
+}
 
 // Shows and then removes welcome message
 function showToast() {
