@@ -3,9 +3,9 @@ var dataJson = [
   [
     [
       {
-        name: "Skill 1",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget leo sit amet purus tempor dapibus. Praesent in auctor ligula. Ut pretium id massa nec lacinia.",
-        skillicon: "pictures/skillicon.jpg",
+        name: "Management",
+        description: "The process of working through details of a problem to reach a solution.",
+        skillicon: "pictures/icons/management.jpg",
         skill_level: 2,
         max_skill_level: 5,
         children: [
@@ -15,9 +15,9 @@ var dataJson = [
         ]
       },
       {
-        name: "Skill 2",
-        description: "Maecenas in tristique massa, sed lobortis justo. Quisque at lacus eget magna egestas elementum. Fusce convallis tortor mattis leo pretium fermentum. Nulla facilisi.",
-        skillicon: "pictures/skillicon.jpg",
+        name: "Leadership",
+        description: "The art of motivating a group of people to act towards achieving a common goal.",
+        skillicon: "pictures/icons/leadership.jpg",
         skill_level: 0,
         max_skill_level: 5,
         children: [
@@ -28,30 +28,30 @@ var dataJson = [
     ],
     [
       {
-        name: "Skill 3",
-        description: "Suspendisse at sodales ex, tristique ornare sem. Vivamus consequat mauris lacus, at mollis nulla dapibus ut.",
-        skillicon: "pictures/skillicon.jpg",
+        name: "Time management",
+        description: "Manages own and the whole team's time to deliver projects on time.",
+        skillicon: "pictures/icons/time_management.png",
         skill_level: 0,
         max_skill_level: 5
       },
       {
-        name: "Skill 4",
-        description: "Sed luctus nulla eu ornare dapibus. Integer metus dolor, blandit eu nisi sit amet, lacinia porta odio.",
-        skillicon: "pictures/skillicon.jpg",
+        name: "Project management",
+        description: "Project management is the application of knowledge, skills, tools, and techniques to project activities to meet the project requirements.",
+        skillicon: "pictures/icons/project_management.png",
         skill_level: 0,
         max_skill_level: 5
       },
       {
-        name: "Skill 5",
-        description: "Sed suscipit nec magna ac iaculis.",
-        skillicon: "pictures/skillicon.jpg",
+        name: "People Management/HR",
+        description: "Flawless communication within team, willing to help new members to blend in and actively participates in coaching, training new team members.",
+        skillicon: "pictures/icons/HR.png",
         skill_level: 0,
         max_skill_level: 5
       },
       {
-        name: "Skill 6",
-        description: "Phasellus id bibendum ante. Cras sagittis massa nec eleifend vestibulum. Pellentesque mauris lorem, ornare sed tortor luctus, accumsan dictum nibh. Nulla ac porta magna, id aliquet sem. Ut erat nisi, eleifend dictum bibendum eu, imperdiet sit amet dui.",
-        skillicon: "pictures/skillicon.jpg",
+        name: "Communication",
+        description: "Able to coordinate a team, gives constant feedback of the project's achievements.",
+        skillicon: "pictures/icons/communication.png",
         skill_level: 0,
         max_skill_level: 5
       }
