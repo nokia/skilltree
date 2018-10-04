@@ -188,6 +188,8 @@ export class ItemContainer {
         var details = this.parentObj.details;
         var container = this;
 
+        console.log("ss");
+
         container.removeChild(details);
         container.zOrder = 1;
 

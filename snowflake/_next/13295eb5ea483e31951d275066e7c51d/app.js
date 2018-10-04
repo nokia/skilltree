@@ -1,3 +1,15 @@
+showToast();
+
+function showToast() {
+    var toast = document.getElementById("toast");
+
+    toast.className = "show";
+
+    setTimeout(function(){
+        toast.className = ""
+    }, 3000);
+}
+
 ! function(e) {
     function n(r) {
         if (t[r]) return t[r].exports;
@@ -22469,8 +22481,6 @@ webpackJsonp([0], [function(e, t, n) {
                     var e = this;
                     return I.default.createElement("main", {
                         className: "jsx-2126963245",
-                        style: {
-                        }
                     }, I.default.createElement(m.default, {
                         styleId: "2126963245",
                         css: ["body{font-family:Helvetica;}", "main{width:960px;margin:0 auto;}", ".name-input{border:none;display:block;border-bottom:2px solid #fff;font-size:30px;line-height:40px;font-weight:bold;width:380px;margin-bottom:10px;}", ".name-input:hover,.name-input:focus{border-bottom:2px solid #ccc;outline:0;}", "a{color:#888;text-decoration:none;}"]
@@ -22483,13 +22493,14 @@ webpackJsonp([0], [function(e, t, n) {
                     })
                     , I.default.createElement("div", {
                         style: {
-                            display: "flex"
+                            display: "flex",
+                            display: "block",
+                            margin: "auto",
                         },
                         className: "jsx-2126963245"
                     }, I.default.createElement("div", {
                         style: {
                             flex: 0,
-                            width: "30%",
                         },
                         className: "jsx-2126963245"
                     }, I.default.createElement("a", {
@@ -22500,10 +22511,6 @@ webpackJsonp([0], [function(e, t, n) {
                         src: "title.png",
                         width: 461,
                         height: 100,
-                        style: {
-                            display: "block",
-                            margin: "auto",
-                        }
                     })), I.default.createElement(_.default, {
                         milestoneByTrack: this.state.milestoneByTrack,
                         focusedTrackId: this.state.focusedTrackId,

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html oncontextmenu="return false;">
+
+<head>
+    <link rel="preload" href="/_next/08f7bbd1-48df-4c27-afc4-f28bce2365c9/page/index.js" as="script" />
+    <link rel="preload" href="/_next/08f7bbd1-48df-4c27-afc4-f28bce2365c9/page/_error/index.js" as="script" />
+    <link rel="preload" href="/_next/13295eb5ea483e31951d275066e7c51d/app.js" as="script" />
+    <meta charSet="utf-8" class="next-head" />
+    <script src="../pixi/pixi.min.js"></script>
+    <script src="../pixi/pixi-extra-filters.js"></script>
+    <script src="../pixi/pixi-layers.js"></script>
+    <link rel="stylesheet" type="text/css" href = "style.css"></link>
+    <style id="__jsx-2126963245">
+        body {
+            font-family: Helvetica;
+        }
+
+        main {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .name-input {
+            border: none;
+            display: block;
+            border-bottom: 2px solid #fff;
+            font-size: 30px;
+            line-height: 40px;
+            font-weight: bold;
+            width: 380px;
+            margin-bottom: 10px;
+        }
+
+        .name-input:hover,
+        .name-input:focus {
+            border-bottom: 2px solid #ccc;
+            outline: 0;
+        }
+
+        a {
+            color: #888;
+            text-decoration: none;
+        }
+    </style>
+    <style id="__jsx-2295457571">
+        select.jsx-2295457571 {
+            font-size: 20px;
+            line-height: 20px;
+            margin-bottom: 20px;
+            min-width: 300px;
+        }
+    </style>
+    <style id="__jsx-3403694977">
+        table.jsx-3403694977 {
+            border-spacing: 3px;
+            margin-bottom: 20px;
+            margin-left: -3px;
+        }
+
+        .point-summary-label.jsx-3403694977 {
+            font-size: 12px;
+            text-align: center;
+            font-weight: normal;
+            width: 120px;
+        }
+
+        .point-summary-value.jsx-3403694977 {
+            width: 120px;
+            background: #eee;
+            font-size: 24px;
+            font-weight: bold;
+            line-height: 50px;
+            border-radius: 2px;
+            text-align: center;
+        }
+    </style>
+    <style id="__jsx-2708482886">
+        figure.jsx-2708482886 {
+            margin: 0 0 0 -10px;
+        }
+
+        svg.jsx-2708482886 {
+            width: 550px;
+            height: 160px;
+        }
+    </style>
+    <style id="__jsx-3023698355">
+        figure.jsx-3023698355 {
+            margin: 0;
+        }
+
+        svg.jsx-3023698355 {
+            width: 400px;
+            height: 400px;
+        }
+
+        .track-milestone.jsx-3023698355 {
+            -webkit-fill: #eee;
+            fill: #eee;
+            cursor: pointer;
+        }
+
+        .track-milestone-current.jsx-3023698355,
+        .track-milestone.jsx-3023698355:hover {
+            stroke: #000;
+            stroke-width: 4px;
+            stroke-linejoin: round;
+        }
+    </style>
+    <style id="__jsx-886021826">
+        table.jsx-886021826 {
+            width: 100%;
+            border-spacing: 3px;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            margin-left: -3px;
+        }
+
+        .track-selector-value.jsx-886021826 {
+            line-height: 50px;
+            width: 50px;
+            text-align: center;
+            background: #eee;
+            font-weight: bold;
+            font-size: 24px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .track-selector-label.jsx-886021826 {
+            text-align: center;
+            font-size: 9px;
+        }
+    </style>
+    <style id="__jsx-2815140849">
+        div.track.jsx-2815140849 {
+            margin: 0 0 20px 0;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #ccc;
+        }
+
+        h2.jsx-2815140849 {
+            margin: 0 0 10px 0;
+        }
+
+        p.track-description.jsx-2815140849 {
+            margin-top: 0;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #ccc;
+        }
+
+        table.jsx-2815140849 {
+            border-spacing: 3px;
+        }
+
+        td.jsx-2815140849 {
+            line-height: 50px;
+            width: 50px;
+            text-align: center;
+            background: #eee;
+            font-weight: bold;
+            font-size: 24px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        ul.jsx-2815140849 {
+            line-height: 1.5em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id = "toast">
+        Welcome back!
+    </div>
+
+    <div>
+        <div id="__next">
+            <div data-reactroot="">
+                <div>
+                    <main class="jsx-2126963245">
+                            <div style="flex:0" class="jsx-2126963245">
+
+                            </div>
+                        </div>
+
+
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+        <div id="__next-error"></div>
+    </div>
+    <div>
+        <script>
+            __NEXT_DATA__ = {
+                "props": {},
+                "pathname": "/",
+                "query": {},
+                "buildId": "08f7bbd1-48df-4c27-afc4-f28bce2365c9",
+                "buildStats": {
+                    "app.js": {
+                        "hash": "13295eb5ea483e31951d275066e7c51d"
+                    }
+                },
+                "assetPrefix": "",
+                "nextExport": true,
+                "err": null,
+                "chunks": []
+            }
+            module = {}
+            __NEXT_LOADED_PAGES__ = []
+            __NEXT_LOADED_CHUNKS__ = []
+
+            __NEXT_REGISTER_PAGE = function(route, fn) {
+                __NEXT_LOADED_PAGES__.push({
+                    route: route,
+                    fn: fn
+                })
+            }
+
+            __NEXT_REGISTER_CHUNK = function(chunkName, fn) {
+                __NEXT_LOADED_CHUNKS__.push({
+                    chunkName: chunkName,
+                    fn: fn
+                })
+            }
+        </script>
+        <script async="" id="__NEXT_PAGE__/" type="text/javascript" src="/_next/08f7bbd1-48df-4c27-afc4-f28bce2365c9/page/index.js"></script>
+        <script async="" id="__NEXT_PAGE__/_error" type="text/javascript" src="/_next/08f7bbd1-48df-4c27-afc4-f28bce2365c9/page/_error/index.js"></script>
+        <div></div>
+        <script type="text/javascript" src="/_next/13295eb5ea483e31951d275066e7c51d/app.js" async=""></script>
+    </div>
+</body>
+
+</html>
