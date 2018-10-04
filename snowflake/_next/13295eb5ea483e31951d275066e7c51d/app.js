@@ -402,7 +402,7 @@ webpackJsonp([0], [function(e, t, n) {
             },
             FOUNDATIONS: {
                 displayName: "Foundations",
-                category: "A",
+                category: "C",
                 description: "Develops expertise in foundational systems, such as deployments, pipelines, databases and machine learning",
                 milestones: [{
                     summary: "Works effectively within established structures, following current best practices",
@@ -428,7 +428,7 @@ webpackJsonp([0], [function(e, t, n) {
             },
             SERVERS: {
                 displayName: "Servers",
-                category: "A",
+                category: "C",
                 description: "Develops expertise in server side engineering, using technologies such as Go, NodeJS, or Scala",
                 milestones: [{
                     summary: "Works effectively within established server side frameworks, following current best practices",
@@ -22470,8 +22470,6 @@ webpackJsonp([0], [function(e, t, n) {
                     return I.default.createElement("main", {
                         className: "jsx-2126963245",
                         style: {
-                            display: "block",
-                            margin: "auto"
                         }
                     }, I.default.createElement(m.default, {
                         styleId: "2126963245",
@@ -22482,15 +22480,7 @@ webpackJsonp([0], [function(e, t, n) {
                             width: 142
                         },
                         className: "jsx-2126963245"
-                    }, I.default.createElement("a", {
-                        href: "login.html",
-                        target: "_blank",
-                        className: "jsx-2126963245"
-                    }, I.default.createElement("img", {
-                        src: "title.png",
-                        width: 461,
-                        height: 100,
-                    })))
+                    })
                     , I.default.createElement("div", {
                         style: {
                             display: "flex"
@@ -22499,11 +22489,22 @@ webpackJsonp([0], [function(e, t, n) {
                     }, I.default.createElement("div", {
                         style: {
                             flex: 0,
-                            display: "block",
-                            margin: "auto"
+                            width: "30%",
                         },
                         className: "jsx-2126963245"
-                    }, I.default.createElement(_.default, {
+                    }, I.default.createElement("a", {
+                        href: "login.html",
+                        target: "_blank",
+                        className: "jsx-2126963245"
+                    }, I.default.createElement("img", {
+                        src: "title.png",
+                        width: 461,
+                        height: 100,
+                        style: {
+                            display: "block",
+                            margin: "auto",
+                        }
+                    })), I.default.createElement(_.default, {
                         milestoneByTrack: this.state.milestoneByTrack,
                         focusedTrackId: this.state.focusedTrackId,
                         handleTrackMilestoneChangeFn: function(t, n) {

@@ -1,14 +1,14 @@
 import { ItemContainer } from './classes/itemcontainer.js';
 
-showToast();
+//showToast();
 
 var allData = dataJson;
 
 var app = new PIXI.Application(
     {
         view: pixiCanvas,
-        width: window.innerWidth,
-        height: window.innerHeight,
+        width: window.innerWidth * .5,
+        height: window.innerHeight * .8,
         backgroundColor: 0x000000,
         antialias: true,
         autoStart: false, // TODO false and rendering only when needed
@@ -155,7 +155,7 @@ class Tree {
 }
 
 function init () {
-    var tree = new Tree(allData[1], 0, 30);
+    var tree = new Tree(allData[0], 0, 30);
     app.stage.addChild(tree.treeContainer);
     app.renderer.render(app.stage);
 }

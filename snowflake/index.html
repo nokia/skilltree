@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html oncontextmenu="return false;">
 
 <head>
     <link rel="preload" href="/_next/08f7bbd1-48df-4c27-afc4-f28bce2365c9/page/index.js" as="script" />
     <link rel="preload" href="/_next/08f7bbd1-48df-4c27-afc4-f28bce2365c9/page/_error/index.js" as="script" />
     <link rel="preload" href="/_next/13295eb5ea483e31951d275066e7c51d/app.js" as="script" />
     <meta charSet="utf-8" class="next-head" />
+    <script src="../pixi/pixi.min.js"></script>
+    <script src="../pixi/pixi-extra-filters.js"></script>
+    <script src="../pixi/pixi-layers.js"></script>
+    <link rel="stylesheet" type="text/css" href = "style.css"></link>
     <style id="__jsx-2126963245">
         body {
             font-family: Helvetica;
@@ -168,7 +172,10 @@
 </head>
 
 <body>
-    
+    <canvas id = "pixiCanvas" ></canvas>
+    <script src = "data.json"></script>
+    <script type="module" src="main.js"></script>
+
     <div>
         <div id="__next">
             <div data-reactroot="">

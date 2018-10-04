@@ -1,0 +1,111 @@
+// not really a json :(
+var dataJson = [
+  [
+    [
+      {
+        name: "Management",
+        description: "The process of working through details of a problem to reach a solution.",
+        skillicon: "pictures/icons/management.jpg",
+        skill_level: 2,
+        max_skill_level: 5,
+        children: [
+          {level: 1, i: 0},
+          {level: 1, i: 1},
+          {level: 1, i: 2}
+        ]
+      },
+      {
+        name: "Leadership",
+        description: "The art of motivating a group of people to act towards achieving a common goal.",
+        skillicon: "pictures/icons/leadership.jpg",
+        skill_level: 0,
+        max_skill_level: 5,
+        children: [
+          {level: 1, i: 3},
+          {level: 1, i: 2}
+        ]
+      }
+    ],
+    [
+      {
+        name: "Time management",
+        description: "Manages own and the whole team's time to deliver projects on time.",
+        skillicon: "pictures/icons/time_management.png",
+        skill_level: 0,
+        max_skill_level: 5
+      },
+      {
+        name: "Project management",
+        description: "Project management is the application of knowledge, skills, tools, and techniques to project activities to meet the project requirements.",
+        skillicon: "pictures/icons/project_management.png",
+        skill_level: 0,
+        max_skill_level: 5
+      },
+      {
+        name: "People Management/HR",
+        description: "Flawless communication within team, willing to help new members to blend in and actively participates in coaching, training new team members.",
+        skillicon: "pictures/icons/HR.png",
+        skill_level: 0,
+        max_skill_level: 5
+      },
+      {
+        name: "Communication",
+        description: "Able to coordinate a team, gives constant feedback of the project's achievements.",
+        skillicon: "pictures/icons/communication.png",
+        skill_level: 0,
+        max_skill_level: 5
+      }
+    ]
+  ],
+  [
+    [
+      {
+        name: "Skill 1",
+        description: "Praesent in auctor ligula. Ut pretium id massa nec lacinia.",
+        skillicon: "pictures/skillicon.jpg",
+        skill_level: 4,
+        max_skill_level: 6,
+        children: [
+          {level: 1, i: 0},
+          {level: 1, i: 1},
+        ]
+      },
+    ],
+    [
+      {
+        name: "Skill 2",
+        description: "Suspendisse at sodales ex, tristique ornare sem. Vivamus consequat mauris lacus, at mollis nulla dapibus ut.",
+        skillicon: "pictures/skillicon.jpg",
+        skill_level: 2,
+        max_skill_level: 5
+      },
+      {
+        name: "Skill 3",
+        description: "Sed luctus nulla eu ornare dapibus. Integer metus dolor, blandit eu nisi sit amet, lacinia porta odio.",
+        skillicon: "pictures/skillicon.jpg",
+        skill_level: 0,
+        max_skill_level: 5,
+        children: [
+          {level: 2, i: 0},
+          {level: 2, i: 1},
+        ]
+      },
+    ],
+    [
+      {
+        name: "Skill 4",
+        description: "Sed luctus nulla eu ornare dapibus. Integer metus dolor, blandit eu nisi sit amet, lacinia porta odio.",
+        skillicon: "pictures/skillicon.jpg",
+        skill_level: 0,
+        max_skill_level: 5
+      },
+      {
+        name: "Skill 5",
+        description: "Sed suscipit nec magna ac iaculis.",
+        skillicon: "pictures/skillicon.jpg",
+        skill_level: 0,
+        max_skill_level: 5
+      },
+    ]
+  ]
+];
