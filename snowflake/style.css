@@ -5,6 +5,12 @@ canvas {
     margin: 0;
 }
 
+#tree_visit {
+  left: 20px;
+  bottom: 30px;
+  position: fixed;
+}
+
 #toast {
     visibility: hidden;
     min-width: 250px;
