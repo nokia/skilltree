@@ -3,11 +3,6 @@ canvas {
     padding: 0;
     display: block;
     margin: 0;
-    right: 20px;
-    border: 4px solid #aaaaaa;
-    top: 50%;
-    left: 50%;
-    transform: translate(-3%, -50%);
 }
 
 #toast {

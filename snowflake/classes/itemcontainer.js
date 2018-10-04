@@ -32,12 +32,41 @@ export class ItemContainer {
         description.position.set(detailsMargin, detailsMargin * 2 + nameFontSize);
         detailsForeground.addChild(description);
 
-        // Temporary hardcoded link
+        // Temporary hardcoded link and buttons
         if (level == 0 && i == 0) {
             var link = this.createLink("Nokia website", "https://nokia.com", {fontSize: 12, fill: 0x0000ff}, true);
             link.position.set(detailsMargin, description.position.y + description.height + 10);
             detailsForeground.addChild(link);
         }
+
+        var btnG = new PIXI.Graphics();
+        btnG.lineStyle(1, 0x888888);
+        btnG.beginFill(0x44cc44);
+        btnG.drawRoundedRect(0, 0, 70, 26, 5);
+        btnG.endFill();
+
+        var btn1 = new PIXI.Sprite(btnG.generateTexture());
+        btn1.interactive = true;
+        btn1.buttonMode = true;
+        btn1.position.set(detailsMargin + 10, description.position.y + description.height + 10);
+        detailsForeground.addChild(btn1);
+
+        var txt1 = new PIXI.Text("OFFER", {fontSize: 14, fill: 0x000000});
+        txt1.anchor.set(0.5, 0.5);
+        txt1.position.set(detailsMargin + 10 + 35, description.position.y + description.height + 10 + 13);
+        detailsForeground.addChild(txt1);
+
+        var btn2 = new PIXI.Sprite(btnG.generateTexture());
+        btn2.interactive = true;
+        btn2.buttonMode = true;
+        btn2.anchor.set(1, 0);
+        btn2.position.set(detailsWidth - detailsMargin - 10, description.position.y + description.height + 10);
+        detailsForeground.addChild(btn2);
+
+        var txt2 = new PIXI.Text("REQUEST", {fontSize: 14, fill: 0x000000});
+        txt2.anchor.set(0.5, 0.5);
+        txt2.position.set(detailsWidth - detailsMargin - 10 - 35, description.position.y + description.height + 10 + 13);
+        detailsForeground.addChild(txt2);
         //
 
         var detailsBackground = new PIXI.Graphics();
