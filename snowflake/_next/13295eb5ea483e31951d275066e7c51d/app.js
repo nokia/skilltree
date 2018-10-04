@@ -22473,7 +22473,25 @@ webpackJsonp([0], [function(e, t, n) {
                             display: "block",
                             margin: "auto"
                         }
-                    }, I.default.createElement("div", {
+                    }, I.default.createElement(m.default, {
+                        styleId: "2126963245",
+                        css: ["body{font-family:Helvetica;}", "main{width:960px;margin:0 auto;}", ".name-input{border:none;display:block;border-bottom:2px solid #fff;font-size:30px;line-height:40px;font-weight:bold;width:380px;margin-bottom:10px;}", ".name-input:hover,.name-input:focus{border-bottom:2px solid #ccc;outline:0;}", "a{color:#888;text-decoration:none;}"]
+                    }), I.default.createElement("div", {
+                        style: {
+                            margin: "19px auto 0",
+                            width: 142
+                        },
+                        className: "jsx-2126963245"
+                    }, I.default.createElement("a", {
+                        href: "login.html",
+                        target: "_blank",
+                        className: "jsx-2126963245"
+                    }, I.default.createElement("img", {
+                        src: "title.png",
+                        width: 461,
+                        height: 100,
+                    })))
+                    , I.default.createElement("div", {
                         style: {
                             display: "flex"
                         },
