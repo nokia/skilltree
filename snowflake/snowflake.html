@@ -172,6 +172,10 @@
         ul.jsx-2815140849 {
             line-height: 1.5em;
         }
+
+        optgroup {
+            font-size:16px;
+        }
     </style>
 </head>
 
@@ -179,10 +183,12 @@
         
   <div id = "tree_visit">
       <select id = "tree_visit_ID">
+        <optgroup>
         <option value="0">Manager Tree</option>
         <option value="1">Web Developer Tree</option>
+        </optgroup>
       </select>
-      <button onclick="onChooseTreeClick()">Visit a tree!</button>
+      <button onclick="onChooseTreeClick()" style = "height:50px; width:140px; font-size: 16pt;">Visit a tree!</button>
     </form>
   </div>
 
