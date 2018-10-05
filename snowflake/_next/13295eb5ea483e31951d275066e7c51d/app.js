@@ -22519,7 +22519,7 @@ webpackJsonp([0], [function(e, t, n) {
                         className: "jsx-2126963245"
                     }, I.default.createElement("a", {
                         href: "index.html",
-                        target: "_blank",
+                        target: "_self",
                         className: "jsx-2126963245"
                     }, I.default.createElement("img", {
                         src: "title.png",

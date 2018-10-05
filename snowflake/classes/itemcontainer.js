@@ -16,7 +16,7 @@ export class ItemContainer {
         this.skillborder.levelinfo = new PIXI.Text(this.skillData.skill_level + "/" + this.skillData.max_skill_level);
 
         //Creating details page
-        var detailsWidth = 200;
+        var detailsWidth = 240;
         var detailsMargin = 10;
         var nameFontSize = 20;
         var descriptionFontSize = 12;
@@ -33,12 +33,6 @@ export class ItemContainer {
         detailsForeground.addChild(description);
 
         // Temporary hardcoded link and buttons
-        if (level == 0 && i == 0) {
-            var link = this.createLink("Nokia website", "https://nokia.com", {fontSize: 12, fill: 0x0000ff}, true);
-            link.position.set(detailsMargin, description.position.y + description.height + 10);
-            detailsForeground.addChild(link);
-        }
-
         var btnG = new PIXI.Graphics();
         btnG.lineStyle(1, 0x888888);
         btnG.beginFill(0x44cc44);
@@ -48,25 +42,35 @@ export class ItemContainer {
         var btn1 = new PIXI.Sprite(btnG.generateTexture());
         btn1.interactive = true;
         btn1.buttonMode = true;
-        btn1.position.set(detailsMargin + 10, description.position.y + description.height + 10);
+        btn1.position.set(detailsMargin + 20, description.position.y + description.height + 10);
         detailsForeground.addChild(btn1);
 
         var txt1 = new PIXI.Text("OFFER", {fontSize: 14, fill: 0x000000});
         txt1.anchor.set(0.5, 0.5);
-        txt1.position.set(detailsMargin + 10 + 35, description.position.y + description.height + 10 + 13);
+        txt1.position.set(detailsMargin + 10 + 45, description.position.y + description.height + 10 + 13);
         detailsForeground.addChild(txt1);
+        txt1.interactive = true;
+        txt1.buttonMode = true;
 
         var btn2 = new PIXI.Sprite(btnG.generateTexture());
         btn2.interactive = true;
         btn2.buttonMode = true;
         btn2.anchor.set(1, 0);
-        btn2.position.set(detailsWidth - detailsMargin - 10, description.position.y + description.height + 10);
+        btn2.position.set(detailsWidth - detailsMargin - 20, description.position.y + description.height + 10);
         detailsForeground.addChild(btn2);
 
         var txt2 = new PIXI.Text("REQUEST", {fontSize: 14, fill: 0x000000});
         txt2.anchor.set(0.5, 0.5);
-        txt2.position.set(detailsWidth - detailsMargin - 10 - 35, description.position.y + description.height + 10 + 13);
+        txt2.position.set(detailsWidth - detailsMargin - 10 - 45, description.position.y + description.height + 10 + 13);
         detailsForeground.addChild(txt2);
+        txt2.interactive = true;
+        txt2.buttonMode = true;
+
+        if (level == 0 && i == 0) {
+            var link = this.createLink("Nokia website", "https://nokia.com", {fontSize: 12, fill: 0x0000ff}, true);
+            link.position.set(detailsMargin, txt1.position.y + txt1.height + 7);
+            detailsForeground.addChild(link);
+        }
         //
 
         var detailsBackground = new PIXI.Graphics();
@@ -206,10 +210,10 @@ export class ItemContainer {
         container.addChild(details);
         container.zOrder = 0;
 
+        this.parentObj.app.renderer.render(this.parentObj.app.stage);
+
         if(skillborder.skill_level == skillborder.max_skill_level) return;
         skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFFBF00, 1)];
-
-        this.parentObj.app.renderer.render(this.parentObj.app.stage);
     }
 
     onButtonOut() {
@@ -222,10 +226,10 @@ export class ItemContainer {
         container.removeChild(details);
         container.zOrder = 1;
 
+        this.parentObj.app.renderer.render(this.parentObj.app.stage);
+
         if(skillborder.skill_level == skillborder.max_skill_level) return;
         skillborder.filters = null;
-
-        this.parentObj.app.renderer.render(this.parentObj.app.stage);
     }
 
     enable () {
