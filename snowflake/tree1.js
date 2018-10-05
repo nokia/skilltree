@@ -9,7 +9,7 @@ var app = new PIXI.Application(
         height: window.innerHeight,
         backgroundColor: 0x000000,
         antialias: true,
-        autoStart: false, // TODO false and rendering only when needed
+        autoStart: true, // TODO false and rendering only when needed
     }
 );
 
