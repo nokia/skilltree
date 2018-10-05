@@ -165,7 +165,6 @@ function init () {
     backButton.buttonMode = true;
     backButton.on('pointerdown', function() { window.open('snowflake.html', "_self"); })
 
-
     app.stage.addChild(backButton);
 
 
