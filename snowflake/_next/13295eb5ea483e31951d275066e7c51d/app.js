@@ -10,6 +10,20 @@ function showToast() {
     }, 3000);
 }
 
+function onChooseTreeClick()
+{
+    var operationType = $("#tree_visit_ID").val();
+    if(operationType == 0)
+        return window.open('tree0.html', '_self');
+
+    if(operationType == 1)
+        return window.open('tree1.html', '_self');
+
+    //return window.open('tree0.html', '_self');
+    
+    //
+}
+
 ! function(e) {
     function n(r) {
         if (t[r]) return t[r].exports;

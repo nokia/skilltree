@@ -153,10 +153,12 @@ class Tree {
 }
 
 function init () {
-    var tree = new Tree(allData[0], 0, 30);
+    var tree = new Tree(allData[1], 0, 30);
     app.stage.addChild(tree.treeContainer);
     app.renderer.render(app.stage);
 }
+
+
 
 // Shows and then removes welcome message
 function showToast() {
