@@ -1,4 +1,4 @@
-showToast();
+//showToast();
 
 function showToast() {
     var toast = document.getElementById("toast");
@@ -22504,7 +22504,7 @@ webpackJsonp([0], [function(e, t, n) {
                         },
                         className: "jsx-2126963245"
                     }, I.default.createElement("a", {
-                        href: "login.html",
+                        href: "index.html",
                         target: "_blank",
                         className: "jsx-2126963245"
                     }, I.default.createElement("img", {
