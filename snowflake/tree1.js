@@ -13,6 +13,10 @@ var app = new PIXI.Application(
     }
 );
 
+//Back button
+
+
+
 var imgs = new Array();
 for (var i = 0; i < allData.length; ++i) {
     for (var j = 0; j < allData[i].length; ++j) {
@@ -155,6 +159,16 @@ class Tree {
 function init () {
     var tree = new Tree(allData[1], 0, 30);
     app.stage.addChild(tree.treeContainer);
+
+    var backButton = new PIXI.Sprite.fromImage("pictures/back.png");
+    backButton.interactive = true;
+    backButton.buttonMode = true;
+    backButton.on('pointerdown', function() { window.open('snowflake.html', "_self"); })
+
+
+    app.stage.addChild(backButton);
+
+
     app.renderer.render(app.stage);
 }
 
