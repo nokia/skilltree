@@ -10,9 +10,9 @@ function showToast() {
     }, 3000);
 }
 
-function onChooseTreeClick()
+function onChooseTreeClick(option)
 {
-    var operationType = $("#tree_visit_ID").val();
+    var operationType = option;//$("#tree_visit_ID").val();
     if(operationType == 0)
         return window.open('tree0.html', '_self');
 
@@ -20,7 +20,7 @@ function onChooseTreeClick()
         return window.open('tree1.html', '_self');
 
     //return window.open('tree0.html', '_self');
-    
+
     //
 }
 
