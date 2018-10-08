@@ -17,61 +17,58 @@ document.body.appendChild(app.view);
 
 
 // draw a shape
-var x = window.innerWidth/2;
-var y = window.innerHeight/2;
-var width = 8;
+var x = window.innerWidth / 2;
+var y = window.innerHeight / 2;
+var sliceCount = 8;
+
+var width = 240;
 var h1 = 60;
-var h2 = 300;
+var h2 = h1 + width;
 
 
+for (var i = 0; i < sliceCount; i++) {
+    h2 = h1 + width;
+    var s = (i * (360 / sliceCount) * Math.PI) / 180;
+    var e = ((i + 1) * (360 / sliceCount) * Math.PI) / 180;
 
+    var slice = new PIXI.Graphics();
+    slice.lineStyle(3, 0x000000);
 
+    slice.moveTo(x + Math.cos(e) * h1, y + Math.sin(e) * h1);
+    slice.beginFill(0xFFFFFF);
+    slice.arc(x, y, h1, e, s, true);
+    slice.arc(x, y, h2, s, e, false);
+    slice.lineTo(x + Math.cos(e) * h1, y + Math.sin(e) * h1);
+    slice.endFill();
 
+    app.stage.addChild(slice);
 
-for(var i = 0; i < width; i++)
-{
-  var s = (i * (360 / width) * Math.PI) / 180;
-  var e = ((i + 1) * (360 / width) * Math.PI) / 180;
-  
-  var slice = new PIXI.Graphics();
-  slice.lineStyle(3, 0x000000);
+    //generating random percent
+    var percent = Math.random();
 
-  slice.moveTo(x + Math.cos(e) * h1, y + Math.sin(e) * h1);
-  slice.beginFill(0xFFFFFF);
-  slice.arc(x, y, h1, e, s, true);
-  slice.arc(x, y, h2, s, e, false);
-  slice.lineTo(x + Math.cos(e) * h1, y + Math.sin(e) * h1);
-  slice.endFill();
+    h2 = h1 + (width * percent);
+    console.log(h2);
+    var innerSlice = new PIXI.Graphics();
+    innerSlice.lineStyle(3, 0x000000);
+    innerSlice.moveTo(x + Math.cos(e) * h1, y + Math.sin(e) * h1);
+    innerSlice.beginFill(0xFF0000);
+    innerSlice.arc(x, y, h1, e, s, true);
+    innerSlice.arc(x, y, h2, s, e, false);
+    innerSlice.lineTo(x + Math.cos(e) * h1, y + Math.sin(e) * h1);
+    innerSlice.endFill();
 
-  app.stage.addChild(slice);
+    app.stage.addChild(innerSlice);
+
 }
 
 
-h1 = 60;
-h2 = 230;
 
-for(var i = 0; i < width; i++)
-{
-    h2 = 60+  i*25;
-  var s = (i * (360 / width) * Math.PI) / 180;
-  var e = ((i + 1) * (360 / width) * Math.PI) / 180;
-  
-  var slice = new PIXI.Graphics();
-  slice.lineStyle(3, 0x000000);
 
-  slice.moveTo(x + Math.cos(e) * h1, y + Math.sin(e) * h1);
-  slice.beginFill(0xFF0000);
-  slice.arc(x, y, h1, e, s, true);
-  slice.arc(x, y, h2, s, e, false);
-  slice.lineTo(x + Math.cos(e) * h1, y + Math.sin(e) * h1);
-  slice.endFill();
 
-  app.stage.addChild(slice);
-}
 
 var logo = new PIXI.Sprite.fromImage("../tree.png");
-logo.anchor.set(0.5,0.5);
-logo.position.set(window.innerWidth/2, window.innerHeight/2);
+logo.anchor.set(0.5, 0.5);
+logo.position.set(window.innerWidth / 2, window.innerHeight / 2);
 logo.scale.set(0.42);
 app.stage.addChild(logo);
 
