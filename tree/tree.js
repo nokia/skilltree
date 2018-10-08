@@ -7,15 +7,11 @@ var app = new PIXI.Application(
         view: pixiCanvas,
         width: window.innerWidth,
         height: window.innerHeight,
-        backgroundColor: 0x000000,
+        backgroundColor: 0x183693,
         antialias: true,
         autoStart: true, // TODO false and rendering only when needed
     }
 );
-
-//Back button
-
-
 
 var imgs = new Array();
 for (var i = 0; i < allData.length; ++i) {
@@ -160,6 +156,7 @@ function init () {
     var tree = new Tree(allData[1], 0, 30);
     app.stage.addChild(tree.treeContainer);
 
+    // back button
     var backButton = new PIXI.Sprite.fromImage("pictures/back.png");
     backButton.interactive = true;
     backButton.buttonMode = true;
