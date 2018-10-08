@@ -1,8 +1,7 @@
 var app = new PIXI.Application({
     width: window.innerWidth,
     height: window.innerHeight,
-    backgroundColor: 0xFFFFFF,
-    transparent: true,
+    backgroundColor: 0x183693,
     antialias: true,
     autoStart: true,
 
@@ -10,22 +9,44 @@ var app = new PIXI.Application({
 
 document.body.appendChild(app.view);
 
-var percent = 0.7;
-var constant = 250;
-
-var pixiCircle1 = new PIXI.Graphics();
-pixiCircle1.lineStyle(constant, 0x000000);  //(thickness, color)
-//pixiCircle.drawCircle(window.innerWidth/2, window.innerHeight/2, 200);   //(x,y,radius)
-pixiCircle1.arc(window.innerWidth/2, window.innerHeight/2, constant/2 + 50, 0, Math.PI/8);
-app.stage.addChild(pixiCircle1);
-
-var pixiCircle2 = new PIXI.Graphics();
-pixiCircle2.lineStyle(constant*percent, 0xFF0000);  //(thickness, color)
-//pixiCircle.drawCircle(window.innerWidth/2, window.innerHeight/2, 200);   //(x,y,radius)
-pixiCircle2.arc(window.innerWidth/2, window.innerHeight/2, (constant*percent)/2 + 50, Math.PI/8, Math.PI/8*2);
 
 
-app.stage.addChild(pixiCircle2);
+
+// set a fill and line style
+
+
+
+// draw a shape
+var x = window.innerWidth/2;
+var y = window.innerHeight/2;
+var width = 8;
+var h1 = 100;
+var h2 = 300;
+
+var slices = new Array(width);
+
+for(var i = 0; i < width; i++)
+{
+  var s = (i * (360 / width) * Math.PI) / 180;
+  var e = ((i + 1) * (360 / width) * Math.PI) / 180;
+  
+  var slice = new PIXI.Graphics();
+  slice.lineStyle(7, 0x000000);
+
+  slice.moveTo(x + Math.cos(e) * h1, y + Math.sin(e) * h1);
+  slice.beginFill(0xFF3300);
+  slice.arc(x, y, h1, e, s, true);
+  slice.arc(x, y, h2, s, e, false);
+  slice.lineTo(x + Math.cos(e) * h1, y + Math.sin(e) * h1);
+  slice.endFill();
+
+  slices[i]=slice;
+
+  app.stage.addChild(slices[i]);
+}
+
+
+
 
 
 
