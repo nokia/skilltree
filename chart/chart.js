@@ -10,6 +10,8 @@ var app = new PIXI.Application({
 document.body.appendChild(app.view);
 
 
+var container = new PIXI.Container();
+
 
 
 // set a fill and line style
@@ -25,8 +27,12 @@ var width = 240;
 var h1 = 60;
 var h2 = h1 + width;
 
+var sliceContainer = new Array(sliceCount);
 
 for (var i = 0; i < sliceCount; i++) {
+
+    var tempContainer = new PIXI.Container();
+
     h2 = h1 + width;
     var s = (i * (360 / sliceCount) * Math.PI) / 180;
     var e = ((i + 1) * (360 / sliceCount) * Math.PI) / 180;
@@ -39,15 +45,18 @@ for (var i = 0; i < sliceCount; i++) {
     slice.arc(x, y, h1, e, s, true);
     slice.arc(x, y, h2, s, e, false);
     slice.lineTo(x + Math.cos(e) * h1, y + Math.sin(e) * h1);
+    slice.alpha = 0.9;
     slice.endFill();
 
-    app.stage.addChild(slice);
+    tempContainer.addChild(slice);
+    
+
+    //app.stage.addChild(slice);
 
     //generating random percent
     var percent = Math.random();
 
     h2 = h1 + (width * percent);
-    console.log(h2);
     var innerSlice = new PIXI.Graphics();
     innerSlice.lineStyle(3, 0x000000);
     innerSlice.moveTo(x + Math.cos(e) * h1, y + Math.sin(e) * h1);
@@ -55,11 +64,24 @@ for (var i = 0; i < sliceCount; i++) {
     innerSlice.arc(x, y, h1, e, s, true);
     innerSlice.arc(x, y, h2, s, e, false);
     innerSlice.lineTo(x + Math.cos(e) * h1, y + Math.sin(e) * h1);
+    innerSlice.alpha = 0.9;
     innerSlice.endFill();
 
-    app.stage.addChild(innerSlice);
+    tempContainer.addChild(innerSlice);
 
+    //app.stage.addChild(innerSlice);
+    sliceContainer[i] = tempContainer;
+    sliceContainer[i].buttonMode = true;
+    sliceContainer[i].interactive = true;
+
+    sliceContainer[i]
+                .on('pointerover', function() { this.alpha = 1.2 })
+                .on('pointerout', function() { this.alpha = 0.9; })
+                .on('pointerdown', function() { window.open('../tree/tree.html', '_self') })
+
+    app.stage.addChild(sliceContainer[i]);
 }
+
 
 
 

@@ -1,41 +1,6 @@
-//import { Tree } from './classes/treeClass.js';
-import { ItemContainer } from './classes/itemcontainer.js';
+import { ItemContainer } from './itemcontainer.js';
 
-var allData = dataJson;
-
-var app = new PIXI.Application(
-    {
-        view: pixiCanvas,
-        width: window.innerWidth,
-        height: window.innerHeight,
-        backgroundColor: 0x183693,
-        antialias: true,
-        autoStart: true, // TODO false and rendering only when needed
-    }
-);
-
-var imgs = new Array();
-for (var i = 0; i < allData.length; ++i) {
-    for (var j = 0; j < allData[i].length; ++j) {
-        for (var k = 0; k < allData[i][j].length; ++k) {
-            if (!imgs.includes(allData[i][j][k].skillicon)) {
-                imgs.push(allData[i][j][k].skillicon);
-                PIXI.loader.add(allData[i][j][k].skillicon.toString());
-            }
-        }
-    }
-}
-PIXI.loader.add("pictures/skillborder.png");
-PIXI.loader.load(init);
-
-app.stage = new PIXI.display.Stage();
-app.stage.group.enableSort = true;
-
-app.stage.buttonMode = true;
-
-
-//TO BE MOVED AND REMOVED
-class Tree {
+export class Tree {
     constructor (data, posX, posY) {
         this.data = data;
         this.treeContainer = new PIXI.Container();
@@ -153,33 +118,4 @@ class Tree {
             );
         }
     }
-}
-
-function init () {
-    var tree = new Tree(allData[1], 0, 30, app.stage);
-    app.stage.addChild(tree.treeContainer);
-
-    // back button
-    var backButton = new PIXI.Sprite.fromImage("pictures/back.png");
-    backButton.interactive = true;
-    backButton.buttonMode = true;
-    backButton.on('pointerdown', function() { window.open('../chart/chart.html', "_self"); })
-
-    app.stage.addChild(backButton);
-
-
-    app.renderer.render(app.stage);
-}
-
-
-
-// Shows and then removes welcome message
-function showToast() {
-    var toast = document.getElementById("toast");
-
-    toast.className = "show";
-
-    setTimeout(function(){
-        toast.className = ""
-    }, 3000);
 }
