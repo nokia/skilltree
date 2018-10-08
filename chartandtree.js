@@ -1,4 +1,4 @@
-import { ItemContainer } from './classes/itemcontainer.js';
+import { ItemContainer } from './tree/classes/itemcontainer.js';
 
 var allData = dataJson;
 
@@ -24,7 +24,9 @@ for (var i = 0; i < allData.length; ++i) {
         }
     }
 }
-PIXI.loader.add("pictures/skillborder.png");
+PIXI.loader.add("pictures/skillborder.png")
+            .add("tree.png")
+            .add("pictures/back.png");
 PIXI.loader.load(showChart);
 
 app.stage = new PIXI.display.Stage();
@@ -32,7 +34,59 @@ app.stage.group.enableSort = true;
 
 // CHART
 
+function showChart() {
+    var x = window.innerWidth / 2;
+    var y = window.innerHeight / 2;
+    var sliceCount = 8;
 
+    var width = 240;
+    var h1 = 60;
+    var h2 = h1 + width;
+
+
+    for (var i = 0; i < sliceCount; i++) {
+        h2 = h1 + width;
+        var s = (i * (360 / sliceCount) * Math.PI) / 180;
+        var e = ((i + 1) * (360 / sliceCount) * Math.PI) / 180;
+
+        var slice = new PIXI.Graphics();
+        slice.lineStyle(3, 0x000000);
+
+        slice.moveTo(x + Math.cos(e) * h1, y + Math.sin(e) * h1);
+        slice.beginFill(0xFFFFFF);
+        slice.arc(x, y, h1, e, s, true);
+        slice.arc(x, y, h2, s, e, false);
+        slice.lineTo(x + Math.cos(e) * h1, y + Math.sin(e) * h1);
+        slice.endFill();
+
+        app.stage.addChild(slice);
+
+        //generating random percent
+        var percent = Math.random();
+
+        h2 = h1 + (width * percent);
+        console.log(h2);
+        var innerSlice = new PIXI.Graphics();
+        innerSlice.lineStyle(3, 0x000000);
+        innerSlice.moveTo(x + Math.cos(e) * h1, y + Math.sin(e) * h1);
+        innerSlice.beginFill(0xFF0000);
+        innerSlice.arc(x, y, h1, e, s, true);
+        innerSlice.arc(x, y, h2, s, e, false);
+        innerSlice.lineTo(x + Math.cos(e) * h1, y + Math.sin(e) * h1);
+        innerSlice.endFill();
+
+        app.stage.addChild(innerSlice);
+
+    }
+
+    var logo = new PIXI.Sprite(PIXI.loader.resources["tree.png"].texture);
+    logo.anchor.set(0.5, 0.5);
+    logo.position.set(window.innerWidth / 2, window.innerHeight / 2);
+    logo.scale.set(0.42);
+    app.stage.addChild(logo);
+
+    showTree(0);
+}
 
 // TREE
 
@@ -163,7 +217,7 @@ function showTree (treeID) {
     app.stage.addChild(tree.treeContainer);
 
     // back button
-    var backButton = new PIXI.Sprite.fromImage("pictures/back.png");
+    var backButton = new PIXI.Sprite(PIXI.loader.resources["pictures/back.png"].texture);
     backButton.interactive = true;
     backButton.buttonMode = true;
     backButton.on('pointerdown', function() {
