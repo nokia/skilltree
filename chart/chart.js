@@ -13,19 +13,19 @@ document.body.appendChild(app.view);
 var percent = 0.7;
 var constant = 250;
 
-var pixiCircle = new PIXI.Graphics();
-pixiCircle.lineStyle(constant, 0x000000);  //(thickness, color)
+var pixiCircle1 = new PIXI.Graphics();
+pixiCircle1.lineStyle(constant, 0x000000);  //(thickness, color)
 //pixiCircle.drawCircle(window.innerWidth/2, window.innerHeight/2, 200);   //(x,y,radius)
-pixiCircle.arc(window.innerWidth/2, window.innerHeight/2, constant/2 + 50, 0, Math.PI/8);
-app.stage.addChild(pixiCircle);
+pixiCircle1.arc(window.innerWidth/2, window.innerHeight/2, constant/2 + 50, 0, Math.PI/8);
+app.stage.addChild(pixiCircle1);
 
-var pixiCircle = new PIXI.Graphics();
-pixiCircle.lineStyle(constant*percent, 0xFF0000);  //(thickness, color)
+var pixiCircle2 = new PIXI.Graphics();
+pixiCircle2.lineStyle(constant*percent, 0xFF0000);  //(thickness, color)
 //pixiCircle.drawCircle(window.innerWidth/2, window.innerHeight/2, 200);   //(x,y,radius)
-pixiCircle.arc(window.innerWidth/2, window.innerHeight/2, (constant*percent)/2 + 50, Math.PI/8, Math.PI/8*2);
+pixiCircle2.arc(window.innerWidth/2, window.innerHeight/2, (constant*percent)/2 + 50, Math.PI/8, Math.PI/8*2);
 
 
-app.stage.addChild(pixiCircle);
+app.stage.addChild(pixiCircle2);
 
 
 
