@@ -5,21 +5,24 @@ var app = new PIXI.Application({
     transparent: true,
     antialias: true,
     autoStart: true,
-    
+
 });
 
 document.body.appendChild(app.view);
 
+var percent = 0.7;
+var constant = 250;
+
 var pixiCircle = new PIXI.Graphics();
-pixiCircle.lineStyle(250, 0x000000);  //(thickness, color)
+pixiCircle.lineStyle(constant, 0x000000);  //(thickness, color)
 //pixiCircle.drawCircle(window.innerWidth/2, window.innerHeight/2, 200);   //(x,y,radius)
-pixiCircle.arc(window.innerWidth/2, window.innerHeight/2, 200, 0, Math.PI/8);
+pixiCircle.arc(window.innerWidth/2, window.innerHeight/2, constant/2 + 50, 0, Math.PI/8);
 app.stage.addChild(pixiCircle);
 
 var pixiCircle = new PIXI.Graphics();
-pixiCircle.lineStyle(250*0.6, 0xFF0000);  //(thickness, color)
+pixiCircle.lineStyle(constant*percent, 0xFF0000);  //(thickness, color)
 //pixiCircle.drawCircle(window.innerWidth/2, window.innerHeight/2, 200);   //(x,y,radius)
-pixiCircle.arc(window.innerWidth/2, window.innerHeight/2, 200*(1-(0.6*0.4)), Math.PI/8, Math.PI/8*2);
+pixiCircle.arc(window.innerWidth/2, window.innerHeight/2, (constant*percent)/2 + 50, Math.PI/8, Math.PI/8*2);
 
 
 app.stage.addChild(pixiCircle);
