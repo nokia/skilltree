@@ -16,7 +16,7 @@ export class ItemContainer {
         this.skillborder.levelinfo = new PIXI.Text(this.skillData.skill_level + "/" + this.skillData.max_skill_level);
 
         //Creating details page
-        var detailsWidth = 200;
+        var detailsWidth = 240;
         var detailsMargin = 10;
         var nameFontSize = 20;
         var descriptionFontSize = 12;
@@ -32,10 +32,43 @@ export class ItemContainer {
         description.position.set(detailsMargin, detailsMargin * 2 + nameFontSize);
         detailsForeground.addChild(description);
 
-        // Temporary hardcoded link
+        // Temporary hardcoded link and buttons
+        var btnG = new PIXI.Graphics();
+        btnG.lineStyle(1, 0x888888);
+        btnG.beginFill(0x44cc44);
+        btnG.drawRoundedRect(0, 0, 70, 26, 5);
+        btnG.endFill();
+
+        var btn1 = new PIXI.Sprite(btnG.generateTexture());
+        btn1.interactive = true;
+        //btn1.buttonMode = true;
+        btn1.position.set(detailsMargin + 20, description.position.y + description.height + 10);
+        detailsForeground.addChild(btn1);
+
+        var txt1 = new PIXI.Text("OFFER", {fontSize: 14, fill: 0x000000});
+        txt1.anchor.set(0.5, 0.5);
+        txt1.position.set(detailsMargin + 10 + 45, description.position.y + description.height + 10 + 13);
+        detailsForeground.addChild(txt1);
+        txt1.interactive = true;
+        //txt1.buttonMode = true;
+
+        var btn2 = new PIXI.Sprite(btnG.generateTexture());
+        btn2.interactive = true;
+        //btn2.buttonMode = true;
+        btn2.anchor.set(1, 0);
+        btn2.position.set(detailsWidth - detailsMargin - 20, description.position.y + description.height + 10);
+        detailsForeground.addChild(btn2);
+
+        var txt2 = new PIXI.Text("REQUEST", {fontSize: 14, fill: 0x000000});
+        txt2.anchor.set(0.5, 0.5);
+        txt2.position.set(detailsWidth - detailsMargin - 10 - 45, description.position.y + description.height + 10 + 13);
+        detailsForeground.addChild(txt2);
+        txt2.interactive = true;
+        //txt2.buttonMode = true;
+
         if (level == 0 && i == 0) {
             var link = this.createLink("Nokia website", "https://nokia.com", {fontSize: 12, fill: 0x0000ff}, true);
-            link.position.set(detailsMargin, description.position.y + description.height + 10);
+            link.position.set(detailsMargin, txt1.position.y + txt1.height + 7);
             detailsForeground.addChild(link);
         }
         //
@@ -89,22 +122,7 @@ export class ItemContainer {
             // Enable children which doesn't have other parents with 0 skill level
             var children = this.parentObj.skillData.children;
 
-            for (var k = 0; children !== undefined && k < children.length; ++k) {
-                var child = this.parentObj.data[children[k].level][children[k].i];
-
-                for (var j = 0; child.zeroSLParents !== undefined && j < child.zeroSLParents.length; ++j) {
-                    if (child.zeroSLParents[j].level == this.parentObj.level && child.zeroSLParents[j].i == this.parentObj.i) {
-                        child.zeroSLParents.splice(j, 1);
-
-                        if (child.zeroSLParents.length == 0) {
-                            child.itemcontainer.container.filters = null;
-                            child.itemcontainer.container.interactive = true;
-                            child.itemcontainer.skillborder.interactive = true;
-                            child.itemcontainer.skillborder.buttonMode = true;
-                        }
-                    }
-                }
-            }
+            this.parentObj.toggleChildren(children, true);
 
             // Increase skill level
             if (this.skill_level < this.max_skill_level) {
@@ -112,6 +130,7 @@ export class ItemContainer {
                 this.levelinfo.text = (this.skill_level + "/" + this.max_skill_level);
                 if (this.skill_level == this.max_skill_level) {
                     this.filters = [new PIXI.filters.GlowFilter(10, 4, 4, 0xFF4000, 1)];
+                    //this.parentObj.container.removeChild(this.parentObj.details);
                 }
             }
 
@@ -124,10 +143,40 @@ export class ItemContainer {
         if (this.skill_level == 1) {
             var children = this.parentObj.skillData.children;
 
-            if (children !== undefined) {
-                for (var k = 0; k < children.length; ++k) {
-                    var child = this.parentObj.data[children[k].level][children[k].i];
+            this.parentObj.toggleChildren (children, false);
+        }
 
+        // Decrease skill level
+        if(this.skill_level>0)
+        {
+            this.skill_level --;
+            this.levelinfo.text = (this.skill_level + "/" + this.max_skill_level);
+        } else return;
+
+        this.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFFBF00, 1)];
+
+        this.parentObj.app.renderer.render(this.parentObj.app.stage);
+    }
+
+    toggleChildren (children, enable) {
+        if (children !== undefined) {
+            for (var k = 0; k < children.length; ++k) {
+                var child = this.data[children[k].level][children[k].i];
+
+                if (enable) {
+                    for (var j = 0; child.zeroSLParents !== undefined && j < child.zeroSLParents.length; ++j) {
+                        if (child.zeroSLParents[j].level == this.level && child.zeroSLParents[j].i == this.i) {
+                            child.zeroSLParents.splice(j, 1);
+
+                            if (child.zeroSLParents.length == 0) {
+                                child.itemcontainer.container.filters = null;
+                                child.itemcontainer.container.interactive = true;
+                                child.itemcontainer.skillborder.interactive = true;
+                                child.itemcontainer.skillborder.buttonMode = true;
+                            }
+                        }
+                    }
+                } else {
                     if (child.zeroSLParents === undefined) {
                         child.zeroSLParents = new Array();
                     }
@@ -143,28 +192,19 @@ export class ItemContainer {
 
                     var newParent = true;
                     for (var j = 0; j < child.zeroSLParents.length; ++j) {
-                        if (child.zeroSLParents[j].level == this.parentObj.level && child.zeroSLParents[j].i == this.parentObj.i) {
+                        if (child.zeroSLParents[j].level == this.level && child.zeroSLParents[j].i == this.i) {
                             newParent = false;
                         }
                     }
                     if (newParent) {
-                        var parent = {level: this.parentObj.level, i: this.parentObj.i};
+                        var parent = {level: this.level, i: this.i};
                         child.zeroSLParents.push(parent);
                     }
                 }
+
+                this.toggleChildren (child.children, enable)
             }
         }
-
-        // Decrease skill level
-        if(this.skill_level>0)
-        {
-            this.skill_level --;
-            this.levelinfo.text = (this.skill_level + "/" + this.max_skill_level);
-        } else return;
-
-        this.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFFBF00, 1)];
-
-        this.parentObj.app.renderer.render(this.parentObj.app.stage);
     }
 
     onButtonOver() {
@@ -175,6 +215,8 @@ export class ItemContainer {
         // Brings up hovered container
         container.addChild(details);
         container.zOrder = 0;
+
+        this.parentObj.app.renderer.render(this.parentObj.app.stage);
 
         if(skillborder.skill_level == skillborder.max_skill_level) return;
         skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFFBF00, 1)];
@@ -189,6 +231,8 @@ export class ItemContainer {
 
         container.removeChild(details);
         container.zOrder = 1;
+
+        this.parentObj.app.renderer.render(this.parentObj.app.stage);
 
         if(skillborder.skill_level == skillborder.max_skill_level) return;
         skillborder.filters = null;
