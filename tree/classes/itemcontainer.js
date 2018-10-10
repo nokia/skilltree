@@ -7,7 +7,7 @@ export class ItemContainer {
         this.i = i;
 
         //Creating images
-        this.skillicon = new PIXI.Sprite(PIXI.loader.resources[this.skillData.skillicon].texture); //100x100
+        this.skillicon = new PIXI.Sprite(app.localLoader.resources[this.skillData.skillicon].texture); //100x100
         this.skillborder = new PIXI.Sprite(PIXI.loader.resources["pictures/skillborder.png"].texture); //116x116
 
         //Setting border variables

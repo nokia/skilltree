@@ -1,8 +1,6 @@
 import { ItemContainer } from './tree/classes/itemcontainer.js';
 
 var allData = dataJson;
-var sliceCount = 8;
-var sliceContainer = new Array(sliceCount);
 
 var app = new PIXI.Application(
     {
@@ -11,31 +9,25 @@ var app = new PIXI.Application(
         height: window.innerHeight,
         backgroundColor: 0x183693,
         antialias: true,
-        autoStart: true, // TODO false and rendering only when needed
+        autoStart: false,
     }
 );
 
-var imgs = new Array();
-for (var i = 0; i < allData.length; ++i) {
-    for (var j = 0; j < allData[i].length; ++j) {
-        for (var k = 0; k < allData[i][j].length; ++k) {
-            if (!imgs.includes(allData[i][j][k].skillicon)) {
-                imgs.push(allData[i][j][k].skillicon);
-                PIXI.loader.add(allData[i][j][k].skillicon.toString());
-            }
-        }
-    }
-}
 PIXI.loader.add("pictures/skillborder.png")
             .add("tree.png")
             .add("pictures/back.png");
-PIXI.loader.load(showChart);
+PIXI.loader.load(initChart);
 
 app.stage = new PIXI.display.Stage();
 app.stage.group.enableSort = true;
+
 // CHART
 
-function showChart() {
+var sliceCount = 8;
+var sliceContainer = new Array(sliceCount);
+var logo;
+
+function initChart() {
     var x = window.innerWidth / 2;
     var y = window.innerHeight / 2;
 
@@ -45,10 +37,24 @@ function showChart() {
     var h2 = h1 + width;
 
 
-    for (i = 0; i < sliceCount; i++) {
+    for (var i = 0; i < sliceCount; i++) {
+        var currentLevelSum = 0;
+        var maxLevelSum = 0;
+        var percent = 0;
 
-      var tempContainer = new PIXI.Container();
-      tempContainer.id = i;
+        if (i < 2) { // temporary, we have only 2 trees
+            for (var level = 0; level < allData[i].length; ++level) {
+                for (var j = 0; j < allData[i][level].length; ++j) {
+                    currentLevelSum += allData[i][level][j].skill_level;
+                    maxLevelSum += allData[i][level][j].max_skill_level;
+                }
+            }
+
+            percent = currentLevelSum / maxLevelSum;
+        } else percent = 0;
+
+        var tempContainer = new PIXI.Container();
+        tempContainer.id = i;
 
         h2 = h1 + width;
         var s = (i * (360 / sliceCount) * Math.PI) / 180;
@@ -65,9 +71,6 @@ function showChart() {
         slice.endFill();
 
         tempContainer.addChild(slice);
-
-        //generating random percent
-        var percent = Math.random();
 
         h2 = h1 + (width * percent);
         console.log(h2);
@@ -86,30 +89,48 @@ function showChart() {
         sliceContainer[i].buttonMode = true;
         sliceContainer[i].interactive = true;
 
-
-
         sliceContainer[i]
-                    .on('pointerover', function() { this.alpha = 1.2 })
-                    .on('pointerout', function() { this.alpha = 0.9; })
-                    .on('pointerdown', function() {showTree(this.id);})
-                    //.on('pointerdown', function() { console.log(this.id); })
+                    .on('pointerover', function() {
+                        this.alpha = 0.9;
+                        app.renderer.render(app.stage);
+                    })
+                    .on('pointerout', function() {
+                        this.alpha = 1.2;
+                        app.renderer.render(app.stage);
+                    })
+                    .on('pointerdown', function() {
+                        hideChart();
+                        showTree(this.id);
+                    });
 
         app.stage.addChild(sliceContainer[i]);
 
     }
 
-    var logo = new PIXI.Sprite(PIXI.loader.resources["tree.png"].texture);
+    logo = new PIXI.Sprite(PIXI.loader.resources["tree.png"].texture);
     logo.anchor.set(0.5, 0.5);
     logo.position.set(window.innerWidth / 2, window.innerHeight / 2);
     logo.scale.set(0.42);
     app.stage.addChild(logo);
 
+    app.renderer.render(app.stage);
+}
 
+function hideChart () {
+    for (var i = 0; i < sliceContainer.length; ++i) {
+        app.stage.removeChild(sliceContainer[i]);
+    }
+    app.stage.removeChild(logo);
+}
+
+function showChart () {
+    for (var i = 0; i < sliceContainer.length; ++i) {
+        app.stage.addChild(sliceContainer[i]);
+    }
+    app.stage.addChild(logo);
 }
 
 // TREE
-
-app.stage.buttonMode = true;
 
 class Tree {
     constructor (data, posX, posY) {
@@ -231,23 +252,36 @@ class Tree {
     }
 }
 
+// app.localLoader is a loader for skillicons (when a tree is opened, we load only that tree's skillicons)
+// PIXI.loader is global, it loads the back button, skillborder, tree, ...
+
 function showTree (treeID) {
-    var tree = new Tree(allData[treeID], 0, 30);
-    app.stage.addChild(tree.treeContainer);
+    app.localLoader = new PIXI.loaders.Loader();
+    for (var level = 0; level < allData[treeID].length; ++level) {
+        for (var i = 0; i < allData[treeID][level].length; ++i) {
+            app.localLoader.add(allData[treeID][level][i].skillicon.toString());
+        }
+    }
 
-    // back button
-    var backButton = new PIXI.Sprite(PIXI.loader.resources["pictures/back.png"].texture);
-    backButton.interactive = true;
-    backButton.buttonMode = true;
-    backButton.on('pointerdown', function() {
-        app.stage.removeChild(tree.treeContainer);
-        app.stage.removeChild(backButton);
+    app.localLoader.load(function () {
+        var tree = new Tree(allData[treeID], 0, 30);
+        app.stage.addChild(tree.treeContainer);
+
+        // back button
+        var backButton = new PIXI.Sprite(PIXI.loader.resources["pictures/back.png"].texture);
+        backButton.interactive = true;
+        backButton.buttonMode = true;
+        backButton.on('pointerdown', function() {
+            // hide tree and show chart
+            app.stage.removeChild(tree.treeContainer);
+            app.stage.removeChild(backButton);
+            app.localLoader.destroy();
+            showChart();
+            app.renderer.render(app.stage);
+        });
+
+        app.stage.addChild(backButton);
+
+        app.renderer.render(app.stage);
     });
-
-    app.stage.addChild(backButton);
-
-
-
-
-    app.renderer.render(app.stage);
 }
