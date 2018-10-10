@@ -1,4 +1,4 @@
-import { ItemContainer } from './tree/classes/itemcontainer.js';
+import { ItemContainer } from './classes/itemcontainer.js';
 
 var allData = dataJson;
 
