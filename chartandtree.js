@@ -1,6 +1,8 @@
 import { ItemContainer } from './tree/classes/itemcontainer.js';
 
 var allData = dataJson;
+var sliceCount = 8;
+var sliceContainer = new Array(sliceCount);
 
 var app = new PIXI.Application(
     {
@@ -31,20 +33,23 @@ PIXI.loader.load(showChart);
 
 app.stage = new PIXI.display.Stage();
 app.stage.group.enableSort = true;
-
 // CHART
 
 function showChart() {
     var x = window.innerWidth / 2;
     var y = window.innerHeight / 2;
-    var sliceCount = 8;
+
 
     var width = 240;
     var h1 = 60;
     var h2 = h1 + width;
 
 
-    for (var i = 0; i < sliceCount; i++) {
+    for (i = 0; i < sliceCount; i++) {
+
+      var tempContainer = new PIXI.Container();
+      tempContainer.id = i;
+
         h2 = h1 + width;
         var s = (i * (360 / sliceCount) * Math.PI) / 180;
         var e = ((i + 1) * (360 / sliceCount) * Math.PI) / 180;
@@ -59,7 +64,7 @@ function showChart() {
         slice.lineTo(x + Math.cos(e) * h1, y + Math.sin(e) * h1);
         slice.endFill();
 
-        app.stage.addChild(slice);
+        tempContainer.addChild(slice);
 
         //generating random percent
         var percent = Math.random();
@@ -75,7 +80,21 @@ function showChart() {
         innerSlice.lineTo(x + Math.cos(e) * h1, y + Math.sin(e) * h1);
         innerSlice.endFill();
 
-        app.stage.addChild(innerSlice);
+        tempContainer.addChild(innerSlice);
+
+        sliceContainer[i] = tempContainer;
+        sliceContainer[i].buttonMode = true;
+        sliceContainer[i].interactive = true;
+
+
+
+        sliceContainer[i]
+                    .on('pointerover', function() { this.alpha = 1.2 })
+                    .on('pointerout', function() { this.alpha = 0.9; })
+                    .on('pointerdown', function() {showTree(this.id);})
+                    //.on('pointerdown', function() { console.log(this.id); })
+
+        app.stage.addChild(sliceContainer[i]);
 
     }
 
@@ -85,7 +104,7 @@ function showChart() {
     logo.scale.set(0.42);
     app.stage.addChild(logo);
 
-    showTree(0);
+
 }
 
 // TREE
@@ -223,10 +242,11 @@ function showTree (treeID) {
     backButton.on('pointerdown', function() {
         app.stage.removeChild(tree.treeContainer);
         app.stage.removeChild(backButton);
-        showChart();
     });
 
     app.stage.addChild(backButton);
+
+
 
 
     app.renderer.render(app.stage);
