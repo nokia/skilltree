@@ -28,6 +28,8 @@ var sliceContainer = new Array(sliceCount);
 var logo;
 
 function initChart() {
+    document.getElementById("pixiCanvas").style.visibility = "visible";
+
     var x = window.innerWidth / 2;
     var y = window.innerHeight / 2;
 
@@ -36,6 +38,18 @@ function initChart() {
     var h1 = 60;
     var h2 = h1 + width;
 
+    /*
+    *
+    *
+    *
+     */
+    var titles = ['Management', 'Web Development', 'Communication', 'Wellbeing', 'Mobile', 'Server Administration', 'Databases', 'Category'];
+    /*
+    *
+    *
+    *
+    *
+     */
 
     for (var i = 0; i < sliceCount; i++) {
         var currentLevelSum = 0;
@@ -73,7 +87,6 @@ function initChart() {
         tempContainer.addChild(slice);
 
         h2 = h1 + (width * percent);
-        console.log(h2);
         var innerSlice = new PIXI.Graphics();
         innerSlice.lineStyle(3, 0x000000);
         innerSlice.moveTo(x + Math.cos(e) * h1, y + Math.sin(e) * h1);
@@ -103,8 +116,40 @@ function initChart() {
                         showTree(this.id);
                     });
 
-        app.stage.addChild(sliceContainer[i]);
+        /*
+        *
+        *
+        *  WIP titles
+        *
+        *
+         */
 
+        var text = new PIXI.Text(titles[i], {fill: '#ffffff'});
+
+        var points = [];
+        var radius = 320;
+        var s = (i * (360 / sliceCount) * Math.PI) / 180;
+        for (var j = 0; j < 20; j++) {
+            var px = radius * Math.cos(j * text.width / 250 / 20 * Math.PI * 2 / sliceCount + s);
+            var py = radius * Math.sin(j * text.width / 250 / 20 * Math.PI * 2 / sliceCount + s);
+            points.push(new PIXI.Point(px, py));
+        }
+
+        var rope = new PIXI.mesh.Rope(text.texture, points);
+        rope.rotation = (Math.PI * 2 / sliceCount - text.width / 250 * Math.PI * 2 / sliceCount) / 2;
+        app.stage.addChild(rope);
+        rope.position.set(window.innerWidth / 2, window.innerHeight / 2);
+        sliceContainer[i].title = rope;
+
+        /*
+        *
+        *
+        *
+        *
+        *
+         */
+
+        app.stage.addChild(sliceContainer[i]);
     }
 
     logo = new PIXI.Sprite(PIXI.loader.resources["tree.png"].texture);
@@ -119,6 +164,19 @@ function initChart() {
 function hideChart () {
     for (var i = 0; i < sliceContainer.length; ++i) {
         app.stage.removeChild(sliceContainer[i]);
+        /*
+        *
+        *
+        *
+        *
+         */
+        app.stage.removeChild(sliceContainer[i].title);
+        /*
+        *
+        *
+        *
+        *
+         */
     }
     app.stage.removeChild(logo);
 }
@@ -126,6 +184,20 @@ function hideChart () {
 function showChart () {
     for (var i = 0; i < sliceContainer.length; ++i) {
         app.stage.addChild(sliceContainer[i]);
+        /*
+        *
+        *
+        *
+        *
+         */
+        app.stage.addChild(sliceContainer[i].title);
+        /*
+        *
+        *
+        *
+        *
+        * 
+         */
     }
     app.stage.addChild(logo);
 }

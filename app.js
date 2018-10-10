@@ -9,7 +9,7 @@ function validate() {
 	if(username.value == "test" && password.value == "TEST") {
 		loginBox.style.display = "none";
 		showToast();
-		window.open("tree", "_self");
+		window.open("chartandtree.html", "_self");
 		return false;
 	}
 	else {

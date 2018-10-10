@@ -3,14 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Skill Tree</title>
-    <style>* {padding: 0; margin: 0}</style>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            background-color: #183693;
+            overflow: hidden;
+        }
+    </style>
     <script src="pixi/pixi.min.js"></script>
     <script src="pixi/pixi-extra-filters.js"></script>
     <script src="pixi/pixi-layers.js"></script>
-    <script src = "tree/data.json"></script>
+    <script src = "data.json"></script>
     <script type="module" src="chartandtree.js"></script>
 </head>
 <body>
-    <canvas id = "pixiCanvas"></canvas>
+    <canvas id = "pixiCanvas" style = "visibility: hidden;"></canvas>
 </body>
 </html>
