@@ -15,7 +15,8 @@ var app = new PIXI.Application(
 
 PIXI.loader.add("pictures/skillborder.png")
             .add("tree.png")
-            .add("pictures/back.png");
+            .add("pictures/back.png")
+            .add("pictures/tick.png");
 PIXI.loader.load(initChart);
 
 app.stage = new PIXI.display.Stage();
