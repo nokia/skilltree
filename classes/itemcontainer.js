@@ -9,6 +9,7 @@ export class ItemContainer {
         //Creating images
         this.skillicon = new PIXI.Sprite(app.localLoader.resources[this.skillData.skillicon].texture); //100x100
         this.skillborder = new PIXI.Sprite(PIXI.loader.resources["pictures/skillborder.png"].texture); //116x116
+        this.tick = new PIXI.Sprite(PIXI.loader.resources["pictures/tick.png"].texture )
 
         //Setting border variables
         this.skillborder.skill_level = this.skillData.skill_level;
@@ -17,7 +18,8 @@ export class ItemContainer {
 
         // if it's already maaxed out add the filter
         if (this.skillData.skill_level == this.skillData.max_skill_level) {
-            this.skillborder.filters = [new PIXI.filters.GlowFilter(10, 4, 4, 0xFF4000, 1)];
+            //this.skillborder.filters = [new PIXI.filters.GlowFilter(10, 4, 4, 0xFF4000, 1)];
+            this.container.addChild(this.tick);
         }
 
         //Creating details page
@@ -112,6 +114,7 @@ export class ItemContainer {
         this.container = new PIXI.Container();
         this.container.addChild(this.skillicon);
         this.container.addChild(this.skillborder);
+        
         this.container.addChild(this.skillborder.levelinfo);
         this.container.zOrder = 1;
 
@@ -119,15 +122,19 @@ export class ItemContainer {
         this.skillicon.anchor.set(0.5, 0.5);
         this.skillborder.anchor.set(0.5, 0.5);
         this.skillborder.levelinfo.anchor.set(0.5,0.5);
+        
 
         this.skillicon.position.set(60, 60);
         this.skillborder.position.set(60, 60);
+
         this.skillborder.levelinfo.position.set(96, 100);
         this.skillborder.levelinfo.scale.set(0.6);
-
         this.skillborder.levelinfo.style.fill = 0xFFFFFF;
 
         this.details.position.set(116, 0);
+
+        this.tick.anchor.set(0.5,0.5);
+        this.tick.position.set(60,60);
 
         //Adding events
         this.skillborder.interactive = true;
