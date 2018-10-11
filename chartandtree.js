@@ -105,6 +105,8 @@ function initChart() {
                         showTree(this.id);
                     });
 
+        app.stage.addChild(sliceContainer[i]);
+
         /*
         *
         *
@@ -117,11 +119,19 @@ function initChart() {
 
         var points = [];
         var radius = 320 + (text.height / 29 - 1) * 15;
-        var numOfPoints = 20;
-        for (var j = 0; j < numOfPoints; j++) {
-            var px = radius * Math.cos(j * Math.PI * 2 * text.width / 250 / numOfPoints / sliceCount + s);
-            var py = radius * Math.sin(j * Math.PI * 2 * text.width / 250 / numOfPoints / sliceCount + s);
-            points.push(new PIXI.Point(px, py));
+        var pointsCount = 20;
+        if (Math.floor(sliceCount / 2) <= i) {
+            for (var j = 0; j < pointsCount; j++) {
+                var px = radius * Math.cos(j * Math.PI * 2 * text.width / 250 / pointsCount / sliceCount + s);
+                var py = radius * Math.sin(j * Math.PI * 2 * text.width / 250 / pointsCount / sliceCount + s);
+                points.push(new PIXI.Point(px, py));
+            }
+        } else { // if title is in the bottom half
+            for (var j = pointsCount - 1; j > 0; --j) {
+                var px = radius * Math.cos(j * Math.PI * 2 * text.width / 250 / pointsCount / sliceCount + s);
+                var py = radius * Math.sin(j * Math.PI * 2 * text.width / 250 / pointsCount / sliceCount + s);
+                points.push(new PIXI.Point(px, py));
+            }
         }
 
         var rope = new PIXI.mesh.Rope(text.texture, points);
@@ -137,8 +147,6 @@ function initChart() {
         *
         *
          */
-
-        app.stage.addChild(sliceContainer[i]);
     }
 
     logo = new PIXI.Sprite(PIXI.loader.resources["tree.png"].texture);
