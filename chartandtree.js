@@ -122,20 +122,20 @@ function initChart() {
         var pointsCount = 20;
         if (Math.floor(sliceCount / 2) <= i) {
             for (var j = 0; j < pointsCount; j++) {
-                var px = radius * Math.cos(j * Math.PI * 2 * text.width / 250 / pointsCount / sliceCount + s);
-                var py = radius * Math.sin(j * Math.PI * 2 * text.width / 250 / pointsCount / sliceCount + s);
+                var px = radius * Math.cos(j * Math.PI * 2 * text.width / (250 * 8 / sliceCount) / pointsCount / sliceCount + s);
+                var py = radius * Math.sin(j * Math.PI * 2 * text.width / (250 * 8 / sliceCount) / pointsCount / sliceCount + s);
                 points.push(new PIXI.Point(px, py));
             }
-        } else { // if title is in the bottom half
+        } else {
             for (var j = pointsCount - 1; j > 0; --j) {
-                var px = radius * Math.cos(j * Math.PI * 2 * text.width / 250 / pointsCount / sliceCount + s);
-                var py = radius * Math.sin(j * Math.PI * 2 * text.width / 250 / pointsCount / sliceCount + s);
+                var px = radius * Math.cos(j * Math.PI * 2 * text.width / (250 * 8 / sliceCount) / pointsCount / sliceCount + s);
+                var py = radius * Math.sin(j * Math.PI * 2 * text.width / (250 * 8 / sliceCount) / pointsCount / sliceCount + s);
                 points.push(new PIXI.Point(px, py));
             }
         }
 
         var rope = new PIXI.mesh.Rope(text.texture, points);
-        rope.rotation = (Math.PI * 2 / sliceCount - text.width / 250 * Math.PI * 2 / sliceCount * 0.95) / 2;
+        rope.rotation = (Math.PI * 2 / sliceCount - text.width / (250 * 8 / sliceCount) * Math.PI * 2 / sliceCount * 0.95) / 2;
         app.stage.addChild(rope);
         rope.position.set(window.innerWidth / 2, window.innerHeight / 2);
         sliceContainer[i].title = rope;
@@ -330,3 +330,9 @@ function showTree (treeID) {
         app.renderer.render(app.stage);
     });
 }
+
+document.addEventListener("DOMMouseScroll", function (e) {
+    //zoom(e.clientX, e.clientY, e.deltaY < 0);
+    console.log(e);
+    console.log("ss");
+});
