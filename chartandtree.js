@@ -299,6 +299,8 @@ class Tree {
 // app.localLoader is a loader for skillicons (when a tree is opened, we load only that tree's skillicons)
 // PIXI.loader is global, it loads the back button, skillborder, tree, ...
 
+var tree = undefined;
+
 function showTree (treeID) {
     app.localLoader = new PIXI.loaders.Loader();
     for (var level = 0; level < allData[treeID].length; ++level) {
@@ -308,7 +310,7 @@ function showTree (treeID) {
     }
 
     app.localLoader.load(function () {
-        var tree = new Tree(allData[treeID], 0, 30);
+        tree = new Tree(allData[treeID], 0, 30);
         app.stage.addChild(tree.treeContainer);
 
         // back button
@@ -320,6 +322,7 @@ function showTree (treeID) {
             app.stage.removeChild(tree.treeContainer);
             app.stage.removeChild(backButton);
             app.localLoader.destroy();
+            tree = undefined;
             //showChart();
             initChart(); // we need to create the chart again because the levels could have chaged
             app.renderer.render(app.stage);
@@ -330,9 +333,37 @@ function showTree (treeID) {
         app.renderer.render(app.stage);
     });
 }
+// zooming
+/*
+var handleWheel = function (event)
+{
+    var e = window.event || event;
+    var delta = Math.max(-1, Math.min(1, e.wheelDelta || -e.detail));
 
-document.addEventListener("DOMMouseScroll", function (e) {
-    //zoom(e.clientX, e.clientY, e.deltaY < 0);
-    console.log(e);
-    console.log("ss");
-});
+    if (tree !== undefined) {
+        if (delta == 1 && tree.treeContainer.scale.x < 1) {
+            tree.treeContainer.scale.x += 0.05;
+            tree.treeContainer.scale.y += 0.05;
+        } else if (tree.treeContainer.scale.x > 0.5) {
+            tree.treeContainer.scale.x -= 0.05;
+            tree.treeContainer.scale.y -= 0.05;
+        }
+
+        app.renderer.render(app.stage);
+    }
+
+    e.preventDefault();
+};
+
+var addMouseWheelEventListener = function (scrollHandler)
+{
+    if (window.addEventListener) {
+        window.addEventListener("mousewheel", scrollHandler, false);
+        window.addEventListener("DOMMouseScroll", scrollHandler, false);
+    } else {
+        window.attachEvent("onmousewheel", scrollHandler);
+    }
+}
+
+addMouseWheelEventListener(handleWheel);
+*/

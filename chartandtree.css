@@ -23,3 +23,21 @@
   min-width: 198px;
   background-color: #FFF;
 }
+
+.headerButton{
+  float: left;
+  margin: 1px;
+  padding: 1px;
+  background-color: #EEE;
+  font-weight: bold;
+  min-height: 26px;
+  min-width: 60px;
+  text-align: center;
+  line-height: 26px;
+  border: 0px;
+}
+
+.headerButton:hover{
+  background-color: #FFF;
+  cursor: pointer;
+}
