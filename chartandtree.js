@@ -38,18 +38,7 @@ function initChart() {
     var h1 = 60;
     var h2 = h1 + width;
 
-    /*
-    *
-    *
-    *
-     */
     var titles = ['Management', 'Web Development', 'Communication', 'Wellbeing', 'Mobile', 'Server Administration', 'Databases', 'Category'];
-    /*
-    *
-    *
-    *
-    *
-     */
 
     for (var i = 0; i < sliceCount; i++) {
         var currentLevelSum = 0;
@@ -104,11 +93,11 @@ function initChart() {
 
         sliceContainer[i]
                     .on('pointerover', function() {
-                        this.alpha = 0.9;
+                        this.alpha = 0.75;
                         app.renderer.render(app.stage);
                     })
                     .on('pointerout', function() {
-                        this.alpha = 1.2;
+                        this.alpha = 1;
                         app.renderer.render(app.stage);
                     })
                     .on('pointerdown', function() {
@@ -124,19 +113,19 @@ function initChart() {
         *
          */
 
-        var text = new PIXI.Text(titles[i], {fill: '#ffffff'});
+        var text = new PIXI.Text(titles[i], {fill: '#ffffff', wordWrap: true, wordWrapWidth: 200, align: 'center'});
 
         var points = [];
-        var radius = 320;
-        var s = (i * (360 / sliceCount) * Math.PI) / 180;
-        for (var j = 0; j < 20; j++) {
-            var px = radius * Math.cos(j * text.width / 250 / 20 * Math.PI * 2 / sliceCount + s);
-            var py = radius * Math.sin(j * text.width / 250 / 20 * Math.PI * 2 / sliceCount + s);
+        var radius = 320 + (text.height / 29 - 1) * 15;
+        var numOfPoints = 20;
+        for (var j = 0; j < numOfPoints; j++) {
+            var px = radius * Math.cos(j * Math.PI * 2 * text.width / 250 / numOfPoints / sliceCount + s);
+            var py = radius * Math.sin(j * Math.PI * 2 * text.width / 250 / numOfPoints / sliceCount + s);
             points.push(new PIXI.Point(px, py));
         }
 
         var rope = new PIXI.mesh.Rope(text.texture, points);
-        rope.rotation = (Math.PI * 2 / sliceCount - text.width / 250 * Math.PI * 2 / sliceCount) / 2;
+        rope.rotation = (Math.PI * 2 / sliceCount - text.width / 250 * Math.PI * 2 / sliceCount * 0.95) / 2;
         app.stage.addChild(rope);
         rope.position.set(window.innerWidth / 2, window.innerHeight / 2);
         sliceContainer[i].title = rope;
@@ -164,19 +153,7 @@ function initChart() {
 function hideChart () {
     for (var i = 0; i < sliceContainer.length; ++i) {
         app.stage.removeChild(sliceContainer[i]);
-        /*
-        *
-        *
-        *
-        *
-         */
         app.stage.removeChild(sliceContainer[i].title);
-        /*
-        *
-        *
-        *
-        *
-         */
     }
     app.stage.removeChild(logo);
 }
@@ -184,20 +161,7 @@ function hideChart () {
 function showChart () {
     for (var i = 0; i < sliceContainer.length; ++i) {
         app.stage.addChild(sliceContainer[i]);
-        /*
-        *
-        *
-        *
-        *
-         */
         app.stage.addChild(sliceContainer[i].title);
-        /*
-        *
-        *
-        *
-        *
-        * 
-         */
     }
     app.stage.addChild(logo);
 }
@@ -348,7 +312,8 @@ function showTree (treeID) {
             app.stage.removeChild(tree.treeContainer);
             app.stage.removeChild(backButton);
             app.localLoader.destroy();
-            showChart();
+            //showChart();
+            initChart(); // we need to create the chart again because the levels could have chaged
             app.renderer.render(app.stage);
         });
 

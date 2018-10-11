@@ -32,17 +32,30 @@ export class ItemContainer {
         description.position.set(detailsMargin, detailsMargin * 2 + nameFontSize);
         detailsForeground.addChild(description);
 
-        // Temporary hardcoded link and buttons
         var btnG = new PIXI.Graphics();
         btnG.lineStyle(1, 0x888888);
         btnG.beginFill(0x44cc44);
-        btnG.drawRoundedRect(0, 0, 70, 26, 5);
+        btnG.drawRect(0, 0, 70, 26);
         btnG.endFill();
+
+        var btnGHover = new PIXI.Graphics();
+        btnGHover.lineStyle(1, 0x888888);
+        btnGHover.beginFill(0x217821);
+        btnGHover.drawRect(0, 0, 70, 26);
+        btnGHover.endFill();
 
         var btn1 = new PIXI.Sprite(btnG.generateTexture());
         btn1.interactive = true;
-        //btn1.buttonMode = true;
+        btn1.buttonMode = true;
         btn1.position.set(detailsMargin + 20, description.position.y + description.height + 10);
+        btn1.on('pointerover', function () {
+            this.texture = btnGHover.generateTexture();
+            app.renderer.render(app.stage);
+        });
+        btn1.on('pointerout', function () {
+            this.texture = btnG.generateTexture();
+            app.renderer.render(app.stage);
+        });
         detailsForeground.addChild(btn1);
 
         var txt1 = new PIXI.Text("OFFER", {fontSize: 14, fill: 0x000000});
@@ -50,13 +63,21 @@ export class ItemContainer {
         txt1.position.set(detailsMargin + 10 + 45, description.position.y + description.height + 10 + 13);
         detailsForeground.addChild(txt1);
         txt1.interactive = true;
-        //txt1.buttonMode = true;
+        txt1.buttonMode = true;
 
         var btn2 = new PIXI.Sprite(btnG.generateTexture());
         btn2.interactive = true;
-        //btn2.buttonMode = true;
+        btn2.buttonMode = true;
         btn2.anchor.set(1, 0);
         btn2.position.set(detailsWidth - detailsMargin - 20, description.position.y + description.height + 10);
+        btn2.on('pointerover', function () {
+            this.texture = btnGHover.generateTexture();
+            app.renderer.render(app.stage);
+        });
+        btn2.on('pointerout', function () {
+            this.texture = btnG.generateTexture();
+            app.renderer.render(app.stage);
+        });
         detailsForeground.addChild(btn2);
 
         var txt2 = new PIXI.Text("REQUEST", {fontSize: 14, fill: 0x000000});
@@ -64,8 +85,9 @@ export class ItemContainer {
         txt2.position.set(detailsWidth - detailsMargin - 10 - 45, description.position.y + description.height + 10 + 13);
         detailsForeground.addChild(txt2);
         txt2.interactive = true;
-        //txt2.buttonMode = true;
+        txt2.buttonMode = true;
 
+        // Temporary link
         if (level == 0 && i == 0) {
             var link = this.createLink("Nokia website", "https://nokia.com", {fontSize: 12, fill: 0x0000ff}, true);
             link.position.set(detailsMargin, txt1.position.y + txt1.height + 7);
@@ -132,6 +154,9 @@ export class ItemContainer {
                     this.filters = [new PIXI.filters.GlowFilter(10, 4, 4, 0xFF4000, 1)];
                     //this.parentObj.container.removeChild(this.parentObj.details);
                 }
+
+                //save level change
+                this.parentObj.skillData.skill_level++;
             }
 
             this.parentObj.app.renderer.render(this.parentObj.app.stage);
@@ -151,6 +176,9 @@ export class ItemContainer {
         {
             this.skill_level --;
             this.levelinfo.text = (this.skill_level + "/" + this.max_skill_level);
+
+            //save level change
+            this.parentObj.skillData.skill_level--;
         } else return;
 
         this.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFFBF00, 1)];
