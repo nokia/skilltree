@@ -174,6 +174,7 @@ export class ItemContainer {
                     //this.filters = [new PIXI.filters.GlowFilter(10, 4, 4, 0xFF4000, 1)];
                     //this.parentObj.container.removeChild(this.parentObj.details);
                     this.parentObj.tick.alpha = 1;
+                    this.parentObj.skillborder.filters = null;
                 }
 
                 //save level change
