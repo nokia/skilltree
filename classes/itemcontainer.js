@@ -16,11 +16,7 @@ export class ItemContainer {
         this.skillborder.max_skill_level = this.skillData.max_skill_level;
         this.skillborder.levelinfo = new PIXI.Text(this.skillData.skill_level + "/" + this.skillData.max_skill_level);
 
-        // if it's already maaxed out add the filter
-        if (this.skillData.skill_level == this.skillData.max_skill_level) {
-            //this.skillborder.filters = [new PIXI.filters.GlowFilter(10, 4, 4, 0xFF4000, 1)];
-            this.tick.alpha = 1;
-        }
+        
 
         //Creating details page
         var detailsWidth = 240;
@@ -116,8 +112,14 @@ export class ItemContainer {
         //Initilaizing container
         this.container = new PIXI.Container();
         this.container.addChild(this.skillicon);
+        
         this.container.addChild(this.tick);
         this.container.addChild(this.skillborder);
+        
+        
+
+        console.log(level +" "+ i + " "  +this.skillborder.skill_level + " " + this.skillborder.max_skill_level );
+
         
         this.container.addChild(this.skillborder.levelinfo);
         this.container.zOrder = 1;
@@ -138,7 +140,13 @@ export class ItemContainer {
 
         this.details.position.set(116, 0);
 
-        this.tick.alpha = 0;
+        // if it's already maaxed out add the tick
+        if (this.skillborder.skill_level == this.skillborder.max_skill_level) {
+            //this.skillborder.filters = [new PIXI.filters.GlowFilter(10, 4, 4, 0xFF4000, 1)];
+            this.tick.alpha = 1;
+        } else this.tick.alpha = 0;
+
+
         this.tick.anchor.set(0.5,0.5);
         this.tick.position.set(60,60);
 
