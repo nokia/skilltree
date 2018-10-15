@@ -115,12 +115,6 @@ export class ItemContainer {
         
         this.container.addChild(this.tick);
         this.container.addChild(this.skillborder);
-        
-        
-
-        console.log(level +" "+ i + " "  +this.skillborder.skill_level + " " + this.skillborder.max_skill_level );
-
-        
         this.container.addChild(this.skillborder.levelinfo);
         this.container.zOrder = 1;
 
