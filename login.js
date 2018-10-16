@@ -9,7 +9,7 @@ function validate() {
 	var loginData = {user: {email: username.value, password: password.value}};
 
     var loginRequest = new XMLHttpRequest();
-    loginRequest.open("POST", '/routes/api/users', true);
+    loginRequest.open("POST", '/api/users', true);
 
     loginRequest.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 
