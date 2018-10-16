@@ -6,7 +6,22 @@ function validate() {
 	var password = document.getElementById("password");
 	var submit = document.getElementById("submit");
 
-	if(username.value == "test" && password.value == "TEST") {
+	var loginData = {user: {email: username, password: password}};
+
+    var loginRequest = new XMLHttpRequest();
+    loginRequest.open("POST", '/server', true);
+
+    loginRequest.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+
+    loginRequest.onreadystatechange = function() {
+        if(this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+            var resp = this.response;
+            console.log(resp.token);
+        }
+    }
+    loginData.send(loginData);
+
+    /*if(username.value == "test" && password.value == "TEST") {
 		loginBox.style.display = "none";
 		showToast();
 		window.open("chartandtree.html", "_self");
@@ -21,7 +36,7 @@ function validate() {
 			submit.style.display = "none";
 			return false;
 		}
-	}
+	}*/
 }
 
 function showToast() {
