@@ -19,7 +19,7 @@ function validate() {
             console.log(resp.token);
         }
     }
-    loginData.send(loginData);
+    loginRequest.send(loginData);
 
     /*if(username.value == "test" && password.value == "TEST") {
 		loginBox.style.display = "none";
