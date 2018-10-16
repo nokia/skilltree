@@ -22,6 +22,6 @@ const app = express()
 const port = 80
 
 app.use(express.static('./'))
-app.get('/', (req, res) => res.send('Hello World!'))
+app.get('/', (req, res) => res.send('./login.html'))
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
