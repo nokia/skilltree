@@ -9,7 +9,7 @@ function validate() {
 	var loginData = {user: {email: username, password: password}};
 
     var loginRequest = new XMLHttpRequest();
-    loginRequest.open("POST", '/server', true);
+    loginRequest.open("POST", '/chartandtree.html', true);
 
     loginRequest.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 
