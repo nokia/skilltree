@@ -27,7 +27,7 @@ app.get('/', (req, res) => res.sendFile('login.html', { root: path.join(__dirnam
 //app.listen(port);
 // -----------------------------
 //Configure our app
-/*app.use(cors());
+app.use(cors());
 app.use(require('morgan')('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -68,7 +68,7 @@ app.use((err, req, res) => {
       error: {},
     },
   });
-});*/
+});
 
 app.listen(port);
 
