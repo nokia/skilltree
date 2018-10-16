@@ -6,10 +6,10 @@ function validate() {
 	var password = document.getElementById("password");
 	var submit = document.getElementById("submit");
 
-	var loginData = {user: {email: username, password: password}};
+	var loginData = {user: {email: "username", password: "password"}};
 
     var loginRequest = new XMLHttpRequest();
-    loginRequest.open("POST", '/server', true);
+    loginRequest.open("POST", '/', true);
 
     loginRequest.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 
