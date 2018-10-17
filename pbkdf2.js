@@ -12,7 +12,7 @@ async function hashPassword (password) {
             return err;
         }
 
-        crypto.pbkdf2(password, salt, iterations, hashLength,
+        crypto.pbkdf2Sync(password, salt, iterations, hashLength,
             function(err, hash) {
 
                 if (err) {
