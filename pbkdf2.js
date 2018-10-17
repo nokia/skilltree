@@ -1,18 +1,18 @@
 var crypto = require('crypto');
 
-function hashPassword (password) {
+async function hashPassword (password) {
     const hashLength = 32; // in bytes
     const saltLength = 16; // in bytes
     const iterations = 248573;
 
     var hashData = undefined;
 
-    crypto.randomBytes(saltLength, function(err, salt) { // generates salt (only this line)
+    await crypto.randomBytes(saltLength, function(err, salt) { // generates salt (only this line)
         if (err) {
             return err;
         }
 
-        crypto.pbkdf2Sync(password, salt, iterations, hashLength,
+        crypto.pbkdf2(password, salt, iterations, hashLength,
             function(err, hash) {
 
                 if (err) {
