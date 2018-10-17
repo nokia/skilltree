@@ -25,9 +25,6 @@ app.use(morgan('dev'));
 app.post('/registration', function(req, res) {
     var hashData = pbkdf2.hashPassword(req.body.password);
 
-    console.log('sdsd');
-    console.log(hashData);
-
     var newUser = new User({
         username: req.body.username,
         hashData: hashData,
@@ -88,7 +85,5 @@ app.post('/auth', function(req, res) {
 // serving static files and opening login.html
 app.use(express.static('./'));
 app.get('/', (req, res) => res.sendFile('login.html', { root: path.join(__dirname, './') }));
-
-
 
 app.listen(port);

@@ -34,7 +34,6 @@ function verifyPassword(password, hashData) {
 
     // verify the salt and hash against the password
     var newHash = crypto.pbkdf2Sync(password, salt, iterations, hashLength, "sha512");
-    console.log(newHash.toString('binary') === hash);
     return newHash.toString('binary') === hash;
 }
 
