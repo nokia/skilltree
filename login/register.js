@@ -7,10 +7,10 @@ function validate() {
 
 	if(password1.value == password2.value){
 		var http = new XMLHttpRequest();
-		var params = 'username=' + username.value + '&password=' + password.value + '&email=' + email.value;
+		var params = 'username=' + username.value + '&password=' + password1.value + '&email=' + email.value;
 
 		http.open('POST', '/registration', true);
-		//http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
 		http.responseType = "json";
 
 		http.onreadystatechange = function() {
