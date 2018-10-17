@@ -28,8 +28,6 @@ function hashPassword (password) {
                 salt.copy(hashData, 8);
                 hash.copy(hashData, salt.length + 8);
 
-                console.log(hashData);
-
                 return hashData;
             });
     });
