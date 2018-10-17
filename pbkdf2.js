@@ -50,3 +50,6 @@ function verifyPassword(password, hashData) {
         return verify.toString('binary') === hash;
     });
 }
+
+exports.hashPassword = hashPassword;
+exports.verifyPassword = verifyPassword;
