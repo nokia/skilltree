@@ -3,11 +3,24 @@ function validate() {
 	var username = document.getElementById("username");
 	var password = document.getElementById("password");
 
-	if(true) {
-		loginBox.style.display = "none";
-		showToast();
-		
+	var http = new XMLHttpRequest();
+	var params = 'username=' + username.value + '&password=' + password.value;
+
+	http.open('POST', '/auth', true);
+	http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	http.responseType = "json";
+
+	http.onreadystatechange = function() {
+			if(http.readyState == 4 && http.status == 200) {
+				loginBox.style.display = "none";
+				if(http.response.success){
+					alert(http.response.message);
+					console.log(http.response.token);
+					showToast();
+				}
+			}
 	}
+	http.send(params);
 }
 
 function showToast() {
