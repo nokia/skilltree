@@ -101,7 +101,7 @@ app.get('/', (req, res) => res.sendFile('login.html', { root: path.join(__dirnam
 
 var protectedRoutes = express.Router();
 
-protectedRoutes.use(function(req, res) {
+protectedRoutes.use(function(req, res, next) {
     // check header or url parameters or post parameters for token
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
 
@@ -117,10 +117,7 @@ protectedRoutes.use(function(req, res) {
                 });
             } else {
                 req.decoded = decoded;
-                return res.json({
-                    success: true,
-                    message: 'ok'
-                });
+                next();
             }
         });
 
@@ -134,7 +131,6 @@ protectedRoutes.use(function(req, res) {
 
     }
 });
-
 protectedRoutes.use(express.static('./protected'));
 protectedRoutes.get('/', (req, res) => res.sendFile('chartandtree.html', { root: path.join(__dirname, './protected') }));
 app.use('/protected', protectedRoutes);
