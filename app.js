@@ -57,7 +57,7 @@ app.post('/auth', function(req, res) {
             });
         } else if (user) {
             // check password
-            if (pbkdf2.verifyPassword(req.body.password, user.hashData)) {
+            if (!pbkdf2.verifyPassword(req.body.password, user.hashData)) {
                 res.json({
                     success: false,
                     message: 'Authentication failed. Wrong password.'
