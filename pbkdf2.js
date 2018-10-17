@@ -5,12 +5,12 @@ function hashPassword (password) {
     const saltLength = 16; // in bytes
     const iterations = 248573;
 
-    crypto.randomBytes(saltLength, function(err, salt) { // generates salt (only this line)
+    return crypto.randomBytes(saltLength, function(err, salt) { // generates salt (only this line)
         if (err) {
             return err;
         }
 
-        crypto.pbkdf2(password, salt, iterations, hashLength,
+        return crypto.pbkdf2(password, salt, iterations, hashLength,
             function(err, hash) {
 
                 if (err) {
