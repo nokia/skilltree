@@ -5,7 +5,7 @@ function hashPassword (password) {
     const saltLength = 16; // in bytes
     const iterations = 248573;
 
-    var hashData = undefined;
+    var hashData = 1;
 
     crypto.randomBytes(saltLength, function(err, salt) { // generates salt (only this line)
         if (err) {
