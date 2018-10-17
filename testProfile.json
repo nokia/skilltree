@@ -1,5 +1,0 @@
-var testUser = {
-  name: "Test User",
-  job: "Web Developer",
-
-};

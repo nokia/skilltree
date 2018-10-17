@@ -98,4 +98,39 @@ app.post('/auth', function(req, res) {
 app.use(express.static('./login'));
 app.get('/', (req, res) => res.sendFile('login.html', { root: path.join(__dirname, './login') }));
 
+var protectedRoutes = express.Router();
+
+protectedRoutes.use(function(req, res) {
+    // check header or url parameters or post parameters for token
+    var token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+    // decode token
+    if (token) {
+        // verifies secret and checks exp
+        jwt.verify(token, app.get('superSecret'), function(err, decoded) {
+            if (err) {
+                return res.json({
+                    success: false,
+                    message: 'Failed to authenticate token.'
+                });
+            } else {
+                req.decoded = decoded;
+            }
+        });
+
+    } else {
+        // if there is no token
+        // return an error
+        return res.status(403).send({
+            success: false,
+            message: 'No token provided.'
+        });
+
+    }
+});
+
+protectedRoutes.use(express.static('./protected'));
+protectedRoutes.get('/', (req, res) => res.sendFile('chartandtree.html', { root: path.join(__dirname, './protected') }));
+app.use('/protected', protectedRoutes);
+
 app.listen(port);
