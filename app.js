@@ -67,7 +67,7 @@ app.post('/auth', function(req, res) {
                     //admin: user.admin
                 };
                 var token = jwt.sign(payload, app.get('superSecret'), {
-                    expiresInMinutes: 1440 // expires in 24 hours
+                    expiresIn: '1440m' // expires in 24 hours
                 });
 
                 // return the information including token as JSON
