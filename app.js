@@ -30,13 +30,24 @@ app.post('/registration', function(req, res) {
         hashData: hashData,
     });
 
-    newUser.save(function(err) {
+    User.findOne({
+        username: req.body.username,
+    }, function (err, user) {
         if (err) throw err;
 
-        console.log('User saved successfully');
-        res.json({
-            success: true
-        });
+        if (!user) {
+            newUser.save(function(err) {
+                if (err) throw err;
+
+                res.json({
+                    success: true
+                });
+            });
+        } else {
+            res.json({
+                success: false
+            });
+        }
     });
 });
 
