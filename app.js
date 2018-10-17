@@ -108,6 +108,7 @@ protectedRoutes.use(function(req, res) {
     // decode token
     if (token) {
         // verifies secret and checks exp
+        console.log(token);
         jwt.verify(token, app.get('superSecret'), function(err, decoded) {
             if (err) {
                 return res.json({
