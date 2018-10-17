@@ -43,7 +43,7 @@ app.post('/registration', function(req, res) {
 app.post('/auth', function(req, res) {
     // find the user
     User.findOne({
-        name: req.body.name
+        username: req.body.username
     }, function(err, user) {
         if (err) throw err;
 
