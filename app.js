@@ -116,6 +116,7 @@ protectedRoutes.use(function(req, res) {
                 });
             } else {
                 req.decoded = decoded;
+                next();
             }
         });
 
@@ -133,7 +134,7 @@ protectedRoutes.use(function(req, res) {
 
 
 
-//protectedRoutes.use(express.static('./protected'));
+protectedRoutes.use(express.static('./protected'));
 protectedRoutes.get('/', (req, res) => res.sendFile('chartandtree.html', { root: path.join(__dirname, './protected') }));
 app.use('/protected', protectedRoutes);
 
