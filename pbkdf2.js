@@ -8,25 +8,18 @@ function hashPassword (password) {
 
     var salt = crypto.randomBytes(saltLength);
 
-    var hashData = crypto.pbkdf2Sync(password, salt, iterations, hashLength,
-        function(err, hash) {
-            if (err) {
-                //return err;
-            }
+    var hash = crypto.pbkdf2Sync(password, salt, iterations, hashLength, "sha512");
 
-            hashData = new Buffer(hash.length + salt.length + 8);
+    var hashData = new Buffer(hash.length + salt.length + 8);
 
-            // include the size of the salt so that we can, during verification,
-            // figure out how much of the hash is salt
-            hashData.writeUInt32BE(salt.length, 0, true);
-            // similarly, include the iteration count
-            hashData.writeUInt32BE(iterations, 4, true);
+    // include the size of the salt so that we can, during verification,
+    // figure out how much of the hash is salt
+    hashData.writeUInt32BE(salt.length, 0, true);
+    // similarly, include the iteration count
+    hashData.writeUInt32BE(iterations, 4, true);
 
-            salt.copy(hashData, 8);
-            hash.copy(hashData, salt.length + 8);
-
-            return hashData;
-        });
+    salt.copy(hashData, 8);
+    hash.copy(hashData, salt.length + 8);
 
     return hashData;
 }
@@ -40,16 +33,9 @@ function verifyPassword(password, hashData) {
     var hash = hashData.toString('binary', saltLength + 8);
 
     // verify the salt and hash against the password
-    var pass = crypto.pbkdf2Sync(password, salt, iterations, hashLength, function(err, verify) { // verify is the newly generated hash
-        if (err) {
-            //return err;
-        }
-
-        return verify.toString('binary') === hash;
-    });
-
-    console.log(pass);
-    return pass;
+    var newHash = crypto.pbkdf2Sync(password, salt, iterations, hashLength, "sha512");
+    console.log(newHash.toString('binary') === hash);
+    return newHash.toString('binary') === hash;
 }
 
 exports.hashPassword = hashPassword;
