@@ -18,7 +18,6 @@ function validate() {
 					loginBox.style.display = "none";
 					if(httpRequest.response.success){
 						showToast();
-						window.open("/login.html", "_self");
 					}
 		    }
 		}
