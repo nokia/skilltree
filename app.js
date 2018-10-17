@@ -97,7 +97,7 @@ app.post('/auth', function(req, res) {
 
 // serving static files and opening login.html
 app.use(express.static('./login'));
-//app.get('/', (req, res) => res.sendFile('login.html', { root: path.join(__dirname, './login') }));
+app.get('/', (req, res) => res.sendFile('login.html', { root: path.join(__dirname, './login') }));
 
 var protectedRoutes = express.Router();
 
