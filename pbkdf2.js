@@ -5,10 +5,12 @@ function hashPassword (password) {
     const saltLength = 16; // in bytes
     const iterations = 248573;
 
-    var hashData = undefined;
-    var salt = crypto.randomBytes(saltLength);
 
-    crypto.pbkdf2Sync(password, salt, iterations, hashLength,
+    var salt = crypto.randomBytes(saltLength);
+    console.log("salt");
+    console.log(salt);
+
+    var hashData = crypto.pbkdf2Sync(password, salt, iterations, hashLength,
         function(err, hash) {
 
             if (err) {
@@ -26,8 +28,10 @@ function hashPassword (password) {
             salt.copy(hashData, 8);
             hash.copy(hashData, salt.length + 8);
 
-            //return hashData;
+            return hashData;
         });
+    console.log("hashData");
+    console.log(hashData);
 
     return hashData;
 }
