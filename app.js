@@ -25,8 +25,6 @@ app.use(morgan('dev'));
 app.post('/registration', function(req, res) {
     var hashData = pbkdf2.hashPassword(req.body.password);
 
-    console.log(hashData);
-
     var newUser = new User({
         username: req.body.username,
         hashData: hashData,
