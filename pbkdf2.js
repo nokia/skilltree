@@ -28,14 +28,13 @@ function hashPassword (password) {
                 salt.copy(hashData, 8);
                 hash.copy(hashData, salt.length + 8);
 
-                return hashData.toString('hex');
+                return hashData;
             });
     });
 }
 
-function verifyPassword(password, hashDataHex) {
+function verifyPassword(password, hashData) {
     // extract the salt and hash from the combined buffer
-    var hashData = Buffer.from(hashDataHex, 'hex');
     var saltLength = hashData.readUInt32BE(0);
     var hashLength = hashData.length - saltLength - 8;
     var iterations = hashData.readUInt32BE(4);
