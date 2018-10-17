@@ -1,13 +1,13 @@
 var crypto = require('crypto');
 
-async function hashPassword (password) {
+function hashPassword (password) {
     const hashLength = 32; // in bytes
     const saltLength = 16; // in bytes
     const iterations = 248573;
 
     var hashData = undefined;
 
-    await crypto.randomBytes(saltLength, function(err, salt) { // generates salt (only this line)
+    crypto.randomBytes(saltLength, function(err, salt) { // generates salt (only this line)
         if (err) {
             return err;
         }
