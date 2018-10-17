@@ -23,6 +23,7 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 
 app.post('/registration', function(req, res) {
+    console.log(req.body.password);
     var hashData = pbkdf2.hashPassword(req.body.password);
 
     var newUser = new User({
