@@ -14,9 +14,9 @@ function validate() {
 			if(http.readyState == 4 && http.status == 200) {
 				loginBox.style.display = "none";
 				if(http.response.success){
-					alert(http.response.message);
-					console.log(http.response.token);
+					setCookie(loginToken, http.response.token, 1);
 					showToast();
+					window.open("/protected?token=" + http.response.token, "_self");
 				}
 			}
 	}
@@ -31,4 +31,11 @@ function showToast() {
 	setTimeout(function(){
 		toast.className = ""
 	}, 3000);
+}
+
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
