@@ -7,7 +7,7 @@ function hashPassword (password) {
 
     crypto.randomBytes(saltLength, function(err, salt) { // generates salt (only this line)
         if (err) {
-            //return err;
+            return err;
         }
 
         crypto.pbkdf2(password, salt, iterations, hashLength,
@@ -27,6 +27,8 @@ function hashPassword (password) {
 
                 salt.copy(hashData, 8);
                 hash.copy(hashData, salt.length + 8);
+
+                console.log(hash);
 
                 return hashData;
             });
