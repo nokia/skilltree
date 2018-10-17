@@ -5,10 +5,26 @@ function validate() {
 	var password2 = document.getElementById("password2");
 	var email = document.getElementById("email");
 
-	if(true) {
-		loginBox.style.display = "none";
-		showToast();
-		
+	if(password1.value == password2.value){
+		var http = new XMLHttpRequest();
+		var params = 'username=' + username.value + '&password=' + password.value + '&email=' + email.value;
+
+		http.open('POST', '/registration', true);
+		//http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		http.responseType = "json";
+
+		http.onreadystatechange = function() {
+		    if(http.readyState == 4 && http.status == 200) {
+					loginBox.style.display = "none";
+					if(http.response.success){
+						showToast();
+					}
+		    }
+		}
+		http.send(params);
+	}
+	else{
+		alert("Incorrect credentials! Passwords don't match!");
 	}
 }
 
