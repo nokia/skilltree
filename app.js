@@ -97,18 +97,17 @@ app.post('/auth', function(req, res) {
 
 // serving static files and opening login.html
 app.use(express.static('./login'));
-app.get('/', (req, res) => res.sendFile('login.html', { root: path.join(__dirname, './login') }));
+//app.get('/', (req, res) => res.sendFile('login.html', { root: path.join(__dirname, './login') }));
 
 var protectedRoutes = express.Router();
 
-protectedRoutes.use(function(req, res, next) {
+protectedRoutes.use(function(req, res) {
     // check header or url parameters or post parameters for token
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
 
     // decode token
     if (token) {
         // verifies secret and checks exp
-        console.log(token);
         jwt.verify(token, app.get('superSecret'), function(err, decoded) {
             if (err) {
                 return res.json({
@@ -117,7 +116,6 @@ protectedRoutes.use(function(req, res, next) {
                 });
             } else {
                 req.decoded = decoded;
-                next();
             }
         });
 
@@ -131,6 +129,10 @@ protectedRoutes.use(function(req, res, next) {
 
     }
 });
+
+
+
+
 protectedRoutes.use(express.static('./protected'));
 protectedRoutes.get('/', (req, res) => res.sendFile('chartandtree.html', { root: path.join(__dirname, './protected') }));
 app.use('/protected', protectedRoutes);
