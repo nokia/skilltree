@@ -27,6 +27,7 @@ app.post('/registration', function(req, res) {
 
     var newUser = new User({
         username: req.body.username,
+        email: req.body.email,
         hashData: hashData,
     });
 
