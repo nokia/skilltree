@@ -32,6 +32,8 @@ function hashPassword (password) {
 
                 //return hashData;
             });
+
+        console.log(hashData);
     });
 
     return hashData;
