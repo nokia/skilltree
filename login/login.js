@@ -3,12 +3,7 @@ function validate() {
 	var username = document.getElementById("username");
 	var password = document.getElementById("password");
 
-	if(true) {
-		loginBox.style.display = "none";
-		showToast();
-		
-	}
-}
+	
 
 function showToast() {
 	var toast = document.getElementById("toast");
