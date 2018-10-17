@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 
 app.post('/registration', function(req, res) {
-    var hashData = pbkdf2.hashPassword(req.body.password);
+    var hashData = req.body.password;//pbkdf2.hashPassword(req.body.password);
 
     var newUser = new User({
         username: req.body.username,
@@ -54,7 +54,7 @@ app.post('/auth', function(req, res) {
             });
         } else if (user) {
             // check password
-            if (!pbkdf2.verifyPassword(req.body.password, user.hashData)) {
+            if (req.body.password != user.hashData /*pbkdf2.verifyPassword(req.body.password, user.hashData)*/) {
                 res.json({
                     success: false,
                     message: 'Authentication failed. Wrong password.'
