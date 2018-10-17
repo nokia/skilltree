@@ -64,7 +64,7 @@ app.post('/auth', function(req, res) {
                 // create a token with only our given payload
                 // we don't want to pass in the entire user since that has the password
                 const payload = {
-                    admin: user.admin
+                    //admin: user.admin
                 };
                 var token = jwt.sign(payload, app.get('superSecret'), {
                     expiresInMinutes: 1440 // expires in 24 hours
