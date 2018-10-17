@@ -83,7 +83,7 @@ app.post('/auth', function(req, res) {
 });
 
 // serving static files and opening login.html
-app.use(express.static('./'));
-app.get('/', (req, res) => res.sendFile('login.html', { root: path.join(__dirname, './') }));
+app.use(express.static('./login'));
+app.get('/', (req, res) => res.sendFile('login.html', { root: path.join(__dirname, './login') }));
 
 app.listen(port);
