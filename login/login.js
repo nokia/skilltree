@@ -14,7 +14,7 @@ function validate() {
 			if(http.readyState == 4 && http.status == 200) {
 				loginBox.style.display = "none";
 				if(http.response.success){
-					setCookie(loginToken, http.response.token, 1);
+					setCookie("loginToken", http.response.token, 1);
 					showToast();
 					window.open("/protected?token=" + http.response.token, "_self");
 				}
