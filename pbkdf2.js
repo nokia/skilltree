@@ -5,19 +5,21 @@ function hashPassword (password) {
     const saltLength = 16; // in bytes
     const iterations = 248573;
 
-    return crypto.randomBytes(saltLength, function(err, salt) { // generates salt (only this line)
+    var hashData = undefined;
+
+    crypto.randomBytes(saltLength, function(err, salt) { // generates salt (only this line)
         if (err) {
             return err;
         }
 
-        return crypto.pbkdf2(password, salt, iterations, hashLength,
+        crypto.pbkdf2(password, salt, iterations, hashLength,
             function(err, hash) {
 
                 if (err) {
                     //return err;
                 }
 
-                var hashData = new Buffer(hash.length + salt.length + 8);
+                hashData = new Buffer(hash.length + salt.length + 8);
 
                 // include the size of the salt so that we can, during verification,
                 // figure out how much of the hash is salt
@@ -28,9 +30,11 @@ function hashPassword (password) {
                 salt.copy(hashData, 8);
                 hash.copy(hashData, salt.length + 8);
 
-                return hashData;
+                //return hashData;
             });
     });
+
+    return hashData;
 }
 
 function verifyPassword(password, hashData) {
