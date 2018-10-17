@@ -6,15 +6,7 @@ function hashPassword (password) {
     const iterations = 248573;
 
     var hashData = undefined;
-    var salt = undefined;
-
-    crypto.randomBytes(saltLength, function(err, saltt) { // generates salt (only this line)
-        if (err) {
-            return err;
-        }
-        
-        salt = saltt;
-    });
+    var salt = crypto.randomBytes(saltLength);
 
     crypto.pbkdf2Sync(password, salt, iterations, hashLength,
         function(err, hash) {
