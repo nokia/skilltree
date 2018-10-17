@@ -3,24 +3,25 @@ function validate() {
 	var username = document.getElementById("username");
 	var password = document.getElementById("password");
 
-	var http = new XMLHttpRequest();
+	var httpRequest = new XMLHttpRequest();
 	var params = 'username=' + username.value + '&password=' + password.value;
 
-	http.open('POST', '/auth', true);
-	http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-	http.responseType = "json";
+	httpRequest.open('POST', '/auth', true);
+	httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	httpRequest.responseType = "json";
 
-	http.onreadystatechange = function() {
-			if(http.readyState == 4 && http.status == 200) {
+	httpRequest.onreadystatechange = function() {
+			if(httpRequest.readyState == 4 && httpRequest.status == 200) {
 				loginBox.style.display = "none";
-				if(http.response.success){
-					setCookie("loginToken", http.response.token, 1);
+				if(httpRequest.response.success){
+					setCookie("loginToken", httpRequest.response.token, 1);
 					showToast();
-					window.open("/protected?token=" + http.response.token, "_self");
+					alert(httpRequest.response.message);
+					window.open("/protected?token=" + httpRequest.response.token, "_self");
 				}
 			}
 	}
-	http.send(params);
+	httpRequest.send(params);
 }
 
 function showToast() {
