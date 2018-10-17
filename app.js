@@ -26,7 +26,7 @@ app.post('/registration', function(req, res) {
     var hashData = pbkdf2.hashPassword(req.body.password);
 
     console.log('sdsd');
-    console.log(hashData);
+    console.log(hashData.toString());
 
     var newUser = new User({
         username: req.body.username,
