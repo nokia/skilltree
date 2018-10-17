@@ -117,6 +117,10 @@ protectedRoutes.use(function(req, res) {
                 });
             } else {
                 req.decoded = decoded;
+                return res.json({
+                    success: true,
+                    message: 'ok'
+                });
             }
         });
 
