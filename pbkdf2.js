@@ -7,12 +7,9 @@ function hashPassword (password) {
 
 
     var salt = crypto.randomBytes(saltLength);
-    console.log("salt");
-    console.log(salt);
 
     var hashData = crypto.pbkdf2Sync(password, salt, iterations, hashLength,
         function(err, hash) {
-
             if (err) {
                 //return err;
             }
@@ -30,8 +27,6 @@ function hashPassword (password) {
 
             return hashData;
         });
-    console.log("hashData");
-    console.log(hashData);
 
     return hashData;
 }
@@ -45,13 +40,16 @@ function verifyPassword(password, hashData) {
     var hash = hashData.toString('binary', saltLength + 8);
 
     // verify the salt and hash against the password
-    crypto.pbkdf2(password, salt, iterations, hashLength, function(err, verify) { // verify is the newly generated hash
+    var pass = crypto.pbkdf2Sync(password, salt, iterations, hashLength, function(err, verify) { // verify is the newly generated hash
         if (err) {
             //return err;
         }
 
         return verify.toString('binary') === hash;
     });
+
+    console.log(pass);
+    return pass;
 }
 
 exports.hashPassword = hashPassword;
