@@ -6,22 +6,23 @@ function validate() {
 	var email = document.getElementById("email");
 
 	if(password1.value == password2.value){
-		var http = new XMLHttpRequest();
+		var httpRequest = new XMLHttpRequest();
 		var params = 'username=' + username.value + '&password=' + password1.value + '&email=' + email.value;
 
-		http.open('POST', '/registration', true);
-		http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-		http.responseType = "json";
+		httpRequest.open('POST', '/registration', true);
+		httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		httpRequest.responseType = "json";
 
-		http.onreadystatechange = function() {
-		    if(http.readyState == 4 && http.status == 200) {
+		httpRequest.onreadystatechange = function() {
+		    if(httpRequest.readyState == 4 && httpRequest.status == 200) {
 					loginBox.style.display = "none";
-					if(http.response.success){
+					if(httpRequest.response.success){
 						showToast();
+						window.open("/login.html", "_self");
 					}
 		    }
 		}
-		http.send(params);
+		httpRequest.send(params);
 	}
 	else{
 		alert("Incorrect credentials! Passwords don't match!");
