@@ -12,10 +12,10 @@ function validate() {
 
 	httpRequest.onreadystatechange = function() {
 			if(httpRequest.readyState == 4 && httpRequest.status == 200) {
-				loginBox.style.display = "none";
 				if(httpRequest.response.success){
 					setCookie("loginToken", httpRequest.response.token, 1);
-					//showToast();
+					loginBox.style.display = "none";
+					showToast();
 
 					window.open("/protected/", "_self");
 				}
