@@ -4,6 +4,7 @@ const bodyParser  = require('body-parser');
 const morgan      = require('morgan');
 const mongoose    = require('mongoose');
 const jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
+var cookieParser = require('cookie-parser');
 
 var config = require('./config'); // get our config file
 var User   = require('./usermodel'); // get our mongoose model
@@ -100,10 +101,10 @@ app.use(express.static('./login'));
 app.get('/', (req, res) => res.sendFile('login.html', { root: path.join(__dirname, './login') }));
 
 var protectedRoutes = express.Router();
-protectedRoutes.use('/', express.static('./protected'));
+protectedRoutes.use(cookieParser());
 protectedRoutes.use(function(req, res, next) {
     // check header or url parameters or post parameters for token
-    var token = req.body.token || req.query.token || req.headers['x-access-token'];
+    var token = req.cookies.loginToken;
 
     // decode token
     if (token) {
@@ -131,7 +132,7 @@ protectedRoutes.use(function(req, res, next) {
 
     }
 });
-
+protectedRoutes.use(express.static('./protected'));
 protectedRoutes.get('/', (req, res) => res.sendFile('chartandtree.html', { root: path.join(__dirname, './protected') }));
 app.use('/protected', protectedRoutes);
 
