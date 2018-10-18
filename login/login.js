@@ -15,28 +15,9 @@ function validate() {
 				loginBox.style.display = "none";
 				if(httpRequest.response.success){
 					setCookie("loginToken", httpRequest.response.token, 1);
-					showToast();
+					//showToast();
 
-                    var redirect = new XMLHttpRequest();
-                    redirect.open('GET', '/protected', true);
-                    redirect.setRequestHeader('x-access-token', httpRequest.response.token);
-                    /*redirect.onreadystatechange = function() {
-                        if(httpRequest.readyState == 4 && httpRequest.status == 200) {
-                            loginBox.style.display = "none";
-                            if(httpRequest.response.success){
-                                setCookie("loginToken", httpRequest.response.token, 1);
-                                showToast();
-                                alert(httpRequest.response.message);
-                                window.open("/protected?token=" + httpRequest.response.token, "_self");
-                                //window.open("/protected", "_self");
-                            }
-                        }
-                    }*/
-                    redirect.send();
-
-					//alert(httpRequest.response.message);
-					//window.open("/protected?token=" + httpRequest.response.token, "_self");
-					//window.open("/protected", "_self");
+					window.open("/protected", "_self");
 				}
 			}
 	}
