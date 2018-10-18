@@ -14,11 +14,9 @@ function validate() {
 			if(httpRequest.readyState == 4 && httpRequest.status == 200) {
 				if(httpRequest.response.success){
 					setCookie("loginToken", httpRequest.response.token, 1);
-					loginBox.style.display = "none";
-					showToast();
-
 					window.open("/protected/", "_self");
 				}
+				showToast();
 			}
 	}
 	httpRequest.send(params);

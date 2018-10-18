@@ -13,7 +13,7 @@ var app = new PIXI.Application(
 
 function logout(){
   setCookie("loginToken", "", 1);
-  window.open("/login/login.html", "_self");
+  window.open("/login", "_self");
 }
 
 function setCookie(cname, cvalue) {
