@@ -100,7 +100,7 @@ app.use(express.static('./login'));
 app.get('/', (req, res) => res.sendFile('login.html', { root: path.join(__dirname, './login') }));
 
 var protectedRoutes = express.Router();
-
+protectedRoutes.use('/', express.static('./protected'));
 protectedRoutes.use(function(req, res, next) {
     // check header or url parameters or post parameters for token
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
@@ -133,7 +133,6 @@ protectedRoutes.use(function(req, res, next) {
 });
 
 protectedRoutes.get('/', (req, res) => res.sendFile('chartandtree.html', { root: path.join(__dirname, './protected') }));
-protectedRoutes.use('/', express.static('./protected'));
 app.use('/protected', protectedRoutes);
 
 app.listen(port);
