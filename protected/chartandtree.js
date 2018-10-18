@@ -1,4 +1,5 @@
-import { ItemContainer } from './classes/itemcontainer.js';
+var ItemContainer = require('./classes/itemcontainer.js');
+//import { ItemContainer } from './classes/itemcontainer.js';
 
 var allData = dataJson;
 
