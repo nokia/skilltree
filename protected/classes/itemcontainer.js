@@ -1,4 +1,4 @@
-export class ItemContainer {
+class ItemContainer {
     constructor(app, data, level, i) {
         this.app = app;
         this.data = data;
@@ -16,7 +16,7 @@ export class ItemContainer {
         this.skillborder.max_skill_level = this.skillData.max_skill_level;
         this.skillborder.levelinfo = new PIXI.Text(this.skillData.skill_level + "/" + this.skillData.max_skill_level);
 
-        
+
 
         //Creating details page
         var detailsWidth = 240;
@@ -107,12 +107,12 @@ export class ItemContainer {
         this.details.addChild(detailsForeground);
 
 
-  
+
 
         //Initilaizing container
         this.container = new PIXI.Container();
         this.container.addChild(this.skillicon);
-        
+
         this.container.addChild(this.tick);
         this.container.addChild(this.skillborder);
         this.container.addChild(this.skillborder.levelinfo);
@@ -123,7 +123,7 @@ export class ItemContainer {
         this.skillborder.anchor.set(0.5, 0.5);
         this.skillborder.levelinfo.anchor.set(0.5,0.5);
 
-        
+
 
         this.skillicon.position.set(60, 60);
         this.skillborder.position.set(60, 60);

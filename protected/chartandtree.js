@@ -1,5 +1,3 @@
-import ItemContainer from './classes/itemcontainer.js';
-
 var allData = dataJson;
 
 var app = new PIXI.Application(
