@@ -117,7 +117,7 @@ protectedRoutes.use(function(req, res, next) {
             } else {
                 req.decoded = decoded;
                 console.log(token);
-                express.static('./protected')
+                //express.static('./protected')
                 next();
             }
         });
