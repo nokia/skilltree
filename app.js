@@ -116,7 +116,7 @@ protectedRoutes.use(function(req, res, next) {
                 });
             } else {
                 req.decoded = decoded;
-                res.redirect('/protected');
+                console.log(token);
                 next();
             }
         });

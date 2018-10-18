@@ -17,7 +17,7 @@ function validate() {
 					setCookie("loginToken", httpRequest.response.token, 1);
 					showToast();
 					alert(httpRequest.response.message);
-					//window.open("/protected?token=" + httpRequest.response.token, "_self");
+					window.open("/protected?token=" + httpRequest.response.token, "_self");
 					//window.open("/protected", "_self");
 				}
 			}
