@@ -18,7 +18,7 @@ function validate() {
 					showToast();
 
                     var redirect = new XMLHttpRequest();
-                    redirect.open('GET', '/protected', false);
+                    redirect.open('GET', '/protected', true);
                     redirect.setRequestHeader('x-access-token', httpRequest.response.token);
                     /*redirect.onreadystatechange = function() {
                         if(httpRequest.readyState == 4 && httpRequest.status == 200) {
