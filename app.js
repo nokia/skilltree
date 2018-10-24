@@ -98,19 +98,20 @@ app.post('/auth', function(req, res) {
 });
 
 // serving static files and opening login.html
-app.use(express.static('./login'));
-app.get('/', (req, res) => res.sendFile('login.html', { root: path.join(__dirname, './login') }));
+app.use(express.static('./public'));
+app.get('/', (req, res) => res.sendFile('login.html', { root: path.join(__dirname, './public') }));
+app.get('/user', (req, res) => res.sendFile('chartandtree.html', { root: path.join(__dirname, './public/user') }));
 
-var userRoute = express.Router();
+/*var userRoute = express.Router();
 
 protectedRoutes.use(express.static('./protected'));
 protectedRoutes.get('/', (req, res) => res.sendFile('chartandtree.html', { root: path.join(__dirname, './protected') }));
-app.use('/protected', protectedRoutes);
+app.use('/protected', protectedRoutes);*/
 
 app.listen(port);
 
 
-protectedRoutes.use(function(req, res, next) {
+/*protectedRoutes.use(function(req, res, next) {
     // check header or url parameters or post parameters for token
     var token = req.cookies.loginToken;
 
@@ -138,4 +139,4 @@ protectedRoutes.use(function(req, res, next) {
         });
 
     }
-});
+});*/
