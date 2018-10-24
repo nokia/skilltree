@@ -344,40 +344,6 @@ function showTree (treeID) {
         app.renderer.render(app.stage);
     });
 }
-// zooming
-/*
-var handleWheel = function (event)
-{
-    var e = window.event || event;
-    var delta = Math.max(-1, Math.min(1, e.wheelDelta || -e.detail));
-
-    if (tree !== undefined) {
-        if (delta == 1 && tree.treeContainer.scale.x < 1) {
-            tree.treeContainer.scale.x += 0.05;
-            tree.treeContainer.scale.y += 0.05;
-        } else if (tree.treeContainer.scale.x > 0.5) {
-            tree.treeContainer.scale.x -= 0.05;
-            tree.treeContainer.scale.y -= 0.05;
-        }
-
-        app.renderer.render(app.stage);
-    }
-
-    e.preventDefault();
-};
-
-var addMouseWheelEventListener = function (scrollHandler)
-{
-    if (window.addEventListener) {
-        window.addEventListener("mousewheel", scrollHandler, false);
-        window.addEventListener("DOMMouseScroll", scrollHandler, false);
-    } else {
-        window.attachEvent("onmousewheel", scrollHandler);
-    }
-}
-
-addMouseWheelEventListener(handleWheel);
-*/
 
 function setCookie(cname, cvalue, exdays) {
     var d = new Date();
@@ -385,3 +351,9 @@ function setCookie(cname, cvalue, exdays) {
     var expires = "expires="+ d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
+
+function parseJwt (token) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace('-', '+').replace('_', '/');
+    return JSON.parse(window.atob(base64));
+};
