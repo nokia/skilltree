@@ -11,6 +11,18 @@ var app = new PIXI.Application(
     }
 );
 
+function logout(){
+  setCookie("loginToken", "", 1);
+  window.open("../", "_self");
+}
+
+function setCookie(cname, cvalue) {
+    var d = new Date();
+    d.setTime(d.getTime() + 1);
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
 PIXI.loader.add("pictures/skillborder.png")
             .add("tree.png")
             .add("pictures/back.png")
