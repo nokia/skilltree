@@ -117,8 +117,8 @@ protectedRoutes.use(function(req, res, next) {
                 });
             } else {
                 req.decoded = decoded;
-                console.log(token);
-                next();
+                //next();
+                res.redirect('/s');
             }
         });
 
@@ -133,7 +133,7 @@ protectedRoutes.use(function(req, res, next) {
     }
 });
 protectedRoutes.use(express.static('./protected'));
-protectedRoutes.get('/', (req, res) => res.sendFile('chartandtree.html', { root: path.join(__dirname, './protected') }));
+protectedRoutes.get('/s', (req, res) => res.sendFile('chartandtree.html', { root: path.join(__dirname, './protected') }));
 app.use('/protected', protectedRoutes);
 
 app.listen(port);
