@@ -15,8 +15,9 @@ function validate() {
 				if(httpRequest.response.success){
 					setCookie("loginToken", httpRequest.response.token, 1);
 					window.open("/protected/", "_self");
-				}
-				showToast();
+				} else {
+                    showToast();
+                }
 			}
 	}
 	httpRequest.send(params);
