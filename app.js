@@ -118,7 +118,7 @@ protectedRoutes.use(function(req, res, next) {
             } else {
                 req.decoded = decoded;
                 //next();
-                res.redirect('/s');
+                res.redirect('/protected/s');
             }
         });
 
