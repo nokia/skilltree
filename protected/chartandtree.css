@@ -43,7 +43,7 @@
 }
 
 .welcome{
-  position: absolute;
+  position: fixed;
   margin: auto;
   padding: 1px;
   background-color: #0b1842;
