@@ -43,6 +43,7 @@
 }
 
 .welcome{
+  float: left;
   margin: 1px;
   padding: 1px;
   background-color: #0b1842;
