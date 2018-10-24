@@ -9,11 +9,11 @@ module.exports = mongoose.model('User', new Schema({
     hashData: Buffer,
     skillData: [
         {
-            treeID: int,
+            treeID: Int32,
             skills: [
                 {
-                    skillID: int,
-                    skillLevel: int,
+                    skillID: Int32,
+                    skillLevel: Int32,
                 }
             ]
         }
