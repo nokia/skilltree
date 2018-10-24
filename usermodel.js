@@ -7,4 +7,15 @@ module.exports = mongoose.model('User', new Schema({
     username: String,
     email: String,
     hashData: Buffer,
+    skillData: [
+        {
+            treeID: int,
+            skills: [
+                {
+                    skillID: int,
+                    skillLevel: int,
+                }
+            ]
+        }
+    ],
 }));

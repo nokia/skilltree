@@ -78,6 +78,7 @@ app.post('/auth', function(req, res) {
                 // we don't want to pass in the entire user since that has the password
                 const payload = {
                     username: req.body.username,
+
                 };
                 var token = jwt.sign(payload, app.get('superSecret'), {
                     expiresIn: '60m' // expires in 1 hour
@@ -100,8 +101,15 @@ app.post('/auth', function(req, res) {
 app.use(express.static('./login'));
 app.get('/', (req, res) => res.sendFile('login.html', { root: path.join(__dirname, './login') }));
 
-var protectedRoutes = express.Router();
-protectedRoutes.use(cookieParser());
+var userRoute = express.Router();
+
+protectedRoutes.use(express.static('./protected'));
+protectedRoutes.get('/', (req, res) => res.sendFile('chartandtree.html', { root: path.join(__dirname, './protected') }));
+app.use('/protected', protectedRoutes);
+
+app.listen(port);
+
+
 protectedRoutes.use(function(req, res, next) {
     // check header or url parameters or post parameters for token
     var token = req.cookies.loginToken;
@@ -131,8 +139,3 @@ protectedRoutes.use(function(req, res, next) {
 
     }
 });
-protectedRoutes.use(express.static('./protected'));
-protectedRoutes.get('/', (req, res) => res.sendFile('chartandtree.html', { root: path.join(__dirname, './protected') }));
-app.use('/protected', protectedRoutes);
-
-app.listen(port);
