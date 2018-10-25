@@ -2,14 +2,13 @@
 var dataJson = [
   {
     treeID: 0,
-    levels:
+    levels: [
     [
       {
         skillID: 0,
         name: "Management",
         description: "The process of working through details of a problem to reach a solution.",
         skillicon: "pictures/icons/management.jpg",
-        skill_level: 2,
         max_skill_level: 5,
         children: [
           {
@@ -31,7 +30,6 @@ var dataJson = [
         name: "Leadership",
         description: "The art of motivating a group of people to act towards achieving a common goal.",
         skillicon: "pictures/icons/leadership.jpg",
-        skill_level: 0,
         max_skill_level: 5,
         children: [
           {
@@ -47,11 +45,17 @@ var dataJson = [
     ],
     [
       {
+        skillID: 2,
+        name: "Time management",
+        description: "Manages own and the whole team's time to deliver projects on time.",
+        skillicon: "pictures/icons/time_management.png",
+        max_skill_level: 5
+      },
+      {
         skillID: 3,
         name: "Project management",
         description: "Project management is the application of knowledge, skills, tools, and techniques to project activities to meet the project requirements.",
         skillicon: "pictures/icons/project_management.png",
-        skill_level: 0,
         max_skill_level: 5
       },
       {
@@ -59,7 +63,6 @@ var dataJson = [
         name: "People Management/HR",
         description: "Flawless communication within team, willing to help new members to blend in and actively participates in coaching, training new team members.",
         skillicon: "pictures/icons/HR.png",
-        skill_level: 0,
         max_skill_level: 5
       },
       {
@@ -67,9 +70,9 @@ var dataJson = [
         name: "Communication",
         description: "Able to coordinate a team, gives constant feedback of the project's achievements.",
         skillicon: "pictures/icons/communication.png",
-        skill_level: 0,
         max_skill_level: 5
       }
+    ]
     ]
   },
   {
@@ -81,7 +84,6 @@ var dataJson = [
           name: "HTML",
           description: "Main webpage creating language.",
           skillicon: "pictures/icons/HTML.png",
-          skill_level: 4,
           max_skill_level: 6,
           children: [
             {
@@ -101,7 +103,6 @@ var dataJson = [
           name: "CSS",
           description: "Cascading Style Sheets (CSS) is a style sheet language used for describing the presentation of a document written in a markup language like HTML.",
           skillicon: "pictures/icons/CSS.png",
-          skill_level: 2,
           max_skill_level: 5,
           children: [
             {
@@ -119,7 +120,6 @@ var dataJson = [
           name: "Javascript",
           description: "Often abbreviated as JS, is a high-level, interpreted programming language. It is a language which is also characterized as dynamic, weakly typed, prototype-based and multi-paradigm.",
           skillicon: "pictures/icons/JS.png",
-          skill_level: 0,
           max_skill_level: 5,
           children: [
             {
@@ -139,7 +139,6 @@ var dataJson = [
           name: "CSS tools",
           description: "Writing CSS can become quite repetitive and little tasks such as having to look up hex color values, closing your tags, etc. can become time-consuming. And so that is where a preprocessor comes into play. A CSS preprocessor is basically a scripting language that extends CSS and then compiles it into regular CSS.",
           skillicon: "pictures/icons/SASS.png",
-          skill_level: 0,
           max_skill_level: 5
         },
         {
@@ -147,7 +146,6 @@ var dataJson = [
           name: "Graphic design tools",
           description: "The art or skill of combining text and pictures.",
           skillicon: "pictures/icons/PS.png",
-          skill_level: 0,
           max_skill_level: 5
         },
         {
@@ -155,7 +153,6 @@ var dataJson = [
           name: "JS libraries",
           description: "Once comfortable with js, there are a huge amount of libraries and frameworks to accomplish more complex tasks.",
           skillicon: "pictures/icons/JS_lib.png",
-          skill_level: 0,
           max_skill_level: 5
         },
         {
@@ -163,7 +160,6 @@ var dataJson = [
           name: "AJAX",
           description: "It is a set of Web development techniques using many Web technologies on the client side to create asynchronous Web applications.",
           skillicon: "pictures/icons/AJAX.png",
-          skill_level: 0,
           max_skill_level: 5
         }
       ]
