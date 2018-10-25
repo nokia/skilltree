@@ -8,6 +8,7 @@ httpRequest.responseType = "json";
 httpRequest.onreadystatechange = function() {
     if(httpRequest.readyState == 4 && httpRequest.status == 200) {
         console.log(httpRequest.response);
+        initChart();
     }
 }
 httpRequest.send();
@@ -50,7 +51,13 @@ var sliceCount = 8;
 var sliceContainer = new Array(sliceCount);
 var logo;
 
+var counter = 0;
 function initChart() {
+    counter++;
+    if (counter < 2) {
+        return;
+    }
+
     // get username from token and write out
     var tokenPayload = parseJwt(getCookie("loginToken"));
     document.getElementById("welcome").innerHTML = "Hello " + tokenPayload.username + "!";
