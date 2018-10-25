@@ -7,7 +7,7 @@ httpRequest.setRequestHeader('x-access-token', getCookie("loginToken"));
 httpRequest.responseType = "json";
 httpRequest.onreadystatechange = function() {
     if(httpRequest.readyState == 4 && httpRequest.status == 200) {
-        console.log(httpRequest.responseText);
+        console.log(httpRequest.response);
     }
 }
 httpRequest.send();
