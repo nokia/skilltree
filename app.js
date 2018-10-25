@@ -143,9 +143,7 @@ getRoute.get('/userdata', function (req, res) {
                 message: 'Authentication failed. User not found.'
             });
         } else if (user) {
-            return res.json({
-                message: 'userdata'
-            });
+            return res.json(user.skillData);
         }
 
     });
