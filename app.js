@@ -131,7 +131,7 @@ getRoute.use(function(req, res, next) {
 
     }
 });
-app.get('/userdata', function (req, res) {
+getRoute.get('/userdata', function (req, res) {
     User.findOne({
         username: req.decoded.username
     }, function(err, user) {
