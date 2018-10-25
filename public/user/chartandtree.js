@@ -80,11 +80,11 @@ function initChart() {
         var percent = 0;
 
         if (i < 2) { // temporary, we have only 2 trees
-            for (var level = 0; level < baseData[i].length; ++level) {
-                for (var j = 0; j < baseData[i][level].length; ++j) {
+            for (var level = 0; level < baseData[i].levels.length; ++level) {
+                for (var j = 0; j < baseData[i].levels[level].length; ++j) {
                     console.log('sd');
                     console.log(userData.find(obj => obj.treeID == i).skills);
-                    currentLevelSum += userData.find(obj => obj.treeID == i).skills.find(obj => obj.skillID == baseData[i][level][j].skillID).skillLevel || 0;
+                    currentLevelSum += userData.find(obj => obj.treeID == i).skills.find(obj => obj.skillID == baseData[i].levels[level][j].skillID).skillLevel || 0;
                     maxLevelSum += baseData[i][level][j].max_skill_level;
                 }
             }
