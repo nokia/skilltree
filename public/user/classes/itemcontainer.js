@@ -4,6 +4,7 @@ class ItemContainer {
         this.data = baseData;
         this.skillData = baseData.levels[level][i];
         this.userSkillData = undefined;
+        console.log(userData.skills.find(obj => obj.skillID == baseData.levels[level][i].skillID));
         if (userData.skills.find(obj => obj.skillID == baseData.levels[level][i].skillID) != undefined) {
             this.userSkillData = userData.skills.find(obj => obj.skillID == baseData.levels[level][i].skillID);
         }
