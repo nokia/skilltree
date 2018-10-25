@@ -227,7 +227,7 @@ class Tree {
                 this.data.levels[level][i].itemcontainer = new ItemContainer(app, this.data, this.userData, level, i);
 
                 // Positioning of the containers dynamically by level and by index inside level
-                this.data.levels[level][i].itemcontainer.container.position.x = i * 130 + (app.renderer.width - data[level].length * 130) / 2 + posX;
+                this.data.levels[level][i].itemcontainer.container.position.x = i * 130 + (app.renderer.width - this.data.levels[level].length * 130) / 2 + posX;
                 this.data.levels[level][i].itemcontainer.container.position.y = level * 150 + posY;
 
                 this.data.levels[level][i].itemcontainer.container.parentLayer = skillLayer;
