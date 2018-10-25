@@ -1,4 +1,5 @@
 var baseData = dataJson;
+var userData = undefined;
 
 var httpRequest = new XMLHttpRequest();
 httpRequest.open('GET', '/get/userdata', true);
@@ -7,7 +8,7 @@ httpRequest.setRequestHeader('x-access-token', getCookie("loginToken"));
 httpRequest.responseType = "json";
 httpRequest.onreadystatechange = function() {
     if(httpRequest.readyState == 4 && httpRequest.status == 200) {
-        console.log(httpRequest.response);
+        userData = httpRequest.response;
         initChart();
     }
 }
@@ -58,7 +59,7 @@ function initChart() {
         return;
     }
 
-    // get username from token and write out
+    // get username from token and show it
     var tokenPayload = parseJwt(getCookie("loginToken"));
     document.getElementById("welcome").innerHTML = "Hello " + tokenPayload.username + "!";
 
@@ -66,7 +67,6 @@ function initChart() {
 
     var x = window.innerWidth / 2;
     var y = window.innerHeight / 2;
-
 
     var width = 240;
     var h1 = 60;
@@ -80,10 +80,10 @@ function initChart() {
         var percent = 0;
 
         if (i < 2) { // temporary, we have only 2 trees
-            for (var level = 0; level < allData[i].length; ++level) {
-                for (var j = 0; j < allData[i][level].length; ++j) {
-                    currentLevelSum += allData[i][level][j].skill_level;
-                    maxLevelSum += allData[i][level][j].max_skill_level;
+            for (var level = 0; level < baseData[i].length; ++level) {
+                for (var j = 0; j < baseData[i][level].length; ++j) {
+                    currentLevelSum += userData.find(obj => obj.treeID == i).skills.find(obj => obj.skillID == baseData[i][level][j].skillID).skillLevel || 0;
+                    maxLevelSum += baseData[i][level][j].max_skill_level;
                 }
             }
 
@@ -141,14 +141,6 @@ function initChart() {
 
         app.stage.addChild(sliceContainer[i]);
 
-        /*
-        *
-        *
-        *  WIP titles
-        *
-        *
-         */
-
         var text = new PIXI.Text(titles[i], {fill: '#ffffff', wordWrap: true, wordWrapWidth: 200, align: 'center'});
 
         var points = [];
@@ -173,14 +165,6 @@ function initChart() {
         app.stage.addChild(rope);
         rope.position.set(window.innerWidth / 2, window.innerHeight / 2);
         sliceContainer[i].title = rope;
-
-        /*
-        *
-        *
-        *
-        *
-        *
-         */
     }
 
     logo = new PIXI.Sprite(PIXI.loader.resources["tree.png"].texture);
