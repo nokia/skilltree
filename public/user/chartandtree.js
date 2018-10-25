@@ -4,7 +4,6 @@ var httpRequest = new XMLHttpRequest();
 httpRequest.open('GET', '/get/userdata', false);
 httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 httpRequest.setRequestHeader('x-access-token', getCookie("loginToken"));
-httpRequest.responseType = "json";
 httpRequest.send();
 if (httpRequest.status === 200) {
     console.log(httpRequest.responseText);
