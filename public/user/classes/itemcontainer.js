@@ -1,8 +1,14 @@
 class ItemContainer {
-    constructor(app, data, level, i) {
+    constructor(app, baseData, userData, level, i) {
         this.app = app;
-        this.data = data;
-        this.skillData = data[level][i];
+        this.data = baseData;
+        this.skillData = baseData.levels[level][i];
+        this.userSkillData = undefined;
+        if (userData.skills != undefined) {
+            if (userData.skills.find(obj => obj.skillID == baseData.levels[level][i].skillID) != undefined) {
+                this.userSkillData = userData.skills.find(obj => obj.skillID == baseData.levels[level][i].skillID);
+            }
+        }
         this.level = level;
         this.i = i;
 
@@ -12,11 +18,9 @@ class ItemContainer {
         this.tick = new PIXI.Sprite(PIXI.loader.resources["pictures/tick.png"].texture);
 
         //Setting border variables
-        this.skillborder.skill_level = this.skillData.skill_level;
+        this.skillborder.skill_level = this.userSkillData.skill_level;
         this.skillborder.max_skill_level = this.skillData.max_skill_level;
         this.skillborder.levelinfo = new PIXI.Text(this.skillData.skill_level + "/" + this.skillData.max_skill_level);
-
-
 
         //Creating details page
         var detailsWidth = 240;

@@ -82,7 +82,7 @@ function initChart() {
         if (i < 2) { // temporary, we have only 2 trees
             for (var level = 0; level < baseData[i].levels.length; ++level) {
                 for (var j = 0; j < baseData[i].levels[level].length; ++j) {
-                    if (userData.find(obj => obj.treeID == i) != undefined) {
+                    if (userData.find(obj => obj.treeID == i).skills != undefined) {
                         if (userData.find(obj => obj.treeID == i).skills.find(obj => obj.skillID == baseData[i].levels[level][j].skillID) != undefined) {
                             currentLevelSum += userData.find(obj => obj.treeID == i).skills.find(obj => obj.skillID == baseData[i].levels[level][j].skillID).skillLevel
                         } else {
@@ -203,8 +203,9 @@ function showChart () {
 // TREE
 
 class Tree {
-    constructor (data, posX, posY) {
-        this.data = data;
+    constructor (_baseData, _userData, posX, posY) {
+        this.data = _baseData;
+        this.userData = _userData;
         this.treeContainer = new PIXI.Container();
         this.treeContainer.enableSort = true;
 
@@ -221,16 +222,16 @@ class Tree {
         skillLayer.group.enableSort = true;
         app.stage.addChild(skillLayer);
 
-        for (var level = 0; level < data.length; ++level) {
-            for (var i = 0; i < data[level].length; ++i) {
-                data[level][i].itemcontainer = new ItemContainer(app, data, level, i);
+        for (var level = 0; level < this.data.levels.length; ++level) {
+            for (var i = 0; i < this.data.levels[level].length; ++i) {
+                this.data.levels[level][i].itemcontainer = new ItemContainer(app, this.data, this.userData, level, i);
 
                 // Positioning of the containers dynamically by level and by index inside level
-                data[level][i].itemcontainer.container.position.x = i * 130 + (app.renderer.width - data[level].length * 130) / 2 + posX;
-                data[level][i].itemcontainer.container.position.y = level * 150 + posY;
+                this.data.levels[level][i].itemcontainer.container.position.x = i * 130 + (app.renderer.width - data[level].length * 130) / 2 + posX;
+                this.data.levels[level][i].itemcontainer.container.position.y = level * 150 + posY;
 
-                data[level][i].itemcontainer.container.parentLayer = skillLayer;
-                this.treeContainer.addChild(data[level][i].itemcontainer.container);
+                this.data.levels[level][i].itemcontainer.container.parentLayer = skillLayer;
+                this.treeContainer.addChild(this.data.levels[level][i].itemcontainer.container);
             }
         }
 
@@ -329,14 +330,14 @@ var tree = undefined;
 
 function showTree (treeID) {
     app.localLoader = new PIXI.loaders.Loader();
-    for (var level = 0; level < allData[treeID].length; ++level) {
-        for (var i = 0; i < allData[treeID][level].length; ++i) {
-            app.localLoader.add(allData[treeID][level][i].skillicon.toString());
+    for (var level = 0; level < baseData[treeID].levels.length; ++level) {
+        for (var i = 0; i < baseData[treeID].levels[level].length; ++i) {
+            app.localLoader.add(baseData[treeID].levels[level][i].skillicon.toString());
         }
     }
 
     app.localLoader.load(function () {
-        tree = new Tree(allData[treeID], 0, 30);
+        tree = new Tree(baseData[treeID], userData.find(obj => obj.treeID == treeID), 0, 30);
         app.stage.addChild(tree.treeContainer);
 
         // back button
