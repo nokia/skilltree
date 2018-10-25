@@ -85,7 +85,7 @@ function initChart() {
                     console.log('sd');
                     console.log(userData.find(obj => obj.treeID == i).skills);
                     currentLevelSum += userData.find(obj => obj.treeID == i).skills.find(obj => obj.skillID == baseData[i].levels[level][j].skillID).skillLevel || 0;
-                    maxLevelSum += baseData[i][level][j].max_skill_level;
+                    maxLevelSum += baseData[i].levels[level][j].max_skill_level;
                 }
             }
 
