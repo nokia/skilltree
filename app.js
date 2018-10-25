@@ -102,18 +102,9 @@ app.use(express.static('./public'));
 app.get('/', (req, res) => res.sendFile('login.html', { root: path.join(__dirname, './public') }));
 app.get('/user', (req, res) => res.sendFile('chartandtree.html', { root: path.join(__dirname, './public/user') }));
 
-/*var userRoute = express.Router();
-
-protectedRoutes.use(express.static('./protected'));
-protectedRoutes.get('/', (req, res) => res.sendFile('chartandtree.html', { root: path.join(__dirname, './protected') }));
-app.use('/protected', protectedRoutes);*/
-
-app.listen(port);
-
-
-/*protectedRoutes.use(function(req, res, next) {
-    // check header or url parameters or post parameters for token
-    var token = req.cookies.loginToken;
+var getRoute = express.Router();
+getRoute.use(function(req, res, next) {
+    var token = req.get('x-access-token');
 
     // decode token
     if (token) {
@@ -139,4 +130,29 @@ app.listen(port);
         });
 
     }
-});*/
+});
+app.get('/userdata', function (req, res) {
+    User.findOne({
+        username: req.decoded.username
+    }, function(err, user) {
+        if (err) throw err;
+
+        if (!user) {
+            res.json({
+                success: false,
+                message: 'Authentication failed. User not found.'
+            });
+        } else if (user) {
+            return res.json({
+                message: 'userdata'
+            });
+        }
+
+    });
+});
+app.use('/get', getRoute);
+
+app.listen(port);
+
+
+/**/
