@@ -1,13 +1,16 @@
 var baseData = dataJson;
 
 var httpRequest = new XMLHttpRequest();
-httpRequest.open('GET', '/get/userdata', false);
+httpRequest.open('GET', '/get/userdata', true);
 httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 httpRequest.setRequestHeader('x-access-token', getCookie("loginToken"));
-httpRequest.send();
-if (httpRequest.status === 200) {
-    console.log(httpRequest.responseText);
+httpRequest.responseType = "json";
+httpRequest.onreadystatechange = function() {
+    if(httpRequest.readyState == 4 && httpRequest.status == 200) {
+        console.log(httpRequest.responseText);
+    }
 }
+httpRequest.send();
 
 var app = new PIXI.Application(
     {
