@@ -47,14 +47,6 @@ var dataJson = [
     ],
     [
       {
-        skillID: 2,
-        name: "Time management",
-        description: "Manages own and the whole team's time to deliver projects on time.",
-        skillicon: "pictures/icons/time_management.png",
-        skill_level: 0,
-        max_skill_level: 5
-      },
-      {
         skillID: 3,
         name: "Project management",
         description: "Project management is the application of knowledge, skills, tools, and techniques to project activities to meet the project requirements.",
