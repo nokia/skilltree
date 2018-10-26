@@ -214,8 +214,6 @@ class Tree {
         skillLayer.group.enableSort = true;
         app.stage.addChild(skillLayer);
 
-        console.log("dsfdf");
-
         for (var level = 0; level < this.data.levels.length; ++level) {
             for (var i = 0; i < this.data.levels[level].length; ++i) {
                 this.data.levels[level][i].itemcontainer = new ItemContainer(app, this.data, this.userData, level, i);
@@ -229,24 +227,22 @@ class Tree {
             }
         }
 
-        console.log("sdsa");
-
         this.drawConnectionLines();
     }
 
     drawConnectionLines() {
         var connectionGroup = new PIXI.display.Group(-1, false);
 
-        for (var level = 0; level < this.data.length; ++level) {
-            for (var i = 0; i < this.data[level].length; ++i) {
-                if (this.data[level][i].children !== undefined) {
-                    for (var k = 0; k < this.data[level][i].children.length; ++k) {
-                        var child = this.data[this.data[level][i].children[k].level][this.data[level][i].children[k].i];
+        for (var level = 0; level < this.data.levels.length; ++level) {
+            for (var i = 0; i < this.data.levels[level].length; ++i) {
+                if (this.data.levels[level][i].children !== undefined) {
+                    for (var k = 0; k < this.data.levels[level][i].children.length; ++k) {
+                        var child = this.data.levels[this.data.levels[level][i].children[k].level][this.data.levels[level][i].children[k].i];
 
                         // Draw the line
                         var connection = new PIXI.Graphics();
                         connection.lineStyle(4, 0xffffff);
-                        connection.moveTo(this.data[level][i].itemcontainer.container.x + this.data[level][i].itemcontainer.skillborder.width / 2, this.data[level][i].itemcontainer.container.position.y + this.data[level][i].itemcontainer.skillborder.height  - 8);
+                        connection.moveTo(this.data.levels[level][i].itemcontainer.container.x + this.data.levels[level][i].itemcontainer.skillborder.width / 2, this.data.levels[level][i].itemcontainer.container.position.y + this.data.levels[level][i].itemcontainer.skillborder.height  - 8);
                         connection.lineTo(child.itemcontainer.container.position.x + child.itemcontainer.skillborder.width / 2, child.itemcontainer.container.position.y + 5);
 
                         // Add the line
@@ -254,7 +250,7 @@ class Tree {
                         connection.parentGroup = connectionGroup;
 
                         // Saving child's zero skill level parents
-                        if (this.data[level][i].skill_level == 0) {
+                        if (this.data.levels[level][i].skill_level == 0) {
                             child.itemcontainer.disable();
 
                             if (child.zeroSLParents === undefined) {
