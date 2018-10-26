@@ -214,6 +214,8 @@ class Tree {
         skillLayer.group.enableSort = true;
         app.stage.addChild(skillLayer);
 
+        console.log("dsfdf");
+
         for (var level = 0; level < this.data.levels.length; ++level) {
             for (var i = 0; i < this.data.levels[level].length; ++i) {
                 this.data.levels[level][i].itemcontainer = new ItemContainer(app, this.data, this.userData, level, i);
@@ -226,6 +228,8 @@ class Tree {
                 this.treeContainer.addChild(this.data.levels[level][i].itemcontainer.container);
             }
         }
+
+        console.log("sdsa");
 
         this.drawConnectionLines();
     }
