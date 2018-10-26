@@ -329,8 +329,8 @@ function showTree (treeID) {
     }
 
     app.localLoader.load(function () {
-        tree = new Tree(baseData[treeID], userData.find(obj => obj.treeID == treeID), 0, 30);
         console.log(userData.find(obj => obj.treeID == treeID));
+        tree = new Tree(baseData[treeID], userData.find(obj => obj.treeID == treeID), 0, 30);
         app.stage.addChild(tree.treeContainer);
 
         // back button
