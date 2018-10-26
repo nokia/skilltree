@@ -1,4 +1,4 @@
-var treeData = undefined;
+var baseData = dataJson;
 var userData = undefined;
 
 var userDataRequest = new XMLHttpRequest();
