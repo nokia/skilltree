@@ -13,7 +13,7 @@ function validate() {
 	httpRequest.onreadystatechange = function() {
 			if(httpRequest.readyState == 4 && httpRequest.status == 200) {
 				if(httpRequest.response.success){
-					setCookie("loginToken", httpRequest.response.token, 1);
+					localStorage.setItem("loginToken", httpRequest.response.token);
 					window.open("/user/", "_self");
 				} else {
                     showToast();
@@ -31,11 +31,4 @@ function showToast() {
 	setTimeout(function(){
 		toast.className = ""
 	}, 3000);
-}
-
-function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    var expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }

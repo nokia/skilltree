@@ -1,18 +1,32 @@
-var baseData = dataJson;
+var treeData = undefined;
 var userData = undefined;
 
-var httpRequest = new XMLHttpRequest();
-httpRequest.open('GET', '/get/userdata', true);
-httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-httpRequest.setRequestHeader('x-access-token', getCookie("loginToken"));
-httpRequest.responseType = "json";
-httpRequest.onreadystatechange = function() {
-    if(httpRequest.readyState == 4 && httpRequest.status == 200) {
-        userData = httpRequest.response;
+var userDataRequest = new XMLHttpRequest();
+userDataRequest.open('GET', '/get/userdata', true);
+userDataRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+userDataRequest.setRequestHeader('x-access-token', getCookie("loginToken"));
+userDataRequest.responseType = "json";
+userDataRequest.onreadystatechange = function() {
+    if(userDataRequest.readyState == 4 && userDataRequest.status == 200) {
+        userData = userDataRequest.response;
         initChart();
     }
 }
-httpRequest.send();
+userDataRequest.send();
+
+var treeDataRequest = new XMLHttpRequest();
+treeDataRequest.open('GET', '/get/treedata', true);
+treeDataRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+treeDataRequest.setRequestHeader('x-access-token', getCookie("loginToken"));
+treeDataRequest.responseType = "json";
+treeDataRequest.onreadystatechange = function() {
+    if(treeDataRequest.readyState == 4 && treeDataRequest.status == 200) {
+        treeData = treeDataRequest.response;
+        console.log(treeData);
+        initChart();
+    }
+}
+treeDataRequest.send();
 
 var app = new PIXI.Application(
     {
@@ -26,15 +40,8 @@ var app = new PIXI.Application(
 );
 
 function logout(){
-  setCookie("loginToken", "", 1);
-  window.open("../", "_self");
-}
-
-function setCookie(cname, cvalue) {
-    var d = new Date();
-    d.setTime(d.getTime() + 1);
-    var expires = "expires="+d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    localStorage.setItem("loginToken", "");
+    window.open("../", "_self");
 }
 
 PIXI.loader.add("pictures/skillborder.png")
@@ -60,7 +67,7 @@ function initChart() {
     }
 
     // get username from token and show it
-    var tokenPayload = parseJwt(getCookie("loginToken"));
+    var tokenPayload = parseJwt(localStorage.getItem("loginToken"););
     document.getElementById("welcome").innerHTML = "Hello " + tokenPayload.username + "!";
 
     document.getElementById("pixiCanvas").style.visibility = "visible";
@@ -358,22 +365,6 @@ function setCookie(cname, cvalue, exdays) {
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
     var expires = "expires="+ d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
 }
 
 function parseJwt (token) {

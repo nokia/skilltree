@@ -7,7 +7,8 @@ const jwt    = require('jsonwebtoken'); // used to create, sign, and verify toke
 var cookieParser = require('cookie-parser');
 
 var config = require('./config'); // get our config file
-var User   = require('./usermodel'); // get our mongoose model
+var User   = require('./models/usermodel'); // get our mongoose model
+var Trees = require('./models/treemodel');
 var pbkdf2 = require('./pbkdf2'); // get hash generator and pw checker
 
 const app = express();
@@ -140,12 +141,18 @@ getRoute.get('/userdata', function (req, res) {
         if (!user) {
             res.json({
                 success: false,
-                message: 'Authentication failed. User not found.'
+                message: 'User not found.'
             });
         } else if (user) {
             return res.json(user.skillData);
         }
+    });
+});
+getRoute.get('/treedata', function (req, res) {
+    Trees.find({}, function (err, trees) {
+        if (err) throw err;
 
+        return res.json(trees);
     });
 });
 app.use('/get', getRoute);
