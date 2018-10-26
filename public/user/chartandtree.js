@@ -4,7 +4,7 @@ var userData = undefined;
 var userDataRequest = new XMLHttpRequest();
 userDataRequest.open('GET', '/get/userdata', true);
 userDataRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-userDataRequest.setRequestHeader('x-access-token', getCookie("loginToken"));
+userDataRequest.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
 userDataRequest.responseType = "json";
 userDataRequest.onreadystatechange = function() {
     if(userDataRequest.readyState == 4 && userDataRequest.status == 200) {
@@ -17,7 +17,7 @@ userDataRequest.send();
 var treeDataRequest = new XMLHttpRequest();
 treeDataRequest.open('GET', '/get/treedata', true);
 treeDataRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-treeDataRequest.setRequestHeader('x-access-token', getCookie("loginToken"));
+treeDataRequest.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
 treeDataRequest.responseType = "json";
 treeDataRequest.onreadystatechange = function() {
     if(treeDataRequest.readyState == 4 && treeDataRequest.status == 200) {
