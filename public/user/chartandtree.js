@@ -82,15 +82,7 @@ function initChart() {
         if (i < 2) { // temporary, we have only 2 trees
             for (var level = 0; level < baseData[i].levels.length; ++level) {
                 for (var j = 0; j < baseData[i].levels[level].length; ++j) {
-                    if (userData.find(obj => obj.treeID == i) != undefined) {
-                        if (userData.find(obj => obj.treeID == i).skills.find(obj => obj.skillID == baseData[i].levels[level][j].skillID) != undefined) {
-                            currentLevelSum += userData.find(obj => obj.treeID == i).skills.find(obj => obj.skillID == baseData[i].levels[level][j].skillID).skillLevel
-                        } else {
-                            currentLevelSum += 0;
-                        }
-                    } else {
-                        currentLevelSum += 0;
-                    }
+                    currentLevelSum += getSkillLevel(i, baseData[i].levels[level][j].skillID);
                     maxLevelSum += baseData[i].levels[level][j].max_skill_level;
                 }
             }
@@ -389,3 +381,11 @@ function parseJwt (token) {
     var base64 = base64Url.replace('-', '+').replace('_', '/');
     return JSON.parse(window.atob(base64));
 };
+
+function getSkillLevel (treeID, skillID) {
+    if (userData.find(obj => obj.treeID == treeID) != undefined) {
+        if (userData.find(obj => obj.treeID == treeID).skills.find(obj => obj.skillID == skillID) != undefined) {
+            return userData.find(obj => obj.treeID == treeID).skills.find(obj => obj.skillID == skillID).skillLevel;
+        } else return 0;
+    } else return 0;
+}

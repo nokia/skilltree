@@ -3,10 +3,7 @@ class ItemContainer {
         this.app = app;
         this.data = baseData;
         this.skillData = baseData.levels[level][i];
-        this.userSkillData = undefined;
-        if (userData.skills.find(obj => obj.skillID == baseData.levels[level][i].skillID) != undefined) {
-            this.userSkillData = userData.skills.find(obj => obj.skillID == baseData.levels[level][i].skillID);
-        }
+        this.skillData.skillLevel = this.getSkillLevel(userData, this.skillData.skillID);
         this.level = level;
         this.i = i;
 
@@ -16,7 +13,7 @@ class ItemContainer {
         this.tick = new PIXI.Sprite(PIXI.loader.resources["pictures/tick.png"].texture);
 
         //Setting border variables
-        this.skillborder.skill_level = this.userSkillData.skillLevel;
+        this.skillborder.skill_level = this.skillData.skillLevel;
         this.skillborder.max_skill_level = this.skillData.max_skill_level;
         this.skillborder.levelinfo = new PIXI.Text(this.skillborder.skill_level + "/" + this.skillData.max_skill_level);
 
@@ -342,5 +339,11 @@ class ItemContainer {
         this.button = button;
 
         return link;
+    }
+
+    getSkillLevel (userData, skillID) {
+        if (userData.skills.find(obj => obj.skillID == skillID) != undefined) {
+            return userData.skills.find(obj => obj.skillID == skillID).skillID;
+        } else return 0;
     }
 }
