@@ -67,7 +67,7 @@ function initChart() {
     }
 
     // get username from token and show it
-    var tokenPayload = parseJwt(localStorage.getItem("loginToken"););
+    var tokenPayload = parseJwt(localStorage.getItem("loginToken"));
     document.getElementById("welcome").innerHTML = "Hello " + tokenPayload.username + "!";
 
     document.getElementById("pixiCanvas").style.visibility = "visible";
