@@ -198,6 +198,7 @@ class Tree {
     constructor (_baseData, _userData, posX, posY) {
         this.data = _baseData;
         this.userData = _userData;
+        console.log(_userData);
         this.treeContainer = new PIXI.Container();
         this.treeContainer.enableSort = true;
 
