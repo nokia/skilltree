@@ -198,7 +198,6 @@ class Tree {
     constructor (_baseData, _userData, posX, posY) {
         this.data = _baseData;
         this.userData = _userData;
-        console.log(_userData);
         this.treeContainer = new PIXI.Container();
         this.treeContainer.enableSort = true;
 
@@ -331,6 +330,7 @@ function showTree (treeID) {
 
     app.localLoader.load(function () {
         tree = new Tree(baseData[treeID], userData.find(obj => obj.treeID == treeID), 0, 30);
+        console.log(userData.find(obj => obj.treeID == treeID));
         app.stage.addChild(tree.treeContainer);
 
         // back button
