@@ -4,7 +4,6 @@ const bodyParser  = require('body-parser');
 const morgan      = require('morgan');
 const mongoose    = require('mongoose');
 const jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
-var cookieParser = require('cookie-parser');
 
 var config = require('./config'); // get our config file
 var User   = require('./models/usermodel'); // get our mongoose model
@@ -158,6 +157,3 @@ getRoute.get('/treedata', function (req, res) {
 app.use('/get', getRoute);
 
 app.listen(port);
-
-
-/**/

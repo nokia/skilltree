@@ -1,4 +1,4 @@
-var baseData = dataJson;
+var treeData = undefined;
 var userData = undefined;
 
 var userDataRequest = new XMLHttpRequest();
@@ -62,7 +62,7 @@ var logo;
 var counter = 0;
 function initChart() {
     counter++;
-    if (counter < 2) {
+    if (counter < 3) {
         return;
     }
 
@@ -87,11 +87,10 @@ function initChart() {
         var percent = 0;
 
         if (i < 2) { // temporary, we have only 2 trees
-            for (var level = 0; level < baseData[i].levels.length; ++level) {
-                for (var j = 0; j < baseData[i].levels[level].length; ++j) {
-                    currentLevelSum += getSkillLevel(i, baseData[i].levels[level][j].skillID);
-                    maxLevelSum += baseData[i].levels[level][j].max_skill_level;
-                }
+            for (var j = 0; j < treeData.find(obj => obj.treeID == treeID).skills.length; ++j) {
+                var skill = treeData.find(obj => obj.treeID == treeID).skills[j];
+                currentLevelSum += getSkillLevel(i, skill.skillID);
+                maxLevelSum += skill.maxSkillLevel;
             }
 
             percent = currentLevelSum / maxLevelSum;
@@ -202,8 +201,8 @@ function showChart () {
 // TREE
 
 class Tree {
-    constructor (_baseData, _userData, posX, posY) {
-        this.data = _baseData;
+    constructor (_treeData, _userData, posX, posY) {
+        this.data = _treeData;
         this.userData = _userData;
         this.treeContainer = new PIXI.Container();
         this.treeContainer.enableSort = true;
@@ -329,14 +328,13 @@ var tree = undefined;
 
 function showTree (treeID) {
     app.localLoader = new PIXI.loaders.Loader();
-    for (var level = 0; level < baseData[treeID].levels.length; ++level) {
-        for (var i = 0; i < baseData[treeID].levels[level].length; ++i) {
-            app.localLoader.add(baseData[treeID].levels[level][i].skillicon.toString());
-        }
+    for (var j = 0; j < treeData.find(obj => obj.treeID == treeID).skills.length; ++j) {
+        var skill = treeData.find(obj => obj.treeID == treeID).skills[j];
+        app.localLoader.add(skill.skillicon.toString());
     }
 
     app.localLoader.load(function () {
-        tree = new Tree(baseData[treeID], userData.find(obj => obj.treeID == treeID), 0, 30);
+        tree = new Tree(treeData.find(obj => obj.treeID == treeID), userData.find(obj => obj.treeID == treeID), 0, 30);
         app.stage.addChild(tree.treeContainer);
 
         // back button
@@ -358,13 +356,6 @@ function showTree (treeID) {
 
         app.renderer.render(app.stage);
     });
-}
-
-function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    var expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
 function parseJwt (token) {
