@@ -11,8 +11,8 @@ userDataRequest.onreadystatechange = function() {
     if(userDataRequest.readyState == 4 && userDataRequest.status == 200) {
         userData = userDataRequest.response;
         console.log(userData.skillData);
-        if (userData.skillData == undefined) window.open("/user/!!!!VALAMI!!!!!", "_self"); // userhez tree hozzaado
-        else initChart();
+        //if (userData.skillData == undefined) window.open("/user/!!!!VALAMI!!!!!", "_self"); // userhez tree hozzaado
+        //else initChart();
     }
 }
 userDataRequest.send();
