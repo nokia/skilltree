@@ -40,6 +40,7 @@ var app = new PIXI.Application({
 
 app.renderer.autoResize = true;
 window.addEventListener("resize", function() {
+    console.log(window.innerWidth);
     app.renderer.resize(window.innerWidth, window.innerHeight - 30);
     app.renderer.render(app.stage);
 });
