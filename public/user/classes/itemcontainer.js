@@ -159,7 +159,7 @@ class ItemContainer {
             // Enable children which doesn't have other parents with 0 skill level
             var children = this.parentObj.skillData.children;
 
-            //this.parentObj.toggleChildren(children, true);
+            this.parentObj.toggleChildren(children, true);
 
             // Increase skill level
             if (this.skill_level < this.max_skill_level) {
@@ -202,7 +202,7 @@ class ItemContainer {
         if (this.skill_level == 1) {
             var children = this.parentObj.skillData.children;
 
-            //this.parentObj.toggleChildren(children, false);
+            this.parentObj.toggleChildren(children, false);
         }
 
         // Decrease skill level
