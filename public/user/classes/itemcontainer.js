@@ -6,7 +6,7 @@ class ItemContainer {
         this.skillData.skillLevel = this.getSkillLevel(userData, this.skillData.skillID);
 
         //Creating images
-        this.skillicon = new PIXI.Sprite(app.localLoader.resources[this.skillData.skillicon].texture); //100x100
+        this.skillicon = new PIXI.Sprite(app.localLoader.resources[this.skillData.skillIcon].texture); //100x100
         this.skillborder = new PIXI.Sprite(PIXI.loader.resources["pictures/skillborder.png"].texture); //116x116
         this.tick = new PIXI.Sprite(PIXI.loader.resources["pictures/tick.png"].texture);
 
