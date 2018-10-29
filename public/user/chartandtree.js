@@ -220,11 +220,21 @@ class Tree {
         skillLayer.group.enableSort = true;
         app.stage.addChild(skillLayer);
 
+        var level = 0;
+        var i = 0;
         for (var j = 0; j < this.treeData.skills.length; ++j) {
+            if (j > 0) {
+                if (level == this.treeData.skills[j].level) ++i;
+                else {
+                    ++level;
+                    i = 0;
+                }
+            }
+
             this.treeData.skills[j].itemcontainer = new ItemContainer(app, this.treeData, this.userData, this.treeData.skills[j].skillID);
 
             // Positioning of the containers dynamically by level and by index inside level
-            this.treeData.skills[j].itemcontainer.container.position.x = 1 * 130 + (app.renderer.width - 1 * 130) / 2 + posX;
+            this.treeData.skills[j].itemcontainer.container.position.x = i * 130 + (app.renderer.width - i * 130) / 2 + posX;
             this.treeData.skills[j].itemcontainer.container.position.y = this.treeData.skills[j].level * 150 + posY;
 
             this.treeData.skills[j].itemcontainer.container.parentLayer = skillLayer;
