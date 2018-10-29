@@ -1,11 +1,9 @@
 class ItemContainer {
-    constructor(app, baseData, userData, level, i) {
+    constructor(app, baseData, userData, skillID) {
         this.app = app;
-        this.data = baseData;
-        this.skillData = baseData.levels[level][i];
+        this.treeData = treeData;
+        this.skillData = treeData.skills[skillID];
         this.skillData.skillLevel = this.getSkillLevel(userData, this.skillData.skillID);
-        this.level = level;
-        this.i = i;
 
         //Creating images
         this.skillicon = new PIXI.Sprite(app.localLoader.resources[this.skillData.skillicon].texture); //100x100
@@ -14,7 +12,7 @@ class ItemContainer {
 
         //Setting border variables
         this.skillborder.skill_level = this.skillData.skillLevel;
-        this.skillborder.max_skill_level = this.skillData.max_skill_level;
+        this.skillborder.max_skill_level = this.skillData.maxSkillLevel;
         this.skillborder.levelinfo = new PIXI.Text(this.skillborder.skill_level + "/" + this.skillData.max_skill_level);
 
         //Creating details page
@@ -105,9 +103,6 @@ class ItemContainer {
         this.details.addChild(detailsBackground);
         this.details.addChild(detailsForeground);
 
-
-
-
         //Initilaizing container
         this.container = new PIXI.Container();
         this.container.addChild(this.skillicon);
@@ -122,8 +117,6 @@ class ItemContainer {
         this.skillborder.anchor.set(0.5, 0.5);
         this.skillborder.levelinfo.anchor.set(0.5,0.5);
 
-
-
         this.skillicon.position.set(60, 60);
         this.skillborder.position.set(60, 60);
 
@@ -133,7 +126,7 @@ class ItemContainer {
 
         this.details.position.set(116, 0);
 
-        // if it's already maaxed out add the tick
+        // if it's already maxed out add the tick
         if (this.skillborder.skill_level == this.skillborder.max_skill_level) {
             //this.skillborder.filters = [new PIXI.filters.GlowFilter(10, 4, 4, 0xFF4000, 1)];
             this.tick.alpha = 1;
@@ -142,8 +135,6 @@ class ItemContainer {
 
         this.tick.anchor.set(0.5,0.5);
         this.tick.position.set(60,60);
-
-
 
         //Adding events
         this.skillborder.interactive = true;
@@ -165,7 +156,7 @@ class ItemContainer {
             // Enable children which doesn't have other parents with 0 skill level
             var children = this.parentObj.skillData.children;
 
-            this.parentObj.toggleChildren(children, true);
+            //this.parentObj.toggleChildren(children, true);
 
             // Increase skill level
             if (this.skill_level < this.max_skill_level) {
@@ -179,7 +170,7 @@ class ItemContainer {
                 }
 
                 //save level change
-                this.parentObj.skillData.skill_level++;
+                this.parentObj.skillData.skillLevel++;
             }
 
             this.parentObj.app.renderer.render(this.parentObj.app.stage);
@@ -191,7 +182,7 @@ class ItemContainer {
         if (this.skill_level == 1) {
             var children = this.parentObj.skillData.children;
 
-            this.parentObj.toggleChildren (children, false);
+            //this.parentObj.toggleChildren(children, false);
         }
 
         // Decrease skill level
@@ -201,7 +192,7 @@ class ItemContainer {
             this.levelinfo.text = (this.skill_level + "/" + this.max_skill_level);
 
             //save level change
-            this.parentObj.skillData.skill_level--;
+            this.parentObj.skillData.skillLevel--;
         } else return;
         this.parentObj.tick.alpha = 0;
         this.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFFBF00, 1)];
@@ -209,10 +200,10 @@ class ItemContainer {
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
     }
 
-    toggleChildren (children, enable) {
+    /*toggleChildren (children, enable) {
         if (children !== undefined) {
             for (var k = 0; k < children.length; ++k) {
-                var child = this.data[children[k].level][children[k].i];
+                var child = this.treeData.skills[children[k].skillID];
 
                 if (enable) {
                     for (var j = 0; child.zeroSLParents !== undefined && j < child.zeroSLParents.length; ++j) {
@@ -256,7 +247,7 @@ class ItemContainer {
                 this.toggleChildren (child.children, enable)
             }
         }
-    }
+    }*/
 
     onButtonOver() {
         var skillborder = this.parentObj.skillborder;

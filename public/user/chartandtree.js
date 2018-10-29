@@ -202,7 +202,7 @@ function showChart () {
 
 class Tree {
     constructor (_treeData, _userData, posX, posY) {
-        this.data = _treeData;
+        this.treeData = _treeData;
         this.userData = _userData;
         this.treeContainer = new PIXI.Container();
         this.treeContainer.enableSort = true;
@@ -220,23 +220,21 @@ class Tree {
         skillLayer.group.enableSort = true;
         app.stage.addChild(skillLayer);
 
-        for (var level = 0; level < this.data.levels.length; ++level) {
-            for (var i = 0; i < this.data.levels[level].length; ++i) {
-                this.data.levels[level][i].itemcontainer = new ItemContainer(app, this.data, this.userData, level, i);
+        for (var j = 0; j < this.treeData.skills.length; ++j) {
+            this.treeData.skills[j].itemcontainer = new ItemContainer(app, this.treeData, this.userData, j);
 
-                // Positioning of the containers dynamically by level and by index inside level
-                this.data.levels[level][i].itemcontainer.container.position.x = i * 130 + (app.renderer.width - this.data.levels[level].length * 130) / 2 + posX;
-                this.data.levels[level][i].itemcontainer.container.position.y = level * 150 + posY;
+            // Positioning of the containers dynamically by level and by index inside level
+            this.treeData.skills[j].itemcontainer.container.position.x = i * 130 + (app.renderer.width - this.data.levels[level].length * 130) / 2 + posX;
+            this.treeData.skills[j].itemcontainer.container.position.y = level * 150 + posY;
 
-                this.data.levels[level][i].itemcontainer.container.parentLayer = skillLayer;
-                this.treeContainer.addChild(this.data.levels[level][i].itemcontainer.container);
-            }
+            this.treeData.skills[j].itemcontainer.container.parentLayer = skillLayer;
+            this.treeContainer.addChild(this.treeData.skills[j].itemcontainer.container);
         }
 
-        this.drawConnectionLines();
+        //this.drawConnectionLines();
     }
 
-    drawConnectionLines() {
+    /*drawConnectionLines() {
         var connectionGroup = new PIXI.display.Group(-1, false);
 
         for (var level = 0; level < this.data.levels.length; ++level) {
@@ -270,7 +268,7 @@ class Tree {
         }
 
         app.stage.addChild(new PIXI.display.Layer(connectionGroup));
-    }
+    }*/
 
     onDragStart(event) {
         event.drag = false;
