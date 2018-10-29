@@ -56,6 +56,7 @@ app.stage.group.enableSort = true;
 
 // CHART
 
+var sliceCount = userData.length;
 var sliceContainer = new Array(sliceCount);
 var logo;
 
@@ -82,7 +83,6 @@ function initChart() {
     // we have only 2 trees so we need this for now
     var titles = ['Management', 'Web Development', 'Communication', 'Wellbeing', 'Mobile', 'Server Administration', 'Databases', 'Category'];
 
-    var sliceCount = userData.length;
     for (var i = 0; i < sliceCount; i++) {
         var currentLevelSum = 0;
         var maxLevelSum = 0;
