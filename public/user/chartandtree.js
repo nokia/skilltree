@@ -29,16 +29,17 @@ treeDataRequest.onreadystatechange = function() {
 }
 treeDataRequest.send();
 
-var app = new PIXI.Application(
-    {
+var app = new PIXI.Application({
         view: pixiCanvas,
         width: window.innerWidth,
         height: window.innerHeight - 30,
         backgroundColor: 0x183693,
         antialias: true,
         autoStart: false,
-    }
-);
+});
+
+app.renderer.autoResize = true;
+app.renderer.resize(window.innerWidth, window.innerHeight - 30);
 
 function logout(){
     localStorage.setItem("loginToken", "");
