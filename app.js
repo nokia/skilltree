@@ -87,7 +87,7 @@ app.post('/auth', function(req, res) {
                 res.json({
                     success: true,
                     token: token,
-                    message: "jooooooooo",
+                    message: "Authenticated.",
                 });
             }
 

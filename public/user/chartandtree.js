@@ -39,6 +39,16 @@ var app = new PIXI.Application({
         autoStart: false,
 });
 
+
+
+function listTrees(){
+  //console.log("a");
+  var dtc = document.getElementById("dropDownContent");
+  for(i = 0; i < treeData.length; i++){
+    dtc.innerHTML += "<a>" + treeData[i].treeID;
+  }
+}
+
 function logout(){
     localStorage.setItem("loginToken", "");
     window.open("../", "_self");

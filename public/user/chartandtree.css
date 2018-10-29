@@ -18,7 +18,6 @@
 
 .dropDownContent{
   display: none;
-  position: absolute;
   background-color: inherit;
 }
 
@@ -26,7 +25,6 @@
   display: block;
   position: static;
 }
-
 
 .dropDownContent a {
   text-decoration: none;
@@ -37,7 +35,6 @@
   line-height: 26px;
   margin: 1px;
   padding: 1px;
-  line-height: 26px;
 }
 
 #submit{

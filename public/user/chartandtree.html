@@ -14,15 +14,13 @@
       <input type="submit" id="submit" value="Search!">
       <div id = "welcome" class = "welcome">Hello</div>
       <input type="button" class ="headerButton" value="Logout" onClick="logout()">
-      <input type="button" class ="headerButton" value="FAQ">
-      <input type="button" class ="headerButton" value="Bug Report">
       <div class = "dropDown">
-        <input type="button" class ="headerButton" value="Edit">
-        <div class = "dropDownContent">
-          <a>Add Tree</a>
-          <a>Create Tree</a>
+        <input type="button" class ="headerButton" value="Add Tree" onmouseover="listTrees()">
+        <div class = "dropDownContent" id = "dropDownContent">
+          <a>B</a>
         </div>
       </div>
+      <input type="button" class ="headerButton" value="Create Tree">
       </div>
       <canvas id = "pixiCanvas" style = "visibility: hidden;"></canvas>
       <script src = "classes/itemcontainer.js"></script>
