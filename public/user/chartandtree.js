@@ -87,8 +87,8 @@ function initChart() {
         var percent = 0;
 
         if (i < 2) { // temporary, we have only 2 trees
-            for (var j = 0; j < treeData.find(obj => obj.treeID == treeID).skills.length; ++j) {
-                var skill = treeData.find(obj => obj.treeID == treeID).skills[j];
+            for (var j = 0; j < treeData.find(obj => obj.treeID == i).skills.length; ++j) {
+                var skill = treeData.find(obj => obj.treeID == i).skills[j];
                 currentLevelSum += getSkillLevel(i, skill.skillID);
                 maxLevelSum += skill.maxSkillLevel;
             }
