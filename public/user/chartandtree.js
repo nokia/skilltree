@@ -9,6 +9,7 @@ userDataRequest.responseType = "json";
 userDataRequest.onreadystatechange = function() {
     if(userDataRequest.readyState == 4 && userDataRequest.status == 200) {
         userData = userDataRequest.response;
+        console.log(userData);
         initChart();
     }
 }
@@ -22,7 +23,6 @@ treeDataRequest.responseType = "json";
 treeDataRequest.onreadystatechange = function() {
     if(treeDataRequest.readyState == 4 && treeDataRequest.status == 200) {
         treeData = treeDataRequest.response;
-        console.log(treeData);
         initChart();
     }
 }
