@@ -156,4 +156,38 @@ getRoute.get('/treedata', function (req, res) {
 });
 app.use('/get', getRoute);
 
+var setRoute = express.Router();
+setRoute.use(function(req, res, next) {
+    var token = req.get('x-access-token');
+
+    // decode token
+    if (token) {
+        // verifies secret and checks exp
+        jwt.verify(token, app.get('superSecret'), function(err, decoded) {
+            if (err) {
+                return res.json({
+                    success: false,
+                    message: 'Failed to authenticate token.'
+                });
+            } else {
+                req.decoded = decoded;
+                next();
+            }
+        });
+
+    } else {
+        // if there is no token
+        // return an error
+        return res.status(403).send({
+            success: false,
+            message: 'No token provided.'
+        });
+
+    }
+});
+setRoute.post('/skilllevel', function(req, res) {
+
+});
+app.use('/set', setRoute);
+
 app.listen(port);
