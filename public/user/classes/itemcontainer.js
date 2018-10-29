@@ -367,7 +367,7 @@ class ItemContainer {
 
     getSkillLevel (userData, skillID) {
         if (userData != undefined) {
-            console.log(userData);
+            console.log(userData.skills);
             return userData.skills.find(obj => obj.skillID == skillID).skillLevel;
         } else return 0;
     }
