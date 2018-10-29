@@ -174,7 +174,7 @@ class ItemContainer {
 
                 //save level change
                 this.parentObj.skillData.skillLevel++;
-                this.parentObj.userData.find(obj => obj.skillID == this.skillID).skillLevel++;
+                this.parentObj.userData.skills.find(obj => obj.skillID == this.skillID).skillLevel++;
 
                 // sending new skillLevel to server
                 var httpRequest = new XMLHttpRequest();
@@ -213,7 +213,7 @@ class ItemContainer {
 
             //save level change
             this.parentObj.skillData.skillLevel--;
-            this.parentObj.userData.find(obj => obj.skillID == this.skillID).skillLevel--;
+            this.parentObj.userData.skills.find(obj => obj.skillID == this.skillID).skillLevel--;
 
             // sending new skillLevel to server
             var httpRequest = new XMLHttpRequest();
