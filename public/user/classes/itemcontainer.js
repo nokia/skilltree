@@ -174,6 +174,7 @@ class ItemContainer {
 
                 //save level change
                 this.parentObj.skillData.skillLevel++;
+                console.log(userData);
                 this.parentObj.userData.skills.find(obj => obj.skillID == this.parentObj.skillID).skillLevel++;
 
                 // sending new skillLevel to server
