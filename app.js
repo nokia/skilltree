@@ -204,8 +204,8 @@ setRoute.post('/skilllevel', function(req, res) {
                 if (user.skillData.find(obj => obj.treeID == data[i].treeID) == undefined) {
                     user.skillData.push({treeID: data[i].treeID, skills: []});
                 }
-                
-                if (user.skillData.find(obj => obj.treeID == ).skills.find(obj => obj.skillID == data[i].skillID) == undefined) user.skillData.find(obj => obj.treeID).skills.push({skillID: data[i].skillID});
+
+                if (user.skillData.find(obj => obj.treeID == data[i].treeID).skills.find(obj => obj.skillID == data[i].skillID) == undefined) user.skillData.find(obj => obj.treeID).skills.push({skillID: data[i].skillID});
 
                 user.skillData.find(obj => obj.treeID).skills.find(obj => obj.skillID == data[i].skillID).skillLevel = data[i].skillLevel;
 
