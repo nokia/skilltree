@@ -49,7 +49,7 @@ function listTrees(){
     if(!userData.find(obj => obj.treeID == treeData[i].treeID)){
       dtc.innerHTML += "<a>" + treeData[i].treeName + "</a>";
       dtc.choiceID = i;
-      dtc.addEventListener("click", choiceClick(choiceID));
+      dtc.addEventListener("click", choiceClick(dtc.choiceID));
     }
   }
 }
