@@ -244,7 +244,7 @@ class ItemContainer {
 
                 if (enable) {
                     for (var j = 0; child.zeroSLParents !== undefined && j < child.zeroSLParents.length; ++j) {
-                        if (child.zeroSLParents[j].level == this.level && child.zeroSLParents[j].i == this.i) {
+                        if (child.zeroSLParents[j].skillID == this.skillID) {
                             child.zeroSLParents.splice(j, 1);
 
                             if (child.zeroSLParents.length == 0) {
