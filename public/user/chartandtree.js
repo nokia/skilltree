@@ -266,7 +266,7 @@ class Tree {
                     connection.parentGroup = connectionGroup;
 
                     // Saving child's zero skill level parents
-                    if (this.treeData.skills[j].skillLevel == 0) {
+                    if (this.treeData.skills[j].skillLevel == 0 || this.treeData.skills[j].zeroSLParents != undefined) {
                         child.itemcontainer.disable();
 
                         if (child.zeroSLParents === undefined) {
