@@ -1,8 +1,9 @@
 class ItemContainer {
-    constructor(app, treeData, userData, skillID) {
+    constructor(app, treeData, userData, treeID, skillID) {
         this.app = app;
         this.treeData = treeData;
         this.skillData = treeData.skills[skillID];
+        this.skillData.treeID = treeID;
         this.skillData.skillLevel = this.getSkillLevel(userData, this.skillData.skillID);
 
         //Creating images
@@ -171,6 +172,21 @@ class ItemContainer {
 
                 //save level change
                 this.parentObj.skillData.skillLevel++;
+
+                var httpRequest = new XMLHttpRequest();
+                var data = new Array();
+                data.push({treeID: this.parentObj.skillData.treeID, skillID: this.parentObj.skillData.skillID, skillLevel: this.parentObj.skillData.skillLevel});
+
+                httpRequest.open('POST', '/set/skilllevel', true);
+                httpRequest.setRequestHeader('Content-type', 'application/json');
+                //httpRequest.responseType = "json";
+
+                httpRequest.onreadystatechange = function() {
+                    if(httpRequest.readyState == 4 && httpRequest.status == 200) {
+                        this.parentObj.app.renderer.render(this.parentObj.app.stage);
+                    }
+                }
+                httpRequest.send(data);
             }
 
             this.parentObj.app.renderer.render(this.parentObj.app.stage);

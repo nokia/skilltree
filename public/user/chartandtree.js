@@ -201,7 +201,7 @@ function showChart () {
 // TREE
 
 class Tree {
-    constructor (_treeData, _userData, posX, posY) {
+    constructor (treeID, _treeData, _userData, posX, posY) {
         this.treeData = _treeData;
         this.userData = _userData;
         this.treeContainer = new PIXI.Container();
@@ -233,7 +233,7 @@ class Tree {
                 }
             }
 
-            this.treeData.skills[j].itemcontainer = new ItemContainer(app, this.treeData, this.userData, this.treeData.skills[j].skillID);
+            this.treeData.skills[j].itemcontainer = new ItemContainer(app, this.treeData, this.userData, treeID, this.treeData.skills[j].skillID);
 
             // Positioning of the containers dynamically by level and by index inside level
             this.treeData.skills[j].itemcontainer.container.position.x = i * 130 + (app.renderer.width - levelLength * 130) / 2 + posX;
@@ -342,7 +342,7 @@ function showTree (treeID) {
     }
 
     app.localLoader.load(function () {
-        tree = new Tree(treeData.find(obj => obj.treeID == treeID), userData.find(obj => obj.treeID == treeID), 0, 30);
+        tree = new Tree(treeID, treeData.find(obj => obj.treeID == treeID), userData.find(obj => obj.treeID == treeID), 0, 30);
         app.stage.addChild(tree.treeContainer);
 
         // back button
