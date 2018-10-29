@@ -330,7 +330,7 @@ function showTree (treeID) {
     app.localLoader = new PIXI.loaders.Loader();
     for (var j = 0; j < treeData.find(obj => obj.treeID == treeID).skills.length; ++j) {
         var skill = treeData.find(obj => obj.treeID == treeID).skills[j];
-        app.localLoader.add(skill.skillicon.toString());
+        app.localLoader.add(skill.skillIcon.toString());
     }
 
     app.localLoader.load(function () {
