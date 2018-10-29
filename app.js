@@ -188,32 +188,33 @@ setRoute.use(express.json());
 setRoute.post('/skilllevel', function(req, res) {
     var data = req.body;
 
-    for (var i = 0; i < data.length; ++i) {
-        console.log(i);
-        User.findOne({
-            username: req.decoded.username
-        }, function(err, user) {
-            if (err) throw err;
+    User.findOne({
+        username: req.decoded.username
+    }, function(err, user) {
+        if (err) throw err;
 
-            if (!user) {
-                res.json({
-                    success: false,
-                    message: 'User not found.'
+        if (!user) {
+            res.json({
+                success: false,
+                message: 'User not found.'
+            });
+        } else if (user) {
+            if (user.skillData == undefined) user.skillData = new Array();
+            for (var i = 0; i < data.length; ++i) {
+                if (user.skillData.find(obj => obj.treeID == data[i].treeID) == undefined) user.skillData.push({
+                    treeID: data[i].treeID,
+                    skills: []
                 });
-            } else if (user) {
-                if (user.skillData == undefined) user.skillData = new Array();
-                console.log(i);
-                if (user.skillData.find(obj => obj.treeID == data[i].treeID) == undefined) user.skillData.push({treeID: data[i].treeID, skills: []});
                 if (user.skillData.find(obj => obj.treeID).skills.find(obj => obj.skillID == data[i].skillID) == undefined) user.skillData.find(obj => obj.treeID).skills.push({skillID: data[i].skillID});
 
                 user.skillData.find(obj => obj.treeID).skills.find(obj => obj.skillID == data[i].skillID).skillLevel = data[i].skillLevel;
 
-                user.save(function(err) {
+                user.save(function (err) {
                     if (err) throw err;
                 });
             }
-        });
-    }
+        }
+    });
 });
 app.use('/set', setRoute);
 
