@@ -1,5 +1,5 @@
 class ItemContainer {
-    constructor(app, baseData, userData, skillID) {
+    constructor(app, treeData, userData, skillID) {
         this.app = app;
         this.treeData = treeData;
         this.skillData = treeData.skills[skillID];
