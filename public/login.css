@@ -14,10 +14,7 @@ h1 {
     font-size: 23px;
 }
 
-canvas {
-    width: 100%;
-    height: 100%;
-}
+
 
 #loginBox {
     width: 400px;
