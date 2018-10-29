@@ -88,7 +88,7 @@ class ItemContainer {
         detailsForeground.addChild(btn2Container);
 
         // Temporary link
-        if (level == 0 && i == 0) {
+        if (skillID == 0) {
             var link = this.createLink("Nokia website", "https://nokia.com", {fontSize: 12, fill: 0x0000ff}, true);
             link.position.set(detailsMargin, btn1Container.position.y + btn1Container.height + 7);
             detailsForeground.addChild(link);
