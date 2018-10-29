@@ -10,7 +10,7 @@ userDataRequest.responseType = "json";
 userDataRequest.onreadystatechange = function() {
     if(userDataRequest.readyState == 4 && userDataRequest.status == 200) {
         userData = userDataRequest.response;
-        if (userData.skillData == undefined || (userData.skillData != undefined && userData.skillData.length == 0)) window.open("/user/!!!!VALAMI!!!!!", "_self"); // userhez tree hozzaado
+        if (userData.skillData == undefined) window.open("/user/!!!!VALAMI!!!!!", "_self"); // userhez tree hozzaado
         else initChart();
     }
 }
