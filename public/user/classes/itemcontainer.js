@@ -5,6 +5,7 @@ class ItemContainer {
         this.skillData = treeData.skills[skillID];
         this.skillData.treeID = treeID;
         this.skillData.skillLevel = this.getSkillLevel(userData, skillID);
+        this.skillID = skillID;
 
         //Creating images
         this.skillicon = new PIXI.Sprite(app.localLoader.resources[this.skillData.skillIcon].texture); //100x100
@@ -172,6 +173,7 @@ class ItemContainer {
 
                 //save level change
                 this.parentObj.skillData.skillLevel++;
+                this.parentObj.userData.find(obj => obj.skillID == this.skillID).skillLevel++;
 
                 // sending new skillLevel to server
                 var httpRequest = new XMLHttpRequest();
@@ -210,6 +212,7 @@ class ItemContainer {
 
             //save level change
             this.parentObj.skillData.skillLevel--;
+            this.parentObj.userData.find(obj => obj.skillID == this.skillID).skillLevel--;
 
             // sending new skillLevel to server
             var httpRequest = new XMLHttpRequest();
