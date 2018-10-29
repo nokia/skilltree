@@ -269,16 +269,16 @@ class ItemContainer {
                         child.itemcontainer.skillborder.buttonMode = false;
                     }
 
-                    /*var newParent = true;
+                    var newParent = true;
                     for (var j = 0; j < child.zeroSLParents.length; ++j) {
-                        if (child.zeroSLParents[j].level == this.level && child.zeroSLParents[j].i == this.i) {
+                        if (child.zeroSLParents[j].skillID == this.skillID) {
                             newParent = false;
                         }
                     }
                     if (newParent) {
-                        var parent = {level: this.level, i: this.i};
+                        var parent = {skillID: this.skillID};
                         child.zeroSLParents.push(parent);
-                    }*/
+                    }
                 }
 
                 this.toggleChildren (child.children, enable)
