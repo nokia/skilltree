@@ -48,12 +48,7 @@ function listTrees(){
   for(i = 0; i < treeData.length; i++){
     dtc.innerHTML += "<a>" + treeData[i].name + "</a>";
     dtc.choiceID = i;
-    dtc.onClick = clickTree(choiceID);
   }
-}
-
-function clickTree(var cid){
-
 }
 
 function logout(){
