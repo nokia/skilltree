@@ -4,10 +4,10 @@ const bodyParser  = require('body-parser');
 const morgan      = require('morgan');
 const mongoose    = require('mongoose');
 const jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
-var cookieParser = require('cookie-parser');
 
 var config = require('./config'); // get our config file
-var User   = require('./usermodel'); // get our mongoose model
+var User   = require('./models/usermodel'); // get our mongoose model
+var Trees = require('./models/treemodel');
 var pbkdf2 = require('./pbkdf2'); // get hash generator and pw checker
 
 const app = express();
@@ -97,14 +97,13 @@ app.post('/auth', function(req, res) {
 });
 
 // serving static files and opening login.html
-app.use(express.static('./login'));
-app.get('/', (req, res) => res.sendFile('login.html', { root: path.join(__dirname, './login') }));
+app.use(express.static('./public'));
+app.get('/', (req, res) => res.sendFile('login.html', { root: path.join(__dirname, './public') }));
+app.get('/user', (req, res) => res.sendFile('chartandtree.html', { root: path.join(__dirname, './public/user') }));
 
-var protectedRoutes = express.Router();
-protectedRoutes.use(cookieParser());
-protectedRoutes.use(function(req, res, next) {
-    // check header or url parameters or post parameters for token
-    var token = req.cookies.loginToken;
+var getRoute = express.Router();
+getRoute.use(function(req, res, next) {
+    var token = req.get('x-access-token');
 
     // decode token
     if (token) {
@@ -131,8 +130,93 @@ protectedRoutes.use(function(req, res, next) {
 
     }
 });
-protectedRoutes.use(express.static('./protected'));
-protectedRoutes.get('/', (req, res) => res.sendFile('chartandtree.html', { root: path.join(__dirname, './protected') }));
-app.use('/protected', protectedRoutes);
+getRoute.get('/userdata', function (req, res) {
+    User.findOne({
+        username: req.decoded.username
+    }, function(err, user) {
+        if (err) throw err;
+
+        if (!user) {
+            res.json({
+                success: false,
+                message: 'User not found.'
+            });
+        } else if (user) {
+            return res.json(user.skillData);
+        }
+    });
+});
+getRoute.get('/treedata', function (req, res) {
+    Trees.find({}, function (err, trees) {
+        if (err) throw err;
+
+        return res.json(trees);
+    });
+});
+app.use('/get', getRoute);
+
+var setRoute = express.Router();
+setRoute.use(function(req, res, next) {
+    var token = req.get('x-access-token');
+
+    // decode token
+    if (token) {
+        // verifies secret and checks exp
+        jwt.verify(token, app.get('superSecret'), function(err, decoded) {
+            if (err) {
+                return res.json({
+                    success: false,
+                    message: 'Failed to authenticate token.'
+                });
+            } else {
+                req.decoded = decoded;
+                next();
+            }
+        });
+
+    } else {
+        // if there is no token
+        // return an error
+        return res.status(403).send({
+            success: false,
+            message: 'No token provided.'
+        });
+
+    }
+});
+setRoute.use(express.json());
+setRoute.post('/skilllevel', function(req, res) {
+    var data = req.body;
+
+    User.findOne({
+        username: req.decoded.username
+    }, function(err, user) {
+        if (err) throw err;
+
+        if (!user) {
+            res.json({
+                success: false,
+                message: 'User not found.'
+            });
+        } else if (user) {
+            if (user.skillData == undefined) user.skillData = new Array();
+            for (var i = 0; i < data.length; ++i) {
+                if (user.skillData.find(obj => obj.treeID == data[i].treeID) == undefined) {
+                    user.skillData.push({treeID: data[i].treeID, skills: []});
+                }
+
+                if (user.skillData.find(obj => obj.treeID == data[i].treeID).skills.find(obj => obj.skillID == data[i].skillID) == undefined) user.skillData.find(obj => obj.treeID).skills.push({skillID: data[i].skillID});
+
+                user.skillData.find(obj => obj.treeID== data[i].treeID).skills.find(obj => obj.skillID == data[i].skillID).skillLevel = data[i].skillLevel;
+
+                user.save(function (err) {
+                    if (err) throw err;
+                    console.log('sss');
+                });
+            }
+        }
+    });
+});
+app.use('/set', setRoute);
 
 app.listen(port);

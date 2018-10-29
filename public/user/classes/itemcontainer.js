@@ -1,22 +1,20 @@
 class ItemContainer {
-    constructor(app, data, level, i) {
+    constructor(app, treeData, userData, treeID, skillID) {
         this.app = app;
-        this.data = data;
-        this.skillData = data[level][i];
-        this.level = level;
-        this.i = i;
+        this.treeData = treeData; // only this tree's data
+        this.skillData = treeData.skills[skillID];
+        this.skillData.treeID = treeID;
+        this.skillData.skillLevel = this.getSkillLevel(userData, skillID);
 
         //Creating images
-        this.skillicon = new PIXI.Sprite(app.localLoader.resources[this.skillData.skillicon].texture); //100x100
+        this.skillicon = new PIXI.Sprite(app.localLoader.resources[this.skillData.skillIcon].texture); //100x100
         this.skillborder = new PIXI.Sprite(PIXI.loader.resources["pictures/skillborder.png"].texture); //116x116
         this.tick = new PIXI.Sprite(PIXI.loader.resources["pictures/tick.png"].texture);
 
         //Setting border variables
-        this.skillborder.skill_level = this.skillData.skill_level;
-        this.skillborder.max_skill_level = this.skillData.max_skill_level;
-        this.skillborder.levelinfo = new PIXI.Text(this.skillData.skill_level + "/" + this.skillData.max_skill_level);
-
-
+        this.skillborder.skill_level = this.skillData.skillLevel;
+        this.skillborder.max_skill_level = this.skillData.maxSkillLevel;
+        this.skillborder.levelinfo = new PIXI.Text(this.skillborder.skill_level + "/" + this.skillborder.max_skill_level);
 
         //Creating details page
         var detailsWidth = 240;
@@ -91,7 +89,7 @@ class ItemContainer {
         detailsForeground.addChild(btn2Container);
 
         // Temporary link
-        if (level == 0 && i == 0) {
+        if (skillID == 0) {
             var link = this.createLink("Nokia website", "https://nokia.com", {fontSize: 12, fill: 0x0000ff}, true);
             link.position.set(detailsMargin, btn1Container.position.y + btn1Container.height + 7);
             detailsForeground.addChild(link);
@@ -105,9 +103,6 @@ class ItemContainer {
 
         this.details.addChild(detailsBackground);
         this.details.addChild(detailsForeground);
-
-
-
 
         //Initilaizing container
         this.container = new PIXI.Container();
@@ -123,8 +118,6 @@ class ItemContainer {
         this.skillborder.anchor.set(0.5, 0.5);
         this.skillborder.levelinfo.anchor.set(0.5,0.5);
 
-
-
         this.skillicon.position.set(60, 60);
         this.skillborder.position.set(60, 60);
 
@@ -134,7 +127,7 @@ class ItemContainer {
 
         this.details.position.set(116, 0);
 
-        // if it's already maaxed out add the tick
+        // if it's already maxed out add the tick
         if (this.skillborder.skill_level == this.skillborder.max_skill_level) {
             //this.skillborder.filters = [new PIXI.filters.GlowFilter(10, 4, 4, 0xFF4000, 1)];
             this.tick.alpha = 1;
@@ -143,8 +136,6 @@ class ItemContainer {
 
         this.tick.anchor.set(0.5,0.5);
         this.tick.position.set(60,60);
-
-
 
         //Adding events
         this.skillborder.interactive = true;
@@ -166,7 +157,7 @@ class ItemContainer {
             // Enable children which doesn't have other parents with 0 skill level
             var children = this.parentObj.skillData.children;
 
-            this.parentObj.toggleChildren(children, true);
+            //this.parentObj.toggleChildren(children, true);
 
             // Increase skill level
             if (this.skill_level < this.max_skill_level) {
@@ -180,7 +171,23 @@ class ItemContainer {
                 }
 
                 //save level change
-                this.parentObj.skillData.skill_level++;
+                this.parentObj.skillData.skillLevel++;
+
+                // sending new skillLevel to server
+                var httpRequest = new XMLHttpRequest();
+                var data = new Array();
+                data.push({treeID: this.parentObj.skillData.treeID, skillID: this.parentObj.skillData.skillID, skillLevel: this.parentObj.skillData.skillLevel});
+
+                httpRequest.open('POST', '/set/skilllevel', true);
+                httpRequest.setRequestHeader('Content-type', 'application/json');
+                httpRequest.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+
+                httpRequest.onreadystatechange = function() {
+                    if(httpRequest.readyState == 4 && httpRequest.status == 200) {
+                        this.parentObj.app.renderer.render(this.parentObj.app.stage);
+                    }
+                }
+                httpRequest.send(JSON.stringify(data));
             }
 
             this.parentObj.app.renderer.render(this.parentObj.app.stage);
@@ -192,7 +199,7 @@ class ItemContainer {
         if (this.skill_level == 1) {
             var children = this.parentObj.skillData.children;
 
-            this.parentObj.toggleChildren (children, false);
+            //this.parentObj.toggleChildren(children, false);
         }
 
         // Decrease skill level
@@ -202,7 +209,23 @@ class ItemContainer {
             this.levelinfo.text = (this.skill_level + "/" + this.max_skill_level);
 
             //save level change
-            this.parentObj.skillData.skill_level--;
+            this.parentObj.skillData.skillLevel--;
+
+            // sending new skillLevel to server
+            var httpRequest = new XMLHttpRequest();
+            var data = new Array();
+            data.push({treeID: this.parentObj.skillData.treeID, skillID: this.parentObj.skillData.skillID, skillLevel: this.parentObj.skillData.skillLevel});
+
+            httpRequest.open('POST', '/set/skilllevel', true);
+            httpRequest.setRequestHeader('Content-type', 'application/json');
+            httpRequest.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+
+            httpRequest.onreadystatechange = function() {
+                if(httpRequest.readyState == 4 && httpRequest.status == 200) {
+                    this.parentObj.app.renderer.render(this.parentObj.app.stage);
+                }
+            }
+            httpRequest.send(JSON.stringify(data));
         } else return;
         this.parentObj.tick.alpha = 0;
         this.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFFBF00, 1)];
@@ -210,10 +233,10 @@ class ItemContainer {
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
     }
 
-    toggleChildren (children, enable) {
+    /*toggleChildren (children, enable) {
         if (children !== undefined) {
             for (var k = 0; k < children.length; ++k) {
-                var child = this.data[children[k].level][children[k].i];
+                var child = this.treeData.skills[children[k].skillID];
 
                 if (enable) {
                     for (var j = 0; child.zeroSLParents !== undefined && j < child.zeroSLParents.length; ++j) {
@@ -257,7 +280,7 @@ class ItemContainer {
                 this.toggleChildren (child.children, enable)
             }
         }
-    }
+    }*/
 
     onButtonOver() {
         var skillborder = this.parentObj.skillborder;
@@ -340,5 +363,12 @@ class ItemContainer {
         this.button = button;
 
         return link;
+    }
+
+    getSkillLevel (userData, skillID) {
+        if (userData != undefined) {
+            if (userData.skills.find(obj => obj.skillID == skillID) != undefined) return userData.skills.find(obj => obj.skillID == skillID).skillLevel;
+            else return 0;
+        } else return 0;
     }
 }

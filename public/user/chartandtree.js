@@ -1,4 +1,33 @@
-var allData = dataJson;
+var treeData = undefined;
+var userData = undefined;
+
+// get user's data (skilllevels) from server
+var userDataRequest = new XMLHttpRequest();
+userDataRequest.open('GET', '/get/userdata', true);
+userDataRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+userDataRequest.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+userDataRequest.responseType = "json";
+userDataRequest.onreadystatechange = function() {
+    if(userDataRequest.readyState == 4 && userDataRequest.status == 200) {
+        userData = userDataRequest.response;
+        initChart();
+    }
+}
+userDataRequest.send();
+
+// get the data of all trees (treeID, name, skills(level(in the tree), maxSkillLevel, ...))
+var treeDataRequest = new XMLHttpRequest();
+treeDataRequest.open('GET', '/get/treedata', true);
+treeDataRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+treeDataRequest.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+treeDataRequest.responseType = "json";
+treeDataRequest.onreadystatechange = function() {
+    if(treeDataRequest.readyState == 4 && treeDataRequest.status == 200) {
+        treeData = treeDataRequest.response;
+        initChart();
+    }
+}
+treeDataRequest.send();
 
 var app = new PIXI.Application(
     {
@@ -12,15 +41,8 @@ var app = new PIXI.Application(
 );
 
 function logout(){
-  setCookie("loginToken", "", 1);
-  window.open("../", "_self");
-}
-
-function setCookie(cname, cvalue) {
-    var d = new Date();
-    d.setTime(d.getTime() + 1);
-    var expires = "expires="+d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    localStorage.setItem("loginToken", "");
+    window.open("../", "_self");
 }
 
 PIXI.loader.add("pictures/skillborder.png")
@@ -38,9 +60,15 @@ var sliceCount = 8;
 var sliceContainer = new Array(sliceCount);
 var logo;
 
+var counter = 0;                // ?????
 function initChart() {
-    // get username from token and write out
-    var tokenPayload = parseJwt(getCookie("loginToken"));
+    counter++;                  // ????? initChart waits for pixi loader, tree data and user data, only runs when we have all these
+    if (counter < 3) {          // ?????
+        return;                 // ?????
+    }
+
+    // get username from token and show it
+    var tokenPayload = parseJwt(localStorage.getItem("loginToken"));
     document.getElementById("welcome").innerHTML = "Hello " + tokenPayload.username + "!";
 
     document.getElementById("pixiCanvas").style.visibility = "visible";
@@ -48,11 +76,11 @@ function initChart() {
     var x = window.innerWidth / 2;
     var y = window.innerHeight / 2;
 
-
     var width = 240;
     var h1 = 60;
     var h2 = h1 + width;
 
+    // we have only 2 trees so we need this for now
     var titles = ['Management', 'Web Development', 'Communication', 'Wellbeing', 'Mobile', 'Server Administration', 'Databases', 'Category'];
 
     for (var i = 0; i < sliceCount; i++) {
@@ -61,11 +89,10 @@ function initChart() {
         var percent = 0;
 
         if (i < 2) { // temporary, we have only 2 trees
-            for (var level = 0; level < allData[i].length; ++level) {
-                for (var j = 0; j < allData[i][level].length; ++j) {
-                    currentLevelSum += allData[i][level][j].skill_level;
-                    maxLevelSum += allData[i][level][j].max_skill_level;
-                }
+            for (var j = 0; j < treeData.find(obj => obj.treeID == i).skills.length; ++j) {
+                var skill = treeData.find(obj => obj.treeID == i).skills[j];
+                currentLevelSum += getSkillLevel(i, skill.skillID);
+                maxLevelSum += skill.maxSkillLevel;
             }
 
             percent = currentLevelSum / maxLevelSum;
@@ -122,14 +149,7 @@ function initChart() {
 
         app.stage.addChild(sliceContainer[i]);
 
-        /*
-        *
-        *
-        *  WIP titles
-        *
-        *
-         */
-
+        // creates tree name at the chart
         var text = new PIXI.Text(titles[i], {fill: '#ffffff', wordWrap: true, wordWrapWidth: 200, align: 'center'});
 
         var points = [];
@@ -154,14 +174,6 @@ function initChart() {
         app.stage.addChild(rope);
         rope.position.set(window.innerWidth / 2, window.innerHeight / 2);
         sliceContainer[i].title = rope;
-
-        /*
-        *
-        *
-        *
-        *
-        *
-         */
     }
 
     logo = new PIXI.Sprite(PIXI.loader.resources["tree.png"].texture);
@@ -192,8 +204,9 @@ function showChart () {
 // TREE
 
 class Tree {
-    constructor (data, posX, posY) {
-        this.data = data;
+    constructor (treeID, _treeData, _userData, posX, posY) {
+        this.treeData = _treeData; // contains only this tree's data
+        this.userData = _userData; // contains user's data for this tree
         this.treeContainer = new PIXI.Container();
         this.treeContainer.enableSort = true;
 
@@ -210,17 +223,27 @@ class Tree {
         skillLayer.group.enableSort = true;
         app.stage.addChild(skillLayer);
 
-        for (var level = 0; level < data.length; ++level) {
-            for (var i = 0; i < data[level].length; ++i) {
-                data[level][i].itemcontainer = new ItemContainer(app, data, level, i);
+        var level = 0;                                                                      // ????? for positioning itemcontainers horizontlly
+        var i = 0;                                                                          // ?????
+        var levelLength = this.treeData.skills.filter(obj => obj.level == level).length;    // ?????
+        for (var j = 0; j < this.treeData.skills.length; ++j) {
+            if (j > 0) {                                                                    // ?????
+                if (level == this.treeData.skills[j].level) ++i;                            // ?????
+                else {                                                                      // ?????
+                    ++level;                                                                // ?????
+                    i = 0;                                                                  // ?????
+                    levelLength = this.treeData.skills.filter(obj => obj.level == level).length;    // ?????
+                }                                                                           // ?????
+            }                                                                               // ?????
 
-                // Positioning of the containers dynamically by level and by index inside level
-                data[level][i].itemcontainer.container.position.x = i * 130 + (app.renderer.width - data[level].length * 130) / 2 + posX;
-                data[level][i].itemcontainer.container.position.y = level * 150 + posY;
+            this.treeData.skills[j].itemcontainer = new ItemContainer(app, this.treeData, this.userData, treeID, this.treeData.skills[j].skillID);
 
-                data[level][i].itemcontainer.container.parentLayer = skillLayer;
-                this.treeContainer.addChild(data[level][i].itemcontainer.container);
-            }
+            // Positioning of the containers dynamically by level and by index inside level
+            this.treeData.skills[j].itemcontainer.container.position.x = i * 130 + (app.renderer.width - levelLength * 130) / 2 + posX; // ?????
+            this.treeData.skills[j].itemcontainer.container.position.y = this.treeData.skills[j].level * 150 + posY;
+
+            this.treeData.skills[j].itemcontainer.container.parentLayer = skillLayer;
+            this.treeContainer.addChild(this.treeData.skills[j].itemcontainer.container);
         }
 
         this.drawConnectionLines();
@@ -229,31 +252,29 @@ class Tree {
     drawConnectionLines() {
         var connectionGroup = new PIXI.display.Group(-1, false);
 
-        for (var level = 0; level < this.data.length; ++level) {
-            for (var i = 0; i < this.data[level].length; ++i) {
-                if (this.data[level][i].children !== undefined) {
-                    for (var k = 0; k < this.data[level][i].children.length; ++k) {
-                        var child = this.data[this.data[level][i].children[k].level][this.data[level][i].children[k].i];
+        for (var j = 0; j < this.treeData.skills.length; ++j) {
+            if (this.treeData.skills[j].children !== undefined) {
+                for (var k = 0; k < this.treeData.skills[j].children.length; ++k) {
+                    var child = this.treeData.skills.find(obj => obj.skillID == this.treeData.skills[j].children[k].skillID);
 
-                        // Draw the line
-                        var connection = new PIXI.Graphics();
-                        connection.lineStyle(4, 0xffffff);
-                        connection.moveTo(this.data[level][i].itemcontainer.container.x + this.data[level][i].itemcontainer.skillborder.width / 2, this.data[level][i].itemcontainer.container.position.y + this.data[level][i].itemcontainer.skillborder.height  - 8);
-                        connection.lineTo(child.itemcontainer.container.position.x + child.itemcontainer.skillborder.width / 2, child.itemcontainer.container.position.y + 5);
+                    // Draw the line
+                    var connection = new PIXI.Graphics();
+                    connection.lineStyle(4, 0xffffff);
+                    connection.moveTo(this.treeData.skills[j].itemcontainer.container.x + this.treeData.skills[j].itemcontainer.skillborder.width / 2, this.treeData.skills[j].itemcontainer.container.position.y + this.treeData.skills[j].itemcontainer.skillborder.height - 8);
+                    connection.lineTo(child.itemcontainer.container.position.x + child.itemcontainer.skillborder.width / 2, child.itemcontainer.container.position.y + 5);
 
-                        // Add the line
-                        this.treeContainer.addChild(connection);
-                        connection.parentGroup = connectionGroup;
+                    // Add the line
+                    this.treeContainer.addChild(connection);
+                    connection.parentGroup = connectionGroup;
 
-                        // Saving child's zero skill level parents
-                        if (this.data[level][i].skill_level == 0) {
-                            child.itemcontainer.disable();
+                    // Saving child's zero skill level parents
+                    if (this.treeData.skills[j].skillLevel == 0) {
+                        child.itemcontainer.disable();
 
-                            if (child.zeroSLParents === undefined) {
-                                child.zeroSLParents = new Array();
-                            }
-                            child.zeroSLParents.push({ level: level, i: i });
+                        if (child.zeroSLParents === undefined) {
+                            child.zeroSLParents = new Array();
                         }
+                        child.zeroSLParents.push({skillID: this.treeData.skills[j].skillID});
                     }
                 }
             }
@@ -276,6 +297,7 @@ class Tree {
         app.start();
     }
 
+    // not sure if we need dragging
     onDragEnd(event) {
         var obj = event.currentTarget;
         if (!obj.dragging) return;
@@ -317,15 +339,15 @@ class Tree {
 var tree = undefined;
 
 function showTree (treeID) {
+    // load the tree's pictures
     app.localLoader = new PIXI.loaders.Loader();
-    for (var level = 0; level < allData[treeID].length; ++level) {
-        for (var i = 0; i < allData[treeID][level].length; ++i) {
-            app.localLoader.add(allData[treeID][level][i].skillicon.toString());
-        }
+    for (var j = 0; j < treeData.find(obj => obj.treeID == treeID).skills.length; ++j) {
+        var skill = treeData.find(obj => obj.treeID == treeID).skills[j];
+        app.localLoader.add(skill.skillIcon.toString());
     }
 
     app.localLoader.load(function () {
-        tree = new Tree(allData[treeID], 0, 30);
+        tree = new Tree(treeID, treeData.find(obj => obj.treeID == treeID), userData.find(obj => obj.treeID == treeID), 0, 30);
         app.stage.addChild(tree.treeContainer);
 
         // back button
@@ -349,31 +371,16 @@ function showTree (treeID) {
     });
 }
 
-function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    var expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
-
 function parseJwt (token) {
     var base64Url = token.split('.')[1];
     var base64 = base64Url.replace('-', '+').replace('_', '/');
     return JSON.parse(window.atob(base64));
 };
+
+function getSkillLevel (treeID, skillID) {
+    if (userData.find(obj => obj.treeID == treeID) != undefined) {
+        if (userData.find(obj => obj.treeID == treeID).skills.find(obj => obj.skillID == skillID) != undefined) {
+            return userData.find(obj => obj.treeID == treeID).skills.find(obj => obj.skillID == skillID).skillLevel;
+        } else return 0;
+    } else return 0;
+}
