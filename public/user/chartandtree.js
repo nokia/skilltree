@@ -66,8 +66,8 @@ function choiceClick(cid){
     if(req.readyState == 4 && req.status == 200){
       location.reload();
     }
-    req.send(JSON.stringify(data));
   }
+  req.send(JSON.stringify(data));
 }
 
 function logout(){
