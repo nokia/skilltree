@@ -56,8 +56,7 @@ app.stage.group.enableSort = true;
 
 // CHART
 
-var sliceCount = userData.length;
-var sliceContainer = new Array(sliceCount);
+var sliceContainer;
 var logo;
 
 var counter = 0;                // ?????
@@ -66,6 +65,9 @@ function initChart() {
     if (counter < 3) {          // ?????
         return;                 // ?????
     }
+
+    var sliceCount = userData.length;
+    sliceContainer = new Array(sliceCount);
 
     // get username from token and show it
     var tokenPayload = parseJwt(localStorage.getItem("loginToken"));
