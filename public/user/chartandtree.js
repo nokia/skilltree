@@ -46,8 +46,10 @@ function listTrees(){
   var dtc = document.getElementById("dropDownContent");
   dtc.innerHTML = "";
   for(i = 0; i < treeData.length; i++){
-    dtc.innerHTML += "<a>" + treeData[i].name + "</a>";
-    dtc.choiceID = i;
+    if(!userData.find(obj => obj.treeID == treeData[i].treeID)){
+      dtc.innerHTML += "<a>" + treeData[i].treeName + "</a>";
+      dtc.choiceID = i;
+    }
   }
 }
 
