@@ -187,7 +187,7 @@ class ItemContainer {
                         this.parentObj.app.renderer.render(this.parentObj.app.stage);
                     }
                 }
-                httpRequest.send(data);
+                httpRequest.send(JSON.stringify(data));
             }
 
             this.parentObj.app.renderer.render(this.parentObj.app.stage);
