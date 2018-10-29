@@ -10,8 +10,8 @@ userDataRequest.responseType = "json";
 userDataRequest.onreadystatechange = function() {
     if(userDataRequest.readyState == 4 && userDataRequest.status == 200) {
         userData = userDataRequest.response;
-        if (userData.length == 0) window.open("/user/!!!!VALAMI!!!!!", "_self"); // userhez tree hozzaado
-        else initChart();
+        //if (userData.length == 0) window.open("/user/!!!!VALAMI!!!!!", "_self"); // userhez tree hozzaado
+        /*else*/ initChart();
     }
 }
 userDataRequest.send();
@@ -32,12 +32,26 @@ treeDataRequest.send();
 
 var app = new PIXI.Application({
         view: pixiCanvas,
-        width: window.innerWidth,
-        height: window.innerHeight - 30,
+        width: window.innerWidth - 20,
+        height: window.innerHeight - 50,
         backgroundColor: 0x183693,
         antialias: true,
         autoStart: false,
 });
+
+
+
+function listTrees(){
+  //console.log("a");
+  var dtc = document.getElementById("dropDownContent");
+  dtc.innerHTML = "";
+  for(i = 0; i < treeData.length; i++){
+    if(!userData.find(obj => obj.treeID == treeData[i].treeID)){
+      dtc.innerHTML += "<a>" + treeData[i].treeName + "</a>";
+      dtc.choiceID = i;
+    }
+  }
+}
 
 function logout(){
     localStorage.setItem("loginToken", "");

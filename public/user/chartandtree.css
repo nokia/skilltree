@@ -2,14 +2,39 @@
   padding: 0;
   margin: 0;
   background-color: #183693;
-  overflow: hidden;
 }
 
-#topLine{
+.topLine{
   width: 100%;
   background-color: #0b1842;
   height: 30px;
-  top: auto;
+}
+
+.dropDown{
+  background-color: inherit;
+  position: relative;
+  display: inline-block;
+}
+
+.dropDownContent{
+  display: none;
+  background-color: inherit;
+}
+
+.dropDown:hover .dropDownContent{
+  display: block;
+  position: static;
+}
+
+.dropDownContent a {
+  text-decoration: none;
+  display: block;
+  background-color: inherit;
+  color: white;
+  cursor: pointer;
+  line-height: 26px;
+  margin: 1px;
+  padding: 1px;
 }
 
 #submit{
@@ -20,7 +45,7 @@
   font-weight: bold;
   min-height: 24px;
   min-width: 60px;
-  background-color: #0b1842;
+  background-color: #0D3060;
   right: 0px;
   margin-right: 3px;
 }
@@ -65,7 +90,6 @@
   font-weight: bold;
   min-height: 26px;
   min-width: 60px;
-  text-align: center;
   line-height: 26px;
   border: 0px;
 }
