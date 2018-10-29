@@ -10,7 +10,8 @@ userDataRequest.responseType = "json";
 userDataRequest.onreadystatechange = function() {
     if(userDataRequest.readyState == 4 && userDataRequest.status == 200) {
         userData = userDataRequest.response;
-        initChart();
+        if (userData.length == 0) window.open("/user/!!!!VALAMI!!!!!", "_self"); // userhez tree hozzaado
+        else initChart();
     }
 }
 userDataRequest.send();
@@ -54,8 +55,7 @@ app.stage.group.enableSort = true;
 
 // CHART
 
-var sliceCount = 8;
-var sliceContainer = new Array(sliceCount);
+var sliceContainer;
 var logo;
 
 var counter = 0;                // ?????
@@ -64,6 +64,9 @@ function initChart() {
     if (counter < 3) {          // ?????
         return;                 // ?????
     }
+
+    var sliceCount = userData.length;
+    sliceContainer = new Array(sliceCount);
 
     // get username from token and show it
     var tokenPayload = parseJwt(localStorage.getItem("loginToken"));
@@ -86,15 +89,13 @@ function initChart() {
         var maxLevelSum = 0;
         var percent = 0;
 
-        if (i < 2) { // temporary, we have only 2 trees
-            for (var j = 0; j < treeData.find(obj => obj.treeID == i).skills.length; ++j) {
-                var skill = treeData.find(obj => obj.treeID == i).skills[j];
-                currentLevelSum += getSkillLevel(i, skill.skillID);
-                maxLevelSum += skill.maxSkillLevel;
-            }
+        for (var j = 0; j < treeData.find(obj => obj.treeID == userData[i].treeID).skills.length; ++j) {
+            var skill = treeData.find(obj => obj.treeID == userData[i].treeID).skills[j];
+            currentLevelSum += getSkillLevel(i, skill.skillID);
+            maxLevelSum += skill.maxSkillLevel;
+        }
 
-            percent = currentLevelSum / maxLevelSum;
-        } else percent = 0;
+        percent = currentLevelSum / maxLevelSum;
 
         var tempContainer = new PIXI.Container();
         tempContainer.id = i;
@@ -148,7 +149,7 @@ function initChart() {
         app.stage.addChild(sliceContainer[i]);
 
         // creates tree name at the chart
-        var text = new PIXI.Text(titles[i], {fill: '#ffffff', wordWrap: true, wordWrapWidth: 200, align: 'center'});
+        var text = new PIXI.Text(treeData.find(obj => obj.treeID == userData[i].treeID).treeName, {fill: '#ffffff', wordWrap: true, wordWrapWidth: 200, align: 'center'});
 
         var points = [];
         var radius = 320 + (text.height / 29 - 1) * 15;
