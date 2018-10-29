@@ -49,25 +49,23 @@ function listTrees(){
     if(!userData.find(obj => obj.treeID == treeData[i].treeID)){
       dtc.innerHTML += "<a>" + treeData[i].treeName + "</a>";
       dtc.choiceID = i;
-      dtc.addEventListener("click", choiceClick(dtc.choiceID));
+      dtc.addEventListener("click", function() {
+          var req = new XMLHttpRequest();
+          var data = new Array();
+          data.push(dtc.choiceID);
+
+          req.open('POST', '/set/mytrees', true);
+          req.setRequestHeader('Content-type', 'application/json');
+          req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+          req.onreadystatechange = function() {
+              if(req.readyState == 4 && req.status == 200){
+                  location.reload();
+              }
+          }
+          req.send(JSON.stringify(data));
+      });
     }
   }
-}
-
-function choiceClick(cid){
-  var req = new XMLHttpRequest();
-  var data = new Array();
-  data.push(cid);
-
-  req.open('POST', '/set/mytrees', true);
-  req.setRequestHeader('Content-type', 'application/json');
-  req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-  req.onreadystatechange = function() {
-    if(req.readyState == 4 && req.status == 200){
-      location.reload();
-    }
-  }
-  req.send(JSON.stringify(data));
 }
 
 function logout(){
