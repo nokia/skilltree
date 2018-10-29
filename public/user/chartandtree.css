@@ -2,7 +2,6 @@
   padding: 0;
   margin: 0;
   background-color: #183693;
-  font-family: Arial;
 }
 
 .topLine{
@@ -30,13 +29,14 @@
 
 
 .dropDownContent a {
-  padding: inherit;
   text-decoration: none;
   display: block;
   background-color: inherit;
   color: white;
   cursor: pointer;
-  text-align: center;
+  line-height: 26px;
+  margin: 1px;
+  padding: 1px;
   line-height: 26px;
 }
 
@@ -93,7 +93,6 @@
   font-weight: bold;
   min-height: 26px;
   min-width: 60px;
-  text-align: center;
   line-height: 26px;
   border: 0px;
 }
