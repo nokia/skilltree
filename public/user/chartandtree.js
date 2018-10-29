@@ -9,7 +9,6 @@ userDataRequest.responseType = "json";
 userDataRequest.onreadystatechange = function() {
     if(userDataRequest.readyState == 4 && userDataRequest.status == 200) {
         userData = userDataRequest.response;
-        console.log(userData);
         initChart();
     }
 }
