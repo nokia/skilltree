@@ -39,7 +39,10 @@ var app = new PIXI.Application({
 });
 
 app.renderer.autoResize = true;
-app.renderer.resize(window.innerWidth, window.innerHeight - 30);
+window.addEventListener("resize", function() {
+    app.renderer.resize(window.innerWidth, window.innerHeight - 30);
+    app.renderer.render(app.stage);
+});
 
 function logout(){
     localStorage.setItem("loginToken", "");
