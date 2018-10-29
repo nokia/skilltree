@@ -10,7 +10,6 @@ userDataRequest.responseType = "json";
 userDataRequest.onreadystatechange = function() {
     if(userDataRequest.readyState == 4 && userDataRequest.status == 200) {
         userData = userDataRequest.response;
-        console.log(userData);
         if (userData.length == 0) window.open("/user/!!!!VALAMI!!!!!", "_self"); // userhez tree hozzaado
         else initChart();
     }
