@@ -201,8 +201,8 @@ setRoute.post('/mytrees', function(req, res) {
         } else if (user) {
             if (user.skillData == undefined) user.skillData = new Array();
             for (var i = 0; i < data.length; ++i) {
-                if (user.skillData.find(obj => obj.treeID == data[i].treeID) == undefined) {
-                    user.skillData.push({treeID: data[i].treeID, skills: []});
+                if (user.skillData.find(obj => obj.treeID == data[i]) == undefined) {
+                    user.skillData.push({treeID: data[i], skills: []});
                 }
 
                 user.save(function (err) {
