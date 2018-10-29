@@ -240,7 +240,7 @@ class Tree {
         for (var j = 0; j < this.treeData.skills.length; ++j) {
             if (this.treeData.skills[j].children !== undefined) {
                 for (var k = 0; k < this.treeData.skills[j].children.length; ++k) {
-                    var child = this.treeData.skills.find(obj => obj.skillID == this.treeData.skills[j].skillID);
+                    var child = this.treeData.skills.find(obj => obj.skillID == this.treeData.skills[j].children[k].skillID);
 
                     // Draw the line
                     var connection = new PIXI.Graphics();
