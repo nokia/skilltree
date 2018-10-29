@@ -209,6 +209,8 @@ setRoute.post('/skilllevel', function(req, res) {
 
                 user.skillData.find(obj => obj.treeID== data[i].treeID).skills.find(obj => obj.skillID == data[i].skillID).skillLevel = data[i].skillLevel;
 
+                console.log(user.skillData.find(obj => obj.treeID== data[i].treeID).skills.find(obj => obj.skillID == data[i].skillID).skillLevel);
+
                 user.save(function (err) {
                     if (err) throw err;
                 });
