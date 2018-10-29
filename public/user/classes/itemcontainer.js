@@ -1,7 +1,7 @@
 class ItemContainer {
     constructor(app, treeData, userData, treeID, skillID) {
         this.app = app;
-        this.treeData = treeData;
+        this.treeData = treeData; // only this tree's data
         this.skillData = treeData.skills[skillID];
         this.skillData.treeID = treeID;
         this.skillData.skillLevel = this.getSkillLevel(userData, skillID);
@@ -173,6 +173,7 @@ class ItemContainer {
                 //save level change
                 this.parentObj.skillData.skillLevel++;
 
+                // sending new skillLevel to server
                 var httpRequest = new XMLHttpRequest();
                 var data = new Array();
                 data.push({treeID: this.parentObj.skillData.treeID, skillID: this.parentObj.skillData.skillID, skillLevel: this.parentObj.skillData.skillLevel});
@@ -180,7 +181,6 @@ class ItemContainer {
                 httpRequest.open('POST', '/set/skilllevel', true);
                 httpRequest.setRequestHeader('Content-type', 'application/json');
                 httpRequest.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-                //httpRequest.responseType = "json";
 
                 httpRequest.onreadystatechange = function() {
                     if(httpRequest.readyState == 4 && httpRequest.status == 200) {
@@ -211,6 +211,7 @@ class ItemContainer {
             //save level change
             this.parentObj.skillData.skillLevel--;
 
+            // sending new skillLevel to server
             var httpRequest = new XMLHttpRequest();
             var data = new Array();
             data.push({treeID: this.parentObj.skillData.treeID, skillID: this.parentObj.skillData.skillID, skillLevel: this.parentObj.skillData.skillLevel});
@@ -218,7 +219,6 @@ class ItemContainer {
             httpRequest.open('POST', '/set/skilllevel', true);
             httpRequest.setRequestHeader('Content-type', 'application/json');
             httpRequest.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-            //httpRequest.responseType = "json";
 
             httpRequest.onreadystatechange = function() {
                 if(httpRequest.readyState == 4 && httpRequest.status == 200) {

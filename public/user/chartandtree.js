@@ -1,6 +1,7 @@
 var treeData = undefined;
 var userData = undefined;
 
+// get user's data (skilllevels) from server
 var userDataRequest = new XMLHttpRequest();
 userDataRequest.open('GET', '/get/userdata', true);
 userDataRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -14,6 +15,7 @@ userDataRequest.onreadystatechange = function() {
 }
 userDataRequest.send();
 
+// get the data of all trees (treeID, name, skills(level(in the tree), maxSkillLevel, ...))
 var treeDataRequest = new XMLHttpRequest();
 treeDataRequest.open('GET', '/get/treedata', true);
 treeDataRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -58,11 +60,11 @@ var sliceCount = 8;
 var sliceContainer = new Array(sliceCount);
 var logo;
 
-var counter = 0;
+var counter = 0;                // ?????
 function initChart() {
-    counter++;
-    if (counter < 3) {
-        return;
+    counter++;                  // ????? initChart waits for pixi loader, tree data and user data, only runs when we have all these
+    if (counter < 3) {          // ?????
+        return;                 // ?????
     }
 
     // get username from token and show it
@@ -78,6 +80,7 @@ function initChart() {
     var h1 = 60;
     var h2 = h1 + width;
 
+    // we have only 2 trees so we need this for now
     var titles = ['Management', 'Web Development', 'Communication', 'Wellbeing', 'Mobile', 'Server Administration', 'Databases', 'Category'];
 
     for (var i = 0; i < sliceCount; i++) {
@@ -146,6 +149,7 @@ function initChart() {
 
         app.stage.addChild(sliceContainer[i]);
 
+        // creates tree name at the chart
         var text = new PIXI.Text(titles[i], {fill: '#ffffff', wordWrap: true, wordWrapWidth: 200, align: 'center'});
 
         var points = [];
@@ -201,8 +205,8 @@ function showChart () {
 
 class Tree {
     constructor (treeID, _treeData, _userData, posX, posY) {
-        this.treeData = _treeData;
-        this.userData = _userData;
+        this.treeData = _treeData; // contains only this tree's data
+        this.userData = _userData; // contains user's data for this tree
         this.treeContainer = new PIXI.Container();
         this.treeContainer.enableSort = true;
 
@@ -219,23 +223,23 @@ class Tree {
         skillLayer.group.enableSort = true;
         app.stage.addChild(skillLayer);
 
-        var level = 0;
-        var i = 0;
-        var levelLength = this.treeData.skills.filter(obj => obj.level == level).length;
+        var level = 0;                                                                      // ????? for positioning itemcontainers horizontlly
+        var i = 0;                                                                          // ?????
+        var levelLength = this.treeData.skills.filter(obj => obj.level == level).length;    // ?????
         for (var j = 0; j < this.treeData.skills.length; ++j) {
-            if (j > 0) {
-                if (level == this.treeData.skills[j].level) ++i;
-                else {
-                    ++level;
-                    i = 0;
-                    levelLength = this.treeData.skills.filter(obj => obj.level == level).length;
-                }
-            }
+            if (j > 0) {                                                                    // ?????
+                if (level == this.treeData.skills[j].level) ++i;                            // ?????
+                else {                                                                      // ?????
+                    ++level;                                                                // ?????
+                    i = 0;                                                                  // ?????
+                    levelLength = this.treeData.skills.filter(obj => obj.level == level).length;    // ?????
+                }                                                                           // ?????
+            }                                                                               // ?????
 
             this.treeData.skills[j].itemcontainer = new ItemContainer(app, this.treeData, this.userData, treeID, this.treeData.skills[j].skillID);
 
             // Positioning of the containers dynamically by level and by index inside level
-            this.treeData.skills[j].itemcontainer.container.position.x = i * 130 + (app.renderer.width - levelLength * 130) / 2 + posX;
+            this.treeData.skills[j].itemcontainer.container.position.x = i * 130 + (app.renderer.width - levelLength * 130) / 2 + posX; // ?????
             this.treeData.skills[j].itemcontainer.container.position.y = this.treeData.skills[j].level * 150 + posY;
 
             this.treeData.skills[j].itemcontainer.container.parentLayer = skillLayer;
@@ -293,6 +297,7 @@ class Tree {
         app.start();
     }
 
+    // not sure if we need dragging
     onDragEnd(event) {
         var obj = event.currentTarget;
         if (!obj.dragging) return;
@@ -334,6 +339,7 @@ class Tree {
 var tree = undefined;
 
 function showTree (treeID) {
+    // load the tree's pictures
     app.localLoader = new PIXI.loaders.Loader();
     for (var j = 0; j < treeData.find(obj => obj.treeID == treeID).skills.length; ++j) {
         var skill = treeData.find(obj => obj.treeID == treeID).skills[j];
