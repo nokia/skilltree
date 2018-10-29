@@ -188,9 +188,8 @@ setRoute.use(express.json());
 setRoute.post('/skilllevel', function(req, res) {
     var data = req.body;
 
-    console.log(data);
-
-    for (var i = 0; i < data.length; i++) {
+    for (var i = 0; i < data.length; ++i) {
+        console.log(i);
         User.findOne({
             username: req.decoded.username
         }, function(err, user) {
