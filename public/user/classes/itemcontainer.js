@@ -237,7 +237,7 @@ class ItemContainer {
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
     }
 
-    /*toggleChildren (children, enable) {
+    toggleChildren (children, enable) {
         if (children !== undefined) {
             for (var k = 0; k < children.length; ++k) {
                 var child = this.treeData.skills[children[k].skillID];
@@ -269,7 +269,7 @@ class ItemContainer {
                         child.itemcontainer.skillborder.buttonMode = false;
                     }
 
-                    var newParent = true;
+                    /*var newParent = true;
                     for (var j = 0; j < child.zeroSLParents.length; ++j) {
                         if (child.zeroSLParents[j].level == this.level && child.zeroSLParents[j].i == this.i) {
                             newParent = false;
@@ -278,13 +278,13 @@ class ItemContainer {
                     if (newParent) {
                         var parent = {level: this.level, i: this.i};
                         child.zeroSLParents.push(parent);
-                    }
+                    }*/
                 }
 
                 this.toggleChildren (child.children, enable)
             }
         }
-    }*/
+    }
 
     onButtonOver() {
         var skillborder = this.parentObj.skillborder;
