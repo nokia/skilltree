@@ -211,7 +211,6 @@ setRoute.post('/skilllevel', function(req, res) {
 
                 user.save(function (err) {
                     if (err) throw err;
-                    console.log('sss');
                 });
             }
         }
