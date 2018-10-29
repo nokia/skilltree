@@ -201,6 +201,7 @@ setRoute.post('/skilllevel', function(req, res) {
         } else if (user) {
             if (user.skillData == undefined) user.skillData = new Array();
             for (var i = 0; i < data.length; ++i) {
+                console.log("ss");
                 if (user.skillData.find(obj => obj.treeID == data[i].treeID) == undefined) {
                     user.skillData.push({treeID: data[i].treeID, skills: []});
                 }
