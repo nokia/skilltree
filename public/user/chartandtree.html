@@ -9,16 +9,23 @@
     <script src = "pixi/pixi-layers.js"></script>
 </head>
 <body>
-    <div id = "topLine">
+    <div class = "topLine">
       <input type="text" id="text" value="">
       <input type="submit" id="submit" value="Search!">
       <div id = "welcome" class = "welcome">Hello</div>
       <input type="button" class ="headerButton" value="Logout" onClick="logout()">
       <input type="button" class ="headerButton" value="FAQ">
       <input type="button" class ="headerButton" value="Bug Report">
-    </div>
-    <canvas id = "pixiCanvas" style = "visibility: hidden;"></canvas>
-    <script src = "classes/itemcontainer.js"></script>
-    <script src = "chartandtree.js"></script>
+      <div class = "dropDown">
+        <input type="button" class ="headerButton" value="Edit">
+        <div class = "dropDownContent">
+          <a>Add Tree</a>
+          <a>Create Tree</a>
+        </div>
+      </div>
+      </div>
+      <canvas id = "pixiCanvas" style = "visibility: hidden;"></canvas>
+      <script src = "classes/itemcontainer.js"></script>
+      <script src = "chartandtree.js"></script>
 </body>
 </html>
