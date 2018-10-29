@@ -221,54 +221,52 @@ class Tree {
         app.stage.addChild(skillLayer);
 
         for (var j = 0; j < this.treeData.skills.length; ++j) {
-            this.treeData.skills[j].itemcontainer = new ItemContainer(app, this.treeData, this.userData, j);
+            this.treeData.skills[j].itemcontainer = new ItemContainer(app, this.treeData, this.userData, this.treeData.skills[j].skillID);
 
             // Positioning of the containers dynamically by level and by index inside level
-            this.treeData.skills[j].itemcontainer.container.position.x = i * 130 + (app.renderer.width - this.data.levels[level].length * 130) / 2 + posX;
-            this.treeData.skills[j].itemcontainer.container.position.y = level * 150 + posY;
+            this.treeData.skills[j].itemcontainer.container.position.x = 1 * 130 + (app.renderer.width - 1 * 130) / 2 + posX;
+            this.treeData.skills[j].itemcontainer.container.position.y = this.treeData.skills[j].level * 150 + posY;
 
             this.treeData.skills[j].itemcontainer.container.parentLayer = skillLayer;
             this.treeContainer.addChild(this.treeData.skills[j].itemcontainer.container);
         }
 
-        //this.drawConnectionLines();
+        this.drawConnectionLines();
     }
 
-    /*drawConnectionLines() {
+    drawConnectionLines() {
         var connectionGroup = new PIXI.display.Group(-1, false);
 
-        for (var level = 0; level < this.data.levels.length; ++level) {
-            for (var i = 0; i < this.data.levels[level].length; ++i) {
-                if (this.data.levels[level][i].children !== undefined) {
-                    for (var k = 0; k < this.data.levels[level][i].children.length; ++k) {
-                        var child = this.data.levels[this.data.levels[level][i].children[k].level][this.data.levels[level][i].children[k].i];
+        for (var j = 0; j < this.treeData.skills.length; ++j) {
+            if (this.treeData.skills[j].children !== undefined) {
+                for (var k = 0; k < this.treeData.skills[j].children.length; ++k) {
+                    var child = this.treeData.skills.find(obj => obj.skillID == this.treeData.skills[j].skillID);
 
-                        // Draw the line
-                        var connection = new PIXI.Graphics();
-                        connection.lineStyle(4, 0xffffff);
-                        connection.moveTo(this.data.levels[level][i].itemcontainer.container.x + this.data.levels[level][i].itemcontainer.skillborder.width / 2, this.data.levels[level][i].itemcontainer.container.position.y + this.data.levels[level][i].itemcontainer.skillborder.height  - 8);
-                        connection.lineTo(child.itemcontainer.container.position.x + child.itemcontainer.skillborder.width / 2, child.itemcontainer.container.position.y + 5);
+                    // Draw the line
+                    var connection = new PIXI.Graphics();
+                    connection.lineStyle(4, 0xffffff);
+                    connection.moveTo(this.treeData.skills[j].itemcontainer.container.x + this.treeData.skills[j].itemcontainer.skillborder.width / 2, this.treeData.skills[j].itemcontainer.container.position.y + this.treeData.skills[j].itemcontainer.skillborder.height - 8);
+                    connection.lineTo(child.itemcontainer.container.position.x + child.itemcontainer.skillborder.width / 2, child.itemcontainer.container.position.y + 5);
 
-                        // Add the line
-                        this.treeContainer.addChild(connection);
-                        connection.parentGroup = connectionGroup;
+                    // Add the line
+                    this.treeContainer.addChild(connection);
+                    connection.parentGroup = connectionGroup;
 
-                        // Saving child's zero skill level parents
-                        if (this.data.levels[level][i].skill_level == 0) {
-                            child.itemcontainer.disable();
+                    // Saving child's zero skill level parents
+                    if (this.treeData.skills[j].skillLevel == 0) {
+                        child.itemcontainer.disable();
 
-                            if (child.zeroSLParents === undefined) {
-                                child.zeroSLParents = new Array();
-                            }
-                            child.zeroSLParents.push({ level: level, i: i });
+                        if (child.zeroSLParents === undefined) {
+                            child.zeroSLParents = new Array();
                         }
+                        child.zeroSLParents.push({skillID: this.treeData.skills[j].skillID});
                     }
                 }
             }
         }
 
         app.stage.addChild(new PIXI.display.Layer(connectionGroup));
-    }*/
+    }
 
     onDragStart(event) {
         event.drag = false;
