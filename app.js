@@ -190,7 +190,7 @@ setRoute.post('/skilllevel', function(req, res) {
 
     console.log(data);
 
-    for (var i = 0; i < data.length; ++i) {
+    for (var k = 0; k < data.length; ++k) {
         User.findOne({
             username: req.decoded.username
         }, function(err, user) {
@@ -203,7 +203,7 @@ setRoute.post('/skilllevel', function(req, res) {
                 });
             } else if (user) {
                 if (user.skillData == undefined) user.skillData = new Array();
-                console.log(i);
+                console.log(k);
                 if (user.skillData.find(obj => obj.treeID == data[i].treeID) == undefined) user.skillData.push({treeID: data[i].treeID, skills: []});
                 if (user.skillData.find(obj => obj.treeID).skills.find(obj => obj.skillID == data[i].skillID) == undefined) user.skillData.find(obj => obj.treeID).skills.push({skillID: data[i].skillID});
 
