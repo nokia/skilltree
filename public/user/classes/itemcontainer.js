@@ -179,6 +179,7 @@ class ItemContainer {
 
                 httpRequest.open('POST', '/set/skilllevel', true);
                 httpRequest.setRequestHeader('Content-type', 'application/json');
+                httpRequest.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
                 //httpRequest.responseType = "json";
 
                 httpRequest.onreadystatechange = function() {
