@@ -56,7 +56,6 @@ app.stage.group.enableSort = true;
 
 // CHART
 
-var sliceCount = 8;
 var sliceContainer = new Array(sliceCount);
 var logo;
 
@@ -83,20 +82,19 @@ function initChart() {
     // we have only 2 trees so we need this for now
     var titles = ['Management', 'Web Development', 'Communication', 'Wellbeing', 'Mobile', 'Server Administration', 'Databases', 'Category'];
 
+    var sliceCount = userData.length;
     for (var i = 0; i < sliceCount; i++) {
         var currentLevelSum = 0;
         var maxLevelSum = 0;
         var percent = 0;
 
-        if (i < 2) { // temporary, we have only 2 trees
-            for (var j = 0; j < treeData.find(obj => obj.treeID == i).skills.length; ++j) {
-                var skill = treeData.find(obj => obj.treeID == i).skills[j];
-                currentLevelSum += getSkillLevel(i, skill.skillID);
-                maxLevelSum += skill.maxSkillLevel;
-            }
+        for (var j = 0; j < treeData.find(obj => obj.treeID == userData[i].treeID).skills.length; ++j) {
+            var skill = treeData.find(obj => obj.treeID == userData[i].treeID).skills[j];
+            currentLevelSum += getSkillLevel(i, skill.skillID);
+            maxLevelSum += skill.maxSkillLevel;
+        }
 
-            percent = currentLevelSum / maxLevelSum;
-        } else percent = 0;
+        percent = currentLevelSum / maxLevelSum;
 
         var tempContainer = new PIXI.Container();
         tempContainer.id = i;
