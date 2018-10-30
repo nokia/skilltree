@@ -41,6 +41,10 @@ var app = new PIXI.Application({
 
 // TOP BAR
 
+// get username from token and show it
+var tokenPayload = parseJwt(localStorage.getItem("loginToken"));
+document.getElementById("welcome").innerHTML = "Hello " + tokenPayload.username + "!";
+
 var cid;
 function listTrees(){
   //console.log("a");
@@ -56,8 +60,6 @@ function listTrees(){
 }
 
 function choiceClick () {
-    console.log('ss');
-
     var req = new XMLHttpRequest();
     var data = new Array();
     data.push(cid);
@@ -75,7 +77,7 @@ function choiceClick () {
 
 function logout(){
     localStorage.setItem("loginToken", "");
-    window.open("../", "_self");
+    window.open("/", "_self");
 }
 
 PIXI.loader.add("pictures/skillborder.png")
@@ -102,10 +104,6 @@ function initChart() {
     var sliceCount = userData.length;
     sliceContainer = new Array(sliceCount);
 
-    // get username from token and show it
-    var tokenPayload = parseJwt(localStorage.getItem("loginToken"));
-    document.getElementById("welcome").innerHTML = "Hello " + tokenPayload.username + "!";
-
     document.getElementById("pixiCanvas").style.visibility = "visible";
 
     var x = window.innerWidth / 2;
@@ -114,9 +112,6 @@ function initChart() {
     var width = 240;
     var h1 = 60;
     var h2 = h1 + width;
-
-    // we have only 2 trees so we need this for now
-    var titles = ['Management', 'Web Development', 'Communication', 'Wellbeing', 'Mobile', 'Server Administration', 'Databases', 'Category'];
 
     for (var i = 0; i < sliceCount; i++) {
         var currentLevelSum = 0;
@@ -273,6 +268,8 @@ function showTree (treeID) {
         app.renderer.render(app.stage);
     });
 }
+
+// helper functions
 
 function parseJwt (token) {
     var base64Url = token.split('.')[1];
