@@ -40,7 +40,7 @@ var app = new PIXI.Application({
 });
 
 
-
+var cid;
 function listTrees(){
   //console.log("a");
   var dtc = document.getElementById("dropDownContent");
@@ -48,24 +48,26 @@ function listTrees(){
   for(i = 0; i < treeData.length; i++){
     if(!userData.find(obj => obj.treeID == treeData[i].treeID)){
       dtc.innerHTML += "<a>" + treeData[i].treeName + "</a>";
-      dtc.choiceID = i;
-      dtc.addEventListener("click", function() {
-          var req = new XMLHttpRequest();
-          var data = new Array();
-          data.push(dtc.choiceID);
-
-          req.open('POST', '/set/mytrees', true);
-          req.setRequestHeader('Content-type', 'application/json');
-          req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-          req.onreadystatechange = function() {
-              if(req.readyState == 4 && req.status == 200){
-                  location.reload();
-              }
-          }
-          req.send(JSON.stringify(data));
-      });
+      cid = dtc.choiceID = i;
+      dtc.addEventListener("click", choiceClick);
     }
   }
+}
+
+function choiceClick () {
+    var req = new XMLHttpRequest();
+    var data = new Array();
+    data.push(dtc.choiceID);
+
+    req.open('POST', '/set/mytrees', true);
+    req.setRequestHeader('Content-type', 'application/json');
+    req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+    req.onreadystatechange = function() {
+        if(req.readyState == 4 && req.status == 200){
+            location.reload();
+        }
+    }
+    req.send(JSON.stringify(data));
 }
 
 function logout(){
