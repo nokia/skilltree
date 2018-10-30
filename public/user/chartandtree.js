@@ -39,6 +39,7 @@ var app = new PIXI.Application({
         autoStart: false,
 });
 
+// TOP BAR
 
 var cid;
 function listTrees(){
