@@ -127,7 +127,7 @@ class ItemContainer {
         this.details.position.set(116, 0);
 
         // if it's already maxed out add the tick
-        if (this.skillData.SkillLevel == this.skillData.maxSkillLevel) {
+        if (this.skillData.skillLevel == this.skillData.maxSkillLevel) {
             //this.skillborder.filters = [new PIXI.filters.GlowFilter(10, 4, 4, 0xFF4000, 1)];
             this.tick.alpha = 1;
         } else this.tick.alpha = 0;
