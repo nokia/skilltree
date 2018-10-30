@@ -3,7 +3,6 @@ class ItemContainer {
         this.app = app;
         this.treeData = treeData; // only this tree's data
         this.userData = userData;
-        console.log(userData);
         this.skillData = treeData.skills[skillID];
         this.skillData.treeID = treeID;
         this.skillData.skillLevel = this.getSkillLevel(userData, skillID);
@@ -78,7 +77,6 @@ class ItemContainer {
         btn2Container.interactive = true;
         btn2Container.buttonMode = true;
         btn2Container.on('pointerover', function () {
-            console.log(btn2);
             btn2.texture = btnGHover.generateTexture();
             app.renderer.render(app.stage);
         });
