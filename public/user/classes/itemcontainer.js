@@ -6,7 +6,6 @@ class ItemContainer {
         this.skillData = treeData.skills[skillID];
         this.skillData.treeID = treeID;
         this.skillData.skillLevel = this.getSkillLevel(userData, skillID);
-        //this.skillID = skillID;
 
         //Creating images
         this.skillicon = new PIXI.Sprite(app.localLoader.resources[this.skillData.skillIcon].texture); //100x100
@@ -14,9 +13,7 @@ class ItemContainer {
         this.tick = new PIXI.Sprite(PIXI.loader.resources["pictures/tick.png"].texture);
 
         //Setting border variables
-        this.skillborder.skill_level = this.skillData.skillLevel;
-        this.skillborder.max_skill_level = this.skillData.maxSkillLevel;
-        this.skillborder.levelinfo = new PIXI.Text(this.skillborder.skill_level + "/" + this.skillborder.max_skill_level);
+        this.skillborder.levelinfo = new PIXI.Text(this.skillData.skillLevel + "/" + this.skillData.maxSkillLevel);
 
         //Creating details page
         var detailsWidth = 240;
@@ -130,7 +127,7 @@ class ItemContainer {
         this.details.position.set(116, 0);
 
         // if it's already maxed out add the tick
-        if (this.skillborder.skill_level == this.skillborder.max_skill_level) {
+        if (this.skillData.SkillLevel == this.skillData.maxSkillLevel) {
             //this.skillborder.filters = [new PIXI.filters.GlowFilter(10, 4, 4, 0xFF4000, 1)];
             this.tick.alpha = 1;
         } else this.tick.alpha = 0;
@@ -162,10 +159,10 @@ class ItemContainer {
             this.parentObj.toggleChildren(children, true);
 
             // Increase skill level
-            if (this.skill_level < this.max_skill_level) {
-                this.skill_level++;
-                this.levelinfo.text = (this.skill_level + "/" + this.max_skill_level);
-                if (this.skill_level == this.max_skill_level) {
+            if (this.parentObj.skillData.skillLevel < this.parentObj.skillData.maxSkillLevel) {
+                this.parentObj.skillData.skillLevel++;
+                this.levelinfo.text = (this.parentObj.skillData.skillLevel + "/" + this.parentObj.skillData.maxSkillLevel);
+                if (this.parentObj.skillData.skillLevel == this.parentObj.skillData.maxSkillLevel) {
                     //this.filters = [new PIXI.filters.GlowFilter(10, 4, 4, 0xFF4000, 1)];
                     //this.parentObj.container.removeChild(this.parentObj.details);
                     this.parentObj.tick.alpha = 1;
@@ -173,7 +170,6 @@ class ItemContainer {
                 }
 
                 //save level change
-                this.parentObj.skillData.skillLevel++;
                 if (this.parentObj.userData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID) == undefined) {
                     this.parentObj.userData.skills.push({skillID: this.parentObj.skillData.skillID, skillLevel: 0});
                 }
@@ -202,20 +198,19 @@ class ItemContainer {
 
     onRightClick() {
         // Disable children which doesn't have other parents with 0 skill level
-        if (this.skill_level == 1) {
+        if (this.parentObj.skillData.skillLevel == 1) {
             var children = this.parentObj.skillData.children;
 
             this.parentObj.toggleChildren(children, false);
         }
 
         // Decrease skill level
-        if(this.skill_level>0)
+        if(this.parentObj.skillData.skillLevel > 0)
         {
-            this.skill_level --;
-            this.levelinfo.text = (this.skill_level + "/" + this.max_skill_level);
+            this.parentObj.skillData.skillLevel--;
+            this.levelinfo.text = (this.parentObj.skillData.skillLevel + "/" + this.parentObj.skillData.maxSkillLevel);
 
             //save level change
-            this.parentObj.skillData.skillLevel--;
             this.parentObj.userData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID).skillLevel--;
 
             // sending new skillLevel to server
@@ -300,7 +295,7 @@ class ItemContainer {
 
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
 
-        if(skillborder.skill_level == skillborder.max_skill_level) return;
+        if(this.parentObj.skillData.skillLevel == this.parentObj.skillData.maxSkillLevel) return;
         skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFFBF00, 1)];
 
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
@@ -316,7 +311,7 @@ class ItemContainer {
 
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
 
-        if(skillborder.skill_level == skillborder.max_skill_level) return;
+        if(this.parentObj.skillData.skillLevel == this.parentObj.skillData.maxSkillLevel) return;
         skillborder.filters = null;
 
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
