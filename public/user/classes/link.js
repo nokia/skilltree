@@ -1,4 +1,4 @@
-export class Link {
+class Link {
     constructor (textString, url, style, underline) {
         var link = new PIXI.Container();
 
