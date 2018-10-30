@@ -48,7 +48,7 @@ function listTrees(){
   for(i = 0; i < treeData.length; i++){
     if(!userData.find(obj => obj.treeID == treeData[i].treeID)){
       dtc.innerHTML += "<a>" + treeData[i].treeName + "</a>";
-      cid = dtc.choiceID = i;
+      cid = dtc.choiceID = treeData[i].treeID;
       dtc.addEventListener("click", choiceClick);
     }
   }
