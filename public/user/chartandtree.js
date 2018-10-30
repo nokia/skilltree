@@ -52,7 +52,7 @@ function listTrees(){
   for(i = 0; i < treeData.length; i++){
     if(!userData.find(obj => obj.treeID == treeData[i].treeID)){
       dtc.innerHTML += "<a>" + treeData[i].treeName + "</a>";
-      cid = dtc.choiceID = treeData[i].treeID; // SZAR, mindenkeppen az utolso tree idjat menti el
+      cid = dtc.choiceID = treeData[i].treeID; // SZAR, mindenkeppen az utolso tree idjat menti el szoval a choiceclick is azt adja hozza, mindegy mit nyomsz
       dtc.addEventListener("click", choiceClick);
     }
   }
