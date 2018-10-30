@@ -2,7 +2,6 @@ class Tree {
     constructor (app, treeID, _treeData, _userData, posX, posY) {
         this.treeData = _treeData; // contains only this tree's data
         this.userData = _userData; // contains user's data for this tree
-        console.log(_userData);
         this.treeContainer = new PIXI.Container();
         this.treeContainer.enableSort = true;
 
