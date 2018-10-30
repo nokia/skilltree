@@ -47,7 +47,6 @@ document.getElementById("welcome").innerHTML = "Hello " + tokenPayload.username 
 
 var cid;
 function listTrees(){
-  //console.log("a");
   var dtc = document.getElementById("dropDownContent");
   dtc.innerHTML = "";
   for(i = 0; i < treeData.length; i++){

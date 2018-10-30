@@ -3,6 +3,7 @@ class ItemContainer {
         this.app = app;
         this.treeData = treeData; // only this tree's data
         this.userData = userData;
+        console.log(userData);
         this.skillData = treeData.skills[skillID];
         this.skillData.treeID = treeID;
         this.skillData.skillLevel = this.getSkillLevel(userData, skillID);
