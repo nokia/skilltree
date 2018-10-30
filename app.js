@@ -188,8 +188,6 @@ setRoute.use(express.json());
 setRoute.post('/mytrees', function(req, res) {
     var data = req.body;
 
-    console.log(data);
-
     User.findOne({
         username: req.decoded.username
     }, function(err, user) {
