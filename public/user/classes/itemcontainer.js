@@ -389,10 +389,7 @@ class ItemContainer {
             event.drag = true;
             var dragPointerEnd = data.getLocalPosition(obj.parent);
             // DRAG
-            obj.position.set(
-                obj.dragObjStart.x + (dragPointerEnd.x - obj.dragPointerStart.x),
-                //obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y)
-            );
+            obj.position.x = obj.dragObjStart.x + (dragPointerEnd.x - obj.dragPointerStart.x);
         }
     }
 }
