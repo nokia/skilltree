@@ -174,10 +174,10 @@ class ItemContainer {
 
                 //save level change
                 this.parentObj.skillData.skillLevel++;
-                if (this.parentObj.userData.skills.find(obj => obj.skillID == this.parentObj.skillID) == undefined) {
-                    this.parentObj.userData.skills.push({skillID: this.parentObj.skillID, skillLevel: 0});
+                if (this.parentObj.userData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID) == undefined) {
+                    this.parentObj.userData.skills.push({skillID: this.parentObj.skillData.skillID, skillLevel: 0});
                 }
-                this.parentObj.userData.skills.find(obj => obj.skillID == this.parentObj.skillID).skillLevel++;
+                this.parentObj.userData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID).skillLevel++;
 
                 // sending new skillLevel to server
                 var httpRequest = new XMLHttpRequest();
@@ -216,7 +216,7 @@ class ItemContainer {
 
             //save level change
             this.parentObj.skillData.skillLevel--;
-            this.parentObj.userData.skills.find(obj => obj.skillID == this.parentObj.skillID).skillLevel--;
+            this.parentObj.userData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID).skillLevel--;
 
             // sending new skillLevel to server
             var httpRequest = new XMLHttpRequest();
