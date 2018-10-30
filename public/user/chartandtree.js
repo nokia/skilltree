@@ -2,33 +2,20 @@ var treeData = undefined;
 var userData = undefined;
 
 // get user's data (skilllevels) from server
-var userDataRequest = new XMLHttpRequest();
-userDataRequest.open('GET', '/get/userdata', true);
-userDataRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-userDataRequest.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-userDataRequest.responseType = "json";
-userDataRequest.onreadystatechange = function() {
-    if(userDataRequest.readyState == 4 && userDataRequest.status == 200) {
-        userData = userDataRequest.response;
+var dataRequest = new XMLHttpRequest();
+dataRequest.open('GET', '/get/data', true);
+dataRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+dataRequest.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+dataRequest.responseType = "json";
+dataRequest.onreadystatechange = function() {
+    if(dataRequest.readyState == 4 && dataRequest.status == 200) {
+        treeData = dataRequest.response.trees;
+        userData = dataRequest.response.user;
         if (userData.length == 0) alert("Please add some trees.");
         else initChart();
     }
 }
-userDataRequest.send();
-
-// get the data of all trees (treeID, name, skills(level(in the tree), maxSkillLevel, ...))
-var treeDataRequest = new XMLHttpRequest();
-treeDataRequest.open('GET', '/get/treedata', true);
-treeDataRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-treeDataRequest.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-treeDataRequest.responseType = "json";
-treeDataRequest.onreadystatechange = function() {
-    if(treeDataRequest.readyState == 4 && treeDataRequest.status == 200) {
-        treeData = treeDataRequest.response;
-        initChart();
-    }
-}
-treeDataRequest.send();
+dataRequest.send();
 
 var app = new PIXI.Application({
         view: pixiCanvas,
@@ -95,7 +82,7 @@ var logo;
 var counter = 0;                // ?????
 function initChart() {
     counter++;                  // ????? initChart waits for pixi loader, tree data and user data, only runs when we have all these
-    if (counter < 3) {          // ?????
+    if (counter < 2) {          // ?????
         return;                 // ?????
     }
 
