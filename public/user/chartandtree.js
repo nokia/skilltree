@@ -285,7 +285,7 @@ function openEditor () {
     }
 
     app.localLoader.load(function () {
-        tree = new EditorTree(app, treeID2, treeData.find(obj => obj.treeID == treeID2) 0, 30);
+        tree = new EditorTree(app, treeID2, treeData.find(obj => obj.treeID == treeID2), 0, 30);
         app.stage.addChild(tree.treeContainer);
 
         app.renderer.render(app.stage);
