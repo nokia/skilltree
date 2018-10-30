@@ -52,7 +52,7 @@ function listTrees(){
   for(i = 0; i < treeData.length; i++){
     if(!userData.find(obj => obj.treeID == treeData[i].treeID)){
       dtc.innerHTML += "<a>" + treeData[i].treeName + "</a>";
-      cid = dtc.choiceID = treeData[i].treeID;
+      cid = dtc.choiceID = treeData[i].treeID; // SZAR, mindenkeppen az utolso tree idjat menti el
       dtc.addEventListener("click", choiceClick);
     }
   }
@@ -244,7 +244,6 @@ function showTree (treeID) {
     }
 
     app.localLoader.load(function () {
-        console.log(treeID);
         tree = new Tree(app, treeID, treeData.find(obj => obj.treeID == treeID), userData.find(obj => obj.treeID == treeID), 0, 30);
         app.stage.addChild(tree.treeContainer);
 
