@@ -6,7 +6,7 @@ class ItemContainer {
         this.skillData = treeData.skills[skillID];
         this.skillData.treeID = treeID;
         this.skillData.skillLevel = this.getSkillLevel(userData, skillID);
-        this.skillID = skillID;
+        //this.skillID = skillID;
 
         //Creating images
         this.skillicon = new PIXI.Sprite(app.localLoader.resources[this.skillData.skillIcon].texture); //100x100
@@ -247,7 +247,7 @@ class ItemContainer {
 
                 if (enable) {
                     for (var j = 0; child.zeroSLParents !== undefined && j < child.zeroSLParents.length; ++j) {
-                        if (child.zeroSLParents[j].skillID == this.skillID) {
+                        if (child.zeroSLParents[j].skillID == this.skillData.skillID) {
                             child.zeroSLParents.splice(j, 1);
 
                             if (child.zeroSLParents.length == 0) {
@@ -274,12 +274,12 @@ class ItemContainer {
 
                     var newParent = true;
                     for (var j = 0; j < child.zeroSLParents.length; ++j) {
-                        if (child.zeroSLParents[j].skillID == this.skillID) {
+                        if (child.zeroSLParents[j].skillID == this.skillData.skillID) {
                             newParent = false;
                         }
                     }
                     if (newParent) {
-                        var parent = {skillID: this.skillID};
+                        var parent = {skillID: this.skillData.skillID};
                         child.zeroSLParents.push(parent);
                     }
                 }
