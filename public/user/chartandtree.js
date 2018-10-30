@@ -55,9 +55,11 @@ function listTrees(){
 }
 
 function choiceClick () {
+    console.log('ss');
+
     var req = new XMLHttpRequest();
     var data = new Array();
-    data.push(dtc.choiceID);
+    data.push(cid);
 
     req.open('POST', '/set/mytrees', true);
     req.setRequestHeader('Content-type', 'application/json');
