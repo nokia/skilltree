@@ -148,7 +148,11 @@ class ItemContainer {
         this.container.interactive = true;
         this.container
             .on('pointerover', this.onButtonOver)
-            .on('pointerout', this.onButtonOut);
+            .on('pointerout', this.onButtonOut)
+            .on('pointerdown', this.onDragStart)
+            .on('pointerup', this.onDragEnd)
+            .on('pointerupoutside', this.onDragEnd)
+            .on('pointermove', this.onDragMove);
     }
 
     onClick(event) {
@@ -342,5 +346,53 @@ class ItemContainer {
             if (userData.skills.find(obj => obj.skillID == skillID) != undefined) return userData.skills.find(obj => obj.skillID == skillID).skillLevel;
             else return 0;
         } else return 0;
+    }
+
+    onDragStart(event) {
+        event.drag = false;
+        var obj = event.currentTarget;
+        obj.dragData = event.data;
+        obj.dragging = 1;
+        obj.dragPointerStart = event.data.getLocalPosition(obj.parent);
+        obj.dragObjStart = new PIXI.Point();
+        obj.dragObjStart.copy(obj.position);
+        obj.dragGlobalStart = new PIXI.Point();
+        obj.dragGlobalStart.copy(event.data.global);
+
+        app.start();
+    }
+
+    onDragEnd(event) {
+        var obj = event.currentTarget;
+        if (!obj.dragging) return;
+
+        obj.dragging = 0;
+        obj.dragData = null;
+
+        app.stop();
+    }
+
+    onDragMove(event) {
+        var obj = event.currentTarget;
+        if (!obj.dragging) return;
+        var data = obj.dragData;
+        if (obj.dragging == 1) {
+
+            // click or drag?
+            if (Math.abs(data.global.x - obj.dragGlobalStart.x) +
+                Math.abs(data.global.y - obj.dragGlobalStart.y) >= 5) {
+                // DRAG
+                obj.dragging = 2;
+            }
+        }
+        if (obj.dragging == 2) {
+            event.drag = true;
+            var dragPointerEnd = data.getLocalPosition(obj.parent);
+            // DRAG
+            obj.position.set(
+                obj.dragObjStart.x + (dragPointerEnd.x - obj.dragPointerStart.x),
+                //obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y)
+            );
+        }
     }
 }

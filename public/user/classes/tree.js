@@ -78,7 +78,7 @@ class Tree {
         app.stage.addChild(new PIXI.display.Layer(connectionGroup));
     }
 
-    onDragStart(event) {
+    /*onDragStart(event) {
         event.drag = false;
         var obj = event.currentTarget;
         obj.dragData = event.data;
@@ -125,5 +125,5 @@ class Tree {
                 obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y)
             );
         }
-    }
+    }*/
 }
