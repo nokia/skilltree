@@ -198,7 +198,7 @@ function initChart() {
         }
 
         var rope = new PIXI.mesh.Rope(text.texture, points);
-        rope.rotation = (Math.PI * 2 / sliceCount - text.width / (255 * 8 / sliceCount) * Math.PI * 2 / sliceCount * 0.95) / 2;
+        rope.rotation = (Math.PI * 2 / sliceCount - text.width / (270 * 8 / sliceCount) * Math.PI * 2 / sliceCount * 0.95) / 2;
         app.stage.addChild(rope);
         rope.position.set(window.innerWidth / 2, window.innerHeight / 2);
         sliceContainer[i].title = rope;
