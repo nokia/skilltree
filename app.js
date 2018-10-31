@@ -263,7 +263,7 @@ setRoute.post('/mytrees', function(req, res) {
         }
       }
     }
-}
+
 app.use('/set', setRoute);
 
 app.listen(port);
