@@ -65,7 +65,6 @@ function listTrees(){
             }
         }
         req.send(JSON.stringify(data));
-        window.reload();
       }
       var addedText = document.createTextNode(treeData[i].treeName);
       addedElement.appendChild(addedText);
