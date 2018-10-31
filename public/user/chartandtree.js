@@ -64,9 +64,7 @@ function listTrees(){
 
             }
         }
-        req.send(JSON.stringify(data)); // jol mukodik ez a fele, jo treeID-t kuld el, ellenoriztem, de
-                                        // akarmit is kuldunk be, eloszor a webfejleszos cuccot kuldi be
-                                        // aztan a masikat, neha meg a nevek is osszekavarodnak.
+        req.send(JSON.stringify(data)); 
       }
       var addedText = document.createTextNode(treeData[i].treeName);
       addedElement.appendChild(addedText);

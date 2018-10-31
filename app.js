@@ -226,16 +226,10 @@ setRoute.post('/skilllevel', function(req, res) {
                 message: 'User not found.'
             });
         } else if (user) {
-            //if (user.skillData == undefined) user.skillData = new Array();
             for (var i = 0; i < data.length; ++i) {
-                /*if (user.skillData.find(obj => obj.treeID == data[i].treeID) == undefined) {
-                    user.skillData.push({treeID: data[i].treeID, skills: []});
-                }*/
-
+                // itt baja van, a WebDev-hez hozzáad, a Managerhez nem. de hogy miert?
                 if (user.skillData.find(obj => obj.treeID == data[i].treeID).skills.find(obj => obj.skillID == data[i].skillID) == undefined) user.skillData.find(obj => obj.treeID).skills.push({skillID: data[i].skillID});
-
-                user.skillData.find(obj => obj.treeID== data[i].treeID).skills.find(obj => obj.skillID == data[i].skillID).skillLevel = data[i].skillLevel;
-
+                user.skillData.find(obj => obj.treeID == data[i].treeID).skills.find(obj => obj.skillID == data[i].skillID).skillLevel = data[i].skillLevel;
                 user.save(function (err) {
                     if (err) throw err;
                 });
