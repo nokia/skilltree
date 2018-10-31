@@ -55,7 +55,7 @@ function listTrees(){
       addedElement.onclick = function (){
         var req = new XMLHttpRequest();
         var data = new Array();
-        data.push(addedElement.getAttribute("ID"));
+        data.push(this.getAttribute("ID"));
         req.open('POST', '/set/mytrees', true);
         req.setRequestHeader('Content-type', 'application/json');
         req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
