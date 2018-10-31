@@ -237,7 +237,7 @@ setRoute.post('/mytrees', function(req, res) {
         }
     });
 });*/
-  setRoute.post('/submitAll', function(req, res) {
+  setRoute.post('/submitall', function(req, res) {
     var data = req.body;
     User.findOne({
         username: req.decoded.username

@@ -75,7 +75,7 @@ function listTrees(){
 
 function submit(){
   var sub = new XMLHttpRequest();
-  sub.open('POST', '/set/submitAll', true);
+  sub.open('POST', '/set/submitall', true);
   sub.setRequestHeader('Content-type', 'application/json');
   sub.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
   sub.send(JSON.stringify(userData));
