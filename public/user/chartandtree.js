@@ -61,10 +61,11 @@ function listTrees(){
         req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
         req.onreadystatechange = function() {
             if(req.readyState == 4 && req.status == 200){
-                window.reload();
+
             }
         }
         req.send(JSON.stringify(data));
+        window.reload();
       }
       var addedText = document.createTextNode(treeData[i].treeName);
       addedElement.appendChild(addedText);
