@@ -64,7 +64,9 @@ function listTrees(){
 
             }
         }
-        req.send(JSON.stringify(data));
+        req.send(JSON.stringify(data)); // jol mukodik ez a fele, jo treeID-t kuld el, ellenoriztem, de
+                                        // akarmit is kuldunk be, eloszor a webfejleszos cuccot kuldi be
+                                        // aztan a masikat, neha meg a nevek is osszekavarodnak.
       }
       var addedText = document.createTextNode(treeData[i].treeName);
       addedElement.appendChild(addedText);
@@ -125,7 +127,7 @@ function initChart() {
         percent = currentLevelSum / maxLevelSum;
 
         var tempContainer = new PIXI.Container();
-        tempContainer.id = i;
+        tempContainer.id = userData[i].treeID;
 
         h2 = h1 + width;
         var s = (i * (360 / sliceCount) * Math.PI) / 180;
