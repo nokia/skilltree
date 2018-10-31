@@ -48,6 +48,7 @@ document.getElementById("welcome").innerHTML = "Hello " + tokenPayload.username 
 var cid;
 function listTrees(){
   var dtc = document.getElementById("dropDownContent");
+
   dtc.innerHTML = "";
   for(i = 0; i < treeData.length; i++){
     if(!userData.find(obj => obj.treeID == treeData[i].treeID)){
@@ -56,6 +57,7 @@ function listTrees(){
       dtc.addEventListener("click", choiceClick);
     }
   }
+  console.log(dtc);
 }
 
 function choiceClick () {
