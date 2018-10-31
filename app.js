@@ -251,15 +251,11 @@ setRoute.post('/skilllevel', function(req, res) {
         }
         else {
           for(var i = 0; i < data.length; ++i){
-            for(var j = 0; j < data[i].skills.length; ++j){
-                if(user.skillData.find(obj => obj.treeID == data[i].treeID).skills.find(obj => obj.skillID == data[i][j].skillID) == undefined){
-                    user.skillData.find(obj => obj.treeID == data[i].treeID).skills.find(obj => obj.skillID == data[i][j].skillID) = data[i][j];
-                }
-            }
-            user.save(function (err) {
-                if (err) throw err;
-            });
+            user.skillData.find(obj => obj.treeID == data[i].treeID).skills = data[i].skills;
           }
+          user.save(function (err) {
+              if (err) throw err;
+          });
         }
       })
     });
