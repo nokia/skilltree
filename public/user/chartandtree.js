@@ -51,7 +51,7 @@ function listTrees(){
   for(i = 0; i < treeData.length; i++){
     if(!userData.find(obj => obj.treeID == treeData[i].treeID)){
       var addedElement = document.createElement("A");
-      addedElement.setAttribute("ID", treedata[i].treeID);
+      addedElement.setAttribute("ID", treeData[i].treeID);
       addedElement.onclick = function (){
         var req = new XMLHttpRequest();
         var data = new Array();
