@@ -212,7 +212,7 @@ setRoute.post('/mytrees', function(req, res) {
         }
     });
 });
-/*setRoute.post('/skilllevel', function(req, res) {
+setRoute.post('/skilllevel', function(req, res) {
     var data = req.body;
 
     User.findOne({
@@ -236,7 +236,7 @@ setRoute.post('/mytrees', function(req, res) {
             }
         }
     });
-});*/
+});
   setRoute.post('/submitall', function(req, res) {
     var data = req.body;
     User.findOne({
@@ -261,8 +261,8 @@ setRoute.post('/mytrees', function(req, res) {
             });
           }
         }
-      }
-    }
+      })
+    });
 
 app.use('/set', setRoute);
 
