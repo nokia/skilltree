@@ -64,13 +64,21 @@ function listTrees(){
 
             }
         }
-        req.send(JSON.stringify(data)); 
+        req.send(JSON.stringify(data));
       }
       var addedText = document.createTextNode(treeData[i].treeName);
       addedElement.appendChild(addedText);
       dtc.appendChild(addedElement);
     }
   }
+}
+
+function submit(){
+  var sub = new XMLHttpRequest();
+  sub.open('POST', '/set/submitAll', true);
+  sub.setRequestHeader('Content-type', 'application/json');
+  sub.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+  req.send(JSON.stringify(userData));
 }
 
 function logout(){

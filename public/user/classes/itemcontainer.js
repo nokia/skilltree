@@ -175,7 +175,7 @@ class ItemContainer {
                 this.parentObj.userData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID).skillLevel++;
 
                 // sending new skillLevel to server
-                var httpRequest = new XMLHttpRequest();
+                /*var httpRequest = new XMLHttpRequest();
                 var data = new Array();
                 data.push({treeID: this.parentObj.skillData.treeID, skillID: this.parentObj.skillData.skillID, skillLevel: this.parentObj.skillData.skillLevel});
 
@@ -188,7 +188,7 @@ class ItemContainer {
                         this.parentObj.app.renderer.render(this.parentObj.app.stage);
                     }
                 }
-                httpRequest.send(JSON.stringify(data));
+                httpRequest.send(JSON.stringify(data));*/
             }
 
             this.parentObj.app.renderer.render(this.parentObj.app.stage);

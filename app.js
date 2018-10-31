@@ -212,7 +212,7 @@ setRoute.post('/mytrees', function(req, res) {
         }
     });
 });
-setRoute.post('/skilllevel', function(req, res) {
+/*setRoute.post('/skilllevel', function(req, res) {
     var data = req.body;
 
     User.findOne({
@@ -227,7 +227,7 @@ setRoute.post('/skilllevel', function(req, res) {
             });
         } else if (user) {
             for (var i = 0; i < data.length; ++i) {
-                // itt baja van, a WebDev-hez hozzáad, a Managerhez nem. de hogy miert?
+                // itt baja van, a WebDev-hez(treeID: 1) hozzáad, a Managerhez(treeID: 0) nem. de hogy miert?
                 if (user.skillData.find(obj => obj.treeID == data[i].treeID).skills.find(obj => obj.skillID == data[i].skillID) == undefined) user.skillData.find(obj => obj.treeID).skills.push({skillID: data[i].skillID});
                 user.skillData.find(obj => obj.treeID == data[i].treeID).skills.find(obj => obj.skillID == data[i].skillID).skillLevel = data[i].skillLevel;
                 user.save(function (err) {
@@ -236,8 +236,34 @@ setRoute.post('/skilllevel', function(req, res) {
             }
         }
     });
-});
-
+});*/
+  setRoute.post('/submitAll', function(req, res) {
+    var data = req.body;
+    User.findOne({
+        username: req.decoded.username
+      }, function(err, user) {
+        if (err) throw err;
+        if (!user) {
+          res.json({
+            success: false,
+            message: 'User not found.'
+          });
+        }
+        else {
+          for(var i = 0; i < data.length; ++i){
+            for(var j = 0; j < data[i].skills.length; ++j){
+                if(user.skillData.find(obj => obj.treeID == data[i].treeID).skills.find(obj => obj.skillID == data[i][j].skillID) == undefined){
+                    user.skillData.find(obj => obj.treeID == data[i].treeID).skills.find(obj => obj.skillID == data[i][j].skillID) = data[i][j];
+                }
+            }
+            user.save(function (err) {
+                if (err) throw err;
+            });
+          }
+        }
+      }
+    }
+}
 app.use('/set', setRoute);
 
 app.listen(port);
