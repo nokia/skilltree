@@ -120,7 +120,7 @@ function initChart() {
 
         for (var j = 0; j < treeData.find(obj => obj.treeID == userData[i].treeID).skills.length; ++j) {
             var skill = treeData.find(obj => obj.treeID == userData[i].treeID).skills[j];
-            currentLevelSum += getSkillLevel(i, skill.skillID);
+            currentLevelSum += getSkillLevel(userData[i].treeID, skill.skillID);
             maxLevelSum += skill.maxSkillLevel;
         }
 
