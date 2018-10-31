@@ -45,35 +45,33 @@ var app = new PIXI.Application({
 var tokenPayload = parseJwt(localStorage.getItem("loginToken"));
 document.getElementById("welcome").innerHTML = "Hello " + tokenPayload.username + "!";
 
-var cid;
 function listTrees(){
   var dtc = document.getElementById("dropDownContent");
-
   dtc.innerHTML = "";
   for(i = 0; i < treeData.length; i++){
     if(!userData.find(obj => obj.treeID == treeData[i].treeID)){
-      dtc.innerHTML += "<a>" + treeData[i].treeName + "</a>";
-      cid = dtc.choiceID = treeData[i].treeID; // SZAR, mindenkeppen az utolso tree idjat menti el szoval a choiceclick is azt adja hozza, mindegy mit nyomsz
-      dtc.addEventListener("click", choiceClick);
+      var addedElement = document.createElement("A");
+      addedElement.setAttribute("ID", treedata[i].treeID);
+      addedElement.onclick = function (){
+        var req = new XMLHttpRequest();
+        var data = new Array();
+        data.push(addedElement.ID);
+
+        req.open('POST', '/set/mytrees', true);
+        req.setRequestHeader('Content-type', 'application/json');
+        req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+        req.onreadystatechange = function() {
+            if(req.readyState == 4 && req.status == 200){
+                window.reload();
+            }
+        }
+        req.send(JSON.stringify(data));
+      }
+      var addedText = document.createTextNode("<a>" + treeData[i].treeName + "</a>");
+      addedElement.appendChild(addedText);
+      dtc.appendChild(addedElement);
     }
   }
-  console.log(dtc);
-}
-
-function choiceClick () {
-    var req = new XMLHttpRequest();
-    var data = new Array();
-    data.push(cid);
-
-    req.open('POST', '/set/mytrees', true);
-    req.setRequestHeader('Content-type', 'application/json');
-    req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-    req.onreadystatechange = function() {
-        if(req.readyState == 4 && req.status == 200){
-            window.reload();
-        }
-    }
-    req.send(JSON.stringify(data));
 }
 
 function logout(){
