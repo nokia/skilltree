@@ -1,7 +1,7 @@
 function validate() {
 	var loginBox = document.getElementById("loginBox");
-	var thisusername = document.getElementById("username");
-	var thispassword = document.getElementById("password");
+	var username = document.getElementById("username");
+	var password = document.getElementById("password");
 
 	var httpRequest = new XMLHttpRequest();
 	var params = 'username=' + username.value + '&password=' + password.value;
@@ -22,8 +22,8 @@ function validate() {
 	}
 	httpRequest.send( 
 		JSON.stringify({
-			username: thisusername.value,
-			password: thispassword.value
+			username: username.value,
+			password: password.value
 		})
 	 );
 }
