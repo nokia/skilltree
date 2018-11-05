@@ -5,8 +5,6 @@ class EditorItemContainer {
         this.skillData = treeData.skills[skillID];
         this.skillData.treeID = treeID;
 
-        this.lock = false;
-
         //Creating images
         this.skillicon = new PIXI.Sprite(app.localLoader.resources[this.skillData.skillIcon].texture); //100x100
         this.skillborder = new PIXI.Sprite(PIXI.loader.resources["pictures/skillborder.png"].texture); //116x116
@@ -105,8 +103,7 @@ class EditorItemContainer {
             // DRAG
             obj.position.x = obj.dragObjStart.x + (dragPointerEnd.x - obj.dragPointerStart.x);
 
-            if (Math.abs(obj.position.y - obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y)) > 75 && !this.lock) {
-                this.lock = true;
+            if (Math.abs(obj.position.y - obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y)) > 75) {
                 var levelChange;
                 if (obj.position.y - obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y) > 0) {
                     levelChange = Math.floor(((obj.position.y - obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y)) + 75) / 150);
@@ -118,8 +115,7 @@ class EditorItemContainer {
 
                 this.parentObj.treeData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID).level += levelChange;
 
-                obj.position.y += this.parentObj.treeData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID).level * 150;
-                this.lock = false;
+                obj.position.y = this.parentObj.treeData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID).level * 150;
             }
         }
     }
