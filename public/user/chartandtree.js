@@ -120,14 +120,16 @@ function initChart() {
 
     document.getElementById("pixiCanvas").style.visibility = "visible";
 
-    var x = 0//window.innerWidth / 2;
-    var y = 0//window.innerHeight / 2;
+    var x = 0;
+    var y = 0;
 
     var width = 240;
     var h1 = 60;
     var h2 = h1 + width;
 
     for (var i = 0; i < sliceCount; i++) {
+        var tempContainer = new PIXI.Container();
+
         //var currentLevelSum = 0;
         //var maxLevelSum = 0;
         var percent = 0;
@@ -140,9 +142,9 @@ function initChart() {
         //percent = currentLevelSum / maxLevelSum;
 
         //var tempContainer = new PIXI.Container();
-        sliceContainer[i] = new PIXI.Container();
+        //sliceContainer[i] = new PIXI.Container();
         //tempContainer.id = userData[i].treeID;
-        sliceContainer[i].id = categories[i];
+        //sliceContainer[i].id = categories[i];
 
         h2 = h1 + width;
         var s = (i * (360 / sliceCount) * Math.PI) / 180;
@@ -158,7 +160,7 @@ function initChart() {
         slice.lineTo(x + Math.cos(e) * h1, y + Math.sin(e) * h1);
         slice.endFill();
 
-        sliceContainer[i].addChild(slice);
+        tempContainer.addChild(slice);
 
         h2 = h1 + (width * percent);
         var innerSlice = new PIXI.Graphics();
@@ -170,7 +172,7 @@ function initChart() {
         innerSlice.lineTo(x + Math.cos(e) * h1, y + Math.sin(e) * h1);
         innerSlice.endFill();
 
-        sliceContainer[i].addChild(innerSlice);
+        tempContainer.addChild(innerSlice);
 
         //sliceContainer[i] = tempContainer;
         /*sliceContainer[i].buttonMode = true;
@@ -214,14 +216,14 @@ function initChart() {
         var rope = new PIXI.mesh.Rope(text.texture, points);
         rope.rotation = (Math.PI * 2 / sliceCount - text.width / (240 * 8 / sliceCount) * Math.PI * 2 / sliceCount * 0.95) / 2;
         //app.stage.addChild(rope);
-        sliceContainer[i].addChild(rope);
+        tempContainer.addChild(rope);
         //rope.position.set(window.innerWidth / 2, window.innerHeight / 2);
         //sliceContainer[i].title = rope;
 
         //sliceContainer[i].position.set(window.innerWidth / 2, window.innerHeight / 2);
 
         //app.stage.addChild(sliceContainer[i]);
-        chartContainer.addChild(sliceContainer[i]);
+        chartContainer.addChild(tempContainer);
     }
 
     logo = new PIXI.Sprite(PIXI.loader.resources["tree.png"].texture);
