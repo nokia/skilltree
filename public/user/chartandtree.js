@@ -39,6 +39,12 @@ var app = new PIXI.Application({
         autoStart: false,
 });
 
+function reSizeCanvas(){
+  app.width = window.innerWidth;
+  app.height = window.innerHeight - 30;
+  app.renderer.render(app.stage);
+}
+
 // TOP BAR
 
 // get username from token and show it
@@ -61,7 +67,6 @@ function listTrees(){
         req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
         req.onreadystatechange = function() {
             if(req.readyState == 4 && req.status == 200){
-              window.open("/user/", "_self");
             }
         }
         req.send(JSON.stringify(data));
@@ -80,7 +85,7 @@ function submit(){
   sub.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
   sub.onreadystatechange = function() {
       if(sub.readyState == 4 && sub.status == 200) {
-
+        window.open("/user/", "_self");
       }
   }
   sub.send(JSON.stringify(userData));
