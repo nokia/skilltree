@@ -40,6 +40,10 @@ var app = new PIXI.Application({
         autoResize: true
 });
 
+window.onresize = function () {
+  alert("dd");
+};
+
 // TOP BAR
 
 // get username from token and show it
