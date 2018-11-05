@@ -5,6 +5,8 @@ class EditorItemContainer {
         this.skillData = treeData.skills[skillID];
         this.skillData.treeID = treeID;
 
+        this.levelChange = 0;
+
         //Creating images
         this.skillicon = new PIXI.Sprite(app.localLoader.resources[this.skillData.skillIcon].texture); //100x100
         this.skillborder = new PIXI.Sprite(PIXI.loader.resources["pictures/skillborder.png"].texture); //116x116
@@ -78,6 +80,7 @@ class EditorItemContainer {
         var obj = event.currentTarget;
         if (!obj.dragging) return;
 
+        this.parentObj.treeData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID).level += this.levelChange;
         obj.position.y = this.parentObj.treeData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID).level * 150;
 
         obj.dragging = 0;
@@ -112,10 +115,6 @@ class EditorItemContainer {
                 } else {
                     levelChange = Math.ceil(((obj.position.y - obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y)) - 75) / 150);
                 }
-
-                console.log(levelChange);
-
-                this.parentObj.treeData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID).level += levelChange;
             }
         }
     }
