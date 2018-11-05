@@ -129,6 +129,8 @@ function initChart() {
     var h1 = 60;
     var h2 = h1 + width;
 
+    var chartContainer = new PIXI.Container();
+
     for (var i = 0; i < sliceCount; i++) {
         var currentLevelSum = 0;
         var maxLevelSum = 0;
@@ -191,7 +193,9 @@ function initChart() {
                         showTree(this.id);
                     });
 
-        app.stage.addChild(sliceContainer[i]);
+        //app.stage.addChild(sliceContainer[i]);
+
+        chartContainer.addChild(sliceContainer[i]);
 
         // creates tree name at the chart
         var text = new PIXI.Text(treeData.find(obj => obj.treeID == userData[i].treeID).treeName, {fill: '#ffffff', wordWrap: true, wordWrapWidth: 200, align: 'center'});
@@ -215,16 +219,21 @@ function initChart() {
 
         var rope = new PIXI.mesh.Rope(text.texture, points);
         rope.rotation = (Math.PI * 2 / sliceCount - text.width / (240 * 8 / sliceCount) * Math.PI * 2 / sliceCount * 0.95) / 2;
-        app.stage.addChild(rope);
+        //app.stage.addChild(rope);
+        sliceContainer[i].addChild(rope);
         rope.position.set(window.innerWidth / 2, window.innerHeight / 2);
         sliceContainer[i].title = rope;
+
+        chartContainer.addChild(sliceContainer[i]);
     }
 
     logo = new PIXI.Sprite(PIXI.loader.resources["tree.png"].texture);
     logo.anchor.set(0.5, 0.5);
     logo.position.set(window.innerWidth / 2, window.innerHeight / 2);
     logo.scale.set(0.42);
-    app.stage.addChild(logo);
+    chartContainer.addChild(logo);
+
+    app.stage.addChild(chartContainer);
 
     app.renderer.render(app.stage);
 }
