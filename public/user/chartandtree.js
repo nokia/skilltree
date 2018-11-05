@@ -193,10 +193,6 @@ function initChart() {
                         showTree(this.id);
                     });*/
 
-        //app.stage.addChild(sliceContainer[i]);
-
-        chartContainer.addChild(sliceContainer[i]);
-
         // creates tree name at the chart
         //var text = new PIXI.Text(treeData.find(obj => obj.treeID == userData[i].treeID).treeName, {fill: '#ffffff', wordWrap: true, wordWrapWidth: 200, align: 'center'});
 
