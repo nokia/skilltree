@@ -112,7 +112,7 @@ class EditorItemContainer {
 
                 console.log(levelChange);
 
-                obj.position.y += levelChange * 150;
+                //obj.position.y += levelChange * 150;
             }
         }
     }
