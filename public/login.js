@@ -7,7 +7,7 @@ function validate() {
 	var params = 'username=' + username.value + '&password=' + password.value;
 
 	httpRequest.open('POST', '/auth', true);
-	httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	httpRequest.setRequestHeader('Content-type', 'application/json');
 	httpRequest.responseType = "json";
 
 	httpRequest.onreadystatechange = function() {
@@ -20,7 +20,12 @@ function validate() {
                 }
 			}
 	}
-	httpRequest.send(params);
+	httpRequest.send( 
+		{
+			"username": username.value,
+			"password": password.value
+		}
+	 );
 }
 
 function showToast() {
