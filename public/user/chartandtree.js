@@ -61,7 +61,7 @@ function listTrees(){
         req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
         req.onreadystatechange = function() {
             if(req.readyState == 4 && req.status == 200){
-
+              window.open("/user/", "_self");
             }
         }
         req.send(JSON.stringify(data));
@@ -80,7 +80,7 @@ function submit(){
   sub.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
   sub.onreadystatechange = function() {
       if(sub.readyState == 4 && sub.status == 200) {
-          
+
       }
   }
   sub.send(JSON.stringify(userData));

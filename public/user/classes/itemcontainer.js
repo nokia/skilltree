@@ -173,22 +173,6 @@ class ItemContainer {
                     this.parentObj.userData.skills.push({skillID: this.parentObj.skillData.skillID, skillLevel: 0});
                 }
                 this.parentObj.userData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID).skillLevel++;
-
-                // sending new skillLevel to server
-                /*var httpRequest = new XMLHttpRequest();
-                var data = new Array();
-                data.push({treeID: this.parentObj.skillData.treeID, skillID: this.parentObj.skillData.skillID, skillLevel: this.parentObj.skillData.skillLevel});
-
-                httpRequest.open('POST', '/set/skilllevel', true);
-                httpRequest.setRequestHeader('Content-type', 'application/json');
-                httpRequest.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-
-                httpRequest.onreadystatechange = function() {
-                    if(httpRequest.readyState == 4 && httpRequest.status == 200) {
-                        this.parentObj.app.renderer.render(this.parentObj.app.stage);
-                    }
-                }
-                httpRequest.send(JSON.stringify(data));*/
             }
 
             this.parentObj.app.renderer.render(this.parentObj.app.stage);

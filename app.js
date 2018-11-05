@@ -212,31 +212,6 @@ setRoute.post('/mytrees', function(req, res) {
         }
     });
 });
-setRoute.post('/skilllevel', function(req, res) {
-    var data = req.body;
-
-    User.findOne({
-        username: req.decoded.username
-    }, function(err, user) {
-        if (err) throw err;
-
-        if (!user) {
-            res.json({
-                success: false,
-                message: 'User not found.'
-            });
-        } else if (user) {
-            for (var i = 0; i < data.length; ++i) {
-                // itt baja van, a WebDev-hez(treeID: 1) hozzáad, a Managerhez(treeID: 0) nem. de hogy miert?
-                if (user.skillData.find(obj => obj.treeID == data[i].treeID).skills.find(obj => obj.skillID == data[i].skillID) == undefined) user.skillData.find(obj => obj.treeID).skills.push({skillID: data[i].skillID});
-                user.skillData.find(obj => obj.treeID == data[i].treeID).skills.find(obj => obj.skillID == data[i].skillID).skillLevel = data[i].skillLevel;
-                user.save(function (err) {
-                    if (err) throw err;
-                });
-            }
-        }
-    });
-});
   setRoute.post('/submitall', function(req, res) {
     var data = req.body;
     User.findOne({
