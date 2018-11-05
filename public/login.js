@@ -4,7 +4,6 @@ function validate() {
 	var password = document.getElementById("password");
 
 	var httpRequest = new XMLHttpRequest();
-	var params = 'username=' + username.value + '&password=' + password.value;
 
 	httpRequest.open('POST', '/auth', true);
 	httpRequest.setRequestHeader('Content-type', 'application/json');
