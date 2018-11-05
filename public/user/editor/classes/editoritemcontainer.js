@@ -80,6 +80,7 @@ class EditorItemContainer {
         var obj = event.currentTarget;
         if (!obj.dragging) return;
 
+        console.log(this.levelChange);
         this.parentObj.treeData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID).level += this.levelChange;
         obj.position.y = this.parentObj.treeData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID).level * 150;
 
