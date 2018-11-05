@@ -37,13 +37,8 @@ var app = new PIXI.Application({
         backgroundColor: 0x183693,
         antialias: true,
         autoStart: false,
+        autoResize: true
 });
-
-function reSizeCanvas(){
-  app.width = window.innerWidth;
-  app.height = window.innerHeight - 30;
-  app.renderer.render(app.stage);
-}
 
 // TOP BAR
 
