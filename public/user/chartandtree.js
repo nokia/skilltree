@@ -119,8 +119,8 @@ function initChart() {
 
     document.getElementById("pixiCanvas").style.visibility = "visible";
 
-    var x = window.innerWidth / 2;
-    var y = window.innerHeight / 2;
+    var x = 0//window.innerWidth / 2;
+    var y = 0//window.innerHeight / 2;
 
     var width = 240;
     var h1 = 60;
