@@ -41,7 +41,8 @@ var app = new PIXI.Application({
 });
 
 window.onresize = function () {
-  alert("dd");
+  app.renderer.resize(window.innerWidth, window.innerHeight - 30);
+  app.renderer.render(app.stage);
 };
 
 // TOP BAR
