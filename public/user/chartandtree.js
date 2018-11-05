@@ -78,6 +78,11 @@ function submit(){
   sub.open('POST', '/set/submitall', true);
   sub.setRequestHeader('Content-type', 'application/json');
   sub.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+  sub.onreadystatechange = function() {
+      if(sub.readyState == 4 && sub.status == 200) {
+          
+      }
+  }
   sub.send(JSON.stringify(userData));
 }
 
