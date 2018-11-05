@@ -41,6 +41,7 @@ class EditorItemContainer {
             .on('rightclick', this.onRightClick);
 
         this.container.interactive = true;
+        this.container.parentObj = this;
         this.container
             .on('pointerdown', this.onDragStart)
             .on('pointerup', this.onDragEnd)
@@ -112,7 +113,9 @@ class EditorItemContainer {
 
                 console.log(levelChange);
 
-                //obj.position.y += levelChange * 150;
+                this.parentObj.userData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID).level += levelChange;
+
+                obj.position.y += this.parentObj.userData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID).level * 150;
             }
         }
     }
