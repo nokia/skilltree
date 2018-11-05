@@ -106,6 +106,8 @@ class EditorItemContainer {
                 var levelChange = Math.floor(((obj.position.y - obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y)) + 75) / 150);
                 if (levelChange < 0) levelChange++;
 
+                console.log(levelChange);
+
                 obj.position.y += levelChange * 150;
             }
         }
