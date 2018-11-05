@@ -129,7 +129,7 @@ function initChart() {
 
         //var currentLevelSum = 0;
         //var maxLevelSum = 0;
-        var percent = 0;
+        var percent = Math.random();
 
         /*for (var j = 0; j < treeData.find(obj => obj.treeID == userData[i].treeID).skills.length; ++j) {
             var skill = treeData.find(obj => obj.treeID == userData[i].treeID).skills[j];
@@ -169,6 +169,8 @@ function initChart() {
 
         tempContainer.addChild(innerSlice);
 
+
+        //Clickabke slices ----------------------------
         /*sliceContainer[i].buttonMode = true;
         sliceContainer[i].interactive = true;
 
