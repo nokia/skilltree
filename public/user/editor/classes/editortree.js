@@ -22,7 +22,7 @@ class EditorTree {
                 }                                                                           // ?????
             }                                                                               // ?????
 
-            this.treeData.skills[j].itemcontainer = new EditorItemContainer(app, this.treeData, treeID);
+            this.treeData.skills[j].itemcontainer = new EditorItemContainer(app, this.treeData, treeID, this.treeData.skills[j].skillID);
 
             // Positioning of the containers dynamically by level and by index inside level
             this.treeData.skills[j].itemcontainer.container.position.x = i * 130 + (app.renderer.width - levelLength * 130) / 2 + posX; // ?????
