@@ -22,8 +22,8 @@ function validate() {
 	}
 	httpRequest.send( 
 		{
-			"username": username.value,
-			"password": password.value
+			username: username.value,
+			password: password.value
 		}
 	 );
 }
