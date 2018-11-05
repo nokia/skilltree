@@ -40,13 +40,8 @@ var app = new PIXI.Application({
         autoResize: true
 });
 
-var chartContainer = new PIXI.Container();
-
 window.onresize = function () {
   app.renderer.resize(window.innerWidth, window.innerHeight - 30);
-
-  chartContainer.position.set(window.innerWidth / 2, window.innerHeight / 2);
-
   app.renderer.render(app.stage);
 };
 
@@ -228,20 +223,16 @@ function initChart() {
         //app.stage.addChild(rope);
         sliceContainer[i].addChild(rope);
         rope.position.set(window.innerWidth / 2, window.innerHeight / 2);
-        sliceContainer[i].title = rope;
+        //sliceContainer[i].title = rope;
 
-        chartContainer.addChild(sliceContainer[i]);
+        app.stage.addChild(sliceContainer[i]);
     }
 
     logo = new PIXI.Sprite(PIXI.loader.resources["tree.png"].texture);
     logo.anchor.set(0.5, 0.5);
     logo.position.set(window.innerWidth / 2, window.innerHeight / 2);
     logo.scale.set(0.42);
-    chartContainer.addChild(logo);
-
-    chartContainer.pivot.set(chartContainer.width / 2, chartContainer.height / 2);
-
-    app.stage.addChild(chartContainer);
+    app.stage.addChild(logo);
 
     app.renderer.render(app.stage);
 }
