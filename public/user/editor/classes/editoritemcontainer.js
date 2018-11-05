@@ -80,9 +80,9 @@ class EditorItemContainer {
         var obj = event.currentTarget;
         if (!obj.dragging) return;
 
-        console.log(this.levelChange);
-        this.parentObj.treeData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID).level += this.levelChange;
-        obj.position.y += this.levelChange * 150;
+        console.log(this.parentObj.levelChange);
+        this.parentObj.treeData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID).level += this.parentObj.levelChange;
+        obj.position.y += this.parentObj.levelChange * 150;
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
 
         obj.dragging = 0;
@@ -112,11 +112,11 @@ class EditorItemContainer {
 
             if (Math.abs(obj.position.y - obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y)) > 75) {
                 if (obj.position.y - obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y) > 0) {
-                    this.levelChange = Math.floor(((obj.position.y - obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y)) + 75) / 150);
+                    this.parentObj.levelChange = Math.floor(((obj.position.y - obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y)) + 75) / 150);
                 } else {
-                    this.levelChange = Math.ceil(((obj.position.y - obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y)) - 75) / 150);
+                    this.parentObj.levelChange = Math.ceil(((obj.position.y - obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y)) - 75) / 150);
                 }
-            } else this.levelChange = 0;
+            } else this.parentObj.levelChange = 0;
         }
     }
 }
