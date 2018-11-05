@@ -21,10 +21,10 @@ function validate() {
 			}
 	}
 	httpRequest.send( 
-		{
+		JSON({
 			username: thisusername.value,
 			password: thispassword.value
-		}
+		})
 	 );
 }
 
