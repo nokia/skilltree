@@ -85,7 +85,7 @@ class EditorItemContainer {
 
         this.parentObj.treeData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID).level += this.parentObj.levelChange;
         obj.position.y += this.parentObj.levelChange * 150;
-        obj.position.x += this.parentObj.positionYChange * 10;
+        obj.position.x += this.parentObj.positionXChange * 20;
         this.parentObj.treeData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID).positionX = obj.position.x - window.innerWidth / 2;
         console.log(this.parentObj.treeData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID).positionX);
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
@@ -119,11 +119,11 @@ class EditorItemContainer {
 
             if (Math.abs(x) > 10) {
                 if (x > 0) {
-                    this.parentObj.positionYChange = Math.floor((x + 10) / 20);
+                    this.parentObj.positionXChange = Math.floor((x + 10) / 20);
                 } else {
-                    this.parentObj.positionYChange = Math.ceil((x - 10) / 20);
+                    this.parentObj.positionXChange = Math.ceil((x - 10) / 20);
                 }
-            } else this.parentObj.positionYChange = 0;
+            } else this.parentObj.positionXChange = 0;
 
             var y = obj.position.y - obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y);
 
