@@ -55,7 +55,7 @@ class EditorItemContainer {
     onClick(event) {
         if (!event.drag) {
             this.parentObj.levelChange = 0;
-            this.parentObj.positionYChange = 0;
+            this.parentObj.positionXChange = 0;
             this.parentObj.app.renderer.render(this.parentObj.app.stage);
         }
     }
