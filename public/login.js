@@ -21,7 +21,7 @@ function validate() {
 			}
 	}
 	httpRequest.send( 
-		JSON({
+		JSON.stringify({
 			username: thisusername.value,
 			password: thispassword.value
 		})
