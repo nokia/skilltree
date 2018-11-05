@@ -285,6 +285,8 @@ function openEditor () {
     }
 
     app.localLoader.load(function () {
+        app.width = .75 * window.innerWidth;
+
         tree = new EditorTree(app, treeID2, treeData.find(obj => obj.treeID == treeID2), 0, 30);
         app.stage.addChild(tree.treeContainer);
 
