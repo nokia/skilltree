@@ -214,8 +214,10 @@ function initChart() {
         rope.rotation = (Math.PI * 2 / sliceCount - text.width / (240 * 8 / sliceCount) * Math.PI * 2 / sliceCount * 0.95) / 2;
         //app.stage.addChild(rope);
         sliceContainer[i].addChild(rope);
-        rope.position.set(window.innerWidth / 2, window.innerHeight / 2);
+        //rope.position.set(window.innerWidth / 2, window.innerHeight / 2);
         //sliceContainer[i].title = rope;
+
+        sliceContainer[i].position.set(window.innerWidth, window.innerHeight);
 
         app.stage.addChild(sliceContainer[i]);
         console.log(sliceContainer[i].position.x);
