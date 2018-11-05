@@ -218,7 +218,7 @@ function initChart() {
         //sliceContainer[i].title = rope;
 
         app.stage.addChild(sliceContainer[i]);
-        console.log(sliceContainer[i].width);
+        console.log(sliceContainer[i].position.x);
     }
 
     logo = new PIXI.Sprite(PIXI.loader.resources["tree.png"].texture);
