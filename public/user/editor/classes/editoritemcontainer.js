@@ -40,6 +40,7 @@ class EditorItemContainer {
             .on('click', this.onClick)
             .on('rightclick', this.onRightClick);
 
+        this.container.interactive = true;
         this.container
             .on('pointerdown', this.onDragStart)
             .on('pointerup', this.onDragEnd)
