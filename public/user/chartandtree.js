@@ -32,8 +32,8 @@ treeDataRequest.send();
 
 var app = new PIXI.Application({
         view: pixiCanvas,
-        width: window.innerWidth - 20,
-        height: window.innerHeight - 50,
+        width: window.innerWidth,
+        height: window.innerHeight - 30,
         backgroundColor: 0x183693,
         antialias: true,
         autoStart: false,
