@@ -120,7 +120,7 @@ function initChart() {
     //var sliceCount = userData.length;
     var sliceCount = 8;
     sliceContainer = new Array(sliceCount);
-    var categories = ["Communication", "Engineering", "Digital Competence", "Way of Learning", "Behaviour and Citizenship", "Management and Innovation", "Culture" ];
+    var categories = ["Communication", "Engineering", "Digital Competence", "Way of Learning", "Behaviour and Citizenship", "Management and Innovation", "Culture", "Others"];
 
     document.getElementById("pixiCanvas").style.visibility = "visible";
 
@@ -145,7 +145,7 @@ function initChart() {
 
         var tempContainer = new PIXI.Container();
         //tempContainer.id = userData[i].treeID;
-        tempContainer.id = i;
+        tempContainer.id = categories[i];
 
         h2 = h1 + width;
         var s = (i * (360 / sliceCount) * Math.PI) / 180;
