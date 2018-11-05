@@ -239,7 +239,7 @@ function initChart() {
     logo.scale.set(0.42);
     chartContainer.addChild(logo);
 
-    chartContainer.pivot.set(chartContainer.width, chartContainer.height);
+    chartContainer.pivot.set(chartContainer.width / 2, chartContainer.height / 2);
 
     app.stage.addChild(chartContainer);
 
