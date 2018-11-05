@@ -138,7 +138,8 @@ function initChart() {
         }*/
         //percent = currentLevelSum / maxLevelSum;
 
-        var tempContainer = new PIXI.Container();
+        //var tempContainer = new PIXI.Container();
+        sliceContainer[i] = new PIXI.Container();
         //tempContainer.id = userData[i].treeID;
         tempContainer.id = categories[i];
 
@@ -156,7 +157,7 @@ function initChart() {
         slice.lineTo(x + Math.cos(e) * h1, y + Math.sin(e) * h1);
         slice.endFill();
 
-        tempContainer.addChild(slice);
+        sliceContainer[i].addChild(slice);
 
         h2 = h1 + (width * percent);
         var innerSlice = new PIXI.Graphics();
@@ -168,9 +169,9 @@ function initChart() {
         innerSlice.lineTo(x + Math.cos(e) * h1, y + Math.sin(e) * h1);
         innerSlice.endFill();
 
-        tempContainer.addChild(innerSlice);
+        sliceContainer[i].addChild(innerSlice);
 
-        sliceContainer[i] = tempContainer;
+        //sliceContainer[i] = tempContainer;
         /*sliceContainer[i].buttonMode = true;
         sliceContainer[i].interactive = true;
 
