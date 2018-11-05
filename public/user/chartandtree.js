@@ -231,7 +231,7 @@ function initChart() {
     //app.stage.addChild(logo);
     chartContainer.addChild(logo);
 
-    chartContainer.position.set(window.innerWidth / 2, window.innerHeight / 2);
+    chartContainer.position.set(window.innerWidth / 2, (window.innerHeight - 30) / 2);
     app.stage.addChild(chartContainer);
 
     app.renderer.render(app.stage);
@@ -245,7 +245,7 @@ window.onresize = function () {
     }
     logo.position.set(window.innerWidth / 2, window.innerHeight / 2);*/
 
-    chartContainer.position.set(window.innerWidth / 2, window.innerHeight / 2);
+    chartContainer.position.set(window.innerWidth / 2, (window.innerHeight - 30) / 2);
 
     app.renderer.render(app.stage);
 };
