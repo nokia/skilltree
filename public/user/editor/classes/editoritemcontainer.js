@@ -81,9 +81,10 @@ class EditorItemContainer {
         var obj = event.currentTarget;
         if (!obj.dragging) return;
 
-        console.log(this.parentObj.levelChange);
         this.parentObj.treeData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID).level += this.parentObj.levelChange;
         obj.position.y += this.parentObj.levelChange * 150;
+        this.parentObj.treeData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID).positionY = obj.position.y - window.innerWidth / 2;
+        console.log(this.parentObj.treeData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID).positionY);
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
 
         obj.dragging = 0;
