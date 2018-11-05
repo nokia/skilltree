@@ -40,8 +40,13 @@ var app = new PIXI.Application({
         autoResize: true
 });
 
+var chartContainer = new PIXI.Container();
+
 window.onresize = function () {
   app.renderer.resize(window.innerWidth, window.innerHeight - 30);
+
+  chartContainer.position.set(window.innerWidth / 2, window.innerHeight / 2);
+
   app.renderer.render(app.stage);
 };
 
@@ -130,8 +135,6 @@ function initChart() {
     var width = 240;
     var h1 = 60;
     var h2 = h1 + width;
-
-    var chartContainer = new PIXI.Container();
 
     for (var i = 0; i < sliceCount; i++) {
         //var currentLevelSum = 0;
