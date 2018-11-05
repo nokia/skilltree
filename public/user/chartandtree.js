@@ -32,8 +32,8 @@ treeDataRequest.send();
 
 var app = new PIXI.Application({
         view: pixiCanvas,
-        width: window.innerWidth - 20,
-        height: window.innerHeight - 50,
+        width: window.innerWidth,
+        height: window.innerHeight - 30,
         backgroundColor: 0x183693,
         antialias: true,
         autoStart: false,
@@ -241,8 +241,11 @@ function showChart () {
 // PIXI.loader is global, it loads the back button, skillborder, tree, ...
 
 var tree = undefined;
+var treeID2 = undefined;
 
 function showTree (treeID) {
+    treeID2 = treeID;
+
     // load the tree's pictures
     app.localLoader = new PIXI.loaders.Loader();
     for (var j = 0; j < treeData.find(obj => obj.treeID == treeID).skills.length; ++j) {
@@ -270,6 +273,28 @@ function showTree (treeID) {
         });
 
         app.stage.addChild(backButton);
+
+        app.renderer.render(app.stage);
+    });
+}
+
+function openEditor () {
+    app.stage.removeChild(tree.treeContainer);
+    app.localLoader.destroy();
+    tree = undefined;
+
+    // load the tree's pictures
+    app.localLoader = new PIXI.loaders.Loader();
+    for (var j = 0; j < treeData.find(obj => obj.treeID == treeID2).skills.length; ++j) {
+        var skill = treeData.find(obj => obj.treeID == treeID2).skills[j];
+        app.localLoader.add(skill.skillIcon.toString());
+    }
+
+    app.localLoader.load(function () {
+        app.renderer.resize(.75 * window.innerWidth, window.innerHeight - 30);
+
+        tree = new EditorTree(app, treeID2, treeData.find(obj => obj.treeID == treeID2), 0, 30);
+        app.stage.addChild(tree.treeContainer);
 
         app.renderer.render(app.stage);
     });
