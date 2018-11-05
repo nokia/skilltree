@@ -6,6 +6,7 @@ class EditorItemContainer {
         this.skillData.treeID = treeID;
 
         this.levelChange = 0;
+        this.positionXChange = 0;
 
         //Creating images
         this.skillicon = new PIXI.Sprite(app.localLoader.resources[this.skillData.skillIcon].texture); //100x100
@@ -54,6 +55,7 @@ class EditorItemContainer {
     onClick(event) {
         if (!event.drag) {
             this.parentObj.levelChange = 0;
+            this.parentObj.positionYChange = 0;
             this.parentObj.app.renderer.render(this.parentObj.app.stage);
         }
     }
@@ -83,8 +85,9 @@ class EditorItemContainer {
 
         this.parentObj.treeData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID).level += this.parentObj.levelChange;
         obj.position.y += this.parentObj.levelChange * 150;
-        this.parentObj.treeData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID).positionY = obj.position.x - window.innerWidth / 2;
-        console.log(this.parentObj.treeData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID).positionY);
+        obj.position.x += this.parentObj.positionYChange * 10;
+        this.parentObj.treeData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID).positionX = obj.position.x - window.innerWidth / 2;
+        console.log(this.parentObj.treeData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID).positionX);
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
 
         obj.dragging = 0;
@@ -110,13 +113,25 @@ class EditorItemContainer {
             event.drag = true;
             var dragPointerEnd = data.getLocalPosition(obj.parent);
             // DRAG
-            obj.position.x = obj.dragObjStart.x + (dragPointerEnd.x - obj.dragPointerStart.x);
+            //obj.position.x = obj.dragObjStart.x + (dragPointerEnd.x - obj.dragPointerStart.x);
 
-            if (Math.abs(obj.position.y - obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y)) > 75) {
-                if (obj.position.y - obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y) > 0) {
-                    this.parentObj.levelChange = Math.floor(((obj.position.y - obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y)) + 75) / 150);
+            var x = obj.position.x - obj.dragObjStart.x + (dragPointerEnd.x - obj.dragPointerStart.x);
+
+            if (Math.abs(x) > 10) {
+                if (x > 0) {
+                    this.parentObj.positionYChange = Math.floor((x + 10) / 20);
                 } else {
-                    this.parentObj.levelChange = Math.ceil(((obj.position.y - obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y)) - 75) / 150);
+                    this.parentObj.positionYChange = Math.ceil((x - 10) / 20);
+                }
+            } else this.parentObj.positionYChange = 0;
+
+            var y = obj.position.y - obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y);
+
+            if (Math.abs(y) > 75) {
+                if (y > 0) {
+                    this.parentObj.levelChange = Math.floor((y + 75) / 150);
+                } else {
+                    this.parentObj.levelChange = Math.ceil((y - 75) / 150);
                 }
             } else this.parentObj.levelChange = 0;
         }

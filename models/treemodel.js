@@ -14,7 +14,7 @@ module.exports = mongoose.model('Tree', new Schema({
             skillIcon: String,
             maxSkillLevel: Number,
             level: Number,
-            positionY: Number,
+            positionX: Number,
             children: [{skillID: Number}]
         }
     ],
