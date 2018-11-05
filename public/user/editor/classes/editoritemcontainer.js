@@ -110,11 +110,10 @@ class EditorItemContainer {
             obj.position.x = obj.dragObjStart.x + (dragPointerEnd.x - obj.dragPointerStart.x);
 
             if (Math.abs(obj.position.y - obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y)) > 75) {
-                var levelChange;
                 if (obj.position.y - obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y) > 0) {
-                    levelChange = Math.floor(((obj.position.y - obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y)) + 75) / 150);
+                    this.levelChange = Math.floor(((obj.position.y - obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y)) + 75) / 150);
                 } else {
-                    levelChange = Math.ceil(((obj.position.y - obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y)) - 75) / 150);
+                    this.levelChange = Math.ceil(((obj.position.y - obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y)) - 75) / 150);
                 }
             }
         }
