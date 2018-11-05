@@ -102,9 +102,7 @@ app.stage.group.enableSort = true;
 
 // CHART
 
-var sliceContainer;
 var chartContainer = new PIXI.Container();
-var logo;
 
 var counter = 0;                // ?????
 function initChart() {
@@ -115,7 +113,6 @@ function initChart() {
 
     //var sliceCount = userData.length;
     var sliceCount = 8;
-    sliceContainer = new Array(sliceCount);
     var categories = ["Communication", "Engineering", "Digital Competence", "Way of Learning", "Behaviour and Citizenship", "Management and Innovation", "Culture", "Others"];
 
     document.getElementById("pixiCanvas").style.visibility = "visible";
@@ -141,8 +138,6 @@ function initChart() {
         }*/
         //percent = currentLevelSum / maxLevelSum;
 
-        //var tempContainer = new PIXI.Container();
-        //sliceContainer[i] = new PIXI.Container();
         //tempContainer.id = userData[i].treeID;
         //sliceContainer[i].id = categories[i];
 
@@ -174,7 +169,6 @@ function initChart() {
 
         tempContainer.addChild(innerSlice);
 
-        //sliceContainer[i] = tempContainer;
         /*sliceContainer[i].buttonMode = true;
         sliceContainer[i].interactive = true;
 
@@ -215,18 +209,12 @@ function initChart() {
 
         var rope = new PIXI.mesh.Rope(text.texture, points);
         rope.rotation = (Math.PI * 2 / sliceCount - text.width / (240 * 8 / sliceCount) * Math.PI * 2 / sliceCount * 0.95) / 2;
-        //app.stage.addChild(rope);
         tempContainer.addChild(rope);
-        //rope.position.set(window.innerWidth / 2, window.innerHeight / 2);
-        //sliceContainer[i].title = rope;
 
-        //sliceContainer[i].position.set(window.innerWidth / 2, window.innerHeight / 2);
-
-        //app.stage.addChild(sliceContainer[i]);
         chartContainer.addChild(tempContainer);
     }
 
-    logo = new PIXI.Sprite(PIXI.loader.resources["tree.png"].texture);
+    var logo = new PIXI.Sprite(PIXI.loader.resources["tree.png"].texture);
     logo.anchor.set(0.5, 0.5);
     //logo.position.set(window.innerWidth / 2, window.innerHeight / 2);
     logo.scale.set(0.42);
