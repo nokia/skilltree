@@ -103,6 +103,7 @@ app.stage.group.enableSort = true;
 // CHART
 
 var sliceContainer;
+var chartContainer = new PIXI.Container();
 var logo;
 
 var counter = 0;                // ?????
@@ -217,17 +218,21 @@ function initChart() {
         //rope.position.set(window.innerWidth / 2, window.innerHeight / 2);
         //sliceContainer[i].title = rope;
 
-        sliceContainer[i].position.set(window.innerWidth / 2, window.innerHeight / 2);
+        //sliceContainer[i].position.set(window.innerWidth / 2, window.innerHeight / 2);
 
-        app.stage.addChild(sliceContainer[i]);
-        console.log(sliceContainer[i].position.x);
+        //app.stage.addChild(sliceContainer[i]);
+        chartContainer.addChild(sliceContainer[i]);
     }
 
     logo = new PIXI.Sprite(PIXI.loader.resources["tree.png"].texture);
     logo.anchor.set(0.5, 0.5);
-    logo.position.set(window.innerWidth / 2, window.innerHeight / 2);
+    //logo.position.set(window.innerWidth / 2, window.innerHeight / 2);
     logo.scale.set(0.42);
-    app.stage.addChild(logo);
+    //app.stage.addChild(logo);
+    chartContainer.addChild(logo);
+
+    chartContainer.position.set(window.innerWidth / 2, window.innerHeight / 2);
+    app.stage.addChild(chartContainer);
 
     app.renderer.render(app.stage);
 }
@@ -235,10 +240,12 @@ function initChart() {
 window.onresize = function () {
     app.renderer.resize(window.innerWidth, window.innerHeight - 30);
 
-    for (var i = 0; i < sliceContainer.length; ++i) {
+    /*for (var i = 0; i < sliceContainer.length; ++i) {
         sliceContainer[i].position.set(window.innerWidth / 2, window.innerHeight / 2);
     }
-    logo.position.set(window.innerWidth / 2, window.innerHeight / 2);
+    logo.position.set(window.innerWidth / 2, window.innerHeight / 2);*/
+
+    chartContainer.position.set(window.innerWidth / 2, window.innerHeight / 2);
 
     app.renderer.render(app.stage);
 };
