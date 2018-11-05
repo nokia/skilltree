@@ -217,7 +217,7 @@ function initChart() {
         //rope.position.set(window.innerWidth / 2, window.innerHeight / 2);
         //sliceContainer[i].title = rope;
 
-        sliceContainer[i].position.set(window.innerWidth, window.innerHeight);
+        sliceContainer[i].position.set(window.innerWidth / 2, window.innerHeight / 2);
 
         app.stage.addChild(sliceContainer[i]);
         console.log(sliceContainer[i].position.x);
