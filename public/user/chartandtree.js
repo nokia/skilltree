@@ -107,13 +107,15 @@ var logo;
 
 var counter = 0;                // ?????
 function initChart() {
-    counter++;                  // ????? initChart waits for pixi loader, tree data and user data, only runs when we have all these
+    /*counter++;                  // ????? initChart waits for pixi loader, tree data and user data, only runs when we have all these
     if (counter < 3) {          // ?????
         return;                 // ?????
-    }
+    }*/ //egyenlore useless
 
-    var sliceCount = userData.length;
+    //var sliceCount = userData.length;
+    var sliceCount = 8;
     sliceContainer = new Array(sliceCount);
+    var categories = ["Communication", "Engineering", "Digital Competence", "Way of Learning", "Behaviour and Citizenship", "Management and Innovation", "Culture" ];
 
     document.getElementById("pixiCanvas").style.visibility = "visible";
 
@@ -125,20 +127,20 @@ function initChart() {
     var h2 = h1 + width;
 
     for (var i = 0; i < sliceCount; i++) {
-        var currentLevelSum = 0;
-        var maxLevelSum = 0;
+        //var currentLevelSum = 0;
+        //var maxLevelSum = 0;
         var percent = 0;
 
-        for (var j = 0; j < treeData.find(obj => obj.treeID == userData[i].treeID).skills.length; ++j) {
+        /*for (var j = 0; j < treeData.find(obj => obj.treeID == userData[i].treeID).skills.length; ++j) {
             var skill = treeData.find(obj => obj.treeID == userData[i].treeID).skills[j];
             currentLevelSum += getSkillLevel(userData[i].treeID, skill.skillID);
             maxLevelSum += skill.maxSkillLevel;
-        }
-
-        percent = currentLevelSum / maxLevelSum;
+        }*/
+        //percent = currentLevelSum / maxLevelSum;
 
         var tempContainer = new PIXI.Container();
-        tempContainer.id = userData[i].treeID;
+        //tempContainer.id = userData[i].treeID;
+        tempContainer.id = i;
 
         h2 = h1 + width;
         var s = (i * (360 / sliceCount) * Math.PI) / 180;
@@ -183,14 +185,15 @@ function initChart() {
                     })
                     .on('pointerdown', function() {
                         hideChart();
-                        showTree(this.id);
+                        //showTree(this.id);
                     });
 
         app.stage.addChild(sliceContainer[i]);
 
         // creates tree name at the chart
-        var text = new PIXI.Text(treeData.find(obj => obj.treeID == userData[i].treeID).treeName, {fill: '#ffffff', wordWrap: true, wordWrapWidth: 200, align: 'center'});
+        //var text = new PIXI.Text(treeData.find(obj => obj.treeID == userData[i].treeID).treeName, {fill: '#ffffff', wordWrap: true, wordWrapWidth: 200, align: 'center'});
 
+        var text = new PIXI.Text(categories[i], {fill: '#ffffff', wordWrap: true, wordWrapWidth: 200, align: 'center'});
         var points = [];
         var radius = 320 + (text.height / 29 - 1) * 15;
         var pointsCount = 20;
