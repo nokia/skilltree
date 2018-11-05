@@ -40,11 +40,6 @@ var app = new PIXI.Application({
         autoResize: true
 });
 
-window.onresize = function () {
-  app.renderer.resize(window.innerWidth, window.innerHeight - 30);
-  app.renderer.render(app.stage);
-};
-
 // TOP BAR
 
 // get username from token and show it
@@ -231,6 +226,17 @@ function initChart() {
     app.stage.addChild(logo);
 
     app.renderer.render(app.stage);
+
+    window.onresize = function () {
+        app.renderer.resize(window.innerWidth, window.innerHeight - 30);
+
+        for (var i = 0; i < sliceContainer.length; ++i) {
+            sliceContainer[i].position.set(window.innerWidth / 2, window.innerHeight / 2);
+        }
+        logo.position.set(window.innerWidth / 2, window.innerHeight / 2);
+
+        app.renderer.render(app.stage);
+    };
 }
 
 function hideChart () {
