@@ -239,6 +239,8 @@ function initChart() {
     logo.scale.set(0.42);
     chartContainer.addChild(logo);
 
+    chartContainer.pivot.set(chartContainer.width, chartContainer.height);
+
     app.stage.addChild(chartContainer);
 
     app.renderer.render(app.stage);
