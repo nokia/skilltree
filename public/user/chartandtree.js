@@ -141,7 +141,7 @@ function initChart() {
         //var tempContainer = new PIXI.Container();
         sliceContainer[i] = new PIXI.Container();
         //tempContainer.id = userData[i].treeID;
-        tempContainer.id = categories[i];
+        sliceContainer[i].id = categories[i];
 
         h2 = h1 + width;
         var s = (i * (360 / sliceCount) * Math.PI) / 180;
