@@ -176,7 +176,7 @@ function initChart() {
         tempContainer.addChild(innerSlice);
 
         sliceContainer[i] = tempContainer;
-        sliceContainer[i].buttonMode = true;
+        /*sliceContainer[i].buttonMode = true;
         sliceContainer[i].interactive = true;
 
         sliceContainer[i]
@@ -190,8 +190,8 @@ function initChart() {
                     })
                     .on('pointerdown', function() {
                         hideChart();
-                        //showTree(this.id);
-                    });
+                        showTree(this.id);
+                    });*/
 
         app.stage.addChild(sliceContainer[i]);
 
