@@ -101,7 +101,13 @@ class EditorItemContainer {
             var dragPointerEnd = data.getLocalPosition(obj.parent);
             // DRAG
             obj.position.x = obj.dragObjStart.x + (dragPointerEnd.x - obj.dragPointerStart.x);
-            //obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y)
+
+            if (Math.abs(obj.position.y - obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y)) > 75) {
+                var levelChange = Math.floor(((obj.position.y - obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y)) + 75) / 150);
+                if (levelChange < 0) levelChange++;
+
+                obj.position.y += levelChange * 150;
+            }
         }
     }
 }
