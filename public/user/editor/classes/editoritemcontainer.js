@@ -84,7 +84,7 @@ class EditorItemContainer {
         this.parentObj.treeData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID).level += this.levelChange;
         obj.position.y += this.levelChange * 150;
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
-        
+
         obj.dragging = 0;
         obj.dragData = null;
 
@@ -116,7 +116,7 @@ class EditorItemContainer {
                 } else {
                     this.levelChange = Math.ceil(((obj.position.y - obj.dragObjStart.y + (dragPointerEnd.y - obj.dragPointerStart.y)) - 75) / 150);
                 }
-            }
+            } else this.levelChange = 0;
         }
     }
 }
