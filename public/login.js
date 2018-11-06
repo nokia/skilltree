@@ -23,13 +23,15 @@ function validate() {
                     showToast();
                 }
 			}
-	}
+	
+
 	httpRequest.send( 
 		JSON.stringify({
 			username: username.value,
 			password: password.value
 		})
 	 );
+	}
 
 
 function showToast() {
