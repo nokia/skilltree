@@ -10,13 +10,8 @@
   grid-template-areas:
   't t'
   's c';
-  grid-template-columns: 25% 75%;
+  grid-template-columns: 100px auto;
   grid-template-rows: 30px 100%;
-}
-
-.topLine{
-  background-color: #0b1842;
-  grid-area: t;
 }
 
 .sideBar{
@@ -101,6 +96,11 @@
   display: block;
   margin-top: 10px;
   text-align: center;
+}
+
+.topLine{
+  background-color: #0b1842;
+  grid-area: t;
 }
 
 .dropDown{
