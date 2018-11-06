@@ -15,8 +15,13 @@ function validate() {
 				if(httpRequest.response.success){
 					localStorage.setItem("loginToken", httpRequest.response.token);
 					
-
-					window.open("get/user", "_self");
+					
+					httpRequest = new XMLHttpRequest();
+					httpRequest.open('GET', './get/user');
+					httpRequest.setRequestHeader('Content-type', 'application/json');
+					httpRequest.responseType = "json";
+					httpRequest.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+					
 				} else {
                     showToast();
                 }
