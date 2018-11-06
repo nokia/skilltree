@@ -9,6 +9,7 @@ function validate() {
 		var httpRequest2 = new XMLHttpRequest();
 		httpRequest2.open('POST', '/registration', true);
 		httpRequest2.setRequestHeader('Content-type', 'application/json');
+		httpRequest2.send();
 		console.log(httpRequest2.response);
 
 		//Listener, if response comes, it runs.
