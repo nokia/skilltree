@@ -22,12 +22,16 @@ function validate() {
 					httpRequest2.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
 					httpRequest2.send();
 					
-					if(httpRequest2.readyState = 4 && httpRequest2.status ==200)
-					{
-						console.log("http response ", httpRequest2.response);
-						console.log("http response text ", httpRequest2.responseText);
-						//window.open(httpRequest2.response)
+					httpRequest2.onreadystatechange = function(){
+						if(httpRequest2.readyState = 4 && httpRequest2.status ==200)
+						{
+							console.log("http response ", httpRequest2.response);
+							console.log("http response text ", httpRequest2.responseText);
+							//window.open(httpRequest2.response)
+						}
+
 					}
+					
 
 				} else {
                     showToast();
