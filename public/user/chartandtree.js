@@ -233,7 +233,6 @@ function initChart() {
 }
 
 window.onresize = function () {
-    var chDiv = document.getElementById("canvas");
     app.renderer.resize((chDiv.left + window.innerWidth), window.innerHeight - 30 + chDiv.top);
 
     /*for (var i = 0; i < sliceContainer.length; ++i) {
