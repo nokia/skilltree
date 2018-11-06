@@ -10,26 +10,8 @@
   grid-template-areas:
   't t'
   's c';
-  grid-template-columns: 100px auto;
+  grid-template-columns: 150px auto;
   grid-template-rows: 30px 100%;
-}
-
-.sideBar{
-  float: left;
-  background-color: #0b1842;
-  grid-area: s;
-  color: white;
-  height: 100%;
-  position: absolute;
-  line-height: 26px;
-  min-height: 26px;
-  margin: 0px;
-  padding: 0px;
-  min-width: 150px;
-  border: 0px;
-  border-right: 1px;
-  border-color: grey;
-  border-style: solid;
 }
 
 .canvas{
@@ -38,6 +20,21 @@
   border-color: grey;
   border-style: solid;
   grid-area: c;
+}
+
+.sideBar{
+  background-color: #0b1842;
+  grid-area: s;
+  color: white;
+  height: 100%;
+  position: fixed;
+  margin: 0px;
+  padding: 0px;
+  min-width: 150px;
+  border: 0px;
+  border-right: 1px;
+  border-color: grey;
+  border-style: solid;
 }
 
 .sideBarContent{
@@ -92,9 +89,11 @@
 .sideBarTitle{
   background-color: inherit;
   font-weight: bold;
+  padding-top: 4px;
   font-size: 22px;
+  line-height: 22px;
+  height: 26px;
   display: block;
-  margin-top: 10px;
   text-align: center;
 }
 
