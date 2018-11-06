@@ -104,8 +104,10 @@ app.post('/auth', function(req, res) {
 });
 
 
-
+//Creating a getRoute thats protected with token, API calls are under /get/...
 var getRoute = express.Router();
+app.use('/get', getRoute);
+
 getRoute.use(function(req, res, next) {
     var token = req.get('x-access-token');
 
@@ -158,9 +160,14 @@ getRoute.get('/treedata', function (req, res) {
     });
 });
 
-app.use('/get', getRoute);
 
+
+
+//Creating a setRoute, thats protected with Token. API calls are under /set/...
 var setRoute = express.Router();
+app.use('/set', setRoute);
+
+
 setRoute.use(function(req, res, next) {
     var token = req.get('x-access-token');
 
@@ -240,6 +247,6 @@ setRoute.post('/mytrees', function(req, res) {
       })
     });
 
-app.use('/set', setRoute);
+
 
 app.listen(port);
