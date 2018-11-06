@@ -17,10 +17,10 @@ function validate() {
 		    if(httpRequest.readyState == 4 && httpRequest.status == 200) {
 					loginBox.style.display = "none";
 					if(httpRequest.response.success){
-						//showToast();
+						
 						window.open("/", "_self");
 					}
-					else { throw err; }
+					else {showToast(); }
 			}
 			
 		}

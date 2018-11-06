@@ -9,6 +9,7 @@ function validate() {
 	httpRequest.setRequestHeader('Content-type', 'application/json');
 	httpRequest.responseType = "json";
 
+	//Listener, if response comes, it runs.
 	httpRequest.onreadystatechange = function() {
 			if(httpRequest.readyState == 4 && httpRequest.status == 200) {
 				if(httpRequest.response.success){
