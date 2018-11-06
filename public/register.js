@@ -7,7 +7,6 @@ function validate() {
 
 	if(password1.value == password2.value){
 		var httpRequest = new XMLHttpRequest();
-
 		httpRequest.open('POST', '/registration', true);
 		httpRequest.setRequestHeader('Content-type', 'application/json');
 		httpRequest.responseType = "json";

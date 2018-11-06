@@ -158,6 +158,7 @@ getRoute.get('/treedata', function (req, res) {
     });
 });
 getRoute.get('/user', (req, res) => res.sendFile('chartandtree.html', { root: path.join(__dirname, './public/user') }));
+
 app.use('/get', getRoute);
 
 var setRoute = express.Router();

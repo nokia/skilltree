@@ -7,6 +7,7 @@ function validate() {
 
 	httpRequest.open('POST', '/auth', true);
 	httpRequest.setRequestHeader('Content-type', 'application/json');
+	httpRequest.setRequestBody()
 	httpRequest.responseType = "json";
 
 	//Listener, if response comes, it runs.
@@ -14,9 +15,8 @@ function validate() {
 			if(httpRequest.readyState == 4 && httpRequest.status == 200) {
 				if(httpRequest.response.success){
 					localStorage.setItem("loginToken", httpRequest.response.token);
-					httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 					httpRequest.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-					
+
 					window.open("/user/", "_self");
 				} else {
                     showToast();
