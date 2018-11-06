@@ -5,10 +5,105 @@
   overflow: hidden;
 }
 
+.gird{
+  display: grid;
+  grid-template-areas:
+  't t'
+  's c';
+  grid-template-columns: 25% 75%;
+  grid-template-rows: 30px 100%;
+}
+
 .topLine{
-  width: 100%;
   background-color: #0b1842;
-  height: 30px;
+  grid-area: t;
+}
+
+.sideBar{
+  float: left;
+  background-color: #0b1842;
+  grid-area: s;
+  color: white;
+  height: 100%;
+  position: absolute;
+  line-height: 26px;
+  min-height: 26px;
+  margin: 0px;
+  padding: 0px;
+  min-width: 150px;
+  border: 0px;
+  border-right: 1px;
+  border-color: grey;
+  border-style: solid;
+}
+
+.canvas{
+  border: 0px;
+  border-top: 1px;
+  border-color: grey;
+  border-style: solid;
+}
+
+.canvas{
+  grid-area: c;
+}
+
+.sideBarContent{
+  background-color: inherit;
+  display: block;
+}
+
+.sideBarContent a{
+  background-color: inherit;
+  display: block;
+  text-align: center;
+}
+
+.sideBarContent div div:hover{
+  background-color: grey;
+}
+
+.sideBarContent div{
+  background-color: inherit;
+  display: block;
+  text-align: center;
+  padding: 1px;
+}
+
+.sideBarContent div div{
+  text-align: left;
+  line-height: 20px;
+}
+
+.sideBarContent div div:hover{
+  max-height: 100px;
+}
+
+.sideBarContent div div div{
+  transition: all 0.5s;
+  max-height: 0px;
+  display: block;
+  text-align: inherit;
+}
+
+.sideBarContent div div:hover div{
+  max-height: 100px;
+}
+
+.sideBarContent div div div a{
+  display: block;
+  font-size: 12px;
+  text-align: inherit;
+  margin-left: 4px;
+}
+
+.sideBarTitle{
+  background-color: inherit;
+  font-weight: bold;
+  font-size: 22px;
+  display: block;
+  margin-top: 10px;
+  text-align: center;
 }
 
 .dropDown{
