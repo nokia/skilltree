@@ -20,7 +20,9 @@ function validate() {
 						//showToast();
 						window.open("/", "_self");
 					}
-		    }
+					else { throw err; }
+			}
+			
 		}
 		httpRequest.send(
 			JSON.stringify({
