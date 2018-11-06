@@ -21,6 +21,13 @@ function validate() {
 					httpRequest2.setRequestHeader('Content-type', 'application/json');
 					httpRequest2.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
 					httpRequest2.send();
+					console.log("http response ", httpRequest2.response);
+					console.log("http response text ", httpRequest2.responseText);
+					/*if(httpRequest2.readyState = 4 && httpRequest2.status ==200)
+					{
+						window.open(httpRequest2.response)
+					}*/
+
 				} else {
                     showToast();
                 }
