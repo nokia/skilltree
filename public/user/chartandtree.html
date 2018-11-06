@@ -9,6 +9,7 @@
     <script src = "pixi/pixi-layers.js"></script>
 </head>
 <body>
+  <div class = "grid">
     <div class = "topLine">
       <input type="text" id="text" value="">
       <input type="submit" id="submit" value="Search!">
@@ -20,17 +21,59 @@
 
         </div>
       </div>
-      <input type="button" class ="headerButton" value="Create Tree">
+      <input type = "button" class = "headerButton" value = "Create Tree">
       <input type = "button" class = "headerButton" value = "Edit Tree" onclick = "openEditor()">
-      <input type="button" class ="headerButton" value="Submit Changes" onClick="submit()">
+      <input type = "button" class = "headerButton" value = "Submit Changes" onClick = "submit()">
+    </div>
+    <div class = "sideBar">
+      <a class = "sideBarTitle">List of Skills</a>
+      <div class = "sideBarContent" id = "sideBarContent">
+        <div>
+          <a>Root Skills▼</a>
+          <div>Skill1
+            <div>
+              <a>Detail1</a>
+              <a>Detail2</a>
+              <a>Detail2</a>
+            </div>
+          </div>
+          <div>Skill2
+            <div>
+              <a>Detail1</a>
+              <a>Detail2</a>
+              <a>Detail2</a>
+            </div>
+          </div>
+        </div>
+        <div>
+          <a>Doot Skills▼</a>
+          <div>Skill3
+            <div>
+              <a>Detail1</a>
+              <a>Detail2</a>
+              <a>Detail2</a>
+            </div>
+          </div>
+          <div>Skill4
+            <div>
+              <a>Detail1</a>
+              <a>Detail2</a>
+              <a>Detail2</a>
+            </div>
+          </div>
+        </div>
       </div>
-      <canvas id = "pixiCanvas" style = "visibility: hidden;"></canvas>
-      <script src = "classes/link.js"></script>
-      <script src = "classes/itemcontainer.js"></script>
-      <script src = "classes/tree.js"></script>
-      <script src = "editor/classes/editoritemcontainer.js"></script>
-      <script src = "editor/classes/editortree.js"></script>
-      <script src = "editor/editor.js"></script>
-      <script src = "chartandtree.js"></script>
+    </div>
+  </div>
+  <div class = "canvas">
+    <canvas id = "pixiCanvas" style = "visibility: hidden;"></canvas>
+  </div>
+    <script src = "classes/link.js"></script>
+    <script src = "classes/itemcontainer.js"></script>
+    <script src = "classes/tree.js"></script>
+    <script src = "editor/classes/editoritemcontainer.js"></script>
+    <script src = "editor/classes/editortree.js"></script>
+    <script src = "editor/editor.js"></script>
+    <script src = "chartandtree.js"></script>
 </body>
 </html>
