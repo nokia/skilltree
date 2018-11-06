@@ -42,10 +42,14 @@
   display: block;
 }
 
-.sideBarContent a{
+.sideBarContent div a{
   background-color: inherit;
   display: block;
   text-align: center;
+}
+
+.sideBarContent div:hover div{
+  display: block;
 }
 
 .sideBarContent div div:hover{
@@ -62,6 +66,7 @@
 .sideBarContent div div{
   text-align: left;
   line-height: 20px;
+  display: block;
 }
 
 .sideBarContent div div:hover{
@@ -180,7 +185,7 @@
   background-color: #0b1842;
   color: white;
   font-weight: bold;
-  min-height: 26px;
+  min-height: 28px;
   min-width: 80px;
   line-height: 26px;
   border: 0px;
