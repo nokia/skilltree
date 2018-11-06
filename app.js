@@ -23,6 +23,13 @@ app.use(bodyParser.json());
 // use morgan to log requests to the console
 app.use(morgan('dev'));
 
+// serving static files and opening login.html
+app.use(express.static('./public'));
+app.get('/', (req, res) => res.sendFile('login.html', { root: path.join(__dirname, './public') }));
+app.get('/user', (req, res) => res.sendFile('chartandtree.html', { root: path.join(__dirname, './public/user') }));
+
+
+
 app.post('/registration', function(req, res) {
     var hashData = pbkdf2.hashPassword(req.body.password);
 
@@ -96,10 +103,7 @@ app.post('/auth', function(req, res) {
     });
 });
 
-// serving static files and opening login.html
-app.use(express.static('./public'));
-app.get('/', (req, res) => res.sendFile('login.html', { root: path.join(__dirname, './public') }));
-app.get('/user', (req, res) => res.sendFile('chartandtree.html', { root: path.join(__dirname, './public/user') }));
+
 
 var getRoute = express.Router();
 getRoute.use(function(req, res, next) {
