@@ -221,26 +221,23 @@ function initChart() {
     //logo.position.set(window.innerWidth / 2, window.innerHeight / 2);
     logo.scale.set(0.42);
     //app.stage.addChild(logo);
-
-    var chDiv = document.getElementById("canvas");
-
     chartContainer.addChild(logo);
 
-    chartContainer.position.set(chDiv.innerWidth / 2, (chDiv.innerHeight - 30) / 2);
+    chartContainer.position.set(window.innerWidth / 2, (window.innerHeight - 30) / 2);
     app.stage.addChild(chartContainer);
 
     app.renderer.render(app.stage);
 }
 
 window.onresize = function () {
-    app.renderer.resize(chDiv.innerWidth, chDiv.innerHeight - 30);
+    app.renderer.resize(window.innerWidth, window.innerHeight - 30);
 
     /*for (var i = 0; i < sliceContainer.length; ++i) {
         sliceContainer[i].position.set(window.innerWidth / 2, window.innerHeight / 2);
     }
     logo.position.set(window.innerWidth / 2, window.innerHeight / 2);*/
 
-    chartContainer.position.set(chDiv.innerWidth / 2, (chDiv.innerHeight - 30) / 2);
+    chartContainer.position.set(window.innerWidth / 2, (window.innerHeight - 30) / 2);
 
     app.renderer.render(app.stage);
 };
