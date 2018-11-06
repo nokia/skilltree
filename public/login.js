@@ -7,7 +7,6 @@ function validate() {
 
 	httpRequest.open('POST', '/auth', true);
 	httpRequest.setRequestHeader('Content-type', 'application/json');
-	httpRequest.setRequestBody()
 	httpRequest.responseType = "json";
 
 	//Listener, if response comes, it runs.
