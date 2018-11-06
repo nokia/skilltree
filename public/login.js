@@ -30,7 +30,7 @@ function validate() {
 			password: password.value
 		})
 	 );
-}
+
 
 function showToast() {
 	var toast = document.getElementById("toast");
