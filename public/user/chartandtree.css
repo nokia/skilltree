@@ -42,9 +42,6 @@
   border-top: 1px;
   border-color: grey;
   border-style: solid;
-}
-
-.canvas{
   grid-area: c;
 }
 
