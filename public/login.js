@@ -14,20 +14,7 @@ function validate() {
 			if(httpRequest.readyState == 4 && httpRequest.status == 200) {
 				if(httpRequest.response.success){
 					localStorage.setItem("loginToken", httpRequest.response.token);
-					
-					
-					var httpRequest2 = new XMLHttpRequest();
-					httpRequest2.open('GET', './get/user');
-					httpRequest2.setRequestHeader('Content-type', 'application/json');
-					httpRequest2.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-					httpRequest2.send();
-					
-					httpRequest2.onreadystatechange = function(){
-						if(httpRequest2.readyState = 4 && httpRequest2.status ==200)
-						{
-							window.open("/get/user", "_self");
-							//window.open(httpRequest2.response)
-						}
+					window.open('/user','_self');
 
 					}
 					
