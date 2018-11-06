@@ -14,9 +14,9 @@ function validate() {
 			if(httpRequest.readyState == 4 && httpRequest.status == 200) {
 				if(httpRequest.response.success){
 					localStorage.setItem("loginToken", httpRequest.response.token);
-					httpRequest.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+					
 
-					window.open("/user/", "_self");
+					window.open("get/user", "_self");
 				} else {
                     showToast();
                 }
