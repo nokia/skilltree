@@ -6,11 +6,10 @@ function validate() {
 	var email = document.getElementById("email");
 
 	if(password1.value == password2.value){
-		var httpRequest2 = new XMLHttpRequest();
-		httpRequest2.open('POST', '/registration', true);
-		httpRequest2.setRequestHeader('Content-type', 'application/json');
-		httpRequest2.send();
-		console.log(httpRequest2.response);
+		var httpRequest = new XMLHttpRequest();
+		httpRequest.open('POST', '/registration', true);
+		httpRequest.setRequestHeader('Content-type', 'application/json');
+		httpRequest.responseType = "json";
 
 		//Listener, if response comes, it runs.
 		httpRequest.onreadystatechange = function() {

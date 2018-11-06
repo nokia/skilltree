@@ -16,12 +16,11 @@ function validate() {
 					localStorage.setItem("loginToken", httpRequest.response.token);
 					
 					
-					httpRequest = new XMLHttpRequest();
-					httpRequest.open('GET', './get/user');
-					httpRequest.setRequestHeader('Content-type', 'application/json');
-					httpRequest.responseType = "json";
-					httpRequest.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-					
+					var httpRequest2 = new XMLHttpRequest();
+					httpRequest2.open('GET', './get/user');
+					httpRequest2.setRequestHeader('Content-type', 'application/json');
+					httpRequest2.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+					httpRequest2.send();
 				} else {
                     showToast();
                 }
