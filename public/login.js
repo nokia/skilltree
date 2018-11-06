@@ -25,8 +25,7 @@ function validate() {
 					httpRequest2.onreadystatechange = function(){
 						if(httpRequest2.readyState = 4 && httpRequest2.status ==200)
 						{
-							console.log("http response ", httpRequest2.response);
-							console.log("http response text ", httpRequest2.responseText);
+							window.open("/get/user", "_self");
 							//window.open(httpRequest2.response)
 						}
 
