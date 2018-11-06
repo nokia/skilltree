@@ -220,28 +220,27 @@ function initChart() {
     logo.anchor.set(0.5, 0.5);
     //logo.position.set(window.innerWidth / 2, window.innerHeight / 2);
     logo.scale.set(0.42);
-    //app.stage.addChild(logo);
 
     var chDiv = document.getElementById("canvas");
+    var rect = chDiv.getBoundingClientRect();
 
     chartContainer.addChild(logo);
 
-    chartContainer.position.set((chDiv.left + window.innerWidth) / 2, (window.innerHeight - 30 + chDiv.top) / 2);
+    chartContainer.position.set((rect.left + window.innerWidth) / 2, (window.innerHeight - 30 + rect.top) / 2);
     app.stage.addChild(chartContainer);
 
     app.renderer.render(app.stage);
 }
 
 window.onresize = function () {
-    var chDiv = document.getElementById("canvas");
-    app.renderer.resize((chDiv.left + window.innerWidth), window.innerHeight - 30 + chDiv.top);
+    app.renderer.resize((rect.left + window.innerWidth), window.innerHeight - 30 + rect.top);
 
     /*for (var i = 0; i < sliceContainer.length; ++i) {
         sliceContainer[i].position.set(window.innerWidth / 2, window.innerHeight / 2);
     }
     logo.position.set(window.innerWidth / 2, window.innerHeight / 2);*/
 
-    chartContainer.position.set((chDiv.left + window.innerWidth) / 2, (window.innerHeight - 30 + chDiv.top) / 2);
+    chartContainer.position.set((rect.left + window.innerWidth) / 2, (window.innerHeight - 30 + rect.top) / 2);
 
     app.renderer.render(app.stage);
 };
