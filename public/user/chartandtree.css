@@ -165,27 +165,30 @@
 
 #submit{
   position: absolute;
-  color: white;
+  color: #0b1842;
   border: none;
   top: 1px;
   font-weight: bold;
   min-height: 24px;
   min-width: 60px;
-  background-color: #0D3060;
+  background-color: gainsboro;
   right: 0px;
   margin-right: 3px;
+  transition: all 0.5s;
+  border-radius: 12px;
 }
 
 #submit:hover{
   color: gainsboro;
+  background-color: inherit;
   cursor: pointer;
 }
 
 #text{
   position: absolute;
   border: none;
-  color: white;
-  border-bottom: 1px solid white;
+  color: gainsboro;
+  border-bottom: 1px solid gainsboro;
   top: 3px;
   right: 67px;
   height: 22px;
@@ -198,7 +201,7 @@
   margin: 1px;
   padding: 1px;
   background-color: #0b1842;
-  color: white;
+  color: gainsboro;
   font-weight: bold;
   min-height: 26px;
   min-width: 60px;
@@ -212,12 +215,13 @@
   margin: 1px;
   padding: 1px;
   background-color: #0b1842;
-  color: white;
+  color: gainsboro;
   font-weight: bold;
   min-height: 28px;
   min-width: 80px;
   line-height: 26px;
   border: 0px;
+  transition: all 0.5s;
 }
 
 .headerButton:hover{
