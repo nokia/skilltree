@@ -1,3 +1,6 @@
+const fs = require('fs');
+const http = require('http');
+const https = require('https');
 const path = require('path');
 const express = require('express');
 const bodyParser  = require('body-parser');
@@ -11,7 +14,17 @@ var Trees = require('./models/treemodel');
 var pbkdf2 = require('./pbkdf2'); // get hash generator and pw checker
 
 const app = express();
-const port = 80;
+
+// https certificate
+const privateKey = fs.readFileSync('/etc/letsencrypt/live/skilltree.benis.hu/privkey.pem', 'utf8');
+const certificate = fs.readFileSync('/etc/letsencrypt/live/skilltree.benis.hu/cert.pem', 'utf8');
+const ca = fs.readFileSync('/etc/letsencrypt/live/skilltree.benis.hu/chain.pem', 'utf8');
+
+const credentials = {
+	key: privateKey,
+	cert: certificate,
+	ca: ca
+};
 
 mongoose.connect(config.database); // connect to database
 app.set('superSecret', config.secret);
@@ -247,6 +260,11 @@ setRoute.post('/mytrees', function(req, res) {
       })
     });
 
+const httpsServer = https.createServer(credentials, app);
+httpsServer.listen(443);
 
-
-app.listen(port);
+// Redirect from http port 80 to https
+http.createServer(function (req, res) {
+    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+    res.end();
+}).listen(80);
