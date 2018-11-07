@@ -261,7 +261,7 @@ setRoute.post('/mytrees', function(req, res) {
     });
 
 const httpsServer = https.createServer(credentials, app);
-httpsServer.listen(443, () => {});
+httpsServer.listen(443);
 
 // Redirect from http port 80 to https
 http.createServer(function (req, res) {
