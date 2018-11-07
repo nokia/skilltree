@@ -8,7 +8,7 @@
 
 .grid{
   display: grid;
-  grid-template-columns: 180px auto;
+  grid-template-columns: 160px auto;
   grid-template-rows: 30px 100%;
   grid-template-areas:
   "topBar topBar"
@@ -47,6 +47,10 @@
   background-color: inherit;
   display: block;
   text-align: center;
+  padding: 2px;
+  padding-top: 0px;
+  margin: 1px;
+  margin-top: 0px;
 }
 
 .sideBarContent div:hover div{
@@ -66,7 +70,8 @@
 
 .sideBarContent div div{
   text-align: left;
-  line-height: 20px;
+  line-height: 17px;
+  font-size: 15px;
   display: block;
 }
 
@@ -91,7 +96,7 @@
   font-size: 11px;
   line-height: 13px;
   text-align: inherit;
-  margin-left: 4px;
+  margin-left: 2px;
 }
 
 .sideBarContent div div div .addButton{
