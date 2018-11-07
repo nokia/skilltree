@@ -3,11 +3,12 @@
   margin: 0;
   background-color: #183693;
   overflow: hidden;
+  font-family: Helvetica;
 }
 
 .grid{
   display: grid;
-  grid-template-columns: 150px auto;
+  grid-template-columns: 180px auto;
   grid-template-rows: 30px 100%;
   grid-template-areas:
   "topBar topBar"
@@ -18,7 +19,7 @@
   border: 0px;
   border-top: 1px;
   border-left: 1px;
-  border-color: grey;
+  border-color: gainsboro;
   border-style: solid;
   grid-area: canvas;
 }
@@ -26,15 +27,20 @@
 .sideBar{
   background-color: #0b1842;
   grid-area: sideBar;
-  color: white;
+  color: gainsboro;
   margin: 0px;
   padding: 0px;
-  min-width: 150px;
 }
 
 .sideBarContent{
   background-color: inherit;
   display: block;
+  margin: 2px;
+  margin-bottom: 12px;
+  border: 3px;
+  border-style: solid;
+  border-color: #778899;
+  border-radius: 6px;
 }
 
 .sideBarContent div a{
@@ -48,7 +54,7 @@
 }
 
 .sideBarContent div div:hover{
-  font-size: 18px;
+  background-color: #2F4F4F;
 }
 
 .sideBarContent div{
@@ -70,6 +76,7 @@
 
 .sideBarContent div div div{
   transition: all 0.5s;
+  background-color: inherit;
   max-height: 0px;
   display: block;
   text-align: inherit;
@@ -81,26 +88,42 @@
 
 .sideBarContent div div div a{
   display: block;
-  font-size: 12px;
+  font-size: 11px;
+  line-height: 13px;
   text-align: inherit;
   margin-left: 4px;
 }
 
-.sideBarContent div div div input{
+.sideBarContent div div div .addButton{
   display: block;
-  color: inherit;
-  width: 100%;
-  margin: 0;
+  background-color: gainsboro;
+  color: #0b1842;
+  width: 95%;
+  float: left;
+  min-height: 18px;
+  font-size: 14px;
+  padding: 2px;
+  margin: 2px;
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: center;
+  font-weight: bold;
+}
+
+.sideBarContent div div div .addButton:hover{
+  background-color: #0b1842;
+  color: gainsboro;
 }
 
 .sideBarTitle{
   background-color: inherit;
   font-weight: bold;
-  font-size: 22px;
+  font-size: 20px;
   line-height: 22px;
   height: 26px;
   display: block;
   text-align: center;
+  padding: 2px;
 }
 
 .topLine{
