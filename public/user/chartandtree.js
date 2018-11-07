@@ -32,7 +32,7 @@ treeDataRequest.send();
 
 var app = new PIXI.Application({
         view: pixiCanvas,
-        width: window.innerWidth + 50,
+        width: window.innerWidth - 50,
         height: window.innerHeight - 30,
         backgroundColor: 0x183693,
         antialias: true,
@@ -223,21 +223,21 @@ function initChart() {
     //app.stage.addChild(logo);
     chartContainer.addChild(logo);
 
-    chartContainer.position.set(window.innerWidth / 2 + 50, (window.innerHeight - 30) / 2);
+    chartContainer.position.set(window.innerWidth / 2 - 50, (window.innerHeight - 30) / 2);
     app.stage.addChild(chartContainer);
 
     app.renderer.render(app.stage);
 }
 
 window.onresize = function () {
-    app.renderer.resize(window.innerWidth + 50, window.innerHeight - 30);
+    app.renderer.resize(window.innerWidth - 50, window.innerHeight - 30);
 
     /*for (var i = 0; i < sliceContainer.length; ++i) {
         sliceContainer[i].position.set(window.innerWidth / 2, window.innerHeight / 2);
     }
     logo.position.set(window.innerWidth / 2, window.innerHeight / 2);*/
 
-    chartContainer.position.set(window.innerWidth / 2 + 50, (window.innerHeight - 30) / 2);
+    chartContainer.position.set(window.innerWidth / 2 - 50, (window.innerHeight - 30) / 2);
 
     app.renderer.render(app.stage);
 };
