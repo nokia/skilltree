@@ -41,8 +41,6 @@ app.use(express.static('./public'));
 app.get('/', (req, res) => res.sendFile('login.html', { root: path.join(__dirname, './public') }));
 app.get('/user', (req, res) => res.sendFile('chartandtree.html', { root: path.join(__dirname, './public/user') }));
 
-
-
 app.post('/registration', function(req, res) {
     var hashData = pbkdf2.hashPassword(req.body.password);
 
@@ -173,13 +171,9 @@ getRoute.get('/treedata', function (req, res) {
     });
 });
 
-
-
-
 //Creating a setRoute, thats protected with Token. API calls are under /set/...
 var setRoute = express.Router();
 app.use('/set', setRoute);
-
 
 setRoute.use(function(req, res, next) {
     var token = req.get('x-access-token');
@@ -237,8 +231,9 @@ setRoute.post('/mytrees', function(req, res) {
         }
     });
 });
-  setRoute.post('/submitall', function(req, res) {
-    var data = req.body;
+
+setRoute.post('/submitall', function(req, res) {
+	var data = req.body;
     User.findOne({
         username: req.decoded.username
       }, function(err, user) {
@@ -257,8 +252,8 @@ setRoute.post('/mytrees', function(req, res) {
               if (err) throw err;
           });
         }
-      })
-    });
+	});
+});
 
 const httpsServer = https.createServer(credentials, app);
 httpsServer.listen(443);
