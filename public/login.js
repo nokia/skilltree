@@ -20,16 +20,15 @@ function validate() {
                     showToast();
                 }
 			}
-	
 
-	httpRequest.send( 
+
+	httpRequest.send(
 		JSON.stringify({
 			username: username.value,
 			password: password.value
 		})
 	 );
 	}
-
 
 function showToast() {
 	var toast = document.getElementById("toast");

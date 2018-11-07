@@ -14,14 +14,14 @@ function validate() {
 		//Listener, if response comes, it runs.
 		httpRequest.onreadystatechange = function() {
 		    if(httpRequest.readyState == 4 && httpRequest.status == 200) {
-					
+
 					if(httpRequest.response.success){
-						
+
 						window.open("/", "_self");
 					}
 					else {showToast(); }
 			}
-			
+
 		}
 		httpRequest.send(
 			JSON.stringify({
