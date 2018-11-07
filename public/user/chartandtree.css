@@ -5,36 +5,31 @@
   overflow: hidden;
 }
 
-.gird{
+.grid{
   display: grid;
-  grid-template-areas:
-  't t'
-  's c';
   grid-template-columns: 150px auto;
   grid-template-rows: 30px 100%;
+  grid-template-areas:
+  "topBar topBar"
+  "sideBar canvas";
 }
 
 .canvas{
   border: 0px;
   border-top: 1px;
+  border-left: 1px;
   border-color: grey;
   border-style: solid;
-  grid-area: c;
+  grid-area: canvas;
 }
 
 .sideBar{
   background-color: #0b1842;
-  grid-area: s;
+  grid-area: sideBar;
   color: white;
-  height: 100%;
-  position: fixed;
   margin: 0px;
   padding: 0px;
   min-width: 150px;
-  border: 0px;
-  border-right: 1px;
-  border-color: grey;
-  border-style: solid;
 }
 
 .sideBarContent{
@@ -53,7 +48,7 @@
 }
 
 .sideBarContent div div:hover{
-  background-color: grey;
+  font-size: 18px;
 }
 
 .sideBarContent div{
@@ -91,10 +86,16 @@
   margin-left: 4px;
 }
 
+.sideBarContent div div div input{
+  display: block;
+  color: inherit;
+  width: 100%;
+  margin: 0;
+}
+
 .sideBarTitle{
   background-color: inherit;
   font-weight: bold;
-  padding-top: 4px;
   font-size: 22px;
   line-height: 22px;
   height: 26px;
@@ -104,7 +105,7 @@
 
 .topLine{
   background-color: #0b1842;
-  grid-area: t;
+  grid-area: topBar;
 }
 
 .dropDown{
