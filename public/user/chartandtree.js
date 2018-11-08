@@ -223,7 +223,7 @@ function initChart() {
     //app.stage.addChild(logo);
     chartContainer.addChild(logo);
 
-    chartContainer.position.set(window.innerWidth / 2 - 50, (window.innerHeight - 30) / 2);
+    chartContainer.position.set((window.innerWidth - 160) / 2, (window.innerHeight - 30) / 2);
     app.stage.addChild(chartContainer);
 
     // scale chart
