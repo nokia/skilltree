@@ -16,7 +16,7 @@ module.exports = mongoose.model('Skill', new Schema({
         {
             id: Number,
             minPoint: Number,
-            recommended: bool
+            recommended: Boolean
         }
     ]
 }));

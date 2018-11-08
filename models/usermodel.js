@@ -7,7 +7,7 @@ module.exports = mongoose.model('User', new Schema({
     username: String,
     email: String,
     hashData: Buffer,
-    teacher: bool,
+    teacher: Boolean,
     categories: [
         {
             id: Number,
@@ -30,7 +30,7 @@ module.exports = mongoose.model('User', new Schema({
                 {
                     id: Number,
                     minPoint: Number,
-                    recommended: bool
+                    recommended: Boolean
                 }
             ]
         }
