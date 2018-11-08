@@ -11,7 +11,7 @@
   grid-template-columns: 160px auto;
   grid-template-rows: 30px 100%;
   grid-template-areas:
-  "topBar topBar"
+  "topLine topBar"
   "sideBar canvas";
 }
 
@@ -135,7 +135,7 @@
 
 .topLine{
   background-color: #0b1842;
-  grid-area: topBar;
+  grid-area: topLine;
 }
 
 .dropDown{

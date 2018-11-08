@@ -30,7 +30,7 @@ class Tree {
 
             this.skills[j].itemcontainer.container.parentLayer = skillLayer;
             this.treeContainer.addChild(this.skills[j].itemcontainer.container);
-        }*/
+        }
 
         this.drawConnectionLines();
     }
