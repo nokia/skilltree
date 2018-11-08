@@ -17,21 +17,23 @@ module.exports = mongoose.model('User', new Schema({
         }
     ],
     skills: [
-        id: Number,
-        name: String,
-        categoryID: Number,
-        skillIcon: String,
-        description: String,
-        achievedPoint: Number,
-        maxPoint: Number,
-        parents: [Number],
-        children: [
-            {
-                id: Number,
-                minPoint: Number,
-                recommended: bool
-            }
-        ]
+        {
+            id: Number,
+            name: String,
+            categoryID: Number,
+            skillIcon: String,
+            description: String,
+            achievedPoint: Number,
+            maxPoint: Number,
+            parents: [Number],
+            children: [
+                {
+                    id: Number,
+                    minPoint: Number,
+                    recommended: bool
+                }
+            ]
+        }
     ],
     trees: [
         {
