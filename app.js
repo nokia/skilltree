@@ -147,7 +147,7 @@ getRoute.use(function(req, res, next) {
 
     }
 });
-getRoute.get('/userdata', function (req, res) {
+getRoute.get('/data', function (req, res) {
     User.findOne({
         username: req.decoded.username
     }, function(err, user) {
@@ -159,15 +159,10 @@ getRoute.get('/userdata', function (req, res) {
                 message: 'User not found.'
             });
         } else if (user) {
-            return res.json(user.skillData);
+			delete user.email;
+			delete user.hashData;
+            return res.json(user);
         }
-    });
-});
-getRoute.get('/treedata', function (req, res) {
-    Trees.find({}, function (err, trees) {
-        if (err) throw err;
-
-        return res.json(trees);
     });
 });
 
