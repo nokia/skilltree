@@ -1,5 +1,5 @@
 /*
-*   positioning of the skills and drawconnectionlines not working
+*   positioning not working
 */
 
 class Tree {
@@ -59,6 +59,7 @@ class Tree {
             if (this.skills[j].children !== undefined) {
                 for (var k = 0; k < this.skills[j].children.length; ++k) {
                     var child = this.skills.find(obj => obj.id == this.skills[j].children[k].id);
+                    var minPoint = this.skills[j].children[k].minPoint;
 
                     // Draw the line
                     var connection = new PIXI.Graphics();
@@ -70,14 +71,13 @@ class Tree {
                     this.treeContainer.addChild(connection);
                     connection.parentGroup = connectionGroup;
 
-                    // Saving child's zero skill level parents
-                    if (this.skills[j].skillLevel == 0 || this.treeData.skills[j].zeroSLParents != undefined) {
+                    if (this.skills[j].achievedPoint < minPoint || child.lowAPParents != undefined) {
                         child.itemcontainer.disable();
 
-                        if (child.zeroSLParents === undefined) {
-                            child.zeroSLParents = new Array();
+                        if (child.lowAPParents === undefined) {
+                            child.lowAPParents = new Array();
                         }
-                        child.zeroSLParents.push({skillID: this.treeData.skills[j].skillID});
+                        child.lowAPParents.push(this.skills[j].id);
                     }
                 }
             }
