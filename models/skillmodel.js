@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 // set up a mongoose model and pass it using module.exports
 module.exports = mongoose.model('Skill', new Schema({
-    ID: Number,
+    id: Number,
     name: String,
     categoryID: Number,
     skillIcon: String,
@@ -14,7 +14,7 @@ module.exports = mongoose.model('Skill', new Schema({
     parents: [Number],
     children: [
         {
-            ID: Number,
+            id: Number,
             minPoint: Number,
             recommended: bool
         }

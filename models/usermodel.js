@@ -10,14 +10,14 @@ module.exports = mongoose.model('User', new Schema({
     teacher: bool,
     categories: [
         {
-            ID: Number,
+            id: Number,
             name: String,
             achievedPoint: Number,
             maxPoint: Number
         }
     ],
     skills: [
-        ID: Number,
+        id: Number,
         name: String,
         categoryID: Number,
         skillIcon: String,
@@ -27,7 +27,7 @@ module.exports = mongoose.model('User', new Schema({
         parents: [Number],
         children: [
             {
-                ID: Number,
+                id: Number,
                 minPoint: Number,
                 recommended: bool
             }
@@ -35,7 +35,7 @@ module.exports = mongoose.model('User', new Schema({
     ],
     trees: [
         {
-            ID: Number,
+            id: Number,
             name: String,
             skillIDs: [Number]
         }
