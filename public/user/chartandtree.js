@@ -245,12 +245,7 @@ window.onresize = function () {
 // app.localLoader is a loader for skillicons (when a tree is opened, we load only that tree's skillicons)
 // PIXI.loader is global, it loads the back button, skillborder, tree, ...
 
-var tree = undefined;
-var treeID2 = undefined;
-
 function showTree (treeID) {
-    treeID2 = treeID;
-
     // load the tree's pictures
     app.localLoader = new PIXI.loaders.Loader();
     var skills = new Array();
@@ -263,7 +258,7 @@ function showTree (treeID) {
     }
 
     app.localLoader.load(function () {
-        tree = new Tree(app, treeID, skills, 0, 30);
+        tree = new Tree(app, skills, 0, 30);
         app.stage.addChild(tree.treeContainer);
 
         // back button

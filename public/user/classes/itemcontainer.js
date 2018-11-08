@@ -1,19 +1,20 @@
+/*
+*   onclick, onrightclick and togglechildren not working
+*/
+
 class ItemContainer {
-    constructor(app, treeData, userData, treeID, skillID) {
+    constructor(app, skills, skillID) {
         this.app = app;
-        this.treeData = treeData; // only this tree's data
-        this.userData = userData;
-        this.skillData = treeData.skills[skillID];
-        this.skillData.treeID = treeID;
-        this.skillData.skillLevel = this.getSkillLevel(userData, skillID);
+        this.skills = skills;
+        this.skill = skills.find(obj => obj.id == skillID);
 
         //Creating images
-        this.skillicon = new PIXI.Sprite(app.localLoader.resources[this.skillData.skillIcon].texture); //100x100
+        this.skillicon = new PIXI.Sprite(app.localLoader.resources[this.skill.skillIcon].texture); //100x100
         this.skillborder = new PIXI.Sprite(PIXI.loader.resources["pictures/skillborder.png"].texture); //116x116
         this.tick = new PIXI.Sprite(PIXI.loader.resources["pictures/tick.png"].texture);
 
         //Setting border variables
-        this.skillborder.levelinfo = new PIXI.Text(this.skillData.skillLevel + "/" + this.skillData.maxSkillLevel);
+        this.skillborder.levelinfo = new PIXI.Text(this.skill.achievedPoint + "/" + this.skill.maxPoint);
 
         //Creating details page
         var detailsWidth = 240;
@@ -24,11 +25,11 @@ class ItemContainer {
         this.details = new PIXI.Container();
 
         var detailsForeground = new PIXI.Container();
-        var name = new PIXI.Text(this.skillData.name, {fontSize: nameFontSize, fill: 0x000000});
+        var name = new PIXI.Text(this.skill.name, {fontSize: nameFontSize, fill: 0x000000});
         name.position.set(10, 10);
         detailsForeground.addChild(name);
 
-        var description = new PIXI.Text(this.skillData.description, {fontSize: descriptionFontSize, fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - detailsMargin * 2 });
+        var description = new PIXI.Text(this.skill.description, {fontSize: descriptionFontSize, fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - detailsMargin * 2 });
         description.position.set(detailsMargin, detailsMargin * 2 + nameFontSize);
         detailsForeground.addChild(description);
 
@@ -126,7 +127,7 @@ class ItemContainer {
         this.details.position.set(116, 0);
 
         // if it's already maxed out add the tick
-        if (this.skillData.skillLevel == this.skillData.maxSkillLevel) {
+        if (this.skill.achievedPoint == this.skill.maxPoint) {
             //this.skillborder.filters = [new PIXI.filters.GlowFilter(10, 4, 4, 0xFF4000, 1)];
             this.tick.alpha = 1;
         } else this.tick.alpha = 0;
@@ -278,7 +279,7 @@ class ItemContainer {
 
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
 
-        if(this.parentObj.skillData.skillLevel == this.parentObj.skillData.maxSkillLevel) return;
+        if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint) return;
         skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFFBF00, 1)];
 
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
@@ -294,7 +295,7 @@ class ItemContainer {
 
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
 
-        if(this.parentObj.skillData.skillLevel == this.parentObj.skillData.maxSkillLevel) return;
+        if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint) return;
         skillborder.filters = null;
 
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
@@ -318,12 +319,5 @@ class ItemContainer {
         this.skillborder.buttonMode = false;
 
         this.app.renderer.render(this.app.stage);
-    }
-
-    getSkillLevel (userData, skillID) {
-        if (userData != undefined) {
-            if (userData.skills.find(obj => obj.skillID == skillID) != undefined) return userData.skills.find(obj => obj.skillID == skillID).skillLevel;
-            else return 0;
-        } else return 0;
     }
 }
