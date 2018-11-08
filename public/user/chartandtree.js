@@ -30,33 +30,6 @@ var app = new PIXI.Application({
 var tokenPayload = parseJwt(localStorage.getItem("loginToken"));
 document.getElementById("welcome").innerHTML = "Hello " + tokenPayload.username + "!";
 
-function listTrees(){
-  var dtc = document.getElementById("dropDownContent");
-  dtc.innerHTML = "";
-  for(i = 0; i < treeData.length; i++){
-    if(!userData.find(obj => obj.treeID == treeData[i].treeID)){
-      var addedElement = document.createElement("A");
-      addedElement.setAttribute("ID", treeData[i].treeID);
-      addedElement.onclick = function (){
-        var req = new XMLHttpRequest();
-        var data = new Array();
-        data.push(this.getAttribute("ID"));
-        req.open('POST', '/set/mytrees', true);
-        req.setRequestHeader('Content-type', 'application/json');
-        req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-        req.onreadystatechange = function() {
-            if(req.readyState == 4 && req.status == 200){
-            }
-        }
-        req.send(JSON.stringify(data));
-      }
-      var addedText = document.createTextNode(treeData[i].treeName);
-      addedElement.appendChild(addedText);
-      dtc.appendChild(addedElement);
-    }
-  }
-}
-
 function submit(){
   var sub = new XMLHttpRequest();
   sub.open('POST', '/set/submitall', true);
@@ -282,27 +255,36 @@ function showTree (treeID) {
     });
 }
 
-/*function openEditor () {
+function openEditor () {
     app.stage.removeChild(tree.treeContainer);
     app.localLoader.destroy();
     tree = undefined;
 
     // load the tree's pictures
     app.localLoader = new PIXI.loaders.Loader();
-    for (var j = 0; j < treeData.find(obj => obj.treeID == treeID2).skills.length; ++j) {
-        var skill = treeData.find(obj => obj.treeID == treeID2).skills[j];
-        app.localLoader.add(skill.skillIcon.toString());
+    var treeID2 = 0;
+    var editedTree = data.trees.find(obj => obj.id == treeID2);
+    for(var i = 0; i < editedTree.skillIDs.length; i++){
+      var skill = data.skills.find(obj => obj.id == editedTree.skillIDs[i]);
+      app.localLoader.add(skill.skillIcon.toString());
     }
 
     app.localLoader.load(function () {
-        app.renderer.resize(.75 * window.innerWidth, window.innerHeight - 30);
+        app.renderer.resize(.75 * window.innerWidth - 150, window.innerHeight - 30);
 
-        tree = new EditorTree(app, treeID2, treeData.find(obj => obj.treeID == treeID2), 0, 30);
+        // passes the details of the skills used by the tree.
+        for(var i = 0; i < editedTree.skillIDs.length; i++){
+          editedTree.skills[i] = data.skills.find(obj => obj.id == editedTree.skillIDs[i]);
+        }
+        //tree = new EditorTree(app, treeID2, treeData.find(obj => obj.treeID == treeID2), 150, 30);
+        // needs a new constructor, where we pass the expanded editedTree, the app, and xy.
+        tree = new EditorTree(app, editedTree, 150, 30);
+
         app.stage.addChild(tree.treeContainer);
 
         app.renderer.render(app.stage);
     });
-}*/
+}
 
 // helper functions
 
