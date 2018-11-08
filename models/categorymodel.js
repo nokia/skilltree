@@ -3,8 +3,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 // set up a mongoose model and pass it using module.exports
-module.exports = mongoose.model('Tree', new Schema({
+module.exports = mongoose.model('Category', new Schema({
     ID: Number,
-    name: String,
-    skillIDs: [Number],
+    name: String
 }));
