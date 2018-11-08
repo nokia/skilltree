@@ -240,22 +240,6 @@ window.onresize = function () {
     app.renderer.render(app.stage);
 };
 
-function hideChart () {
-    for (var i = 0; i < sliceContainer.length; ++i) {
-        app.stage.removeChild(sliceContainer[i]);
-        app.stage.removeChild(sliceContainer[i].title);
-    }
-    app.stage.removeChild(logo);
-}
-
-function showChart () {
-    for (var i = 0; i < sliceContainer.length; ++i) {
-        app.stage.addChild(sliceContainer[i]);
-        app.stage.addChild(sliceContainer[i].title);
-    }
-    app.stage.addChild(logo);
-}
-
 // TREE
 
 // app.localLoader is a loader for skillicons (when a tree is opened, we load only that tree's skillicons)
@@ -269,13 +253,17 @@ function showTree (treeID) {
 
     // load the tree's pictures
     app.localLoader = new PIXI.loaders.Loader();
-    for (var j = 0; j < treeData.find(obj => obj.treeID == treeID).skills.length; ++j) {
-        var skill = treeData.find(obj => obj.treeID == treeID).skills[j];
+    var skills = new Array();
+    for (var j = 0; j < data.trees.find(obj => obj.id == treeID).skillIDs.length; ++j) {
+        var skillID = data.trees.find(obj => obj.id == treeID).skillIDs[j];
+        var skill = data.skills.find(obj => obj.id == skillID);
         app.localLoader.add(skill.skillIcon.toString());
+
+        skills.push(skill);
     }
 
     app.localLoader.load(function () {
-        tree = new Tree(app, treeID, treeData.find(obj => obj.treeID == treeID), userData.find(obj => obj.treeID == treeID), 0, 30);
+        tree = new Tree(app, treeID, skills, 0, 30);
         app.stage.addChild(tree.treeContainer);
 
         // back button
@@ -299,7 +287,7 @@ function showTree (treeID) {
     });
 }
 
-function openEditor () {
+/*function openEditor () {
     app.stage.removeChild(tree.treeContainer);
     app.localLoader.destroy();
     tree = undefined;
@@ -319,7 +307,7 @@ function openEditor () {
 
         app.renderer.render(app.stage);
     });
-}
+}*/
 
 // helper functions
 
@@ -329,10 +317,10 @@ function parseJwt (token) {
     return JSON.parse(window.atob(base64));
 };
 
-function getSkillLevel (treeID, skillID) {
+/*function getSkillLevel (treeID, skillID) {
     if (userData.find(obj => obj.treeID == treeID) != undefined) {
         if (userData.find(obj => obj.treeID == treeID).skills.find(obj => obj.skillID == skillID) != undefined) {
             return userData.find(obj => obj.treeID == treeID).skills.find(obj => obj.skillID == skillID).skillLevel;
         } else return 0;
     } else return 0;
-}
+}*/
