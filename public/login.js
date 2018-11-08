@@ -18,6 +18,7 @@ function validate() {
 				} else {
                     showToast();
                 }
+			}
 	};
 
 	httpRequest.send(
