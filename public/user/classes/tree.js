@@ -26,6 +26,7 @@ class Tree {
 
         for(var i = 0; i < this.skills.length; i++){
           if(tmpChildren.find(obj => obj.id == this.skills[i].id) !== undefined){
+            levelLength[level] = n;
             level += 1;
             tmpChildren = [];
             n = 0;
@@ -38,12 +39,14 @@ class Tree {
           n++;
         }
 
-        for(var i = 0; i < (level + 1); i++){
-          var levelLength = skills.filter(obj => obj.place == i).length;
+        for(var i = 0; i < level+1; i++){
+          var levelLength[i] = skills.filter(obj => obj.level == i).length;
+        }
 
+        for(var i = 0; i < this.skills.length; i++){
           this.skills[i].itemcontainer = new ItemContainer(app, this.skills, this.skills[i].id);
 
-          this.skills[i].itemcontainer.container.position.x = this.skills[i].place * 130 + (app.renderer.width - levelLength * 130) / 2;
+          this.skills[i].itemcontainer.container.position.x = this.skills[i].place * 130 + (app.renderer.width - levelLength[level] * 130) / 2;
           this.skills[i].itemcontainer.container.position.y = this.skills[i].level * 150;
 
           this.skills[i].itemcontainer.container.parentLayer = skillLayer;
