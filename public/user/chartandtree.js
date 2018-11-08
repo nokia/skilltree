@@ -231,7 +231,7 @@ function showTree (treeID) {
     }
 
     app.localLoader.load(function () {
-        tree = new Tree(app, skills, 0, 30);
+        tree = new Tree(app, skills);
         app.stage.addChild(tree.treeContainer);
 
         // back button
