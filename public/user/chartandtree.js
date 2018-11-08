@@ -232,15 +232,16 @@ function initChart() {
 window.onresize = function () {
     app.renderer.resize(window.innerWidth - 160, window.innerHeight - 30);
 
+    var ratio = chartContainer.width / chartContainer.height;
     if (window.innerWidth - 160 < window.innerHeight - 30) {
         chartContainer.width = window.innerWidth - 200;
-        chartContainer.height = window.innerWidth - 200;
+        chartContainer.height = window.innerWidth - 200 / ratio;
     } else {
-        chartContainer.width = window.innerHeight - 70;
+        chartContainer.width = window.innerHeight - 70 * ratio;
         chartContainer.height = window.innerHeight - 70;
     }
 
-    chartContainer.position.set(window.innerWidth / 2 - 160, (window.innerHeight - 30) / 2);
+    chartContainer.position.set((window.innerWidth - 160) / 2, (window.innerHeight - 30) / 2);
 
     app.renderer.render(app.stage);
 };
