@@ -15,12 +15,10 @@ function validate() {
 				if(httpRequest.response.success){
 					localStorage.setItem("loginToken", httpRequest.response.token);
 					window.open('/user','_self');
-					}
 				} else {
                     showToast();
                 }
-			}
-
+	};
 
 	httpRequest.send(
 		JSON.stringify({
