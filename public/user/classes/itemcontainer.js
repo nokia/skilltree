@@ -1,5 +1,5 @@
 /*
-*   onclick, onrightclick and togglechildren not working
+*   togglechildren not working
 */
 
 class ItemContainer {
@@ -154,26 +154,23 @@ class ItemContainer {
     onClick(event) {
         if (!event.drag) {
             // Enable children which doesn't have other parents with 0 skill level
-            var children = this.parentObj.skillData.children;
+            var children = this.parentObj.skill.children;
 
-            this.parentObj.toggleChildren(children, true);
+            //this.parentObj.toggleChildren(children, true);
 
             // Increase skill level
-            if (this.parentObj.skillData.skillLevel < this.parentObj.skillData.maxSkillLevel) {
-                this.parentObj.skillData.skillLevel++;
-                this.levelinfo.text = (this.parentObj.skillData.skillLevel + "/" + this.parentObj.skillData.maxSkillLevel);
-                if (this.parentObj.skillData.skillLevel == this.parentObj.skillData.maxSkillLevel) {
+            if (this.parentObj.skill.achievedPoint < this.parentObj.skill.maxPoint) {
+                this.parentObj.skill.achievedPoint++;
+                this.levelinfo.text = (this.parentObj.skill.achievedPoint + "/" + this.parentObj.skill.maxPoint);
+                if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint) {
                     //this.filters = [new PIXI.filters.GlowFilter(10, 4, 4, 0xFF4000, 1)];
                     //this.parentObj.container.removeChild(this.parentObj.details);
                     this.parentObj.tick.alpha = 1;
                     this.parentObj.skillborder.filters = null;
                 }
 
-                //save level change
-                if (this.parentObj.userData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID) == undefined) {
-                    this.parentObj.userData.skills.push({skillID: this.parentObj.skillData.skillID, skillLevel: 0});
-                }
-                this.parentObj.userData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID).skillLevel++;
+                //save level change (kell?)
+                this.parentObj.skills.find(obj => obj.id == this.parentObj.skill.id).achievedPoint++;
             }
 
             this.parentObj.app.renderer.render(this.parentObj.app.stage);
@@ -182,36 +179,20 @@ class ItemContainer {
 
     onRightClick() {
         // Disable children which doesn't have other parents with 0 skill level
-        if (this.parentObj.skillData.skillLevel == 1) {
+        /*if (this.parentObj.skill.skillLevel == 1) {
             var children = this.parentObj.skillData.children;
 
             this.parentObj.toggleChildren(children, false);
-        }
+        }*/
 
         // Decrease skill level
-        if(this.parentObj.skillData.skillLevel > 0)
+        if(this.parentObj.skill.achievedPoint > 0)
         {
-            this.parentObj.skillData.skillLevel--;
-            this.levelinfo.text = (this.parentObj.skillData.skillLevel + "/" + this.parentObj.skillData.maxSkillLevel);
+            this.parentObj.skill.achievedPoint--;
+            this.levelinfo.text = (this.parentObj.skill.achievedPoint + "/" + this.parentObj.skill.maxPoint);
 
-            //save level change
-            this.parentObj.userData.skills.find(obj => obj.skillID == this.parentObj.skillData.skillID).skillLevel--;
-
-            // sending new skillLevel to server
-            var httpRequest = new XMLHttpRequest();
-            var data = new Array();
-            data.push({treeID: this.parentObj.skillData.treeID, skillID: this.parentObj.skillData.skillID, skillLevel: this.parentObj.skillData.skillLevel});
-
-            httpRequest.open('POST', '/set/skilllevel', true);
-            httpRequest.setRequestHeader('Content-type', 'application/json');
-            httpRequest.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-
-            httpRequest.onreadystatechange = function() {
-                if(httpRequest.readyState == 4 && httpRequest.status == 200) {
-                    this.parentObj.app.renderer.render(this.parentObj.app.stage);
-                }
-            }
-            httpRequest.send(JSON.stringify(data));
+            //save level change (kell?)
+            this.parentObj.userData.skills.find(obj => obj.id == this.parentObj.skill.id).achievedPoint--;
         } else return;
         this.parentObj.tick.alpha = 0;
         this.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFFBF00, 1)];

@@ -39,14 +39,14 @@ class Tree {
         var connectionGroup = new PIXI.display.Group(-1, false);
 
         for (var j = 0; j < this.skills.length; ++j) {
-            if (this.treeData.skills[j].children !== undefined) {
-                for (var k = 0; k < this.treeData.skills[j].children.length; ++k) {
-                    var child = this.treeData.skills.find(obj => obj.skillID == this.treeData.skills[j].children[k].skillID);
+            if (this.skills[j].children !== undefined) {
+                for (var k = 0; k < this.skills[j].children.length; ++k) {
+                    var child = this.skills.find(obj => obj.id == this.skills[j].children[k].id);
 
                     // Draw the line
                     var connection = new PIXI.Graphics();
                     connection.lineStyle(4, 0xffffff);
-                    connection.moveTo(this.treeData.skills[j].itemcontainer.container.x + this.treeData.skills[j].itemcontainer.skillborder.width / 2, this.treeData.skills[j].itemcontainer.container.position.y + this.treeData.skills[j].itemcontainer.skillborder.height - 8);
+                    connection.moveTo(this.skills[j].itemcontainer.container.x + this.skills[j].itemcontainer.skillborder.width / 2, this.skills[j].itemcontainer.container.position.y + this.skills[j].itemcontainer.skillborder.height - 8);
                     connection.lineTo(child.itemcontainer.container.position.x + child.itemcontainer.skillborder.width / 2, child.itemcontainer.container.position.y + 5);
 
                     // Add the line
@@ -54,7 +54,7 @@ class Tree {
                     connection.parentGroup = connectionGroup;
 
                     // Saving child's zero skill level parents
-                    if (this.treeData.skills[j].skillLevel == 0 || this.treeData.skills[j].zeroSLParents != undefined) {
+                    if (this.skills[j].skillLevel == 0 || this.treeData.skills[j].zeroSLParents != undefined) {
                         child.itemcontainer.disable();
 
                         if (child.zeroSLParents === undefined) {
