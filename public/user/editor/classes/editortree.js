@@ -1,5 +1,5 @@
 class EditorTree {
-    constructor (app, treeID, _treeData, posX, posY) {
+    constructor (app, _treeData, posX, posY) {
         this.treeData = _treeData; // contains only this tree's data
         this.treeContainer = new PIXI.Container();
         this.treeContainer.enableSort = true;
@@ -9,29 +9,27 @@ class EditorTree {
         skillLayer.group.enableSort = true;
         app.stage.addChild(skillLayer);
 
-        var level = 0;                                                                      // ????? for positioning itemcontainers horizontlly
-        var i = 0;                                                                          // ?????
-        var levelLength = this.treeData.skills.filter(obj => obj.level == level).length;    // ?????
-        for (var j = 0; j < this.treeData.skills.length; ++j) {
-            if (j > 0) {                                                                    // ?????
-                if (level == this.treeData.skills[j].level) ++i;                            // ?????
-                else {                                                                      // ?????
-                    ++level;                                                                // ?????
-                    i = 0;                                                                  // ?????
-                    levelLength = this.treeData.skills.filter(obj => obj.level == level).length;    // ?????
-                }                                                                           // ?????
-            }                                                                               // ?????
+        var level = 0;
+        var tmpChildren = [];
 
-            this.treeData.skills[j].itemcontainer = new EditorItemContainer(app, this.treeData, treeID, this.treeData.skills[j].skillID);
+        for(var i = 0; i < this.treeData.skills.length; i++){
+          if(tmpChildren.find(obj => obj.id == this.treeData.skills[i].id) !== undefined){
+            level += 1;
+            tmpChildren = [];
+          }
+          this.treeData.skills[i].level = level;
+          for(var j = 0; j < this.treeData.skills[i].children.length){
+            tmpChildren.push(this.treeData.skills[i].children[j].id);
+          }
 
-            // Positioning of the containers dynamically by level and by index inside level
-            this.treeData.skills[j].itemcontainer.container.position.x = i * 130 + (app.renderer.width - levelLength * 130) / 2 + posX; // ?????
-            this.treeData.skills[j].itemcontainer.container.position.y = this.treeData.skills[j].level * 150 + posY;
 
-            this.treeData.skills[j].itemcontainer.container.parentLayer = skillLayer;
-            this.treeContainer.addChild(this.treeData.skills[j].itemcontainer.container);
+          this.treeData.skills[i].itemcontainer = new EditorItemContainer(app, this.treeData, this.treeData.skills[i].id);
+          this.treeData.skills[i].itemcontainer.container.position.x = i * 130 + (app.renderer.width - levelLength * 130) / 2 + posX;
+          this.treeData.skills[i].itemcontainer.container.position.y = this.treeData.skills[j].level * 150 + posY;
+
+          this.treeData.skills[i].itemcontainer.container.parentLayer = skillLayer;
+          this.treeContainer.addChild(this.treeData.skills[i].itemcontainer.container);
         }
-
         this.drawConnectionLines();
     }
 

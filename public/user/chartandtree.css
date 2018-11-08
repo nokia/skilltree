@@ -11,7 +11,7 @@
   grid-template-columns: 160px auto;
   grid-template-rows: 30px 100%;
   grid-template-areas:
-  "topLine topBar"
+  "topLine topLine"
   "sideBar canvas";
 }
 
@@ -138,33 +138,6 @@
   grid-area: topLine;
 }
 
-.dropDown{
-  background-color: inherit;
-  position: relative;
-  display: inline-block;
-}
-
-.dropDownContent{
-  display: none;
-  background-color: inherit;
-}
-
-.dropDown:hover .dropDownContent{
-  display: block;
-  position: static;
-}
-
-.dropDownContent a {
-  text-decoration: none;
-  display: block;
-  background-color: inherit;
-  color: white;
-  cursor: pointer;
-  line-height: 26px;
-  margin: 1px;
-  padding: 1px;
-}
-
 #submit{
   position: absolute;
   color: #0b1842;
@@ -178,6 +151,7 @@
   margin-right: 3px;
   transition: all 0.5s;
   border-radius: 12px;
+  display: block;
 }
 
 #submit:hover{
@@ -196,6 +170,7 @@
   height: 22px;
   min-width: 198px;
   background-color: #183693;
+  display: block;
 }
 
 .welcome{
@@ -224,6 +199,7 @@
   line-height: 26px;
   border: 0px;
   transition: all 0.5s;
+  display: block;
 }
 
 .headerButton:hover{
