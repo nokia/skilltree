@@ -155,16 +155,13 @@ class ItemContainer {
         if (!event.drag) {
             // Enable children which doesn't have other parents with 0 skill level
             var children = this.parentObj.skill.children;
-
-            //this.parentObj.toggleChildren(children, true);
+            this.parentObj.toggleChildren(children, true);
 
             // Increase skill level
             if (this.parentObj.skill.achievedPoint < this.parentObj.skill.maxPoint) {
                 this.parentObj.skill.achievedPoint++;
                 this.levelinfo.text = (this.parentObj.skill.achievedPoint + "/" + this.parentObj.skill.maxPoint);
                 if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint) {
-                    //this.filters = [new PIXI.filters.GlowFilter(10, 4, 4, 0xFF4000, 1)];
-                    //this.parentObj.container.removeChild(this.parentObj.details);
                     this.parentObj.tick.alpha = 1;
                     this.parentObj.skillborder.filters = null;
                 }
@@ -179,11 +176,10 @@ class ItemContainer {
 
     onRightClick() {
         // Disable children which doesn't have other parents with 0 skill level
-        /*if (this.parentObj.skill.skillLevel == 1) {
-            var children = this.parentObj.skillData.children;
-
+        if (this.parentObj.skill.skillLevel == 1) {
+            var children = this.parentObj.skill.children;
             this.parentObj.toggleChildren(children, false);
-        }*/
+        }
 
         // Decrease skill level
         if(this.parentObj.skill.achievedPoint > 0)
@@ -203,14 +199,14 @@ class ItemContainer {
     toggleChildren (children, enable) {
         if (children !== undefined) {
             for (var k = 0; k < children.length; ++k) {
-                var child = this.treeData.skills[children[k].skillID];
+                var child = this.skills[children[k].id];
 
                 if (enable) {
-                    for (var j = 0; child.zeroSLParents !== undefined && j < child.zeroSLParents.length; ++j) {
-                        if (child.zeroSLParents[j].skillID == this.skillData.skillID) {
-                            child.zeroSLParents.splice(j, 1);
+                    for (var j = 0; child.lowAPParents !== undefined && j < child.lowAPParents.length; ++j) {
+                        if (child.lowAPParents[j].id == this.skill.id) {
+                            child.lowAPParents.splice(j, 1);
 
-                            if (child.zeroSLParents.length == 0) {
+                            if (child.lowAPParents.length == 0) {
                                 child.itemcontainer.container.filters = null;
                                 child.itemcontainer.container.interactive = true;
                                 child.itemcontainer.skillborder.interactive = true;
@@ -219,11 +215,11 @@ class ItemContainer {
                         }
                     }
                 } else {
-                    if (child.zeroSLParents === undefined) {
-                        child.zeroSLParents = new Array();
+                    if (child.lowAPParents === undefined) {
+                        child.lowAPParents = new Array();
                     }
 
-                    if (child.zeroSLParents.length <= 1) {
+                    if (child.lowAPParents.length > 0) {
                         var colorMatrixFilter = new PIXI.filters.ColorMatrixFilter;
                         colorMatrixFilter.brightness(0.4);
                         child.itemcontainer.container.filters = [colorMatrixFilter];
@@ -232,15 +228,8 @@ class ItemContainer {
                         child.itemcontainer.skillborder.buttonMode = false;
                     }
 
-                    var newParent = true;
-                    for (var j = 0; j < child.zeroSLParents.length; ++j) {
-                        if (child.zeroSLParents[j].skillID == this.skillData.skillID) {
-                            newParent = false;
-                        }
-                    }
-                    if (newParent) {
-                        var parent = {skillID: this.skillData.skillID};
-                        child.zeroSLParents.push(parent);
+                    if (child.lowAPParents.find(obj => obj.id == this.skill.id) == undefined) {
+                        child.lowAPParents.push(this.skill.id);
                     }
                 }
 
