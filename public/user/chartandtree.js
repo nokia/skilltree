@@ -214,9 +214,9 @@ function initChart() {
     var ratio = chartContainer.width / chartContainer.height;
     if (window.innerWidth - 160 < window.innerHeight - 30) {
         chartContainer.width = window.innerWidth - 200;
-        chartContainer.height = window.innerWidth - 200 / ratio;
+        chartContainer.height = (window.innerWidth - 200) / ratio;
     } else {
-        chartContainer.width = window.innerHeight - 70 * ratio;
+        chartContainer.width = (window.innerHeight - 70) * ratio;
         chartContainer.height = window.innerHeight - 70;
     }
 
@@ -229,9 +229,9 @@ window.onresize = function () {
     var ratio = chartContainer.width / chartContainer.height;
     if (window.innerWidth - 160 < window.innerHeight - 30) {
         chartContainer.width = window.innerWidth - 200;
-        chartContainer.height = window.innerWidth - 200 / ratio;
+        chartContainer.height = (window.innerWidth - 200) / ratio;
     } else {
-        chartContainer.width = window.innerHeight - 70 * ratio;
+        chartContainer.width = (window.innerHeight - 70) * ratio;
         chartContainer.height = window.innerHeight - 70;
     }
 
