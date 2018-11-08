@@ -226,6 +226,16 @@ function initChart() {
     chartContainer.position.set(window.innerWidth / 2 - 50, (window.innerHeight - 30) / 2);
     app.stage.addChild(chartContainer);
 
+    // scale chart
+    var ratio = chartContainer.width / chartContainer.height;
+    if (window.innerWidth - 160 < window.innerHeight - 30) {
+        chartContainer.width = window.innerWidth - 200;
+        chartContainer.height = window.innerWidth - 200 / ratio;
+    } else {
+        chartContainer.width = window.innerHeight - 70 * ratio;
+        chartContainer.height = window.innerHeight - 70;
+    }
+
     app.renderer.render(app.stage);
 }
 
