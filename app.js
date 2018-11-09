@@ -11,7 +11,8 @@ const jwt    = require('jsonwebtoken'); // used to create, sign, and verify toke
 var config = require('./config'); // get our config file
 var Category   = require('./models/categorymodel');
 var User   = require('./models/usermodel'); // get our mongoose model
-var Trees = require('./models/treemodel');
+var Tree = require('./models/treemodel');
+var Skill = require('./models/skillmodel');
 var pbkdf2 = require('./pbkdf2'); // get hash generator and pw checker
 
 const app = express();
