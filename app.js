@@ -30,10 +30,6 @@ const credentials = {
 mongoose.connect(config.database); // connect to database
 app.set('superSecret', config.secret);
 
-Category.find({}, function (err, categories) {
-	console.log(categories);
-});
-
 // use body parser so we can get info from POST and/or URL parameters
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -47,24 +43,26 @@ app.get('/', (req, res) => res.sendFile('login.html', { root: path.join(__dirnam
 app.get('/user', (req, res) => res.sendFile('chartandtree.html', { root: path.join(__dirname, './public/user') }));
 
 app.post('/registration', function(req, res) {
-    var hashData = pbkdf2.hashPassword(req.body.password);
-
-	/*Category.find({}, function (err, categories) {
-
-	});*/
-
-    var newUser = new User({
-        username: req.body.username,
-        email: req.body.email,
-        hashData: hashData,
-    });
-
     User.findOne({
         username: req.body.username,
-    }, function (err, user) {
+    }, async function (err, user) {
         if (err) throw err;
 
         if (!user) {
+			var hashData = pbkdf2.hashPassword(req.body.password);
+
+			var categories;
+			await Category.find({}, function (err, _categories) {
+				categories = _categories;
+			});
+
+			var newUser = new User({
+		        username: req.body.username,
+		        email: req.body.email,
+		        hashData: hashData,
+				categories: categories
+		    });
+
             newUser.save(function(err) {
                 if (err) throw err;
 
