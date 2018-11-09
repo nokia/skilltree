@@ -236,7 +236,7 @@ setRoute.post('/newskill', async function(req, res) { // global skill
 		if (err) throw err;
 	});
 });
-setRoute.post('/newtree', async function (req, res) { // user tree
+setRoute.post('/newtree', async function (req, res) { // create user tree
 	var data = req.body;
 
     var user = await User.findOne({
@@ -258,7 +258,7 @@ setRoute.post('/newtree', async function (req, res) { // user tree
 		});
 	}
 });
-setRoute.post('/addskilltotree', async function(req, res) {
+setRoute.post('/addskilltotree', async function(req, res) { // to user tree
     var data = req.body;
 
     var user = await User.findOne({

@@ -28,7 +28,6 @@ module.exports = mongoose.model('User', new Schema({
             parents: [Number],
             children: [
                 {
-                    id: Number,
                     minPoint: Number,
                     recommended: Boolean
                 }
@@ -38,9 +37,8 @@ module.exports = mongoose.model('User', new Schema({
     mainTree: ObjectID,
     trees: [
         {
-            id: Number,
             name: String,
-            skillIDs: [Number]
+            skillIDs: [ObjectID]
         }
     ]
 }));
