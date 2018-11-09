@@ -266,9 +266,7 @@ setRoute.post('/newtree', async function (req, res) { // create user tree
 		});
 	} else {
 		user.trees.push({name: data.name, skillIDs: []});
-		user.save(function (err) {
-			if (err) throw err;
-		});
+		user.save(function (err) {if (err) throw err;});
 	}
 });
 setRoute.post('/addskilltotree', async function(req, res) { // to user tree
@@ -287,7 +285,30 @@ setRoute.post('/addskilltotree', async function(req, res) { // to user tree
 			message: 'User not found.'
 		});
 	} else {
-		user.trees.find(obj => obj._id == treeID).skillIDs.push(data.skillID);
+		user.trees.find(obj => obj._id == data.treeID).skillIDs.push(data.skillID);
+		user.save(function (err) {if (err) throw err;});
+	}
+});
+
+setRoute.post('/approvetree', function (req, res) {
+	var data = req.body;
+
+    var user = await User.findOne({
+        username: req.decoded.username
+    }, function(err, user) {
+        if (err) throw err;
+		return user;
+    });
+
+	if (!user) {
+		res.json({
+			success: false,
+			message: 'User not found.'
+		});
+	} else {
+		var tree = new Tree();
+		tree = user.trees.find(obj => obj._id == data.treeID);
+		tree.save(function (err) {if (err) throw err;});
 	}
 });
 
