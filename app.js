@@ -238,11 +238,11 @@ setRoute.post('/newskill', async function(req, res) { // global skill
 		id = skill._id;
 	});
 
-	for (int i = 0; i < data.parents.length; ++i) {
+	for (var i = 0; i < data.parents.length; ++i) {
 		Skill.update({ _id: data.parents[i].id}, {$push: {children: {_id: id, data.parents[i].minPoint}}}, function (err) {if (err) throw err;});
 	}
 
-	for (int i = 0; i < data.children.length; ++i) {
+	for (var i = 0; i < data.children.length; ++i) {
 		Skill.update({ _id: data.children[i]}, {$push: {parents: {_id: id}}}, function (err) {if (err) throw err;});
 	}
 });
