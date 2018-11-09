@@ -63,7 +63,7 @@ var chartContainer = new PIXI.Container();
 
 var counter = 0;                // ?????
 function initChart() {
-    counter++;                  // ????? initChart waits for pixi loader, tree data and user data, only runs when we have all these
+    counter++;                  // ????? initChart waits for pixi loader and data, only runs when we have all these
     if (counter < 2) {          // ?????
         return;                 // ?????
     }

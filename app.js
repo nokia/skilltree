@@ -29,6 +29,10 @@ const credentials = {
 mongoose.connect(config.database); // connect to database
 app.set('superSecret', config.secret);
 
+Category.find({}, function (err, categories) {
+	console.log(categories);
+});
+
 // use body parser so we can get info from POST and/or URL parameters
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -43,6 +47,10 @@ app.get('/user', (req, res) => res.sendFile('chartandtree.html', { root: path.jo
 
 app.post('/registration', function(req, res) {
     var hashData = pbkdf2.hashPassword(req.body.password);
+
+	/*Category.find({}, function (err, categories) {
+
+	});*/
 
     var newUser = new User({
         username: req.body.username,
@@ -199,7 +207,7 @@ setRoute.use(function(req, res, next) {
     }
 });
 setRoute.use(express.json());
-setRoute.post('/mytrees', function(req, res) {
+setRoute.post('/skilltotree', function(req, res) {
     var data = req.body;
 
     User.findOne({
@@ -247,6 +255,27 @@ setRoute.post('/submitall', function(req, res) {
               if (err) throw err;
           });
         }
+	});
+});
+setRoute.post('/newskill', function(req, res) {
+	var data = req.body;
+
+	var newSkill = new Skill({
+		name: data.name,
+		description: data.description,
+		categoryID: data.categoryID,
+		skillIcon: data.skillIcon,
+		maxPoint: data.maxPoint,
+		parents: data.parents,
+		children: data.children
+	});
+
+	newSkill.save(function(err) {
+		if (err) throw err;
+
+		res.json({
+			success: true
+		});
 	});
 });
 

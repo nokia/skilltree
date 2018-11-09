@@ -9,7 +9,6 @@ module.exports = mongoose.model('Skill', new Schema({
     categoryID: Number,
     skillIcon: String,
     description: String,
-    achievedPoint: Number,
     maxPoint: Number,
     parents: [Number],
     children: [
