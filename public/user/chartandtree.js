@@ -9,7 +9,7 @@ dataRequest.responseType = "json";
 dataRequest.onreadystatechange = function() {
     if(dataRequest.readyState == 4 && dataRequest.status == 200) {
         data = dataRequest.response;
-        if (!data.success) window.open("/", "_self");
+        if (data.success === false) window.open("/", "_self");
         else initChart();
     }
 }
