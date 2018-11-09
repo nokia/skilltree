@@ -1,7 +1,3 @@
-if (localStorage.getItem("loginToken") == '') {
-    window.open("/", "_self");
-}
-
 var data = undefined;
 
 // get data from server
