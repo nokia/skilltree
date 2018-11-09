@@ -209,32 +209,58 @@ setRoute.use(function(req, res, next) {
     }
 });
 setRoute.use(express.json());
-setRoute.post('/skilltotree', function(req, res) {
-    var data = req.body;
+setRoute.post('/newtree', async function (req, res) {
+	var data = req.body;
 
-    User.findOne({
+    var user = await User.findOne({
         username: req.decoded.username
     }, function(err, user) {
         if (err) throw err;
-
-        if (!user) {
-            res.json({
-                success: false,
-                message: 'User not found.'
-            });
-        } else if (user) {
-            if (user.skillData == undefined) user.skillData = new Array();
-            for (var i = 0; i < data.length; ++i) {
-                if (user.skillData.find(obj => obj.treeID == data[i]) == undefined) {
-                    user.skillData.push({treeID: data[i], skills: []});
-                }
-
-                user.save(function (err) {
-                    if (err) throw err;
-                });
-            }
-        }
+		return user;
     });
+
+	if (!user) {
+		res.json({
+			success: false,
+			message: 'User not found.'
+		});
+	} else {
+		user.trees.push({name: data.name, skillIDs: []});
+		user.save(function (err) {
+			if (err) throw err;
+		});
+	}
+});
+setRoute.post('/addskilltotree', async function(req, res) {
+    var data = req.body;
+
+    var user = await User.findOne({
+        username: req.decoded.username
+    }, function(err, user) {
+        if (err) throw err;
+		return user;
+    });
+
+	if (!user) {
+		res.json({
+			success: false,
+			message: 'User not found.'
+		});
+	} else {
+		user.trees
+
+
+		if (user.skillData == undefined) user.skillData = new Array();
+		for (var i = 0; i < data.length; ++i) {
+			if (user.skillData.find(obj => obj.treeID == data[i]) == undefined) {
+				user.skillData.push({treeID: data[i], skills: []});
+			}
+
+			user.save(function (err) {
+				if (err) throw err;
+			});
+		}
+	}
 });
 
 setRoute.post('/submitall', function(req, res) {
