@@ -9,8 +9,8 @@ dataRequest.responseType = "json";
 dataRequest.onreadystatechange = function() {
     if(dataRequest.readyState == 4 && dataRequest.status == 200) {
         data = dataRequest.response;
-        if (data.success) initChart();
-        else window.open("/", "_self");
+        if (!data.success) window.open("/", "_self");
+        else initChart();
     }
 }
 dataRequest.send();
