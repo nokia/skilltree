@@ -55,7 +55,7 @@ app.post('/registration', async function(req, res) {
 
 		var categories = await Category.find({}, function (err, categories) {
 							return categories;
-						}));
+						});
 
 		var newUser = new User({
 			username: req.body.username,
