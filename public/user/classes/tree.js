@@ -35,10 +35,6 @@ class Tree {
           n++;
         }
 
-        for(var i = 0; i < level+1; i++){
-          var levelLength[i] = skills.filter(obj => obj.level == i).length;
-        }
-
         for(var i = 0; i < this.skills.length; i++){
           this.skills[i].itemcontainer = new ItemContainer(app, this.skills, this.skills[i].id);
 
