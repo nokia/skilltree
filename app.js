@@ -42,40 +42,40 @@ app.use(express.static('./public'));
 app.get('/', (req, res) => res.sendFile('login.html', { root: path.join(__dirname, './public') }));
 app.get('/user', (req, res) => res.sendFile('chartandtree.html', { root: path.join(__dirname, './public/user') }));
 
-app.post('/registration', function(req, res) {
-    User.findOne({
+app.post('/registration', async function(req, res) {
+    var user = await User.findOne({
         username: req.body.username,
     }, async function (err, user) {
         if (err) throw err;
-
-        if (!user) {
-			var hashData = pbkdf2.hashPassword(req.body.password);
-
-			//var categories;
-			console.log(await Category.find({}, function (err, _categories) {
-				return _categories;
-			}));
-
-			var newUser = new User({
-		        username: req.body.username,
-		        email: req.body.email,
-		        hashData: hashData,
-				categories: categories
-		    });
-
-            newUser.save(function(err) {
-                if (err) throw err;
-
-                res.json({
-                    success: true
-                });
-            });
-        } else {
-            res.json({
-                success: false
-            });
-        }
+		return user;
     });
+
+	if (!user) {
+		var hashData = pbkdf2.hashPassword(req.body.password);
+
+		var categories = await Category.find({}, function (err, categories) {
+							return categories;
+						}));
+
+		var newUser = new User({
+			username: req.body.username,
+			email: req.body.email,
+			hashData: hashData,
+			categories: categories
+		});
+
+		newUser.save(function(err) {
+			if (err) throw err;
+
+			res.json({
+				success: true
+			});
+		});
+	} else {
+		res.json({
+			success: false
+		});
+	}
 });
 
 app.post('/auth', function(req, res) {
