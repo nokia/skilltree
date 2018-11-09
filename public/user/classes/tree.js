@@ -29,7 +29,7 @@ class Tree {
           }
           this.skills[i].level = level;
           this.skills[i].place = n;
-          for(var j = 0; j < this.skills[i].children.length){
+          for (var j = 0; j < this.skills[i].children.length; ++j){
             tmpChildren.push(this.skills[i].children[j].id);
           }
           n++;
