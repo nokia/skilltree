@@ -224,18 +224,21 @@ setRoute.post('/newskill', async function(req, res) { // global skill
 
 	var newSkill = new Skill({
 		name: data.name,
-		description: data.description,
+		/*description: data.description,
 		categoryID: data.categoryID,
 		skillIcon: data.skillIcon,
 		maxPoint: data.maxPoint,
 		parents: data.parents,
-		children: data.children
+		children: data.children*/
 	});
 
-	newSkill.save(function(err) {
+	console.log(newSkill.save(function(err) {
 		if (err) throw err;
-	});
+	});)
 });
+
+
+
 setRoute.post('/newtree', async function (req, res) { // create user tree
 	var data = req.body;
 
