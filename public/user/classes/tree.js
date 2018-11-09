@@ -1,7 +1,3 @@
-/*
-*   positioning not working
-*/
-
 class Tree {
     constructor (app, skills) {
         this.skills = skills;

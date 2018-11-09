@@ -1,3 +1,7 @@
+if (localStorage.getItem("loginToken") == '') {
+    window.open("/", "_self");
+}
+
 var data = undefined;
 
 // get data from server
@@ -9,7 +13,8 @@ dataRequest.responseType = "json";
 dataRequest.onreadystatechange = function() {
     if(dataRequest.readyState == 4 && dataRequest.status == 200) {
         data = dataRequest.response;
-        initChart();
+        if (data.success) initChart();
+        else window.open("/", "_self");
     }
 }
 dataRequest.send();
