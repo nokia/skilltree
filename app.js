@@ -259,7 +259,7 @@ setRoute.post('/submitall', function(req, res) {
         }
 	});
 });
-setRoute.post('/newskill', function(req, res) {
+setRoute.post('/newskill', async function(req, res) {
 	var data = req.body;
 
 	var newSkill = new Skill({
@@ -272,13 +272,9 @@ setRoute.post('/newskill', function(req, res) {
 		children: data.children
 	});
 
-	newSkill.save(function(err) {
+	console.log(newSkill.save(function(err) {
 		if (err) throw err;
-
-		res.json({
-			success: true
-		});
-	});
+	}));
 });
 
 const httpsServer = https.createServer(credentials, app);

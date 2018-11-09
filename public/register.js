@@ -5,7 +5,9 @@ function validate() {
 	var password2 = document.getElementById("password2");
 	var email = document.getElementById("email");
 
-	if(password1.value == password2.value){
+
+
+	if (password1.value == password2.value) {
 		var httpRequest = new XMLHttpRequest();
 		httpRequest.open('POST', '/registration', true);
 		httpRequest.setRequestHeader('Content-type', 'application/json');
@@ -14,9 +16,7 @@ function validate() {
 		//Listener, if response comes, it runs.
 		httpRequest.onreadystatechange = function() {
 		    if(httpRequest.readyState == 4 && httpRequest.status == 200) {
-
 					if(httpRequest.response.success){
-
 						window.open("/", "_self");
 					}
 					else {showToast(); }
@@ -27,11 +27,12 @@ function validate() {
 			JSON.stringify({
 				username: username.value,
 				password: password1.value,
-				email: email.value
+				email: email.value,
+				mainTree:
 			})
 		);
 	}
-	else{
+	else {
 		alert("Incorrect credentials! Passwords don't match!");
 	}
 }
