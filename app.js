@@ -290,7 +290,7 @@ setRoute.post('/addskilltotree', async function(req, res) { // to user tree
 	}
 });
 
-setRoute.post('/approvetree', function (req, res) {
+setRoute.post('/approvetree', async function (req, res) {
 	var data = req.body;
 
     var user = await User.findOne({
