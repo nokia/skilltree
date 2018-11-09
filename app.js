@@ -234,8 +234,8 @@ setRoute.post('/newskill', async function(req, res) { // global skill
 
 	console.log(await newSkill.save(function(err, skill) {
 		if (err) throw err;
-		console.log(skill.id);
-		return skill.id;
+		console.log(skill._id);
+		return skill._id;
 	}));
 });
 
