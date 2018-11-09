@@ -10,7 +10,6 @@ module.exports = mongoose.model('User', new Schema({
     teacher: Boolean,
     categories: [
         {
-            id: Number,
             name: String,
             achievedPoint: Number,
             maxPoint: Number
@@ -18,7 +17,6 @@ module.exports = mongoose.model('User', new Schema({
     ],
     skills: [
         {
-            id: Number,
             name: String,
             categoryID: Number,
             skillIcon: String,
@@ -35,6 +33,7 @@ module.exports = mongoose.model('User', new Schema({
             ]
         }
     ],
+    mainTree: Number,
     trees: [
         {
             id: Number,

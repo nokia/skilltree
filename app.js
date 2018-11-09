@@ -56,6 +56,7 @@ app.post('/registration', async function(req, res) {
 
 		// get all categories from db
 		var categories = await Category.find({}, function (err, categories) {
+							if (err) throw err;
 							return categories;
 						});
 
