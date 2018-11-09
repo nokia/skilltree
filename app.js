@@ -43,16 +43,18 @@ app.get('/', (req, res) => res.sendFile('login.html', { root: path.join(__dirnam
 app.get('/user', (req, res) => res.sendFile('chartandtree.html', { root: path.join(__dirname, './public/user') }));
 
 app.post('/registration', async function(req, res) {
+	// search for username in db
     var user = await User.findOne({
         username: req.body.username,
-    }, async function (err, user) {
+    }, function (err, user) {
         if (err) throw err;
 		return user;
     });
 
-	if (!user) {
+	if (!user) { // if new user
 		var hashData = pbkdf2.hashPassword(req.body.password);
 
+		// get all categories from db
 		var categories = await Category.find({}, function (err, categories) {
 							return categories;
 						});
@@ -71,7 +73,7 @@ app.post('/registration', async function(req, res) {
 				success: true
 			});
 		});
-	} else {
+	} else { // if user already exists
 		res.json({
 			success: false
 		});

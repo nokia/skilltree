@@ -68,9 +68,7 @@ function initChart() {
         return;                 // ?????
     }
 
-    //var sliceCount = userData.length;
-    var sliceCount = 8;
-    var categories = ["Communication", "Engineering", "Digital Competence", "Way of Learning", "Behaviour and Citizenship", "Management and Innovation", "Culture", "Others"];
+    var sliceCount = data.categories.length;
 
     document.getElementById("pixiCanvas").style.visibility = "visible";
 
@@ -148,7 +146,7 @@ function initChart() {
         // creates tree name at the chart
         //var text = new PIXI.Text(treeData.find(obj => obj.treeID == userData[i].treeID).treeName, {fill: '#ffffff', wordWrap: true, wordWrapWidth: 200, align: 'center'});
 
-        var text = new PIXI.Text(categories[i], {fill: '#ffffff', wordWrap: true, wordWrapWidth: 200, align: 'center'});
+        var text = new PIXI.Text(data.categories[i].name, {fill: '#ffffff', wordWrap: true, wordWrapWidth: 200, align: 'center'});
         var points = [];
         var radius = 320 + (text.height / 29 - 1) * 15;
         var pointsCount = 20;
