@@ -18,7 +18,7 @@ module.exports = mongoose.model('User', new Schema({
     skills: [
         {
             name: String,
-            categoryID: Number,
+            categoryID: ObjectID,
             skillIcon: String,
             description: String,
             achievedPoint: Number,
@@ -33,7 +33,7 @@ module.exports = mongoose.model('User', new Schema({
             ]
         }
     ],
-    mainTree: Number,
+    mainTree: ObjectID,
     trees: [
         {
             id: Number,
