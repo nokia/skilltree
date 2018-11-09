@@ -232,8 +232,9 @@ setRoute.post('/newskill', async function(req, res) { // global skill
 		children: data.children*/
 	});
 
-	console.log(newSkill.save(function(err) {
+	console.log(await newSkill.save(function(err, skill) {
 		if (err) throw err;
+		return skill;
 	}));
 });
 
