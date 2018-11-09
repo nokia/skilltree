@@ -224,18 +224,27 @@ setRoute.post('/newskill', async function(req, res) { // global skill
 
 	var newSkill = new Skill({
 		name: data.name,
-		/*description: data.description,
+		description: data.description,
 		categoryID: data.categoryID,
 		skillIcon: data.skillIcon,
 		maxPoint: data.maxPoint,
 		parents: data.parents,
-		children: data.children*/
+		children: data.children
 	});
 
-	console.log(await newSkill.save(function(err, skill) {
+	var id;
+	await newSkill.save(function(err, skill) {
 		if (err) throw err;
-		return skill._id;
-	}));
+		id = skill._id;
+	});
+
+	for (int i = 0; i < data.parents.length; ++i) {
+		Skill.update({ _id: data.parents[i].id}, {$push: {children: {_id: id, data.parents[i].minPoint}}}, function (err) {if (err) throw err;});
+	}
+
+	for (int i = 0; i < data.children.length; ++i) {
+		Skill.update({ _id: data.children[i]}, {$push: {parents: {_id: id}}}, function (err) {if (err) throw err;});
+	}
 });
 
 

@@ -2,6 +2,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+var ObjectID = mongoose.Schema.Types.ObjectId;
+
 // set up a mongoose model and pass it using module.exports
 module.exports = mongoose.model('Skill', new Schema({
     id: Number,
@@ -13,7 +15,7 @@ module.exports = mongoose.model('Skill', new Schema({
     parents: [Number],
     children: [
         {
-            id: Number,
+            _id: ObjectID,
             minPoint: Number,
             recommended: Boolean
         }
