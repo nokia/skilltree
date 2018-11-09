@@ -60,11 +60,20 @@ app.post('/registration', async function(req, res) {
 							return categories;
 						});
 
+		var trees = await Tree.find({}, function (err, trees) {
+							if (err) throw err;
+							return trees;
+						});
+
+		var tree = trees[req.body.role];
+
 		var newUser = new User({
 			username: req.body.username,
 			email: req.body.email,
 			hashData: hashData,
-			categories: categories
+			categories: categories,
+			mainTree: tree._id
+			trees: [tree]
 		});
 
 		newUser.save(function(err) {
@@ -209,7 +218,24 @@ setRoute.use(function(req, res, next) {
     }
 });
 setRoute.use(express.json());
-setRoute.post('/newtree', async function (req, res) {
+setRoute.post('/newskill', async function(req, res) { // global skill
+	var data = req.body;
+
+	var newSkill = new Skill({
+		name: data.name,
+		description: data.description,
+		categoryID: data.categoryID,
+		skillIcon: data.skillIcon,
+		maxPoint: data.maxPoint,
+		parents: data.parents,
+		children: data.children
+	});
+
+	newSkill.save(function(err) {
+		if (err) throw err;
+	});
+});
+setRoute.post('/newtree', async function (req, res) { // user tree
 	var data = req.body;
 
     var user = await User.findOne({
@@ -247,19 +273,7 @@ setRoute.post('/addskilltotree', async function(req, res) {
 			message: 'User not found.'
 		});
 	} else {
-		user.trees
-
-
-		if (user.skillData == undefined) user.skillData = new Array();
-		for (var i = 0; i < data.length; ++i) {
-			if (user.skillData.find(obj => obj.treeID == data[i]) == undefined) {
-				user.skillData.push({treeID: data[i], skills: []});
-			}
-
-			user.save(function (err) {
-				if (err) throw err;
-			});
-		}
+		user.trees.find(obj => obj._id == treeID).skillIDs.push(data.skillID);
 	}
 });
 
@@ -284,23 +298,6 @@ setRoute.post('/submitall', function(req, res) {
           });
         }
 	});
-});
-setRoute.post('/newskill', async function(req, res) {
-	var data = req.body;
-
-	var newSkill = new Skill({
-		name: data.name,
-		description: data.description,
-		categoryID: data.categoryID,
-		skillIcon: data.skillIcon,
-		maxPoint: data.maxPoint,
-		parents: data.parents,
-		children: data.children
-	});
-
-	console.log(newSkill.save(function(err) {
-		if (err) throw err;
-	}));
 });
 
 const httpsServer = https.createServer(credentials, app);

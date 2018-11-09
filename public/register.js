@@ -5,8 +5,6 @@ function validate() {
 	var password2 = document.getElementById("password2");
 	var email = document.getElementById("email");
 
-
-
 	if (password1.value == password2.value) {
 		var httpRequest = new XMLHttpRequest();
 		httpRequest.open('POST', '/registration', true);
@@ -28,7 +26,7 @@ function validate() {
 				username: username.value,
 				password: password1.value,
 				email: email.value,
-				mainTree:
+				role: document.querySelector('input[name="role"]:checked').value
 			})
 		);
 	}
