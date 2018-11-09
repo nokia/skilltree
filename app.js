@@ -42,10 +42,6 @@ app.use(express.static('./public'));
 app.get('/', (req, res) => res.sendFile('login.html', { root: path.join(__dirname, './public') }));
 app.get('/user', (req, res) => res.sendFile('chartandtree.html', { root: path.join(__dirname, './public/user') }));
 
-console.log(Category.find({}, function (err, _categories) {
-	return _categories;
-}));
-
 app.post('/registration', function(req, res) {
     User.findOne({
         username: req.body.username,
@@ -55,10 +51,10 @@ app.post('/registration', function(req, res) {
         if (!user) {
 			var hashData = pbkdf2.hashPassword(req.body.password);
 
-			var categories;
-			await Category.find({}, function (err, _categories) {
-				categories = _categories;
-			});
+			//var categories;
+			console.log(await Category.find({}, function (err, _categories) {
+				return _categories;
+			}));
 
 			var newUser = new User({
 		        username: req.body.username,
