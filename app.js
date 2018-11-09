@@ -73,7 +73,7 @@ app.post('/registration', async function(req, res) {
 			hashData: hashData,
 			categories: categories,
 			mainTree: tree._id
-			trees: [tree]
+			trees: [{tree}]
 		});
 
 		newUser.save(function(err) {
