@@ -65,16 +65,19 @@ app.post('/registration', async function(req, res) {
 							if (err) throw err;
 							return trees;
 						});
+						
+		var uskills = await Skill.find({}, function (err, uskills) {
+							if (err) throw err;
+							return uskills;
+						});
 
 		var tree = trees[req.body.role];
-		var uskills;
-		for(var i = 0; i < tree.skillIDs.length; i++){
-			uskills[i] = await Skill.find({_id: tree.skillIDs[i]}, function (err, uskills[i]) {
-								if (err) throw err;
-								return uskills[i];
-							});
+
+
+		/*for(var i = 0; i < tree.skillIDs.length; i++){
+			uskills[i] = await Skill.find({_id: tree.skillIDs[i]});
 			uskills[i].achievedPoint = 0;
-		}
+		}*/
 
 		var newUser = new User({
 			username: req.body.username,
