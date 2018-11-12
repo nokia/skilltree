@@ -220,9 +220,9 @@ function showTree (treeID) {
     // load the tree's pictures
     app.localLoader = new PIXI.loaders.Loader();
     var skills = new Array();
-    for (var j = 0; j < data.trees.find(obj => obj.id == treeID).skillIDs.length; ++j) {
-        var skillID = data.trees.find(obj => obj.id == treeID).skillIDs[j];
-        var skill = data.skills.find(obj => obj.id == skillID);
+    for (var j = 0; j < data.trees.find(obj => obj._id == treeID).skillIDs.length; ++j) {
+        var skillID = data.trees.find(obj => obj._id == treeID).skillIDs[j];
+        var skill = data.skills.find(obj => obj._id == skillID);
         app.localLoader.add(skill.skillIcon.toString());
 
         skills.push(skill);
