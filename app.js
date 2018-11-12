@@ -28,6 +28,7 @@ const credentials = {
 	ca: ca
 };
 
+
 mongoose.connect(config.database); // connect to database
 app.set('superSecret', config.secret);
 
