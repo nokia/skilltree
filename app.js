@@ -70,6 +70,7 @@ app.post('/registration', async function(req, res) {
 							if (err) throw err;
 							for(var i = 0; i < uskills.length; i++){
 								uskills[i].achievedPoint = 0;
+								console.log("0");
 							}
 							return uskills;
 						});
