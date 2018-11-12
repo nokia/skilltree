@@ -43,9 +43,9 @@ app.use(express.static('./public'));
 app.get('/', (req, res) => res.sendFile('login.html', { root: path.join(__dirname, './public') }));
 app.get('/user', (req, res) => res.sendFile('chartandtree.html', { root: path.join(__dirname, './public/user') }));
 
-app.post('/registration', function(req, res) {
+app.post('/registration', async function(req, res) {
 	// search for username in db
-    var user = User.findOne({
+    var user = await User.findOne({
         username: req.body.username,
     }, function (err, user) {
         if (err) throw err;
@@ -56,12 +56,12 @@ app.post('/registration', function(req, res) {
 		var hashData = pbkdf2.hashPassword(req.body.password);
 
 		// get all categories from db
-		var categories = Category.find({}, function (err, categories) {
+		var categories = await Category.find({}, function (err, categories) {
 							if (err) throw err;
 							return categories;
 						});
 
-		var trees = Tree.find({}, function (err, trees) {
+		var trees = await Tree.find({}, function (err, trees) {
 							if (err) throw err;
 							return trees;
 						});
@@ -69,7 +69,10 @@ app.post('/registration', function(req, res) {
 		var tree = trees[req.body.role];
 		var uskills;
 		for(var i = 0; i < tree.skillIDs.length; i++){
-			uskills[i] = Skill.find({_id: tree.skillIDs[i]});
+			uskills[i] = await Skill.find({_id: tree.skillIDs[i]}, function (err, uskills[i]) {
+								if (err) throw err;
+								return uskills[i];
+							});
 			uskills[i].achievedPoint = 0;
 		}
 
