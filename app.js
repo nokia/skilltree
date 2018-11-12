@@ -66,7 +66,7 @@ app.post('/registration', async function(req, res) {
 							return trees;
 						});
 
-		var allSkills = Skill.find({}, function (err, allSkills) {
+		var allSkills = await Skill.find({}, function (err, allSkills) {
 							if (err) throw err;
 							return allSkills;
 						});
