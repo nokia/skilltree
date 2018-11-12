@@ -66,15 +66,10 @@ app.post('/registration', async function(req, res) {
 							return trees;
 						});
 
-		var allSkills = await Skill.find({}, function (err, allSkills) {
-							if (err) throw err;
-							return allSkills;
-						});
-
 		var tree = trees[req.body.role];
 		var uskills;
 		for(var i = 0; i < tree.skillIDs.length; i++){
-			uskills[i] = allSkills.find(obj => obj._id == tree.skillIDs[i]);
+			uskills[i] = Skills.find({_id: tree.skillIDs[i]});
 			uskills[i].achievedPoint = 0;
 		}
 
