@@ -43,9 +43,9 @@ app.use(express.static('./public'));
 app.get('/', (req, res) => res.sendFile('login.html', { root: path.join(__dirname, './public') }));
 app.get('/user', (req, res) => res.sendFile('chartandtree.html', { root: path.join(__dirname, './public/user') }));
 
-app.post('/registration', async function(req, res) {
+app.post('/registration', function(req, res) {
 	// search for username in db
-    var user = await User.findOne({
+    var user = User.findOne({
         username: req.body.username,
     }, function (err, user) {
         if (err) throw err;
@@ -56,12 +56,12 @@ app.post('/registration', async function(req, res) {
 		var hashData = pbkdf2.hashPassword(req.body.password);
 
 		// get all categories from db
-		var categories = await Category.find({}, function (err, categories) {
+		var categories = Category.find({}, function (err, categories) {
 							if (err) throw err;
 							return categories;
 						});
 
-		var trees = await Tree.find({}, function (err, trees) {
+		var trees = Tree.find({}, function (err, trees) {
 							if (err) throw err;
 							return trees;
 						});
