@@ -61,12 +61,12 @@ app.post('/registration', async function(req, res) {
 							return categories;
 						});
 
-		var trees = await Tree.find({}, function (err, trees) {
+		var gtrees = await Tree.find({}, function (err, gtrees) {
 							if (err) throw err;
-							return trees;
+							return gtrees;
 						});
 
-		var tree = trees[req.body.role];
+		var tree = gtrees[req.body.role];
 
 		var newUser = new User({
 			username: req.body.username,
@@ -181,7 +181,7 @@ getRoute.get('/data', function (req, res) {
         } else if (user) {
 			delete user.email;
 			delete user.hashData;
-            return res.json(user);
+      return res.json(user);
         }
     });
 });
