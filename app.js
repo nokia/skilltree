@@ -66,7 +66,17 @@ app.post('/registration', async function(req, res) {
 							return trees;
 						});
 
+		var allSkills = await Skill.find({}, function (err, allSkills) {
+							if (err) throw err;
+							return allSkills;
+						});
+
 		var tree = trees[req.body.role];
+		var uskills;
+		for(var i = 0; i < tree.skillIDs.length; i++){
+			uskills[i] = allSkills.find(obj => obj._id == tree.skillIDs[i]);
+			uskills[i].achievedPoint = 0;
+		}
 
 		var newUser = new User({
 			username: req.body.username,
@@ -74,7 +84,8 @@ app.post('/registration', async function(req, res) {
 			hashData: hashData,
 			categories: categories,
 			mainTree: tree._id,
-			trees: [tree]
+			trees: [tree],
+			skills: uskills
 		});
 
 		newUser.save(function(err) {
@@ -178,11 +189,13 @@ getRoute.get('/data', function (req, res) {
                 success: false,
                 message: 'User not found.'
             });
-        } else if (user) {
-			delete user.email;
-			delete user.hashData;
-      return res.json(user);
         }
+				else if (user) {
+					var _user = user;
+					delete _user.email;
+					delete _user.hashData;
+      		return res.json(_user);
+      }
     });
 });
 
@@ -310,29 +323,6 @@ setRoute.post('/approvetree', async function (req, res) {
 		tree = user.trees.find(obj => obj._id == data.treeID);
 		tree.save(function (err) {if (err) throw err;});
 	}
-});
-
-setRoute.post('/submitall', function(req, res) {
-	var data = req.body;
-    User.findOne({
-        username: req.decoded.username
-      }, function(err, user) {
-        if (err) throw err;
-        if (!user) {
-          res.json({
-            success: false,
-            message: 'User not found.'
-          });
-        }
-        else {
-          for(var i = 0; i < data.length; ++i){
-            user.skillData.find(obj => obj.treeID == data[i].treeID).skills = data[i].skills;
-          }
-          user.save(function (err) {
-              if (err) throw err;
-          });
-        }
-	});
 });
 
 const httpsServer = https.createServer(credentials, app);

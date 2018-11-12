@@ -19,6 +19,7 @@ module.exports = mongoose.model('User', new Schema({
     ],
     skills: [
         {
+            _id: ObjectID,
             name: String,
             categoryID: ObjectID,
             skillIcon: String,
@@ -28,6 +29,7 @@ module.exports = mongoose.model('User', new Schema({
             parents: [Number],
             children: [
                 {
+                    _id: ObjectID,
                     minPoint: Number,
                     recommended: Boolean
                 }

@@ -12,7 +12,7 @@ module.exports = mongoose.model('Skill', new Schema({
     skillIcon: String,
     description: String,
     maxPoint: Number,
-    parents: [Number],
+    parents: [ObjectID],
     children: [
         {
             _id: ObjectID,
