@@ -289,5 +289,6 @@ class ItemContainer {
         this.skillborder.buttonMode = false;
 
         this.app.renderer.render(this.app.stage);
+        console.log("leaf");
     }
 }
