@@ -19,29 +19,29 @@ module.exports = mongoose.model('User', new Schema({
     ],
     skills: [
         {
-            _id: ObjectID,
+            _id: Number,
             name: String,
-            categoryID: ObjectID,
+            categoryID: Number,
             skillIcon: String,
             description: String,
             achievedPoint: Number,
             maxPoint: Number,
-            parents: [ObjectID],
+            parents: [Number],
             children: [
                 {
-                    _id: ObjectID,
+                    _id: Number,
                     minPoint: Number,
                     recommended: Boolean
                 }
             ]
         }
     ],
-    mainTree: ObjectID,
+    mainTree: Number,
     trees: [
         {
-            _id: ObjectID,
+            _id: Number,
             name: String,
-            skillIDs: [ObjectID]
+            skillIDs: [Number]
         }
     ]
 }));

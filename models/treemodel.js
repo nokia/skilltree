@@ -8,5 +8,5 @@ var ObjectID = mongoose.Schema.Types.ObjectId;
 module.exports = mongoose.model('Tree', new Schema({
     _id: ObjectID,
     name: String,
-    skillIDs: [ObjectID],
+    skillIDs: [Number],
 }));

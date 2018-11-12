@@ -8,15 +8,15 @@ var ObjectID = mongoose.Schema.Types.ObjectId;
 module.exports = mongoose.model('Skill', new Schema({
     _id: ObjectID,
     name: String,
-    categoryID: ObjectID,
+    categoryID: Number,
     skillIcon: String,
     description: String,
     achievedPoint: Number,
     maxPoint: Number,
-    parents: [ObjectID],
+    parents: [Number],
     children: [
         {
-            _id: ObjectID,
+            _id: Number,
             minPoint: Number,
             recommended: Boolean
         }
