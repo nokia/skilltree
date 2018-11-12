@@ -21,7 +21,7 @@ canvas {
 
 #loginBox {
     width: 400px;
-    height: 540px;
+    height: auto;
     background: black;
     color: white;
     top: 50%;
@@ -29,7 +29,7 @@ canvas {
     position: absolute;
     transform: translate(-50%, -50%);
     box-sizing: border-box;
-    padding: 70px 30px;
+    padding: 45px;
 }
 
 #avatar {
@@ -86,6 +86,15 @@ canvas {
 
 #loginBox a:hover {
     color: #124191;
+}
+
+#loginBox input[type="radio"]{
+  position: relative;
+  display: block;
+  float: left;
+  width: auto;
+  padding: 0px;
+  margin: 0px;
 }
 
 #toast {

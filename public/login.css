@@ -18,7 +18,7 @@ h1 {
 
 #loginBox {
     width: 400px;
-    height: 400px;
+    height: auto;
     background: black;
     color: white;
     top: 50%;
@@ -26,7 +26,7 @@ h1 {
     position: absolute;
     transform: translate(-50%, -50%);
     box-sizing: border-box;
-    padding: 70px 30px;
+    padding: 45px;
 }
 
 #avatar {
@@ -86,19 +86,19 @@ h1 {
 }
 
 #toast {
-    visibility: hidden; 
-    min-width: 250px; 
-    margin-left: -125px; 
-    background-color: #333; 
-    color: #fff; 
-    text-align: center; 
-    border-radius: 2px; 
-    padding: 17px; 
-    position: fixed; 
-    z-index: 1; 
-    left: 50%; 
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 17px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
     bottom: 30px;
-    font-size: 17px; 
+    font-size: 17px;
 }
 
 #toast.show {
@@ -108,7 +108,7 @@ h1 {
 }
 
 @-webkit-keyframes fadein {
-    from {bottom: 0; opacity: 0;} 
+    from {bottom: 0; opacity: 0;}
     to {bottom: 30px; opacity: 1;}
 }
 
@@ -118,7 +118,7 @@ h1 {
 }
 
 @-webkit-keyframes fadeout {
-    from {bottom: 30px; opacity: 1;} 
+    from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
 }
 
