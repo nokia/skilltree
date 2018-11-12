@@ -6,9 +6,9 @@ var ObjectID = mongoose.Schema.Types.ObjectId;
 
 // set up a mongoose model and pass it using module.exports
 module.exports = mongoose.model('Skill', new Schema({
-    id: Number,
+    _id: ObjectID,
     name: String,
-    categoryID: Number,
+    categoryID: ObjectID,
     skillIcon: String,
     description: String,
     maxPoint: Number,

@@ -34,10 +34,10 @@ module.exports = mongoose.model('User', new Schema({
             ]
         }
     ],
-    mainTree: Number,
+    mainTree: ObjectID,
     trees: [
         {
-            id: Number,
+            _id: ObjectID,
             name: String,
             skillIDs: [ObjectID]
         }

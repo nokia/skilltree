@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 // set up a mongoose model and pass it using module.exports
 module.exports = mongoose.model('Tree', new Schema({
-    id: Number,
+    _id: ObjectID,
     name: String,
-    skillIDs: [Number],
+    skillIDs: [ObjectID],
 }));

@@ -73,7 +73,7 @@ app.post('/registration', async function(req, res) {
 			email: req.body.email,
 			hashData: hashData,
 			categories: categories,
-			mainTree: tree.id,
+			mainTree: tree._id,
 			trees: [tree]
 		});
 
