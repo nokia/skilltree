@@ -11,6 +11,7 @@ module.exports = mongoose.model('Skill', new Schema({
     categoryID: ObjectID,
     skillIcon: String,
     description: String,
+    achievedPoint: Number,
     maxPoint: Number,
     parents: [ObjectID],
     children: [
