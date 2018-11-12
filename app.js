@@ -69,7 +69,7 @@ app.post('/registration', async function(req, res) {
 		var tree = trees[req.body.role];
 		var uskills;
 		for(var i = 0; i < tree.skillIDs.length; i++){
-			uskills[i] = Skills.find({_id: tree.skillIDs[i]});
+			uskills[i] = Skill.find({_id: tree.skillIDs[i]});
 			uskills[i].achievedPoint = 0;
 		}
 
