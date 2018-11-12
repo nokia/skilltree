@@ -9,7 +9,7 @@ dataRequest.responseType = "json";
 dataRequest.onreadystatechange = function() {
     if(dataRequest.readyState == 4 && dataRequest.status == 200) {
         data = dataRequest.response;
-        showTree(data.user.mainTree);
+        showTree(data.mainTree);
     }
 }
 dataRequest.send();

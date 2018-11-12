@@ -18,7 +18,7 @@ class EditorTree {
             tmpChildren = [];
           }
           this.treeData.skills[i].level = level;
-          for(var j = 0; j < this.treeData.skills[i].children.length){
+          for(var j = 0; j < this.treeData.skills[i].children.length; j++){
             tmpChildren.push(this.treeData.skills[i].children[j].id);
           }
 
