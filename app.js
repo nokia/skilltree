@@ -61,12 +61,12 @@ app.post('/registration', async function(req, res) {
 							return categories;
 						});
 
-		var gtrees = await Tree.find({}, function (err, gtrees) {
+		var trees = await Tree.find({}, function (err, trees) {
 							if (err) throw err;
-							return gtrees;
+							return trees;
 						});
 
-		var tree = gtrees[req.body.role];
+		var tree = trees[req.body.role];
 
 		var newUser = new User({
 			username: req.body.username,
