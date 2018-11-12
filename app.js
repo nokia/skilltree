@@ -190,10 +190,7 @@ getRoute.get('/data', function (req, res) {
             });
         }
 				else if (user) {
-					var _user = user;
-					delete _user.email;
-					delete _user.hashData;
-      		return res.json(_user);
+      		return res.json(user);
       }
     });
 });
