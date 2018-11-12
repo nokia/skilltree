@@ -9,7 +9,7 @@ dataRequest.responseType = "json";
 dataRequest.onreadystatechange = function() {
     if(dataRequest.readyState == 4 && dataRequest.status == 200) {
         data = dataRequest.response;
-        initChart();
+        showTree(data.user.mainTree);
     }
 }
 dataRequest.send();
