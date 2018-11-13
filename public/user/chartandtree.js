@@ -65,7 +65,6 @@ app.stage.group.enableSort = true;
 // CHART
 
 document.getElementById("openchart").onclick = showChart;
-};
 
 var chartContainer = new PIXI.Container();
 
