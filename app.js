@@ -71,10 +71,10 @@ app.post('/registration', async function(req, res) {
 							return categories;
 						});
 
-		var trees = await Tree.find({}, function (err, trees) {
+		/*var trees = await Tree.find({}, function (err, trees) {
 							if (err) throw err;
 							return trees;
-						});
+						});*/
 
 		/*var uskills = await Skill.find({}, function (err, uskills) {
 							if (err) throw err;
