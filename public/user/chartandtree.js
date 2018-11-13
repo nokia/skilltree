@@ -66,13 +66,8 @@ app.stage.group.enableSort = true;
 
 var chartContainer = new PIXI.Container();
 
-//var counter = 0;                // ?????
 function showChart() {
-    //counter++;                  // ????? initChart waits for pixi loader and data, only runs when we have all these
-    //if (counter < 2) {          // ?????
-    //    return;                 // ?????
-    //}
-
+    console.log("ss");
     if (tree != undefined) {
         app.stage.removeChild(tree.treeContainer);
         tree = undefined;
