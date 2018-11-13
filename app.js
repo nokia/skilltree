@@ -58,15 +58,12 @@ app.post('/registration', async function(req, res) {
 
 		var focusAreaTrees = await Tree.find({focusArea: req.body.focusArea}, {_id: 0, name: 1}, function (err, trees) {
 							if (err) throw err;
-							var temp = new Array();
-							for (var i = 0; i < trees.length; ++i) {
-								temp.push(trees[i].name);
-								console.log(trees[i].name);
-							}
-							return temp;
+							return trees;
 						});
 
-						console.log(focusAreaTrees);
+		for (var i = 0; i < trees.length; ++i) {
+			trees[i] = trees[i].name; // lehet enelkul?
+		}
 
 		// get all categories from db
 		var categories = await Category.find({}, function (err, categories) {
