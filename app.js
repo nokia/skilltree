@@ -190,7 +190,11 @@ getRoute.get('/data', function (req, res) {
                 message: 'User not found.'
             });
         } else if (user) {
-			console.log(user);
+			user = user.toObject();
+			delete user._v;
+			delete user._id;
+			delete user.email;
+			delete user.hashData;
       		return res.json(user);
       	}
     });
