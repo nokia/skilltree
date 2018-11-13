@@ -14,10 +14,11 @@ function validate() {
 		//Listener, if response comes, it runs.
 		httpRequest.onreadystatechange = function() {
 		    if(httpRequest.readyState == 4 && httpRequest.status == 200) {
-					if(httpRequest.response.success){
+					if (httpRequest.response.success) {
+						localStorage.setItem("loginToken", httpRequest.response.token);
 						window.open("/user", "_self");
 					}
-					else {showToast(); }
+					else showToast();
 			}
 
 		}
