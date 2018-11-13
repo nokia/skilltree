@@ -195,6 +195,7 @@ getRoute.get('/data', function (req, res) {
 			delete user._id;
 			delete user.email;
 			delete user.hashData;
+			consle.log(user);
       		return res.json(user);
       	}
     });
