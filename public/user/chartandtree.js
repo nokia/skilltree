@@ -61,8 +61,7 @@ app.stage.group.enableSort = true;
 
 // CHART
 
-var chartContainer = new PIXI.Container();
-console.log(chartContainer.width);
+var chartContainer;
 
 //var counter = 0;                // ?????
 function initChart() {
@@ -70,6 +69,8 @@ function initChart() {
     //if (counter < 2) {          // ?????
     //    return;                 // ?????
     //}
+
+    chartContainer = new PIXI.Container();
 
     var sliceCount = data.categories.length;
 
