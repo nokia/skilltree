@@ -2,14 +2,12 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var ObjectID = mongoose.Schema.Types.ObjectId;
-
 // set up a mongoose model and pass it using module.exports
 module.exports = mongoose.model('User', new Schema({
     username: String,
     email: String,
     hashData: Buffer,
-    focusArea: Number,
+    focusArea: String,
     teacher: Boolean,
     categories: [
         {
@@ -20,29 +18,27 @@ module.exports = mongoose.model('User', new Schema({
     ],
     skills: [
         {
-            _id: Number,
             name: String,
-            categoryID: Number,
+            categoryName: Number,
             skillIcon: String,
             description: String,
             achievedPoint: Number,
             maxPoint: Number,
-            parents: [Number],
+            parents: [String],
             children: [
                 {
-                    _id: Number,
+                    name: String,
                     minPoint: Number,
                     recommended: Boolean
                 }
             ]
         }
     ],
-    mainTree: Number,
+    mainTree: Name,
     trees: [
         {
-            _id: Number,
             name: String,
-            skillIDs: [Number]
+            skillNames: [String]
         }
     ]
 }));

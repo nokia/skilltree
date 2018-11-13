@@ -27,9 +27,13 @@
         <input type="password" id="password2" placeholder="Enter Password">
         <p>Email</p>
         <input type="text" id="email" placeholder="Enter Email">
-        <h1>My focus area:</h1>
-        <input type="radio" name="focusarea" value = "0" checked><p>Business</p>
-        <input type="radio" name="focusarea" value = "1"><p>Engineering</p>
+        <select>
+            <option value = "People">People</option>
+            <option value = "Engineering">Engineering</option>
+            <option value = "Business">Business</option>
+            <option value = "Communication">Communication</option>
+            <option value = "Support functions">Support functions</option>
+        </select>
         <input type="submit" id="submit" value="Register" onclick="validate()">
         <a href="login.html">Already a user?</a>
       </form>
