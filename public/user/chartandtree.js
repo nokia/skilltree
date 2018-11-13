@@ -64,7 +64,7 @@ app.stage.group.enableSort = true;
 
 // CHART
 
-var chartContainer;
+var chartContainer = new PIXI.Container();
 
 //var counter = 0;                // ?????
 function showChart() {
