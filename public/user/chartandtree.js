@@ -9,7 +9,7 @@ dataRequest.responseType = "json";
 dataRequest.onreadystatechange = function() {
     if(dataRequest.readyState == 4 && dataRequest.status == 200) {
         data = dataRequest.response;
-        if (done) showTree(data.mainTree);
+        if (loaded) showTree(data.mainTree); // only show if pixi loader is done
     }
 }
 dataRequest.send();
@@ -49,13 +49,13 @@ function logout(){
     window.open("/", "_self");
 }
 
-var done = false;
+var loaded = false;
 PIXI.loader.add("pictures/skillborder.png")
             .add("tree.png")
             .add("pictures/back.png")
             .add("pictures/tick.png");
 PIXI.loader.load(function () {
-    done = true;
+    loaded = true;
     if (data != undefined) showTree(data.mainTree);
 });
 
