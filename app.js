@@ -191,7 +191,7 @@ getRoute.get('/data', function (req, res) {
             });
         } else if (user) {
 			user = user.toObject();
-			delete user._v;
+			delete user.__v;
 			delete user._id;
 			delete user.email;
 			delete user.hashData;
