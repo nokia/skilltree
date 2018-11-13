@@ -72,6 +72,7 @@ function showChart() {
     //if (counter < 2) {          // ?????
     //    return;                 // ?????
     //}
+    document.getElementById("openchart").value = "Close Chart";
 
     chartContainer = new PIXI.Container();
 
