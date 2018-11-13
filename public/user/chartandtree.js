@@ -34,7 +34,13 @@ function checkFirstLogin() {
     if (data.mainTree != undefined) showTree(data.mainTree);
     else {
         var modal = document.getElementById('firstLogin');
-        var span = document.getElementsByClassName("modalClose")[0];
+        var btn = document.getElementById('savebtn');
+
+        btn.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        /*var span = document.getElementsByClassName("modalClose")[0];
 
         span.onclick = function() {
             modal.style.display = "none";
@@ -44,7 +50,7 @@ function checkFirstLogin() {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
-        }
+        }*/
 
         modal.style.display = "block";
     }
