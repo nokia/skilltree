@@ -344,6 +344,30 @@ setRoute.post('/approvetree', async function (req, res) {
 	}
 });
 
+setRoute.post('/maintree', async function (req, res) {
+	var data = req.body;
+
+    var user = await User.findOne({
+        username: req.decoded.username
+    }, function(err, user) {
+        if (err) throw err;
+		return user;
+    });
+
+	if (!user) {
+		res.json({
+			success: false,
+			message: 'User not found.'
+		});
+	} else {
+		user.mainTree = data.name;
+		/*
+		* should add main tree data and skills to user
+		*/
+		user.save(function (err) {if (err) throw err;});
+	}
+});
+
 const httpsServer = https.createServer(credentials, app);
 httpsServer.listen(443);
 
