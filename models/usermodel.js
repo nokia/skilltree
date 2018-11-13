@@ -34,7 +34,7 @@ module.exports = mongoose.model('User', new Schema({
             ]
         }
     ],
-    mainTree: Name,
+    mainTree: String,
     trees: [
         {
             name: String,
