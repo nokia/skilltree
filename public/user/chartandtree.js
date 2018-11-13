@@ -73,10 +73,8 @@ function showChart() {
         tree = undefined;
     }
 
-    document.getElementById("openchart").value = "Close Chart";
-    document.getElementById("openchart").onclick = function() {
-        showTree(selectedTreeID);
-    };
+    document.getElementById("openchart").visibility = "visible";
+    document.getElementById("openchart").visibility = "hidden";
 
     chartContainer = new PIXI.Container();
 
