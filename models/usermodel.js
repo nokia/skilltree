@@ -9,7 +9,7 @@ module.exports = mongoose.model('User', new Schema({
     username: String,
     email: String,
     hashData: Buffer,
-    focusArea: Number
+    focusArea: Number,
     teacher: Boolean,
     categories: [
         {
