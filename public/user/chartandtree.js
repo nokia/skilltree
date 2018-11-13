@@ -72,13 +72,20 @@ function showChart() {
     //if (counter < 2) {          // ?????
     //    return;                 // ?????
     //}
+
+    if (tree != undefined) {
+        app.stage.removeChild(tree.treeContainer);
+        tree = undefined;
+    }
+
     document.getElementById("openchart").value = "Close Chart";
+    document.getElementById("openchart").addEventListener("click", function() {
+        showTree(selectedTreeID);
+    }, false);
 
     chartContainer = new PIXI.Container();
 
     var sliceCount = data.categories.length;
-
-    document.getElementById("pixiCanvas").style.visibility = "visible";
 
     var x = 0;
     var y = 0;
@@ -224,8 +231,11 @@ window.onresize = function () {
 // app.localLoader is a loader for skillicons (when a tree is opened, we load only that tree's skillicons)
 // PIXI.loader is global, it loads the back button, skillborder, tree, ...
 
+var selectedTreeID = data.mainTree;
 function showTree (treeID) {
     // load the tree's pictures
+    selectedTreeID = treeID;
+
     app.localLoader = new PIXI.loaders.Loader();
     var skills = new Array();
     for (var j = 0; j < data.trees.find(obj => obj._id == treeID).skillIDs.length; ++j) {
@@ -237,6 +247,13 @@ function showTree (treeID) {
     }
 
     app.localLoader.load(function () {
+        document.getElementById("pixiCanvas").style.visibility = "visible";
+
+        if (chartContainer != undefined) {
+            app.stage.removeChild(chartContainer);
+            chartContainer = undefined;
+        }
+
         tree = new Tree(app, skills);
         app.stage.addChild(tree.treeContainer);
 
