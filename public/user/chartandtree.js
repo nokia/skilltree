@@ -249,7 +249,7 @@ function showTree (treeID) {
     }
 
     app.localLoader.load(function () {
-        document.getElementById("pixiCanvas").style.visibility = "visible";
+        //document.getElementById("pixiCanvas").style.visibility = "visible";
 
         if (chartContainer != undefined) {
             app.stage.removeChild(chartContainer);
