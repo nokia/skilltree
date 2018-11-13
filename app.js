@@ -190,6 +190,7 @@ getRoute.get('/data', function (req, res) {
                 message: 'User not found.'
             });
         } else if (user) {
+			delete user.email;
       		return res.json(user);
       	}
     });
