@@ -186,7 +186,7 @@ getRoute.use(function(req, res, next) {
 getRoute.get('/data', function (req, res) {
     User.findOne({
         username: req.decoded.username
-    }, function(err, user) {
+    }, async function(err, user) {
         if (err) throw err;
 
         if (!user) {
@@ -200,6 +200,19 @@ getRoute.get('/data', function (req, res) {
 			delete user._id;
 			delete user.email;
 			delete user.hashData;
+
+			if (user.mainTree == undefined) { // first login
+				var focusArea = await Tree.find({focusArea: user.focusArea}, function (err, trees) {
+									if (err) throw err;
+									return trees;
+								});
+
+				/*user.focusArea = {
+					name: user.focusArea,
+					trees: [...]
+				}*/
+			}
+
       		return res.json(user);
       	}
     });

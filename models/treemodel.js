@@ -9,4 +9,5 @@ module.exports = mongoose.model('Tree', new Schema({
     _id: ObjectID,
     name: String,
     skillIDs: [Number],
+    focusArea: String // or id?
 }));
