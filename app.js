@@ -99,7 +99,6 @@ app.post('/registration', async function(req, res) {
 			});
 
 			// return the information including token as JSON
-			console.log(token);
 			res.json({
 				success: true,
 				token: token,
