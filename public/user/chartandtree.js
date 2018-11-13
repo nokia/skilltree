@@ -253,6 +253,9 @@ function showTree (treeID) {
             chartContainer = undefined;
         }
 
+        document.getElementById("openchart").value = "Open Chart";
+        document.getElementById("openchart").onclick = showChart;
+
         tree = new Tree(app, skills);
         app.stage.addChild(tree.treeContainer);
 
