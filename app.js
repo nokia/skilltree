@@ -87,7 +87,7 @@ app.post('/registration', async function(req, res) {
 			categories: categories,
 			focusArea: {
 					name: req.body.focusArea,
-					treeNames: focusAreaTrees
+					treeNames: Object.values(focusAreaTrees);
 				}
 			//skills: uskills
 		});
@@ -365,6 +365,10 @@ setRoute.post('/maintree', async function (req, res) {
 		* should add main tree data and skills to user
 		*/
 		user.save(function (err) {if (err) throw err;});
+
+		res.json({
+			success: true,
+		});
 	}
 });
 
