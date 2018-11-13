@@ -60,7 +60,7 @@ app.post('/registration', async function(req, res) {
 							if (err) throw err;
 							var temp = new Array();
 							for (var i = 0; i < trees.length; ++i) {
-								temp.push(trees[i].names);
+								temp.push(trees[i].name);
 							}
 							return temp;
 						});
