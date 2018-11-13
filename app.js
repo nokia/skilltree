@@ -80,6 +80,8 @@ app.post('/registration', async function(req, res) {
 							return uskills;
 						});*/
 
+		console.log(Object.values(focusAreaTrees));
+
 		var newUser = new User({
 			username: req.body.username,
 			email: req.body.email,
