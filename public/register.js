@@ -27,7 +27,7 @@ function validate() {
 				username: username.value,
 				password: password1.value,
 				email: email.value,
-				role: document.querySelector('input[name="role"]:checked').value
+				focusArea: document.querySelector('input[name="focusarea"]:checked').value
 			})
 		);
 	}

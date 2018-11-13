@@ -9,7 +9,7 @@ dataRequest.responseType = "json";
 dataRequest.onreadystatechange = function() {
     if(dataRequest.readyState == 4 && dataRequest.status == 200) {
         data = dataRequest.response;
-        if (loaded) showTree(data.mainTree); // only show if pixi loader is done
+        if (loaded) checkFirstLogin(); // only show if pixi loader is done
     }
 }
 dataRequest.send();
@@ -29,6 +29,26 @@ var app = new PIXI.Application({
 // get username from token and show it
 var tokenPayload = parseJwt(localStorage.getItem("loginToken"));
 document.getElementById("welcome").innerHTML = "Hello " + tokenPayload.username + "!";
+
+function checkFirstLogin() {
+    if (data.mainTree != undefined) showTree(data.mainTree);
+    else {
+        var modal = document.getElementById('firstLogin');
+        var span = document.getElementsByClassName("modalClose")[0];
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        modal.style.display = "block";
+    }
+}
 
 function submit(){
   /*var sub = new XMLHttpRequest();
@@ -56,7 +76,7 @@ PIXI.loader.add("pictures/skillborder.png")
             .add("pictures/tick.png");
 PIXI.loader.load(function () {
     loaded = true;
-    if (data != undefined) showTree(data.mainTree);
+    if (data != undefined) checkFirstLogin();
 });
 
 app.stage = new PIXI.display.Stage();
