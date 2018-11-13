@@ -62,13 +62,14 @@ app.stage.group.enableSort = true;
 // CHART
 
 var chartContainer = new PIXI.Container();
+console.log(chartContainer.width);
 
-var counter = 0;                // ?????
+//var counter = 0;                // ?????
 function initChart() {
-    counter++;                  // ????? initChart waits for pixi loader and data, only runs when we have all these
-    if (counter < 2) {          // ?????
-        return;                 // ?????
-    }
+    //counter++;                  // ????? initChart waits for pixi loader and data, only runs when we have all these
+    //if (counter < 2) {          // ?????
+    //    return;                 // ?????
+    //}
 
     var sliceCount = data.categories.length;
 
