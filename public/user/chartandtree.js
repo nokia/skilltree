@@ -74,12 +74,9 @@ function showChart() {
     }
 
     document.getElementById("openchart").value = "Close Chart";
-    document.getElementById("openchart").onClick = function() {
+    document.getElementById("openchart").onclick = function() {
         showTree(selectedTreeID);
     };
-    /*document.getElementById("openchart").addEventListener("click", function() {
-        showTree(selectedTreeID);
-    }, false);*/
 
     chartContainer = new PIXI.Container();
 
