@@ -62,7 +62,7 @@ app.post('/registration', async function(req, res) {
 						});
 
 		for (var i = 0; i < focusAreaTrees.length; ++i) {
-			focusAreaTrees[i] = focusAreaTrees[i].name; // lehet enelkul?
+			focusAreaTrees[i] = focusAreaTrees[i].name; //	lehet enelkul?
 		}
 
 		// get all categories from db
