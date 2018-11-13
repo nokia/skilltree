@@ -74,6 +74,7 @@ function showChart() {
     }
 
     document.getElementById("openchart").value = "Close Chart";
+    document.getElementById("openchart").onClick = "";
     document.getElementById("openchart").addEventListener("click", function() {
         showTree(selectedTreeID);
     }, false);
