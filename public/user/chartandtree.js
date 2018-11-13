@@ -9,6 +9,7 @@ dataRequest.responseType = "json";
 dataRequest.onreadystatechange = function() {
     if(dataRequest.readyState == 4 && dataRequest.status == 200) {
         data = dataRequest.response;
+        console.log(data);
         showTree(data.mainTree);
     }
 }
