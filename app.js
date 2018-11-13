@@ -91,8 +91,17 @@ app.post('/registration', async function(req, res) {
 		newUser.save(function(err) {
 			if (err) throw err;
 
+			const payload = {
+				username: req.body.username,
+			};
+			var token = jwt.sign(payload, app.get('superSecret'), {
+				expiresIn: '60m' // expires in 1 hour
+			});
+
+			// return the information including token as JSON
 			res.json({
-				success: true
+				success: true,
+				token: token,
 			});
 		});
 	} else { // if user already exists
