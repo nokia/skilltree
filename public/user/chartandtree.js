@@ -64,6 +64,10 @@ app.stage.group.enableSort = true;
 
 // CHART
 
+document.getElementById("openchart").addEventListener("click", function() {
+    showChart();
+}, false);
+
 var chartContainer = new PIXI.Container();
 
 function showChart() {
@@ -73,8 +77,10 @@ function showChart() {
         tree = undefined;
     }
 
-    document.getElementById("openchart").visibility = "visible";
-    document.getElementById("openchart").visibility = "hidden";
+    document.getElementById("openchart").value = "Close Chart";
+    document.getElementById("openchart").addEventListener("click", function() {
+        showTree(selectedTreeID);
+    }, false);
 
     chartContainer = new PIXI.Container();
 
