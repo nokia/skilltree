@@ -15,6 +15,7 @@ function validate() {
 		httpRequest.onreadystatechange = function() {
 		    if(httpRequest.readyState == 4 && httpRequest.status == 200) {
 					if (httpRequest.response.success) {
+						console.log(httpRequest.response.token);
 						localStorage.setItem("loginToken", httpRequest.response.token);
 						window.open("/user", "_self");
 					}
