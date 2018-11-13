@@ -83,7 +83,7 @@ app.post('/registration', async function(req, res) {
 			email: req.body.email,
 			hashData: hashData,
 			categories: categories,
-			mainTree: tree._id,
+			//mainTree: tree._id,
 			trees: [tree],
 			skills: uskills
 		});
@@ -189,10 +189,9 @@ getRoute.get('/data', function (req, res) {
                 success: false,
                 message: 'User not found.'
             });
-        }
-				else if (user) {
+        } else if (user) {
       		return res.json(user);
-      }
+      	}
     });
 });
 
