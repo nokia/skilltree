@@ -65,6 +65,8 @@ app.post('/registration', async function(req, res) {
 							return temp;
 						});
 
+						console.log(focusAreaTrees);
+
 		// get all categories from db
 		var categories = await Category.find({}, function (err, categories) {
 							if (err) throw err;
