@@ -61,6 +61,7 @@ app.post('/registration', async function(req, res) {
 							var temp = new Array();
 							for (var i = 0; i < trees.length; ++i) {
 								temp.push(trees[i].name);
+								console.log(trees[i].name);
 							}
 							return temp;
 						});
