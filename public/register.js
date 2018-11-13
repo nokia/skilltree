@@ -4,6 +4,7 @@ function validate() {
 	var password1 = document.getElementById("password1");
 	var password2 = document.getElementById("password2");
 	var email = document.getElementById("email");
+	var focusarea = document.getElementById("focusarea");
 
 	if (password1.value == password2.value) {
 		var httpRequest = new XMLHttpRequest();
@@ -27,7 +28,7 @@ function validate() {
 				username: username.value,
 				password: password1.value,
 				email: email.value,
-				focusArea: document.querySelector('input[name="focusarea"]:checked').value
+				focusArea: focusarea.value
 			})
 		);
 	}

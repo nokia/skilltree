@@ -56,6 +56,11 @@ app.post('/registration', async function(req, res) {
 	if (!user) { // if new user
 		var hashData = pbkdf2.hashPassword(req.body.password);
 
+		var focusAreaTrees = await Tree.find({focusArea: req.body.focusArea}, {_id: 0, name: 1}, function (err, trees) {
+							if (err) throw err;
+							return trees;
+						});
+
 		// get all categories from db
 		var categories = await Category.find({}, function (err, categories) {
 							if (err) throw err;
@@ -80,7 +85,10 @@ app.post('/registration', async function(req, res) {
 			email: req.body.email,
 			hashData: hashData,
 			categories: categories,
-			focusArea: req.body.focusArea
+			focusArea: {
+					name: req.body.focusArea,
+					treeNames: trees
+				}
 			//skills: uskills
 		});
 
@@ -201,16 +209,8 @@ getRoute.get('/data', function (req, res) {
 			delete user.email;
 			delete user.hashData;
 
-			if (user.mainTree == undefined) { // first login
-				var focusArea = await Tree.find({focusArea: user.focusArea}, function (err, trees) {
-									if (err) throw err;
-									return trees;
-								});
-
-				/*user.focusArea = {
-					name: user.focusArea,
-					trees: [...]
-				}*/
+			if (user.mainTree != undefined) { // first login
+				delete user.focusArea;
 			}
 
       		return res.json(user);

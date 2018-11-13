@@ -7,7 +7,10 @@ module.exports = mongoose.model('User', new Schema({
     username: String,
     email: String,
     hashData: Buffer,
-    focusArea: String,
+    focusArea: {
+        name: String,
+        treeNames: [String],
+    },
     teacher: Boolean,
     categories: [
         {
