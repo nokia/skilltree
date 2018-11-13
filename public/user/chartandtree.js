@@ -64,9 +64,8 @@ app.stage.group.enableSort = true;
 
 // CHART
 
-document.getElementById("openchart").addEventListener("click", function() {
-    showChart();
-}, false);
+document.getElementById("openchart").onclick = showChart;
+};
 
 var chartContainer = new PIXI.Container();
 
@@ -78,9 +77,9 @@ function showChart() {
     }
 
     document.getElementById("openchart").value = "Close Chart";
-    document.getElementById("openchart").addEventListener("click", function() {
+    document.getElementById("openchart").onclick = function() {
         showTree(selectedTreeID);
-    }, false);
+    };
 
     chartContainer = new PIXI.Container();
 
