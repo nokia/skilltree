@@ -67,25 +67,21 @@ app.post('/registration', async function(req, res) {
 							return trees;
 						});
 
-		var uskills = await Skill.find({}, function (err, uskills) {
+		/*var uskills = await Skill.find({}, function (err, uskills) {
 							if (err) throw err;
 							for(var i = 0; i < uskills.length; i++){
 								uskills[i].achievedPoint = 0;
 							}
 							return uskills;
-						});
-
-		var tree = trees[req.body.role];
-
+						});*/
 
 		var newUser = new User({
 			username: req.body.username,
 			email: req.body.email,
 			hashData: hashData,
 			categories: categories,
-			//mainTree: tree._id,
-			trees: [tree],
-			skills: uskills
+			focusArea: req.body.focusArea
+			//skills: uskills
 		});
 
 		newUser.save(function(err) {
