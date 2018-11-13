@@ -58,7 +58,11 @@ app.post('/registration', async function(req, res) {
 
 		var focusAreaTrees = await Tree.find({focusArea: req.body.focusArea}, {_id: 0, name: 1}, function (err, trees) {
 							if (err) throw err;
-							return trees;
+							var temp = new Array();
+							for (var i = 0; i < trees.length; ++i) {
+								temp.push(trees[i].names);
+							}
+							return temp;
 						});
 
 		// get all categories from db
@@ -80,8 +84,6 @@ app.post('/registration', async function(req, res) {
 							return uskills;
 						});*/
 
-		console.log(Object.values(focusAreaTrees));
-
 		var newUser = new User({
 			username: req.body.username,
 			email: req.body.email,
@@ -89,7 +91,7 @@ app.post('/registration', async function(req, res) {
 			categories: categories,
 			focusArea: {
 					name: req.body.focusArea,
-					treeNames: Object.values(focusAreaTrees),
+					treeNames: focusAreaTrees,
 				}
 			//skills: uskills
 		});
