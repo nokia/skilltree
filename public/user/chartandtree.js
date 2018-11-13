@@ -232,6 +232,7 @@ window.onresize = function () {
 // PIXI.loader is global, it loads the back button, skillborder, tree, ...
 
 var selectedTreeID;
+var tree = undefined;
 
 function showTree (treeID) {
     // load the tree's pictures
