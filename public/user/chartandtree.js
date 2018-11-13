@@ -9,8 +9,7 @@ dataRequest.responseType = "json";
 dataRequest.onreadystatechange = function() {
     if(dataRequest.readyState == 4 && dataRequest.status == 200) {
         data = dataRequest.response;
-        console.log(data);
-        showTree(data.mainTree);
+        if (done) showTree(data.mainTree);
     }
 }
 dataRequest.send();
@@ -50,11 +49,15 @@ function logout(){
     window.open("/", "_self");
 }
 
+var done = false;
 PIXI.loader.add("pictures/skillborder.png")
             .add("tree.png")
             .add("pictures/back.png")
             .add("pictures/tick.png");
-PIXI.loader.load(initChart);
+PIXI.loader.load(function () {
+    done = true;
+    if (data != undefined) showTree(data.mainTree);
+});
 
 app.stage = new PIXI.display.Stage();
 app.stage.group.enableSort = true;
@@ -64,7 +67,7 @@ app.stage.group.enableSort = true;
 var chartContainer;
 
 //var counter = 0;                // ?????
-function initChart() {
+function showChart() {
     //counter++;                  // ????? initChart waits for pixi loader and data, only runs when we have all these
     //if (counter < 2) {          // ?????
     //    return;                 // ?????
