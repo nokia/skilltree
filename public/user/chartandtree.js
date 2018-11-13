@@ -35,9 +35,21 @@ function checkFirstLogin() {
     else {
         var modal = document.getElementById('firstLogin');
         var btn = document.getElementById('savebtn');
+        var select = document.getElementById('maintree');
 
         btn.onclick = function() {
-            modal.style.display = "none";
+            var maintree = {name: option.value};
+
+            var saveMain = new XMLHttpRequest();
+            saveMain.open('POST', '/set/maintree', true);
+            saveMain.setRequestHeader('Content-type', 'application/json');
+            saveMain.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+            saveMain.onreadystatechange = function() {
+                if(saveMain.readyState == 4 && saveMain.status == 200) {
+                  window.open("/user/", "_self");
+                }
+            }
+            saveMain.send(JSON.stringify(maintree));
         }
 
         /*var span = document.getElementsByClassName("modalClose")[0];
@@ -51,6 +63,12 @@ function checkFirstLogin() {
                 modal.style.display = "none";
             }
         }*/
+
+        for (var i = 0; i < data.focusArea.treeNames.length; ++i) {
+            var option = document.createElement('option');
+            option.value = option.text = data.focusArea.treeNames[i];
+            select.add(option);
+        }
 
         modal.style.display = "block";
     }

@@ -87,7 +87,7 @@ app.post('/registration', async function(req, res) {
 			categories: categories,
 			focusArea: {
 					name: req.body.focusArea,
-					treeNames: trees
+					treeNames: focusAreaTrees
 				}
 			//skills: uskills
 		});
