@@ -1,9 +1,12 @@
 * {
   padding: 0;
   margin: 0;
-  /*background-color: #183693;*/
   overflow: hidden;
   font-family: Helvetica;
+}
+
+body {
+    background-color: #183693;
 }
 
 .grid{
