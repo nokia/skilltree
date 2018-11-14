@@ -19,6 +19,7 @@ class Tree {
         var level = 0;
         var tmpChildren = [];
         var n = 0;
+        var levelLength = [];
 
         for(var i = 0; i < this.skills.length; i++){
           if(tmpChildren.find(obj => obj.name == this.skills[i].name) !== undefined){
