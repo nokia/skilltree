@@ -39,7 +39,10 @@ class Tree {
         for(var i = 0; i < this.skills.length; i++){
           this.skills[i].itemcontainer = new ItemContainer(app, this.skills, this.skills[i].name);
 
-          //this.skills[i].itemcontainer.container.position.x = this.skills[i].place * 130 + (app.renderer.width - levelLength[level] * 130) / 2;
+          console.log(this.skills[i].level);
+          console.log(this.skills[i].place);
+
+          this.skills[i].itemcontainer.container.position.x = this.skills[i].place * 130 + (app.renderer.width - levelLength[level] * 130) / 2;
           this.skills[i].itemcontainer.container.position.y = this.skills[i].level * 150;
 
           this.skills[i].itemcontainer.container.parentLayer = skillLayer;
