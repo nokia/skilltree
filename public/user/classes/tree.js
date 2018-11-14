@@ -51,12 +51,12 @@ class Tree {
     drawConnectionLines() {
         var connectionGroup = new PIXI.display.Group(-1, false);
 
-        for (var j = 0; j < this.skills.length; ++j) {
+        for (var j = 0; j < this.skills.length; j++) {
             if (this.skills[j].children !== undefined) {
-                for (var k = 0; k < this.skills[j].children.length; ++k) {
+                for (var k = 0; k < this.skills[j].children.length; k++) {
                     var child = this.skills.find(obj => obj.name == this.skills[j].children[k].name);
-                    console.log(this.skills.find(obj => obj.name == this.skills[j].children[k]));
                     var minPoint = this.skills[j].children[k].minPoint;
+                    console.log(j);console.log(k);
 
                     // Draw the line
                     var connection = new PIXI.Graphics();
