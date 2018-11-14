@@ -55,27 +55,27 @@ class Tree {
             if (this.skills[j].children !== undefined) {
                 for (var k = 0; k < this.skills[j].children.length; k++) {
                     var child = this.skills.find(obj => obj.name == this.skills[j].children[k].name);
-                    var minPoint = this.skills[j].children[k].minPoint;
-                    console.log(j);console.log(k);
-                    console.log(this.skills);
+                    if (child != undefined) {
+                        var minPoint = this.skills[j].children[k].minPoint;
 
-                    // Draw the line
-                    var connection = new PIXI.Graphics();
-                    connection.lineStyle(4, 0xffffff);
-                    connection.moveTo(this.skills[j].itemcontainer.container.x + this.skills[j].itemcontainer.skillborder.width / 2, this.skills[j].itemcontainer.container.position.y + this.skills[j].itemcontainer.skillborder.height - 8);
-                    connection.lineTo(child.itemcontainer.container.position.x + child.itemcontainer.skillborder.width / 2, child.itemcontainer.container.position.y + 5);
+                        // Draw the line
+                        var connection = new PIXI.Graphics();
+                        connection.lineStyle(4, 0xffffff);
+                        connection.moveTo(this.skills[j].itemcontainer.container.x + this.skills[j].itemcontainer.skillborder.width / 2, this.skills[j].itemcontainer.container.position.y + this.skills[j].itemcontainer.skillborder.height - 8);
+                        connection.lineTo(child.itemcontainer.container.position.x + child.itemcontainer.skillborder.width / 2, child.itemcontainer.container.position.y + 5);
 
-                    // Add the line
-                    this.treeContainer.addChild(connection);
-                    connection.parentGroup = connectionGroup;
+                        // Add the line
+                        this.treeContainer.addChild(connection);
+                        connection.parentGroup = connectionGroup;
 
-                    if (this.skills[j].achievedPoint < minPoint || child.lowAPParents != undefined) {
-                        child.itemcontainer.disable();
+                        if (this.skills[j].achievedPoint < minPoint || child.lowAPParents != undefined) {
+                            child.itemcontainer.disable();
 
-                        if (child.lowAPParents === undefined) {
-                            child.lowAPParents = new Array();
+                            if (child.lowAPParents === undefined) {
+                                child.lowAPParents = new Array();
+                            }
+                            child.lowAPParents.push(this.skills[j].name);
                         }
-                        child.lowAPParents.push(this.skills[j].name);
                     }
                 }
             }
