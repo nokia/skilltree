@@ -57,6 +57,7 @@ class Tree {
                     var child = this.skills.find(obj => obj.name == this.skills[j].children[k].name);
                     var minPoint = this.skills[j].children[k].minPoint;
                     console.log(j);console.log(k);
+                    console.log(this.skills);
 
                     // Draw the line
                     var connection = new PIXI.Graphics();
