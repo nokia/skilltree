@@ -41,7 +41,7 @@ class Tree {
 
           console.log(this.skills[i].level);
           console.log(this.skills[i].place);
-          console.log(levelLength[level]);
+          console.log(levelLength[this.skills[i].level]);
 
           this.skills[i].itemcontainer.container.position.x = this.skills[i].place * 130 + (app.renderer.width - levelLength[this.skills[i].level] * 130) / 2;
           this.skills[i].itemcontainer.container.position.y = this.skills[i].level * 150;
