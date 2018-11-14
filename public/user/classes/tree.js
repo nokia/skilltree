@@ -45,7 +45,6 @@ class Tree {
           this.skills[i].itemcontainer.container.parentLayer = skillLayer;
           this.treeContainer.addChild(this.skills[i].itemcontainer.container);
         }
-        console.log("tree");
         this.drawConnectionLines();
     }
 
@@ -56,7 +55,7 @@ class Tree {
             if (this.skills[j].children !== undefined) {
                 for (var k = 0; k < this.skills[j].children.length; ++k) {
                     var child = this.skills.find(obj => obj.name == this.skills[j].children[k].name);
-                    console.log(child);
+                    console.log('ssa' + child);
                     var minPoint = this.skills[j].children[k].minPoint;
 
                     // Draw the line
