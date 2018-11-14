@@ -66,7 +66,7 @@ class ItemContainer {
         });
         detailsForeground.addChild(btn1Container);
 
-        /*
+        
         var btn2 = new PIXI.Sprite(btnG.generateTexture());
 
         var txt2 = new PIXI.Text("REQUEST", {fontSize: 14, fill: 0x000000});
@@ -87,7 +87,7 @@ class ItemContainer {
             app.renderer.render(app.stage);
         });
         detailsForeground.addChild(btn2Container);
-        */
+        
         /*// Temporary link
         if (skillName == 0) {
             var link = new Link("Nokia website", "https://nokia.com", {fontSize: 12, fill: 0x0000ff}, true);
