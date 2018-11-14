@@ -53,7 +53,7 @@ class ItemContainer {
 
         var btn1Container = new PIXI.Container();
         btn1Container.addChild(btn1, txt1);
-        btn1Container.position.set( detailsMargin + (detailsWidth - btn1Container.width)  , description.position.y + description.height + 10);
+        btn1Container.position.set( detailsMargin + (detailsWidth - btn1Container.width)/2  , description.position.y + description.height + 10);
         btn1Container.interactive = true;
         btn1Container.buttonMode = true;
         btn1Container.on('pointerover', function () {
