@@ -302,7 +302,6 @@ function showTree (treeName) {
         document.getElementById("openchart").onclick = showChart;
 
         tree = new Tree(app, skills);
-        console.log(skills);
         app.stage.addChild(tree.treeContainer);
 
         // back button
