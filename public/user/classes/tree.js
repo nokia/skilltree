@@ -54,7 +54,7 @@ class Tree {
         for (var j = 0; j < this.skills.length; ++j) {
             if (this.skills[j].children !== undefined) {
                 for (var k = 0; k < this.skills[j].children.length; ++k) {
-                    var child = this.skills.find(obj => obj.id == this.skills[j].children[k].id);
+                    var child = this.skills.find(obj => obj.name == this.skills[j].children[k].name);
                     var minPoint = this.skills[j].children[k].minPoint;
 
                     // Draw the line
@@ -73,7 +73,7 @@ class Tree {
                         if (child.lowAPParents === undefined) {
                             child.lowAPParents = new Array();
                         }
-                        child.lowAPParents.push(this.skills[j].id);
+                        child.lowAPParents.push(this.skills[j].name);
                     }
                 }
             }

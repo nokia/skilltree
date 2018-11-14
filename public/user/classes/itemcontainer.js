@@ -3,10 +3,10 @@
 */
 
 class ItemContainer {
-    constructor(app, skills, skillID) {
+    constructor(app, skills, skillName) {
         this.app = app;
         this.skills = skills;
-        this.skill = skills.find(obj => obj.id == skillID);
+        this.skill = skills.find(obj => obj.name == skillName);
 
         //Creating images
         this.skillicon = new PIXI.Sprite(app.localLoader.resources[this.skill.skillIcon].texture); //100x100
@@ -167,7 +167,7 @@ class ItemContainer {
                 }
 
                 //save level change (kell?)
-                this.parentObj.skills.find(obj => obj.id == this.parentObj.skill.id).achievedPoint++;
+                this.parentObj.skills.find(obj => obj.name == this.parentObj.skill.name).achievedPoint++;
             }
 
             this.parentObj.app.renderer.render(this.parentObj.app.stage);
@@ -176,7 +176,7 @@ class ItemContainer {
 
     onRightClick() {
         // Disable children which doesn't have other parents with 0 skill level
-        if (this.parentObj.skill.skillLevel == 1) {
+        if (this.parentObj.skill.achievedPoint == 1) {
             var children = this.parentObj.skill.children;
             this.parentObj.toggleChildren(children, false);
         }
@@ -188,7 +188,7 @@ class ItemContainer {
             this.levelinfo.text = (this.parentObj.skill.achievedPoint + "/" + this.parentObj.skill.maxPoint);
 
             //save level change (kell?)
-            this.parentObj.userData.skills.find(obj => obj.id == this.parentObj.skill.id).achievedPoint--;
+            this.parentObj.userData.skills.find(obj => obj.name == this.parentObj.skill.name).achievedPoint--;
         } else return;
         this.parentObj.tick.alpha = 0;
         this.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFFBF00, 1)];
@@ -199,11 +199,11 @@ class ItemContainer {
     toggleChildren (children, enable) {
         if (children !== undefined) {
             for (var k = 0; k < children.length; ++k) {
-                var child = this.skills[children[k].id];
+                var child = this.skills[children[k].name];
 
                 if (enable) {
                     for (var j = 0; child.lowAPParents !== undefined && j < child.lowAPParents.length; ++j) {
-                        if (child.lowAPParents[j].id == this.skill.id) {
+                        if (child.lowAPParents[j].name == this.skill.name) {
                             child.lowAPParents.splice(j, 1);
 
                             if (child.lowAPParents.length == 0) {
@@ -228,8 +228,8 @@ class ItemContainer {
                         child.itemcontainer.skillborder.buttonMode = false;
                     }
 
-                    if (child.lowAPParents.find(obj => obj.id == this.skill.id) == undefined) {
-                        child.lowAPParents.push(this.skill.id);
+                    if (child.lowAPParents.find(obj => obj.name == this.skill.name) == undefined) {
+                        child.lowAPParents.push(this.skill.name);
                     }
                 }
 
@@ -289,6 +289,5 @@ class ItemContainer {
         this.skillborder.buttonMode = false;
 
         this.app.renderer.render(this.app.stage);
-        console.log("leaf");
     }
 }
