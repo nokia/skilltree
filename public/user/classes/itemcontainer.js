@@ -87,13 +87,13 @@ class ItemContainer {
         });
         detailsForeground.addChild(btn2Container);
 
-        // Temporary link
-        if (skillID == 0) {
+        /*// Temporary link
+        if (skillName == 0) {
             var link = new Link("Nokia website", "https://nokia.com", {fontSize: 12, fill: 0x0000ff}, true);
             link.position.set(detailsMargin, btn1Container.position.y + btn1Container.height + 7);
             detailsForeground.addChild(link);
         }
-        //
+        //*/
 
         var detailsBackground = new PIXI.Graphics();
         detailsBackground.beginFill(0xffffff);
