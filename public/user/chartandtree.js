@@ -286,6 +286,7 @@ function showTree (treeName) {
         var skillName = data.trees.find(obj => obj.name == treeName).skillNames[j];
         var skill = data.skills.find(obj => obj.name == skillName);
         app.localLoader.add(skill.skillIcon.toString());
+        console.log(skill.skillIcon.toString());
 
         skills.push(skill);
     }
