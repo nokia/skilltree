@@ -64,11 +64,11 @@ function checkFirstLogin() {
             }
         }*/
 
-        /*for (var i = 0; i < data.focusArea.treeNames.length; ++i) {
+        for (var i = 0; i < data.focusArea.treeNames.length; ++i) {
             var option = document.createElement('option');
             option.value = option.text = data.focusArea.treeNames[i];
             select.add(option);
-        }*/
+        }
 
         modal.style.display = "block";
     }
