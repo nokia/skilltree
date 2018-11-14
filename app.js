@@ -364,9 +364,27 @@ setRoute.post('/maintree', async function (req, res) {
 		});
 	} else {
 		user.mainTree = data.name;
-		/*
-		* should add main tree data and skills to user
-		*/
+
+		var mainTree = await Tree.findOne({
+	        name: data.name,
+	    }, function (err, tree) {
+	        if (err) throw err;
+			return tree;
+	    });
+
+		user.trees.push(mainTree);
+
+		var skills = await Skill.find({
+	        name: mainTree.skillNames,
+	    }, function (err, skills) {
+	        if (err) throw err;
+			return skills;
+	    });
+
+		await skills.forEach(function (skill) {
+			user.skills.push(skill);
+		});
+
 		user.save(function (err) {if (err) throw err;});
 
 		res.json({
