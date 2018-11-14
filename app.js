@@ -370,7 +370,8 @@ setRoute.post('/maintree', async function (req, res) {
 	    }, function (err, tree) {
 	        if (err) throw err;
 			return tree;
-	    });
+		});
+		
 
 		user.trees.push(mainTree);
 
@@ -382,6 +383,7 @@ setRoute.post('/maintree', async function (req, res) {
 	    });
 
 		await skills.forEach(function (skill) {
+			skill.achievedPoint = 0;
 			user.skills.push(skill);
 		});
 
