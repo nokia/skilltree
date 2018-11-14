@@ -300,14 +300,9 @@ function showTree (treeName) {
 
         document.getElementById("openchart").value = "Open Chart";
         document.getElementById("openchart").onclick = showChart;
-   
-        //test
-         
-        var RootSkill = new ItemContainer(app, skills, skills[0].name);
-        app.stage.addChild(RootSkill.container);
-        /**************/
-        //tree = new Tree(app, skills);
-        //app.stage.addChild(tree.treeContainer);
+
+        tree = new Tree(app, skills);
+        app.stage.addChild(tree.treeContainer);
 
         // back button
         var backButton = new PIXI.Sprite(PIXI.loader.resources["pictures/back.png"].texture);
