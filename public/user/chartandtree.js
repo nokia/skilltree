@@ -113,7 +113,6 @@ document.getElementById("openchart").onclick = showChart;
 var chartContainer = new PIXI.Container();
 
 function showChart() {
-    console.log("ss");
     if (tree != undefined) {
         app.stage.removeChild(tree.treeContainer);
         tree = undefined;
@@ -272,18 +271,18 @@ window.onresize = function () {
 // app.localLoader is a loader for skillicons (when a tree is opened, we load only that tree's skillicons)
 // PIXI.loader is global, it loads the back button, skillborder, tree, ...
 
-var selectedTreeID;
+var selectedTreeName;
 var tree = undefined;
 
-function showTree (treeID) {
+function showTree (treeName) {
     // load the tree's pictures
-    selectedTreeID = treeID;
+    selectedTreeName = treeName;
 
     app.localLoader = new PIXI.loaders.Loader();
     var skills = new Array();
-    for (var j = 0; j < data.trees.find(obj => obj._id == treeID).skillIDs.length; ++j) {
-        var skillID = data.trees.find(obj => obj._id == treeID).skillIDs[j];
-        var skill = data.skills.find(obj => obj._id == skillID);
+    for (var j = 0; j < data.trees.find(obj => obj.name == treeName).skillNames.length; ++j) {
+        var skillName = data.trees.find(obj => obj.name == treeName).skillNames[j];
+        var skill = data.skills.find(obj => obj.name == skillName);
         app.localLoader.add(skill.skillIcon.toString());
 
         skills.push(skill);
@@ -324,7 +323,7 @@ function showTree (treeID) {
     });
 }
 
-function openEditor () {
+/*function openEditor () {
     app.stage.removeChild(tree.treeContainer);
     app.localLoader.destroy();
     tree = undefined;
@@ -353,7 +352,7 @@ function openEditor () {
 
         app.renderer.render(app.stage);
     });
-}
+}*/
 
 // helper functions
 
@@ -362,11 +361,3 @@ function parseJwt (token) {
     var base64 = base64Url.replace('-', '+').replace('_', '/');
     return JSON.parse(window.atob(base64));
 };
-
-/*function getSkillLevel (treeID, skillID) {
-    if (userData.find(obj => obj.treeID == treeID) != undefined) {
-        if (userData.find(obj => obj.treeID == treeID).skills.find(obj => obj.skillID == skillID) != undefined) {
-            return userData.find(obj => obj.treeID == treeID).skills.find(obj => obj.skillID == skillID).skillLevel;
-        } else return 0;
-    } else return 0;
-}*/
