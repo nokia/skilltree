@@ -303,7 +303,7 @@ function showTree (treeName) {
    
         //test
          
-        var RootSkill = new Container(app, skills, skills[0].name);
+        var RootSkill = new ItemContainer(app, skills, skills[0].name);
         app.stage.addChild(RootSkill.container);
         /**************/
         //tree = new Tree(app, skills);
