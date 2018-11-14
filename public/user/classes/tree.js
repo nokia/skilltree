@@ -21,7 +21,7 @@ class Tree {
         var n = 0;
 
         for(var i = 0; i < this.skills.length; i++){
-          if(tmpChildren.find(obj => obj.id == this.skills[i].id) !== undefined){
+          if(tmpChildren.find(obj => obj.name == this.skills[i].name) !== undefined){
             levelLength[level] = n;
             level += 1;
             tmpChildren = [];
@@ -30,7 +30,7 @@ class Tree {
           this.skills[i].level = level;
           this.skills[i].place = n;
           for (var j = 0; j < this.skills[i].children.length; ++j){
-            tmpChildren.push(this.skills[i].children[j].id);
+            tmpChildren.push(this.skills[i].children[j].name);
           }
           n++;
         }
