@@ -82,6 +82,7 @@ class Tree {
         }
 
         app.stage.addChild(new PIXI.display.Layer(connectionGroup));
+        app.stage.addChild(this.treeContainer);
 
         app.renderer.render(app.stage);
     }
