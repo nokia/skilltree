@@ -28,7 +28,7 @@ var app = new PIXI.Application({
 
 // get username from token and show it
 var tokenPayload = parseJwt(localStorage.getItem("loginToken"));
-document.getElementById("welcome").innerHTML = "Hello " + tokenPayload.username + "!";
+document.getElementById("welcome").innerText = "Hello " + tokenPayload.username + "!";
 
 function checkFirstLogin() {
     if (data.mainTree != undefined) showTree(data.mainTree);
