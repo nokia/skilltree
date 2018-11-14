@@ -261,7 +261,7 @@ setRoute.post('/newskill', async function(req, res) { // global skill
 	var newSkill = new Skill({
 		name: data.name,
 		description: data.description,
-		categoryID: data.categoryID,
+		categoryName: data.categoryName,
 		skillIcon: data.skillIcon,
 		maxPoint: data.maxPoint,
 		parents: data.parents,
@@ -271,15 +271,14 @@ setRoute.post('/newskill', async function(req, res) { // global skill
 	var id;
 	await newSkill.save(function(err, skill) {
 		if (err) throw err;
-		id = skill._id;
 	});
 
 	for (var i = 0; i < data.parents.length; ++i) {
-		Skill.update({ _id: data.parents[i].id}, {$push: {children: {_id: id, minPoint: data.parents[i].minPoint}}}, function (err) {if (err) throw err;});
+		Skill.update({name: data.parents[i].name}, {$push: {children: {name: data.name, minPoint: data.parents[i].minPoint}}}, function (err) {if (err) throw err;});
 	}
 
 	for (var i = 0; i < data.children.length; ++i) {
-		Skill.update({ _id: data.children[i]}, {$push: {parents: {_id: id}}}, function (err) {if (err) throw err;});
+		Skill.update({name: data.children[i]}, {$push: {parents: {name: data.name}}}, function (err) {if (err) throw err;});
 	}
 });
 
@@ -301,7 +300,7 @@ setRoute.post('/newtree', async function (req, res) { // create user tree
 			message: 'User not found.'
 		});
 	} else {
-		user.trees.push({name: data.name, skillIDs: []});
+		user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: []});
 		user.save(function (err) {if (err) throw err;});
 	}
 });
@@ -321,7 +320,7 @@ setRoute.post('/addskilltotree', async function(req, res) { // to user tree
 			message: 'User not found.'
 		});
 	} else {
-		user.trees.find(obj => obj._id == data.treeID).skillIDs.push(data.skillID);
+		user.trees.find(obj => obj.name == data.treeName).skillNames.push(data.name);
 		user.save(function (err) {if (err) throw err;});
 	}
 });
@@ -343,7 +342,7 @@ setRoute.post('/approvetree', async function (req, res) {
 		});
 	} else {
 		var tree = new Tree();
-		tree = user.trees.find(obj => obj._id == data.treeID);
+		tree = user.trees.find(obj => obj.name == data.name);
 		tree.save(function (err) {if (err) throw err;});
 	}
 });
