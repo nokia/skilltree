@@ -149,6 +149,9 @@ class ItemContainer {
         this.container
             .on('pointerover', this.onButtonOver)
             .on('pointerout', this.onButtonOut);
+
+            app.stage.addChild(this.container);
+            app.renderer.render(app.stage);
     }
 
     onClick(event) {
