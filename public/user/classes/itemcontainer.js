@@ -221,7 +221,7 @@ class ItemContainer {
                             child.lowAPParents = new Array();
                         }
 
-                        if (child.lowAPParents.length > 0) {
+                        if (child.lowAPParents.length == 0) {
                             var colorMatrixFilter = new PIXI.filters.ColorMatrixFilter;
                             colorMatrixFilter.brightness(0.4);
                             child.itemcontainer.container.filters = [colorMatrixFilter];
