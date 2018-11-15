@@ -36,8 +36,13 @@ class Tree {
           n++;
         }
 
+        console.log(levelLength);
+
         for(var i = 0; i < this.skills.length; i++){
           this.skills[i].itemcontainer = new ItemContainer(app, this.skills, this.skills[i].name);
+
+
+          console.log(this.skills[i]);
 
           this.skills[i].itemcontainer.container.position.x = Math.random() * 500;//this.skills[i].place * 130 + (app.renderer.width - levelLength[this.skills[i].level] * 130) / 2;
           this.skills[i].itemcontainer.container.position.y = Math.random() * 500;//this.skills[i].level * 150;
