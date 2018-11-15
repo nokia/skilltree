@@ -189,7 +189,7 @@ class ItemContainer {
             this.levelinfo.text = (this.parentObj.skill.achievedPoint + "/" + this.parentObj.skill.maxPoint);
 
             //save level change (kell?)
-            this.parentObj.skills.find(obj => obj.name == this.parentObj.skill.name).achievedPoint--;
+            //this.parentObj.skills.find(obj => obj.name == this.parentObj.skill.name).achievedPoint--;
         } else return;
         this.parentObj.tick.alpha = 0;
         this.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFFBF00, 1)];
@@ -204,6 +204,7 @@ class ItemContainer {
 
                 if (child != undefined) {
                     if (enable) {
+                        console.log(child);
                         for (var j = 0; child.lowAPParents !== undefined && j < child.lowAPParents.length; ++j) {
                             if (child.lowAPParents[j].name == this.skill.name) {
                                 child.lowAPParents.splice(j, 1);
