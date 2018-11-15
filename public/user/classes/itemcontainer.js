@@ -214,7 +214,7 @@ class ItemContainer {
                             }
                         }
                         change = true;
-                    } else if (achievedPoint == children[k].minPoint) {
+                    } else if (!enable && achievedPoint == children[k].minPoint) {
                         if (child.lowAPParents === undefined) {
                             child.lowAPParents = new Array();
                         }
