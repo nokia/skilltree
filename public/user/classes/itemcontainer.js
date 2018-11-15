@@ -205,11 +205,7 @@ class ItemContainer {
                 if (child != undefined) {
                     if (enable) {
                         for (var j = 0; child.lowAPParents !== undefined && j < child.lowAPParents.length; ++j) {
-
-                            console.log(child.lowAPParents[j].name);
-                            console.log(this.skill.name);
-
-                            if (child.lowAPParents[j].name == this.skill.name) {
+                            if (child.lowAPParents[j] == this.skill.name) {
                                 child.lowAPParents.splice(j, 1);
 
                                 if (child.lowAPParents.length == 0) {
@@ -234,7 +230,7 @@ class ItemContainer {
                             child.itemcontainer.skillborder.buttonMode = false;
                         }
 
-                        if (child.lowAPParents.find(obj => obj.name == this.skill.name) == undefined) {
+                        if (child.lowAPParents.find(obj => obj == this.skill.name) == undefined) {
                             child.lowAPParents.push(this.skill.name);
                         }
                     }
