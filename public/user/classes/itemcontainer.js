@@ -56,14 +56,18 @@ class ItemContainer {
         btn1Container.position.set(  (detailsWidth - btn1Container.width)/2  , description.position.y + description.height + 10);
         btn1Container.interactive = true;
         btn1Container.buttonMode = true;
-        btn1Container.on('pointerover', function () {
-            btn1.texture = btnGHover.generateTexture();
-            app.renderer.render(app.stage);
-        });
-        btn1Container.on('pointerout', function () {
-            btn1.texture = btnG.generateTexture();
-            app.renderer.render(app.stage);
-        });
+        btn1Container
+                .on('pointerover', function () {
+                        btn1.texture = btnGHover.generateTexture();
+                        app.renderer.render(app.stage);
+                        })
+                .on('pointerout', function () {
+                        btn1.texture = btnG.generateTexture();
+                        app.renderer.render(app.stage);
+                        })
+                .on('click', function () {
+                        console.log('asd');
+                        });
         detailsForeground.addChild(btn1Container);
 
         /*
@@ -151,6 +155,8 @@ class ItemContainer {
             .on('pointerover', this.onButtonOver)
             .on('pointerout', this.onButtonOut);
     }
+
+
 
     onClick(event) {
         if (!event.drag) {
@@ -272,6 +278,7 @@ class ItemContainer {
 
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
     }
+
 
     enable () {
         this.container.filters = null;
