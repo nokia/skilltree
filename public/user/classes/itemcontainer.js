@@ -199,6 +199,7 @@ class ItemContainer {
                 var child = this.skills.find(obj => obj.name == children[k].name);
 
                 if (child != undefined) {
+                    var change = false;
                     if (enable && achievedPoint == children[k].minPoint - 1) {
                         for (var j = 0; child.lowAPParents !== undefined && j < child.lowAPParents.length; ++j) {
                             if (child.lowAPParents[j] == this.skill.name) {
@@ -212,6 +213,7 @@ class ItemContainer {
                                 }
                             }
                         }
+                        change = true;
                     } else if (achievedPoint == children[k].minPoint) {
                         if (child.lowAPParents === undefined) {
                             child.lowAPParents = new Array();
@@ -229,9 +231,10 @@ class ItemContainer {
                         if (child.lowAPParents.find(obj => obj == this.skill.name) == undefined) {
                             child.lowAPParents.push(this.skill.name);
                         }
+                        change = true;
                     }
 
-                    this.toggleChildren(child.children, enable);
+                    if (change) this.toggleChildren(child.children, enable);
                 }
             }
         }
