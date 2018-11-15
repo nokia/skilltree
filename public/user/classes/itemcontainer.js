@@ -154,9 +154,8 @@ class ItemContainer {
 
     onClick(event) {
         if (!event.drag) {
-            // Enable children which doesn't have other parents with 0 skill level
             var children = this.parentObj.skill.children;
-            this.parentObj.toggleChildren(children, true);
+            this.parentObj.toggleChildren(children, this.parentObj.skill.achievedPoint, true);
 
             // Increase skill level
             if (this.parentObj.skill.achievedPoint < this.parentObj.skill.maxPoint) {
@@ -168,7 +167,7 @@ class ItemContainer {
                 }
 
                 //save level change (kell?)
-                this.parentObj.skills.find(obj => obj.name == this.parentObj.skill.name).achievedPoint++;
+                //this.parentObj.skills.find(obj => obj.name == this.parentObj.skill.name).achievedPoint++;
             }
 
             this.parentObj.app.renderer.render(this.parentObj.app.stage);
@@ -176,11 +175,8 @@ class ItemContainer {
     }
 
     onRightClick() {
-        // Disable children which doesn't have other parents with 0 skill level
-        if (this.parentObj.skill.achievedPoint == 1) {
-            var children = this.parentObj.skill.children;
-            this.parentObj.toggleChildren(children, false);
-        }
+        var children = this.parentObj.skill.children;
+        this.parentObj.toggleChildren(children, this.parentObj.skill.achievedPoint, false);
 
         // Decrease skill level
         if(this.parentObj.skill.achievedPoint > 0)
@@ -189,7 +185,7 @@ class ItemContainer {
             this.levelinfo.text = (this.parentObj.skill.achievedPoint + "/" + this.parentObj.skill.maxPoint);
 
             //save level change (kell?)
-            this.parentObj.userData.skills.find(obj => obj.name == this.parentObj.skill.name).achievedPoint--;
+            //this.parentObj.skills.find(obj => obj.name == this.parentObj.skill.name).achievedPoint--;
         } else return;
         this.parentObj.tick.alpha = 0;
         this.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFFBF00, 1)];
@@ -197,44 +193,49 @@ class ItemContainer {
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
     }
 
-    toggleChildren (children, enable) {
+    toggleChildren (children, achievedPoint, enable) {
         if (children !== undefined) {
             for (var k = 0; k < children.length; ++k) {
-                var child = this.skills[children[k].name];
+                var child = this.skills.find(obj => obj.name == children[k].name);
 
-                if (enable) {
-                    for (var j = 0; child.lowAPParents !== undefined && j < child.lowAPParents.length; ++j) {
-                        if (child.lowAPParents[j].name == this.skill.name) {
-                            child.lowAPParents.splice(j, 1);
+                if (child != undefined && !children[k].recommended) {
+                    var change = false;
+                    if (enable && achievedPoint == children[k].minPoint - 1) {
+                        for (var j = 0; child.lowAPParents !== undefined && j < child.lowAPParents.length; ++j) {
+                            if (child.lowAPParents[j] == this.skill.name) {
+                                child.lowAPParents.splice(j, 1);
 
-                            if (child.lowAPParents.length == 0) {
-                                child.itemcontainer.container.filters = null;
-                                child.itemcontainer.container.interactive = true;
-                                child.itemcontainer.skillborder.interactive = true;
-                                child.itemcontainer.skillborder.buttonMode = true;
+                                if (child.lowAPParents.length == 0) {
+                                    child.itemcontainer.container.filters = null;
+                                    child.itemcontainer.container.interactive = true;
+                                    child.itemcontainer.skillborder.interactive = true;
+                                    child.itemcontainer.skillborder.buttonMode = true;
+                                }
                             }
                         }
-                    }
-                } else {
-                    if (child.lowAPParents === undefined) {
-                        child.lowAPParents = new Array();
+                        change = true;
+                    } else if (!enable && achievedPoint == children[k].minPoint) {
+                        if (child.lowAPParents === undefined) {
+                            child.lowAPParents = new Array();
+                        }
+
+                        if (child.lowAPParents.length == 0) {
+                            var colorMatrixFilter = new PIXI.filters.ColorMatrixFilter;
+                            colorMatrixFilter.brightness(0.4);
+                            child.itemcontainer.container.filters = [colorMatrixFilter];
+                            child.itemcontainer.container.interactive = false;
+                            child.itemcontainer.skillborder.interactive = false;
+                            child.itemcontainer.skillborder.buttonMode = false;
+                        }
+
+                        if (child.lowAPParents.find(obj => obj == this.skill.name) == undefined) {
+                            child.lowAPParents.push(this.skill.name);
+                        }
+                        change = true;
                     }
 
-                    if (child.lowAPParents.length > 0) {
-                        var colorMatrixFilter = new PIXI.filters.ColorMatrixFilter;
-                        colorMatrixFilter.brightness(0.4);
-                        child.itemcontainer.container.filters = [colorMatrixFilter];
-                        child.itemcontainer.container.interactive = false;
-                        child.itemcontainer.skillborder.interactive = false;
-                        child.itemcontainer.skillborder.buttonMode = false;
-                    }
-
-                    if (child.lowAPParents.find(obj => obj.name == this.skill.name) == undefined) {
-                        child.lowAPParents.push(this.skill.name);
-                    }
+                    if (change) this.toggleChildren(child.children, enable);
                 }
-
-                this.toggleChildren(child.children, enable);
             }
         }
     }

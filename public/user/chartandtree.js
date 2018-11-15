@@ -120,7 +120,7 @@ function showChart() {
 
     document.getElementById("openchart").value = "Close Chart";
     document.getElementById("openchart").onclick = function() {
-        showTree(selectedTreeID);
+        showTree(selectedTreeName);
     };
 
     chartContainer = new PIXI.Container();
@@ -300,17 +300,12 @@ function showTree (treeName) {
 
         document.getElementById("openchart").value = "Open Chart";
         document.getElementById("openchart").onclick = showChart;
-   
-        //test
-         
-        var RootSkill = new ItemContainer(app, skills, skills[0].name);
-        app.stage.addChild(RootSkill.container);
-        /**************/
-        //tree = new Tree(app, skills);
-        //app.stage.addChild(tree.treeContainer);
+
+        tree = new Tree(app, skills);
+        app.stage.addChild(tree.treeContainer);
 
         // back button
-        var backButton = new PIXI.Sprite(PIXI.loader.resources["pictures/back.png"].texture);
+        /*var backButton = new PIXI.Sprite(PIXI.loader.resources["pictures/back.png"].texture);
         backButton.interactive = true;
         backButton.buttonMode = true;
         backButton.on('pointerdown', function() {
@@ -324,7 +319,7 @@ function showTree (treeName) {
             app.renderer.render(app.stage);
         });
 
-        app.stage.addChild(backButton);
+        app.stage.addChild(backButton);*/
 
         app.renderer.render(app.stage);
     });

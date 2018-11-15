@@ -18,16 +18,17 @@ class Tree {
 
         var level = 0;
         var tmpChildren = [];
-        var n = 0;
+        var n = 1;
         var levelLength = [];
 
         for(var i = 0; i < this.skills.length; i++){
-          if(tmpChildren.find(obj => obj.name == this.skills[i].name) !== undefined){
-            levelLength[level] = n;
+          if(tmpChildren.includes(this.skills[i].name)){
             level += 1;
             tmpChildren = [];
-            n = 0;
+            n = 1;
+            levelLength[level] = n;
           }
+          else { levelLength[level] = n;}
           this.skills[i].level = level;
           this.skills[i].place = n;
           for (var j = 0; j < this.skills[i].children.length; ++j){
@@ -39,7 +40,7 @@ class Tree {
         for(var i = 0; i < this.skills.length; i++){
           this.skills[i].itemcontainer = new ItemContainer(app, this.skills, this.skills[i].name);
 
-          this.skills[i].itemcontainer.container.position.x = this.skills[i].place * 130 + (app.renderer.width - levelLength[this.skills[i].level] * 130) / 2;
+          this.skills[i].itemcontainer.container.position.x = this.skills[i].place * 130 + (app.renderer.width - levelLength[this.skills[i].level] * 130) / 2 - 60;
           this.skills[i].itemcontainer.container.position.y = this.skills[i].level * 150;
 
           this.skills[i].itemcontainer.container.parentLayer = skillLayer;
@@ -56,7 +57,7 @@ class Tree {
             if (this.skills[j].children !== undefined) {
                 for (var k = 0; k < this.skills[j].children.length; k++) {
                     var child = this.skills.find(obj => obj.name == this.skills[j].children[k].name);
-                    if (child != undefined) {
+                    if (child != undefined && !this.skills[j].children[k].recommended) {
                         var minPoint = this.skills[j].children[k].minPoint;
 
                         // Draw the line
