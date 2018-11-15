@@ -203,7 +203,7 @@ class ItemContainer {
                 var child = this.skills.find(obj => obj.name == children[k].name);
 
                 if (enable) {
-                    for (var j = 0; child.lowAPParents !== undefined && j < child.lowAPParents.length; ++j) {
+                    for (var j = 0; child != undefined && child.lowAPParents !== undefined && j < child.lowAPParents.length; ++j) {
                         if (child.lowAPParents[j].name == this.skill.name) {
                             child.lowAPParents.splice(j, 1);
 
@@ -216,21 +216,23 @@ class ItemContainer {
                         }
                     }
                 } else {
-                    if (child.lowAPParents === undefined) {
-                        child.lowAPParents = new Array();
-                    }
+                    if (child != undefined) {
+                        if (child.lowAPParents === undefined) {
+                            child.lowAPParents = new Array();
+                        }
 
-                    if (child.lowAPParents.length > 0) {
-                        var colorMatrixFilter = new PIXI.filters.ColorMatrixFilter;
-                        colorMatrixFilter.brightness(0.4);
-                        child.itemcontainer.container.filters = [colorMatrixFilter];
-                        child.itemcontainer.container.interactive = false;
-                        child.itemcontainer.skillborder.interactive = false;
-                        child.itemcontainer.skillborder.buttonMode = false;
-                    }
+                        if (child.lowAPParents.length > 0) {
+                            var colorMatrixFilter = new PIXI.filters.ColorMatrixFilter;
+                            colorMatrixFilter.brightness(0.4);
+                            child.itemcontainer.container.filters = [colorMatrixFilter];
+                            child.itemcontainer.container.interactive = false;
+                            child.itemcontainer.skillborder.interactive = false;
+                            child.itemcontainer.skillborder.buttonMode = false;
+                        }
 
-                    if (child.lowAPParents.find(obj => obj.name == this.skill.name) == undefined) {
-                        child.lowAPParents.push(this.skill.name);
+                        if (child.lowAPParents.find(obj => obj.name == this.skill.name) == undefined) {
+                            child.lowAPParents.push(this.skill.name);
+                        }
                     }
                 }
 
