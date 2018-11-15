@@ -55,7 +55,9 @@ class Tree {
 
         for (var j = 0; j < this.skills.length; j++) {
             if (this.skills[j].children !== undefined) {
+              console.log(this.skills[j].children);
                 for (var k = 0; k < this.skills[j].children.length; k++) {
+                  console.log(this.skills[j].children[k]);
                     var child = this.skills.find(obj => obj.name == this.skills[j].children[k].name);
                     if (child != undefined && !this.skills[j].children[k].recommended) {
                         var minPoint = this.skills[j].children[k].minPoint;
