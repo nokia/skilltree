@@ -193,30 +193,7 @@ class ItemContainer {
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
     }
 
-    toggleChildren(children, achievedPoint, enable) {
-      for(var i = 0; i < skills.length; i++){
-        var l = true;
-        for(var j = 0; j < skills[i].children.length){
-          if(skills[i].achievedPoint < skills[i].children[j].minPoint) {l = false;}
-        }
-        if(l){
-          var colorMatrixFilter = new PIXI.filters.ColorMatrixFilter;
-          colorMatrixFilter.brightness(0.4);
-          child.itemcontainer.container.filters = [colorMatrixFilter];
-          child.itemcontainer.container.interactive = false;
-          child.itemcontainer.skillborder.interactive = false;
-          child.itemcontainer.skillborder.buttonMode = false;
-        }
-        else{
-          child.itemcontainer.container.filters = null;
-          child.itemcontainer.container.interactive = true;
-          child.itemcontainer.skillborder.interactive = true;
-          child.itemcontainer.skillborder.buttonMode = true;
-        }
-      }
-    }
-
-    /*toggleChildren (children, achievedPoint, enable) {
+    toggleChildren (children, achievedPoint, enable) {
         if (children !== undefined) {
             for (var k = 0; k < children.length; ++k) {
                 var child = this.skills.find(obj => obj.name == children[k].name);
@@ -261,7 +238,7 @@ class ItemContainer {
                 }
             }
         }
-    }*/
+    }
 
     onButtonOver() {
         var skillborder = this.parentObj.skillborder;
