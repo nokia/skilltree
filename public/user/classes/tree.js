@@ -18,7 +18,7 @@ class Tree {
 
         var level = 0;
         var tmpChildren = [];
-        var n = 0;
+        var n = 1;
         var levelLength = [];
 
         for(var i = 0; i < this.skills.length; i++){
@@ -26,7 +26,8 @@ class Tree {
           if(tmpChildren.includes(this.skills[i].name)){
             level += 1;
             tmpChildren = [];
-            n = 0;
+            n = 1;
+            levelLength[level] = n;
           }
           this.skills[i].level = level;
           this.skills[i].place = n;
