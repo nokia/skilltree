@@ -202,6 +202,8 @@ class ItemContainer {
             for (var k = 0; k < children.length; ++k) {
                 var child = this.skills.find(obj => obj.name = children[k].name);
 
+                var child.name;
+
                 if (enable) {
                     for (var j = 0; child.lowAPParents !== undefined && j < child.lowAPParents.length; ++j) {
                         if (child.lowAPParents[j].name == this.skill.name) {
