@@ -305,7 +305,7 @@ function showTree (treeName) {
         app.stage.addChild(tree.treeContainer);
 
         // back button
-        var backButton = new PIXI.Sprite(PIXI.loader.resources["pictures/back.png"].texture);
+        /*var backButton = new PIXI.Sprite(PIXI.loader.resources["pictures/back.png"].texture);
         backButton.interactive = true;
         backButton.buttonMode = true;
         backButton.on('pointerdown', function() {
@@ -319,7 +319,7 @@ function showTree (treeName) {
             app.renderer.render(app.stage);
         });
 
-        app.stage.addChild(backButton);
+        app.stage.addChild(backButton);*/
 
         app.renderer.render(app.stage);
     });
