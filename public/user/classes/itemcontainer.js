@@ -200,7 +200,7 @@ class ItemContainer {
     toggleChildren (children, enable) {
         if (children !== undefined) {
             for (var k = 0; k < children.length; ++k) {
-                var child = this.skills[children[k].name];
+                var child = this.skills.find(obj => obj.name = children[k].name);
 
                 if (enable) {
                     for (var j = 0; child.lowAPParents !== undefined && j < child.lowAPParents.length; ++j) {
