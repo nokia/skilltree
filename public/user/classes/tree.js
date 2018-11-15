@@ -51,6 +51,10 @@ class Tree {
     }
 
     // not ready yet
+    // this needs to be in an array, that parses through
+    // the parents of the addedSkill, and we have to cover
+    // the cases of the added skill being a root skill or
+    // being in a new line.
 
     insertSkill(addedSkill)
     {
