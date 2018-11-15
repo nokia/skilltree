@@ -37,7 +37,7 @@ class Tree {
           n++;
         }
 
-        console.log(levelLength);
+        console.log(this.skills);
 
         for(var i = 0; i < this.skills.length; i++){
           this.skills[i].itemcontainer = new ItemContainer(app, this.skills, this.skills[i].name);
