@@ -22,13 +22,12 @@ class Tree {
         var levelLength = [];
 
         for(var i = 0; i < this.skills.length; i++){
+          levelLength[level] = n;
           if(tmpChildren.includes(this.skills[i].name)){
-            levelLength.push(n); //levelLength[level] = n;
             level += 1;
             tmpChildren = [];
             n = 0;
           }
-          else{ levelLength[level] = n; }
           this.skills[i].level = level;
           this.skills[i].place = n;
           for (var j = 0; j < this.skills[i].children.length; ++j){
