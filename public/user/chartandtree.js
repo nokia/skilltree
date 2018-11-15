@@ -120,7 +120,7 @@ function showChart() {
 
     document.getElementById("openchart").value = "Close Chart";
     document.getElementById("openchart").onclick = function() {
-        showTree(selectedTreeID);
+        showTree(selectedTreeName);
     };
 
     chartContainer = new PIXI.Container();
