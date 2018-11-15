@@ -206,7 +206,8 @@ class ItemContainer {
                     if (enable) {
                         for (var j = 0; child.lowAPParents !== undefined && j < child.lowAPParents.length; ++j) {
 
-                            console.log(child);
+                            console.log(child.lowAPParents[j].name);
+                            console.log(this.skill.name);
 
                             if (child.lowAPParents[j].name == this.skill.name) {
                                 child.lowAPParents.splice(j, 1);
