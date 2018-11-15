@@ -22,8 +22,9 @@ class Tree {
         var levelLength = [];
 
         for(var i = 0; i < this.skills.length; i++){
+          console.log(tmpChildren.find(obj => obj.name == this.skills[i].name);
           if(tmpChildren.find(obj => obj.name == this.skills[i].name) !== undefined){
-            levelLength[level] = n;
+            levelLength.push(n); //levelLength[level] = n;
             level += 1;
             tmpChildren = [];
             n = 0;
