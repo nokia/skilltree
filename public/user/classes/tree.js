@@ -72,7 +72,7 @@ class Tree {
                         this.treeContainer.addChild(connection);
                         connection.parentGroup = connectionGroup;
 
-                        if (this.skills[j].achievedPoint < minPoint || child.lowAPParents != undefined) {
+                        if (this.skills[j].achievedPoint < minPoint && child.lowAPParents != undefined) {
                             child.itemcontainer.disable();
 
                             if (child.lowAPParents === undefined) {
