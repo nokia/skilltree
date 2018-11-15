@@ -198,7 +198,7 @@ class ItemContainer {
             for (var k = 0; k < children.length; ++k) {
                 var child = this.skills.find(obj => obj.name == children[k].name);
 
-                if (child != undefined && !this.skills[j].children[k].recommended) {
+                if (child != undefined && !children[k].recommended) {
                     var change = false;
                     if (enable && achievedPoint == children[k].minPoint - 1) {
                         for (var j = 0; child.lowAPParents !== undefined && j < child.lowAPParents.length; ++j) {
