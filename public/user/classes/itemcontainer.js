@@ -236,6 +236,7 @@ class ItemContainer {
                     }
                 }
 
+                console.log(child.children);
                 this.toggleChildren(child.children, enable);
             }
         }
