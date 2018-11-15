@@ -74,6 +74,13 @@ function checkFirstLogin() {
     }
 }
 
+function toggleSkillDetailsPage(){
+    var modal = document.getElementById('skillpage');
+    
+    modal.style.display = "block";
+    
+}
+
 function submit(){
   /*var sub = new XMLHttpRequest();
   sub.open('POST', '/set/submitall', true);

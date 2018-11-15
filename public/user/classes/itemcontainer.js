@@ -66,7 +66,7 @@ class ItemContainer {
                         app.renderer.render(app.stage);
                         })
                 .on('click', function () {
-                        console.log('asd');
+                        toggleSkillDetailsPage();
                         });
         detailsForeground.addChild(btn1Container);
 
