@@ -98,6 +98,9 @@ PIXI.loader.add("pictures/skillborder.png")
             .add("tree.png")
             .add("pictures/back.png")
             .add("pictures/tick.png");
+for (var i = 0; i < data.skills.length; ++i) {
+    PIXI.loader.add(data.skills[i].skillIcon.toString());
+}
 PIXI.loader.load(function () {
     loaded = true;
     if (data != undefined) checkFirstLogin();
@@ -277,21 +280,13 @@ var selectedTreeName;
 var tree = undefined;
 
 function showTree (treeName) {
-    // load the tree's pictures
-    selectedTreeName = treeName;
-
-    app.localLoader = new PIXI.loaders.Loader();
     var skills = new Array();
     for (var j = 0; j < data.trees.find(obj => obj.name == treeName).skillNames.length; ++j) {
         var skillName = data.trees.find(obj => obj.name == treeName).skillNames[j];
         var skill = data.skills.find(obj => obj.name == skillName);
-        app.localLoader.add(skill.skillIcon.toString());
 
         skills.push(skill);
     }
-
-    app.localLoader.load(function () {
-        //document.getElementById("pixiCanvas").style.visibility = "visible";
 
         if (chartContainer != undefined) {
             app.stage.removeChild(chartContainer);
@@ -322,6 +317,8 @@ function showTree (treeName) {
         app.stage.addChild(backButton);*/
 
         app.renderer.render(app.stage);
+
+        document.getElementById("pixiCanvas").style.visibility = "visible";
     });
 }
 
