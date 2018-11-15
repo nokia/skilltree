@@ -204,10 +204,11 @@ class ItemContainer {
 
                 if (child != undefined) {
                     if (enable) {
-                        console.log(child);
                         for (var j = 0; child.lowAPParents !== undefined && j < child.lowAPParents.length; ++j) {
                             if (child.lowAPParents[j].name == this.skill.name) {
                                 child.lowAPParents.splice(j, 1);
+
+                                console.log(child);
 
                                 if (child.lowAPParents.length == 0) {
                                     child.itemcontainer.container.filters = null;
