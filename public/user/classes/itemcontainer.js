@@ -155,8 +155,7 @@ class ItemContainer {
     onClick(event) {
         if (!event.drag) {
             var children = this.parentObj.skill.children;
-            //this.parentObj.toggleChildren(children, this.parentObj.skill.achievedPoint, true);
-            toggleChildren();
+            this.parentObj.toggleChildren(children, this.parentObj.skill.achievedPoint, true);
 
             // Increase skill level
             if (this.parentObj.skill.achievedPoint < this.parentObj.skill.maxPoint) {
@@ -177,8 +176,7 @@ class ItemContainer {
 
     onRightClick() {
         var children = this.parentObj.skill.children;
-        toggleChildren();
-        //this.parentObj.toggleChildren(children, this.parentObj.skill.achievedPoint, false);
+        this.parentObj.toggleChildren(children, this.parentObj.skill.achievedPoint, false);
 
         // Decrease skill level
         if(this.parentObj.skill.achievedPoint > 0)
@@ -195,7 +193,7 @@ class ItemContainer {
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
     }
 
-    function toggleChildren() {
+    toggleChildren(children, achievedPoint, enable) {
       for(var i = 0; i < skills.length; i++){
         var l = true;
         for(var j = 0; j < skills[i].children.length){
