@@ -50,6 +50,25 @@ class Tree {
         this.drawConnectionLines();
     }
 
+    // not ready yet
+
+    insertSkill(addedSkill)
+    {
+      this.skills.splice(
+        this.skills.indexof(
+          this.skills.findOne(
+            obj1 => obj1.parents.includes(
+              obj2 => obj2.name == this.skills.find(
+                obj3 => obj3.name == addedSkill.parents[0].name
+              )
+            )
+          )
+        ),
+      0, addedSkill);
+    }
+
+    // not ready yet
+
     drawConnectionLines() {
         var connectionGroup = new PIXI.display.Group(-1, false);
 
