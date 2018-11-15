@@ -319,6 +319,7 @@ function showTree (treeName) {
         app.renderer.render(app.stage);
 
         document.getElementById("pixiCanvas").style.visibility = "visible";
+    });
 }
 
 /*function openEditor () {
