@@ -326,8 +326,8 @@ function showTree (treeName) {
 
         app.stage.addChild(backButton);*/
 
-    app.renderer.render(app.stage);
     tree.treeContainer.alpha = 0;
+    app.renderer.render(app.stage);
     document.getElementById("pixiCanvas").style.visibility = "visible";
     var fadein = function (delta) {
         tree.treeContainer.alpha += .01;
