@@ -9,7 +9,7 @@ dataRequest.responseType = "json";
 dataRequest.onreadystatechange = function() {
     if(dataRequest.readyState == 4 && dataRequest.status == 200) {
         data = dataRequest.response;
-        if (loaded) checkFirstLogin(); // only show if pixi loader is done
+        checkFirstLogin();
     }
 }
 dataRequest.send();
