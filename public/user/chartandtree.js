@@ -327,11 +327,14 @@ function showTree (treeName) {
         app.stage.addChild(backButton);*/
 
     tree.treeContainer.alpha = 0;
-    app.renderer.render(app.stage);
+    app.start();
     document.getElementById("pixiCanvas").style.visibility = "visible";
     var fadein = function (delta) {
         tree.treeContainer.alpha += .01;
-        if (tree.treeContainer.alpha == 1) app.ticker.remove(fadein);
+        if (tree.treeContainer.alpha == 1) {
+            app.ticker.remove(fadein);
+            app.stop();
+        }
     };
     app.ticker.add(fadein);
 }
