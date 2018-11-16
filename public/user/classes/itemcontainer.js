@@ -304,8 +304,20 @@ class ItemContainer {
     toggleSkillDetailsPage(){
         var modal = document.getElementById('skillpage');
         var header = document.getElementById('skillnameHeader');
+        var span = document.getElementsByClassName("close")[0];
 
         header.innerText = this.skill.name;
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        } 
 
         modal.style.display = "block";
     }
