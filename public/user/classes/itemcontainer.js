@@ -56,6 +56,7 @@ class ItemContainer {
         btn1Container.position.set(  (detailsWidth - btn1Container.width)/2  , description.position.y + description.height + 10);
         btn1Container.interactive = true;
         btn1Container.buttonMode = true;
+        btn1Container.parentObj = this;
         btn1Container
                 .on('pointerover', function () {
                         btn1.texture = btnGHover.generateTexture();
@@ -66,8 +67,7 @@ class ItemContainer {
                         app.renderer.render(app.stage);
                         })
                 .on('click', function () {
-                    console.log(this);
-                        this.toggleSkillDetailsPage();
+                        this.parentObj.toggleSkillDetailsPage();
                         });
         detailsForeground.addChild(btn1Container);
 
