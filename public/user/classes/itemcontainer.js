@@ -66,7 +66,8 @@ class ItemContainer {
                         app.renderer.render(app.stage);
                         })
                 .on('click', function () {
-                        toggleSkillDetailsPage();
+                    console.log(this);
+                        this.toggleSkillDetailsPage();
                         });
         detailsForeground.addChild(btn1Container);
 
@@ -298,5 +299,11 @@ class ItemContainer {
         this.skillborder.buttonMode = false;
 
         this.app.renderer.render(this.app.stage);
+    }
+
+    toggleSkillDetailsPage(){
+        var modal = document.getElementById('skillpage');
+
+        modal.style.display = "block";
     }
 }
