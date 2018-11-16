@@ -305,7 +305,7 @@ class ItemContainer {
         var modal = document.getElementById('skillpage');
         var header = document.getElementById('skillnameHeader');
 
-        header.innerText = this.parentObj.skill.name;
+        header.innerText = this.skill.name;
 
         modal.style.display = "block";
     }
