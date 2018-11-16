@@ -9,7 +9,7 @@ class ItemContainer {
         this.skill = skills.find(obj => obj.name == skillName);
 
         //Creating images
-        this.skillicon = new PIXI.Sprite(app.localLoader.resources[this.skill.skillIcon].texture); //100x100
+        this.skillicon = new PIXI.Sprite(PIXI.loader.resources[this.skill.skillIcon].texture); //100x100
         this.skillborder = new PIXI.Sprite(PIXI.loader.resources["pictures/skillborder.png"].texture); //116x116
         this.tick = new PIXI.Sprite(PIXI.loader.resources["pictures/tick.png"].texture);
 
