@@ -31,7 +31,7 @@ var tokenPayload = parseJwt(localStorage.getItem("loginToken"));
 document.getElementById("welcome").innerText = "Hello " + tokenPayload.username + "!";
 
 function checkFirstLogin() {
-    if (data.mainTree != undefined) showTree(data.mainTree);
+    if (data.mainTree != undefined) startLoader();
     else {
         var modal = document.getElementById('firstLogin');
         var btn = document.getElementById('savebtn');
@@ -76,9 +76,9 @@ function checkFirstLogin() {
 
 function toggleSkillDetailsPage(){
     var modal = document.getElementById('skillpage');
-    
+
     modal.style.display = "block";
-    
+
 }
 
 function submit(){
@@ -100,15 +100,18 @@ function logout(){
     window.open("/", "_self");
 }
 
-var loaded = false;
-PIXI.loader.add("pictures/skillborder.png")
-            .add("tree.png")
-            .add("pictures/back.png")
-            .add("pictures/tick.png");
-PIXI.loader.load(function () {
-    loaded = true;
-    if (data != undefined) checkFirstLogin();
-});
+function startLoader () {
+    PIXI.loader.add("pictures/skillborder.png")
+                .add("tree.png")
+                .add("pictures/back.png")
+                .add("pictures/tick.png");
+    for (var i = 0; i < data.skills.length; ++i) {
+        PIXI.loader.add(data.skills[i].skillIcon.toString());
+    }
+    PIXI.loader.load(function () {
+        showTree(data.mainTree);
+    });
+}
 
 app.stage = new PIXI.display.Stage();
 app.stage.group.enableSort = true;
@@ -287,29 +290,24 @@ function showTree (treeName) {
     // load the tree's pictures
     selectedTreeName = treeName;
 
-    app.localLoader = new PIXI.loaders.Loader();
     var skills = new Array();
     for (var j = 0; j < data.trees.find(obj => obj.name == treeName).skillNames.length; ++j) {
         var skillName = data.trees.find(obj => obj.name == treeName).skillNames[j];
         var skill = data.skills.find(obj => obj.name == skillName);
-        app.localLoader.add(skill.skillIcon.toString());
 
         skills.push(skill);
     }
 
-    app.localLoader.load(function () {
-        //document.getElementById("pixiCanvas").style.visibility = "visible";
+    if (chartContainer != undefined) {
+        app.stage.removeChild(chartContainer);
+        chartContainer = undefined;
+    }
 
-        if (chartContainer != undefined) {
-            app.stage.removeChild(chartContainer);
-            chartContainer = undefined;
-        }
+    document.getElementById("openchart").value = "Open Chart";
+    document.getElementById("openchart").onclick = showChart;
 
-        document.getElementById("openchart").value = "Open Chart";
-        document.getElementById("openchart").onclick = showChart;
-
-        tree = new Tree(app, skills);
-        app.stage.addChild(tree.treeContainer);
+    tree = new Tree(app, skills);
+    app.stage.addChild(tree.treeContainer);
 
         // back button
         /*var backButton = new PIXI.Sprite(PIXI.loader.resources["pictures/back.png"].texture);
@@ -328,8 +326,8 @@ function showTree (treeName) {
 
         app.stage.addChild(backButton);*/
 
-        app.renderer.render(app.stage);
-    });
+    app.renderer.render(app.stage);
+    document.getElementById("pixiCanvas").style.visibility = "visible";
 }
 
 /*function openEditor () {
