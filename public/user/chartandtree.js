@@ -330,7 +330,7 @@ function showTree (treeName) {
     app.start();
     document.getElementById("pixiCanvas").style.visibility = "visible";
     var fadein = function (delta) {
-        tree.treeContainer.alpha += .03;
+        tree.treeContainer.alpha += .05;
         if (tree.treeContainer.alpha == 1) {
             app.ticker.remove(fadein);
             app.stop();
