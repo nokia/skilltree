@@ -290,7 +290,7 @@ window.onresize = function () {
 // TREE
 
 // app.localLoader is a loader for skillicons (when a tree is opened, we load only that tree's skillicons)
-// PIXI.loader is global, it loads the back button, skillborder, tree, ...
+// PIXI.loader is global, it loads the back button, skillborder, tree,...
 
 var selectedTreeName;
 var tree = undefined;
