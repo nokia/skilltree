@@ -2,7 +2,7 @@ var data = undefined;
 
 // get data from server
 var dataRequest = new XMLHttpRequest();
-dataRequest.open('GET', '/get/data', true);
+dataRequest.open('GET', '/get/userdata', true);
 dataRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 dataRequest.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
 dataRequest.responseType = "json";
@@ -332,6 +332,8 @@ function showTree (treeName) {
     };
     app.ticker.add(fadein);
 }
+
+
 
 /*function openEditor () {
     app.stage.removeChild(tree.treeContainer);

@@ -222,7 +222,27 @@ getRoute.get('/userdata', function (req, res) {
     });
 });
 
-getRoute.get
+getRoute.get('/skilldata', function(req, res) {
+	Skill.findOne({
+		name: req.body.name
+	}, async function(err, skilldata) {
+		if(err) throw err;
+
+		if(!skilldata){
+			escape.json({
+				succes: false,
+				message: 'User not found.'
+			});
+		} else if (skilldata) {
+			skill = skilldata.toObject();
+
+			return res.json(skilldata);
+		}
+
+
+	});
+		
+});
 
 //Creating a setRoute, thats protected with Token. API calls are under /set/...
 var setRoute = express.Router();
