@@ -275,6 +275,19 @@ window.onresize = function () {
         chartContainer.position.set((window.innerWidth - 160) / 2, (window.innerHeight - 30) / 2);
     }
 
+    /*if (tree != undefined) {
+        var ratio = tree.treeContainer.width / tree.treeContainer.height;
+        if (window.innerWidth - 160 < window.innerHeight - 30) {
+            chartContainer.width = window.innerWidth - 200;
+            chartContainer.height = (window.innerWidth - 200) / ratio;
+        } else {
+            chartContainer.width = (window.innerHeight - 70) * ratio;
+            chartContainer.height = window.innerHeight - 70;
+        }
+
+        tree.treeContainer.position.set((window.innerWidth - 160) / 2, (window.innerHeight - 30) / 2);
+    }*/
+
     app.renderer.render(app.stage);
 };
 
@@ -308,23 +321,6 @@ function showTree (treeName) {
 
     tree = new Tree(app, skills);
     app.stage.addChild(tree.treeContainer);
-
-        // back button
-        /*var backButton = new PIXI.Sprite(PIXI.loader.resources["pictures/back.png"].texture);
-        backButton.interactive = true;
-        backButton.buttonMode = true;
-        backButton.on('pointerdown', function() {
-            // hide tree and show chart
-            app.stage.removeChild(tree.treeContainer);
-            app.stage.removeChild(backButton);
-            app.localLoader.destroy();
-            tree = undefined;
-            //showChart();
-            initChart(); // we need to create the chart again because the levels could have chaged
-            app.renderer.render(app.stage);
-        });
-
-        app.stage.addChild(backButton);*/
 
     tree.treeContainer.alpha = 0;
     app.start();
