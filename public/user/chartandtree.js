@@ -281,7 +281,7 @@ window.onresize = function () {
     }
 
     if (tree != undefined) {
-        tree.treeContainer.position.set(app.renderer.width / 2, app.renderer.height / 2);
+        tree.treeContainer.position.set(app.renderer.width / 2 + tree.treeContainer.width / 2, app.renderer.height / 2);
     }
 
     app.renderer.render(app.stage);
@@ -331,10 +331,6 @@ function showTree (treeName) {
         }
     };
     app.ticker.add(fadein);
-
-    console.log(tree.treeContainer.x);
-    console.log(tree.treeContainer.width);
-    console.log(tree.treeContainer.pivot.x);
 }
 
 /*function openEditor () {
