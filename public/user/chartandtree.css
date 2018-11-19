@@ -46,85 +46,6 @@ body {
   border-radius: 6px;
 }
 
-.sideBarContent div a{
-  background-color: inherit;
-  display: block;
-  text-align: center;
-  padding: 2px;
-  margin: 1px;
-}
-
-.sideBarContent div:hover div{
-  display: block;
-}
-
-.sideBarContent div div:hover{
-  background-color: #2F4F4F;
-}
-
-.sideBarContent div{
-  background-color: inherit;
-  display: block;
-  text-align: center;
-  padding: 1px;
-}
-
-.sideBarContent div div{
-  text-align: left;
-  line-height: 17px;
-  font-size: 15px;
-  display: block;
-  padding-top: 0px;
-  padding-bottom: 0px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-
-.sideBarContent div div:hover{
-  max-height: 100px;
-}
-
-.sideBarContent div div div{
-  transition: all 0.5s;
-  background-color: inherit;
-  max-height: 0px;
-  display: block;
-  text-align: inherit;
-}
-
-.sideBarContent div div:hover div{
-  max-height: 100px;
-}
-
-.sideBarContent div div div a{
-  display: block;
-  font-size: 11px;
-  line-height: 13px;
-  text-align: inherit;
-  margin-left: 2px;
-}
-
-.sideBarContent div div div .addButton{
-  display: block;
-  background-color: gainsboro;
-  color: #0b1842;
-  width: 95%;
-  float: left;
-  min-height: 18px;
-  font-size: 14px;
-  padding: 2px;
-  margin: 2px;
-  border-radius: 12px;
-  cursor: pointer;
-  text-align: center;
-  font-weight: bold;
-}
-
-.sideBarContent div div div .addButton:hover{
-  background-color: #0b1842;
-  color: gainsboro;
-}
-
 .sideBarTitle{
   background-color: inherit;
   font-weight: bold;
@@ -136,44 +57,55 @@ body {
   padding: 2px;
 }
 
-.topLine{
-  background-color: #0b1842;
-  grid-area: topLine;
-}
-
-#submit{
-  position: absolute;
-  color: #0b1842;
-  border: none;
-  top: 1px;
-  font-weight: bold;
-  min-height: 24px;
-  min-width: 60px;
-  background-color: gainsboro;
-  right: 0px;
-  margin-right: 3px;
-  transition: all 0.5s;
-  border-radius: 12px;
+.sideBarSearch{
   display: block;
+  padding: 2px;
+  margin: 2px;
 }
 
-#submit:hover{
+.sideBarSearch input[type="text"]{
+  width: 140px;
+  margin-bottom: 4px;
+}
+
+.sideBarButton{
+  display: block;
+  background-color: gainsboro;
+  color: #0b1842;
+  width: 140px;
+  float: left;
+  min-height: 18px;
+  font-size: 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: center;
+  font-weight: bold;
+  transition: all 0.5s ease-out;
+}
+
+.sideBarButton:hover{
   color: gainsboro;
-  background-color: inherit;
+  background-color: #183693;
   cursor: pointer;
 }
 
-#text{
-  position: absolute;
-  border: none;
-  color: gainsboro;
-  border-bottom: 1px solid gainsboro;
-  top: 3px;
-  right: 67px;
-  height: 22px;
-  min-width: 198px;
-  background-color: #183693;
+.sideBarSearchResult{
+  margin-top: 10px;
   display: block;
+}
+
+.sideBarSearchResult div a{
+  display: block;
+  font-size: 14px;
+  line-height: 14px;
+  margin: 1px;
+  padding: 2px;
+  text-align: inherit;
+}
+
+.topLine{
+  background-color: #0b1842;
+  grid-area: topLine;
 }
 
 .welcome{
