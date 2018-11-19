@@ -205,8 +205,9 @@ class ItemContainer {
     refreshAvaliability(){
       for (var i = 0; i < this.skills.length; i++) {
         for (var j = 0; j < this.skills[i].parents.length; j++) {
-          if(this.skills.find(obj => obj.name == this.skills[i].parents[j].name)){
-            if(this.skills[i].parents[j].children.find(obj => obj.name == this.skills[i].name).minPoint > this.skills[i].achievedPoint){
+          var par = this.skills.find(obj => obj.name == this.skills[i].parents[j]);
+          if(par !== undefined){
+            if(par.children.find(obj => obj.name == this.skills[i].name).minPoint > this.skills[i].achievedPoint){
               var colorMatrixFilter = new PIXI.filters.ColorMatrixFilter;
               colorMatrixFilter.brightness(0.4);
               this.skills[i].itemcontainer.container.filters = [colorMatrixFilter];
