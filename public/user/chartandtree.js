@@ -285,7 +285,7 @@ window.onresize = function () {
             chartContainer.height = window.innerHeight - 70;
         }*/
 
-        tree.treeContainer.position.set((window.innerWidth - 160) / 2, (window.innerHeight - 30) / 2);
+        tree.treeContainer.position.set(0, 0);
     }
 
     app.renderer.render(app.stage);
