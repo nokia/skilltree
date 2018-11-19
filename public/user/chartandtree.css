@@ -209,3 +209,8 @@ body {
   font-weight: bold;
   width: 25%;
 }
+
+.divTableBody {
+  display: table-row-group;
+  width: inherit;
+}
