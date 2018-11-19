@@ -162,7 +162,7 @@ class ItemContainer {
     onClick(event) {
         if (!event.drag) {
             var children = this.parentObj.skill.children;
-            this.parentObj.refreshAvaliability();
+
             //this.parentObj.toggleChildren(children, this.parentObj.skill.achievedPoint, true);
 
             // Increase skill level
@@ -179,13 +179,14 @@ class ItemContainer {
             }
 
             this.parentObj.app.renderer.render(this.parentObj.app.stage);
+            this.parentObj.refreshAvaliability();
         }
     }
 
     onRightClick() {
         var children = this.parentObj.skill.children;
         //this.parentObj.toggleChildren(children, this.parentObj.skill.achievedPoint, false);
-        this.parentObj.refreshAvaliability();
+
 
         // Decrease skill level
         if(this.parentObj.skill.achievedPoint > 0)
@@ -200,12 +201,13 @@ class ItemContainer {
         this.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFFBF00, 1)];
 
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
+        this.parentObj.refreshAvaliability();
     }
 
     refreshAvaliability(){
       for (var i = 0; i < this.skills.length; i++) {
         for (var j = 0; j < this.skills[i].parents.length; j++) {
-          var par = this.skills.find(obj => obj.name == this.skills[i].parents[j]);
+          var par = this.skills.findOne(obj => obj.name == this.skills[i].parents[j]);
           if(par !== undefined){
             if(par.children.find(obj => obj.name == this.skills[i].name).minPoint > par.achievedPoint){
               var colorMatrixFilter = new PIXI.filters.ColorMatrixFilter;
