@@ -203,22 +203,22 @@ class ItemContainer {
     }
 
     refreshAvaliability(){
-      for (var i = 0; i < skills.length; i++) {
-        for (var j = 0; j < skills[i].parents.length; j++) {
-          if(skills.find(obj => obj.name == skills[i].parents[j].name)){
-            if(skills[i].parents[j].children.find(obj => obj.name == skills[i].name).minPoint > skills[i].achievedPoint){
+      for (var i = 0; i < this.skills.length; i++) {
+        for (var j = 0; j < this.skills[i].parents.length; j++) {
+          if(this.skills.find(obj => obj.name == this.skills[i].parents[j].name)){
+            if(this.skills[i].parents[j].children.find(obj => obj.name == this.skills[i].name).minPoint > this.skills[i].achievedPoint){
               var colorMatrixFilter = new PIXI.filters.ColorMatrixFilter;
               colorMatrixFilter.brightness(0.4);
-              skills[i].itemcontainer.container.filters = [colorMatrixFilter];
-              skills[i].itemcontainer.container.interactive = false;
-              skills[i].itemcontainer.skillborder.interactive = false;
-              skills[i].itemcontainer.skillborder.buttonMode = false;
+              this.skills[i].itemcontainer.container.filters = [colorMatrixFilter];
+              this.skills[i].itemcontainer.container.interactive = false;
+              this.skills[i].itemcontainer.skillborder.interactive = false;
+              this.skills[i].itemcontainer.skillborder.buttonMode = false;
             }
             else{
-              skills[i].itemcontainer.container.filters = null;
-              skills[i].itemcontainer.container.interactive = true;
-              skills[i].itemcontainer.skillborder.interactive = true;
-              skills[i].itemcontainer.skillborder.buttonMode = true;
+              this.skills[i].itemcontainer.container.filters = null;
+              this.skills[i].itemcontainer.container.interactive = true;
+              this.skills[i].itemcontainer.skillborder.interactive = true;
+              this.skills[i].itemcontainer.skillborder.buttonMode = true;
             }
           }
         }
