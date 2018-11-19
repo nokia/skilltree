@@ -325,6 +325,7 @@ setRoute.post('/addskilltotree', async function(req, res) { // to user tree
 	}
 });
 
+//TO BE DELETED
 setRoute.post('/approvetree', async function (req, res) {
 	var data = req.body;
 
