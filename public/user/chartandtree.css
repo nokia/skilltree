@@ -206,6 +206,7 @@ body {
   border: 2px solid #777575;
 	display: table-cell;
   padding: 3px 10px;
+  font-weight: bold;
   width: 25%;
 }
 
