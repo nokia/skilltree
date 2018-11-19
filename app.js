@@ -195,32 +195,34 @@ getRoute.use(function(req, res, next) {
 
     }
 });
-getRoute.get('/data', function (req, res) {
+getRoute.get('/userdata', function (req, res) {
     User.findOne({
         username: req.decoded.username
-    }, async function(err, user) {
+    }, async function(err, userdata) {
         if (err) throw err;
 
-        if (!user) {
+        if (!userdata) {
             res.json({
                 success: false,
                 message: 'User not found.'
             });
-        } else if (user) {
-			user = user.toObject();
-			delete user.__v;
-			delete user._id;
-			delete user.email;
-			delete user.hashData;
+        } else if (userdata) {
+			user = userdata.toObject();
+			delete userdata.__v;
+			delete userdata._id;
+			delete userdata.email;
+			delete userdata.hashData;
 
-			if (user.mainTree != undefined) { // first login
-				delete user.focusArea;
+			if (userdata.mainTree != undefined) { // first login
+				delete userdata.focusArea;
 			}
 
-      		return res.json(user);
+      		return res.json(userdata);
       	}
     });
 });
+
+getRoute.get
 
 //Creating a setRoute, thats protected with Token. API calls are under /set/...
 var setRoute = express.Router();

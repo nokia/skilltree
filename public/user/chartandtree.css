@@ -192,7 +192,7 @@ body {
 	width: 100%;
 }
 
-.divTableName {
+.divTableCaption {
   width: inherit;
   display: table-caption;
   font-weight: bold;
