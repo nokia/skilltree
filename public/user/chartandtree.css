@@ -64,6 +64,8 @@ body {
 }
 
 .sideBarSearch input[type="text"]{
+  width: 140px;
+  margin-bottom: 4px;
 }
 
 .sideBarButton{
