@@ -162,7 +162,8 @@ class ItemContainer {
     onClick(event) {
         if (!event.drag) {
             var children = this.parentObj.skill.children;
-            this.parentObj.toggleChildren(children, this.parentObj.skill.achievedPoint, true);
+            this.parentObj.refreshAvaliability();
+            //this.parentObj.toggleChildren(children, this.parentObj.skill.achievedPoint, true);
 
             // Increase skill level
             if (this.parentObj.skill.achievedPoint < this.parentObj.skill.maxPoint) {
@@ -183,7 +184,8 @@ class ItemContainer {
 
     onRightClick() {
         var children = this.parentObj.skill.children;
-        this.parentObj.toggleChildren(children, this.parentObj.skill.achievedPoint, false);
+        //this.parentObj.toggleChildren(children, this.parentObj.skill.achievedPoint, false);
+        this.parentObj.refreshAvaliability();
 
         // Decrease skill level
         if(this.parentObj.skill.achievedPoint > 0)
@@ -198,6 +200,29 @@ class ItemContainer {
         this.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFFBF00, 1)];
 
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
+    }
+
+    refreshAvaliability(){
+      for (var i = 0; i < skills.length; i++) {
+        for (var j = 0; j < skills[i].parents.length; j++) {
+          if(skills.find(obj => obj.name == skills[i].parents[j].name)){
+            if(skills[i].parents[j].children.find(obj => obj.name == skills[i].name).minPoint > skills[i].achievedPoint){
+              var colorMatrixFilter = new PIXI.filters.ColorMatrixFilter;
+              colorMatrixFilter.brightness(0.4);
+              skills[i].itemcontainer.container.filters = [colorMatrixFilter];
+              skills[i].itemcontainer.container.interactive = false;
+              skills[i].itemcontainer.skillborder.interactive = false;
+              skills[i].itemcontainer.skillborder.buttonMode = false;
+            }
+            else{
+              skills[i].itemcontainer.container.filters = null;
+              skills[i].itemcontainer.container.interactive = true;
+              skills[i].itemcontainer.skillborder.interactive = true;
+              skills[i].itemcontainer.skillborder.buttonMode = true;
+            }
+          }
+        }
+      }
     }
 
     toggleChildren (children, achievedPoint, enable) {
