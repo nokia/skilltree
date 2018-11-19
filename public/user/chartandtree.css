@@ -212,8 +212,18 @@ body {
 
 .divTableHeading {
   border: 1px solid #000000;
+	display: table-header-group;
   font-weight: bold;
   font-size: 22px;
   text-align: center;
   width: 100%;
+}
+.divTableFoot {
+	background-color: #EEE;
+	display: table-footer-group;
+	font-weight: bold;
+}
+.divTableBody {
+  display: table-row-group;
+  width: inherit;
 }
