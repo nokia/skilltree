@@ -93,8 +93,7 @@ function submit(){
   }
 
   for (var i = 0; i < data.skills.length; ++i) {
-      delete data.skills[i].parents;
-      delete data.skills[i].children;
+      delete data.skills[i].itemcontainer;
   }
 
   sub.send(JSON.stringify(data.skills));
