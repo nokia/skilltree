@@ -201,6 +201,7 @@ class ItemContainer {
     }
 
     toggleChildren (children, achievedPoint, enable) {
+        alert("dd");
         if (children !== undefined) {
             for (var k = 0; k < children.length; ++k) {
                 var child = this.skills.find(obj => obj.name == children[k].name);
