@@ -92,6 +92,14 @@ class Tree {
                         // Add the line
                         this.treeContainer.addChild(connection);
                         connection.parentGroup = connectionGroup;
+
+                        if (this.skills[j].achievedPoint < minPoint || child.lowAPParents != undefined) {
+                            child.itemcontainer.disable();
+
+                            if (child.lowAPParents === undefined) {
+                                child.lowAPParents = new Array();
+                            }
+                            child.lowAPParents.push(this.skills[j].name);
                         }
                     }
                 }
