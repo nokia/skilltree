@@ -398,6 +398,7 @@ setRoute.post('/maintree', async function (req, res) {
 
 setRoute.post('/submitall', function (req, res) {
 	var data = req.body;
+	console.log(data);
 
     var user = await User.findOne({
         username: req.decoded.username

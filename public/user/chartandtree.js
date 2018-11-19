@@ -92,7 +92,6 @@ function submit(){
       }
   }
   sub.send(JSON.stringify(data.skills));
-  console.log(data);
 }
 
 function logout(){
