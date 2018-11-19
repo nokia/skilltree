@@ -214,3 +214,9 @@ body {
   display: table-row-group;
   width: inherit;
 }
+
+.divTableName {
+  width: inherit;
+  font-weight: bold;
+  font-size: 22;
+}
