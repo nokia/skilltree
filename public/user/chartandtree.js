@@ -92,7 +92,7 @@ function submit(){
       }
   }
   console.log(data.skills);
-  sub.send(JSON.stringify(data.skills));
+  sub.send(JSON.stringify(JSON.decycle(data.skills)));
 }
 
 function logout(){
