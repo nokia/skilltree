@@ -194,6 +194,7 @@ body {
 
 .divTableName {
   width: 100%;
+  display: table-caption;
   border: 1px solid #000000;
   font-weight: bold;
   font-size: 22px;
