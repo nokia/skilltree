@@ -193,11 +193,11 @@ body {
 }
 
 .divTableName {
-  width: 100%;
+  width: inherit;
   display: table-caption;
   border: 1px solid #000000;
   font-weight: bold;
-  font-size: 22px;
+  font-size: 20px;
   text-align: center;
 }
 
@@ -217,6 +217,7 @@ body {
 	display: table-cell;
   padding: 3px 10px;
   font-weight: bold;
+  text-align: center;
   width: 25%;
 }
 
