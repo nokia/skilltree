@@ -1,3 +1,7 @@
+/*
+*   togglechildren not working
+*/
+
 class ItemContainer {
     constructor(app, skills, skillName) {
         this.app = app;
@@ -158,6 +162,7 @@ class ItemContainer {
     onClick(event) {
         if (!event.drag) {
             var children = this.parentObj.skill.children;
+            this.parentObj.toggleChildren(children, this.parentObj.skill.achievedPoint, true);
 
             // Increase skill level
             if (this.parentObj.skill.achievedPoint < this.parentObj.skill.maxPoint) {
@@ -172,16 +177,13 @@ class ItemContainer {
                 //this.parentObj.skills.find(obj => obj.name == this.parentObj.skill.name).achievedPoint++;
             }
 
-            this.parentObj.toggleChildren(children, this.parentObj.skill.achievedPoint, true);
-
             this.parentObj.app.renderer.render(this.parentObj.app.stage);
-            //this.parentObj.refreshAvaliability();
         }
     }
 
     onRightClick() {
         var children = this.parentObj.skill.children;
-
+        this.parentObj.toggleChildren(children, this.parentObj.skill.achievedPoint, false);
 
         // Decrease skill level
         if(this.parentObj.skill.achievedPoint > 0)
@@ -195,13 +197,10 @@ class ItemContainer {
         this.parentObj.tick.alpha = 0;
         this.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFFBF00, 1)];
 
-        this.parentObj.toggleChildren(children, this.parentObj.skill.achievedPoint, false);
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
-        //this.parentObj.refreshAvaliability();
     }
 
     toggleChildren (children, achievedPoint, enable) {
-        alert("dd");
         if (children !== undefined) {
             for (var k = 0; k < children.length; ++k) {
                 var child = this.skills.find(obj => obj.name == children[k].name);
@@ -246,30 +245,6 @@ class ItemContainer {
                 }
             }
         }
-    }
-
-    refreshAvaliability(){
-      for (var i = 0; i < this.skills.length; i++) {
-        for (var j = 0; j < this.skills[i].parents.length; j++) {
-          var par = this.skills.find(obj => obj.name == this.skills[i].parents[j]);
-          if(par !== undefined){
-            if(par.children.find(obj => obj.name == this.skills[i].name).minPoint > par.achievedPoint || par.itemcontainer.container.interactive == false){
-              var colorMatrixFilter = new PIXI.filters.ColorMatrixFilter;
-              colorMatrixFilter.brightness(0.4);
-              this.skills[i].itemcontainer.container.filters = [colorMatrixFilter];
-              this.skills[i].itemcontainer.container.interactive = false;
-              this.skills[i].itemcontainer.skillborder.interactive = false;
-              this.skills[i].itemcontainer.skillborder.buttonMode = false;
-            }
-            else{
-              this.skills[i].itemcontainer.container.filters = null;
-              this.skills[i].itemcontainer.container.interactive = true;
-              this.skills[i].itemcontainer.skillborder.interactive = true;
-              this.skills[i].itemcontainer.skillborder.buttonMode = true;
-            }
-          }
-        }
-      }
     }
 
     onButtonOver() {
