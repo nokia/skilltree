@@ -91,8 +91,8 @@ function submit(){
         window.open("/user/", "_self");
       }
   }
-  var jsonData = JSON.stringify(data.skills);
-  sub.send(jsonData);
+  //var jsonData = JSON.stringify(data.skills);
+  sub.send(data.skills.toString());
 }
 
 function logout(){
