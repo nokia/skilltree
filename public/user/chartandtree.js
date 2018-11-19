@@ -334,7 +334,7 @@ function showTree (treeName) {
     };
     app.ticker.add(fadein);
 
-    tree.treeContainer.pivot(tree.treeContainer.width / 2, tree.treeContainer.height / 2)
+    tree.treeContainer.pivot.set(tree.treeContainer.width / 2, tree.treeContainer.height / 2);
 
     console.log(tree.treeContainer.x);
     console.log(tree.treeContainer.y);
