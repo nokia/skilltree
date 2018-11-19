@@ -191,6 +191,14 @@ body {
 	display: table;
 	width: 100%;
 }
+
+.divTableName {
+  width: inherit;
+  font-weight: bold;
+  font-size: 22px;
+  text-align: center;
+}
+
 .divTableRow {
   display: table-row;
   width: 100%;
@@ -215,9 +223,3 @@ body {
   width: inherit;
 }
 
-.divTableName {
-  width: inherit;
-  font-weight: bold;
-  font-size: 22px;
-  text-align: center;
-}
