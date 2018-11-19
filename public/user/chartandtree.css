@@ -171,7 +171,7 @@ body {
 }
 
 .modalClose {
-    color: #fffff;
+    color: #ffffff;
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -192,21 +192,32 @@ body {
 	width: 100%;
 }
 .divTableRow {
-	display: table-row;
+  display: table-row;
+  width: 100%;
 }
-.divTableHeading {
-	background-color: #EEE;
-	display: table-header-group;
-}
-.divTableCell, .divTableHead {
+
+.divTableCell {
 	border: 1px solid #999999;
 	display: table-cell;
-	padding: 3px 10px;
+  padding: 3px 10px;
+  width: 25%;
 }
+.divTableHead {
+  border: 1px solid #000000;
+	display: table-cell;
+  padding: 3px 10px;
+  font-weight: bold;
+  width: 25%;
+}
+
 .divTableHeading {
+  border: 1px solid #000000;
 	background-color: #EEE;
 	display: table-header-group;
-	font-weight: bold;
+  font-weight: bold;
+  font-size: 22px;
+  text-align: center;
+  width: 100%;
 }
 .divTableFoot {
 	background-color: #EEE;
@@ -214,5 +225,6 @@ body {
 	font-weight: bold;
 }
 .divTableBody {
-	display: table-row-group;
+  display: table-row-group;
+  width: inherit;
 }
