@@ -203,7 +203,7 @@ body {
   width: 25%;
 }
 .divTableHead {
-  border: 2px solid #777575;
+  border: 1px solid #000000;
 	display: table-cell;
   padding: 3px 10px;
   font-weight: bold;
