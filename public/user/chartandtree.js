@@ -91,8 +91,13 @@ function submit(){
         window.open("/user/", "_self");
       }
   }
-  //var jsonData = JSON.stringify(data.skills);
-  sub.send(data.skills.toString());
+
+  for (var i = 0; i < data.skills.length; ++i) {
+      delete data.skills[i].parents;
+      delete data.skills[i].children;
+  }
+
+  sub.send(JSON.stringify(data.skills));
 }
 
 function logout(){
