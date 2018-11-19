@@ -195,7 +195,6 @@ body {
 .divTableName {
   width: inherit;
   display: table-caption;
-  border: 1px solid #000000;
   font-weight: bold;
   font-size: 20px;
   text-align: center;
