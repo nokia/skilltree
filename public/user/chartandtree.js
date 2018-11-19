@@ -82,7 +82,7 @@ function checkFirstLogin() {
 }*/
 
 function submit(){
-  /*var sub = new XMLHttpRequest();
+  var sub = new XMLHttpRequest();
   sub.open('POST', '/set/submitall', true);
   sub.setRequestHeader('Content-type', 'application/json');
   sub.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
@@ -91,8 +91,26 @@ function submit(){
         window.open("/user/", "_self");
       }
   }
-  sub.send(JSON.stringify(userData));*/
-  console.log(data);
+  var cache = [];
+var jsonData = JSON.stringify(data.skills, function(key, value) {
+    if (typeof value === 'object' && value !== null) {
+        if (cache.indexOf(value) !== -1) {
+            // Duplicate reference found
+            try {
+                // If this value does not reference a parent it can be deduped
+                return JSON.parse(JSON.stringify(value));
+            } catch (error) {
+                // discard key if value cannot be deduped
+                return;
+            }
+        }
+        // Store value in our collection
+        cache.push(value);
+    }
+    return value;
+});
+cache = null;
+  sub.send(jsonData);
 }
 
 function logout(){
