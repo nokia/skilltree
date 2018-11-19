@@ -91,6 +91,7 @@ function submit(){
         window.open("/user/", "_self");
       }
   }
+  console.log(data.skills);
   sub.send(JSON.stringify(data.skills));
 }
 
