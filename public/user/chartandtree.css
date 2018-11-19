@@ -218,5 +218,6 @@ body {
 .divTableName {
   width: inherit;
   font-weight: bold;
-  font-size: 22;
+  font-size: 22px;
+  text-align: center;
 }
