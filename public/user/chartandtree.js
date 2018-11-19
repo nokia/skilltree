@@ -82,7 +82,7 @@ function checkFirstLogin() {
 }*/
 
 function submit(){
-  /*var sub = new XMLHttpRequest();
+  var sub = new XMLHttpRequest();
   sub.open('POST', '/set/submitall', true);
   sub.setRequestHeader('Content-type', 'application/json');
   sub.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
@@ -91,7 +91,7 @@ function submit(){
         window.open("/user/", "_self");
       }
   }
-  sub.send(JSON.stringify(userData));*/
+  sub.send(JSON.stringify(data.skills));
   console.log(data);
 }
 

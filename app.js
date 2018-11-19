@@ -372,7 +372,7 @@ setRoute.post('/maintree', async function (req, res) {
 	        if (err) throw err;
 			return tree;
 		});
-		
+
 
 		user.trees.push(mainTree);
 
@@ -393,6 +393,26 @@ setRoute.post('/maintree', async function (req, res) {
 		res.json({
 			success: true,
 		});
+	}
+});
+
+setRoute.post('/submitall', function (req, res) {
+	var data = req.body;
+
+    var user = await User.findOne({
+        username: req.decoded.username
+    }, function(err, user) {
+        if (err) throw err;
+		return user;
+    });
+
+	if (!user) {
+		res.json({
+			success: false,
+			message: 'User not found.'
+		});
+	} else {
+		console.log(data);
 	}
 });
 
