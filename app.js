@@ -412,7 +412,11 @@ setRoute.post('/submitall', async function (req, res) {
 			message: 'User not found.'
 		});
 	} else {
-		console.log(data);
+		user.skills = data;
+		user.save(function (err) {if (err) throw err;});
+		res.json({
+			success: true,
+		});
 	}
 });
 
