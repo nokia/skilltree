@@ -92,11 +92,12 @@ function submit(){
       }
   }
 
-  for (var i = 0; i < data.skills.length; ++i) {
-      delete data.skills[i].itemcontainer;
+  var submitData = data.skills;
+  for (var i = 0; i < submitData.length; ++i) {
+      delete submitData[i].itemcontainer;
   }
 
-  sub.send(JSON.stringify(data.skills));
+  sub.send(JSON.stringify(submitData));
 }
 
 function logout(){
