@@ -276,16 +276,7 @@ window.onresize = function () {
     }
 
     if (tree != undefined) {
-        /*var ratio = tree.treeContainer.width / tree.treeContainer.height;
-        if (window.innerWidth - 160 < window.innerHeight - 30) {
-            chartContainer.width = window.innerWidth - 200;
-            chartContainer.height = (window.innerWidth - 200) / ratio;
-        } else {
-            chartContainer.width = (window.innerHeight - 70) * ratio;
-            chartContainer.height = window.innerHeight - 70;
-        }*/
-
-        tree.treeContainer.position.set(0, 0);
+        tree.treeContainer.position.set(app.renderer.width / 2, app.renderer.height / 2);
     }
 
     app.renderer.render(app.stage);
