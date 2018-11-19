@@ -333,9 +333,8 @@ function showTree (treeName) {
     app.ticker.add(fadein);
 
     console.log(tree.treeContainer.x);
-    console.log(tree.treeContainer.y);
     console.log(tree.treeContainer.width);
-    console.log(tree.treeContainer.height);
+    console.log(tree.treeContainer.pivot.x);
 }
 
 /*function openEditor () {
