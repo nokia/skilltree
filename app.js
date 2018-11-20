@@ -357,7 +357,7 @@ setRoute.post('/approvetree', async function (req, res) {
 	}
 });
 
-setRoute.post('/maintree', async function (req, res) {
+/*setRoute.post('/maintree', async function (req, res) {
 	var data = req.body;
 
     var user = await User.findOne({
@@ -403,6 +403,34 @@ setRoute.post('/maintree', async function (req, res) {
 			success: true,
 		});
 	}
+});*/
+
+setRoute.post('/firstlogindata', async function (req, res) {
+	var data = req.body;
+
+    var user = await User.findOne({
+        username: req.decoded.username
+    }, function(err, user) {
+        if (err) throw err;
+		return user;
+    });
+
+	if (!user) {
+		res.json({
+			success: false,
+			message: 'User not found.'
+		});
+	} else {
+		user.mainTree = data.mainTree;
+		user.teachingDay = data.teachingDay;
+		user.teachingTime = data.teachingTime;
+		user.location = data.location;
+
+		user.save(function (err) {if (err) throw err;});
+		res.json({
+			success: true,
+		});
+	}
 });
 
 setRoute.post('/submitall', async function (req, res) {
@@ -422,6 +450,46 @@ setRoute.post('/submitall', async function (req, res) {
 		});
 	} else {
 		user.skills = data;
+
+		if (user.willingToTeach) {
+			var globalSkills = await Skill.find({}, function(err, skills) {
+		        if (err) throw err;
+				return skills;
+		    });
+
+			/*var globalSkillsWithoutUser = globalSkills.filter(
+				obj => obj.trainings.find(obj2 => obj2.teacher == user.username) == undefined
+			); // list of global skills where user is not a teacher
+
+			var notNullPointSkills =  data.filter(obj => obj.achievedPoint > 0);
+			var notInTraining = notNullPointSkills.filter(
+				obj => globalSkillsWithoutUser.find(obj2 => obj2.name == obj.name) != undefined
+			);
+
+			for (var i = 0; i < notInTraining.length; ++i) {
+				notInTraining[i]
+			}*/
+
+			for (var i = 0; i < data.length; ++i) {
+				var globalSkill = globalSkills.find(obj => obj.name == data[i].name);
+				if (data[i].achievedPoint > 0) {
+					if (globalSkill.trainings.find(obj => obj.teacher == user.username) == undefined)
+						globalSkill.trainings.push({
+							date: user.teachingDay + user.teachingTime,
+							level: data[i].achievedPoint,
+							place: user.location,
+							teacher: user.username
+						});
+				} else {
+					if (globalSkill.trainings.find(obj => obj.teacher == user.username) != undefined) {
+						globalSkill.trainings = globalSkill.trainings.filter(obj => obj.teacher != user.username);
+					}
+				}
+			}
+
+			globalSkills.save(function (err) {if (err) throw err;});
+		}
+
 		user.save(function (err) {if (err) throw err;});
 		res.json({
 			success: true,

@@ -35,13 +35,21 @@ function checkFirstLogin() {
     else {
         var modal = document.getElementById('firstLogin');
         var btn = document.getElementById('savebtn');
-        var select = document.getElementById('maintree');
+        var mainTree = document.getElementById('maintree').value;
+        var teachingDay = document.getElementById('day').value;
+        var teachingTime = document.getElementById('timeStart').value + ' - ' + document.getElementById('timeEnd').value;
+        var location = document.getElementById('location').value;
 
         btn.onclick = function() {
-            var maintree = {name: option.value};
+            var firstLoginData = {
+                    mainTree: mainTree,
+                    teachingDay: teachingDay,
+                    teachingTime: teachingTime,
+                    location: location
+            };
 
             var saveMain = new XMLHttpRequest();
-            saveMain.open('POST', '/set/maintree', true);
+            saveMain.open('POST', '/set/firstlogindata', true);
             saveMain.setRequestHeader('Content-type', 'application/json');
             saveMain.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
             saveMain.onreadystatechange = function() {
@@ -49,7 +57,7 @@ function checkFirstLogin() {
                   window.open("/user/", "_self");
                 }
             }
-            saveMain.send(JSON.stringify(maintree));
+            saveMain.send(JSON.stringify(firstLoginData));
         }
 
         /*var span = document.getElementsByClassName("modalClose")[0];
