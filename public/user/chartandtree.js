@@ -35,14 +35,14 @@ function checkFirstLogin() {
     else {
         var modal = document.getElementById('firstLogin');
         var btn = document.getElementById('savebtn');
-        var mainTree = document.getElementById('maintree').value;
+        var mainTree = document.getElementById('maintree');
         var teachingDay = document.getElementById('day').value;
         var teachingTime = document.getElementById('timeStart').value + ' - ' + document.getElementById('timeEnd').value;
         var location = document.getElementById('location').value;
 
         btn.onclick = function() {
             var firstLoginData = {
-                    mainTree: mainTree,
+                    mainTree: mainTree.value,
                     teachingDay: teachingDay,
                     teachingTime: teachingTime,
                     location: location
