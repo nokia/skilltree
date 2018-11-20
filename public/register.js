@@ -8,8 +8,8 @@ function validate() {
 	var willingToTeach = document.getElementById("teach");
 
 	if (password1.value == password2.value) {
-		if (validateEmail(email.value)) {
-			if (checkPassword(password1.value)) {
+		//if (validateEmail(email.value)) {
+			//if (checkPassword(password1.value)) {
 				var httpRequest = new XMLHttpRequest();
 				httpRequest.open('POST', '/registration', true);
 				httpRequest.setRequestHeader('Content-type', 'application/json');
@@ -34,8 +34,8 @@ function validate() {
 						willingToTeach: willingToTeach.checked
 					})
 				);
-			} else alert("The password is not valid! It has to contain at least one digit, one lowercase and one uppercase character. The minimum password length is 8 characters.");
-		} else alert("The email address is not valid!");
+			//} else alert("The password is not valid! It has to contain at least one digit, one lowercase and one uppercase character. The minimum password length is 8 characters.");
+		//} else alert("The email address is not valid!");
 	} else alert("Incorrect credentials! Passwords don't match!");
 }
 
