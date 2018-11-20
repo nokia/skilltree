@@ -428,9 +428,6 @@ setRoute.post('/firstlogindata', async function (req, res) {
 			user.location = data.location;
 		}
 
-		console.log(user.teachingTime);
-		console.log(user.location);
-
 		var mainTree = await Tree.findOne({
 	        name: user.mainTree,
 	    }, function (err, tree) {
