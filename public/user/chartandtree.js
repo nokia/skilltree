@@ -107,7 +107,7 @@ function logout(){
 
 function startLoader () {
     PIXI.loader.add("pictures/skillborder.png")
-                .add("tree.png")
+                //.add("tree.png")
                 .add("pictures/back.png")
                 .add("pictures/tick.png");
     for (var i = 0; i < data.skills.length; ++i) {
@@ -241,12 +241,12 @@ function showChart() {
         chartContainer.addChild(tempContainer);
     }
 
-    var logo = new PIXI.Sprite(PIXI.loader.resources["tree.png"].texture);
+    /*var logo = new PIXI.Sprite(PIXI.loader.resources["tree.png"].texture);
     logo.anchor.set(0.5, 0.5);
     //logo.position.set(window.innerWidth / 2, window.innerHeight / 2);
     logo.scale.set(0.42);
     //app.stage.addChild(logo);
-    chartContainer.addChild(logo);
+    chartContainer.addChild(logo);*/
 
     chartContainer.position.set((window.innerWidth - 160) / 2, (window.innerHeight - 30) / 2);
     app.stage.addChild(chartContainer);
