@@ -71,19 +71,6 @@ app.post('/registration', async function(req, res) {
 							return categories;
 						});
 
-		/*var trees = await Tree.find({}, function (err, trees) {
-							if (err) throw err;
-							return trees;
-						});*/
-
-		/*var uskills = await Skill.find({}, function (err, uskills) {
-							if (err) throw err;
-							for(var i = 0; i < uskills.length; i++){
-								uskills[i].achievedPoint = 0;
-							}
-							return uskills;
-						});*/
-
 		var newUser = new User({
 			username: req.body.username,
 			email: req.body.email,
@@ -93,7 +80,7 @@ app.post('/registration', async function(req, res) {
 					name: req.body.focusArea,
 					treeNames: focusAreaTrees,
 				}
-			//skills: uskills
+			willingToTeach: req.body.willingToTeach
 		});
 
 		newUser.save(function(err) {
@@ -241,7 +228,7 @@ getRoute.get('/skilldata', function(req, res) {
 
 
 	});
-		
+
 });
 
 //Creating a setRoute, thats protected with Token. API calls are under /set/...

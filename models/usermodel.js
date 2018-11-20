@@ -11,7 +11,7 @@ module.exports = mongoose.model('User', new Schema({
         name: String,
         treeNames: [String],
     },
-    teacher: Boolean,
+    willingToTeach: Boolean,
     categories: [
         {
             name: String,
