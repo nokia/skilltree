@@ -480,19 +480,6 @@ setRoute.post('/submitall', async function (req, res) {
 				return skills;
 		    });
 
-			/*var globalSkillsWithoutUser = globalSkills.filter(
-				obj => obj.trainings.find(obj2 => obj2.teacher == user.username) == undefined
-			); // list of global skills where user is not a teacher
-
-			var notNullPointSkills =  data.filter(obj => obj.achievedPoint > 0);
-			var notInTraining = notNullPointSkills.filter(
-				obj => globalSkillsWithoutUser.find(obj2 => obj2.name == obj.name) != undefined
-			);
-
-			for (var i = 0; i < notInTraining.length; ++i) {
-				notInTraining[i]
-			}*/
-
 			for (var i = 0; i < data.length; ++i) {
 				var globalSkill = globalSkills.find(obj => obj.name == data[i].name);
 				if (data[i].achievedPoint > 0) {
@@ -509,6 +496,8 @@ setRoute.post('/submitall', async function (req, res) {
 					}
 				}
 			}
+
+			console.log(globalSkills);
 
 			globalSkills.save(function (err) {if (err) throw err;});
 		}
