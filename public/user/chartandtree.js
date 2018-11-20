@@ -36,11 +36,12 @@ function checkFirstLogin() {
         var modal = document.getElementById('firstLogin');
         var btn = document.getElementById('savebtn');
         var mainTree = document.getElementById('maintree');
-        var teachingDay = document.getElementById('day').value;
-        var teachingTime = document.getElementById('timeStart').value + ' - ' + document.getElementById('timeEnd').value;
-        var location = document.getElementById('location').value;
 
         btn.onclick = function() {
+            var teachingDay = document.getElementById('day').value;
+            var teachingTime = document.getElementById('timeStart').value + ' - ' + document.getElementById('timeEnd').value;
+            var location = document.getElementById('location').value;
+
             var firstLoginData = {
                     mainTree: mainTree.value,
                     teachingDay: teachingDay,
