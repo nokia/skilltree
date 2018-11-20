@@ -422,11 +422,35 @@ setRoute.post('/firstlogindata', async function (req, res) {
 		});
 	} else {
 		user.mainTree = data.mainTree;
-		user.teachingDay = data.teachingDay;
-		user.teachingTime = data.teachingTime;
-		user.location = data.location;
+		if (user.willingToTeach) {
+			user.teachingDay = data.teachingDay;
+			user.teachingTime = data.teachingTime;
+			user.location = data.location;
+		}
 
-		console.log(user);
+		console.log(user.teachingTime);
+		console.log(user.location);
+
+		var mainTree = await Tree.findOne({
+	        name: user.mainTree,
+	    }, function (err, tree) {
+	        if (err) throw err;
+			return tree;
+		});
+
+		user.trees.push(mainTree);
+
+		var skills = await Skill.find({
+	        name: mainTree.skillNames,
+	    }, function (err, skills) {
+	        if (err) throw err;
+			return skills;
+	    });
+
+		await skills.forEach(function (skill) {
+			skill.achievedPoint = 0;
+			user.skills.push(skill);
+		});
 
 		user.save(function (err) {if (err) throw err;});
 		res.json({
