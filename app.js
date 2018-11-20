@@ -426,6 +426,8 @@ setRoute.post('/firstlogindata', async function (req, res) {
 		user.teachingTime = data.teachingTime;
 		user.location = data.location;
 
+		console.log(user);
+
 		user.save(function (err) {if (err) throw err;});
 		res.json({
 			success: true,
