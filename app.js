@@ -79,7 +79,7 @@ app.post('/registration', async function(req, res) {
 			focusArea: {
 					name: req.body.focusArea,
 					treeNames: focusAreaTrees,
-				}
+				},
 			willingToTeach: req.body.willingToTeach
 		});
 
