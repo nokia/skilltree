@@ -49,10 +49,25 @@
   <div id = "firstLogin" class = "modal">
       <div class = "modal-content">
           <div class="modal-header">
-              <h2>Please select your main skill tree</h2>
+              <h2>Set up yout account</h2>
           </div>
           <div class="modal-body">
+              <h3>Please select your main skill tree!</h3>
               <select id = "maintree"></select>
+              <div id = "teachingSettings">
+                  On which day are you available for teching?
+                  <select id = "day">
+                      <option value = "Monday">Monday</option>
+                      <option value = "Tuesday">Tuesday</option>
+                      <option value = "Wednesday">Wednesday</option>
+                      <option value = "Thursday">Thursday</option>
+                      <option value = "Friday">Friday</option>
+                  </select><br>
+                  Timeslot when you are willing to teach on this day:
+                  <input type = "text" id = "timeslot"><br>
+                  Where can people find you?
+                  <input type = "text" id = "location"><br>
+              </div>
               <input type = "button" value = "Save" id = "savebtn">
           </div>
       </div>
@@ -65,8 +80,8 @@
             <h2 id="skillnameHeader"></h2>
         </div>
         <div class="modal-body">
-            
-                    
+
+
             <div class = "divTable">
                 <div class= "divTableCaption">Trainings</div>
                     <div class="divTableBody">
@@ -76,7 +91,7 @@
                             <div class="divTableHead"> Place</div>
                             <div class="divTableHead"> Teacher</div>
                         </div>
-                    
+
                         <div class="divTableRow">
                             <div class="divTableCell"> Date </div>
                             <div class="divTableCell"> Level </div>
