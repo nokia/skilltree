@@ -497,9 +497,7 @@ setRoute.post('/submitall', async function (req, res) {
 				}
 			}
 
-			console.log(globalSkills);
-
-			globalSkills.save(function (err) {if (err) throw err;});
+			//globalSkills.save(function (err) {if (err) throw err;}); // elvileg a user hozzaadasa mukodik a global skillekhez, de elmenteni nem tudom az osszes skillt ujra
 		}
 
 		user.save(function (err) {if (err) throw err;});

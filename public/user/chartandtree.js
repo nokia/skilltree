@@ -79,6 +79,8 @@ function checkFirstLogin() {
             mainTree.add(option);
         }
 
+        if (!data.willingToTeach) document.getElementById('teachingSettings').style.display = 'none';
+
         modal.style.display = "block";
     }
 }
