@@ -85,7 +85,7 @@ function checkFirstLogin() {
     }
 }
 
-/*function toggleSkillDetailsPage(){
+/*function toggleSkillDetailsPage() {
     var modal = document.getElementById('skillpage');
 
     modal.style.display = "block";
