@@ -7,6 +7,7 @@ function validate() {
 	var focusarea = document.getElementById("focusarea");
 
 	if (password1.value == password2.value) {
+		if (validateEmail(email.value)) {
 		var httpRequest = new XMLHttpRequest();
 		httpRequest.open('POST', '/registration', true);
 		httpRequest.setRequestHeader('Content-type', 'application/json');
@@ -31,10 +32,18 @@ function validate() {
 				focusArea: focusarea.value
 			})
 		);
+		} else alert("The email address is not valid!");
 	}
 	else {
 		alert("Incorrect credentials! Passwords don't match!");
 	}
+}
+
+function validateEmail (email) {
+	var expr = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+	if (expr.test(email)) return true;
+	return false;
 }
 
 function showToast() {
