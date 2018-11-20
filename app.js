@@ -484,7 +484,7 @@ setRoute.post('/submitall', async function (req, res) {
 				var globalSkill = globalSkills.find(obj => obj.name == data[i].name);
 				if (data[i].achievedPoint > 0) {
 					if (globalSkill.trainings.find(obj => obj.teacher == user.username) == undefined)
-						globalSkill.trainings.push({
+						globalSkills.find(obj => obj.name == data[i].name).trainings.push({
 							date: user.teachingDay + user.teachingTime,
 							level: data[i].achievedPoint,
 							place: user.location,
@@ -492,7 +492,7 @@ setRoute.post('/submitall', async function (req, res) {
 						});
 				} else {
 					if (globalSkill.trainings.find(obj => obj.teacher == user.username) != undefined) {
-						globalSkill.trainings = globalSkill.trainings.filter(obj => obj.teacher != user.username);
+						globalSkills.find(obj => obj.name == data[i].name).trainings = globalSkill.trainings.filter(obj => obj.teacher != user.username);
 					}
 				}
 			}
