@@ -1,0 +1,228 @@
+{
+  "definitions": {},
+  "type": "array",
+  "title": "The Root Schema",
+  "items": {
+    "$id": "#/items",
+    "type": "object",
+    "title": "The Items Schema",
+    "required": [
+      "name",
+      "categoryName",
+      "skillIcon",
+      "description",
+      "maxPoint"
+    ],
+    "properties": {
+      "name": {
+        "$id": "#/items/properties/name",
+        "type": "string",
+        "title": "The Name Schema",
+        "default": "",
+        "examples": [
+          "HTML"
+        ],
+        "pattern": "^(.*)$"
+      },
+      "categoryName": {
+        "$id": "#/items/properties/categoryName",
+        "type": "string",
+        "title": "The Categoryname Schema",
+        "default": "",
+        "examples": [
+          "MathSciEng",
+          "Language",
+          "Soft",
+          "Entrepreneurship",
+          "Culture",
+          "Digital",
+          "Learning",
+          "Other"
+        ],
+        "pattern": "^(.*)$"
+      },
+      "skillIcon": {
+        "$id": "#/items/properties/skillIcon",
+        "type": "string",
+        "title": "The Skillicon Schema",
+        "default": "pictures/icons/default.png",
+        "examples": [
+          "pictures/icons/HTML.png"
+        ],
+        "pattern": "^(.*)$",
+        "format": "uri"
+      },
+      "description": {
+        "$id": "#/items/properties/description",
+        "type": "string",
+        "title": "The Description Schema",
+        "default": "",
+        "examples": [
+          "..."
+        ],
+        "pattern": "^(.*)$"
+      },
+      "descriptionWikipediaURL": {
+        "$id": "#/items/properties/descriptionWikipediaURL",
+        "type": "string",
+        "title": "The Descriptionwikipediaurl Schema",
+        "default": "",
+        "examples": [
+          "https://en.wikipedia.org/wiki/"
+        ],
+        "pattern": "^(.*)$",
+        "format": "uri"
+      },
+      "pointDescription": {
+        "$id": "#/items/properties/pointDescription",
+        "type": "array",
+        "title": "The Pointdescription Schema",
+        "default": null,
+        "items": {
+          "$id": "#/items/properties/pointDescription/items",
+          "type": "string",
+          "title": "The Items Schema",
+          "default": "",
+          "examples": [
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "L5"
+          ],
+          "pattern": "^(.*)$"
+        }
+      },
+      "maxPoint": {
+        "$id": "#/items/properties/maxPoint",
+        "type": "integer",
+        "title": "The Maxpoint Schema",
+        "default": 0,
+        "examples": [
+          5
+        ],
+        "maximum": 10.0
+      },
+      "parents": {
+        "$id": "#/items/properties/parents",
+        "type": "array",
+        "title": "The Parents Schema",
+        "default": null
+      },
+      "children": {
+        "$id": "#/items/properties/children",
+        "type": "array",
+        "title": "The Children Schema",
+        "default": null,
+        "items": {
+          "$id": "#/items/properties/children/items",
+          "type": "object",
+          "title": "The Items Schema",
+          "required": [
+            "name"
+          ],
+          "properties": {
+            "name": {
+              "$id": "#/items/properties/children/items/properties/name",
+              "type": "string",
+              "title": "The Name Schema",
+              "default": "",
+              "examples": [
+                "CSS"
+              ],
+              "pattern": "^(.*)$"
+            },
+            "minPoint": {
+              "$id": "#/items/properties/children/items/properties/minPoint",
+              "type": "integer",
+              "title": "The Minpoint Schema",
+              "default": 0,
+              "examples": [
+                1
+              ]
+            },
+            "recommended": {
+              "$id": "#/items/properties/children/items/properties/recommended",
+              "type": "boolean",
+              "title": "The Recommended Schema",
+              "default": false,
+              "examples": [
+                false
+              ]
+            }
+          }
+        }
+      },
+      "trainings": {
+        "$id": "#/items/properties/trainings",
+        "type": "array",
+        "title": "The Trainings Schema",
+        "default": null,
+        "items": {
+          "$id": "#/items/properties/trainings/items",
+          "type": "object",
+          "title": "The Items Schema",
+          "required": [
+            "name",
+            "level",
+            "shortDescription",
+            "URL"
+          ],
+          "properties": {
+            "name": {
+              "$id": "#/items/properties/trainings/items/properties/name",
+              "type": "string",
+              "title": "The Name Schema",
+              "default": "",
+              "examples": [
+                "HTML Basics"
+              ],
+              "pattern": "^(.*)$"
+            },
+            "level": {
+              "$id": "#/items/properties/trainings/items/properties/level",
+              "type": "integer",
+              "title": "The Level Schema",
+              "default": 0,
+              "examples": [
+                1
+              ],
+              "minimum": 0.0,
+              "maximum": 10.0
+            },
+            "shortDescription": {
+              "$id": "#/items/properties/trainings/items/properties/shortDescription",
+              "type": "string",
+              "title": "The Shortdescription Schema",
+              "default": "",
+              "examples": [
+                "HTML Crash Course For Absolute Beginners"
+              ],
+              "pattern": "^(.*)$"
+            },
+            "URL": {
+              "$id": "#/items/properties/trainings/items/properties/URL",
+              "type": "string",
+              "title": "The Url Schema",
+              "default": "",
+              "examples": [
+                "https://www.youtube.com/watch?v=UB1O30fR-EE"
+              ],
+              "pattern": "^(.*)$"
+            },
+            "URLlastAccessed": {
+              "$id": "#/items/properties/trainings/items/properties/URLlastAccessed",
+              "type": "string",
+              "title": "The Urllastaccessed Schema",
+              "default": "",
+              "examples": [
+                "2018-11-19"
+              ],
+              "pattern": "^(.*)$"
+            }
+          }
+        }
+      }
+    }
+  }
+}

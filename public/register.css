@@ -32,15 +32,6 @@ canvas {
     padding: 45px;
 }
 
-#avatar {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    position: absolute;
-    top: -50px;
-    left: calc(50% - 50px);
-}
-
 #loginBox p{
     margin: 0;
     padding: 0;
@@ -182,4 +173,4 @@ canvas {
 .dropdown-content a:hover {background-color: #ddd}
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
-.show {display:block;} 
+.show {display:block;}

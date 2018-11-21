@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Web Developer",
+    "description": "",
+    "focusArea": "Engineering",
+    "skillNames": [
+      "HTML",
+      "CSS"
+    ]
+  },
+  {
+    "name": "Software Engineer",
+    "description": "",
+    "focusArea": "Engineering",
+    "skillNames": [
+      "Go",
+      "Java"
+    ]
+  },
+  {
+    "name": "Software Tester",
+    "description": "",
+    "focusArea": "Engineering",
+    "skillNames": [
+      "ROBOT Framework",
+      "Python"
+    ]
+  },
+  {
+    "name": "Data Scientist",
+    "description": "",
+    "focusArea": "Engineering",
+    "skillNames": [
+      "Java",
+      "CSS",
+      "Machine Learning"
+    ]
+  },
+  {
+    "name": "Scrum Master",
+    "description": "",
+    "focusArea": "People",
+    "skillNames": [
+      "Scrum",
+      "Conflict resolution",
+      "Coaching",
+      "Negotiation"
+    ]
+  }
+]

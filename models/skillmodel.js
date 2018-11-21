@@ -18,5 +18,14 @@ module.exports = mongoose.model('Skill', new Schema({
             minPoint: Number,
             recommended: Boolean
         }
+    ],
+    trainings: [
+        {
+            date: String,
+            level: String,
+            place: String,
+            teacher: String
+        }
     ]
+
 }));

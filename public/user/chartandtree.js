@@ -2,7 +2,7 @@ var data = undefined;
 
 // get data from server
 var dataRequest = new XMLHttpRequest();
-dataRequest.open('GET', '/get/data', true);
+dataRequest.open('GET', '/get/userdata', true);
 dataRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 dataRequest.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
 dataRequest.responseType = "json";
@@ -35,13 +35,22 @@ function checkFirstLogin() {
     else {
         var modal = document.getElementById('firstLogin');
         var btn = document.getElementById('savebtn');
-        var select = document.getElementById('maintree');
+        var mainTree = document.getElementById('maintree');
 
         btn.onclick = function() {
-            var maintree = {name: option.value};
+            var teachingDay = document.getElementById('day').value;
+            var teachingTime = document.getElementById('timeStart').value + ' - ' + document.getElementById('timeEnd').value;
+            var location = document.getElementById('location').value;
+
+            var firstLoginData = {
+                    mainTree: mainTree.value,
+                    teachingDay: teachingDay,
+                    teachingTime: teachingTime,
+                    location: location
+            };
 
             var saveMain = new XMLHttpRequest();
-            saveMain.open('POST', '/set/maintree', true);
+            saveMain.open('POST', '/set/firstlogindata', true);
             saveMain.setRequestHeader('Content-type', 'application/json');
             saveMain.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
             saveMain.onreadystatechange = function() {
@@ -49,7 +58,7 @@ function checkFirstLogin() {
                   window.open("/user/", "_self");
                 }
             }
-            saveMain.send(JSON.stringify(maintree));
+            saveMain.send(JSON.stringify(firstLoginData));
         }
 
         /*var span = document.getElementsByClassName("modalClose")[0];
@@ -67,14 +76,16 @@ function checkFirstLogin() {
         for (var i = 0; i < data.focusArea.treeNames.length; ++i) {
             var option = document.createElement('option');
             option.value = option.text = data.focusArea.treeNames[i];
-            select.add(option);
+            mainTree.add(option);
         }
+
+        if (!data.willingToTeach) document.getElementById('teachingSettings').style.display = 'none';
 
         modal.style.display = "block";
     }
 }
 
-/*function toggleSkillDetailsPage(){
+/*function toggleSkillDetailsPage() {
     var modal = document.getElementById('skillpage');
 
     modal.style.display = "block";
@@ -82,7 +93,7 @@ function checkFirstLogin() {
 }*/
 
 function submit(){
-  /*var sub = new XMLHttpRequest();
+  var sub = new XMLHttpRequest();
   sub.open('POST', '/set/submitall', true);
   sub.setRequestHeader('Content-type', 'application/json');
   sub.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
@@ -91,8 +102,13 @@ function submit(){
         window.open("/user/", "_self");
       }
   }
-  sub.send(JSON.stringify(userData));*/
-  console.log(data);
+
+  var submitData = data.skills;
+  for (var i = 0; i < submitData.length; ++i) {
+      delete submitData[i].itemcontainer;
+  }
+
+  sub.send(JSON.stringify(submitData));
 }
 
 function logout(){
@@ -102,7 +118,7 @@ function logout(){
 
 function startLoader () {
     PIXI.loader.add("pictures/skillborder.png")
-                .add("tree.png")
+                //.add("tree.png")
                 .add("pictures/back.png")
                 .add("pictures/tick.png");
     for (var i = 0; i < data.skills.length; ++i) {
@@ -236,12 +252,12 @@ function showChart() {
         chartContainer.addChild(tempContainer);
     }
 
-    var logo = new PIXI.Sprite(PIXI.loader.resources["tree.png"].texture);
+    /*var logo = new PIXI.Sprite(PIXI.loader.resources["tree.png"].texture);
     logo.anchor.set(0.5, 0.5);
     //logo.position.set(window.innerWidth / 2, window.innerHeight / 2);
     logo.scale.set(0.42);
     //app.stage.addChild(logo);
-    chartContainer.addChild(logo);
+    chartContainer.addChild(logo);*/
 
     chartContainer.position.set((window.innerWidth - 160) / 2, (window.innerHeight - 30) / 2);
     app.stage.addChild(chartContainer);
@@ -276,16 +292,7 @@ window.onresize = function () {
     }
 
     if (tree != undefined) {
-        /*var ratio = tree.treeContainer.width / tree.treeContainer.height;
-        if (window.innerWidth - 160 < window.innerHeight - 30) {
-            chartContainer.width = window.innerWidth - 200;
-            chartContainer.height = (window.innerWidth - 200) / ratio;
-        } else {
-            chartContainer.width = (window.innerHeight - 70) * ratio;
-            chartContainer.height = window.innerHeight - 70;
-        }*/
-
-        tree.treeContainer.position.set(0, 0);
+        tree.treeContainer.position.set(app.renderer.width / 2 + tree.treeContainer.width / 2, app.renderer.height / 2);
     }
 
     app.renderer.render(app.stage);
@@ -294,7 +301,7 @@ window.onresize = function () {
 // TREE
 
 // app.localLoader is a loader for skillicons (when a tree is opened, we load only that tree's skillicons)
-// PIXI.loader is global, it loads the back button, skillborder, tree, ...
+// PIXI.loader is global, it loads the back button, skillborder, tree,...
 
 var selectedTreeName;
 var tree = undefined;
@@ -322,7 +329,7 @@ function showTree (treeName) {
     tree = new Tree(app, skills);
     app.stage.addChild(tree.treeContainer);
     tree.treeContainer.pivot.set(tree.treeContainer.width / 2, tree.treeContainer.height / 2);
-    tree.treeContainer.position.set(app.renderer.width / 2, app.renderer.height / 2);
+    tree.treeContainer.position.set(app.renderer.width / 2 + tree.treeContainer.width / 2, app.renderer.height / 2);
 
     tree.treeContainer.alpha = 0;
     app.start();
@@ -335,12 +342,9 @@ function showTree (treeName) {
         }
     };
     app.ticker.add(fadein);
-
-    console.log(tree.treeContainer.x);
-    console.log(tree.treeContainer.y);
-    console.log(tree.treeContainer.width);
-    console.log(tree.treeContainer.height);
 }
+
+
 
 /*function openEditor () {
     app.stage.removeChild(tree.treeContainer);

@@ -282,6 +282,8 @@ class ItemContainer {
 
         header.innerText = this.skill.name;
 
+        
+
         span.onclick = function() {
             modal.style.display = "none";
         }

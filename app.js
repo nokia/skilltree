@@ -71,19 +71,6 @@ app.post('/registration', async function(req, res) {
 							return categories;
 						});
 
-		/*var trees = await Tree.find({}, function (err, trees) {
-							if (err) throw err;
-							return trees;
-						});*/
-
-		/*var uskills = await Skill.find({}, function (err, uskills) {
-							if (err) throw err;
-							for(var i = 0; i < uskills.length; i++){
-								uskills[i].achievedPoint = 0;
-							}
-							return uskills;
-						});*/
-
 		var newUser = new User({
 			username: req.body.username,
 			email: req.body.email,
@@ -92,8 +79,8 @@ app.post('/registration', async function(req, res) {
 			focusArea: {
 					name: req.body.focusArea,
 					treeNames: focusAreaTrees,
-				}
-			//skills: uskills
+				},
+			willingToTeach: req.body.willingToTeach
 		});
 
 		newUser.save(function(err) {
@@ -195,31 +182,53 @@ getRoute.use(function(req, res, next) {
 
     }
 });
-getRoute.get('/data', function (req, res) {
+getRoute.get('/userdata', function (req, res) {
     User.findOne({
         username: req.decoded.username
-    }, async function(err, user) {
+    }, async function(err, userdata) {
         if (err) throw err;
 
-        if (!user) {
+        if (!userdata) {
             res.json({
                 success: false,
                 message: 'User not found.'
             });
-        } else if (user) {
-			user = user.toObject();
-			delete user.__v;
-			delete user._id;
-			delete user.email;
-			delete user.hashData;
+        } else if (userdata) {
+			user = userdata.toObject();
+			delete userdata.__v;
+			delete userdata._id;
+			delete userdata.email;
+			delete userdata.hashData;
 
-			if (user.mainTree != undefined) { // first login
-				delete user.focusArea;
+			if (userdata.mainTree != undefined) { // first login
+				delete userdata.focusArea;
 			}
 
-      		return res.json(user);
+      		return res.json(userdata);
       	}
     });
+});
+
+getRoute.get('/skilldata', function(req, res) {
+	Skill.findOne({
+		name: req.body.name
+	}, async function(err, skilldata) {
+		if(err) throw err;
+
+		if(!skilldata){
+			escape.json({
+				succes: false,
+				message: 'User not found.'
+			});
+		} else if (skilldata) {
+			skill = skilldata.toObject();
+
+			return res.json(skilldata);
+		}
+
+
+	});
+
 });
 
 //Creating a setRoute, thats protected with Token. API calls are under /set/...
@@ -348,7 +357,7 @@ setRoute.post('/approvetree', async function (req, res) {
 	}
 });
 
-setRoute.post('/maintree', async function (req, res) {
+/*setRoute.post('/maintree', async function (req, res) {
 	var data = req.body;
 
     var user = await User.findOne({
@@ -372,7 +381,7 @@ setRoute.post('/maintree', async function (req, res) {
 	        if (err) throw err;
 			return tree;
 		});
-		
+
 
 		user.trees.push(mainTree);
 
@@ -390,6 +399,108 @@ setRoute.post('/maintree', async function (req, res) {
 
 		user.save(function (err) {if (err) throw err;});
 
+		res.json({
+			success: true,
+		});
+	}
+});*/
+
+setRoute.post('/firstlogindata', async function (req, res) {
+	var data = req.body;
+
+    var user = await User.findOne({
+        username: req.decoded.username
+    }, function(err, user) {
+        if (err) throw err;
+		return user;
+    });
+
+	if (!user) {
+		res.json({
+			success: false,
+			message: 'User not found.'
+		});
+	} else {
+		user.mainTree = data.mainTree;
+		if (user.willingToTeach) {
+			user.teachingDay = data.teachingDay;
+			user.teachingTime = data.teachingTime;
+			user.location = data.location;
+		}
+
+		var mainTree = await Tree.findOne({
+	        name: user.mainTree,
+	    }, function (err, tree) {
+	        if (err) throw err;
+			return tree;
+		});
+
+		user.trees.push(mainTree);
+
+		var skills = await Skill.find({
+	        name: mainTree.skillNames,
+	    }, function (err, skills) {
+	        if (err) throw err;
+			return skills;
+	    });
+
+		await skills.forEach(function (skill) {
+			skill.achievedPoint = 0;
+			user.skills.push(skill);
+		});
+
+		user.save(function (err) {if (err) throw err;});
+		res.json({
+			success: true,
+		});
+	}
+});
+
+setRoute.post('/submitall', async function (req, res) {
+	var data = req.body;
+
+    var user = await User.findOne({
+        username: req.decoded.username
+    }, function(err, user) {
+        if (err) throw err;
+		return user;
+    });
+
+	if (!user) {
+		res.json({
+			success: false,
+			message: 'User not found.'
+		});
+	} else {
+		user.skills = data;
+
+		if (user.willingToTeach) {
+			var globalSkills = await Skill.find({}, function(err, skills) {
+		        if (err) throw err;
+				return skills;
+		    });
+
+			for (var i = 0; i < data.length; ++i) {
+				var globalSkill = globalSkills.find(obj => obj.name == data[i].name);
+				if (data[i].achievedPoint > 0) {
+					if (globalSkill.trainings.find(obj => obj.teacher == user.username) == undefined)
+						globalSkills.find(obj => obj.name == data[i].name).trainings.push({
+							date: user.teachingDay + user.teachingTime,
+							level: data[i].achievedPoint,
+							place: user.location,
+							teacher: user.username
+						});
+				} else {
+					if (globalSkill.trainings.find(obj => obj.teacher == user.username) != undefined) {
+						globalSkills.find(obj => obj.name == data[i].name).trainings = globalSkill.trainings.filter(obj => obj.teacher != user.username);
+					}
+				}
+			}
+
+			//globalSkills.save(function (err) {if (err) throw err;}); // elvileg a user hozzaadasa mukodik a global skillekhez, de elmenteni nem tudom az osszes skillt ujra
+		}
+
+		user.save(function (err) {if (err) throw err;});
 		res.json({
 			success: true,
 		});
