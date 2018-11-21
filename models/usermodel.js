@@ -13,6 +13,7 @@ module.exports = mongoose.model('User', new Schema({
     },
     contact: String,
     location: String,
+    willingToTeach: Boolean,
     categories: [
         {
             name: String,
