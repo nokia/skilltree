@@ -92,7 +92,7 @@ function checkFirstLogin() {
 
 // ???
 
-function search(){
+function search(){ 
   var treeToSearch = document.getElementById('searchedTree');
   var sideBarSearchResult = document.getElementById('sideBarSearchResult');
   var sch = new XMLHttpRequest();
