@@ -31,6 +31,7 @@ module.exports = mongoose.model('Skill', new Schema({
         {
             username: String,
             contact: String,
+            location: String,
             skillLevel: Number
         }
     ]

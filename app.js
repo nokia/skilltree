@@ -423,8 +423,7 @@ setRoute.post('/firstlogindata', async function (req, res) {
 	} else {
 		user.mainTree = data.mainTree;
 		if (user.willingToTeach) {
-			user.teachingDay = data.teachingDay;
-			user.teachingTime = data.teachingTime;
+			user.contact = data.contact;
 			user.location = data.location;
 		}
 
