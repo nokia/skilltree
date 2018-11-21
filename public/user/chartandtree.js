@@ -90,6 +90,25 @@ function checkFirstLogin() {
 
 }*/
 
+// ???
+
+function search(){
+  var treeToSearch = document.getElementById('searchedTree');
+  var sideBarSearchResult = document.getElementById('sideBarSearchResult');
+  var sch = new XMLHttpRequest();
+  sch.open('POST', '/set/search', true);
+  sch.setRequestHeader('Content-type', 'application/json');
+  sch.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+  sch.onreadystatechange = function() {
+      if(sch.readyState == 4 && sch.status == 200) {
+        var mya = document.createElement('a');
+        mya.innerHTML = sch.res.name;
+        sideBarSearchResult.appendChild(mya);
+      }
+  }
+  sch.send(treeToSearch.value);
+}
+
 function submit(){
   var sub = new XMLHttpRequest();
   sub.open('POST', '/set/submitall', true);

@@ -182,6 +182,7 @@ getRoute.use(function(req, res, next) {
 
     }
 });
+
 getRoute.get('/userdata', function (req, res) {
     User.findOne({
         username: req.decoded.username
@@ -291,7 +292,16 @@ setRoute.post('/newskill', async function(req, res) { // global skill
 	}
 });
 
-
+setRoute.post('/search', function (req, res) {
+		var data = req.body;
+		var foundTree = await Tree.find({
+					name: data
+			}, function (err, tree) {
+					if (err) throw err;
+			return tree;
+		});
+		res.json(foundTree);
+});
 
 setRoute.post('/newtree', async function (req, res) { // create user tree
 	var data = req.body;
