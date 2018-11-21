@@ -26,6 +26,13 @@ module.exports = mongoose.model('Skill', new Schema({
             place: String,
             teacher: String
         }
+    ],
+    offers: [
+        {
+            username: String,
+            contact: String,
+            skillLevel: Number
+        }
     ]
 
 }));
