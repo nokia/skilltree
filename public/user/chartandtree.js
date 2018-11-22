@@ -181,8 +181,11 @@ function showChart() {
         var tempContainer = new PIXI.Container();
 
         var skills = data.skills.filter(obj => obj.categoryName == data.categories[i].name);
+        console.log(skills);
         var sumAP = skills.reduce((a, b) => a.achievedPoint + b.achievedPoint, 0);
+        console.log(sumAP);
         var sumMP = skills.reduce((a, b) => a.maxPoint + b.maxPoint, 0);
+        console.log(sumMP);
         var percent = 0;
         if (sumMP != 0) percent = sumAP / sumMP;
 
