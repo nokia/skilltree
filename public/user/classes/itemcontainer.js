@@ -296,21 +296,21 @@ class ItemContainer {
                             //Got the offer data, fill the offers table
 
                             //Initialize table variables
-                            var skill = offerHttpRequest.response;
+                            var globalskill = offerHttpRequest.response;
                             var offerTable = document.getElementById('offerTableBody');
                             var i = 0;
 
                             //Empty the table
                             offerTable.innerHTML = "";
                             //Filling the table
-                            for(var i=0; i<skill.offers.length; i++ )
+                            for(var i=0; i<globalskill.offers.length; i++ )
                                 {
-                                if(this.skill.achievedPoint  < skill.offers[i].achievedPoint)
+                                if(this.skill.achievedPoint  < globalskill.offers[i].achievedPoint)
                                     {
-                                    offerTable.appendChild( createTableRow( skill.offers[i].username, 
-                                                                            skill.offers[i].contact, 
-                                                                            skill.offers[i].location, 
-                                                                            skill.offers[i].achievedPoint) );
+                                    offerTable.appendChild( createTableRow( globalskill.offers[i].username, 
+                                                                            globalskill.offers[i].contact, 
+                                                                            globalskill.offers[i].location, 
+                                                                            globalskill.offers[i].achievedPoint) );
                                     }
                                 }
                             //Checking that the table is done (1 table out of 3)
