@@ -102,7 +102,7 @@ function search(){
   sch.onreadystatechange = function() {
       if(sch.readyState == 4 && sch.status == 200) {
         var mya = document.createElement('a');
-        mya.innerHTML = sch.res.name;
+        mya.innerHTML = sch.res;
         sideBarSearchResult.appendChild(mya);
       }
   }
