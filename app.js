@@ -210,27 +210,7 @@ getRoute.get('/userdata', function (req, res) {
     });
 });
 
-getRoute.get('/skilldata', function(req, res) {
-	Skill.findOne({
-		name: req.body.name
-	}, async function(err, skilldata) {
-		if(err) throw err;
 
-		if(!skilldata){
-			escape.json({
-				succes: false,
-				message: 'Skill not found.'
-			});
-		} else if (skilldata) {
-			//skill = skilldata.toObject();
-
-			return res.json(skilldata);
-		}
-
-
-	});
-
-});
 
 
 getRoute.get('/offers', function(req, res) {
@@ -371,6 +351,25 @@ setRoute.post('/addskilltotree', async function(req, res) { // to user tree
 		user.trees.find(obj => obj.name == data.treeName).skillNames.push(data.name);
 		user.save(function (err) {if (err) throw err;});
 	}
+});
+
+setRoute.post('/skilldata', function(req, res) {
+	Skill.findOne({
+		name: req.body.name
+	}, async function(err, skilldata) {
+		if(err) throw err;
+
+		if(!skilldata){
+			escape.json({
+				succes: false,
+				message: 'Skill not found.'
+			});
+		} else if (skilldata) {
+			//skill = skilldata.toObject();
+
+			return res.json(skilldata);
+		}
+	});
 });
 
 //TO BE DELETED
