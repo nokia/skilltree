@@ -107,7 +107,6 @@ function search(){
         sideBarSearchResult.appendChild(mya);
       }
   }
-  console.log(sch.response);
   sch.send(JSON.stringify(treeToSearch));
 }
 
