@@ -24,19 +24,20 @@
       <input type = "button" class = "headerButton" value = "Logout" onClick = "logout()">
       <input type = "button" class = "headerButton" value = "Open Chart" id = "openchart">
       <input type = "button" class = "headerButton" value = "Submit Changes" onClick = "submit()">
-      <div class = "myTablesDropDown">
-        <div class = "myTablesDropDownButton">My Tables</div>
-        <div class = "myTablesDropDownContent"><a>1></a><a>2</a></div>
-      </div>
     </div>
     <datalist id = "sideBarSearchResult"></datalist>
     <div class = "sideBar">
       <a class = "sideBarTitle">Add Trees!</a>
-      <div class = "sideBarContent" id = "">
+      <div class = "sideBarContent">
         <div class = "sideBarSearch">
           <input type ="text" value = "" id="searchedTree" list = "sideBarSearchResult" onkeypress="search()"><br>
           <div class = "sideBarButton">Add</div>
         </div>
+      </div>
+      <a class = "sideBarTitle">List of Skills</a>
+      <div class = "sideBarDropdown" id = "sideBarDropdown">
+        <div>Skill1</div>
+        <div>Skill2</div>
       </div>
     </div>
 
@@ -97,7 +98,7 @@
 
             </div>
 
-            
+
 
             <div class = "divTable">
                 <div class= "divTableCaption">Offers</div>
@@ -119,7 +120,7 @@
 
             </div>
 
-            
+
 
             <div class = "divTable">
                 <div class= "divTableCaption">Request</div>
