@@ -92,34 +92,51 @@ function checkFirstLogin() {
 
 // ???
 
-function search() {
-    var treeToSearch = { value: document.getElementById('searchedTree').value };
-    var sideBarSearchResult = document.getElementById('sideBarSearchResult');
-    var sch = new XMLHttpRequest();
-    sch.open('POST', '/set/search', true);
-    sch.setRequestHeader('Content-type', 'application/json');
-    sch.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-    sch.responseType = "json";
-    sch.onreadystatechange = function () {
-        if (sch.readyState == 4 && sch.status == 200) {
-            var mya = document.createElement('option');
-            sideBarSearchResult.innerHTML = "";
-            for (var i = 0; i < sch.response.length; i++) {
-                mya.value = sch.response[i].name;
-                sideBarSearchResult.appendChild(mya);
-            }
+function search(){
+  var treeToSearch = {value: document.getElementById('searchedTree').value};
+  var sideBarSearchResult = document.getElementById('sideBarSearchResult');
+
+  var sch = new XMLHttpRequest();
+  sch.open('POST', '/set/search', true);
+  sch.setRequestHeader('Content-type', 'application/json');
+  sch.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+  sch.responseType = "json";
+  sch.onreadystatechange = function() {
+      if(sch.readyState == 4 && sch.status == 200) {
+        var mya = document.createElement('option');
+        sideBarSearchResult.innerHTML = "";
+        for (var i = 0; i < sch.response.length; i++) {
+          mya.value = sch.response[i].name;
+          sideBarSearchResult.appendChild(mya);
         }
     }
     sch.send(JSON.stringify(treeToSearch));
 }
 
-function addTree() {
-    var treeToAdd = document.getElementById('searchedTree');
-    var adt = new XMLHttpRequest();
-    adt.open('POST', '/set/addtree');
-    adt.setRequestHeader('Content-type', 'application/json');
-    adt.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-    adt.responseType = "json";
+//????
+function addTree(){
+  var treeToAdd = {value: document.getElementById('searchedTree').value};
+
+  var adt = new XMLHttpRequest();
+  adt.open('POST', '/set/addtree');
+  adt.setRequestHeader('Content-type', 'application/json');
+  adt.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+  adt.responseType = "json";
+  adt.onreadystatechange = function() {
+      if(adt.readyState == 4 && adt.status == 200) {
+        if(adt.response.success){
+          var forest = document.getElementById("forest");
+          var nt = document.createElement('div');
+          nt.innerHTML = adt.response.name;
+          nt.className = "listedTree";
+          forest.appendChild(nt);
+        }
+        else{
+          alert("Selected tree is already added.");
+        }
+      }
+  }
+  adt.send(JSON.stringify(treeToAdd));
 }
 
 function submit() {
