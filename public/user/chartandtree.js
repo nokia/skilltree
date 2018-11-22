@@ -177,9 +177,9 @@ function showChart() {
 
     var sliceCount = data.categories.length;
 
+    //initialize chart variables
     var x = 0;
     var y = 0;
-
     var width = 240;
     var h1 = 60;
     var h2 = h1 + width;
@@ -243,6 +243,7 @@ function showChart() {
         // creates tree name at the chart
         //var text = new PIXI.Text(treeData.find(obj => obj.treeID == userData[i].treeID).treeName, {fill: '#ffffff', wordWrap: true, wordWrapWidth: 200, align: 'center'});
 
+        //Write category names
         var text = new PIXI.Text(data.categories[i].name, {fill: '#ffffff', wordWrap: true, wordWrapWidth: 200, align: 'center'});
         var points = [];
         var radius = 320 + (text.height / 29 - 1) * 15;
