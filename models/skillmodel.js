@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 // set up a mongoose model and pass it using module.exports
 module.exports = mongoose.model('Skill', new Schema({
     name: String,
-    categoryName: Number,
+    categoryName: String,
     skillIcon: String,
     description: String,
     pointDescription: [String],
