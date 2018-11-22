@@ -96,6 +96,7 @@ body {
 
 .sideBarSearchResult div a{
   display: block;
+  width: 100%;
   font-size: 14px;
   line-height: 14px;
   margin: 1px;
