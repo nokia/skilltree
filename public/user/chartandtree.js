@@ -103,9 +103,11 @@ function search(){
   sch.onreadystatechange = function() {
       if(sch.readyState == 4 && sch.status == 200) {
         var mya = document.createElement('a');
-        //mya.innerHTML = sch.response.name;
-        mya.onclick = function (){
+        for (var i = 0; i < sch.response.length; i++) {
+          mya.innerHTML = sch.response[i].name;
+          mya.onclick = function (){
 
+          }
         }
         sideBarSearchResult.innerHTML = '';
         sideBarSearchResult.appendChild(mya);
