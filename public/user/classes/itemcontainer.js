@@ -304,10 +304,10 @@ class ItemContainer {
                                             offerSkillLevel.className = "divTableCell";
                                             offerSkillLevel.innerHTML = "TestSkillLevel";
 
-        offerRow.appendChild(offerUsername)
-                .appendChild(offerContact)
-                .appendChild(offerLocation)
-                .appendChild(offerSkillLevel);
+        offerRow.appendChild(offerUsername);
+        offerRow.appendChild(offerContact);
+        offerRow.appendChild(offerLocation);
+        offerRow.appendChild(offerSkillLevel);
 
         offerTable.appendChild(offerRow);
 
