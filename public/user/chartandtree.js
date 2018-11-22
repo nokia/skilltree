@@ -93,7 +93,7 @@ function checkFirstLogin() {
 // ???
 
 function search(){
-  var treeToSearch = document.getElementById('searchedTree');
+  var treeToSearch = document.getElementById('searchedTree').value;
   var sideBarSearchResult = document.getElementById('sideBarSearchResult');
   var sch = new XMLHttpRequest();
   sch.open('POST', '/set/search', true);
@@ -106,7 +106,7 @@ function search(){
         sideBarSearchResult.appendChild(mya);
       }
   }
-  sch.send(treeToSearch.value);
+  sch.send(treeToSearch);
 }
 
 function submit(){

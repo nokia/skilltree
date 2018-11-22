@@ -295,7 +295,7 @@ setRoute.post('/newskill', async function(req, res) { // global skill
 setRoute.post('/search', async function (req, res) {
 		var data = req.body;
 		var foundTree = await Tree.find({
-					name: data
+					name: data[0].value
 			}, function (err, tree) {
 					if (err) throw err;
 			return tree;
