@@ -180,7 +180,7 @@ function showChart() {
     for (var i = 0; i < sliceCount; i++) {
         var tempContainer = new PIXI.Container();
 
-        var skills = user.skills.filter(obj => obj.categoryName == data.categories[i].name);
+        var skills = data.skills.filter(obj => obj.categoryName == data.categories[i].name);
         var sumAP = skills.reduce((a, b) => a.achievedPoint + b.achievedPoint, 0);
         var sumMP = skills.reduce((a, b) => a.maxPoint + b.maxPoint, 0);
         var percent = 0;
