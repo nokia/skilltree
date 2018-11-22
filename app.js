@@ -300,7 +300,6 @@ setRoute.post('/search', async function (req, res) {
 					if (err) throw err;
 			return tree;
 		});
-		console.log(foundTree.toObject().name);
 		res.json({name: foundTree.toObject().name});
 });
 
