@@ -282,7 +282,7 @@ class ItemContainer {
 
         //HTTP Request for offer data
         var offerHttpRequest = new XMLHttpRequest();
-            offerHttpRequest.open('POST', 'set/skilldata', true);
+            offerHttpRequest.open('POST', '/set/skilldata', true);
             offerHttpRequest.setRequestHeader('Content-type', 'application/json');
             offerHttpRequest.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
             offerHttpRequest.responseType = "json";
