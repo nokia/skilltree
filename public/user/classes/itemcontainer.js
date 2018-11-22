@@ -300,12 +300,13 @@ class ItemContainer {
                             var offerTable = document.getElementById('offerTableBody');
                             var i = 0;
 
+                            var skill = this.skill;
                             //Empty the table
                             offerTable.innerHTML = "";
                             //Filling the table
                             for(var i=0; i<globalskill.offers.length; i++ )
                                 {
-                                if(this.skill.achievedPoint  < globalskill.offers[i].achievedPoint)
+                                if(skill.achievedPoint  < globalskill.offers[i].achievedPoint)
                                     {
                                     offerTable.appendChild( createTableRow( globalskill.offers[i].username, 
                                                                             globalskill.offers[i].contact, 
