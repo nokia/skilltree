@@ -285,19 +285,29 @@ class ItemContainer {
         var requestTable = document.getElementById('requestTableBody');
 
         //Creating an offer tablerow
-        var offerRow = document.createElement('div').className = "divTableRow";
-        var offerUsername = document.createElement('div').className = "divTableCell";
+        var offerRow = document.createElement('div');
+                                            offerRow.className = "divTableRow";
+
+        var offerUsername = document.createElement('div');
+                                            offerUsername.className = "divTableCell";
                                             offerUsername.innerHTML = "TestUsername";
-        var offerContact = document.createElement('div').className = "divTableCell";
+
+        var offerContact = document.createElement('div');
+                                            offerContact.className = "divTableCell";
                                             offerContact.innerHTML = "TestContact";
-        var offerLocation = document.createElement('div').className = "divTableCell";
+
+        var offerLocation = document.createElement('div');
+                                            offerLocation.className = "divTableCell";
                                             offerLocation.innerHTML = "TestLocation";
-        var offerSkillLevel = document.createElement('div').className = "divTableCell";
+
+        var offerSkillLevel = document.createElement('div');
+                                            offerSkillLevel.className = "divTableCell";
                                             offerSkillLevel.innerHTML = "TestSkillLevel";
-        offerRow.appendChild(offerUsername)
-                .appendChild(offerContact)
-                .appendChild(offerLocation)
-                .appendChild(offerSkillLevel);
+
+        offerRow.appendChild(offerUsername);
+        offerRow.appendChild(offerContact);
+        offerRow.appendChild(offerLocation);
+        offerRow.appendChild(offerSkillLevel);
 
         offerTable.appendChild(offerRow);
 
