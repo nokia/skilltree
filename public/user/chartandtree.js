@@ -92,7 +92,7 @@ function checkFirstLogin() {
 
 // ???
 
-function search(){ 
+function search(){
   var treeToSearch = document.getElementById('searchedTree');
   var sideBarSearchResult = document.getElementById('sideBarSearchResult');
   var sch = new XMLHttpRequest();
@@ -180,19 +180,11 @@ function showChart() {
     for (var i = 0; i < sliceCount; i++) {
         var tempContainer = new PIXI.Container();
 
-        //var currentLevelSum = 0;
-        //var maxLevelSum = 0;
-        var percent = Math.random();
-
-        /*for (var j = 0; j < treeData.find(obj => obj.treeID == userData[i].treeID).skills.length; ++j) {
-            var skill = treeData.find(obj => obj.treeID == userData[i].treeID).skills[j];
-            currentLevelSum += getSkillLevel(userData[i].treeID, skill.skillID);
-            maxLevelSum += skill.maxSkillLevel;
-        }*/
-        //percent = currentLevelSum / maxLevelSum;
-
-        //tempContainer.id = userData[i].treeID;
-        //sliceContainer[i].id = categories[i];
+        var skills = user.skills.filter(obj => obj.categoryName == data.categories[i].name);
+        var sumAP = skills.reduce((a, b) => a.achievedPoint + b.achievedPoint, 0);
+        var sumMP = skills.reduce((a, b) => a.maxPoint + b.maxPoint, 0);
+        var percent = 0;
+        if (sumMP != 0) percent = sumAP / sumMP;
 
         h2 = h1 + width;
         var s = (i * (360 / sliceCount) * Math.PI) / 180;
