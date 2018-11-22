@@ -280,8 +280,30 @@ class ItemContainer {
         var header = document.getElementById('skillnameHeader');
         var span = document.getElementsByClassName("modalClose")[0];
 
+        var trainingTable = document.getElementById('trainingTableBody');
+        var offerTable = document.getElementById('offerTableBody');
+        var requestTable = document.getElementById('requestTableBody');
+
+        //Creating an offer tablerow
+        var offerRow = document.createElement('div').className = "divTableRow";
+        var offerUsername = document.createElement('div').className = "divTableCell";
+                                            offerUsername.innerHTML = "TestUsername";
+        var offerContact = document.createElement('div').className = "divTableCell";
+                                            offerContact.innerHTML = "TestContact";
+        var offerLocation = document.createElement('div').className = "divTableCell";
+                                            offerLocation.innerHTML = "TestLocation";
+        var offerSkillLevel = document.createElement('div').className = "divTableCell";
+                                            offerSkillLevel.innerHTML = "TestSkillLevel";
+        offerRow.appendChild(offerUsername)
+                .appendChild(offerContact)
+                .appendChild(offerLocation)
+                .appendChild(offerSkillLevel);
+
+        offerTable.appendChild(offerRow);
+
         header.innerText = this.skill.name;
 
+        
         
 
         span.onclick = function() {
