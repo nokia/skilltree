@@ -286,7 +286,8 @@ class ItemContainer {
 
         //Creating an offer tablerow
         var offerRow = document.createElement('div').className = "divTableRow";
-        var offerUsername = document.createElement('div').className = "divTableCell";
+        var offerUsername = document.createElement('div');
+                                            offerUsername.className = "divTableCell";
                                             offerUsername.innerText = "TestUsername";
         var offerContact = document.createElement('div').className = "divTableCell";
                                             offerContact.innerText = "TestContact";
