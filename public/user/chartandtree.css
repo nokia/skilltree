@@ -110,7 +110,7 @@ body {
   position: relative;
 }
 
-.myTablesDropDownButton:hover myTablesDropDownContent{
+.myTablesDropDown:hover .myTablesDropDownContent{
   max-height: 100%;
 }
 
