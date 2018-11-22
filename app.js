@@ -294,14 +294,18 @@ setRoute.post('/newskill', async function(req, res) { // global skill
 
 setRoute.post('/search', async function (req, res) {
 		var data = req.body;
-		var foundTree = await Tree.find({
+		var foundTrees = await Tree.find({
 					"name": {$regex : ".*" + data.value + ".*"}
 			}, function (err, tree) {
 					if (err) throw err;
 			return tree;
 		});
-		console.log(foundTree);
-		//res.json({name: foundTree.toObject().name});
+		console.log(foundTrees);
+		var resTrees;
+		for (var i = 0; i < foundTrees.length; i++) {
+			resTrees[i] = {name: foundTrees[i].name};
+		}
+		res.json(resTrees);
 });
 
 setRoute.post('/newtree', async function (req, res) { // create user tree
