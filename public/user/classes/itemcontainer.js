@@ -301,6 +301,7 @@ class ItemContainer {
                             var i = 0;
 
                             //Filling the table
+                            for(var i=0; i<skill.offers.length; i++ )
                             offerTable.appendChild( createTableRow( skill.offers[i].username, 
                                                                     skill.offers[i].contact, 
                                                                     skill.offers[i].location, 
