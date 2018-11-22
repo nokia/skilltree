@@ -94,7 +94,6 @@ function checkFirstLogin() {
 
 function search(){
   var treeToSearch = {value: document.getElementById('searchedTree').value};
-  console.log(treeToSearch);
   var sideBarSearchResult = document.getElementById('sideBarSearchResult');
   var sch = new XMLHttpRequest();
   sch.open('POST', '/set/search', true);

@@ -296,7 +296,7 @@ setRoute.post('/search', async function (req, res) {
 		var data = req.body;
 		console.log(data);
 		var foundTree = await Tree.find({
-					name: data.value
+					name: data[0].value
 			}, function (err, tree) {
 					if (err) throw err;
 			return tree;
