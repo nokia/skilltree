@@ -298,15 +298,13 @@ class ItemContainer {
                             //Initialize table variables
                             var globalskill = offerHttpRequest.response;
                             var offerTable = document.getElementById('offerTableBody');
-                            var i = 0;
 
-                            var skill = this.skill;
                             //Empty the table
                             offerTable.innerHTML = "";
                             //Filling the table
                             for(var i=0; i<globalskill.offers.length; i++ )
                                 {
-                                if(skill.achievedPoint  < globalskill.offers[i].achievedPoint)
+                                if(true) //TODO, only higher level offers should appear
                                     {
                                     offerTable.appendChild( createTableRow( globalskill.offers[i].username, 
                                                                             globalskill.offers[i].contact, 
