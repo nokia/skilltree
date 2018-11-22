@@ -341,8 +341,9 @@ function showTree (treeName) {
     tree.treeContainer.position.set(app.renderer.width / 2 + tree.treeContainer.width / 2, app.renderer.height / 2);
 
     tree.treeContainer.alpha = 0;
-    app.start();
+    app.renderer.render(app.stage);
     document.getElementById("pixiCanvas").style.visibility = "visible";
+    app.start();
     var fadein = function (delta) {
         tree.treeContainer.alpha += .05;
         if (tree.treeContainer.alpha == 1) {
