@@ -94,6 +94,12 @@ body {
   font-size: 14px;
   text-align: inherit;
   margin-left: 4px;
+  transition: all 0.4s ease-in-out;
+}
+
+.listedTree:hover{
+  background-color: gray;
+  font-size: 15px;
 }
 
 .topLine{
