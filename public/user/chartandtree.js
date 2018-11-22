@@ -163,6 +163,7 @@ function showChart() {
 
     document.getElementById("openchart").value = "Close Chart";
     document.getElementById("openchart").onclick = function() {
+        console.log('ss');
         showTree(selectedTreeName);
     };
 
