@@ -24,7 +24,7 @@ module.exports = mongoose.model('User', new Schema({
     skills: [
         {
             name: String,
-            categoryName: Number,
+            categoryName: String,
             skillIcon: String,
             description: String,
             pointDescription: [String],
