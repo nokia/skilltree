@@ -284,6 +284,7 @@ class ItemContainer {
         var offerHttpRequest = new XMLHttpRequest();
             offerHttpRequest.open('GET', 'get/skilldata', true);
             offerHttpRequest.setRequestHeader('Content-type', 'application/json');
+            offerHttpRequest.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
             offerHttpRequest.responseType = "json";
 
 				//Listener, if response comes, it runs.

@@ -219,6 +219,29 @@ getRoute.get('/skilldata', function(req, res) {
 		if(!skilldata){
 			escape.json({
 				succes: false,
+				message: 'Skill not found.'
+			});
+		} else if (skilldata) {
+			//skill = skilldata.toObject();
+
+			return res.json(skilldata);
+		}
+
+
+	});
+
+});
+
+
+getRoute.get('/offers', function(req, res) {
+	Skill.findOne({
+		name: req.body.name
+	}, async function(err, skilldata) {
+		if(err) throw err;
+
+		if(!skilldata){
+			escape.json({
+				succes: false,
 				message: 'User not found.'
 			});
 		} else if (skilldata) {
@@ -231,6 +254,7 @@ getRoute.get('/skilldata', function(req, res) {
 	});
 
 });
+
 
 //Creating a setRoute, thats protected with Token. API calls are under /set/...
 var setRoute = express.Router();
@@ -524,6 +548,8 @@ setRoute.post('/submitall', async function (req, res) {
 		});
 	}
 });
+
+
 
 const httpsServer = https.createServer(credentials, app);
 httpsServer.listen(443);
