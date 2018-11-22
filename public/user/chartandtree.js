@@ -6,8 +6,8 @@ dataRequest.open('GET', '/get/userdata', true);
 dataRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 dataRequest.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
 dataRequest.responseType = "json";
-dataRequest.onreadystatechange = function() {
-    if(dataRequest.readyState == 4 && dataRequest.status == 200) {
+dataRequest.onreadystatechange = function () {
+    if (dataRequest.readyState == 4 && dataRequest.status == 200) {
         data = dataRequest.response;
         checkFirstLogin();
     }
@@ -15,13 +15,13 @@ dataRequest.onreadystatechange = function() {
 dataRequest.send();
 
 var app = new PIXI.Application({
-        view: pixiCanvas,
-        width: window.innerWidth - 160,
-        height: window.innerHeight - 30,
-        backgroundColor: 0x183693,
-        antialias: true,
-        autoStart: false,
-        autoResize: true
+    view: pixiCanvas,
+    width: window.innerWidth - 160,
+    height: window.innerHeight - 30,
+    backgroundColor: 0x183693,
+    antialias: true,
+    autoStart: false,
+    autoResize: true
 });
 
 // TOP BAR
@@ -37,23 +37,23 @@ function checkFirstLogin() {
         var btn = document.getElementById('savebtn');
         var mainTree = document.getElementById('maintree');
 
-        btn.onclick = function() {
+        btn.onclick = function () {
             var contact = document.getElementById('contact').value;
             var location = document.getElementById('location').value;
 
             var firstLoginData = {
-                    mainTree: mainTree.value,
-                    contact: contact,
-                    location: location
+                mainTree: mainTree.value,
+                contact: contact,
+                location: location
             };
 
             var saveMain = new XMLHttpRequest();
             saveMain.open('POST', '/set/firstlogindata', true);
             saveMain.setRequestHeader('Content-type', 'application/json');
             saveMain.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-            saveMain.onreadystatechange = function() {
-                if(saveMain.readyState == 4 && saveMain.status == 200) {
-                  window.open("/user/", "_self");
+            saveMain.onreadystatechange = function () {
+                if (saveMain.readyState == 4 && saveMain.status == 200) {
+                    window.open("/user/", "_self");
                 }
             }
             saveMain.send(JSON.stringify(firstLoginData));
@@ -109,9 +109,8 @@ function search(){
           mya.value = sch.response[i].name;
           sideBarSearchResult.appendChild(mya);
         }
-      }
-  }
-  sch.send(JSON.stringify(treeToSearch));
+    }
+    sch.send(JSON.stringify(treeToSearch));
 }
 
 function addTree(){
@@ -139,35 +138,35 @@ function addTree(){
   adt.send(JSON.stringify(treeToAdd));
 }
 
-function submit(){
-  var sub = new XMLHttpRequest();
-  sub.open('POST', '/set/submitall', true);
-  sub.setRequestHeader('Content-type', 'application/json');
-  sub.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-  sub.onreadystatechange = function() {
-      if(sub.readyState == 4 && sub.status == 200) {
-        window.open("/user/", "_self");
-      }
-  }
+function submit() {
+    var sub = new XMLHttpRequest();
+    sub.open('POST', '/set/submitall', true);
+    sub.setRequestHeader('Content-type', 'application/json');
+    sub.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+    sub.onreadystatechange = function () {
+        if (sub.readyState == 4 && sub.status == 200) {
+            window.open("/user/", "_self");
+        }
+    }
 
-  var submitData = data.skills;
-  for (var i = 0; i < submitData.length; ++i) {
-      delete submitData[i].itemcontainer;
-  }
+    var submitData = data.skills;
+    for (var i = 0; i < submitData.length; ++i) {
+        delete submitData[i].itemcontainer;
+    }
 
-  sub.send(JSON.stringify(submitData));
+    sub.send(JSON.stringify(submitData));
 }
 
-function logout(){
+function logout() {
     localStorage.setItem("loginToken", "");
     window.open("/", "_self");
 }
 
-function startLoader () {
+function startLoader() {
     PIXI.loader.add("pictures/skillborder.png")
-                //.add("tree.png")
-                .add("pictures/back.png")
-                .add("pictures/tick.png");
+        //.add("tree.png")
+        .add("pictures/back.png")
+        .add("pictures/tick.png");
     for (var i = 0; i < data.skills.length; ++i) {
         PIXI.loader.add(data.skills[i].skillIcon.toString());
     }
@@ -192,7 +191,7 @@ function showChart() {
     }
 
     document.getElementById("openchart").value = "Close Chart";
-    document.getElementById("openchart").onclick = function() {
+    document.getElementById("openchart").onclick = function () {
         showTree(selectedTreeName);
     };
 
@@ -267,7 +266,7 @@ function showChart() {
         //var text = new PIXI.Text(treeData.find(obj => obj.treeID == userData[i].treeID).treeName, {fill: '#ffffff', wordWrap: true, wordWrapWidth: 200, align: 'center'});
 
         //Write category names
-        var text = new PIXI.Text(data.categories[i].name, {fill: '#ffffff', wordWrap: true, wordWrapWidth: 200, align: 'center'});
+        var text = new PIXI.Text(data.categories[i].name, { fill: '#ffffff', wordWrap: true, wordWrapWidth: 200, align: 'center' });
         var points = [];
         var radius = 320 + (text.height / 29 - 1) * 15;
         var pointsCount = 20;
@@ -346,7 +345,7 @@ window.onresize = function () {
 var selectedTreeName;
 var tree = undefined;
 
-function showTree (treeName) {
+function showTree(treeName) {
     // load the tree's pictures
     selectedTreeName = treeName;
 
@@ -420,7 +419,7 @@ function showTree (treeName) {
 
 // helper functions
 
-function parseJwt (token) {
+function parseJwt(token) {
     var base64Url = token.split('.')[1];
     var base64 = base64Url.replace('-', '+').replace('_', '/');
     return JSON.parse(window.atob(base64));

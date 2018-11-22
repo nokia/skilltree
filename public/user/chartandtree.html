@@ -1,37 +1,54 @@
 <!DOCTYPE html>
 <html oncontextmenu="return false;">
+
 <head>
     <link rel="stylesheet" type="text/css" href="chartandtree.css">
     <meta charset="UTF-8">
     <title>Skill Tree</title>
-    <script src = "pixi/pixi.min.js"></script>
-    <script src = "pixi/pixi-extra-filters.js"></script>
-    <script src = "pixi/pixi-layers.js"></script>
+    <script src="pixi/pixi.min.js"></script>
+    <script src="pixi/pixi-extra-filters.js"></script>
+    <script src="pixi/pixi-layers.js"></script>
     <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function() {
-    	var isIE = /*@cc_on!@*/false || !!document.documentMode;
-    	var isEdge = !isIE && !!window.StyleMedia;
-    	if(isIE || isEdge){
-    		window.open('https://www.google.com/chrome/','_self');
-    	}
-    }, false);
+        document.addEventListener('DOMContentLoaded', function () {
+            var isIE = /*@cc_on!@*/false || !!document.documentMode;
+            var isEdge = !isIE && !!window.StyleMedia;
+            if (isIE || isEdge) {
+                window.open('https://www.google.com/chrome/', '_self');
+            }
+        }, false);
     </script>
 </head>
+
 <body>
-  <div class = "grid">
-    <div class = "topLine">
-      <div id = "welcome" class = "welcome">Hello</div>
-      <input type = "button" class = "headerButton" value = "Logout" onClick = "logout()">
-      <input type = "button" class = "headerButton" value = "Open Chart" id = "openchart">
-      <input type = "button" class = "headerButton" value = "Submit Changes" onClick = "submit()">
-    </div>
-    <datalist id = "sideBarSearchResult"></datalist>
-    <div class = "sideBar">
-      <a class = "sideBarTitle">Add Trees!</a>
-      <div class = "sideBarContent">
-        <div class = "sideBarSearch">
-          <input type ="text" value = "" id="searchedTree" list = "sideBarSearchResult" onkeypress="search()"><br>
-          <div class = "sideBarButton" onclick = "addTree">Add</div>
+    <div class="grid">
+        <div class="topLine">
+            <div id="welcome" class="welcome">Hello</div>
+            <input type="button" class="headerButton" value="Logout" onClick="logout()">
+            <input type="button" class="headerButton" value="Open Chart" id="openchart">
+            <input type="button" class="headerButton" value="Submit Changes" onClick="submit()">
+        </div>
+        <datalist id="sideBarSearchResult"></datalist>
+        <div class="sideBar">
+            <a class="sideBarTitle">Add Trees!</a>
+            <div class="sideBarContent">
+                <div class="sideBarSearch">
+                    <input type="text" value="" id="searchedTree" list="sideBarSearchResult" onkeypress="search()"><br>
+                    <div class="sideBarButton" onclick="addTree">Add</div>
+                </div>
+            </div>
+            <a class="sideBarTitle">Your Trees</a>
+            <div class="sideBarContent">
+                <div class="listedTree">Tree1</div>
+                <div class="listedTree">Tree2</div>
+                <div class="listedTree">Tree3</div>
+                <div class="listedTree">Tree4</div>
+                <div class="listedTree">Tree5</div>
+                <div class="listedTree">Tree6</div>
+                <div class="listedTree">Tree7</div>
+                <div class="listedTree">Tree8</div>
+                <div class="listedTree">Tree9</div>
+                <div class="listedTree">Tree10</div>
+            </div>
         </div>
       </div>
       <a class = "sideBarTitle">Your Trees</a>
@@ -49,47 +66,47 @@
       </div>
     </div>
 
-    <div class = "canvas">
-      <canvas id = "pixiCanvas" style = "visibility: hidden;"></canvas>
-    </div>
-  </div>
-
-  <div id = "firstLogin" class = "modal">
-      <div class = "modal-content">
-          <div class="modal-header">
-              <h2>Set up your account</h2>
-          </div>
-          <div class="modal-body">
-              <h4>Select your main skill tree!</h4>
-              <select id = "maintree"></select>
-              <br>
-              <div id = "teachingSettings">
-                  <br>
-                  <h4>Specify your details for teaching!</h4>
-                  <br>
-                  What is your contact (phone,email) ?
-                  <input type = "text" id = "contact"><br>
-                  <br>
-                  What is your location ?
-                  <input type = "text" id = "location"><br>
-                  <br>
-              </div>
-              <br>
-              <input type = "button" value = "Save" id = "savebtn">
-          </div>
-      </div>
-  </div>
-
-  <div id = "skillpage" class = "modal">
-    <div class = "modal-content">
-        <div class="modal-header">
-            <span class="modalClose">&times;</span>
-            <h2 id="skillnameHeader"></h2>
+        <div class="canvas">
+            <canvas id="pixiCanvas" style="visibility: hidden;"></canvas>
         </div>
-        <div class="modal-body">
-            <div class = "divTable">
-                <div class= "divTableCaption">Trainings</div>
-                    <div class="divTableBody" id = "trainingTableBody">
+    </div>
+
+    <div id="firstLogin" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Set up your account</h2>
+            </div>
+            <div class="modal-body">
+                <h4>Select your main skill tree!</h4>
+                <select id="maintree"></select>
+                <br>
+                <div id="teachingSettings">
+                    <br>
+                    <h4>Specify your details for teaching!</h4>
+                    <br>
+                    What is your contact (phone,email) ?
+                    <input type="text" id="contact"><br>
+                    <br>
+                    What is your location ?
+                    <input type="text" id="location"><br>
+                    <br>
+                </div>
+                <br>
+                <input type="button" value="Save" id="savebtn">
+            </div>
+        </div>
+    </div>
+
+    <div id="skillpage" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modalClose">&times;</span>
+                <h2 id="skillnameHeader"></h2>
+            </div>
+            <div class="modal-body">
+                <div class="divTable">
+                    <div class="divTableCaption">Trainings</div>
+                    <div class="divTableBody" id="trainingTableBody">
                         <div class="divTableRow">
                             <div class="divTableHead"> Date </div>
                             <div class="divTableHead"> Level </div>
@@ -104,13 +121,13 @@
                         </div>
                     </div>
 
-            </div>
+                </div>
 
 
 
-            <div class = "divTable">
-                <div class= "divTableCaption">Offers</div>
-                    <div class="divTableBody" id = "offerTableBody">
+                <div class="divTable">
+                    <div class="divTableCaption">Offers</div>
+                    <div class="divTableBody" id="offerTableBody">
                         <div class="divTableRow">
                             <div class="divTableHead"> Username </div>
                             <div class="divTableHead"> Contact </div>
@@ -126,13 +143,13 @@
                         </div>
                     </div>
 
-            </div>
+                </div>
 
 
 
-            <div class = "divTable">
-                <div class= "divTableCaption">Request</div>
-                    <div class="divTableBody" id = requestTableBody>
+                <div class="divTable">
+                    <div class="divTableCaption">Request</div>
+                    <div class="divTableBody" id=requestTableBody>
                         <div class="divTableRow">
                             <div class="divTableHead"> TODO </div>
                             <div class="divTableHead"> TODO </div>
@@ -148,18 +165,19 @@
                         </div>
                     </div>
 
-            </div>
+                </div>
 
+            </div>
         </div>
     </div>
-</div>
 
-    <script src = "classes/link.js"></script>
-    <script src = "classes/itemcontainer.js"></script>
-    <script src = "classes/tree.js"></script>
-    <script src = "editor/classes/editoritemcontainer.js"></script>
-    <script src = "editor/classes/editortree.js"></script>
-    <script src = "editor/editor.js"></script>
-    <script src = "chartandtree.js"></script>
+    <script src="classes/link.js"></script>
+    <script src="classes/itemcontainer.js"></script>
+    <script src="classes/tree.js"></script>
+    <script src="editor/classes/editoritemcontainer.js"></script>
+    <script src="editor/classes/editortree.js"></script>
+    <script src="editor/editor.js"></script>
+    <script src="chartandtree.js"></script>
 </body>
+
 </html>

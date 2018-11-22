@@ -10,15 +10,15 @@ function validate() {
 	httpRequest.responseType = "json";
 
 	//Listener, if response comes, it runs.
-	httpRequest.onreadystatechange = function() {
-			if(httpRequest.readyState == 4 && httpRequest.status == 200) {
-				if(httpRequest.response.success){
-					localStorage.setItem("loginToken", httpRequest.response.token);
-					window.open('/user','_self');
-				} else {
-                    showToast();
-                }
+	httpRequest.onreadystatechange = function () {
+		if (httpRequest.readyState == 4 && httpRequest.status == 200) {
+			if (httpRequest.response.success) {
+				localStorage.setItem("loginToken", httpRequest.response.token);
+				window.open('/user', '_self');
+			} else {
+				showToast();
 			}
+		}
 	};
 
 	httpRequest.send(
@@ -26,15 +26,15 @@ function validate() {
 			username: username.value,
 			password: password.value
 		})
-	 );
-	}
+	);
+}
 
 function showToast() {
 	var toast = document.getElementById("toast");
 
 	toast.className = "show";
 
-	setTimeout(function(){
+	setTimeout(function () {
 		toast.className = ""
 	}, 3000);
 }
