@@ -280,37 +280,84 @@ class ItemContainer {
         var header = document.getElementById('skillnameHeader');
         var span = document.getElementsByClassName("modalClose")[0];
 
+        //HTTP Request for offer data
+        var offerHttpRequest = new XMLHttpRequest();
+            offerHttpRequest.open('GET', 'get/skilldata', true);
+            offerHttpRequest.setRequestHeader('Content-type', 'application/json');
+            offerHttpRequest.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+            offerHttpRequest.responseType = "json";
+
+				//Listener, if response comes, it runs.
+				offerHttpRequest.onreadystatechange = function() {
+		    		if(offerHttpRequest.readyState == 4 && offerHttpRequest.status == 200) {
+						if (offerHttpRequest.response.success) {
+                            //Got the offer data, fill the offers table
+
+                            //Initialize table variables
+                            var skill = offerHttpRequest.response;
+                            var offerTable = document.getElementById('offerTableBody');
+                            var i = 0;
+
+                            //Filling the table
+                            offerTable.appendChild( createTableRow( skill.offers[i].username, 
+                                                                    skill.offers[i].contact, 
+                                                                    skill.offers[i].location, 
+                                                                    skill.offers[i].achievedPoint) );
+                            
+                            //Checking that the table is done (1 table out of 3)
+                            allLoaded ++;
+
+                            //Display the tables Window if all table has been loaded
+                            displayWindow();
+
+						} else showToast();
+					}
+				}
+
+				offerHttpRequest.send(
+					JSON.stringify({
+						name: this.skill.name
+					})
+				);
+
+
+
+        //Adding
         var trainingTable = document.getElementById('trainingTableBody');
-        var offerTable = document.getElementById('offerTableBody');
+        
         var requestTable = document.getElementById('requestTableBody');
 
-        //Creating an offer tablerow
-        var offerRow = document.createElement('div');
-                                            offerRow.className = "divTableRow";
 
-        var offerUsername = document.createElement('div');
-                                            offerUsername.className = "divTableCell";
-                                            offerUsername.innerHTML = "TestUsername";
+        function createTableRow( data1, data2, data3, data4 )
+        {
+            //Creating an offer tablerow
+            var Row = document.createElement('div');
+            Row.className = "divTableRow";
 
-        var offerContact = document.createElement('div');
-                                            offerContact.className = "divTableCell";
-                                            offerContact.innerHTML = "TestContact";
+            var Column1 = document.createElement('div');
+            Column1.className = "divTableCell";
+            Column1.innerHTML = data1;
 
-        var offerLocation = document.createElement('div');
-                                            offerLocation.className = "divTableCell";
-                                            offerLocation.innerHTML = "TestLocation";
+            var Column2 = document.createElement('div');
+            Column2.className = "divTableCell";
+            Column2.innerHTML = data2;
 
-        var offerSkillLevel = document.createElement('div');
-                                            offerSkillLevel.className = "divTableCell";
-                                            offerSkillLevel.innerHTML = "TestSkillLevel";
+            var Column3 = document.createElement('div');
+            Column3.className = "divTableCell";
+            Column3.innerHTML = data3;
 
-        offerRow.appendChild(offerUsername);
-        offerRow.appendChild(offerContact);
-        offerRow.appendChild(offerLocation);
-        offerRow.appendChild(offerSkillLevel);
+            var Column4 = document.createElement('div');
+            Column4.className = "divTableCell";
+            Column4.innerHTML = data4;
 
-        offerTable.appendChild(offerRow);
+            Row.appendChild(Column1);
+            Row.appendChild(Column2);
+            Row.appendChild(Column3);
+            Row.appendChild(Column4);
 
+            return Row;
+        }
+        
         header.innerText = this.skill.name;
 
         
@@ -326,7 +373,12 @@ class ItemContainer {
                 modal.style.display = "none";
             }
         }
-
-        modal.style.display = "block";
+        
+        function displayWindow(){
+            if(allLoaded == 1)
+                modal.style.display = "block";
+        }
+    
+        
     }
 }
