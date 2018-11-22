@@ -280,6 +280,8 @@ class ItemContainer {
         var header = document.getElementById('skillnameHeader');
         var span = document.getElementsByClassName("modalClose")[0];
 
+
+        var allLoaded = 0;
         //HTTP Request for offer data
         var offerHttpRequest = new XMLHttpRequest();
             offerHttpRequest.open('POST', '/set/skilldata', true);
