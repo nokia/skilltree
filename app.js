@@ -492,15 +492,16 @@ setRoute.post('/submitall', async function (req, res) {
 			data.forEach(function (userSkill) {
 				var globalSkill = globalSkills.find(obj => obj.name == userSkill.name);
 				if (userSkill.achievedPoint > 0) {
-					if (globalSkill.offers.find(obj => obj.username == user.username) == undefined)
+					if (globalSkill.offers.find(obj => obj.username == user.username) == undefined) {
 						globalSkills.find(obj => obj.name == userSkill.name).offers.push({
 							username: user.username,
 							contact: user.contact,
 							location: user.location,
 							achievedPoint: userSkill.achievedPoint,
 						});
+					} else globalSkill.offers.find(obj => obj.username == user.username).achievedPoint = userSkill.achievedPoint;
 				} else {
-					if (globalSkill.offers.find(obj => obj.username() == user.username) != undefined) {
+					if (globalSkill.offers.find(obj => obj.username == user.username) != undefined) {
 						globalSkills.find(obj => obj.name == userSkill.name).offers = globalSkill.offers.filter(obj => obj.username != user.username);
 					}
 				}
