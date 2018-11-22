@@ -308,6 +308,10 @@ setRoute.post('/search', async function (req, res) {
 		res.json(resTrees);
 });
 
+setRoute.post('/addtree', async function (req, res){
+	
+});
+
 setRoute.post('/newtree', async function (req, res) { // create user tree
 	var data = req.body;
 
