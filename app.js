@@ -210,10 +210,7 @@ getRoute.get('/userdata', function (req, res) {
 	});
 });
 
-
-
-
-getRoute.get('/offers', function (req, res) {
+getRoute.post('/skilldata', function (req, res) {
 	Skill.findOne({
 		name: req.body.name
 	}, async function (err, skilldata) {
@@ -222,18 +219,18 @@ getRoute.get('/offers', function (req, res) {
 		if (!skilldata) {
 			escape.json({
 				succes: false,
-				message: 'User not found.'
+				message: 'Skill not found.'
 			});
 		} else if (skilldata) {
-			skill = skilldata.toObject();
+			//skill = skilldata.toObject();
 
 			return res.json(skilldata);
 		}
-
-
 	});
-
 });
+
+
+
 
 
 //Creating a setRoute, thats protected with Token. API calls are under /set/...
@@ -357,24 +354,7 @@ setRoute.post('/addskilltotree', async function (req, res) { // to user tree
 	}
 });
 
-setRoute.post('/skilldata', function (req, res) {
-	Skill.findOne({
-		name: req.body.name
-	}, async function (err, skilldata) {
-		if (err) throw err;
 
-		if (!skilldata) {
-			escape.json({
-				succes: false,
-				message: 'Skill not found.'
-			});
-		} else if (skilldata) {
-			//skill = skilldata.toObject();
-
-			return res.json(skilldata);
-		}
-	});
-});
 
 //TO BE DELETED
 setRoute.post('/approvetree', async function (req, res) {
