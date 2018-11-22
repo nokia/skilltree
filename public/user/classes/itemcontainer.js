@@ -300,13 +300,16 @@ class ItemContainer {
                             var offerTable = document.getElementById('offerTableBody');
                             var i = 0;
 
+                            //Empty the table
+                            offerTable.innerHTML = "";
                             //Filling the table
                             for(var i=0; i<skill.offers.length; i++ )
-                            offerTable.appendChild( createTableRow( skill.offers[i].username, 
-                                                                    skill.offers[i].contact, 
-                                                                    skill.offers[i].location, 
-                                                                    skill.offers[i].achievedPoint) );
-                            
+                                {
+                                offerTable.appendChild( createTableRow( skill.offers[i].username, 
+                                                                        skill.offers[i].contact, 
+                                                                        skill.offers[i].location, 
+                                                                        skill.offers[i].achievedPoint) );
+                                }
                             //Checking that the table is done (1 table out of 3)
                             allLoaded ++;
 
