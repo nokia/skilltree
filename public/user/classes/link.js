@@ -1,5 +1,5 @@
 class Link {
-    constructor(textString, url, style, underline) {
+    constructor (textString, url, style, underline) {
         var link = new PIXI.Container();
 
         var text = new PIXI.Text(textString, style);
@@ -28,12 +28,12 @@ class Link {
         return link;
     }
 
-    enable() {
+    enable () {
         this.button.interactive = true;
         this.button.buttonMode = true;
     }
 
-    disable() {
+    disable () {
         this.button.interactive = false;
         this.button.buttonMode = false;
     }

@@ -1,5 +1,5 @@
 class Tree {
-    constructor(app, skills) {
+    constructor (app, skills) {
         this.skills = skills;
         this.treeContainer = new PIXI.Container();
         this.treeContainer.enableSort = true;
@@ -21,30 +21,30 @@ class Tree {
         var n = 1;
         var levelLength = [];
 
-        for (var i = 0; i < this.skills.length; i++) {
-            if (tmpChildren.includes(this.skills[i].name)) {
-                level += 1;
-                tmpChildren = [];
-                n = 1;
-                levelLength[level] = n;
-            }
-            else { levelLength[level] = n; }
-            this.skills[i].level = level;
-            this.skills[i].place = n;
-            for (var j = 0; j < this.skills[i].children.length; ++j) {
-                tmpChildren.push(this.skills[i].children[j].name);
-            }
-            n++;
+        for(var i = 0; i < this.skills.length; i++){
+          if(tmpChildren.includes(this.skills[i].name)){
+            level += 1;
+            tmpChildren = [];
+            n = 1;
+            levelLength[level] = n;
+          }
+          else { levelLength[level] = n;}
+          this.skills[i].level = level;
+          this.skills[i].place = n;
+          for (var j = 0; j < this.skills[i].children.length; ++j){
+            tmpChildren.push(this.skills[i].children[j].name);
+          }
+          n++;
         }
 
-        for (var i = 0; i < this.skills.length; i++) {
-            this.skills[i].itemcontainer = new ItemContainer(app, this.skills, this.skills[i].name);
+        for(var i = 0; i < this.skills.length; i++){
+          this.skills[i].itemcontainer = new ItemContainer(app, this.skills, this.skills[i].name);
 
-            this.skills[i].itemcontainer.container.position.x = (this.skills[i].place - 1) * 130 - (levelLength[this.skills[i].level] * 130) / 2;
-            this.skills[i].itemcontainer.container.position.y = this.skills[i].level * 150;
+          this.skills[i].itemcontainer.container.position.x = (this.skills[i].place - 1) * 130 - (levelLength[this.skills[i].level] * 130) / 2;
+          this.skills[i].itemcontainer.container.position.y = this.skills[i].level * 150;
 
-            this.skills[i].itemcontainer.container.parentLayer = skillLayer;
-            this.treeContainer.addChild(this.skills[i].itemcontainer.container);
+          this.skills[i].itemcontainer.container.parentLayer = skillLayer;
+          this.treeContainer.addChild(this.skills[i].itemcontainer.container);
         }
 
         this.drawConnectionLines();
@@ -56,18 +56,19 @@ class Tree {
     // the cases of the added skill being a root skill or
     // being in a new line.
 
-    insertSkill(addedSkill) {
-        this.skills.splice(
-            this.skills.indexof(
-                this.skills.findOne(
-                    obj1 => obj1.parents.includes(
-                        obj2 => obj2.name == this.skills.find(
-                            obj3 => obj3.name == addedSkill.parents[0].name
-                        )
-                    )
-                )
-            ),
-            0, addedSkill);
+    insertSkill(addedSkill)
+    {
+      this.skills.splice(
+        this.skills.indexof(
+          this.skills.findOne(
+            obj1 => obj1.parents.includes(
+              obj2 => obj2.name == this.skills.find(
+                obj3 => obj3.name == addedSkill.parents[0].name
+              )
+            )
+          )
+        ),
+      0, addedSkill);
     }
 
     // not ready yet
