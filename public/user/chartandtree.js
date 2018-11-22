@@ -347,7 +347,7 @@ function showTree (treeName) {
     tree.treeContainer.pivot.set(tree.treeContainer.width / 2, tree.treeContainer.height / 2);
     tree.treeContainer.position.set(app.renderer.width / 2 + tree.treeContainer.width / 2, app.renderer.height / 2);
 
-    tree.treeContainer.alpha = 0;
+    tree.treeContainer.alpha = 1;
     app.renderer.render(app.stage);
     document.getElementById("pixiCanvas").style.visibility = "visible";
     app.start();
