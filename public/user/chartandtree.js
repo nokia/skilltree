@@ -104,6 +104,10 @@ function search(){
       if(sch.readyState == 4 && sch.status == 200) {
         var mya = document.createElement('a');
         mya.innerHTML = sch.response.name;
+        mya.onclick = function (){
+          
+        }
+        sideBarSearchResult.innerHTML = '';
         sideBarSearchResult.appendChild(mya);
       }
   }

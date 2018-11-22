@@ -101,6 +101,11 @@ body {
   margin: 1px;
   padding: 2px;
   text-align: inherit;
+  cursor: pointer;
+}
+
+.sideBarSearchResult div a:hover{
+  background-color: gray;
 }
 
 .topLine{
@@ -224,4 +229,3 @@ body {
   display: table-row-group;
   width: inherit;
 }
-
