@@ -113,6 +113,15 @@ function search(){
   sch.send(JSON.stringify(treeToSearch));
 }
 
+function addTree(){
+  var treeToAdd = document.getElementById('searchedTree');
+  var adt = new XMLHttpRequest();
+  adt.open('POST', '/set/addtree');
+  adt.setRequestHeader('Content-type', 'application/json');
+  adt.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+  adt.responseType = "json";
+}
+
 function submit(){
   var sub = new XMLHttpRequest();
   sub.open('POST', '/set/submitall', true);
