@@ -18,20 +18,24 @@
     </script>
 </head>
 <body>
-  <datalist id = "sideBarSearchResult"></datalist>
   <div class = "grid">
     <div class = "topLine">
       <div id = "welcome" class = "welcome">Hello</div>
       <input type = "button" class = "headerButton" value = "Logout" onClick = "logout()">
       <input type = "button" class = "headerButton" value = "Open Chart" id = "openchart">
       <input type = "button" class = "headerButton" value = "Submit Changes" onClick = "submit()">
+      <div class = "myTablesDropDown">
+        <div class = "myTablesDropDownButton">My Tables</div>
+        <div class = "myTablesDropDownContent"><a>1></a><a>2</a></div>
+      </div>
     </div>
+    <datalist id = "sideBarSearchResult"></datalist>
     <div class = "sideBar">
       <a class = "sideBarTitle">Add Trees!</a>
       <div class = "sideBarContent" id = "">
         <div class = "sideBarSearch">
           <input type ="text" value = "" id="searchedTree" list = "sideBarSearchResult" onkeypress="search()"><br>
-          <div class = "sideBarButton">Search</div>
+          <div class = "sideBarButton">Add</div>
         </div>
       </div>
     </div>
@@ -74,8 +78,6 @@
             <h2 id="skillnameHeader"></h2>
         </div>
         <div class="modal-body">
-
-
             <div class = "divTable">
                 <div class= "divTableCaption">Trainings</div>
                     <div class="divTableBody">
@@ -85,7 +87,6 @@
                             <div class="divTableHead"> Place</div>
                             <div class="divTableHead"> Teacher</div>
                         </div>
-
                         <div class="divTableRow">
                             <div class="divTableCell"> Data </div>
                             <div class="divTableCell"> Data </div>
@@ -115,7 +116,7 @@
                             <div class="divTableCell"> Data</div>
                         </div>
                     </div>
-                    
+
             </div>
 
             
@@ -137,7 +138,7 @@
                             <div class="divTableCell"> Data</div>
                         </div>
                     </div>
-                    
+
             </div>
 
         </div>
