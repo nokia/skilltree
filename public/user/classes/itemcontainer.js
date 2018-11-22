@@ -285,7 +285,9 @@ class ItemContainer {
         var requestTable = document.getElementById('requestTableBody');
 
         //Creating an offer tablerow
-        var offerRow = document.createElement('div').className = "divTableRow";
+        var offerRow = document.createElement('div');
+                                            offerRow.className = "divTableRow";
+                                            
         var offerUsername = document.createElement('div');
                                             offerUsername.className = "divTableCell";
                                             offerUsername.innerText = "TestUsername";
@@ -301,7 +303,7 @@ class ItemContainer {
         var offerSkillLevel = document.createElement('div');
                                             offerSkillLevel.className = "divTableCell";
                                             offerSkillLevel.innerText = "TestSkillLevel";
-                                            
+
         offerRow.appendChild(offerUsername)
                 .appendChild(offerContact)
                 .appendChild(offerLocation)
