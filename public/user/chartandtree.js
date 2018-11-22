@@ -351,14 +351,14 @@ function showTree (treeName) {
     app.renderer.render(app.stage);
     document.getElementById("pixiCanvas").style.visibility = "visible";
     app.start();
-    var fadein = function (delta) {
+    /*var fadein = function (delta) {
         tree.treeContainer.alpha += .05;
         if (tree.treeContainer.alpha == 1) {
             app.ticker.remove(fadein);
             app.stop();
         }
     };
-    app.ticker.add(fadein);
+    app.ticker.add(fadein);*/
 }
 
 
