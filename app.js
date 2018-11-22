@@ -308,7 +308,6 @@ setRoute.post('/search', async function (req, res) {
 	for (var i = 0; i < foundTrees.length; i++) {
 		resTrees[i] = { name: foundTrees[i].name };
 	}
-	console.log(resTrees);
 	res.json(resTrees);
 });
 
@@ -320,6 +319,22 @@ setRoute.post('/addtree', async function (req, res){
 			if (err) throw err;
 	return user;
 	});
+	var tree = await Tree.findOne({"name": data.value},  function (err, tree) {
+		if (err) throw err;
+		return tree;
+	});
+	if(user.trees.find("name": tree.name) == []){
+		users.trees.push(tree);
+		res.json({
+			success: true,
+			name: tree.name
+		});
+	}
+	else{
+		res.json({
+			success: false
+		})
+	}
 });
 
 setRoute.post('/newtree', async function (req, res) { // create user tree

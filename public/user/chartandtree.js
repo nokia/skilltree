@@ -123,7 +123,7 @@ function addTree(){
   adt.responseType = "json";
   adt.onreadystatechange = function() {
       if(adt.readyState == 4 && adt.status == 200) {
-        if(nt.response.success){
+        if(adt.response.success){
           var forest = document.getElementById("forest");
           var nt = document.createElement('div');
           nt.innerHTML = adt.response.name;
