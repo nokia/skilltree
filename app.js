@@ -323,7 +323,7 @@ setRoute.post('/addtree', async function (req, res){
 		if (err) throw err;
 		return tree;
 	});
-	if(user.trees.find("name": tree.name) == []){
+	if(user.trees.find("name": tree.name) == [] ){
 		users.trees.push(tree);
 		res.json({
 			success: true,
@@ -333,7 +333,7 @@ setRoute.post('/addtree', async function (req, res){
 	else{
 		res.json({
 			success: false
-		})
+		});
 	}
 });
 
