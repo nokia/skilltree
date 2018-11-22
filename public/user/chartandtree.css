@@ -176,6 +176,7 @@ body {
 .divTable{
 	display: table;
 	width: 100%;
+  margin-bottom: 30px;
 }
 
 .divTableCaption {
