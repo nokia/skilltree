@@ -289,12 +289,19 @@ class ItemContainer {
         var offerUsername = document.createElement('div');
                                             offerUsername.className = "divTableCell";
                                             offerUsername.innerText = "TestUsername";
-        var offerContact = document.createElement('div').className = "divTableCell";
+
+        var offerContact = document.createElement('div');
+                                            offerContact.className = "divTableCell";
                                             offerContact.innerText = "TestContact";
-        var offerLocation = document.createElement('div').className = "divTableCell";
+
+        var offerLocation = document.createElement('div');
+                                            offerLocation.className = "divTableCell";
                                             offerLocation.innerText = "TestLocation";
-        var offerSkillLevel = document.createElement('div').className = "divTableCell";
+
+        var offerSkillLevel = document.createElement('div');
+                                            offerSkillLevel.className = "divTableCell";
                                             offerSkillLevel.innerText = "TestSkillLevel";
+                                            
         offerRow.appendChild(offerUsername)
                 .appendChild(offerContact)
                 .appendChild(offerLocation)
