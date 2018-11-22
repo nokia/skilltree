@@ -489,27 +489,30 @@ setRoute.post('/submitall', async function (req, res) {
 				return skills;
 		    });
 
-			for (var i = 0; i < data.length; ++i) {
-				var globalSkill = globalSkills.find(obj => obj.name == data[i].name);
-				if (data[i].achievedPoint > 0) {
-					if (globalSkill.trainings.find(obj => obj.teacher == user.username) == undefined)
-						globalSkills.find(obj => obj.name == data[i].name).trainings.push({
-							date: user.teachingDay + user.teachingTime,
-							level: data[i].achievedPoint,
-							place: user.location,
-							teacher: user.username
+			data.forEach(function (userSkill) {
+				var globalSkill = globalSkills.find(obj => obj.name == userSkill.name);
+				if (userSkill.achievedPoint > 0) {
+					if (globalSkill.offers.find(obj => obj.username == user.username) == undefined)
+						globalSkills.find(obj => obj.name == userSkill.name).offers.push({
+							username: user.username,
+							contact: user.contact,
+							location: user.location,
+							achievedPoint: userSkill.achievedPoint,
 						});
 				} else {
-					if (globalSkill.trainings.find(obj => obj.teacher == user.username) != undefined) {
-						globalSkills.find(obj => obj.name == data[i].name).trainings = globalSkill.trainings.filter(obj => obj.teacher != user.username);
+					if (globalSkill.offers.find(obj => obj.username() == user.username) != undefined) {
+						globalSkills.find(obj => obj.name == userSkill.name).offers = globalSkill.offers.filter(obj => obj.username != user.username);
 					}
 				}
-			}
+			});
 
-			//globalSkills.save(function (err) {if (err) throw err;}); // elvileg a user hozzaadasa mukodik a global skillekhez, de elmenteni nem tudom az osszes skillt ujra
+			globalSkills.forEach(function (skill) {
+				skill.save(function (err) {if (err) throw err;});
+			});
 		}
 
 		user.save(function (err) {if (err) throw err;});
+
 		res.json({
 			success: true,
 		});
