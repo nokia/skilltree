@@ -300,8 +300,7 @@ setRoute.post('/search', async function (req, res) {
 					if (err) throw err;
 			return tree;
 		});
-		console.log(foundTrees);
-		var resTrees;
+		var resTrees = [];
 		for (var i = 0; i < foundTrees.length; i++) {
 			resTrees[i] = {name: foundTrees[i].name};
 		}
