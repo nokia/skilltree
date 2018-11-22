@@ -300,7 +300,7 @@ setRoute.post('/search', async function (req, res) {
 					if (err) throw err;
 			return tree;
 		});
-		res.json(name: foundTree.toObject().name);
+		res.json({name: foundTree.toObject().name});
 });
 
 setRoute.post('/newtree', async function (req, res) { // create user tree
