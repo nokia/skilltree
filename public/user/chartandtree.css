@@ -95,7 +95,7 @@ body {
   font-size: 14px;
   text-align: inherit;
   margin-left: 4px;
-  transition: all 0.4s ease-in-out;
+  transition: all 0.2s ease-out;
 }
 
 .listedTree:hover{
