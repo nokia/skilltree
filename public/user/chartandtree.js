@@ -350,7 +350,7 @@ function showTree (treeName) {
     tree.treeContainer.alpha = 1;
     app.renderer.render(app.stage);
     document.getElementById("pixiCanvas").style.visibility = "visible";
-    app.start();
+    //app.start();
     /*var fadein = function (delta) {
         tree.treeContainer.alpha += .05;
         if (tree.treeContainer.alpha == 1) {
