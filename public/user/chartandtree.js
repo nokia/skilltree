@@ -99,6 +99,7 @@ function search(){
   sch.open('POST', '/set/search', true);
   sch.setRequestHeader('Content-type', 'application/json');
   sch.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+  sch.responseType = "json";
   sch.onreadystatechange = function() {
       if(sch.readyState == 4 && sch.status == 200) {
         var mya = document.createElement('a');
@@ -106,6 +107,7 @@ function search(){
         sideBarSearchResult.appendChild(mya);
       }
   }
+  console.log(sch.response);
   sch.send(JSON.stringify(treeToSearch));
 }
 
