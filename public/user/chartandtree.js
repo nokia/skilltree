@@ -14,7 +14,7 @@ dataRequest.onreadystatechange = function() {
 }
 dataRequest.send();
 
-var app = new PIXI.Application({
+/*var app = new PIXI.Application({
         view: pixiCanvas,
         width: window.innerWidth - 160,
         height: window.innerHeight - 30,
@@ -22,7 +22,7 @@ var app = new PIXI.Application({
         antialias: true,
         autoStart: false,
         autoResize: true
-});
+});*/
 
 // TOP BAR
 
