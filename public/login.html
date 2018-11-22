@@ -1,41 +1,38 @@
 <!doctype html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <title>Skill Tree</title>
   <link rel="stylesheet" type="text/css" href="login.css">
   <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function () {
-      var isIE = /*@cc_on!@*/false || !!document.documentMode;
-      var isEdge = !isIE && !!window.StyleMedia;
-      if (isIE || isEdge) {
-        window.open('https://www.google.com/chrome/', '_self');
-      }
-    }, false);
+  document.addEventListener('DOMContentLoaded', function() {
+    var isIE = /*@cc_on!@*/false || !!document.documentMode;
+    var isEdge = !isIE && !!window.StyleMedia;
+    if(isIE || isEdge){
+      window.open('https://www.google.com/chrome/','_self');
+    }
+  }, false);
   </script>
   <script src="login.js"></script>
 </head>
-
 <body>
-  <div id="loginBox">
-    <h1>Welcome to the Skill Tree!</h1>
-    <form onsubmit="return false">
-      <p>Username</p>
-      <input type="text" id="username" placeholder="Enter Username">
-      <p>Password</p>
-      <input type="password" id="password" placeholder="Enter Password">
-      <input type="submit" id="submit" value="Login" onclick="validate()">
-      <a href="#">You don't remember the password, do you?</a><br>
-      <a href="register.html">Not a user yet?</a>
-    </form>
-  </div>
+    <div id="loginBox">
+      <h1>Welcome to the Skill Tree!</h1>
+      <form onsubmit="return false">
+        <p>Username</p>
+        <input type="text" id="username" placeholder="Enter Username">
+        <p>Password</p>
+        <input type="password" id="password" placeholder="Enter Password">
+        <input type="submit" id="submit" value="Login" onclick="validate()">
+        <a href="#">You don't remember the password, do you?</a><br>
+        <a href="register.html">Not a user yet?</a>
+      </form>
+    </div>
 
-  <div id="toast">
+	<div id="toast">
     Wrong Password!
   </div>
 
 
 </body>
-
 </html>
