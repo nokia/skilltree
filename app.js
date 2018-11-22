@@ -312,7 +312,7 @@ setRoute.post('/search', async function (req, res) {
 });
 
 setRoute.post('/addtree', async function (req, res){
-	var data = req.body;
+	/*var data = req.body;
 	var user = await User.findOne({
 			username: req.decoded.username
 	}, function(err, user) {
@@ -323,6 +323,7 @@ setRoute.post('/addtree', async function (req, res){
 		if (err) throw err;
 		return tree;
 	});
+
 	if(user.trees.find({"name": tree.name}) == [] ){
 		users.trees.push(tree);
 		res.json({
@@ -334,7 +335,7 @@ setRoute.post('/addtree', async function (req, res){
 		res.json({
 			success: false
 		});
-	}
+	}*/
 });
 
 setRoute.post('/newtree', async function (req, res) { // create user tree
