@@ -102,15 +102,12 @@ function search(){
   sch.responseType = "json";
   sch.onreadystatechange = function() {
       if(sch.readyState == 4 && sch.status == 200) {
-        var mya = document.createElement('a');
+        var mya = document.createElement('option');
+        sideBarSearchResult.innerHTML = "";
         for (var i = 0; i < sch.response.length; i++) {
-          mya.innerHTML = sch.response[i].name;
-          mya.onclick = function (){
-
-          }
+          mya.value = sch.response[i].name;
+          sideBarSearchResult.appendChild(mya);
         }
-        sideBarSearchResult.innerHTML = '';
-        sideBarSearchResult.appendChild(mya);
       }
   }
   sch.send(JSON.stringify(treeToSearch));

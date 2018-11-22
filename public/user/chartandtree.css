@@ -80,33 +80,13 @@ body {
   cursor: pointer;
   text-align: center;
   font-weight: bold;
-  transition: all 0.5s ease-out;
+  transition: all 0.1s ease-in-out;
 }
 
 .sideBarButton:hover{
   color: gainsboro;
   background-color: #183693;
   cursor: pointer;
-}
-
-.sideBarSearchResult{
-  margin-top: 10px;
-  display: block;
-}
-
-.sideBarSearchResult a{
-  display: block;
-  width: 100%;
-  font-size: 14px;
-  line-height: 14px;
-  margin: 1px;
-  padding: 2px;
-  text-align: inherit;
-  cursor: pointer;
-}
-
-.sideBarSearchResult a:hover{
-  background-color: gray;
 }
 
 .topLine{
