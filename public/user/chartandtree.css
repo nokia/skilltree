@@ -123,6 +123,8 @@ body {
 
 .myTablesDropDownContent a{
   background-color: inherit;
+  display: block;
+  position: absolute;
 }
 
 .welcome{
