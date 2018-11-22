@@ -313,7 +313,7 @@ setRoute.post('/search', async function (req, res) {
 
 //?????
 
-/*setRoute.post('/addtree', async function (req, res){
+setRoute.post('/addtree', async function (req, res){
 	var data = req.body;
 	var user = await User.findOne({
 			username: req.decoded.username
@@ -338,7 +338,7 @@ setRoute.post('/search', async function (req, res) {
 			success: false
 		});
 	}
-});*/
+});
 
 setRoute.post('/newtree', async function (req, res) { // create user tree
 	var data = req.body;

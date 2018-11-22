@@ -114,8 +114,7 @@ function search(){
 }
 
 //????
-
-/*function addTree(){
+function addTree(){
   var treeToAdd = {value: document.getElementById('searchedTree').value};
 
   var adt = new XMLHttpRequest();
@@ -138,7 +137,7 @@ function search(){
       }
   }
   adt.send(JSON.stringify(treeToAdd));
-}*/
+}
 
 function submit() {
     var sub = new XMLHttpRequest();
