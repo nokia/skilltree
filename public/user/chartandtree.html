@@ -18,9 +18,9 @@
     </script>
 </head>
 <body>
+  <datalist id = "sideBarSearchResult"></datalist>
   <div class = "grid">
     <div class = "topLine">
-
       <div id = "welcome" class = "welcome">Hello</div>
       <input type = "button" class = "headerButton" value = "Logout" onClick = "logout()">
       <input type = "button" class = "headerButton" value = "Open Chart" id = "openchart">
@@ -28,12 +28,12 @@
     </div>
     <div class = "sideBar">
       <a class = "sideBarTitle">Add Trees!</a>
-      <div class = "sideBarContent" id = "sideBarContent">
+      <div class = "sideBarContent" id = "">
         <div class = "sideBarSearch">
           <input type ="text" value = "" id="searchedTree"><br>
           <div class = "sideBarButton" onclick = "search()">Search</div>
         </div>
-        <div class = "sideBarSearchResult" id = "sideBarSearchResult">
+        <div class = "sideBarSearchResult" list = "sideBarSearchResult">
         </div>
       </div>
     </div>
