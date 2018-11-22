@@ -89,26 +89,6 @@ body {
   cursor: pointer;
 }
 
-.sideBarSearchResult{
-  margin-top: 10px;
-  display: block;
-}
-
-.sideBarSearchResult a{
-  display: block;
-  width: 100%;
-  font-size: 14px;
-  line-height: 14px;
-  margin: 1px;
-  padding: 2px;
-  text-align: inherit;
-  cursor: pointer;
-}
-
-.sideBarSearchResult a:hover{
-  background-color: gray;
-}
-
 .topLine{
   background-color: #0b1842;
   grid-area: topLine;

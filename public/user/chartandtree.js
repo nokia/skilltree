@@ -106,7 +106,6 @@ function search(){
         for (var i = 0; i < sch.response.length; i++) {
           mya.value = sch.response[i].name;
         }
-        sideBarSearchResult.innerHTML = '';
         sideBarSearchResult.appendChild(mya);
       }
   }
