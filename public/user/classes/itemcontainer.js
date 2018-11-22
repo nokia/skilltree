@@ -290,7 +290,7 @@ class ItemContainer {
 				//Listener, if response comes, it runs.
 				offerHttpRequest.onreadystatechange = function() {
 		    		if(offerHttpRequest.readyState == 4 && offerHttpRequest.status == 200) {
-						if (offerHttpRequest.response.success) {
+						if (offerHttpRequest.response !== undefined) {
                             //Got the offer data, fill the offers table
 
                             //Initialize table variables
