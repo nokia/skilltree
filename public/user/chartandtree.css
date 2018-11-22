@@ -94,7 +94,7 @@ body {
   display: block;
 }
 
-.sideBarSearchResult div a{
+.sideBarSearchResult a{
   display: block;
   width: 100%;
   font-size: 14px;
@@ -105,7 +105,7 @@ body {
   cursor: pointer;
 }
 
-.sideBarSearchResult div a:hover{
+.sideBarSearchResult a:hover{
   background-color: gray;
 }
 
