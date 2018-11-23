@@ -326,6 +326,7 @@ setRoute.post('/addtree', async function (req, res){
 	});
 
 	if (tree != undefined) {
+		user = user.toObject();
 		if (user.trees.find({"name": tree.name}) == []){
 			users.trees.push(tree);
 
