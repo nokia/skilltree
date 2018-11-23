@@ -194,7 +194,7 @@ function showChart() {
         var tempContainer = new PIXI.Container();
 
         var skills = data.skills.filter(obj => obj.categoryName == data.categories[i].name);
-        console.log(skills);
+        console.log(data.categories[i].name);
         var sumAP = skills.reduce((a, b) => a.achievedPoint + b.achievedPoint, 0);
         var sumMP = skills.reduce((a, b) => a.maxPoint + b.maxPoint, 0);
         console.log(sumAP);
