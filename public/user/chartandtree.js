@@ -195,8 +195,8 @@ function showChart() {
 
         var skills = data.skills.filter(obj => obj.categoryName == data.categories[i].name);
         console.log(skills);
-        var sumAP = skills.reduce((a, b) => a.achievedPoint + b.achievedPoint, 0);
-        var sumMP = skills.reduce((a, b) => a.maxPoint + b.maxPoint, 0);
+        var sumAP = skills.reduce((a, b) => a.achievedPoint + b.achievedPoint, 0).achievedPoint;
+        var sumMP = skills.reduce((a, b) => a.maxPoint + b.maxPoint, 0).achievedPoint;
         console.log(sumAP);
         console.log(sumMP);
         var percent = 0;
