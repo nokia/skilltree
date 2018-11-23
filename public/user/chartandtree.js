@@ -415,7 +415,7 @@ function parseJwt (token) {
 Array.prototype.sum = function (prop) {
     var total = 0;
 
-    for (var i = 0, i < this.length; ++i) {
+    for (var i = 0; i < this.length; ++i) {
         total += this[i][prop];
     }
 
