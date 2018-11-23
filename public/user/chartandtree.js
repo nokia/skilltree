@@ -114,12 +114,28 @@ function search(){
 }
 
 function addTree(){
-  var treeToAdd = document.getElementById('searchedTree');
+  var treeToAdd = {value: document.getElementById('searchedTree').value};
+
   var adt = new XMLHttpRequest();
   adt.open('POST', '/set/addtree');
   adt.setRequestHeader('Content-type', 'application/json');
   adt.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
   adt.responseType = "json";
+  adt.onreadystatechange = function() {
+      if(adt.readyState == 4 && adt.status == 200) {
+        if(adt.response.success){
+          var forest = document.getElementById("forest");
+          var nt = document.createElement('div');
+          nt.innerText = adt.response.name;
+          nt.className = "listedTree";
+          forest.appendChild(nt);
+        }
+        else{
+          alert("Selected tree is already added.");
+        }
+      }
+  }
+  adt.send(JSON.stringify(treeToAdd));
 }
 
 function submit(){
