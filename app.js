@@ -336,6 +336,8 @@ setRoute.post('/addtree', async function (req, res){
 				return skills;
 	    	});
 
+			skills = skills.toObject();
+
 			await skills.forEach(function (skill) {
 				skill.achievedPoint = 0;
 				user.skills.push(skill);
