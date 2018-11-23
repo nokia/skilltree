@@ -195,8 +195,8 @@ function showChart() {
 
         var skills = data.skills.filter(obj => obj.categoryName == data.categories[i].name);
         console.log(skills);
-        var sumAP = skills.reduce((a, b) => a.achievedPoint + b.achievedPoint, 0).achievedPoint;
-        var sumMP = skills.reduce((a, b) => a.maxPoint + b.maxPoint, 0).achievedPoint;
+        var sumAP = skills.sum("achievedPoint");
+        var sumMP = skills.sum("maxPoint");
         console.log(sumAP);
         console.log(sumMP);
         var percent = 0;
@@ -410,4 +410,14 @@ function parseJwt (token) {
     var base64Url = token.split('.')[1];
     var base64 = base64Url.replace('-', '+').replace('_', '/');
     return JSON.parse(window.atob(base64));
-};
+}
+
+Array.prototype.sum = function (prop) {
+    var total = 0;
+
+    for (var i = 0, i < this.length; ++i) {
+        total += this[i][prop];
+    }
+
+    return total;
+}
