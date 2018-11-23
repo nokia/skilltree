@@ -349,13 +349,13 @@ setRoute.post('/addtree', async function (req, res){
 			});
 		} else {
 			res.json({
-				message: "existing"
+				message: "existing",
 				success: false
 			});
 		}
 	} else {
 		res.json({
-			message: "notfound"
+			message: "notfound",
 			success: false
 		});
 	}
