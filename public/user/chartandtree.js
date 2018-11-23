@@ -122,18 +122,16 @@ function addTree(){
   adt.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
   adt.responseType = "json";
   adt.onreadystatechange = function() {
-      if(adt.readyState == 4 && adt.status == 200) {
+      if (adt.readyState == 4 && adt.status == 200) {
           console.log(adt.response);
-        if(adt.response.success){
+        if (adt.response.success){
           var forest = document.getElementById("forest");
           var nt = document.createElement('div');
           nt.innerText = adt.response.name;
           nt.className = "listedTree";
           forest.appendChild(nt);
-        }
-        else{
-          alert("Selected tree is already added.");
-        }
+        } else if (adt.response.message == "existing") alert("Selected tree is already added.");
+        else if (adt.response.message == "notfound") alert("The tree is not found.");
       }
   }
   adt.send(JSON.stringify(treeToAdd));

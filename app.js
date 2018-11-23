@@ -325,30 +325,37 @@ setRoute.post('/addtree', async function (req, res){
 		return tree;
 	});
 
-	if (tree != undefined && user.trees.find({"name": tree.name}) == []){
-		users.trees.push(tree);
+	if (tree != undefined) {
+		if (user.trees.find({"name": tree.name}) == []){
+			users.trees.push(tree);
 
-		var skills = await Skill.find({
-	        name: tree.skillNames,
-	    }, function (err, skills) {
-	        if (err) throw err;
-			return skills;
-	    });
+			var skills = await Skill.find({
+	        	name: tree.skillNames,
+	    	}, function (err, skills) {
+	        	if (err) throw err;
+				return skills;
+	    	});
 
-		await skills.forEach(function (skill) {
-			skill.achievedPoint = 0;
-			user.skills.push(skill);
-		});
+			await skills.forEach(function (skill) {
+				skill.achievedPoint = 0;
+				user.skills.push(skill);
+			});
 
-		user.save(function (err) {if (err) throw err;});
+			user.save(function (err) {if (err) throw err;});
 
+			res.json({
+				success: true,
+				name: tree.name
+			});
+		} else {
+			res.json({
+				message: "existing"
+				success: false
+			});
+		}
+	} else {
 		res.json({
-			success: true,
-			name: tree.name
-		});
-	}
-	else{
-		res.json({
+			message: "notfound"
 			success: false
 		});
 	}
