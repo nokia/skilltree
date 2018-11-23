@@ -326,7 +326,7 @@ setRoute.post('/addtree', async function (req, res){
 	});
 
 	if (tree != undefined) {
-		if (user.trees.find(obj => obj.name == tree.name}) == undefined){
+		if (user.trees.find(obj => obj.name == tree.name) == undefined){
 			users.trees.push(tree);
 
 			var skills = await Skill.find({
