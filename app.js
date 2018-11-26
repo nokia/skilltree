@@ -301,7 +301,17 @@ setRoute.post('/newskill', async function(req, res) { // global skill
 // Under development
 setRoute.post('/searchTreesByName', async function (req, res) {
 		var data = req.body;
-
+		var foundUsers = await User.find({
+					"username": {$regex : ".*" + data.value + ".*"}
+			}, function (err, tree) {
+					if (err) throw err;
+			return tree;
+		});
+		var resUsers = [];
+		for (var i = 0; i < foundUsers.length; i++) {
+			resUsers[i] / {name: foundUsers[i].username};
+		}
+		res.json(resUsers);
 });
 
 // Search for trees to add while typing
@@ -317,7 +327,6 @@ setRoute.post('/searchTreesByName', async function (req, res) {
 		for (var i = 0; i < foundTrees.length; i++) {
 			resTrees[i] = {name: foundTrees[i].name};
 		}
-		console.log(resTrees);
 		res.json(resTrees);
 });
 
