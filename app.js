@@ -307,10 +307,9 @@ setRoute.post('/searchUsersByName', async function (req, res) {
 					if (err) throw err;
 			return user;
 		});
-		console.log(foundUsers);
 		var resUsers = [];
 		for (var i = 0; i < foundUsers.length; i++) {
-			resUsers[i] / {name: foundUsers[i].username};
+			resUsers[i] = {name: foundUsers[i].username};
 		}
 		res.json(resUsers);
 });
