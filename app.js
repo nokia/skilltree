@@ -298,7 +298,6 @@ setRoute.post('/newskill', async function(req, res) { // global skill
 
 
 // Search for users to view by name
-// Under development
 setRoute.post('/searchUsersByName', async function (req, res) {
 		var data = req.body;
 		var foundUsers = await User.find({
@@ -344,6 +343,21 @@ setRoute.post('/searchSkillsByName', async function (req, res) {
 			resSkills[i] = {name: foundSkills[i].name};
 		}
 		res.json(resSkills);
+});
+
+setRoute.post('/getPublicUserData', async function (req, res) {
+		var data = req.body;
+		var foundUser = await User.findOne({
+				"username": data.value
+		}, function(err, user) {
+				if (err) throw err;
+		return user;
+		});
+		res.json({
+			skills : foundUser.skills,
+			trees : foundUser.trees,
+			mainTree : foundUser.mainTree
+		});
 });
 
 setRoute.post('/addTreeToUser', async function (req, res){
