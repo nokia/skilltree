@@ -503,7 +503,7 @@ function create() {
                 }*/
             }
         }
-        sch.send(JSON.stringify(skillToSearch));
+        skillReq.send(JSON.stringify(skillToSearch));
     };
 }
 
