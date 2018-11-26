@@ -447,7 +447,7 @@ async function getParents (skill, skillFamily) {
 	}
 
 	for (var i = 0; i < parents.length; ++i) {
-		getParents(parents[i]. skillFamily);
+		getParents(parents[i], skillFamily);
 	}
 }
 
