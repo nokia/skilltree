@@ -495,7 +495,9 @@ function create() {
                 if (this.response.success) {
                     if (skillsToAdd.find(obj => obj.name == this.response.skill) == undefined) {
                         skillsToAdd.push(this.response.skill);
-                        skillList.add(this.response.skill.name);
+                        var option = document.createElement("option");
+                        option.text = this.response.skill.name;
+                        skillList.add(option);
                     } else alert("You have already added this skill");
                 } else alert("Skill is not found");
                 /*skillSearchResult.innerText = "";
