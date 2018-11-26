@@ -303,10 +303,11 @@ setRoute.post('/searchUsersByName', async function (req, res) {
 		var data = req.body;
 		var foundUsers = await User.find({
 					"username": {$regex : ".*" + data.value + ".*"}
-			}, function (err, tree) {
+			}, function (err, user) {
 					if (err) throw err;
-			return tree;
+			return user;
 		});
+		console.log(foundUsers);
 		var resUsers = [];
 		for (var i = 0; i < foundUsers.length; i++) {
 			resUsers[i] / {name: foundUsers[i].username};
