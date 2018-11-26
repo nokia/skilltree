@@ -500,7 +500,7 @@ function searchSkillsByName(){
         }
       }
   }
-  sch.send(JSON.stringify(treeToSearch));
+  sch.send(JSON.stringify(skillToSearch));
 }
 
 // helper functions
