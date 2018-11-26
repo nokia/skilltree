@@ -296,6 +296,14 @@ setRoute.post('/newskill', async function(req, res) { // global skill
 	}
 });
 
+
+// Search for users to view by name
+// Under development
+setRoute.post('/searchTreesByName', async function (req, res) {
+		var data = req.body;
+
+});
+
 // Search for trees to add while typing
 setRoute.post('/searchTreesByName', async function (req, res) {
 		var data = req.body;

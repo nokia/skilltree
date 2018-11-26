@@ -95,9 +95,30 @@ function checkFirstLogin() {
 
 // ???
 
+function searchUsersByName(){
+  var userToSearch = {value: document.getElementById('searchedUser').value};
+  var sideBarUserSearchResult = document.getElementById('sideBarUserSearchResult');
+  var sch = new XMLHttpRequest();
+  sch.open('POST', '/set/searchUsersByName', true);
+  sch.setRequestHeader('Content-type', 'application/json');
+  sch.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+  sch.responseType = "json";
+  sch.onreadystatechange = function() {
+      if(sch.readyState == 4 && sch.status == 200) {
+        sideBarUserSearchResult.innerHTML = "";
+        for (var i = 0; i < sch.response.length; i++) {
+          var mya = document.createElement('option');
+          mya.value = sch.response[i].name;
+          sideBarUserSearchResult.appendChild(mya);
+        }
+      }
+  }
+  sch.send(JSON.stringify(userToSearch));
+}
+
 function searchTreesByName(){
   var treeToSearch = {value: document.getElementById('searchedTree').value};
-  var sideBarSearchResult = document.getElementById('sideBarSearchResult');
+  var sideBarTreeSearchResult = document.getElementById('sideBarTreeSearchResult');
   var sch = new XMLHttpRequest();
   sch.open('POST', '/set/searchTreesByName', true);
   sch.setRequestHeader('Content-type', 'application/json');
@@ -105,11 +126,11 @@ function searchTreesByName(){
   sch.responseType = "json";
   sch.onreadystatechange = function() {
       if(sch.readyState == 4 && sch.status == 200) {
-        sideBarSearchResult.innerHTML = "";
+        sideBarTreeSearchResult.innerHTML = "";
         for (var i = 0; i < sch.response.length; i++) {
           var mya = document.createElement('option');
           mya.value = sch.response[i].name;
-          sideBarSearchResult.appendChild(mya);
+          sideBarTreeSearchResult.appendChild(mya);
         }
       }
   }

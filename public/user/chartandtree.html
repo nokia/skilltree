@@ -18,6 +18,8 @@
     </script>
 </head>
 <body>
+  <datalist id = "sideBarTreeSearchResult"></datalist>
+  <datalist id = "sideBarUserSearchResult"></datalist>
   <div class = "grid">
     <div class = "topLine">
       <div id = "welcome" class = "welcome">Hello</div>
@@ -26,13 +28,18 @@
       <input type = "button" class = "headerButton" value = "Submit Changes" onClick = "submit()">
       <input type = "button" class = "headerButton" value = "Create Tree" onClick = "create()">
     </div>
-    <datalist id = "sideBarSearchResult"></datalist>
     <div class = "sideBar">
       <a class = "sideBarTitle">Add Trees!</a>
       <div class = "sideBarContent">
         <div class = "sideBarSearch">
-          <input type ="text" value = "" id="searchedTree" list = "sideBarSearchResult" onkeypress="searchTreesByName()"><br>
+          <input type ="text" value = "" id="searchedTree" list = "sideBarTreeSearchResult" onkeypress="searchTreesByName()"><br>
           <div class = "sideBarButton" onclick = "addTreeToUser()">Add</div>
+        </div>
+      </div>
+      <div class = "sideBarContent">
+        <div class = "sideBarSearch">
+          <input type ="text" value = "" id="searchedUser" list = "sideBarUserSearchResult" onkeypress="searchUsersByName()"><br>
+          <div class = "sideBarButton" onclick = "">Find</div>
         </div>
       </div>
       <a class = "sideBarTitle">Your Trees</a>
