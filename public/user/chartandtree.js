@@ -95,6 +95,18 @@ function checkFirstLogin() {
 
 // ???
 
+function loadAddedTrees(){
+  var treeList = document.getElementById('treeList');
+  treeList.innerHTML = "";
+  for (var i = 0; i < data.trees.length; i++) {
+    var tn = data.trees[i].name;
+    var ithtree = document.createElement('div');
+    ithtree.innerHTML = tn;
+    ithtree.className = "listedTree";
+    treeList.appendChild(ithtree);
+  }
+}
+
 function searchUsersByName(){
   var userToSearch = {value: document.getElementById('searchedUser').value};
   var sideBarUserSearchResult = document.getElementById('sideBarUserSearchResult');
@@ -195,6 +207,7 @@ function startLoader () {
     PIXI.loader.load(function () {
         showTree(data.mainTree);
     });
+    loadAddedTrees();
 }
 
 app.stage = new PIXI.display.Stage();
