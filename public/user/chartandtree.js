@@ -529,6 +529,15 @@ function create() {
         }
         skillReq.send(JSON.stringify(skill));
     };
+
+    var createBtn = document.getElementById("createTree");
+    createBtn.onclick = function () {
+        if (document.getElementById('treeName').value.length > 0) {
+            if (skillsToAdd.length > 0) {
+
+            } else alert("Please add at least one skill to the tree");
+        } else alert("Please provide a name to the tree");
+    };
 }
 
 function searchSkillsByName(){
