@@ -224,6 +224,11 @@ document.getElementById("openchart").onclick = showChart;
 var chartContainer = new PIXI.Container();
 
 function showChart() {
+    if (tree != undefined) {
+        app.stage.removeChild(tree.treeContainer);
+        tree = undefined;
+    }
+
     document.getElementById("openchart").value = "Close Chart";
     document.getElementById("openchart").onclick = function() {
         showTree(selectedTreeName);
