@@ -103,6 +103,9 @@ function loadAddedTrees(){
     var ithtree = document.createElement('div');
     ithtree.innerHTML = tn;
     ithtree.className = "listedTree";
+    ithtree.onClick(){
+      showTree(ithtree.innerHTML);
+    }
     treeList.appendChild(ithtree);
   }
 }
@@ -170,6 +173,7 @@ function addTreeToUser(){
       }
   }
   adt.send(JSON.stringify(treeToAdd));
+  loadAddedTrees();
 }
 
 function submit(){
