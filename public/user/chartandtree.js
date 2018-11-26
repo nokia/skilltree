@@ -493,7 +493,7 @@ function create() {
         skillReq.onreadystatechange = function() {
             if(skillReq.readyState == 4 && skillReq.status == 200) {
                 if (this.response.success) {
-                    if (skillsToAdd.find(this.response.skill.name) == undefined) {
+                    if (skillsToAdd.indexOf(this.response.skill.name) == -1) {
                         skillsToAdd.push(this.response.skill);
                         var option = document.createElement("option");
                         option.text = this.response.skill.name;
