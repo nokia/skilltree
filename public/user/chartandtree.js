@@ -479,6 +479,28 @@ function create() {
     creator.style.display = "block";
     creator.style.width = canvas.style.width;
     creator.style.height = canvas.style.height;
+
+}
+
+function searchSkillsByName(){
+  var skillToSearch = {value: document.getElementById('skillSearch').value};
+  var skillSearchResult = document.getElementById('skillSearchResult');
+  var sch = new XMLHttpRequest();
+  sch.open('POST', '/set/searchSkillsByName', true);
+  sch.setRequestHeader('Content-type', 'application/json');
+  sch.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+  sch.responseType = "json";
+  sch.onreadystatechange = function() {
+      if(sch.readyState == 4 && sch.status == 200) {
+        skillSearchResult.innerText = "";
+        for (var i = 0; i < sch.response.length; i++) {
+          var mya = document.createElement('option');
+          mya.value = sch.response[i].name;
+          skillSearchResult.appendChild(mya);
+        }
+      }
+  }
+  sch.send(JSON.stringify(treeToSearch));
 }
 
 // helper functions

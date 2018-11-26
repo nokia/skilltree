@@ -330,6 +330,22 @@ setRoute.post('/searchTreesByName', async function (req, res) {
 		res.json(resTrees);
 });
 
+// Search for skills to add while typing
+setRoute.post('/searchSkillsByName', async function (req, res) {
+		var data = req.body;
+		var foundSkills = await Skill.find({
+					"name": {$regex : ".*" + data.value + ".*"}
+			}, function (err, tree) {
+					if (err) throw err;
+					return tree;
+		});
+		var resTrees = [];
+		for (var i = 0; i < foundSkills.length; i++) {
+			resSkills[i] = {name: foundSkills[i].name};
+		}
+		res.json(resSkills);
+});
+
 setRoute.post('/addTreeToUser', async function (req, res){
 	var data = req.body;
 	var user = await User.findOne({
