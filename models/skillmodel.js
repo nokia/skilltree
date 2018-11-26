@@ -30,7 +30,8 @@ module.exports = mongoose.model('Skill', new Schema({
     offers: [
         {
             username: String,
-            contact: String,
+            teachingDay: String,
+            teachingTime: String,
             location: String,
             achievedPoint: Number
         }
