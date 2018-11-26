@@ -2,6 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
   <title>Skill Tree</title>
   <link rel="stylesheet" type="text/css" href="login.css">
   <script type="text/javascript">
@@ -13,20 +16,29 @@
     }
   }, false);
   </script>
-  <script src="login.js"></script>
 </head>
-<body>
-    <div id="loginBox">
-      <h1>Welcome to the Skill Tree!</h1>
-      <form onsubmit="return false">
-        <p>Username</p>
-        <input type="text" id="username" placeholder="Enter Username">
-        <p>Password</p>
-        <input type="password" id="password" placeholder="Enter Password">
-        <input type="submit" id="submit" value="Login" onclick="validate()">
-        <a href="#">You don't remember the password, do you?</a><br>
-        <a href="register.html">Not a user yet?</a>
-      </form>
+<body id = "body">
+    <div class="container jumbocontainer p-3">
+        <div class="jumbotron p-3">
+          <h1 class="display-4 d-none d-lg-block">Welcome to the SkillTree</h1>
+          <h5 class="d-block d-lg-none">Welcome to the SkillTree</h5>
+          <p class="lead">What is SkillTree? <a href="">></a></p>
+          <p class="lead">Don't have an account? <a href="register.html">Sign up</a></p>
+          <hr class="my-4">
+          <form method="get" action="userprofile.html">
+              <div class="form-group">
+                <!-- <label for="exampleInputEmail1">Email address</label> -->
+                <input type="text" id = "username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username">
+
+              </div>
+              <div class="form-group">
+                <!-- <label for="exampleInputPassword1">Password</label> -->
+                <input type="password" id = "password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+              </div>
+              <button type="submit" class="btn btn-primary btn-lg" id="submit" value="Login" onclick="validate()">Login</button>
+              <span><a href="">I forgot my password. :(</a></span>
+          </form>
+        </div>
     </div>
 
 	<div id="toast">
