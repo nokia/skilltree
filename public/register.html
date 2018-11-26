@@ -45,8 +45,19 @@
               </div>
               <div class="form-group">
                 <!-- <label for="exampleInputEmail1">Email address</label> -->
-                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email">
               </div>
+              <p>Select a focus area:</p>
+              <p>
+                  <select id = "focusarea">
+                      <option value = "People">People</option>
+                      <option value = "Engineering">Engineering</option>
+                      <option value = "Business">Business</option>
+                      <option value = "Communication">Communication</option>
+                      <option value = "Support functions">Support functions</option>
+                  </select>
+              </p></br>
+              <p>I am willing to share knowledge<input type = "checkbox" id = "teach"></p>
               <button type="submit" id = "submit" value = "Register" class="btn btn-primary btn-lg" onclick = "validate()">Register</button>
           </form>
         </div>
