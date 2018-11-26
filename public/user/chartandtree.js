@@ -492,6 +492,8 @@ function create() {
     document.getElementById("openCreator").onclick = function() {
         creator.style.display = "none";
         canvas.style.display = "block";
+        document.getElementById("openCreator").value = "Create Tree";
+        document.getElementById("openCreator").onclick = create;
     };
 
     creator.style.width = canvas.style.width;
