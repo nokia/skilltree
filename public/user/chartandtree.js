@@ -95,11 +95,11 @@ function checkFirstLogin() {
 
 // ???
 
-function search(){
+function searchTreesByName(){
   var treeToSearch = {value: document.getElementById('searchedTree').value};
   var sideBarSearchResult = document.getElementById('sideBarSearchResult');
   var sch = new XMLHttpRequest();
-  sch.open('POST', '/set/search', true);
+  sch.open('POST', '/set/searchTreesByName', true);
   sch.setRequestHeader('Content-type', 'application/json');
   sch.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
   sch.responseType = "json";
@@ -116,11 +116,11 @@ function search(){
   sch.send(JSON.stringify(treeToSearch));
 }
 
-function addTree(){
+function addTreeToUser(){
   var treeToAdd = {value: document.getElementById('searchedTree').value};
 
   var adt = new XMLHttpRequest();
-  adt.open('POST', '/set/addtree');
+  adt.open('POST', '/set/addTreeToUser');
   adt.setRequestHeader('Content-type', 'application/json');
   adt.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
   adt.responseType = "json";

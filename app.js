@@ -296,10 +296,11 @@ setRoute.post('/newskill', async function(req, res) { // global skill
 	}
 });
 
-setRoute.post('/search', async function (req, res) {
+// Search for trees to add while typing
+setRoute.post('/searchTreesByName', async function (req, res) {
 		var data = req.body;
 		var foundTrees = await Tree.find({
-					"name": {$regex : ".*" + data.value + ".*"}
+					"name": {$regex : ".*" + data.value.toLowerCase() + ".*i"}
 			}, function (err, tree) {
 					if (err) throw err;
 			return tree;
@@ -312,7 +313,7 @@ setRoute.post('/search', async function (req, res) {
 		res.json(resTrees);
 });
 
-setRoute.post('/addtree', async function (req, res){
+setRoute.post('/addTreeToUser', async function (req, res){
 	var data = req.body;
 	var user = await User.findOne({
 			username: req.decoded.username
