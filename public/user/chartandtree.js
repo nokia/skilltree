@@ -168,12 +168,14 @@ function addTreeToUser(){
           nt.innerText = adt.response.name;
           nt.className = "listedTree";
           forest.appendChild(nt);
+          alert("Selected tree successfully added.");
+          loadAddedTrees();
         } else if (adt.response.message == "existing") alert("Selected tree is already added.");
         else if (adt.response.message == "notfound") alert("The tree is not found.");
       }
   }
   adt.send(JSON.stringify(treeToAdd));
-  loadAddedTrees();
+
 }
 
 function submit(){
