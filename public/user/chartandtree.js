@@ -482,11 +482,6 @@ function showTree (treeName) {
 */
 
 function create() {
-    if (tree != undefined) {
-        app.stage.removeChild(tree.treeContainer);
-        tree = undefined;
-    }
-
     var canvas = document.getElementById("pixiCanvas");
     canvas.style.display = "none";
 
