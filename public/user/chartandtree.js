@@ -487,16 +487,18 @@ function create() {
         tree = undefined;
     }
 
-    document.getElementById("openCreator").value = "Close Creator";
-    document.getElementById("openCreator").onclick = function() {
-        showTree(selectedTreeName);
-    };
-
     var canvas = document.getElementById("pixiCanvas");
     canvas.style.display = "none";
 
     var creator = document.getElementById("creator");
     creator.style.display = "block";
+
+    document.getElementById("openCreator").value = "Close Creator";
+    document.getElementById("openCreator").onclick = function() {
+        creator.style.display = "none";
+        canvas.style.display = "block";
+    };
+
     creator.style.width = canvas.style.width;
     creator.style.height = canvas.style.height;
 
