@@ -142,7 +142,6 @@ function getPublicUserData(){
       if(sch.readyState == 4 && sch.status == 200) {
         alert("User found, data loaded.");
       }
-      else alert("User not found.");
   }
   sch.send(JSON.stringify(userToSearch));
 }
