@@ -1,9 +1,9 @@
 #body {
     background-image: url(adventure-beautiful-boardwalk.jpg);
-    background-position: center; /* Center the image */
+    background-position: center center; /* Center the image */
     /* background-position: top; */
     background-repeat: no-repeat; /* Do not repeat the image */
-    background-size: cover;
+    background-size: 150% 150%;
     /* background-attachment: fixed; */ /* fixed (will not scroll with the rest of the page) */
 }
 
@@ -42,4 +42,9 @@ a {
 .btn-primary {
     background-color: #346134;
     border-color: #346134;
+}
+
+span{
+  font-size: 12px;
+  font-weight: bold;
 }
