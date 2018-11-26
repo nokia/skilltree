@@ -487,6 +487,11 @@ function create() {
         tree = undefined;
     }
 
+    document.getElementById("openCreator").value = "Close Creator";
+    document.getElementById("openCreator").onclick = function() {
+        showTree(selectedTreeName);
+    };
+
     var canvas = document.getElementById("pixiCanvas");
     canvas.style.display = "none";
 
