@@ -470,8 +470,8 @@ function create() {
         tree = undefined;
     }
 
-    document.getElementById("pixiCanvas").style.display = none;
-    document.getElementById("creator").style.display = block;
+    document.getElementById("pixiCanvas").style.display = "none";
+    document.getElementById("creator").style.display = "block";
 }
 
 // helper functions
