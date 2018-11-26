@@ -395,7 +395,7 @@ setRoute.post('/addTreeToUser', async function (req, res){
 	}
 });
 
-setRoute.post('/getSkill', async function (req, res) {
+setRoute.post('/getskill', async function (req, res) {
 	var data = req.body;
 
 	var skill = await Skill.findOne({name: data.value} , function (err, skill) {
