@@ -550,9 +550,7 @@ function create() {
                 saveTree.responseType = "json";
                 saveTree.onreadystatechange = function() {
                     if(saveTree.readyState == 4 && saveTree.status == 200) {
-                        if (this.response.success) {
-
-                        }
+                        
                     }
                 }
                 saveTree.send(JSON.stringify(treeData));
