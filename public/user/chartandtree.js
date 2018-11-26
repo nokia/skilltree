@@ -481,6 +481,8 @@ function create() {
     creator.style.height = canvas.style.height;
 
     var addBtn = document.getElementById("addToTree");
+    var skillList = document.getElementById("skillList");
+    var skillsToAdd = [];
     addBtn.onclick = function () {
         var skill = {value: document.getElementById('skillSearch').value};
         var skillReq = new XMLHttpRequest();
@@ -491,10 +493,14 @@ function create() {
         skillReq.onreadystatechange = function() {
             if(skillReq.readyState == 4 && skillReq.status == 200) {
                 if (this.response.success) {
-                    console.log(this.response.skill);
-                } else {
-                    alert("Skill is not found");
-                }
+                    
+                    if (skillsToAdd.find(obj => obj.name == this.response.skill.name) == undefined) {
+                        skillsToAdd.push(this.response.skill);
+                        var option = document.createElement("option");
+                        option.text = this.response.skill.name;
+                        skillList.add(option);
+                    } else alert("You have already added this skill");
+                } else alert("Skill is not found");
                 /*skillSearchResult.innerText = "";
                 for (var i = 0; i < sch.response.length; i++) {
                     var mya = document.createElement('option');
