@@ -103,7 +103,7 @@ function loadAddedTrees(){
     var ithtree = document.createElement('div');
     ithtree.innerHTML = tn;
     ithtree.className = "listedTree";
-    ithtree.onClick = function() {
+    ithtree.onclick = function() {
       showTree(ithtree.innerHTML);
     }
     treeList.appendChild(ithtree);
@@ -224,11 +224,6 @@ document.getElementById("openchart").onclick = showChart;
 var chartContainer = new PIXI.Container();
 
 function showChart() {
-    if (tree != undefined) {
-        app.stage.removeChild(tree.treeContainer);
-        tree = undefined;
-    }
-
     document.getElementById("openchart").value = "Close Chart";
     document.getElementById("openchart").onclick = function() {
         showTree(selectedTreeName);
@@ -386,6 +381,10 @@ var tree = undefined;
 
 function showTree (treeName) {
     // load the tree's pictures
+    if (tree != undefined) {
+        app.stage.removeChild(tree.treeContainer);
+        tree = undefined;
+    }
     selectedTreeName = treeName;
 
     var skills = new Array();
