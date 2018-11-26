@@ -408,12 +408,34 @@ setRoute.post('/getskill', async function (req, res) {
 			success: false
 		});
 	} else {
+		skillFamily = [];
+		skillFamily.push(skill);
+		getParents(skill, skillFamily);
+		console.log(skillFamily);
+
 		res.json({
 			success: true,
 			skill: skill
 		});
 	}
 });
+
+function getParents (skill, skillFamily) {
+	var parents = [];
+	for (var i = 0; i < skill.parents.length; ++i) {
+		var parent = await Skill.findOne({name: skill.parents[i]} , function (err, skill) {
+						if (err) throw err;
+						return skill;
+		});
+
+		parents.push(parent);
+		skillFamily.push(parent);
+	}
+
+	for (var i = 0; i < parents.length; ++i) {
+		getParents(parents[i]. skillFamily);
+	}
+}
 
 setRoute.post('/newtree', async function (req, res) { // create user tree
 	var data = req.body;
