@@ -105,9 +105,9 @@ function searchTreesByName(){
   sch.responseType = "json";
   sch.onreadystatechange = function() {
       if(sch.readyState == 4 && sch.status == 200) {
-        var mya = document.createElement('option');
         sideBarSearchResult.innerHTML = "";
         for (var i = 0; i < sch.response.length; i++) {
+          var mya = document.createElement('option');
           mya.value = sch.response[i].name;
           sideBarSearchResult.appendChild(mya);
         }
