@@ -21,7 +21,7 @@ function validate() {
 						if (httpRequest.response.success) {
 							localStorage.setItem("loginToken", httpRequest.response.token);
 							window.open("/user", "_self");
-						} else showToast();
+						} else alert("Incorrect credentials! Username already taken.");
 					}
 				}
 
