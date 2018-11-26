@@ -472,8 +472,13 @@ function create() {
         tree = undefined;
     }
 
-    document.getElementById("pixiCanvas").style.display = "none";
-    document.getElementById("creator").style.display = "block";
+    var canvas = document.getElementById("pixiCanvas");
+    canvas.style.display = "none";
+
+    var creator = document.getElementById("creator");
+    creator.style.display = "block";
+    creator.style.width = canvas.style.width;
+    creator.style.height = canvas.style.height;
 }
 
 // helper functions
