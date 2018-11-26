@@ -1,51 +1,67 @@
 <!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Skill Tree</title>
-  <link rel="stylesheet" type="text/css" href="register.css">
-  <script type="text/javascript">
-  document.addEventListener('DOMContentLoaded', function() {
-    var isIE = /*@cc_on!@*/false || !!document.documentMode;
-    var isEdge = !isIE && !!window.StyleMedia;
-    if(isIE || isEdge){
-      window.open('https://www.google.com/chrome/','_self');
-    }
-  }, false);
-  </script>
-</head>
-<body>
-    <div id="loginBox">
-      <h1>Welcome to the Skill Tree!</h1>
-      <form onsubmit="return false">
-        <p>Username</p>
-        <input type="text" id="username" placeholder="Enter Username">
-        <p>Password</p>
-        <input type="password" id="password1" placeholder="Enter Password">
-        <p>Confirm Password</p>
-        <input type="password" id="password2" placeholder="Enter Password">
-        <p>Email</p>
-        <input type="text" id="email" placeholder="Enter Email">
-        <p>Select a focus area:</p>
-        <p>
-            <select id = "focusarea">
-                <option value = "People">People</option>
-                <option value = "Engineering">Engineering</option>
-                <option value = "Business">Business</option>
-                <option value = "Communication">Communication</option>
-                <option value = "Support functions">Support functions</option>
-            </select>
-        </p></br>
-        <p>I am willing to share knowledge<input type = "checkbox" id = "teach"></p>
-        <input type="submit" id="submit" value="Register" onclick="validate()">
-        <a href="login.html">Already a user?</a>
-      </form>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+
+    <title>SkillTree</title>
+    <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+      var isIE = /*@cc_on!@*/false || !!document.documentMode;
+      var isEdge = !isIE && !!window.StyleMedia;
+      if(isIE || isEdge){
+        window.open('https://www.google.com/chrome/','_self');
+      }
+    }, false);
+    </script>
+    <script src="register.js"></script>
+  </head>
+  <body id="body">
+
+    <div class="container jumbocontainer p-3">
+        <div class="jumbotron p-3">
+          <h1 class="display-4 d-none d-lg-block">Welcome to the SkillTree</h1>
+          <h5 class="d-block d-lg-none">Welcome to the SkillTree</h5>
+          <p class="lead">What is SkillTree? <a href="">></a></p>
+          <p class="lead">Already have an account? <a href="login.html">Login</a></p>
+          <hr class="my-4">
+          <form onsubmit = "return false">
+              <div class="form-group">
+                <!-- <label for="exampleInputEmail1">Email address</label> -->
+                <input type="text" class="form-control" id = "username" aria-describedby="emailHelp" placeholder="Username">
+              </div>
+              <div class="form-group">
+                <!-- <label for="exampleInputPassword1">Password</label> -->
+                <input type="password" class="form-control" id = "password1" placeholder="Password">
+              </div>
+              <div class="form-group">
+                <!-- <label for="exampleInputPassword1">Password</label> -->
+                <input type="password" class="form-control" id="password2" placeholder="Confirm Password">
+              </div>
+              <div class="form-group">
+                <!-- <label for="exampleInputEmail1">Email address</label> -->
+                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+              </div>
+              <button type="submit" id = "submit" value = "Register" class="btn btn-primary btn-lg" onclick = "validate()">Register</button>
+          </form>
+        </div>
     </div>
 
-	<div id="toast">
-    User already exists.
-  </div>
 
-  <script src="register.js"></script>
-</body>
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
 </html>

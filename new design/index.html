@@ -10,37 +10,53 @@
     <link rel="stylesheet" href="style.css">
 
     <title>SkillTree</title>
+    <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+      var isIE = /*@cc_on!@*/false || !!document.documentMode;
+      var isEdge = !isIE && !!window.StyleMedia;
+      if(isIE || isEdge){
+        window.open('https://www.google.com/chrome/','_self');
+      }
+    }, false);
+    </script>
+    <script src="register.js"></script>
   </head>
   <body id="body">
-    
+
     <div class="container jumbocontainer p-3">
         <div class="jumbotron p-3">
           <h1 class="display-4 d-none d-lg-block">Welcome to the SkillTree</h1>
           <h5 class="d-block d-lg-none">Welcome to the SkillTree</h5>
-          <p class="lead">What is SkillTree? <a href="">></a></p> 
-          <p class="lead">Don't have an account? <a href="">Sign up</a></p>
+          <p class="lead">What is SkillTree? <a href="">></a></p>
+          <p class="lead">Already have an account? <a href="login.html">Login</a></p>
           <hr class="my-4">
-          <form method="get" action="userprofile.html">
+          <form onsubmit = "return false">
               <div class="form-group">
                 <!-- <label for="exampleInputEmail1">Email address</label> -->
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                
+                <input type="text" class="form-control" id = "username" aria-describedby="emailHelp" placeholder="Username">
               </div>
               <div class="form-group">
                 <!-- <label for="exampleInputPassword1">Password</label> -->
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <input type="password" class="form-control" id = "password1" placeholder="Password">
               </div>
-              <button type="submit" class="btn btn-primary btn-lg" onclick="window.location.href='userprofile.html'">Login</button>
-              <span><a href="">I forgot my password. :(</a></span>
-        </form>
+              <div class="form-group">
+                <!-- <label for="exampleInputPassword1">Password</label> -->
+                <input type="password" class="form-control" id="password2" placeholder="Confirm Password">
+              </div>
+              <div class="form-group">
+                <!-- <label for="exampleInputEmail1">Email address</label> -->
+                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+              </div>
+              <button type="submit" id = "submit" value = "Register" class="btn btn-primary btn-lg" onclick = "validate()">Register</button>
+          </form>
         </div>
     </div>
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

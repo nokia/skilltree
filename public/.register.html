@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Skill Tree</title>
+  <link rel="stylesheet" type="text/css" href="register.css">
+  <script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+    var isIE = /*@cc_on!@*/false || !!document.documentMode;
+    var isEdge = !isIE && !!window.StyleMedia;
+    if(isIE || isEdge){
+      window.open('https://www.google.com/chrome/','_self');
+    }
+  }, false);
+  </script>
+</head>
+<body>
+    <div id="loginBox">
+      <h1>Welcome to the Skill Tree!</h1>
+      <form onsubmit="return false">
+        <p>Username</p>
+        <input type="text" id="username" placeholder="Enter Username">
+        <p>Password</p>
+        <input type="password" id="password1" placeholder="Enter Password">
+        <p>Confirm Password</p>
+        <input type="password" id="password2" placeholder="Enter Password">
+        <p>Email</p>
+        <input type="text" id="email" placeholder="Enter Email">
+        <p>Select a focus area:</p>
+        <p>
+            <select id = "focusarea">
+                <option value = "People">People</option>
+                <option value = "Engineering">Engineering</option>
+                <option value = "Business">Business</option>
+                <option value = "Communication">Communication</option>
+                <option value = "Support functions">Support functions</option>
+            </select>
+        </p></br>
+        <p>I am willing to share knowledge<input type = "checkbox" id = "teach"></p>
+        <input type="submit" id="submit" value="Register" onclick="validate()">
+        <a href="login.html">Already a user?</a>
+      </form>
+    </div>
+
+	<div id="toast">
+    User already exists.
+  </div>
+
+  <script src="register.js"></script>
+</body>
+</html>
