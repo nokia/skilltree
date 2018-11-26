@@ -480,6 +480,31 @@ function create() {
     creator.style.width = canvas.style.width;
     creator.style.height = canvas.style.height;
 
+    var addBtn = document.getElementById("addToTree");
+    addBtn.onclick = function () {
+        var skill = {value: document.getElementById('skillSearch').value};
+        var skillReq = new XMLHttpRequest();
+        skillReq.open('POST', '/set/getskill', true);
+        skillReq.setRequestHeader('Content-type', 'application/json');
+        skillReq.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+        skillReq.responseType = "json";
+        skillReq.onreadystatechange = function() {
+            if(skillReq.readyState == 4 && skillReq.status == 200) {
+                if (this.response.success) {
+                    console.log(this.response.skill);
+                } else {
+                    alert("Skill is not found");
+                }
+                /*skillSearchResult.innerText = "";
+                for (var i = 0; i < sch.response.length; i++) {
+                    var mya = document.createElement('option');
+                    mya.value = sch.response[i].name;
+                    skillSearchResult.appendChild(mya);
+                }*/
+            }
+        }
+        skillReq.send(JSON.stringify(skill));
+    };
 }
 
 function searchSkillsByName(){
