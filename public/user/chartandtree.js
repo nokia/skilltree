@@ -140,8 +140,9 @@ function getPublicUserData(){
   sch.responseType = "json";
   sch.onreadystatechange = function() {
       if(sch.readyState == 4 && sch.status == 200) {
-        alert("boop");
+        alert("User found, data loaded.");
       }
+      else alert("User not found.");
   }
   sch.send(JSON.stringify(userToSearch));
 }
