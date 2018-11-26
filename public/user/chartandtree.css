@@ -92,6 +92,7 @@ body {
 
 .listedTree{
   display: block;
+  cursor: pointer;
   font-size: 14px;
   text-align: inherit;
   margin-left: 4px;

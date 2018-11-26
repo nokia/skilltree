@@ -110,7 +110,7 @@ function loadAddedTrees(){
   }
 }
 
-function searchUsersByName(){
+function searchUsersByName(){ 
   var userToSearch = {value: document.getElementById('searchedUser').value};
   var sideBarUserSearchResult = document.getElementById('sideBarUserSearchResult');
   var sch = new XMLHttpRequest();
