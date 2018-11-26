@@ -3,8 +3,9 @@
     background-position: center center; /* Center the image */
     /* background-position: top; */
     background-repeat: no-repeat; /* Do not repeat the image */
-    background-size: 150% 150%;
-    /* background-attachment: fixed; */ /* fixed (will not scroll with the rest of the page) */
+    background-size: cover;
+    background-attachment: fixed;
+    /* background-attachment: fixed; */ /* fixed (will not scroll with the rest of the page), edit: needed, because of other screen rate than 16:9 */
 }
 
 .jumbocontainer {
