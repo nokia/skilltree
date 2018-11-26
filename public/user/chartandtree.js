@@ -491,7 +491,7 @@ function create() {
         skillReq.onreadystatechange = function() {
             if(skillReq.readyState == 4 && skillReq.status == 200) {
                 if (this.response.success) {
-
+                    console.log(this.response.skill);
                 } else {
                     alert("Skill is not found");
                 }
@@ -503,7 +503,7 @@ function create() {
                 }*/
             }
         }
-        skillReq.send(JSON.stringify(skillToSearch));
+        skillReq.send(JSON.stringify(skill));
     };
 }
 
