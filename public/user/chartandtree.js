@@ -38,12 +38,15 @@ function checkFirstLogin() {
         var mainTree = document.getElementById('maintree');
 
         btn.onclick = function() {
-            var contact = document.getElementById('contact').value;
+            var location = document.getElementById('location').value;
+            var teachingDay = document.getElementById('day').value;
+            var teachingTime = document.getElementById('timeStart').value + ' - ' + document.getElementById('timeEnd').value;
             var location = document.getElementById('location').value;
 
             var firstLoginData = {
                     mainTree: mainTree.value,
-                    contact: contact,
+                    teachingDay: teachingDay,
+                    teachingTime: teachingTime,
                     location: location
             };
 
