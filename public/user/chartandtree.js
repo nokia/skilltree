@@ -103,7 +103,7 @@ function loadAddedTrees(){
     var ithtree = document.createElement('div');
     ithtree.innerHTML = tn;
     ithtree.className = "listedTree";
-    ithtree.onClick(){
+    ithtree.onClick = function() {
       showTree(ithtree.innerHTML);
     }
     treeList.appendChild(ithtree);
