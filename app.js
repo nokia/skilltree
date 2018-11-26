@@ -468,7 +468,7 @@ setRoute.post('/newtree', async function (req, res) { // create user tree
 			message: 'User not found.'
 		});
 	} else {
-		user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: []});
+		user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: data.skillNames});
 		user.save(function (err) {if (err) throw err;});
 	}
 });
@@ -513,7 +513,6 @@ setRoute.post('/skilldata', function(req, res) {
 	});
 });
 
-//TO BE DELETED
 setRoute.post('/approvetree', async function (req, res) {
 	var data = req.body;
 

@@ -534,7 +534,28 @@ function create() {
     createBtn.onclick = function () {
         if (document.getElementById('treeName').value.length > 0) {
             if (skillsToAdd.length > 0) {
+                var skillNames = [];
+                for (var i = 0; i < skillsToAdd.length; ++i) skillNames.push(skillsToAdd[i].names);
 
+                var treeData = {
+                    name: document.getElementById('treeName').value,
+                    focusArea: document.getElementById('focusarea').value,
+                    skillNames: skillNames
+                };
+
+                var saveTree = new XMLHttpRequest();
+                saveTree.open('POST', '/set/newtree', true);
+                saveTree.setRequestHeader('Content-type', 'application/json');
+                saveTree.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+                saveTree.responseType = "json";
+                saveTree.onreadystatechange = function() {
+                    if(saveTree.readyState == 4 && saveTree.status == 200) {
+                        if (this.response.success) {
+
+                        }
+                    }
+                }
+                saveTree.send(JSON.stringify(treeData));
             } else alert("Please add at least one skill to the tree");
         } else alert("Please provide a name to the tree");
     };
