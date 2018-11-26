@@ -335,9 +335,9 @@ setRoute.post('/searchSkillsByName', async function (req, res) {
 		var data = req.body;
 		var foundSkills = await Skill.find({
 					"name": {$regex : ".*" + data.value + ".*"}
-			}, function (err, tree) {
+			}, function (err, skills) {
 					if (err) throw err;
-					return tree;
+					return skills;
 		});
 		var resSkills = [];
 		for (var i = 0; i < foundSkills.length; i++) {
@@ -395,6 +395,26 @@ setRoute.post('/addTreeToUser', async function (req, res){
 	}
 });
 
+setRoute.post('/getSkill', async function (req, res) {
+	var data = req.body;
+
+	var skill = await Skill.findOne({name: data.value} , function (err, skill) {
+				if (err) throw err;
+				return skill;
+	});
+
+	if (!skill) {
+		res.json({
+			success: false
+		});
+	} else {
+		res.json({
+			success: true,
+			skill: skill
+		});
+	}
+});
+
 setRoute.post('/newtree', async function (req, res) { // create user tree
 	var data = req.body;
 
@@ -415,6 +435,7 @@ setRoute.post('/newtree', async function (req, res) { // create user tree
 		user.save(function (err) {if (err) throw err;});
 	}
 });
+
 setRoute.post('/addskilltotree', async function(req, res) { // to user tree
     var data = req.body;
 
