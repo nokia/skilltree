@@ -339,7 +339,7 @@ setRoute.post('/searchSkillsByName', async function (req, res) {
 					if (err) throw err;
 					return tree;
 		});
-		var resTrees = [];
+		var resSkills = [];
 		for (var i = 0; i < foundSkills.length; i++) {
 			resSkills[i] = {name: foundSkills[i].name};
 		}
