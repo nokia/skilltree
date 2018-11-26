@@ -434,7 +434,7 @@ setRoute.post('/getskill', async function (req, res) {
 	}
 });
 
-function getParents (skill, skillFamily) {
+async function getParents (skill, skillFamily) {
 	var parents = [];
 	for (var i = 0; i < skill.parents.length; ++i) {
 		var parent = await Skill.findOne({name: skill.parents[i]} , function (err, skill) {
