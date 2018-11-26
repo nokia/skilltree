@@ -104,7 +104,7 @@ function loadAddedTrees(){
     ithtree.innerHTML = tn;
     ithtree.className = "listedTree";
     ithtree.onclick = function() {
-      showTree(ithtree.innerHTML);
+      showTree(this.innerHTML);
     }
     treeList.appendChild(ithtree);
   }
