@@ -131,6 +131,21 @@ function searchUsersByName(){
   sch.send(JSON.stringify(userToSearch));
 }
 
+function getPublicUserData(){
+  var userToSearch = {value: document.getElementById('searchedUser').value};
+  var sch = new XMLHttpRequest();
+  sch.open('POST', '/set/getPublicUserData', true);
+  sch.setRequestHeader('Content-type', 'application/json');
+  sch.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+  sch.responseType = "json";
+  sch.onreadystatechange = function() {
+      if(sch.readyState == 4 && sch.status == 200) {
+        alert("boop");
+      }
+  }
+  sch.send(JSON.stringify(userToSearch));
+}
+
 function searchTreesByName(){
   var treeToSearch = {value: document.getElementById('searchedTree').value};
   var sideBarTreeSearchResult = document.getElementById('sideBarTreeSearchResult');
@@ -493,7 +508,7 @@ function create() {
         skillReq.onreadystatechange = function() {
             if(skillReq.readyState == 4 && skillReq.status == 200) {
                 if (this.response.success) {
-                    
+
                     if (skillsToAdd.find(obj => obj.name == this.response.skill.name) == undefined) {
                         skillsToAdd.push(this.response.skill);
                         var option = document.createElement("option");
