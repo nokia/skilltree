@@ -462,6 +462,20 @@ function showTree (treeName) {
     });
 }*/
 
+/*
+*   TREE CREATOR
+*/
+
+function create() {
+    if (tree != undefined) {
+        app.stage.removeChild(tree.treeContainer);
+        tree = undefined;
+    }
+
+    document.getElementById("pixiCanvas").style.display = none;
+    document.getElementById("creator").style.display = block;
+}
+
 // helper functions
 
 function parseJwt (token) {
