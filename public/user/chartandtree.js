@@ -494,6 +494,7 @@ function searchSkillsByName(){
       if(sch.readyState == 4 && sch.status == 200) {
         skillSearchResult.innerText = "";
         for (var i = 0; i < sch.response.length; i++) {
+            console.log(sch.response[i].name);
           var mya = document.createElement('option');
           mya.value = sch.response[i].name;
           skillSearchResult.appendChild(mya);
