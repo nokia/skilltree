@@ -422,10 +422,10 @@ setRoute.post('/getskill', async function (req, res) {
 			success: false
 		});
 	} else {
-		skillFamily = [];
+		var skillFamily = [];
 		skillFamily.push(skill);
 		getParents(skill, skillFamily);
-		//console.log(skillFamily);
+		console.log(skillFamily);
 
 		res.json({
 			success: true,
