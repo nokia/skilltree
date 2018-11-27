@@ -443,7 +443,7 @@ async function getDependency (skill, dependency) {
 		});
 
 		parents.push(parent);
-		console.log(parent);
+		console.log(dependency);
 		dependency.push(parent);
 	}
 
