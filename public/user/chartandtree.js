@@ -513,7 +513,18 @@ function create() {
             if(skillReq.readyState == 4 && skillReq.status == 200) {
                 if (this.response.success) {
                     if (skillsToAdd.find(obj => obj.name == this.response.skill.name) == undefined) {
-                        skillsToAdd.push(this.response.skill);
+                        if (this.response.dependency.length > 0) {
+                            var text = "The selected skill depends on the following skills. Do you want to add these?\n";
+                            for (var i = 0; i < this.response.dependency.length; ++i) {
+                                text += this.response.dependency[i].name + "\n";
+                            }
+                            if (confirm(text)) {
+                                skillsToAdd.push(this.response.dependency);
+                                for (var i = 0; i < this.response.dependency.length; ++i) {
+                                    skillsToAdd.push(this.response.dependency[i]);
+                                }
+                            }
+                        } else skillsToAdd.push(this.response.skill);
                         var option = document.createElement("option");
                         option.text = this.response.skill.name;
                         skillList.add(option);

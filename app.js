@@ -422,19 +422,35 @@ setRoute.post('/getskill', async function (req, res) {
 			success: false
 		});
 	} else {
-		var skillFamily = [];
-		skillFamily.push(skill);
-		getParents(skill, skillFamily);
-		console.log(skillFamily);
+		var dependency = [];
+		getParents(skill, dependency);
 
 		res.json({
 			success: true,
-			skill: skill
+			skill: skill,
+			dependency: dependency
 		});
 	}
 });
 
-async function getParents (skill, skillFamily) {
+async function getDependency (skill, dependency) {
+	var parents = [];
+	for (var i = 0; skill.parents != undefined && i < skill.parents.length; ++i) {
+		var parent = await Skill.findOne({name: skill.parents[i]} , function (err, skill) {
+						if (err) throw err;
+						return skill;
+		});
+
+		parents.push(parent);
+		dependency.push(parent);
+	}
+
+	for (var i = 0; i < parents.length; ++i) {
+		getParents(parents[i], skills);
+	}
+}
+
+/*async function getParents (skill, skillFamily) {
 	var parents = [];
 	console.log(skill);
 	for (var i = 0; skill.parents != undefined && i < skill.parents.length; ++i) {
@@ -450,7 +466,7 @@ async function getParents (skill, skillFamily) {
 	for (var i = 0; i < parents.length; ++i) {
 		getParents(parents[i], skillFamily);
 	}
-}
+}*/
 
 setRoute.post('/newtree', async function (req, res) { // create user tree
 	var data = req.body;
