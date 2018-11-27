@@ -423,7 +423,7 @@ setRoute.post('/getskill', async function (req, res) {
 		});
 	} else {
 		var dependency = [];
-		getParents(skill, dependency);
+		getDependency(skill, dependency);
 
 		res.json({
 			success: true,
@@ -446,7 +446,7 @@ async function getDependency (skill, dependency) {
 	}
 
 	for (var i = 0; i < parents.length; ++i) {
-		getParents(parents[i], skills);
+		getDependency(parents[i], skills);
 	}
 }
 
