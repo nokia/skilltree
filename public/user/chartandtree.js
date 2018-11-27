@@ -542,6 +542,7 @@ function create() {
                     focusArea: document.getElementById('focusarea').value,
                     skillNames: skillNames
                 };
+                console.log(treeData);
 
                 var saveTree = new XMLHttpRequest();
                 saveTree.open('POST', '/set/newtree', true);
