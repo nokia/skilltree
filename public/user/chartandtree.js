@@ -536,8 +536,8 @@ function create() {
         if (document.getElementById('treeName').value.length > 0) {
             if (skillsToAdd.length > 0) {
                 var skillNames = [];
-                console.log(skillsToAdd);
-                for (var i = 0; i < skillsToAdd.length; ++i) skillNames.push(skillsToAdd[i][0].names);
+                console.log(skillsToAdd[0]);
+                for (var i = 0; i < skillsToAdd.length; ++i) skillNames.push(skillsToAdd[i].names);
 
                 var treeData = {
                     name: document.getElementById('treeName').value,
