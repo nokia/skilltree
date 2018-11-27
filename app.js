@@ -409,7 +409,6 @@ setRoute.post('/addTreeToUser', async function (req, res){
 	}
 });
 
-var dependency;
 setRoute.post('/getskill', async function (req, res) {
 	var data = req.body;
 
@@ -423,8 +422,8 @@ setRoute.post('/getskill', async function (req, res) {
 			success: false
 		});
 	} else {
-		dependency = [];
-		getDependency(skill);
+		var dependency = [];
+		getDependency(skill, dependency);
 		console.log(dependency);
 
 		res.json({
@@ -435,7 +434,7 @@ setRoute.post('/getskill', async function (req, res) {
 	}
 });
 
-async function getDependency (skill) {
+async function getDependency (skill, dependency) {
 	var parents = [];
 	for (var i = 0; skill.parents != undefined && i < skill.parents.length; ++i) {
 		var parent = await Skill.findOne({name: skill.parents[i]} , function (err, skill) {
@@ -444,11 +443,12 @@ async function getDependency (skill) {
 		});
 
 		parents.push(parent);
+		console.log(parent);
 		dependency.push(parent);
 	}
 
 	for (var i = 0; i < parents.length; ++i) {
-		getDependency(parents[i]);
+		getDependency(parents[i], dependency);
 	}
 }
 
