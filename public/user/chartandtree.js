@@ -543,6 +543,8 @@ function create() {
                     skillNames: skillNames
                 };
 
+                console.log(treeData);
+
                 var saveTree = new XMLHttpRequest();
                 saveTree.open('POST', '/set/newtree', true);
                 saveTree.setRequestHeader('Content-type', 'application/json');
@@ -550,7 +552,7 @@ function create() {
                 saveTree.responseType = "json";
                 saveTree.onreadystatechange = function() {
                     if(saveTree.readyState == 4 && saveTree.status == 200) {
-                        
+
                     }
                 }
                 saveTree.send(JSON.stringify(treeData));
