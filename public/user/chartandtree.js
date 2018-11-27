@@ -513,6 +513,7 @@ function create() {
             if(skillReq.readyState == 4 && skillReq.status == 200) {
                 if (this.response.success) {
                     if (skillsToAdd.find(obj => obj.name == this.response.skill.name) == undefined) {
+                        console.log(this.response.dependency);
                         if (this.response.dependency.length > 0) {
                             var text = "The selected skill depends on the following skills. Do you want to add these?\n";
                             for (var i = 0; i < this.response.dependency.length; ++i) {
