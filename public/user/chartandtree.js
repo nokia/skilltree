@@ -543,8 +543,6 @@ function create() {
                     skillNames: skillNames
                 };
 
-                console.log(treeData);
-
                 var saveTree = new XMLHttpRequest();
                 saveTree.open('POST', '/set/newtree', true);
                 saveTree.setRequestHeader('Content-type', 'application/json');
