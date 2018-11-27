@@ -423,7 +423,7 @@ setRoute.post('/getskill', async function (req, res) {
 		});
 	} else {
 		var dependency = [];
-		getDependency(skill, dependency);
+		await getDependency(skill, dependency);
 		console.log(dependency);
 
 		res.json({
