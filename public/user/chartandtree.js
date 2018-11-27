@@ -527,7 +527,7 @@ function create() {
                                 for (var i = 0; i < this.response.dependency.length; ++i) {
                                     skillsToAdd.push(this.response.dependency[i]);
                                     var option = document.createElement("option");
-                                    option.text = this.response.dependency[i];
+                                    option.text = this.response.dependency[i].name;
                                     skillList.add(option);
                                 }
                             }
