@@ -513,7 +513,6 @@ function create() {
             if(skillReq.readyState == 4 && skillReq.status == 200) {
                 if (this.response.success) {
                     if (skillsToAdd.find(obj => obj.name == this.response.skill.name) == undefined) {
-                        console.log(this.response.skill);
                         skillsToAdd.push(this.response.skill);
                         var option = document.createElement("option");
                         option.text = this.response.skill.name;
@@ -536,8 +535,7 @@ function create() {
         if (document.getElementById('treeName').value.length > 0) {
             if (skillsToAdd.length > 0) {
                 var skillNames = [];
-                console.log(skillsToAdd[0]);
-                for (var i = 0; i < skillsToAdd.length; ++i) skillNames.push(skillsToAdd[i].names);
+                for (var i = 0; i < skillsToAdd.length; ++i) skillNames.push(skillsToAdd[i].name);
 
                 var treeData = {
                     name: document.getElementById('treeName').value,
