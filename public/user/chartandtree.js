@@ -552,7 +552,7 @@ function create() {
                 saveTree.responseType = "json";
                 saveTree.onreadystatechange = function() {
                     if(saveTree.readyState == 4 && saveTree.status == 200) {
-
+                        if (this.response.message == "treeexists") alert("There is already a tree with this name");
                     }
                 }
                 saveTree.send(JSON.stringify(treeData));

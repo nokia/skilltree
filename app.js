@@ -468,8 +468,19 @@ setRoute.post('/newtree', async function (req, res) { // create user tree
 			message: 'User not found.'
 		});
 	} else {
-		user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: data.skillNames});
-		user.save(function (err) {if (err) throw err;});
+		if (user.trees.find(obj => obj.name == data.name) == undefined) {
+			user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: data.skillNames});
+			user.save(function (err) {if (err) throw err;});
+
+			res.json({
+				success: true
+			});
+		} else {
+			res.json({
+				success: false,
+				message: 'treeexists'
+			});
+		}
 	}
 });
 
