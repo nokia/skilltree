@@ -317,7 +317,7 @@ setRoute.post('/searchUsersByName', async function (req, res) {
 setRoute.post('/searchTreesByName', async function (req, res) {
 		var data = req.body;
 		var foundTrees = await Tree.find({
-					"name": {$regex : ".*" + data.value + ".*"}
+					"name": {$regex : "/.*" + data.value + ".*/i"}
 			}, function (err, tree) {
 					if (err) throw err;
 			return tree;
