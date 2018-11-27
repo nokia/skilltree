@@ -424,7 +424,6 @@ setRoute.post('/getskill', async function (req, res) {
 	} else {
 		var dependency = [];
 		await getDependency(skill, dependency);
-		console.log(dependency);
 
 		res.json({
 			success: true,

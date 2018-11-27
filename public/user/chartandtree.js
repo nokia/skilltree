@@ -513,7 +513,6 @@ function create() {
             if(skillReq.readyState == 4 && skillReq.status == 200) {
                 if (this.response.success) {
                     if (skillsToAdd.find(obj => obj.name == this.response.skill.name) == undefined) {
-                        console.log(this.response.dependency);
                         if (this.response.dependency.length > 0) {
                             var text = "The selected skill depends on the following skills. Do you want to add these?\n";
                             for (var i = 0; i < this.response.dependency.length; ++i) {
@@ -525,10 +524,12 @@ function create() {
                                 option.text = this.response.skill.name;
                                 skillList.add(option);
                                 for (var i = 0; i < this.response.dependency.length; ++i) {
-                                    skillsToAdd.push(this.response.dependency[i]);
-                                    var option = document.createElement("option");
-                                    option.text = this.response.dependency[i].name;
-                                    skillList.add(option);
+                                    if (skillsToAdd.find(obj => obj.name == this.response.dependency[i].name) == undefined) {
+                                        skillsToAdd.push(this.response.dependency[i]);
+                                        var option = document.createElement("option");
+                                        option.text = this.response.dependency[i].name;
+                                        skillList.add(option);
+                                    }
                                 }
                             }
                         } else {
@@ -562,7 +563,6 @@ function create() {
                     focusArea: document.getElementById('focusarea').value,
                     skillNames: skillNames
                 };
-                console.log(treeData);
 
                 var saveTree = new XMLHttpRequest();
                 saveTree.open('POST', '/set/newtree', true);
