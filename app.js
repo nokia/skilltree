@@ -446,7 +446,7 @@ async function getDependency (skill, dependency) {
 	}
 
 	for (var i = 0; i < parents.length; ++i) {
-		getDependency(parents[i], skills);
+		getDependency(parents[i], dependency);
 	}
 }
 
