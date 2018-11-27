@@ -520,15 +520,23 @@ function create() {
                                 text += this.response.dependency[i].name + "\n";
                             }
                             if (confirm(text)) {
-                                skillsToAdd.push(this.response.dependency);
+                                skillsToAdd.push(this.response.skill);
+                                var option = document.createElement("option");
+                                option.text = this.response.skill.name;
+                                skillList.add(option);
                                 for (var i = 0; i < this.response.dependency.length; ++i) {
                                     skillsToAdd.push(this.response.dependency[i]);
+                                    var option = document.createElement("option");
+                                    option.text = this.response.dependency[i];
+                                    skillList.add(option);
                                 }
                             }
-                        } else skillsToAdd.push(this.response.skill);
-                        var option = document.createElement("option");
-                        option.text = this.response.skill.name;
-                        skillList.add(option);
+                        } else {
+                            skillsToAdd.push(this.response.skill);
+                            var option = document.createElement("option");
+                            option.text = this.response.skill.name;
+                            skillList.add(option);
+                        }
                     } else alert("You have already added this skill");
                 } else alert("Skill is not found");
                 /*skillSearchResult.innerText = "";
