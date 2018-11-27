@@ -301,7 +301,7 @@ setRoute.post('/newskill', async function(req, res) { // global skill
 setRoute.post('/searchUsersByName', async function (req, res) {
 		var data = req.body;
 		var foundUsers = await User.find({
-					"username": {$regex : ".*" + data.value + ".*"}
+					"username": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
 			}, function (err, user) {
 					if (err) throw err;
 			return user;
@@ -333,7 +333,7 @@ setRoute.post('/searchTreesByName', async function (req, res) {
 setRoute.post('/searchSkillsByName', async function (req, res) {
 		var data = req.body;
 		var foundSkills = await Skill.find({
-					"name": {$regex : ".*" + data.value + ".*"}
+					"name": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
 			}, function (err, skills) {
 					if (err) throw err;
 					return skills;
