@@ -409,6 +409,7 @@ setRoute.post('/addTreeToUser', async function (req, res){
 	}
 });
 
+var dependency;
 setRoute.post('/getskill', async function (req, res) {
 	var data = req.body;
 
@@ -422,7 +423,7 @@ setRoute.post('/getskill', async function (req, res) {
 			success: false
 		});
 	} else {
-		var dependency = [];
+		dependency = [];
 		getDependency(skill);
 		console.log(dependency);
 
