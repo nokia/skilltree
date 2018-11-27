@@ -443,12 +443,11 @@ async function getDependency (skill, dependency) {
 		});
 
 		parents.push(parent);
-		console.log(dependency);
 		dependency.push(parent);
 	}
 
 	for (var i = 0; i < parents.length; ++i) {
-		getDependency(parents[i], dependency);
+		await getDependency(parents[i], dependency);
 	}
 }
 
