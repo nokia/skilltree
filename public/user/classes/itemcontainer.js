@@ -307,9 +307,11 @@ class ItemContainer {
                                 if(true) //TODO, only higher level offers should appear
                                     {
                                     offerTable.appendChild( createTableRow( globalskill.offers[i].username, 
-                                                                            globalskill.offers[i].contact, 
                                                                             globalskill.offers[i].location, 
-                                                                            globalskill.offers[i].achievedPoint) );
+                                                                            globalskill.offers[i].teachingDay,
+                                                                            globalskill.offer[i].teachingTime, 
+                                                                            globalskill.offers[i].achievedPoint
+                                                                            ) );
                                     }
                                 }
                             //Checking that the table is done (1 table out of 3)
@@ -336,7 +338,7 @@ class ItemContainer {
         var requestTable = document.getElementById('requestTableBody');
 
 
-        function createTableRow( data1, data2, data3, data4 )
+        function createTableRow( data1, data2, data3, data4, data5 )
         {
             //Creating an offer tablerow
             var Row = document.createElement('div');
@@ -358,10 +360,15 @@ class ItemContainer {
             Column4.className = "divTableCell";
             Column4.innerHTML = data4;
 
+            var Column5 = document.createElement('div');
+            Column5.className = "divTableCell";
+            Column5.innerHTML = data5;
+
             Row.appendChild(Column1);
             Row.appendChild(Column2);
             Row.appendChild(Column3);
             Row.appendChild(Column4);
+            Row.appendChild(Column5);
 
             return Row;
         }
