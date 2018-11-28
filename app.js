@@ -424,7 +424,6 @@ setRoute.post('/getskill', async function (req, res) {
 	} else {
 		var dependency = [];
 		await getDependency(skill, dependency);
-
 		res.json({
 			success: true,
 			skill: skill,
@@ -468,8 +467,83 @@ async function getDependency (skill, dependency) {
 	}
 }*/
 
+////
+//// NEMTOM HOGY MŰKDIK-E, FÉLEK KIPRÓBÁLNI, BEFEJEZEM HOLNAP.
+////
+
+async function insertSkill(skillToInsert, skillArray) {
+	if (!skillArray.includes(skillToInsert)) {
+		if (skillArray.length === 0) {
+			skillToInsert.level = 0;
+			skillArray.push(skillToInsert);
+			return;
+		}
+		else {
+			for (var i = 0; i < skillToInsert.parents.length; i++) {
+				var ithParent = await Skill.findOne({
+						name: skillToInsert.parents[i].name
+				}, function(err, skill) {
+						if (err) throw err;
+				return skill;
+				});
+				if (skillArray.includes(ithParent) {
+					for (var i = 0; i < ithParent.children.length; i++) {
+						var ithChild = await Skill.findOne({
+								name: ithParent.children[i].name
+						}, function(err, skill) {
+								if (err) throw err;
+						return skill;
+						});
+						if (skillArray.includes(ithChild)) {
+							var svc = 0;
+							while (ithChild.name !== skillArray[svc].name) {
+								svc++;
+							}
+							skillToInsert.level = ithChild.level;
+							skillArray.splice(svc + 1, 0, skillToInsert);
+							return;
+						}
+					}
+					var svp = 0;
+					while (skillArray[svp].level <= ithParent.level || skillArray[svp] === undefined) {
+						svp++;
+					}
+					skillToInsert.level = ithParent.level + 1;
+					skillArray.splice(svp, 0, skillToInsert);
+					return;
+				}
+			}
+			var sn = 0;
+			while (skillArray[sn].level === 0) {
+				sn++;
+			}
+			skillToInsert.level = 0;
+			skillarray.splice(sn + 1, 0, skillToInsert);
+			return;
+		}
+	}
+}
+
+async function extractNames(skillArray){
+	for (var i = 0; i < skillArray.length; i++) {
+		skillArray[i] = skillArray[i].name;
+	}
+}
+
+async function sortTree(skillArray){
+	var sortedArray = [];
+	for (var i = 0; i < skillArray.length; i++) {
+		await insertSkill(skillArray[i], sortedArray);
+	}
+	skillArray = await extractNames(sortedArray);
+}
+
+////
+//// NEMTOM HOGY MŰKDIK-E, FÉLEK KIPRÓBÁLNI, BEFEJEZEM HOLNAP.
+////
+
 setRoute.post('/newtree', async function (req, res) { // create user tree
-	var data = req.body;
+		var data = req.body;
 
     var user = await User.findOne({
         username: req.decoded.username
@@ -487,7 +561,6 @@ setRoute.post('/newtree', async function (req, res) { // create user tree
 		if (user.trees.find(obj => obj.name == data.name) == undefined) {
 			user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: data.skillNames});
 			user.save(function (err) {if (err) throw err;});
-
 			res.json({
 				success: true
 			});

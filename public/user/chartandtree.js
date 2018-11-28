@@ -548,7 +548,7 @@ function create() {
                 }*/
             }
         }
-        
+
         skillReq.send(JSON.stringify(skill));
     };
 
