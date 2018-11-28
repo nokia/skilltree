@@ -691,6 +691,7 @@ setRoute.post('/submitall', async function (req, res) {
 					if (globalSkill.offers.find(obj => obj.username == user.username) == undefined) {
 						globalSkills.find(obj => obj.name == userSkill.name).offers.push({
 							username: user.username,
+							location: user.location,
 							teachingDay: user.teachingDay,
 							teachingTime: user.teachingTime,
 							achievedPoint: userSkill.achievedPoint,
