@@ -309,7 +309,7 @@ class ItemContainer {
                                     offerTable.appendChild( createTableRow( globalskill.offers[i].username, 
                                                                             globalskill.offers[i].location, 
                                                                             globalskill.offers[i].teachingDay,
-                                                                            globalskill.offer[i].teachingTime, 
+                                                                            globalskill.offers[i].teachingTime, 
                                                                             globalskill.offers[i].achievedPoint
                                                                             ) );
                                     }
