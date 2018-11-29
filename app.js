@@ -495,7 +495,7 @@ async function insertSkill(skillToInsert, skillArray) {
 						}
 					}
 					var svp = 0;
-					while (skillArray[svp] === undefined && skillArray[svp].level <= ithParent.level) {
+					while (skillArray[svp] !== undefined && skillArray[svp].level <= ithParent.level) {
 						svp++;
 					}
 					skillToInsert.level = ithParent.level + 1;
@@ -516,7 +516,7 @@ async function insertSkill(skillToInsert, skillArray) {
 				if (skillArray.find(obj => obj.name == ithChild.name) !== undefined) {
 					ithChild = skillArray.find(obj => obj.name == ithChild.name);
 					var c;
-					while (skillArray[c].level < ithChild.level) {
+					while (skillArray[c] !== undefined && [c].level < ithChild.level) {
 						c++;
 					}
 					console.log({name: skillToInsert.name, level: skillToInsert.level, pos: c, entry: 3})
@@ -525,7 +525,7 @@ async function insertSkill(skillToInsert, skillArray) {
 			}
 
 			var sn = 0;
-			while (skillArray[sn] === undefined && skillArray[sn].level === rootlevel) {
+			while (skillArray[sn] !== undefined && skillArray[sn].level === rootlevel) {
 				sn++;
 			}
 			skillToInsert.level = rootlevel;
