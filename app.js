@@ -457,9 +457,10 @@ async function getDependency (skill, dependency) {
 
 
 async function insertSkill(skillToInsert, skillArray) {
+	var rootlevel = 0;
 	if (!skillArray.includes(skillToInsert)) {
 		if (skillArray.length === 0) {
-			skillToInsert.level = 0;
+			skillToInsert.level = rootlevel;
 			console.log({name: skillToInsert.name, level: skillToInsert.level, pos: 0, entry: 0});
 			skillArray.push(skillToInsert);
 			return;
@@ -472,10 +473,8 @@ async function insertSkill(skillToInsert, skillArray) {
 						if (err) throw err;
 						return skill;
 				});
-				//console.log({name: skillToInsert.name, parent: ithParent.name});
-				console.log(skillArray);
-				console.log(ithParent.name);
 				if (skillArray.find(obj => obj.name == ithParent.name) !== undefined) {
+					ithParent = skillArray.find(obj => obj.name == ithParent.name);
 					for (var j = 0; j < ithParent.children.length; j++) {
 						var ithChild = await Skill.findOne({
 								name: ithParent.children[j].name
@@ -484,6 +483,7 @@ async function insertSkill(skillToInsert, skillArray) {
 						return skill;
 						});
 						if (skillArray.find(obj => obj.name == ithChild.name) !== undefined) {
+							ithChild = skillArray.find(obj => obj.name == ithChild.name);
 							var svc = 0;
 							while (ithChild.name !== skillArray[svc].name) {
 								svc++;
@@ -504,12 +504,30 @@ async function insertSkill(skillToInsert, skillArray) {
 					return;
 				}
 			}
+
+			for (var i = 0; i < skillToInsert.children.length; i++) {
+				var ithChild = await Skill.findOne({
+						name: skillToInsert.children[i].name
+				}, function(err, skill) {
+						if (err) throw err;
+				return skill;
+				if (skillArray.find(obj => obj.name == ithChild.name) !== undefined) {
+					ithChild = skillArray.find(obj => obj.name == ithChild.name);
+					int c;
+					while (skillList[c].level < ithChild.level) {
+						c++;
+					}
+					console.log({name: skillToInsert.name, level: skillToInsert.level, pos: c, entry: 3})
+					skillArray.splice(c, 0, skillToInsert);
+				}
+			}
+
 			var sn = 0;
-			while (skillArray[sn] === undefined && skillArray[sn].level === 0) {
+			while (skillArray[sn] === undefined && skillArray[sn].level === rootlevel) {
 				sn++;
 			}
-			skillToInsert.level = 0;
-			console.log({name: skillToInsert.name, level: skillToInsert.level, pos: sn, entry: 3});
+			skillToInsert.level = rootlevel;
+			console.log({name: skillToInsert.name, level: skillToInsert.level, pos: sn, entry: 4});
 			skillArray.splice(sn, 0, skillToInsert);
 			return;
 		}
