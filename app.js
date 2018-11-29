@@ -528,7 +528,7 @@ setRoute.post('/newtree', async function (req, res) { // create user tree
 	var data = req.body;
 	console.log(data);
 
-    var user = await User.findOne({
+    /*var user = await User.findOne({
         username: req.decoded.username
     }, function(err, user) {
         if (err) throw err;
@@ -543,8 +543,8 @@ setRoute.post('/newtree', async function (req, res) { // create user tree
 	} else {
 		if (user.trees.find(obj => obj.name == data.name) == undefined) {
 			var sn = sortTree(data.skillNames);
-			//console.log(sn);
-			//user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: sn});
+			console.log(sn);
+			user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: sn});
 			user.save(function (err) {if (err) throw err;});
 
 			res.json({
@@ -556,7 +556,7 @@ setRoute.post('/newtree', async function (req, res) { // create user tree
 				message: 'treeexists'
 			});
 		}
-	}
+	}*/
 });
 
 setRoute.post('/addskilltotree', async function(req, res) { // to user tree
