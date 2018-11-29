@@ -717,13 +717,14 @@ setRoute.post('/submitall', async function (req, res) {
 	}
 });
 
+const httpServer = http.createServer(app);
+httpServer.listen(3000);
 
-
-const httpsServer = https.createServer(credentials, app);
+/*const httpsServer = https.createServer(credentials, app);
 httpsServer.listen(443);
 
 // Redirect from http port 80 to https
 http.createServer(function (req, res) {
     res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
     res.end();
-}).listen(80);
+}).listen(80);*/
