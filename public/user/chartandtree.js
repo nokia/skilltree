@@ -553,6 +553,11 @@ function create() {
         skillReq.send(JSON.stringify(skill));
     };
 
+    var deleteBtn = document.getElementById("deleteFromList");
+    deleteBtn.onclick = function () {
+        skillList.remove(skillList.selectedIndex);
+    };
+
     var createBtn = document.getElementById("createTree");
     createBtn.onclick = function () {
         if (document.getElementById('treeName').value.length > 0) {
