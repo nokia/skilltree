@@ -518,8 +518,8 @@ async function extractNames(skillArray){
 	for (var i = 0; i < skillArray.length; i++) {
 		exctractedArray[i] = skillArray[i].name;
 	}
-	console.log(exctractedArray);
-	//skillArray = exctractedArray;
+	skillArray = [];
+	skillArray = exctractedArray;
 }
 
 async function sortTree(skillArray){
@@ -528,7 +528,6 @@ async function sortTree(skillArray){
 		await insertSkill(skillArray[i], sortedArray);
 	}
 	skillArray = await extractNames(sortedArray);
-	console.log(skillArray);
 }
 
 
