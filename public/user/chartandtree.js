@@ -41,7 +41,7 @@ function checkFirstLogin() {
             var location = document.getElementById('location').value;
             var teachingDay = document.getElementById('day').value;
             var teachingTime = document.getElementById('timeStart').value + ' - ' + document.getElementById('timeEnd').value;
-           
+
 
             var firstLoginData = {
                     mainTree: mainTree.value,
@@ -548,7 +548,7 @@ function create() {
                 }*/
             }
         }
-        
+
         skillReq.send(JSON.stringify(skill));
     };
 
@@ -557,7 +557,7 @@ function create() {
         if (document.getElementById('treeName').value.length > 0) {
             if (skillsToAdd.length > 0) {
                 var skillNames = [];
-                for (var i = 0; i < skillsToAdd.length; ++i) skillNames.push(skillsToAdd[i].name);
+                for (var i = 0; i < skillsToAdd.length; ++i) skillNames.push(skillsToAdd[i]);
 
                 var treeData = {
                     name: document.getElementById('treeName').value,
