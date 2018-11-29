@@ -555,7 +555,7 @@ function create() {
 
     var deleteBtn = document.getElementById("deleteFromList");
     deleteBtn.onclick = function () {
-        skillsToAdd.filter(obj => obj.name != skillList.options[skillList.selectedIndex].text);
+        skillsToAdd = skillsToAdd.filter(obj => obj.name != skillList.options[skillList.selectedIndex].text);
         console.log(skillList.options[skillList.selectedIndex].text);
         console.log(skillsToAdd);
         skillList.remove(skillList.selectedIndex);
