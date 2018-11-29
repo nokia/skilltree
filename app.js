@@ -460,7 +460,7 @@ async function insertSkill(skillToInsert, skillArray) {
 	if (!skillArray.includes(skillToInsert)) {
 		if (skillArray.length === 0) {
 			skillToInsert.level = 0;
-			console.log(skillToInsert);
+			console.log({name: skillToInsert.name, level: skillToInsert.level, pos: 0});
 			skillArray.push(skillToInsert);
 			return;
 		}
@@ -486,7 +486,7 @@ async function insertSkill(skillToInsert, skillArray) {
 								svc++;
 							}
 							skillToInsert.level = ithChild.level;
-							console.log(skillToInsert);
+							console.log({name: skillToInsert.name, level: skillToInsert.level, pos: svc + 1});
 							skillArray.splice(svc + 1, 0, skillToInsert);
 							return;
 						}
@@ -496,7 +496,7 @@ async function insertSkill(skillToInsert, skillArray) {
 						svp++;
 					}
 					skillToInsert.level = ithParent.level + 1;
-					console.log(skillToInsert);
+					console.log({name: skillToInsert.name, level: skillToInsert.level, pos: svp});
 					skillArray.splice(svp, 0, skillToInsert);
 					return;
 				}
@@ -506,7 +506,7 @@ async function insertSkill(skillToInsert, skillArray) {
 				sn++;
 			}
 			skillToInsert.level = 0;
-			console.log(skillToInsert);
+			console.log({name: skillToInsert.name, level: skillToInsert.level, pos: sn + 1});
 			skillArray.splice(sn + 1, 0, skillToInsert);
 			return;
 		}
