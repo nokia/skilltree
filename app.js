@@ -526,7 +526,7 @@ async function sortTree(skillArray){
 
 setRoute.post('/newtree', async function (req, res) { // create user tree
 	var data = req.body;
-	console.log(data);
+	console.log(data.skillNames);
 
     var user = await User.findOne({
         username: req.decoded.username
@@ -539,10 +539,6 @@ setRoute.post('/newtree', async function (req, res) { // create user tree
 			success: false,
 			message: 'User not found.'
 		});
-		res.json({
-			success: true
-		});
-
 	} /*else {
 		if (user.trees.find(obj => obj.name == data.name) == undefined) {
 			var sn = sortTree(data.skillNames);
