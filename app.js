@@ -522,7 +522,7 @@ async function insertSkill(skillToInsert, skillArray) {
 					skillToInsert.level = ithChild.level - 1;
 					console.log({name: skillToInsert.name, level: skillToInsert.level, pos: c, entry: 3})
 					skillArray.splice(c, 0, skillToInsert);
-					rootlevel--;
+					if (skillToInsert.level < rootlevel) rootlevel = skillToInsert.level;
 					return;
 				}
 			}
