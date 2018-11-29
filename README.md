@@ -1,47 +1,73 @@
 # Skill Tree
-Skill tree is a web app to visualize progress & motivate people for self-development, grow the culture of collaboration and teaching each other.
+Skill tree is a web app to visualize skills, motivating people for self-development and supporting the culture of cooperation and knowledge sharing.
 
-  - See your self-development options ahead of you in a visual form (increase awareness of skills, available trainings, add extra motivation to increase competence levels)
-  - Inspire people to think about their future inside Nokia by seeing the many options for self-development (decrease attrition)
-  - Find colleagues fast with a specific skill/competence (enhance collaboration)
+Main features:
+
+  - Record your current skills and their levels in a visual form
+  - Immediately see the self-development options ahead of you (increase awareness of skills, available help & trainings)
+  - Inspire people to think about their future & create a personal learning plan with time-framed steps
+  - Find people fast with a specific skill & willingness to share their knowledge (enhance collaboration)
   - Making it easy to offer/request training for a specific skill and a specific skill level (build p2p training culture)
 
-### Tech
-Skill Tree uses a number of open source projects to work properly:
+## Tech
+Skill Tree needs the following components to operate:
 
-* [node.js] - evented I/O for the backend
-* [MongoDB] - NoSQL database.
+* [node.js] - An open-source, cross-platform JavaScript run-time environment that executes JavaScript code outside of a browser.
+* [Express] - A web framework for Node.js
+* [MongoDB] - A free and open-source cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with schemata.
+* [NginX] - A web server which can also be used as a reverse proxy, load balancer, mail proxy and HTTP cache.
+* A GNU/Linux distribtuion, e.g. Debian or Ubuntu.
 
-### Installation
-Skill Tree requires [Node.js](https://nodejs.org/) to run.
+## Installation
 
-Install the dependencies 
-
-Production environment setup
-
+#### Debian 9
 ```sh
-$ npm install --production
+cd
+mkdir skilltree
+cd skilltree
+wget ... skilltree_install_debian9.sh ; chmod +x skilltree_install_debian9.sh ; ./skilltree_install_debian9.sh
 ```
 
-### Development
+
+## Development
 
 Want to contribute? Great!
+We're using the Atom IDE:
 
-
-Open your favorite Terminal and run these commands.
+Installing some plugins are helpful:
 
 ```sh
-$ node app
+apm install emmet todo minimap pigments minimap-pigments linter file-icons git-diff atom-beautify ask-stack highlight-selected
+```
+After running the install script, run:
+
+```sh
+cd skilltree
+node app.js
 ```
 
+Alternatively, to keep up with changes automatically, install & use PM2 (recommended):
+```sh
+cd skilltree
+pm2 create skilltree
+```
+To run:
+```sh
+pm2 start skilltree --watch
+```
+To query the status:
+```sh
+pm2 list
+```
 
 License
 ----
-
-BSD
+BSD License 2.0
 
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
    [node.js]: <http://nodejs.org>
    [MongoDB]: <https://www.mongodb.com/>
+   [Express]: <https://expressjs.com/>
+   [Nginx]: <https://www.nginx.com/>
