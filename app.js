@@ -528,19 +528,22 @@ setRoute.post('/newtree', async function (req, res) { // create user tree
 	var data = req.body;
 	console.log(data);
 
-    /*var user = await User.findOne({
+    var user = await User.findOne({
         username: req.decoded.username
     }, function(err, user) {
         if (err) throw err;
 		return user;
     });
-
 	if (!user) {
 		res.json({
 			success: false,
 			message: 'User not found.'
 		});
-	} else {
+		res.json({
+			success: true
+		});
+
+	} /*else {
 		if (user.trees.find(obj => obj.name == data.name) == undefined) {
 			var sn = sortTree(data.skillNames);
 			console.log(sn);
