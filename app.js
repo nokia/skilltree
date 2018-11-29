@@ -503,7 +503,7 @@ async function insertSkill(skillToInsert, skillArray) {
 				sn++;
 			}
 			skillToInsert.level = 0;
-			skillarray.splice(sn + 1, 0, skillToInsert);
+			skillArray.splice(sn + 1, 0, skillToInsert);
 			return;
 		}
 	}
