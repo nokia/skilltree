@@ -490,7 +490,7 @@ async function insertSkill(skillToInsert, skillArray) {
 						}
 					}
 					var svp = 0;
-					while (skillArray[svp].level <= ithParent.level || skillArray[svp] === undefined) {
+					while (skillArray[svp] === undefined || skillArray[svp].level <= ithParent.level) {
 						svp++;
 					}
 					skillToInsert.level = ithParent.level + 1;
@@ -499,7 +499,7 @@ async function insertSkill(skillToInsert, skillArray) {
 				}
 			}
 			var sn = 0;
-			while (skillArray[sn].level === 0 || skillArray[sn] === undefined) {
+			while (skillArray[sn] === undefined || skillArray[sn].level === 0) {
 				sn++;
 			}
 			skillToInsert.level = 0;
