@@ -513,7 +513,7 @@ async function insertSkill(skillToInsert, skillArray) {
 				return skill;
 				if (skillArray.find(obj => obj.name == ithChild.name) !== undefined) {
 					ithChild = skillArray.find(obj => obj.name == ithChild.name);
-					int c;
+					var c;
 					while (skillList[c].level < ithChild.level) {
 						c++;
 					}
