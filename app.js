@@ -1,6 +1,5 @@
 const fs = require('fs');
 const http = require('http');
-const https = require('https');
 const path = require('path');
 const express = require('express');
 const bodyParser  = require('body-parser');
@@ -16,18 +15,6 @@ var Skill = require('./models/skillmodel');
 var pbkdf2 = require('./pbkdf2'); // get hash generator and pw checker
 
 const app = express();
-
-// https certificate
-const privateKey = fs.readFileSync('/etc/letsencrypt/live/skilltree.benis.hu/privkey.pem', 'utf8');
-const certificate = fs.readFileSync('/etc/letsencrypt/live/skilltree.benis.hu/cert.pem', 'utf8');
-const ca = fs.readFileSync('/etc/letsencrypt/live/skilltree.benis.hu/chain.pem', 'utf8');
-
-const credentials = {
-	key: privateKey,
-	cert: certificate,
-	ca: ca
-};
-
 
 mongoose.connect(config.database); // connect to database
 app.set('superSecret', config.secret);
@@ -719,12 +706,3 @@ setRoute.post('/submitall', async function (req, res) {
 
 const httpServer = http.createServer(app);
 httpServer.listen(3000);
-
-/*const httpsServer = https.createServer(credentials, app);
-httpsServer.listen(443);
-
-// Redirect from http port 80 to https
-http.createServer(function (req, res) {
-    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
-    res.end();
-}).listen(80);*/
