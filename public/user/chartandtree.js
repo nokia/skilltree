@@ -553,12 +553,17 @@ function create() {
         skillReq.send(JSON.stringify(skill));
     };
 
+    var createSkillBtn = document.getElementById("createSkill");
+    createSkillBtn.onclick = function () {
+        var modal = document.getElementById("newSkillModal");
+        modal.style.display = "block";
+    };
+
     var deleteBtn = document.getElementById("deleteFromList");
     deleteBtn.onclick = function () {
         skillsToAdd = skillsToAdd.filter(obj => obj.name != skillList.options[skillList.selectedIndex].text);
-        console.log(skillList.options[skillList.selectedIndex].text);
-        console.log(skillsToAdd);
         skillList.remove(skillList.selectedIndex);
+        // nem kene engednie, hogy torolje a dependecyt vagy mashol kell ezt ellenorizni
     };
 
     var createBtn = document.getElementById("createTree");
