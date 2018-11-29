@@ -471,7 +471,7 @@ async function insertSkill(skillToInsert, skillArray) {
 						if (err) throw err;
 				return skill;
 				});
-				if (skillArray.includes(ithParent) {
+				if (skillArray.includes(ithParent)) {
 					for (var j = 0; j < ithParent.children.length; j++) {
 						var ithChild = await Skill.findOne({
 								name: ithParent.children[j].name
