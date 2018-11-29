@@ -514,9 +514,11 @@ async function insertSkill(skillToInsert, skillArray) {
 }
 
 async function extractNames(skillArray){
+	var exctractedArray = [];
 	for (var i = 0; i < skillArray.length; i++) {
-		skillArray[i] = skillArray[i].name;
+		exctractedArray[i] = skillArray[i].name;
 	}
+	skillArray = exctractedArray;
 }
 
 async function sortTree(skillArray){
