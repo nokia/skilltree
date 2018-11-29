@@ -455,6 +455,76 @@ async function getDependency (skill, dependency) {
 	}
 }*/
 
+
+async function insertSkill(skillToInsert, skillArray) {
+	if (!skillArray.includes(skillToInsert)) {
+		if (skillArray.length === 0) {
+			skillToInsert.level = 0;
+			skillArray.push(skillToInsert);
+			return;
+		}
+		else {
+			for (var i = 0; i < skillToInsert.parents.length; i++) {
+				var ithParent = await Skill.findOne({
+						name: skillToInsert.parents[i].name
+				}, function(err, skill) {
+						if (err) throw err;
+				return skill;
+				});
+				if (skillArray.includes(ithParent)) {
+					for (var j = 0; j < ithParent.children.length; j++) {
+						var ithChild = await Skill.findOne({
+								name: ithParent.children[j].name
+						}, function(err, skill) {
+								if (err) throw err;
+						return skill;
+						});
+						if (skillArray.includes(ithChild)) {
+							var svc = 0;
+							while (ithChild.name !== skillArray[svc].name) {
+								svc++;
+							}
+							skillToInsert.level = ithChild.level;
+							skillArray.splice(svc + 1, 0, skillToInsert);
+							return;
+						}
+					}
+					var svp = 0;
+					while (skillArray[svp].level <= ithParent.level || skillArray[svp] === undefined) {
+						svp++;
+					}
+					skillToInsert.level = ithParent.level + 1;
+					skillArray.splice(svp, 0, skillToInsert);
+					return;
+				}
+			}
+			var sn = 0;
+			while (skillArray[sn].level === 0) {
+				sn++;
+			}
+			skillToInsert.level = 0;
+			skillarray.splice(sn + 1, 0, skillToInsert);
+			return;
+		}
+	}
+}
+
+async function extractNames(skillArray){
+	for (var i = 0; i < skillArray.length; i++) {
+		skillArray[i] = skillArray[i].name;
+	}
+}
+
+async function sortTree(skillArray){
+	var sortedArray = [];
+	console.log(skillArray);
+	for (var i = 0; i < skillArray.length; i++) {
+		await insertSkill(skillArray[i], sortedArray);
+	}
+	skillArray = await extractNames(sortedArray);
+}
+
+
 setRoute.post('/newtree', async function (req, res) { // create user tree
 	var data = req.body;
 
@@ -472,7 +542,9 @@ setRoute.post('/newtree', async function (req, res) { // create user tree
 		});
 	} else {
 		if (user.trees.find(obj => obj.name == data.name) == undefined) {
-			user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: data.skillNames});
+			var sn = sortTree(data.skillNames);
+			//console.log(sn);
+			//user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: sn});
 			user.save(function (err) {if (err) throw err;});
 
 			res.json({
