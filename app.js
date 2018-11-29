@@ -515,12 +515,14 @@ async function insertSkill(skillToInsert, skillArray) {
 
 				if (skillArray.find(obj => obj.name == ithChild.name) !== undefined) {
 					ithChild = skillArray.find(obj => obj.name == ithChild.name);
-					var c;
+					var c = 0;
 					while (skillArray[c] !== undefined && [c].level < ithChild.level) {
 						c++;
 					}
+					skillToInsert.level = ithChild.level - 1;
 					console.log({name: skillToInsert.name, level: skillToInsert.level, pos: c, entry: 3})
 					skillArray.splice(c, 0, skillToInsert);
+					rootlevel++;
 					return;
 				}
 			}
