@@ -532,6 +532,7 @@ setRoute.post('/newtree', async function (req, res) { // create user tree
         username: req.decoded.username
     }, function(err, user) {
         if (err) throw err;
+				console.log(user)
 		return user;
     });
 	if (!user) {
