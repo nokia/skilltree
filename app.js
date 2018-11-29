@@ -521,6 +521,7 @@ async function insertSkill(skillToInsert, skillArray) {
 					}
 					console.log({name: skillToInsert.name, level: skillToInsert.level, pos: c, entry: 3})
 					skillArray.splice(c, 0, skillToInsert);
+					return;
 				}
 			}
 
