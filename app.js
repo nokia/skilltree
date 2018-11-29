@@ -456,8 +456,9 @@ async function getDependency (skill, dependency) {
 }*/
 
 
+var rootlevel = 0;
+
 async function insertSkill(skillToInsert, skillArray) {
-	var rootlevel = 0;
 	if (!skillArray.includes(skillToInsert)) {
 		if (skillArray.length === 0) {
 			skillToInsert.level = rootlevel;
@@ -548,6 +549,7 @@ async function extractNames(skillArray){
 }
 
 async function sortTree(skillArray){
+	rootlevel = 0;
 	var sortedArray = [];
 	for (var i = 0; i < skillArray.length; i++) {
 		await insertSkill(skillArray[i], sortedArray);
