@@ -467,7 +467,7 @@ async function insertSkill(skillToInsert, skillArray) {
 		else {
 			for (var i = 0; i < skillToInsert.parents.length; i++) {
 				var ithParent = await Skill.findOne({
-						name: skillToInsert.parents[i].name
+						name: skillToInsert.parents[i]
 				}, function(err, skill) {
 						if (err) throw err;
 						return skill;
