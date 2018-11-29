@@ -542,7 +542,8 @@ setRoute.post('/newtree', async function (req, res) { // create user tree
 	} else {
 		if (user.trees.find(obj => obj.name == data.name) == undefined) {
 			var sn = sortTree(data.skillNames);
-			user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: sn});
+			console.log(sn);
+			//user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: sn});
 			user.save(function (err) {if (err) throw err;});
 
 			res.json({
