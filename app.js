@@ -511,6 +511,8 @@ async function insertSkill(skillToInsert, skillArray) {
 				}, function(err, skill) {
 						if (err) throw err;
 				return skill;
+				});
+
 				if (skillArray.find(obj => obj.name == ithChild.name) !== undefined) {
 					ithChild = skillArray.find(obj => obj.name == ithChild.name);
 					var c;
