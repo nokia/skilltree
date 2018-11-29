@@ -459,6 +459,7 @@ async function getDependency (skill, dependency) {
 var rootlevel = 0;
 
 async function insertSkill(skillToInsert, skillArray) {
+	console.log({txt: "rootlevel:" , rootlevel: rootlevel});
 	if (!skillArray.includes(skillToInsert)) {
 		if (skillArray.length === 0) {
 			skillToInsert.level = rootlevel;
