@@ -431,6 +431,7 @@ function showTree (treeName) {
     tree.treeContainer.position.set(app.renderer.width / 2 + tree.treeContainer.width / 2, app.renderer.height / 2);
 
     tree.treeContainer.alpha = 1;
+    tree.skills[0].itemcontainer.refreshAvaliability();
     app.renderer.render(app.stage);
     document.getElementById("pixiCanvas").style.visibility = "visible";
     app.start();

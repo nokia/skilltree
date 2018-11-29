@@ -517,7 +517,6 @@ async function extractNames(skillArray){
 
 async function sortTree(skillArray){
 	var sortedArray = [];
-	console.log(skillArray);
 	for (var i = 0; i < skillArray.length; i++) {
 		await insertSkill(skillArray[i], sortedArray);
 	}
@@ -527,6 +526,7 @@ async function sortTree(skillArray){
 
 setRoute.post('/newtree', async function (req, res) { // create user tree
 	var data = req.body;
+	console.log(data);
 
     var user = await User.findOne({
         username: req.decoded.username
