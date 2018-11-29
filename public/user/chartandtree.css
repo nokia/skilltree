@@ -45,6 +45,7 @@ body {
   border-style: solid;
   border-color: #778899;
   border-radius: 6px;
+  overflow-y: auto;
 }
 
 .sideBarTitle{
