@@ -527,6 +527,7 @@ async function sortTree(skillArray){
 		await insertSkill(skillArray[i], sortedArray);
 	}
 	skillArray = await extractNames(sortedArray);
+	return skillArray;
 }
 
 
