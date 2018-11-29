@@ -517,6 +517,7 @@ async function extractNames(skillArray){
 
 async function sortTree(skillArray){
 	var sortedArray = [];
+	console.log(skillArray);
 	for (var i = 0; i < skillArray.length; i++) {
 		await insertSkill(skillArray[i], sortedArray);
 	}
@@ -542,7 +543,7 @@ setRoute.post('/newtree', async function (req, res) { // create user tree
 	} else {
 		if (user.trees.find(obj => obj.name == data.name) == undefined) {
 			var sn = sortTree(data.skillNames);
-			console.log(sn);
+			//console.log(sn);
 			//user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: sn});
 			user.save(function (err) {if (err) throw err;});
 
