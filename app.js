@@ -499,7 +499,7 @@ async function insertSkill(skillToInsert, skillArray) {
 				}
 			}
 			var sn = 0;
-			while (skillArray[sn].level === 0) {
+			while (skillArray[sn].level === 0 || skillArray[sn] === undefined) {
 				sn++;
 			}
 			skillToInsert.level = 0;
