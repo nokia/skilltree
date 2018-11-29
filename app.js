@@ -460,6 +460,7 @@ async function insertSkill(skillToInsert, skillArray) {
 	if (!skillArray.includes(skillToInsert)) {
 		if (skillArray.length === 0) {
 			skillToInsert.level = 0;
+			console.log({name: skillToInsert.name, level: skillToInsert.level, pos: 0});
 			skillArray.push(skillToInsert);
 			return;
 		}
@@ -485,25 +486,28 @@ async function insertSkill(skillToInsert, skillArray) {
 								svc++;
 							}
 							skillToInsert.level = ithChild.level;
+							console.log({name: skillToInsert.name, level: skillToInsert.level, pos: svc + 1});
 							skillArray.splice(svc + 1, 0, skillToInsert);
 							return;
 						}
 					}
 					var svp = 0;
-					while (skillArray[svp].level <= ithParent.level || skillArray[svp] === undefined) {
+					while (skillArray[svp] === undefined && skillArray[svp].level <= ithParent.level) {
 						svp++;
 					}
 					skillToInsert.level = ithParent.level + 1;
+					console.log({name: skillToInsert.name, level: skillToInsert.level, pos: svp});
 					skillArray.splice(svp, 0, skillToInsert);
 					return;
 				}
 			}
 			var sn = 0;
-			while (skillArray[sn].level === 0) {
+			while (skillArray[sn] === undefined && skillArray[sn].level === 0) {
 				sn++;
 			}
 			skillToInsert.level = 0;
-			skillarray.splice(sn + 1, 0, skillToInsert);
+			console.log({name: skillToInsert.name, level: skillToInsert.level, pos: sn + 1});
+			skillArray.splice(sn + 1, 0, skillToInsert);
 			return;
 		}
 	}
@@ -526,36 +530,32 @@ async function sortTree(skillArray){
 
 setRoute.post('/newtree', async function (req, res) { // create user tree
 	var data = req.body;
-	console.log(data);
-
     var user = await User.findOne({
         username: req.decoded.username
     }, function(err, user) {
         if (err) throw err;
 		return user;
     });
-
 	if (!user) {
 		res.json({
 			success: false,
 			message: 'User not found.'
 		});
-	} else {
-		if (user.trees.find(obj => obj.name == data.name) == undefined) {
-			var sn = sortTree(data.skillNames);
-			//console.log(sn);
-			//user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: sn});
-			user.save(function (err) {if (err) throw err;});
-
-			res.json({
-				success: true
-			});
-		} else {
-			res.json({
-				success: false,
-				message: 'treeexists'
-			});
-		}
+	}
+	else if (user.trees.find(obj => obj.name == data.name) == undefined) {
+		var sn = await sortTree(data.skillNames);
+		console.log(sn);
+		user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: sn});
+		user.save(function (err) {if (err) throw err;});
+		res.json({
+			success: true
+		});
+	}
+	else {
+		res.json({
+			success: false,
+			message: 'treeexists'
+		});
 	}
 });
 
