@@ -455,6 +455,9 @@ async function getDependency (skill, dependency) {
 	}
 }*/
 
+
+var rootlevel = 0;
+
 async function insertSkill(skillToInsert, skillArray) {
 	console.log({txt: "rootlevel:" , rootlevel: rootlevel});
 	if (!skillArray.includes(skillToInsert)) {
@@ -521,15 +524,16 @@ async function insertSkill(skillToInsert, skillArray) {
 					skillToInsert.level = ithChild.level - 1;
 					console.log({name: skillToInsert.name, level: skillToInsert.level, pos: c, entry: 3})
 					skillArray.splice(c, 0, skillToInsert);
+					if (skillToInsert.level < rootlevel) rootlevel = skillToInsert.level;
 					return;
 				}
 			}
 
 			var sn = 0;
-			while (skillArray[sn] !== undefined && skillArray[sn].level === 0) {
+			while (skillArray[sn] !== undefined && skillArray[sn].level === rootlevel) {
 				sn++;
 			}
-			skillToInsert.level = 0;
+			skillToInsert.level = rootlevel;
 			console.log({name: skillToInsert.name, level: skillToInsert.level, pos: sn, entry: 4});
 			skillArray.splice(sn, 0, skillToInsert);
 			return;
@@ -546,6 +550,7 @@ async function extractNames(skillArray){
 }
 
 async function sortTree(skillArray){
+	rootlevel = 0;
 	var sortedArray = [];
 	for (var i = 0; i < skillArray.length; i++) {
 		await insertSkill(skillArray[i], sortedArray);
