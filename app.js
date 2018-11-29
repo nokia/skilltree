@@ -526,13 +526,10 @@ async function sortTree(skillArray){
 
 setRoute.post('/newtree', async function (req, res) { // create user tree
 	var data = req.body;
-	console.log(data.skillNames);
-
     var user = await User.findOne({
         username: req.decoded.username
     }, function(err, user) {
         if (err) throw err;
-				console.log(user)
 		return user;
     });
 	if (!user) {
@@ -540,23 +537,22 @@ setRoute.post('/newtree', async function (req, res) { // create user tree
 			success: false,
 			message: 'User not found.'
 		});
-	} /*else {
-		if (user.trees.find(obj => obj.name == data.name) == undefined) {
-			var sn = sortTree(data.skillNames);
-			console.log(sn);
-			user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: sn});
-			user.save(function (err) {if (err) throw err;});
-
-			res.json({
-				success: true
-			});
-		} else {
-			res.json({
-				success: false,
-				message: 'treeexists'
-			});
-		}
-	}*/
+	}
+	else if (user.trees.find(obj => obj.name == data.name) == undefined) {
+		var sn = sortTree(data.skillNames);
+		console.log(sn);
+		user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: sn});
+		user.save(function (err) {if (err) throw err;});
+		res.json({
+			success: true
+		});
+	}
+	else {
+		res.json({
+			success: false,
+			message: 'treeexists'
+		});
+	}
 });
 
 setRoute.post('/addskilltotree', async function(req, res) { // to user tree
