@@ -524,8 +524,8 @@ async function sortTree(skillArray){
 	for (var i = 0; i < skillArray.length; i++) {
 		await insertSkill(skillArray[i], sortedArray);
 	}
-	console.log(sortedArray);
 	skillArray = await extractNames(sortedArray);
+	console.log(skillArray);
 }
 
 
