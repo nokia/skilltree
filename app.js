@@ -470,9 +470,9 @@ async function insertSkill(skillToInsert, skillArray) {
 						name: skillToInsert.parents[i].name
 				}, function(err, skill) {
 						if (err) throw err;
-				return skill;
+						return skill;
 				});
-				if (skillArray.includes(ithParent)) {
+				if (skillArray.find(obj => obj.name == ithParent.name) !== undefined) {
 					for (var j = 0; j < ithParent.children.length; j++) {
 						var ithChild = await Skill.findOne({
 								name: ithParent.children[j].name
@@ -480,7 +480,7 @@ async function insertSkill(skillToInsert, skillArray) {
 								if (err) throw err;
 						return skill;
 						});
-						if (skillArray.includes(ithChild)) {
+						if (skillArray.find(obj => obj.name == ithChild.name) !== undefined) {
 							var svc = 0;
 							while (ithChild.name !== skillArray[svc].name) {
 								svc++;
