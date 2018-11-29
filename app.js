@@ -486,8 +486,8 @@ async function insertSkill(skillToInsert, skillArray) {
 								svc++;
 							}
 							skillToInsert.level = ithChild.level;
-							console.log({name: skillToInsert.name, level: skillToInsert.level, pos: svc + 1});
-							skillArray.splice(svc + 1, 0, skillToInsert);
+							console.log({name: skillToInsert.name, level: skillToInsert.level, pos: svc});
+							skillArray.splice(svc, 0, skillToInsert);
 							return;
 						}
 					}
@@ -506,8 +506,8 @@ async function insertSkill(skillToInsert, skillArray) {
 				sn++;
 			}
 			skillToInsert.level = 0;
-			console.log({name: skillToInsert.name, level: skillToInsert.level, pos: sn + 1});
-			skillArray.splice(sn + 1, 0, skillToInsert);
+			console.log({name: skillToInsert.name, level: skillToInsert.level, pos: sn});
+			skillArray.splice(sn, 0, skillToInsert);
 			return;
 		}
 	}
@@ -524,6 +524,7 @@ async function sortTree(skillArray){
 	for (var i = 0; i < skillArray.length; i++) {
 		await insertSkill(skillArray[i], sortedArray);
 	}
+	console.log(skillArray);
 	skillArray = await extractNames(sortedArray);
 }
 
@@ -544,7 +545,6 @@ setRoute.post('/newtree', async function (req, res) { // create user tree
 	}
 	else if (user.trees.find(obj => obj.name == data.name) == undefined) {
 		var sn = await sortTree(data.skillNames);
-		console.log(sn);
 		user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: sn});
 		user.save(function (err) {if (err) throw err;});
 		res.json({
