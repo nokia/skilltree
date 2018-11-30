@@ -584,6 +584,31 @@ function create() {
             var pointDescription = [];
             for (i = 1; i < pointsNum + 1; ++i) pointDescription.push(pointsTable.rows[i].cells[1].children[0].value);
 
+            var parentsTable = document.getElementById('parentsTable');
+            var parents = [];
+            for (i = 1; i < parentsTable.rows.length; ++i) parents.push(parentsTable.rows[i].cells[0].children[0].value);
+
+            var childrenTable = document.getElementById('childrenTable');
+            var children = [];
+            for (i = 1; i < childrenTable.rows.length; ++i) {
+                children.push({
+                    name: childrenTable.rows[i].cells[0].children[0].value,
+                    minPoint: childrenTable.rows[i].cells[1].children[0].value,
+                    recommended: !childrenTable.rows[i].cells[2].children[0].value
+                });
+            }
+
+            var trainingsTable = document.getElementById('trainingsTable');
+            var trainings = [];
+            for (i = 1; i < trainingsTable.rows.length; ++i) {
+                trainings.push({
+                    name: trainingsTable.rows[i].cells[0].children[0].value,
+                    level: trainingsTable.rows[i].cells[1].children[0].value,
+                    description: trainingsTable.rows[i].cells[2].children[0].value,
+                    url: trainingsTable.rows[i].cells[3].children[0].value
+                });
+            }
+
             var skillData = {
                 name: document.getElementById('newSkillName').value,
                 description: document.getElementById('newSkillDesc').value,
@@ -593,8 +618,11 @@ function create() {
                 pointDescription: pointDescription,
                 parents: parents,
                 children: children,
-                forApprove: forApprove
+                trainings: trainings,
+                forApprove: document.getElementById('forApprove').value
             };
+
+            console.log(skillData);
         };
     };
 
