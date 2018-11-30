@@ -28,7 +28,7 @@
 
    <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Logo</a>
+  <a class="navbar-brand" href="#">SKILLTREE</a>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -44,10 +44,21 @@
           My SkillTrees
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Tree1</a>
+          <a class="dropdown-item" href="#">Tree2</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" href="#">Something else</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Editor
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Add Skill</a>
+          <a class="dropdown-item" href="#">Add Training Link</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Add SkillTree</a>
         </div>
       </li>
       <li class="nav-item">
@@ -59,26 +70,14 @@
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-
-      <ul class="navbar-nav mr-auto">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <img src="../public/user/pictures/profile.png">
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-          <!--  <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li> -->
-      </ul>
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> 
     </form>
   </div>
+  
+  <a class="nav-link" href="#userprofile" data-toggle="collapse" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <img src="../public/user/pictures/profile.png">
+            </a>
+  
 </nav>
 <!-- end of navbar -->
 
@@ -98,8 +97,8 @@
     <!-- end of user profile mini -->
 
    <!-- user profile details card -->
-   <div id="collapseExample" class="collapse">
-       <div class="card text-white bg-info mb-3 w-35">
+   <div id="userprofile" class="collapse float-right">
+       <div class="card text-white bg-info mb-3">
          <div class="card-header">User Profile</div>
          <div class="card-body">
             <!-- card nav -->
@@ -108,11 +107,12 @@
                     <a class="nav-link active" id="personal-tab" data-toggle="tab" href="#personal" role="tab" aria-controls="personal" aria-selected="true">Personal</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="statistics-tab" data-toggle="tab" href="#statistics" role="tab" aria-controls="statistics" aria-selected="false">Statistics</a>
+                    <a class="nav-link" id="trainings-tab" data-toggle="tab" href="#trainings" role="tab" aria-controls="trainings" aria-selected="false">Peer Learning</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="trainings-tab" data-toggle="tab" href="#trainings" role="tab" aria-controls="trainings" aria-selected="false">Trainings</a>
+                    <a class="nav-link" id="statistics-tab" data-toggle="tab" href="#statistics" role="tab" aria-controls="statistics" aria-selected="false">Statistics</a>
                 </li>
+                
             </ul>
 <!-- end of card nav -->
 <div class="tab-content" id="myTabContent">
@@ -132,6 +132,12 @@
                     </div>
                   </div>
                   <div class="form-group row">
+                    <label for="exampleInputEmail1" class="col-sm-3 col-form-label">Your place</label>
+                    <div class="col-sm-9">
+                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="WhereAreYou link">
+                    </div>
+                  </div>
+                  <div class="form-group row">
                     <label for="inputPassword" class="col-sm-3 col-form-label">Password</label>
                     <div class="col-sm-9">
                       <input type="password" class="form-control" id="inputPassword" placeholder="****">
@@ -148,7 +154,16 @@
       <!-- statistics-tab content -->
       <div class="tab-pane fade" id="statistics" role="tabpanel" aria-labelledby="statistics-tab">...</div>
       <!-- trainings-tab content -->
-      <div class="tab-pane fade" id="trainings" role="tabpanel" aria-labelledby="trainings-tab">...</div>
+      <div class="tab-pane fade" id="trainings" role="tabpanel" aria-labelledby="trainings-tab">
+          <h5>Your Requested Trainings</h5>
+          <p>details about your requested trainings</p>
+          
+          <h5>Your Offered Trainings</h5>
+          <p>details about your offered trainings</p>
+          <p>days</p>
+          <p>timeslot</p>
+          
+      </div>
 </div>
 
 
@@ -166,10 +181,10 @@
 
 
       <!-- small id card -->
-      <div class="card" style="width: 25rem;">
-          <div class="card-body text-center">
+      <div class="card" style="width: 15rem;">
+          <div class="card-body">
             <img class="img-thumbnail float-left d-inline w-25 m-1 mr-3" src="profile_img.jpg" alt="Card image cap">
-            <h5 class="card-title d-inline">User Name</h5>
+            <h6 class="card-title d-inline">User Name</h6>
             <h6 class="card-subtitle mb-2 small font-italic">Webdeveloper - Level 2</h6>
                <!-- <p class="card-text">
                  <span class="badge badge-secondary w-30">3<br>trees</span>

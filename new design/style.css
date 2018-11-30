@@ -43,3 +43,12 @@ a {
     background-color: #346134;
     border-color: #346134;
 }
+
+.card-body {
+    padding: 0.5rem;
+}
+
+#userprofile {
+    width: 35%!important;
+    margin-right: 10px;
+}
