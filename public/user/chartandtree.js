@@ -557,6 +557,18 @@ function create() {
     createSkillBtn.onclick = function () {
         var modal = document.getElementById("newSkillModal");
         modal.style.display = "block";
+
+        var span = document.getElementsByClassName("modalClose")[0];
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
     };
 
     var deleteBtn = document.getElementById("deleteFromList");
