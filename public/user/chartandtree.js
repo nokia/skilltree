@@ -585,7 +585,7 @@ function create() {
             for (i = 1; i < pointsNum + 1; ++i) {
                 var row = pointsTable.rows.item(i).cells;
 
-                var cellVal = row.item(1).item.value;
+                var cellVal = row.item(1);
                 alert(cellVal);
             }
 
