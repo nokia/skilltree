@@ -28,7 +28,7 @@ Skill Tree needs the following components to operate:
 cd
 mkdir skilltree
 cd skilltree
-wget ... skilltree_install_debian9.sh ; chmod +x skilltree_install_debian9.sh ; ./skilltree_install_debian9.sh
+wget https://raw.githubusercontent.com/sicambria/skilltree/master/install/skilltree_install_debian9.sh ; chmod +x skilltree_install_debian9.sh ; ./skilltree_install_debian9.sh
 ```
 
 
@@ -43,7 +43,7 @@ For Atom, installing some plugins are helpful:
 apm install emmet todo minimap pigments minimap-pigments linter file-icons git-diff atom-beautify ask-stack highlight-selected
 ```
 After running the install script, setup your web server.
-In case you use
+For Nginx:
 
 ```sh
 cat /etc/nginx/sites-available/default
