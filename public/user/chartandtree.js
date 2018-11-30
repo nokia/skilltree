@@ -583,8 +583,10 @@ function create() {
             var pointsNum = pointsTable.rows.length - 1;
 
             for (i = 1; i < pointsNum + 1; ++i) {
+                var row = pointsTable.rows.item(i).cells;
+
                 var cellVal = row.item(1).value;
-                    alert(cellVal);
+                alert(cellVal);
             }
 
             var skillData = {
