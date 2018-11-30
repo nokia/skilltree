@@ -625,7 +625,7 @@ function create() {
             request('POST', '/set/newskill', skillData, function () {
                 if (this.readyState == 4 && this.status == 200) {
                     if (this.response.success) {
-                        
+                        modal.style.display = "none";
                     }
                 }
             });
