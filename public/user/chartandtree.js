@@ -604,10 +604,8 @@ function create() {
                 };
 
                 request('POST', '/set/newtree', treeData, function () {
-                    if(this.readyState == 4 && this.status == 200) {
-                        if (this.response.success) window.open("/user/", "_self");
-                        else if (this.response.message == "treeexists") alert("There is already a tree with this name");
-                    }
+                    if (this.response.success) window.open("/user/", "_self");
+                    else if (this.response.message == "treeexists") alert("There is already a tree with this name");
                 });
             } else alert("Please add at least one skill to the tree");
         } else alert("Please provide a name to the tree");
@@ -676,6 +674,8 @@ function request (type, url, data, callback) {
     req.setRequestHeader('Content-type', 'application/json');
     req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
     req.responseType = "json";
-    req.onreadystatechange = callback;
+    req.onreadystatechange = function () {
+        if(this.readyState == 4 && this.status == 200) callback;
+    };
     req.send(JSON.stringify(data));
 }
