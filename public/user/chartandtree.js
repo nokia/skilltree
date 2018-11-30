@@ -569,6 +569,13 @@ function create() {
                 modal.style.display = "none";
             }
         }
+
+        var catSelect = document.getElementById("newSkillCat");
+        for (var i = 0; i < data.categories.length; ++i) {
+            var option = document.createElement("option");
+            option.text = data.categories[i].name;
+            skillList.add(option);
+        }
     };
 
     var deleteBtn = document.getElementById("deleteFromList");
