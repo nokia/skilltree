@@ -579,7 +579,29 @@ function create() {
 
         var save = document.getElementById("saveSkillBtn");
         save.onclick = function () {
+            var pointsTable = document.getElementById('pointsTable');
+            var pointsNum = pointsTable.rows.length;
 
+            for (i = 0; i < pointsNum; ++i) {
+                var row = pointsTable.rows.item(i).cells;
+
+                for(var j = 0; j < row.length; j++){
+                    var cellVal = rew.item(j).innerHTML;
+                    alert(cellVal);
+                }
+            }
+
+            var skillData = {
+                name: document.getElementById('newSkillName').value,
+                description: document.getElementById('newSkillDesc').value,
+                skillIcon: document.getElementById('newSkillIcon').value,
+                categoryName: catSelect.value,
+                maxPoint: pointsNum,
+                pointDescription: pointDescription,
+                parents: parents,
+                children: children,
+                forApprove: forApprove
+            };
         };
     };
 
