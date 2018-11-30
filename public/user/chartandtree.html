@@ -68,12 +68,55 @@
           <p>Serch for a skill</p>
           <p><input type = "text" id = "skillSearch" list = "skillSearchResult" onkeypress="searchSkillsByName()"></p>
           <p><input type = "button" id = "addToTree" value = "Add skill to tree"></p>
+          <p>OR</p>
+          <p><input type = "button" id = "createSkill" value = "Create skill"></p>
+          <p><input type = "button" id = "deleteFromList" value = "Delete selected"></p>
           <p><select id = "skillList" size = "10">
           </select></p>
           <p><input type = "button" id = "createTree" value = "Create tree"></p>
           </center>
       </div>
     </div>
+  </div>
+
+  <div id = "newSkillModal" class = "modal">
+      <div class = "modal-content">
+          <div class="modal-header">
+              <span class="modalClose" id = "closeSkillModal">&times;</span>
+              <h2>Create your own skill</h2>
+          </div>
+          <div class="modal-body">
+              Name:
+              <input type = "text" id = "newSkillName"><br>
+              Description:
+              <textarea id = "newSkillDesc"></textarea><br>
+              Icon:
+              <input type = "text" id = "newSkillIcon"><br>
+              Category:
+              <select id = "newSkillCat"></select><br>
+              Points:<br>
+              <table id = "pointsTable" border = "1">
+                  <tr>
+                      <td>Point</td>
+                      <td>Description</td>
+                      <td>Delete</td>
+                  </tr>
+                  <tr>
+                      <td>1</td>
+                      <td><input size=50 type="text" id = "pointDesc"></td>
+                      <td><input type="button" value="Delete" onclick="deleteRow(this)"></td>
+                  </tr>
+              </table>
+              <input type="button" value="Add point" onclick="addRow()"><br>
+              Parents:<br>
+              <p><input type = "text" id = "parentSearch" list = "skillSearchResult" onkeypress="searchSkillsByName()">
+                 <input type = "button" id = "addParent" value = "Add parent"></p>
+
+              Send for approve:
+              <input type = "checkbox" id = "forApprove"><br>
+              <input type = "button" value = "Save" id = "saveSkillBtn">
+          </div>
+      </div>
   </div>
 
   <div id = "firstLogin" class = "modal">
@@ -109,7 +152,7 @@
   <div id = "skillpage" class = "modal">
     <div class = "modal-content">
         <div class="modal-header">
-            <span class="modalClose">&times;</span>
+            <span class="modalClose" id = "closeORModal">&times;</span>
             <h2 id="skillnameHeader"></h2>
         </div>
         <div class="modal-body">
@@ -139,8 +182,9 @@
                     <div class="divTableBody" id = "offerTableBody">
                         <div class="divTableRow">
                             <div class="divTableHead"> Username </div>
-                            <div class="divTableHead"> Contact </div>
                             <div class="divTableHead"> Location</div>
+                            <div class="divTableHead"> Day </div>
+                            <div class="divTableHead"> Time</div>
                             <div class="divTableHead"> Skill Level</div>
                         </div>
 

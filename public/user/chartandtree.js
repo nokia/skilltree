@@ -41,7 +41,7 @@ function checkFirstLogin() {
             var location = document.getElementById('location').value;
             var teachingDay = document.getElementById('day').value;
             var teachingTime = document.getElementById('timeStart').value + ' - ' + document.getElementById('timeEnd').value;
-            var location = document.getElementById('location').value;
+
 
             var firstLoginData = {
                     mainTree: mainTree.value,
@@ -431,6 +431,7 @@ function showTree (treeName) {
     tree.treeContainer.position.set(app.renderer.width / 2 + tree.treeContainer.width / 2, app.renderer.height / 2);
 
     tree.treeContainer.alpha = 1;
+    tree.skills[0].itemcontainer.refreshAvaliability();
     app.renderer.render(app.stage);
     document.getElementById("pixiCanvas").style.visibility = "visible";
     app.start();
@@ -548,8 +549,45 @@ function create() {
                 }*/
             }
         }
-        
+
         skillReq.send(JSON.stringify(skill));
+    };
+
+    var createSkillBtn = document.getElementById("createSkill");
+    createSkillBtn.onclick = function () {
+        var modal = document.getElementById("newSkillModal");
+        modal.style.display = "block";
+
+        var span = document.getElementById("closeSkillModal");
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        var catSelect = document.getElementById("newSkillCat");
+        for (var i = 0; i < data.categories.length; ++i) {
+            var option = document.createElement("option");
+            option.text = data.categories[i].name;
+            catSelect.add(option);
+        }
+
+        var save = document.getElementById("saveSkillBtn");
+        save.onclick = function () {
+
+        };
+    };
+
+    var deleteBtn = document.getElementById("deleteFromList");
+    deleteBtn.onclick = function () {
+        skillsToAdd = skillsToAdd.filter(obj => obj.name != skillList.options[skillList.selectedIndex].text);
+        skillList.remove(skillList.selectedIndex);
+        // nem kene engednie, hogy torolje a dependecyt vagy mashol kell ezt ellenorizni
     };
 
     var createBtn = document.getElementById("createTree");
@@ -557,7 +595,7 @@ function create() {
         if (document.getElementById('treeName').value.length > 0) {
             if (skillsToAdd.length > 0) {
                 var skillNames = [];
-                for (var i = 0; i < skillsToAdd.length; ++i) skillNames.push(skillsToAdd[i].name);
+                for (var i = 0; i < skillsToAdd.length; ++i) skillNames.push(skillsToAdd[i]);
 
                 var treeData = {
                     name: document.getElementById('treeName').value,
@@ -565,18 +603,12 @@ function create() {
                     skillNames: skillNames
                 };
 
-                var saveTree = new XMLHttpRequest();
-                saveTree.open('POST', '/set/newtree', true);
-                saveTree.setRequestHeader('Content-type', 'application/json');
-                saveTree.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-                saveTree.responseType = "json";
-                saveTree.onreadystatechange = function() {
-                    if(saveTree.readyState == 4 && saveTree.status == 200) {
+                request('POST', '/set/newtree', treeData, function () {
+                    if(this.readyState == 4 && this.status == 200) {
                         if (this.response.success) window.open("/user/", "_self");
                         else if (this.response.message == "treeexists") alert("There is already a tree with this name");
                     }
-                }
-                saveTree.send(JSON.stringify(treeData));
+                });
             } else alert("Please add at least one skill to the tree");
         } else alert("Please provide a name to the tree");
     };
@@ -585,23 +617,38 @@ function create() {
 function searchSkillsByName(){
     var skillToSearch = {value: document.getElementById('skillSearch').value};
     var skillSearchResult = document.getElementById('skillSearchResult');
-    var sch = new XMLHttpRequest();
-    sch.open('POST', '/set/searchSkillsByName', true);
-    sch.setRequestHeader('Content-type', 'application/json');
-    sch.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-    sch.responseType = "json";
-    sch.onreadystatechange = function() {
-        if(sch.readyState == 4 && sch.status == 200) {
+    request('POST', '/set/searchSkillsByName', skillToSearch, function () {
+        if(this.readyState == 4 && this.status == 200) {
             skillSearchResult.innerText = "";
-            for (var i = 0; i < sch.response.length; i++) {
+            for (var i = 0; i < this.response.length; i++) {
                 var mya = document.createElement('option');
-                mya.value = sch.response[i].name;
+                mya.value = this.response[i].name;
                 skillSearchResult.appendChild(mya);
             }
         }
-    }
-    sch.send(JSON.stringify(skillToSearch));
+    });
 }
+
+function deleteRow(row) {
+  var i = row.parentNode.parentNode.rowIndex;
+  document.getElementById('pointsTable').deleteRow(i);
+}
+
+function addRow() {
+  var x = document.getElementById('pointsTable');
+  var new_row = x.rows[1].cloneNode(true);
+  var len = x.rows.length;
+  new_row.cells[0].innerHTML = len;
+
+  var inp1 = new_row.cells[1].getElementsByTagName('input')[0];
+  inp1.id += len;
+  inp1.value = '';
+  x.appendChild(new_row);
+}
+
+/*
+*   TREE CREATOR END
+*/
 
 // helper functions
 
@@ -619,4 +666,14 @@ Array.prototype.sum = function (prop) {
     }
 
     return total;
+}
+
+function request (type, url, data, callback) {
+    var req = new XMLHttpRequest();
+    req.open(type, url, true);
+    req.setRequestHeader('Content-type', 'application/json');
+    req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+    req.responseType = "json";
+    req.onreadystatechange = callback;
+    req.send(JSON.stringify(data));
 }

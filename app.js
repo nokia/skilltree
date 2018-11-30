@@ -1,6 +1,5 @@
 const fs = require('fs');
 const http = require('http');
-const https = require('https');
 const path = require('path');
 const express = require('express');
 const bodyParser  = require('body-parser');
@@ -16,18 +15,6 @@ var Skill = require('./models/skillmodel');
 var pbkdf2 = require('./pbkdf2'); // get hash generator and pw checker
 
 const app = express();
-
-// https certificate
-const privateKey = fs.readFileSync('/etc/letsencrypt/live/skilltree.benis.hu/privkey.pem', 'utf8');
-const certificate = fs.readFileSync('/etc/letsencrypt/live/skilltree.benis.hu/cert.pem', 'utf8');
-const ca = fs.readFileSync('/etc/letsencrypt/live/skilltree.benis.hu/chain.pem', 'utf8');
-
-const credentials = {
-	key: privateKey,
-	cert: certificate,
-	ca: ca
-};
-
 
 mongoose.connect(config.database); // connect to database
 app.set('superSecret', config.secret);
@@ -269,7 +256,7 @@ setRoute.use(function(req, res, next) {
     }
 });
 setRoute.use(express.json());
-setRoute.post('/newskill', async function(req, res) { // global skill
+setRoute.post('/newskill', async function(req, res) {
 	var data = req.body;
 
 	var newSkill = new Skill({
@@ -468,35 +455,138 @@ async function getDependency (skill, dependency) {
 	}
 }*/
 
+
+var rootlevel = 0;
+
+async function insertSkill(skillToInsert, skillArray) {
+	console.log({txt: "rootlevel:" , rootlevel: rootlevel});
+	if (!skillArray.includes(skillToInsert)) {
+		if (skillArray.length === 0) {
+			skillToInsert.level = rootlevel;
+			console.log({name: skillToInsert.name, level: skillToInsert.level, pos: 0, entry: 0});
+			skillArray.push(skillToInsert);
+			return;
+		}
+		else {
+			for (var i = 0; i < skillToInsert.parents.length; i++) {
+				var ithParent = await Skill.findOne({
+						name: skillToInsert.parents[i]
+				}, function(err, skill) {
+						if (err) throw err;
+						return skill;
+				});
+				if (skillArray.find(obj => obj.name == ithParent.name) !== undefined) {
+					ithParent = skillArray.find(obj => obj.name == ithParent.name);
+					for (var j = 0; j < ithParent.children.length; j++) {
+						var ithChild = await Skill.findOne({
+								name: ithParent.children[j].name
+						}, function(err, skill) {
+								if (err) throw err;
+						return skill;
+						});
+						if (skillArray.find(obj => obj.name == ithChild.name) !== undefined) {
+							ithChild = skillArray.find(obj => obj.name == ithChild.name);
+							var svc = 0;
+							while (ithChild.name !== skillArray[svc].name) {
+								svc++;
+							}
+							skillToInsert.level = ithChild.level;
+							console.log({name: skillToInsert.name, level: skillToInsert.level, pos: svc, entry: 1});
+							skillArray.splice(svc, 0, skillToInsert);
+							return;
+						}
+					}
+					var svp = 0;
+					while (skillArray[svp] !== undefined && skillArray[svp].level <= ithParent.level) {
+						svp++;
+					}
+					skillToInsert.level = ithParent.level + 1;
+					console.log({name: skillToInsert.name, level: skillToInsert.level, pos: svp, entry: 2});
+					skillArray.splice(svp, 0, skillToInsert);
+					return;
+				}
+			}
+
+			for (var i = 0; i < skillToInsert.children.length; i++) {
+				var ithChild = await Skill.findOne({
+						name: skillToInsert.children[i].name
+				}, function(err, skill) {
+						if (err) throw err;
+				return skill;
+				});
+
+				if (skillArray.find(obj => obj.name == ithChild.name) !== undefined) {
+					ithChild = skillArray.find(obj => obj.name == ithChild.name);
+					var c = 0;
+					while (skillArray[c] !== undefined && [c].level < ithChild.level) {
+						c++;
+					}
+					skillToInsert.level = ithChild.level - 1;
+					console.log({name: skillToInsert.name, level: skillToInsert.level, pos: c, entry: 3})
+					skillArray.splice(c, 0, skillToInsert);
+					if (skillToInsert.level < rootlevel) rootlevel = skillToInsert.level;
+					return;
+				}
+			}
+
+			var sn = 0;
+			while (skillArray[sn] !== undefined && skillArray[sn].level === rootlevel) {
+				sn++;
+			}
+			skillToInsert.level = rootlevel;
+			console.log({name: skillToInsert.name, level: skillToInsert.level, pos: sn, entry: 4});
+			skillArray.splice(sn, 0, skillToInsert);
+			return;
+		}
+	}
+}
+
+async function extractNames(skillArray){
+	var exctractedArray = [];
+	for (var i = 0; i < skillArray.length; i++) {
+		exctractedArray[i] = skillArray[i].name;
+	}
+	return exctractedArray;
+}
+
+async function sortTree(skillArray){
+	rootlevel = 0;
+	var sortedArray = [];
+	for (var i = 0; i < skillArray.length; i++) {
+		await insertSkill(skillArray[i], sortedArray);
+	}
+	skillArray = await extractNames(sortedArray);
+	return skillArray;
+}
+
+
 setRoute.post('/newtree', async function (req, res) { // create user tree
 	var data = req.body;
-
     var user = await User.findOne({
         username: req.decoded.username
     }, function(err, user) {
         if (err) throw err;
 		return user;
     });
-
 	if (!user) {
 		res.json({
 			success: false,
 			message: 'User not found.'
 		});
-	} else {
-		if (user.trees.find(obj => obj.name == data.name) == undefined) {
-			user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: data.skillNames});
-			user.save(function (err) {if (err) throw err;});
-
-			res.json({
-				success: true
-			});
-		} else {
-			res.json({
-				success: false,
-				message: 'treeexists'
-			});
-		}
+	}
+	else if (user.trees.find(obj => obj.name == data.name) == undefined) {
+		var sn = await sortTree(data.skillNames);
+		user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: sn});
+		user.save(function (err) {if (err) throw err;});
+		res.json({
+			success: true
+		});
+	}
+	else {
+		res.json({
+			success: false,
+			message: 'treeexists'
+		});
 	}
 });
 
@@ -691,6 +781,7 @@ setRoute.post('/submitall', async function (req, res) {
 					if (globalSkill.offers.find(obj => obj.username == user.username) == undefined) {
 						globalSkills.find(obj => obj.name == userSkill.name).offers.push({
 							username: user.username,
+							location: user.location,
 							teachingDay: user.teachingDay,
 							teachingTime: user.teachingTime,
 							achievedPoint: userSkill.achievedPoint,
@@ -716,13 +807,5 @@ setRoute.post('/submitall', async function (req, res) {
 	}
 });
 
-
-
-const httpsServer = https.createServer(credentials, app);
-httpsServer.listen(443);
-
-// Redirect from http port 80 to https
-http.createServer(function (req, res) {
-    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
-    res.end();
-}).listen(80);
+const httpServer = http.createServer(app);
+httpServer.listen(3000);
