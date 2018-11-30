@@ -111,7 +111,21 @@
               Parents:<br>
               <p><input type = "text" id = "parentSearch" list = "skillSearchResult" onkeypress="searchSkillsByName()">
                  <input type = "button" id = "addParent" value = "Add parent"></p>
-
+              Points:<br>
+              <table id = "pointsTable" border = "1">
+                <tr>
+                     <td>Child</td>
+                     <td>Min point</td>
+                     <td>Required</td>
+                     <td>Delete</td>
+                </tr>
+                <tr>
+                     <td><input size=50 type="text" id = "child"></td>
+                     <td><input size=10 type="text" id = "minPoint"></td>
+                     <td><input size=50 type="checkbox" id = "required"></td>
+                     <td><input type="button" value="Delete" onclick="deleteRow(this)"></td>
+                 </tr>
+             </table>
               Send for approve:
               <input type = "checkbox" id = "forApprove"><br>
               <input type = "button" value = "Save" id = "saveSkillBtn">
