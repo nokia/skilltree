@@ -629,13 +629,13 @@ function searchSkillsByName(){
     });
 }
 
-function deleteRow(row) {
+function deleteRow(table, row) {
   var i = row.parentNode.parentNode.rowIndex;
-  document.getElementById('pointsTable').deleteRow(i);
+  document.getElementById(table).deleteRow(i);
 }
 
-function addRow() {
-  var x = document.getElementById('pointsTable');
+function addRow(table) {
+  var x = document.getElementById(table);
   var new_row = x.rows[1].cloneNode(true);
   var len = x.rows.length;
   new_row.cells[0].innerHTML = len;
