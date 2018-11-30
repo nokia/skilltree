@@ -594,7 +594,7 @@ function create() {
                 children.push({
                     name: childrenTable.rows[i].cells[0].children[0].value,
                     minPoint: childrenTable.rows[i].cells[1].children[0].value,
-                    recommended: !childrenTable.rows[i].cells[2].children[0].value
+                    recommended: !childrenTable.rows[i].cells[2].children[0].checked
                 });
             }
 
@@ -619,10 +619,16 @@ function create() {
                 parents: parents,
                 children: children,
                 trainings: trainings,
-                forApprove: document.getElementById('forApprove').value
+                forApprove: document.getElementById('forApprove').checked
             };
 
-            console.log(skillData);
+            request('POST', '/set/newskill', skillData, function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    if (this.response.success) {
+                        
+                    }
+                }
+            });
         };
     };
 
@@ -647,7 +653,7 @@ function create() {
                 };
 
                 request('POST', '/set/newtree', treeData, function () {
-                    if(this.readyState == 4 && this.status == 200) {
+                    if (this.readyState == 4 && this.status == 200) {
                         if (this.response.success) window.open("/user/", "_self");
                         else if (this.response.message == "treeexists") alert("There is already a tree with this name");
                     }
@@ -661,7 +667,7 @@ function searchSkillsByName(){
     var skillToSearch = {value: document.getElementById('skillSearch').value};
     var skillSearchResult = document.getElementById('skillSearchResult');
     request('POST', '/set/searchSkillsByName', skillToSearch, function () {
-        if(this.readyState == 4 && this.status == 200) {
+        if (this.readyState == 4 && this.status == 200) {
             skillSearchResult.innerText = "";
             for (var i = 0; i < this.response.length; i++) {
                 var mya = document.createElement('option');

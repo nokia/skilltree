@@ -12,6 +12,7 @@ var Category   = require('./models/categorymodel');
 var User   = require('./models/usermodel'); // get our mongoose model
 var Tree = require('./models/treemodel');
 var Skill = require('./models/skillmodel');
+var ApprovableSkill = require('./models/skillsforapprovemodel');
 var pbkdf2 = require('./pbkdf2'); // get hash generator and pw checker
 
 const app = express();
@@ -256,33 +257,6 @@ setRoute.use(function(req, res, next) {
     }
 });
 setRoute.use(express.json());
-setRoute.post('/newskill', async function(req, res) {
-	var data = req.body;
-
-	var newSkill = new Skill({
-		name: data.name,
-		description: data.description,
-		categoryName: data.categoryName,
-		skillIcon: data.skillIcon,
-		maxPoint: data.maxPoint,
-		parents: data.parents,
-		children: data.children
-	});
-
-	var id;
-	await newSkill.save(function(err, skill) {
-		if (err) throw err;
-	});
-
-	for (var i = 0; i < data.parents.length; ++i) {
-		Skill.update({name: data.parents[i].name}, {$push: {children: {name: data.name, minPoint: data.parents[i].minPoint}}}, function (err) {if (err) throw err;});
-	}
-
-	for (var i = 0; i < data.children.length; ++i) {
-		Skill.update({name: data.children[i]}, {$push: {parents: {name: data.name}}}, function (err) {if (err) throw err;});
-	}
-});
-
 
 // Search for users to view by name
 setRoute.post('/searchUsersByName', async function (req, res) {
@@ -559,6 +533,63 @@ async function sortTree(skillArray){
 	return skillArray;
 }
 
+setRoute.post('/newskill', async function(req, res) {
+    var data = req.body;
+
+    var user = await User.findOne({
+        username: req.decoded.username
+    }, function(err, user) {
+        if (err) throw err;
+		return user;
+    });
+
+	if (!user) {
+		res.json({
+			success: false,
+			message: 'User not found.'
+		});
+	} else if (user.skills.find(obj => obj.name == data.name) == undefined) {
+		user.skills.push({
+            name: data.name,
+            description: data.description,
+            skillIcon: data.skillIcon,
+            categoryName: data.categoryName,
+            maxPoint: data.maxPoint,
+            pointDescription: data.pointDescription,
+            parents: data.parents,
+            children: data.children,
+            trainings: data.trainings
+        });
+
+        user.save(function (err) {if (err) throw err;});
+
+        if (data.forApprove) {
+            var apprSkill = new ApprovableSkill({
+                username: user.username,
+                name: data.name,
+                description: data.description,
+                skillIcon: data.skillIcon,
+                categoryName: data.categoryName,
+                maxPoint: data.maxPoint,
+                pointDescription: data.pointDescription,
+                parents: data.parents,
+                children: data.children,
+                trainings: data.trainings
+            });
+
+            apprSkill.save(function (err) {if (err) throw err;});
+        }
+
+		res.json({
+			success: true
+		});
+	} else {
+		res.json({
+			success: false,
+			message: 'skillexists'
+		});
+	}
+});
 
 setRoute.post('/newtree', async function (req, res) { // create user tree
 	var data = req.body;
