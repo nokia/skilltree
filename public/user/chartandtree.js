@@ -580,15 +580,11 @@ function create() {
         var save = document.getElementById("saveSkillBtn");
         save.onclick = function () {
             var pointsTable = document.getElementById('pointsTable');
-            var pointsNum = pointsTable.rows.length;
+            var pointsNum = pointsTable.rows.length - 1;
 
-            for (i = 0; i < pointsNum; ++i) {
-                var row = pointsTable.rows.item(i).cells;
-
-                for(var j = 0; j < row.length; j++){
-                    var cellVal = row.item(j).innerHTML;
+            for (i = 1; i < pointsNum + 1; ++i) {
+                var cellVal = row.item(1).value;
                     alert(cellVal);
-                }
             }
 
             var skillData = {
