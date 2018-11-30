@@ -109,27 +109,36 @@
               </table>
               <input type="button" value="Add point" onclick="addRow('pointsTable')"><br>
               Parents:<br>
-              <p><input type = "text" id = "parentSearch" list = "skillSearchResult" onkeypress="searchSkillsByName()">
-                 <input type = "button" id = "addParent" value = "Add parent"></p>
+              <table id = "parentsTable" border = "1">
+                  <tr>
+                      <td>Parent</td>
+                      <td>Delete</td>
+                  </tr>
+                  <tr>
+                      <td><input size=30 type="text" id = "parent" list = "skillSearchResult" onkeypress="searchSkillsByName()"></td>
+                      <td><input type="button" value="Delete" onclick="deleteRow('parentsTable', this)"></td>
+                  </tr>
+              </table>
+              <input type="button" value="Add child" onclick="addRow('parentsTable')"><br>
               Points:<br>
               <table id = "childrenTable" border = "1">
-                <tr>
-                     <td>Child</td>
-                     <td>Min point</td>
-                     <td>Required</td>
-                     <td>Delete</td>
-                </tr>
-                <tr>
-                     <td><input size=30 type="text" id = "child" list = "skillSearchResult" onkeypress="searchSkillsByName()"></td>
-                     <td><input size=10 type="text" id = "minPoint"></td>
-                     <td><input size=50 type="checkbox" id = "required"></td>
-                     <td><input type="button" value="Delete" onclick="deleteRow('childrenTable', this)"></td>
-                 </tr>
-             </table>
-             <input type="button" value="Add child" onclick="addRow('childrenTable')"><br>
-             Send for approve:
-             <input type = "checkbox" id = "forApprove"><br>
-             <input type = "button" value = "Save" id = "saveSkillBtn">
+                  <tr>
+                      <td>Child</td>
+                      <td>Min point</td>
+                      <td>Required</td>
+                      <td>Delete</td>
+                  </tr>
+                  <tr>
+                      <td><input size=30 type="text" id = "child" list = "skillSearchResult" onkeypress="searchSkillsByName()"></td>
+                      <td><input size=10 type="text" id = "minPoint"></td>
+                      <td><input size=50 type="checkbox" id = "required"></td>
+                      <td><input type="button" value="Delete" onclick="deleteRow('childrenTable', this)"></td>
+                  </tr>
+              </table>
+              <input type="button" value="Add child" onclick="addRow('childrenTable')"><br>
+              Send for approve:
+              <input type = "checkbox" id = "forApprove"><br>
+              <input type = "button" value = "Save" id = "saveSkillBtn">
           </div>
       </div>
   </div>

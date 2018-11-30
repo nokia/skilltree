@@ -581,13 +581,8 @@ function create() {
         save.onclick = function () {
             var pointsTable = document.getElementById('pointsTable');
             var pointsNum = pointsTable.rows.length - 1;
-
-            for (i = 1; i < pointsNum + 1; ++i) {
-                var row = pointsTable.rows.item(i).cells;
-
-                var cellVal = row.item(1).value;
-                alert(cellVal);
-            }
+            var pointDescription = [];
+            for (i = 1; i < pointsNum + 1; ++i) pointDescription.push(pointsTable.rows[i].cells[1].children[0].value);
 
             var skillData = {
                 name: document.getElementById('newSkillName').value,
