@@ -576,6 +576,11 @@ function create() {
             option.text = data.categories[i].name;
             catSelect.add(option);
         }
+
+        var save = document.getElementById("saveSkillBtn");
+        save.onclick = function () {
+            
+        };
     };
 
     var deleteBtn = document.getElementById("deleteFromList");

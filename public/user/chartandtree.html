@@ -94,6 +94,22 @@
               <input type = "text" id = "newSkillIcon"><br>
               Category:
               <select id = "newSkillCat"></select><br>
+              Points:<br>
+              <table id="pointsTable" border="1">
+                  <tr>
+                      <td>Point</td>
+                      <td>Description</td>
+                      <td>Delete</td>
+                  </tr>
+                  <tr>
+                      <td>1</td>
+                      <td><input size=50 type="text" id = "pointDesc"></td>
+                      <td><input type="button" value="Delete" onclick="deleteRow(this)"></td>
+                  </tr>
+              </table><br>
+              <input type="button" value="Add point" onclick="addRow()"><br>
+              Send for approve:
+              <input type = "checkbox" id = "forApprove"><br>
               <input type = "button" value = "Save" id = "saveSkillBtn">
           </div>
       </div>
