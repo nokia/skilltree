@@ -31,11 +31,10 @@ cd skilltree
 wget https://raw.githubusercontent.com/sicambria/skilltree/master/install/skilltree_install_debian9.sh ; chmod +x skilltree_install_debian9.sh ; ./skilltree_install_debian9.sh
 ```
 
-
 ## Development
 
 Want to contribute? Great!
-You need an IDE of your choice, we recommend [AtomIDE] or [VScode]
+You need an IDE of your choice, we recommend [AtomIDE] or [VScode].
 
 For Atom, installing some plugins are helpful:
 
@@ -54,8 +53,8 @@ server {
         listen 443 ssl default_server;
         listen [::]:443 ssl default_server;
 
-        ssl_certificate     /etc/letsencrypt/live/skilltree.ga/cert.pem;
-        ssl_certificate_key /etc/letsencrypt/live/skilltree.ga/privkey.pem;
+        ssl_certificate     /etc/letsencrypt/live/YOUR_DOMAIN.ORG/cert.pem;
+        ssl_certificate_key /etc/letsencrypt/live/YOUR_DOMAIN.ORG/privkey.pem;
 
         location / {
                 proxy_pass http://localhost:3000/;
@@ -68,7 +67,6 @@ server {
         return 301 https://$host$request_uri;
 }
 ```
-
 
 ```sh
 cd skilltree
