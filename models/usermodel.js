@@ -38,6 +38,15 @@ module.exports = mongoose.model('User', new Schema({
                     minPoint: Number,
                     recommended: Boolean
                 }
+            ],
+            trainings: [
+                {
+                    name: String,
+                    level: Number,
+                    description: String,
+                    url: String,
+                    urlLastAccessed: String
+                }
             ]
         }
     ],
