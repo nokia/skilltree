@@ -119,8 +119,8 @@
                       <td><input type="button" value="Delete" onclick="deleteRow('parentsTable', this)"></td>
                   </tr>
               </table>
-              <input type="button" value="Add child" onclick="addRow('parentsTable')"><br>
-              Points:<br>
+              <input type="button" value="Add parent" onclick="addRow('parentsTable')"><br>
+              Children:<br>
               <table id = "childrenTable" border = "1">
                   <tr>
                       <td>Child</td>
@@ -136,6 +136,24 @@
                   </tr>
               </table>
               <input type="button" value="Add child" onclick="addRow('childrenTable')"><br>
+              Trainings:<br>
+              <table id = "trainingsTable" border = "1">
+                  <tr>
+                      <td>Name</td>
+                      <td>Level</td>
+                      <td>Description</td>
+                      <td>URL</td>
+                      <td>Delete</td>
+                  </tr>
+                  <tr>
+                      <td><input size=30 type="text"></td>
+                      <td><input size=10 type="text"></td>
+                      <td><input size=30 type="text"></td>
+                      <td><input size=30 type="text"></td>
+                      <td><input type="button" value="Delete" onclick="deleteRow('trainingsTable', this)"></td>
+                  </tr>
+              </table>
+              <input type="button" value="Add child" onclick="addRow('trainingsTable')"><br>
               Send for approve:
               <input type = "checkbox" id = "forApprove"><br>
               <input type = "button" value = "Save" id = "saveSkillBtn">
