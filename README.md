@@ -1,4 +1,5 @@
 # Skill Tree
+
 Skill tree is a web app to visualize skills, motivating people for self-development and supporting the culture of cooperation and knowledge sharing.
 
 Main features:
@@ -10,17 +11,19 @@ Main features:
   - Making it easy to offer/request training for a specific skill and a specific skill level (build p2p training culture)
 
 ## Tech
+
 Skill Tree needs the following components to operate:
 
 * [node.js] - An open-source, cross-platform JavaScript run-time environment that executes JavaScript code outside of a browser.
 * [Express] - A web framework for Node.js
 * [MongoDB] - A free and open-source cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with schemata.
-* [NginX] - A web server which can also be used as a reverse proxy, load balancer, mail proxy and HTTP cache.
-* A GNU/Linux distribtuion, e.g. Debian or Ubuntu.
+* [Nginx] - A web server which can also be used as a reverse proxy, load balancer, mail proxy and HTTP cache.
+* A GNU/Linux distribution, e.g. Debian or Ubuntu.
 
 ## Installation
 
 #### Debian 9
+
 ```sh
 cd
 mkdir skilltree
@@ -32,14 +35,40 @@ wget ... skilltree_install_debian9.sh ; chmod +x skilltree_install_debian9.sh ; 
 ## Development
 
 Want to contribute? Great!
-We're using the Atom IDE:
+You need an IDE of your choice, we recommend [AtomIDE] or [VScode]
 
-Installing some plugins are helpful:
+For Atom, installing some plugins are helpful:
 
 ```sh
 apm install emmet todo minimap pigments minimap-pigments linter file-icons git-diff atom-beautify ask-stack highlight-selected
 ```
-After running the install script, run:
+After running the install script, setup your web server.
+In case you use
+
+```sh
+cat /etc/nginx/sites-available/default
+```
+
+```sh
+server {
+        listen 443 ssl default_server;
+        listen [::]:443 ssl default_server;
+
+        ssl_certificate     /etc/letsencrypt/live/skilltree.ga/cert.pem;
+        ssl_certificate_key /etc/letsencrypt/live/skilltree.ga/privkey.pem;
+
+        location / {
+                proxy_pass http://localhost:3000/;
+        }
+}
+
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+        return 301 https://$host$request_uri;
+}
+```
+
 
 ```sh
 cd skilltree
@@ -60,8 +89,8 @@ To query the status:
 pm2 list
 ```
 
-License
-----
+### License
+
 BSD License 2.0
 
 
@@ -71,3 +100,5 @@ BSD License 2.0
    [MongoDB]: <https://www.mongodb.com/>
    [Express]: <https://expressjs.com/>
    [Nginx]: <https://www.nginx.com/>
+   [VScode]: <https://code.visualstudio.com/>
+   [AtomIDE]: <https://github.com/atom/atom>
