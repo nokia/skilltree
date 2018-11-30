@@ -675,7 +675,7 @@ function request (type, url, data, callback) {
     req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
     req.responseType = "json";
     req.onreadystatechange = function () {
-        if(this.readyState == 4 && this.status == 200) callback;
+        if(this.readyState == 4 && this.status == 200) callback();
     };
     req.send(JSON.stringify(data));
 }
