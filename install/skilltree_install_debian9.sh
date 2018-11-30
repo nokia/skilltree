@@ -6,7 +6,7 @@
 DOMAIN=yourdomain.org
 
 # Install sources
-sudo apt-get install curl software-properties-common git
+sudo apt install curl software-properties-common git -y
 curl -sL https://deb.nodesource.com/setup_8.x | sudo bash -
 # MongoDB
 curl https://www.mongodb.org/static/pgp/server-4.0.asc | sudo apt-key add -
@@ -15,15 +15,13 @@ sudo echo "deb http://repo.mongodb.org/apt/debian stretch/mongodb-org/4.0 main" 
 
 sudo apt update
 
-sudo apt-get install mongodb-org
+sudo apt install mongodb-org -y
 sudo systemctl enable mongod
 sudo systemctl start mongod
 
 cd
 cd skilltree
 git clone https://github.com/sicambria/skilltree.git
-
-
 
 # mongose
 npm install mongoose
@@ -56,20 +54,20 @@ sudo pm2 startup systemd
 # APACHE
 if [ $1 = "Apache" ]
 then
-  sudo apt install python-certbot-apache
+  echo "Installing Apache"
+  sudo apt install python-certbot-apache -y
   # sudo nano /etc/apache2/sites-available/$DOMAIN.conf
-  echo "ServerName $DOMAIN;" > /etc/apache2/sites-available/$DOMAIN.conf
+  sudo echo "ServerName $DOMAIN;" > /etc/apache2/sites-available/$DOMAIN.conf
   sudo apache2ctl configtest
   sudo certbot --apache -d $DOMAIN -d www.$DOMAIN
   sudo a2enmod proxy
   sudo a2enmod proxy_http
 else
-  sudo nano /etc/apt/sources.list
-  deb http://deb.debian.org/debian stretch-backports main contrib non-free
-  deb-src http://deb.debian.org/debian stretch-backports main contrib non-free
-  sudo apt-get update
-  sudo apt-get install python-certbot-nginx
-  sudo apt install python-certbot-nginx -t stretch-backports
+  # sudo nano /etc/apt/sources.list
+  sudo echo "deb http://deb.debian.org/debian stretch-backports main contrib non-free" > /etc/apt/sources.list
+  sudo echo "deb-src http://deb.debian.org/debian stretch-backports main contrib non-free" > /etc/apt/sources.list
+  sudo apt update
+  sudo apt install python-certbot-nginx -y -t stretch-backports
   sudo certbot --nginx -d $DOMAIN -d $DOMAIN
 fi
 
