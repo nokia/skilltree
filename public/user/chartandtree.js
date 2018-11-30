@@ -585,8 +585,8 @@ function create() {
             for (i = 1; i < pointsNum + 1; ++i) {
                 var row = pointsTable.rows[i].cells[1].getElementsByTagName('input')[0].value;
 
-                var cellVal = row.item(1);
-                alert(cellVal);
+                //var cellVal = row.item(1);
+                alert(row);
             }
 
             var skillData = {
