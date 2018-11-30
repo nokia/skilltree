@@ -636,7 +636,7 @@ function create() {
     deleteBtn.onclick = function () {
         skillsToAdd = skillsToAdd.filter(obj => obj.name != skillList.options[skillList.selectedIndex].text);
         skillList.remove(skillList.selectedIndex);
-        // nem kene engednie, hogy torolje a dependecyt vagy mashol kell ezt ellenorizni
+        // nem kene engednie, hogy torolje a dependecyt vagy mashol kell ezt ellenorizni 
     };
 
     var createBtn = document.getElementById("createTree");
