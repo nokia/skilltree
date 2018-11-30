@@ -638,6 +638,7 @@ function addRow(table) {
   var x = document.getElementById(table);
   var new_row = x.rows[1].cloneNode(true);
   var len = x.rows.length;
+  if (table == 'pointsTable') new_row.cells[0].innerText = len;
 
   var inp1 = new_row.cells[1].getElementsByTagName('input')[0];
   inp1.id += len;
