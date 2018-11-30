@@ -278,7 +278,7 @@ class ItemContainer {
     toggleSkillDetailsPage(){
         var modal = document.getElementById('skillpage');
         var header = document.getElementById('skillnameHeader');
-        var span = document.getElementsById("closeORModal");
+        var span = document.getElementById("closeORModal");
 
 
         var allLoaded = 0;
