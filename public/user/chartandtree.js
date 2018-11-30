@@ -579,7 +579,22 @@ function create() {
 
         var save = document.getElementById("saveSkillBtn");
         save.onclick = function () {
+            var pointsTable = document.getElementById('pointsTable');
+            var pointsNum = pointsTable.rows.length - 1;
+            var pointDescription = [];
+            for (i = 1; i < pointsNum + 1; ++i) pointDescription.push(pointsTable.rows[i].cells[1].children[0].value);
 
+            var skillData = {
+                name: document.getElementById('newSkillName').value,
+                description: document.getElementById('newSkillDesc').value,
+                skillIcon: document.getElementById('newSkillIcon').value,
+                categoryName: catSelect.value,
+                maxPoint: pointsNum,
+                pointDescription: pointDescription,
+                parents: parents,
+                children: children,
+                forApprove: forApprove
+            };
         };
     };
 
@@ -629,16 +644,16 @@ function searchSkillsByName(){
     });
 }
 
-function deleteRow(row) {
+function deleteRow(table, row) {
   var i = row.parentNode.parentNode.rowIndex;
-  document.getElementById('pointsTable').deleteRow(i);
+  document.getElementById(table).deleteRow(i);
 }
 
-function addRow() {
-  var x = document.getElementById('pointsTable');
+function addRow(table) {
+  var x = document.getElementById(table);
   var new_row = x.rows[1].cloneNode(true);
   var len = x.rows.length;
-  new_row.cells[0].innerHTML = len;
+  if (table == 'pointsTable') new_row.cells[0].innerText = len;
 
   var inp1 = new_row.cells[1].getElementsByTagName('input')[0];
   inp1.id += len;
