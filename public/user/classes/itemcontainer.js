@@ -278,7 +278,7 @@ class ItemContainer {
     toggleSkillDetailsPage(){
         var modal = document.getElementById('skillpage');
         var header = document.getElementById('skillnameHeader');
-        var span = document.getElementsByClassName("modalClose")[0];
+        var span = document.getElementsById("closeORModal");
 
 
         var allLoaded = 0;
@@ -306,10 +306,10 @@ class ItemContainer {
                                 {
                                 if(true) //TODO, only higher level offers should appear
                                     {
-                                    offerTable.appendChild( createTableRow( globalskill.offers[i].username, 
-                                                                            globalskill.offers[i].location, 
+                                    offerTable.appendChild( createTableRow( globalskill.offers[i].username,
+                                                                            globalskill.offers[i].location,
                                                                             globalskill.offers[i].teachingDay,
-                                                                            globalskill.offers[i].teachingTime, 
+                                                                            globalskill.offers[i].teachingTime,
                                                                             globalskill.offers[i].achievedPoint
                                                                             ) );
                                     }
@@ -334,7 +334,7 @@ class ItemContainer {
 
         //Adding
         var trainingTable = document.getElementById('trainingTableBody');
-        
+
         var requestTable = document.getElementById('requestTableBody');
 
 
@@ -372,11 +372,11 @@ class ItemContainer {
 
             return Row;
         }
-        
+
         header.innerText = this.skill.name;
 
-        
-        
+
+
 
         span.onclick = function() {
             modal.style.display = "none";
@@ -388,12 +388,12 @@ class ItemContainer {
                 modal.style.display = "none";
             }
         }
-        
+
         function displayWindow(){
             if(allLoaded == 1)
                 modal.style.display = "block";
         }
-    
-        
+
+
     }
 }

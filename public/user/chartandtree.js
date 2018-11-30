@@ -558,7 +558,7 @@ function create() {
         var modal = document.getElementById("newSkillModal");
         modal.style.display = "block";
 
-        var span = document.getElementsByClassName("modalClose")[0];
+        var span = document.getElementsByClassName("closeSkillModal");
 
         span.onclick = function() {
             modal.style.display = "none";
