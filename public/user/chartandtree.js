@@ -620,9 +620,9 @@ function searchSkillsByName(){
     request('POST', '/set/searchSkillsByName', skillToSearch, function () {
         if(this.readyState == 4 && this.status == 200) {
             skillSearchResult.innerText = "";
-            for (var i = 0; i < sch.response.length; i++) {
+            for (var i = 0; i < this.response.length; i++) {
                 var mya = document.createElement('option');
-                mya.value = sch.response[i].name;
+                mya.value = this.response[i].name;
                 skillSearchResult.appendChild(mya);
             }
         }
