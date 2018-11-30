@@ -603,18 +603,12 @@ function create() {
                     skillNames: skillNames
                 };
 
-                var saveTree = new XMLHttpRequest();
-                saveTree.open('POST', '/set/newtree', true);
-                saveTree.setRequestHeader('Content-type', 'application/json');
-                saveTree.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-                saveTree.responseType = "json";
-                saveTree.onreadystatechange = function() {
-                    if(saveTree.readyState == 4 && saveTree.status == 200) {
+                request('POST', '/set/newtree', treeData, function () {
+                    if(this.readyState == 4 && this.status == 200) {
                         if (this.response.success) window.open("/user/", "_self");
                         else if (this.response.message == "treeexists") alert("There is already a tree with this name");
                     }
-                }
-                saveTree.send(JSON.stringify(treeData));
+                });
             } else alert("Please add at least one skill to the tree");
         } else alert("Please provide a name to the tree");
     };
@@ -646,7 +640,6 @@ function deleteRow(row) {
   document.getElementById('pointsTable').deleteRow(i);
 }
 
-
 function addRow() {
   var x = document.getElementById('pointsTable');
   var new_row = x.rows[1].cloneNode(true);
@@ -675,4 +668,14 @@ Array.prototype.sum = function (prop) {
     }
 
     return total;
+}
+
+function request (type, url, data, callback) {
+    var req = new XMLHttpRequest();
+    req.open(type, url, true);
+    req.setRequestHeader('Content-type', 'application/json');
+    req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+    req.responseType = "json";
+    req.onreadystatechange = callback;
+    req.send(JSON.stringify(data));
 }
