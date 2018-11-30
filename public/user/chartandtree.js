@@ -603,7 +603,7 @@ function create() {
                     skillNames: skillNames
                 };
 
-                request('POST', '/set/newtree', treeData, function () {
+                request('POST', '/set/newtree', treeData, function (this) {
                     if (this.response.success) window.open("/user/", "_self");
                     else if (this.response.message == "treeexists") alert("There is already a tree with this name");
                 });
@@ -675,7 +675,7 @@ function request (type, url, data, callback) {
     req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
     req.responseType = "json";
     req.onreadystatechange = function () {
-        if(this.readyState == 4 && this.status == 200) callback();
+        if(this.readyState == 4 && this.status == 200) callback(this);
     };
     req.send(JSON.stringify(data));
 }
