@@ -256,7 +256,7 @@ setRoute.use(function(req, res, next) {
     }
 });
 setRoute.use(express.json());
-setRoute.post('/newskill', async function(req, res) { // global skill
+setRoute.post('/newskill', async function(req, res) {
 	var data = req.body;
 
 	var newSkill = new Skill({
