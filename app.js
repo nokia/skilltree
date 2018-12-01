@@ -417,7 +417,7 @@ setRoute.post('/getskill', async function (req, res) {
     }
 });
 
-async function getDependency (skill, dependency) {
+async function getDependency (skill, dependency) { // should search first for user skills
 	var parents = [];
 	for (var i = 0; skill.parents != undefined && i < skill.parents.length; ++i) {
 		var parent = await Skill.findOne({name: skill.parents[i]} , function (err, skill) {
