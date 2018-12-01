@@ -50,16 +50,11 @@ function checkFirstLogin() {
                     location: location
             };
 
-            var saveMain = new XMLHttpRequest();
-            saveMain.open('POST', '/set/firstlogindata', true);
-            saveMain.setRequestHeader('Content-type', 'application/json');
-            saveMain.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-            saveMain.onreadystatechange = function() {
-                if(saveMain.readyState == 4 && saveMain.status == 200) {
+            request('POST', '/set/firstlogindata', firstLoginData, function() {
+                if(this.readyState == 4 && this.status == 200) {
                   window.open("/user/", "_self");
                 }
-            }
-            saveMain.send(JSON.stringify(firstLoginData));
+            });
         }
 
         /*var span = document.getElementsByClassName("modalClose")[0];
@@ -113,103 +108,74 @@ function loadAddedTrees(){
 function searchUsersByName(){
   var userToSearch = {value: document.getElementById('searchedUser').value};
   var sideBarUserSearchResult = document.getElementById('sideBarUserSearchResult');
-  var sch = new XMLHttpRequest();
-  sch.open('POST', '/set/searchUsersByName', true);
-  sch.setRequestHeader('Content-type', 'application/json');
-  sch.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-  sch.responseType = "json";
-  sch.onreadystatechange = function() {
-      if(sch.readyState == 4 && sch.status == 200) {
+
+  request('POST', '/set/searchUsersByName', userToSearch, function() {
+      if(this.readyState == 4 && this.status == 200) {
         sideBarUserSearchResult.innerHTML = "";
-        for (var i = 0; i < sch.response.length; i++) {
+        for (var i = 0; i < this.response.length; i++) {
           var mya = document.createElement('option');
-          mya.value = sch.response[i].name;
+          mya.value = this.response[i].name;
           sideBarUserSearchResult.appendChild(mya);
         }
       }
-  }
-  sch.send(JSON.stringify(userToSearch));
+  });
 }
 
 function getPublicUserData(){
   var userToSearch = {value: document.getElementById('searchedUser').value};
-  var sch = new XMLHttpRequest();
-  sch.open('POST', '/set/getPublicUserData', true);
-  sch.setRequestHeader('Content-type', 'application/json');
-  sch.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-  sch.responseType = "json";
-  sch.onreadystatechange = function() {
-      if(sch.readyState == 4 && sch.status == 200) {
+
+  request('POST', '/set/getPublicUserData', userToSearch, function() {
+      if(this.readyState == 4 && this.status == 200) {
         alert("User found, data loaded.");
       }
-  }
-  sch.send(JSON.stringify(userToSearch));
+  });
 }
 
 function searchTreesByName(){
   var treeToSearch = {value: document.getElementById('searchedTree').value};
   var sideBarTreeSearchResult = document.getElementById('sideBarTreeSearchResult');
-  var sch = new XMLHttpRequest();
-  sch.open('POST', '/set/searchTreesByName', true);
-  sch.setRequestHeader('Content-type', 'application/json');
-  sch.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-  sch.responseType = "json";
-  sch.onreadystatechange = function() {
-      if(sch.readyState == 4 && sch.status == 200) {
+
+  request('POST', '/set/searchTreesByName', treeToSearch, function() {
+      if(this.readyState == 4 && this.status == 200) {
         sideBarTreeSearchResult.innerHTML = "";
-        for (var i = 0; i < sch.response.length; i++) {
+        for (var i = 0; i < this.response.length; i++) {
           var mya = document.createElement('option');
-          mya.value = sch.response[i].name;
+          mya.value = this.response[i].name;
           sideBarTreeSearchResult.appendChild(mya);
         }
       }
-  }
-  sch.send(JSON.stringify(treeToSearch));
+  });
 }
 
 function addTreeToUser(){
   var treeToAdd = {value: document.getElementById('searchedTree').value};
 
-  var adt = new XMLHttpRequest();
-  adt.open('POST', '/set/addTreeToUser');
-  adt.setRequestHeader('Content-type', 'application/json');
-  adt.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-  adt.responseType = "json";
-  adt.onreadystatechange = function() {
-      if (adt.readyState == 4 && adt.status == 200) {
-        if (adt.response.success){
+  request('POST', '/set/addTreeToUser', treeToAdd, function() {
+      if (this.readyState == 4 && this.status == 200) {
+        if (this.response.success){
           var forest = document.getElementById("forest");
           var nt = document.createElement('div');
-          nt.innerText = adt.response.name;
+          nt.innerText = this.response.name;
           nt.className = "listedTree";
           forest.appendChild(nt);
           alert("Selected tree successfully added.");
           loadAddedTrees();
-        } else if (adt.response.message == "existing") alert("Selected tree is already added.");
-        else if (adt.response.message == "notfound") alert("The tree is not found.");
+        } else if (this.response.message == "existing") alert("Selected tree is already added.");
+        else if (this.response.message == "notfound") alert("The tree is not found.");
       }
-  }
-  adt.send(JSON.stringify(treeToAdd));
-
+  });
 }
 
 function submit(){
-  var sub = new XMLHttpRequest();
-  sub.open('POST', '/set/submitall', true);
-  sub.setRequestHeader('Content-type', 'application/json');
-  sub.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-  sub.onreadystatechange = function() {
-      if(sub.readyState == 4 && sub.status == 200) {
-        window.open("/user/", "_self");
-      }
-  }
-
-  var submitData = data.skills;
-  for (var i = 0; i < submitData.length; ++i) {
-      delete submitData[i].itemcontainer;
-  }
-
-  sub.send(JSON.stringify(submitData));
+    var submitData = data.skills;
+    for (var i = 0; i < submitData.length; ++i) {
+        delete submitData[i].itemcontainer;
+    }
+    request('POST', '/set/submitall', submitData, function() {
+        if(this.readyState == 4 && this.status == 200) {
+          window.open("/user/", "_self");
+        }
+    });
 }
 
 function logout(){
@@ -505,13 +471,9 @@ function create() {
     var skillsToAdd = [];
     addBtn.onclick = function () {
         var skill = {value: document.getElementById('skillSearch').value};
-        var skillReq = new XMLHttpRequest();
-        skillReq.open('POST', '/set/getskill', true);
-        skillReq.setRequestHeader('Content-type', 'application/json');
-        skillReq.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-        skillReq.responseType = "json";
-        skillReq.onreadystatechange = function() {
-            if(skillReq.readyState == 4 && skillReq.status == 200) {
+
+        request('POST', '/set/getskill', skill, function() {
+            if(this.readyState == 4 && this.status == 200) {
                 if (this.response.success) {
                     if (skillsToAdd.find(obj => obj.name == this.response.skill.name) == undefined) {
                         if (this.response.dependency.length > 0) {
@@ -548,9 +510,7 @@ function create() {
                     skillSearchResult.appendChild(mya);
                 }*/
             }
-        }
-
-        skillReq.send(JSON.stringify(skill));
+        });
     };
 
     var createSkillBtn = document.getElementById("createSkill");
@@ -636,7 +596,7 @@ function create() {
     deleteBtn.onclick = function () {
         skillsToAdd = skillsToAdd.filter(obj => obj.name != skillList.options[skillList.selectedIndex].text);
         skillList.remove(skillList.selectedIndex);
-        // nem kene engednie, hogy torolje a dependecyt vagy mashol kell ezt ellenorizni 
+        // nem kene engednie, hogy torolje a dependecyt vagy mashol kell ezt ellenorizni
     };
 
     var createBtn = document.getElementById("createTree");
