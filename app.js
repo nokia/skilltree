@@ -291,7 +291,7 @@ setRoute.post('/searchTreesByName', async function (req, res) {
 });
 
 // Search for skills to add while typing
-setRoute.post('/searchSkillsByName', async function (req, res) {
+setRoute.post('/searchSkillsByName', async function (req, res) { // should search first for user skills
 		var data = req.body;
 		var foundSkills = await Skill.find({
 					"name": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
@@ -373,25 +373,48 @@ setRoute.post('/addTreeToUser', async function (req, res){
 setRoute.post('/getskill', async function (req, res) {
 	var data = req.body;
 
-	var skill = await Skill.findOne({name: data.value} , function (err, skill) {
-				if (err) throw err;
-				return skill;
-	});
+    var user = await User.findOne({
+        username: req.decoded.username
+    }, function(err, user) {
+        if (err) throw err;
+		return user;
+    });
 
-	if (!skill) {
+	if (!user) {
 		res.json({
-			success: false
+			success: false,
+			message: 'User not found.'
 		});
 	} else {
-		var dependency = [];
-		await getDependency(skill, dependency);
+        var skill = user.skills.find(obj => obj.name == data.value);
 
-		res.json({
-			success: true,
-			skill: skill,
-			dependency: dependency
-		});
-	}
+        if (skill == undefined) {
+            var skill = await Skill.findOne({name: data.value} , function (err, skill) {
+        				if (err) throw err;
+        				return skill;
+        	});
+
+        	if (!skill) {
+        		res.json({
+        			success: false
+        		});
+        	}
+        }
+
+        var skill = await Skill.findOne({name: data.value} , function (err, skill) {
+    				if (err) throw err;
+    				return skill;
+    	});
+
+    	var dependency = [];
+    	await getDependency(skill, dependency);
+
+    	res.json({
+    		success: true,
+    		skill: skill,
+    		dependency: dependency
+    	});
+    }
 });
 
 async function getDependency (skill, dependency) {
