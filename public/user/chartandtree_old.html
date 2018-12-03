@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html oncontextmenu="return false;">
+<head>
+    <link rel="stylesheet" type="text/css" href="chartandtree.css">
+    <meta charset="UTF-8">
+    <title>Skill Tree</title>
+    <script src = "pixi/pixi.min.js"></script>
+    <script src = "pixi/pixi-extra-filters.js"></script>
+    <script src = "pixi/pixi-layers.js"></script>
+    <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+    	var isIE = /*@cc_on!@*/false || !!document.documentMode;
+    	var isEdge = !isIE && !!window.StyleMedia;
+    	if(isIE || isEdge){
+    		window.open('https://www.google.com/chrome/','_self');
+    	}
+    }, false);
+    </script>
+</head>
+<body>
+  <datalist id = "sideBarTreeSearchResult"></datalist>
+  <datalist id = "sideBarUserSearchResult"></datalist>
+  <datalist id = "skillSearchResult"></datalist>
+  <div class = "grid">
+    <div class = "topLine">
+      <div id = "welcome" class = "welcome">Hello</div>
+      <input type = "button" class = "headerButton" value = "Logout" onClick = "logout()">
+      <input type = "button" class = "headerButton" value = "Open Chart" id = "openchart">
+      <input type = "button" class = "headerButton" value = "Submit Changes" onClick = "submit()">
+      <input type = "button" class = "headerButton" value = "Create Tree" id = "openCreator" onClick = "create()">
+    </div>
+    <div class = "sideBar">
+      <a class = "sideBarTitle">Add Trees!</a>
+      <div class = "sideBarContent">
+        <div class = "sideBarSearch">
+          <input type ="text" value = "" id="searchedTree" list = "sideBarTreeSearchResult" onkeypress="searchTreesByName()"><br>
+          <div class = "sideBarButton" onclick = "addTreeToUser()">Add</div>
+        </div>
+      </div>
+      <a class = "sideBarTitle">Search Users!</a>
+      <div class = "sideBarContent">
+        <div class = "sideBarSearch">
+          <input type ="text" value = "" id="searchedUser" list = "sideBarUserSearchResult" onkeypress="searchUsersByName()"><br>
+          <div class = "sideBarButton" onclick = "getPublicUserData()">Find</div>
+        </div>
+      </div>
+      <a class = "sideBarTitle">Your Trees</a>
+      <div class = "sideBarContent">
+        <div id = "treeList">
+        </div>
+      </div>
+    </div>
+
+    <div class = "canvas">
+      <canvas id = "pixiCanvas" style = "visibility: hidden;"></canvas>
+      <div id = "creator" style = "display: none;">
+          <center>
+          <p>The name of the new tree</p>
+          <p><input type = "text" id = "treeName"></p>
+          <p>Focus area of the new tree</p>
+          <p><select id = "focusarea">
+              <option value = "People">People</option>
+              <option value = "Engineering">Engineering</option>
+              <option value = "Business">Business</option>
+              <option value = "Communication">Communication</option>
+              <option value = "Support functions">Support functions</option>
+          </select></p>
+          <p>Serch for a skill</p>
+          <p><input type = "text" id = "skillSearch" list = "skillSearchResult" onkeypress="searchSkillsByName()"></p>
+          <p><input type = "button" id = "addToTree" value = "Add skill to tree"></p>
+          <p>OR</p>
+          <p><input type = "button" id = "createSkill" value = "Create skill"></p>
+          <p><input type = "button" id = "deleteFromList" value = "Delete selected"></p>
+          <p><select id = "skillList" size = "10">
+          </select></p>
+          <p><input type = "button" id = "createTree" value = "Create tree"></p>
+          </center>
+      </div>
+    </div>
+  </div>
+
+  <div id = "newSkillModal" class = "modal">
+      <div class = "modal-content">
+          <div class="modal-header">
+              <span class="modalClose" id = "closeSkillModal">&times;</span>
+              <h2>Create your own skill</h2>
+          </div>
+          <div class="modal-body">
+              <form onsubmit = "return false">
+                  Name:
+                  <input type = "text" id = "newSkillName" required><br>
+                  Description:
+                  <textarea id = "newSkillDesc" required></textarea><br>
+                  Icon:
+                  <input type = "text" id = "newSkillIcon" value = "pictures/icons/.png" required><br>
+                  Category:
+                  <select id = "newSkillCat"></select><br>
+                  Points:<br>
+                  <table id = "pointsTable" border = "1">
+                      <tr>
+                          <td>Point</td>
+                          <td>Description</td>
+                          <td>Delete</td>
+                      </tr>
+                      <tr>
+                          <td>1</td>
+                          <td><input size=50 type="text" id = "pointDesc" required></td>
+                          <td><input type="button" value="Delete" onclick="deleteRow('pointsTable', this)"></td>
+                      </tr>
+                  </table>
+                  <input type="button" value="Add point" onclick="addRow('pointsTable')"><br>
+                  Parents:<br>
+                  <table id = "parentsTable" border = "1">
+                      <tr>
+                          <td>Parent</td>
+                          <td>Delete</td>
+                      </tr>
+                      <tr>
+                          <td><input size=30 type="text" id = "parent" list = "skillSearchResult" onkeypress="searchSkillsByName()" required></td>
+                          <td><input type="button" value="Delete" onclick="deleteRow('parentsTable', this)"></td>
+                      </tr>
+                  </table>
+                  <input type="button" value="Add parent" onclick="addRow('parentsTable')"><br>
+                  Children:<br>
+                  <table id = "childrenTable" border = "1">
+                      <tr>
+                          <td>Child</td>
+                          <td>Min point</td>
+                          <td>Required</td>
+                          <td>Delete</td>
+                      </tr>
+                      <tr>
+                          <td><input size=30 type="text" id = "child" list = "skillSearchResult" onkeypress="searchSkillsByName()" required></td>
+                          <td><input size=10 type="text" id = "minPoint" required></td>
+                          <td><input size=50 type="checkbox" id = "required"></td>
+                          <td><input type="button" value="Delete" onclick="deleteRow('childrenTable', this)"></td>
+                      </tr>
+                  </table>
+                  <input type="button" value="Add child" onclick="addRow('childrenTable')"><br>
+                  Trainings:<br>
+                  <table id = "trainingsTable" border = "1">
+                      <tr>
+                          <td>Name</td>
+                          <td>Level</td>
+                          <td>Description</td>
+                          <td>URL</td>
+                          <td>Delete</td>
+                      </tr>
+                      <tr>
+                          <td><input size=30 type="text" required></td>
+                          <td><input size=10 type="text" required></td>
+                          <td><input size=30 type="text" required></td>
+                          <td><input size=30 type="text" required></td>
+                          <td><input type="button" value="Delete" onclick="deleteRow('trainingsTable', this)" required></td>
+                      </tr>
+                  </table>
+                  <input type="button" value="Add child" onclick="addRow('trainingsTable')"><br>
+                  Send for approve:
+                  <input type = "checkbox" id = "forApprove"><br>
+                  <input type = "submit" value = "Save" id = "saveSkillBtn">
+              </form>
+          </div>
+      </div>
+  </div>
+
+  <div id = "firstLogin" class = "modal">
+      <div class = "modal-content">
+          <div class="modal-header">
+              <h2>Set up your account</h2>
+          </div>
+          <div class="modal-body">
+              <h4>Please select your main skill tree!</h4>
+              <select id = "maintree"></select>
+              <div id = "teachingSettings">
+                  <br>
+                  <h4>Please specify your availability for teaching!</h4>
+                  On which day are you available for teching?
+                  <select id = "day">
+                     <option value = "Monday">Monday</option>
+                     <option value = "Tuesday">Tuesday</option>
+                     <option value = "Wednesday">Wednesday</option>
+                     <option value = "Thursday">Thursday</option>
+                     <option value = "Friday">Friday</option>
+                  </select><br>
+                  Timeslot when you are willing to teach on this day:
+                  <input type = "time" id = "timeStart"> - <input type = "time" id = "timeEnd"><br>
+                  Where can people find you?
+                  <input type = "text" id = "location"><br>
+             </div>
+             <br>
+             <input type = "button" value = "Save" id = "savebtn">
+          </div>
+      </div>
+  </div>
+
+  <div id = "skillpage" class = "modal">
+    <div class = "modal-content">
+        <div class="modal-header">
+            <span class="modalClose" id = "closeORModal">&times;</span>
+            <h2 id="skillnameHeader"></h2>
+        </div>
+        <div class="modal-body">
+            <div class = "divTable">
+                <div class= "divTableCaption">Trainings</div>
+                    <div class="divTableBody" id = "trainingTableBody">
+                        <div class="divTableRow">
+                            <div class="divTableHead"> Date </div>
+                            <div class="divTableHead"> Level </div>
+                            <div class="divTableHead"> Place</div>
+                            <div class="divTableHead"> Teacher</div>
+                        </div>
+                        <div class="divTableRow">
+                            <div class="divTableCell"> Data </div>
+                            <div class="divTableCell"> Data </div>
+                            <div class="divTableCell"> Data</div>
+                            <div class="divTableCell"> Data</div>
+                        </div>
+                    </div>
+
+            </div>
+
+
+
+            <div class = "divTable">
+                <div class= "divTableCaption">Offers</div>
+                    <div class="divTableBody" id = "offerTableBody">
+                        <div class="divTableRow">
+                            <div class="divTableHead"> Username </div>
+                            <div class="divTableHead"> Location</div>
+                            <div class="divTableHead"> Day </div>
+                            <div class="divTableHead"> Time</div>
+                            <div class="divTableHead"> Skill Level</div>
+                        </div>
+
+                        <div class="divTableRow">
+                            <div class="divTableCell"> Data </div>
+                            <div class="divTableCell"> Data </div>
+                            <div class="divTableCell"> Data</div>
+                            <div class="divTableCell"> Data</div>
+                        </div>
+                    </div>
+
+            </div>
+
+
+
+            <div class = "divTable">
+                <div class= "divTableCaption">Request</div>
+                    <div class="divTableBody" id = requestTableBody>
+                        <div class="divTableRow">
+                            <div class="divTableHead"> TODO </div>
+                            <div class="divTableHead"> TODO </div>
+                            <div class="divTableHead"> TODO</div>
+                            <div class="divTableHead"> TODO</div>
+                        </div>
+
+                        <div class="divTableRow">
+                            <div class="divTableCell"> Data </div>
+                            <div class="divTableCell"> Data </div>
+                            <div class="divTableCell"> Data</div>
+                            <div class="divTableCell"> Data</div>
+                        </div>
+                    </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+    <script src = "classes/link.js"></script>
+    <script src = "classes/itemcontainer.js"></script>
+    <script src = "classes/tree.js"></script>
+    <script src = "editor/classes/editoritemcontainer.js"></script>
+    <script src = "editor/classes/editortree.js"></script>
+    <script src = "editor/editor.js"></script>
+    <script src = "chartandtree.js"></script>
+</body>
+</html>

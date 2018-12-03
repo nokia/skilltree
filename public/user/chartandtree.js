@@ -17,7 +17,7 @@ dataRequest.send();
 var app = new PIXI.Application({
         view: pixiCanvas,
         width: window.innerWidth - 160,
-        height: window.innerHeight - 30,
+        height: window.innerHeight - 70,
         backgroundColor: 0x183693,
         antialias: true,
         autoStart: false,
@@ -95,7 +95,7 @@ function loadAddedTrees(){
   treeList.innerHTML = "";
   for (var i = 0; i < data.trees.length; i++) {
     var tn = data.trees[i].name;
-    var ithtree = document.createElement('div');
+    var ithtree = document.createElement('a');
     ithtree.innerHTML = tn;
     ithtree.className = "listedTree";
     ithtree.onclick = function() {
@@ -320,12 +320,12 @@ function showChart() {
     //app.stage.addChild(logo);
     chartContainer.addChild(logo);*/
 
-    chartContainer.position.set((window.innerWidth - 160) / 2, (window.innerHeight - 30) / 2);
+    chartContainer.position.set((window.innerWidth - 160) / 2, (window.innerHeight - 70) / 2);
     app.stage.addChild(chartContainer);
 
     // scale chart
     var ratio = chartContainer.width / chartContainer.height;
-    if (window.innerWidth - 160 < window.innerHeight - 30) {
+    if (window.innerWidth - 160 < window.innerHeight - 70) {
         chartContainer.width = window.innerWidth - 200;
         chartContainer.height = (window.innerWidth - 200) / ratio;
     } else {
