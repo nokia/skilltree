@@ -77,7 +77,22 @@ a {
   cursor: pointer;
 }
 
-.creator-grid {
+#creator .card {
+    width: 300px;
+}
+
+#creator .card * {
+    margin-left: 20px;
+}
+
+#creator .card h1 {
+    margin-left: 5px;
+}
+
+#creator .card input {
+    width: 70%;
+}
+/*.creator-grid {
     display: grid;
     grid-template-columns: auto auto auto auto;
     grid-column-gap: 20px;
@@ -92,7 +107,7 @@ a {
     padding-left: 10px;
 }
 
-/*.creator-column p {
+.creator-column p {
     margin-left: 20px;
 }
 
