@@ -401,6 +401,7 @@ setRoute.post('/getskill', async function (req, res) {
 			message: 'User not found.'
 		});
 	} else {
+        console.log(data.value);
         var skill = user.skills.find(obj => obj.name == data.value);
 
         if (skill == undefined) {
