@@ -417,11 +417,6 @@ setRoute.post('/getskill', async function (req, res) {
         	}
         }
 
-        var skill = await Skill.findOne({name: data.value} , function (err, skill) {
-    				if (err) throw err;
-    				return skill;
-    	});
-
     	var dependency = [];
     	await getDependency(user.skills, skill, dependency);
 
