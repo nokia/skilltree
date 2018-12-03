@@ -28,6 +28,7 @@ class ItemContainer {
         var description = new PIXI.Text(this.skill.description, {fontSize: descriptionFontSize, fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - detailsMargin * 2 });
         description.position.set(detailsMargin, detailsMargin * 2 + nameFontSize);
         detailsForeground.addChild(description);
+        detailsForeground.zOrder = 3;
 
         var btnG = new PIXI.Graphics();
         btnG.lineStyle(1, 0x888888);
@@ -112,7 +113,7 @@ class ItemContainer {
         this.container.addChild(this.tick);
         this.container.addChild(this.skillborder);
         this.container.addChild(this.skillborder.levelinfo);
-        this.container.zOrder = 1;
+        this.container.zOrder = 3;
 
         //Setting size, position of objects in container
         this.skillicon.anchor.set(0.5, 0.5);
@@ -228,7 +229,7 @@ class ItemContainer {
 
         // Brings up hovered container
         container.addChild(details);
-        container.zOrder = 0;
+        container.zOrder = 5;
 
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
 
