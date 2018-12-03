@@ -72,3 +72,8 @@ a {
 .nav-item{
   cursor: pointer;
 }
+
+.creator-grid {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}
