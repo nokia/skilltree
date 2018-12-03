@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src = "pixi/pixi.min.js"></script>
+    <script src = "pixi/pixi-extra-filters.js"></script>
+    <script src = "pixi/pixi-layers.js"></script>
+    <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+    	var isIE = /*@cc_on!@*/false || !!document.documentMode;
+    	var isEdge = !isIE && !!window.StyleMedia;
+    	if(isIE || isEdge){
+    		window.open('https://www.google.com/chrome/','_self');
+    	}
+    }, false);
+    </script>
+
+    <title>User Profile</title>
+  </head>
+  <body>
+
+  <!-- user profile card -->
+   <!-- <div class="card" style="width: 15rem;">
+     <img class="card-img-top img-thumbnail w-50 mx-auto" src="profile_img.jpg" alt="Card image cap">
+     <div class="card-body text-center">
+    <h5 class="card-title">User Name</h5>
+    <h6 class="card-subtitle mb-2 small font-italic">Webdeveloper - Level 2</h6>
+    <span class="badge badge-secondary w-30">3<br>trees</span>
+    <span class="badge badge-secondary w-30">10<br>skills</span>
+    <span class="badge badge-secondary w-30">570<br>point</span>
+     </div>
+   </div> -->
+   <!-- end of card -->
+
+   <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" >SKILLTREE</a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" id="openchart">Overview <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          My SkillTrees
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="treeList">
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Editor
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" >Add Skill</a>
+          <a class="dropdown-item" >Add Training Link</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" >Add SkillTree</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" onclick="logout">Logout</a>
+      </li>
+     <!--  <li class="nav-item">
+        <a class="nav-link disabled" >Disabled</a>
+      </li> -->
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+
+  <a class="nav-link" href="#userprofile" data-toggle="collapse" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <img src="./pictures/profile.png">
+            </a>
+
+</nav>
+<!-- end of navbar -->
+
+  <!-- user profile mini -->
+    <!-- <a class="navbar-brand btn" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" role="button">
+      <div class="card" style="width: 15rem;">
+      <img class="card-img-top img-thumbnail w-50 mx-auto" src="profile_img.jpg" alt="Card image cap">
+      <div class="card-body text-center">
+    <h5 class="card-title">User Name</h5>
+    <h6 class="card-subtitle mb-2 small font-italic">Webdeveloper - Level 2</h6>
+    <span class="badge badge-secondary w-30">3<br>trees</span>
+    <span class="badge badge-secondary w-30">10<br>skills</span>
+    <span class="badge badge-secondary w-30">570<br>points</span>
+      </div>
+    </div>
+      </a> -->
+    <!-- end of user profile mini -->
+
+   <!-- user profile details card -->
+   <div id="userprofile" class="collapse float-right">
+       <div class="card text-white bg-info mb-3">
+         <div class="card-header">User Profile</div>
+         <div class="card-body">
+            <!-- card nav -->
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="personal-tab" data-toggle="tab" href="#personal" role="tab" aria-controls="personal" aria-selected="true">Personal</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="trainings-tab" data-toggle="tab" href="#trainings" role="tab" aria-controls="trainings" aria-selected="false">Peer Learning</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="statistics-tab" data-toggle="tab" href="#statistics" role="tab" aria-controls="statistics" aria-selected="false">Statistics</a>
+                </li>
+
+            </ul>
+<!-- end of card nav -->
+<div class="tab-content" id="myTabContent">
+     <!-- personal-tab content -->
+      <div class="tab-pane fade show active" id="personal" role="tabpanel" aria-labelledby="personal-tab">
+          <form class="pt-4">
+                 <div class="form-group row">
+                    <label for="username" class="col-sm-3 col-form-label">User name</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="username" aria-describedby="emailHelp" placeholder="User name">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="exampleInputEmail1" class="col-sm-3 col-form-label">Email</label>
+                    <div class="col-sm-9">
+                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="user677@nokia.com">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="exampleInputEmail1" class="col-sm-3 col-form-label">Your place</label>
+                    <div class="col-sm-9">
+                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="WhereAreYou link">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-3 col-form-label">Password</label>
+                    <div class="col-sm-9">
+                      <input type="password" class="form-control" id="inputPassword" placeholder="****">
+                    </div>
+                  </div>
+            </form>
+      </div>
+      <!-- skilltrees-tab content -->
+      <div class="tab-pane fade" id="skilltrees" role="tabpanel" aria-labelledby="skilltrees-tab">
+          <h4 class="pt-4">Your Main Category</h4>
+          <h4 class="pt-4">Your SkillTrees</h4>
+          <h4 class="pt-4">Pick up new SkillTree</h4>
+      </div>
+      <!-- statistics-tab content -->
+      <div class="tab-pane fade" id="statistics" role="tabpanel" aria-labelledby="statistics-tab">...</div>
+      <!-- trainings-tab content -->
+      <div class="tab-pane fade" id="trainings" role="tabpanel" aria-labelledby="trainings-tab">
+          <h5>Your Requested Trainings</h5>
+          <p>details about your requested trainings</p>
+
+          <h5>Your Offered Trainings</h5>
+          <p>details about your offered trainings</p>
+          <p>days</p>
+          <p>timeslot</p>
+
+      </div>
+</div>
+
+
+         </div>
+       </div>
+   </div>
+
+   <div class = "canvas">
+     <canvas id = "pixiCanvas" style = "visibility: hidden;"></canvas>
+     <div id = "creator" style = "display: none;">
+         <center>
+         <p>The name of the new tree</p>
+         <p><input type = "text" id = "treeName"></p>
+         <p>Focus area of the new tree</p>
+         <p><select id = "focusarea">
+             <option value = "People">People</option>
+             <option value = "Engineering">Engineering</option>
+             <option value = "Business">Business</option>
+             <option value = "Communication">Communication</option>
+             <option value = "Support functions">Support functions</option>
+         </select></p>
+         <p>Serch for a skill</p>
+         <p><input type = "text" id = "skillSearch" list = "skillSearchResult" onkeypress="searchSkillsByName()"></p>
+         <p><input type = "button" id = "addToTree" value = "Add skill to tree"></p>
+         <p>OR</p>
+         <p><input type = "button" id = "createSkill" value = "Create skill"></p>
+         <p><input type = "button" id = "deleteFromList" value = "Delete selected"></p>
+         <p><select id = "skillList" size = "10">
+         </select></p>
+         <p><input type = "button" id = "createTree" value = "Create tree"></p>
+         </center>
+     </div>
+   </div>
+
+   <!-- end of user profile details card -->
+
+     <!-- <div class="card" style="width: 15rem;">
+     <img class="img-thumbnail float-left d-inline w-25 m-1 mr-3" src="profile_img.jpg" alt="Card image cap">
+            <h5 class="card-title">UserName</h5>
+            <h6 class="card-subtitle mb-2 text-white small font-italic">Webdeveloper - Level 2</h6>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      </div> -->
+
+
+      <!-- small id card -->
+
+    <!-- end of small ID card -->
+
+    <!-- junk ID card -->
+    <!-- <div class="card" style="width: 25rem;">
+        <img class="img-thumbnail float-left d-inline w-25 m-1 mr-3" src="profile_img.jpg" alt="Card image cap">
+        <h5 class="card-title d-inline">User Name</h5>
+        <h6 class="card-subtitle mb-2 small font-italic">Webdeveloper - Level 2</h6>
+
+        <div class="card-body text-center">
+            <span class="badge badge-secondary w-30">3<br>trees</span>
+            <span class="badge badge-secondary w-30">10<br>skills</span>
+            <span class="badge badge-secondary w-30">570<br>points</span>
+        </div>
+    </div> -->
+    <!-- end of junk ID -->
+
+
+
+
+    <!-- Optional JavaScript -->
+
+    <script src = "classes/link.js"></script>
+    <script src = "classes/itemcontainer.js"></script>
+    <script src = "classes/tree.js"></script>
+    <script src = "chartandtree.js"></script>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>
