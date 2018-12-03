@@ -92,7 +92,7 @@ a {
 }
 
 .creator-column * {
-    padding: 10px
+    margin-left: 10px;
 }
 
 /* MODAL STYLE */
