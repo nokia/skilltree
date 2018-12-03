@@ -81,6 +81,13 @@ a {
     width: 300px;
 }
 
+#creator .card * {
+    margin-left: 20px;
+}
+
+#creator .card h1 {
+    margin-left: 5px;
+}
 /*.creator-grid {
     display: grid;
     grid-template-columns: auto auto auto auto;
