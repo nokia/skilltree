@@ -17,7 +17,7 @@ dataRequest.send();
 var app = new PIXI.Application({
         view: pixiCanvas,
         width: window.innerWidth,
-        height: window.innerHeight - 70,
+        height: window.innerHeight - 64,
         backgroundColor: 0x183693,
         antialias: true,
         autoStart: false,
@@ -28,7 +28,6 @@ var app = new PIXI.Application({
 
 // get username from token and show it
 var tokenPayload = parseJwt(localStorage.getItem("loginToken"));
-document.getElementById("welcome").innerText = "Hello " + tokenPayload.username + "!";
 
 function checkFirstLogin() {
     if (data.mainTree != undefined) startLoader();
@@ -320,17 +319,17 @@ function showChart() {
     //app.stage.addChild(logo);
     chartContainer.addChild(logo);*/
 
-    chartContainer.position.set((window.innerWidth) / 2, (window.innerHeight - 70) / 2);
+    chartContainer.position.set((window.innerWidth) / 2, (window.innerHeight - 64) / 2);
     app.stage.addChild(chartContainer);
 
     // scale chart
     var ratio = chartContainer.width / chartContainer.height;
-    if (window.innerWidth < window.innerHeight - 70) {
+    if (window.innerWidth < window.innerHeight - 64) {
         chartContainer.width = window.innerWidth - 40;
         chartContainer.height = (window.innerWidth - 40) / ratio;
     } else {
-        chartContainer.width = (window.innerHeight - 70) * ratio;
-        chartContainer.height = window.innerHeight - 70;
+        chartContainer.width = (window.innerHeight - 64) * ratio;
+        chartContainer.height = window.innerHeight - 64;
     }
 
     //app.renderer.render(app.stage);
@@ -345,8 +344,8 @@ window.onresize = function () {
             chartContainer.width = window.innerWidth - 40;
             chartContainer.height = (window.innerWidth - 40) / ratio;
         } else {
-            chartContainer.width = (window.innerHeight - 70) * ratio;
-            chartContainer.height = window.innerHeight - 70;
+            chartContainer.width = (window.innerHeight - 64) * ratio;
+            chartContainer.height = window.innerHeight - 64;
         }
 
         chartContainer.position.set((window.innerWidth) / 2, (window.innerHeight - 30) / 2);
