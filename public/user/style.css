@@ -51,18 +51,16 @@ a {
 #userprofile {
     width: 35%!important;
     margin-right: 10px;
-    z-index: 2;
+    z-index: 3;
     position: relative;
 }
 
 .canvas{
   position: fixed;
-  overflow: visible;
   z-index: 1;
 }
 
 #pixiCanvas{
   position: fixed;
-  overflow: visible;
-  z-index: 1;
+  z-index: 2;
 }
