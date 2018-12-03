@@ -100,7 +100,7 @@ a {
 }
 
 .creator-column input select {
-    margin: 0 auto;
+    margin: auto;
     display: block;
 }
 
