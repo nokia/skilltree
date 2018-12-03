@@ -108,16 +108,18 @@ function searchUsersByName(){
   var userToSearch = {value: document.getElementById('searchedUser').value};
   var UserSearchResult = document.getElementById('UserSearchResult');
 
-  request('POST', '/set/searchUsersByName', userToSearch, function() {
-      if(this.readyState == 4 && this.status == 200) {
-        UserSearchResult.innerHTML = "";
-        for (var i = 0; i < this.response.length; i++) {
-          var mya = document.createElement('option');
-          mya.value = this.response[i].name;
-          UserSearchResult.appendChild(mya);
+  if (userToSearch !== "") {
+    request('POST', '/set/searchUsersByName', userToSearch, function() {
+        if(this.readyState == 4 && this.status == 200) {
+          UserSearchResult.innerHTML = "";
+          for (var i = 0; i < this.response.length; i++) {
+            var mya = document.createElement('option');
+            mya.value = this.response[i].name;
+            UserSearchResult.appendChild(mya);
+          }
         }
-      }
-  });
+    });
+  }
 }
 
 function getPublicUserData(){
