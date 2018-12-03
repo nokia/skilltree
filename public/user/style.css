@@ -85,6 +85,10 @@ a {
     align-items: center;
 }
 
+.creator-column {
+    border: 3px;
+    border-radius: 12px;
+
 /* MODAL STYLE */
 
 .modal {
