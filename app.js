@@ -302,7 +302,7 @@ setRoute.post('/searchSkillsByName', async function (req, res) {
         });
 
         user = user.toObject();
-        var foundUserSkills = user.skills.filter(obj => obj.name.match(new RegExp(".*a.*", "i")) != null);
+        var foundUserSkills = user.skills.filter(obj => obj.name.match(new RegExp(".*" + data.value + ".*", "i")) != null);
 
         var foundGlobalSkills = await Skill.find({
             "name": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
