@@ -24,6 +24,16 @@ var app = new PIXI.Application({
         autoResize: true
 });
 
+function init(){
+  var treeCount = document.getElementById('treeCount');
+  var skillCount = document.getElementById('skillCount');
+  var pointCount = document.getElementById('pointCount');
+
+  treeCount.innerHTML = data.trees.length + "<br>trees";
+  skillCount.innerHTML = data.skills.length + "<br>trees";
+  pointCount.innerHTML = data.skills.sum("achievedPoint") + "<br>points";
+}
+
 // TOP BAR
 
 // get username from token and show it
@@ -88,6 +98,7 @@ function checkFirstLogin() {
 }*/
 
 // ???
+
 
 function loadAddedTrees(){
   var treeList = document.getElementById('treeList');
