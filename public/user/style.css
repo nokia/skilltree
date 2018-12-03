@@ -91,6 +91,18 @@ a {
     border-radius: 12px;
 }
 
+.creator-column p {
+    margin-left: 20px;
+}
+
+.creator-column h1 {
+    margin-left: 10px;
+}
+
+.creator-column input select {
+    margin: 0 auto;
+}
+
 /* MODAL STYLE */
 
 .modal {
