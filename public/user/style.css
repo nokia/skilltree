@@ -77,7 +77,7 @@ a {
   cursor: pointer;
 }
 
-.creator-grid {
+/*.creator-grid {
     display: grid;
     grid-template-columns: auto auto auto auto;
     grid-column-gap: 20px;
@@ -92,7 +92,7 @@ a {
     padding-left: 10px;
 }
 
-/*.creator-column p {
+.creator-column p {
     margin-left: 20px;
 }
 
