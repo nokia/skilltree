@@ -124,7 +124,7 @@ class ItemContainer {
         this.skillicon.position.set(38.5, 38.5);
         this.skillborder.position.set(38.5, 38.5);
 
-        this.skillborder.levelinfo.position.set(61.5, 64);
+        this.skillborder.levelinfo.position.set(60, 62);
         this.skillborder.levelinfo.style.fill = 0xFFFFFF;
 
         this.details.position.set(74, 0);
