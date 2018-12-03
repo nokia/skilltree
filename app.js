@@ -291,7 +291,7 @@ setRoute.post('/searchTreesByName', async function (req, res) {
 });
 
 // Search for skills to add while typing
-setRoute.post('/searchSkillsByName', async function (req, res) { // should search first for user skills
+setRoute.post('/searchSkillsByName', async function (req, res) {
 		var data = req.body;
 
         var user = await User.findOne({
@@ -303,7 +303,6 @@ setRoute.post('/searchSkillsByName', async function (req, res) { // should searc
 
         user = user.toObject();
         var foundUserSkills = user.skills.filter(obj => obj.name.match(new RegExp(".*a.*", "i")) != null);
-        console.log(foundUserSkills);
 
         var foundGlobalSkills = await Skill.find({
             "name": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
@@ -423,7 +422,7 @@ setRoute.post('/getskill', async function (req, res) {
     	});
 
     	var dependency = [];
-    	await getDependency(skill, dependency);
+    	await getDependency(user.skills, skill, dependency);
 
     	res.json({
     		success: true,
@@ -433,20 +432,24 @@ setRoute.post('/getskill', async function (req, res) {
     }
 });
 
-async function getDependency (skill, dependency) { // should search first for user skills
+async function getDependency (userSkills, skill, dependency) {
 	var parents = [];
 	for (var i = 0; skill.parents != undefined && i < skill.parents.length; ++i) {
-		var parent = await Skill.findOne({name: skill.parents[i]} , function (err, skill) {
-						if (err) throw err;
-						return skill;
-		});
+        var parent = userSkills.filter(obj => obj.name == skill.parents[i]);
+
+        if (parent == undefined) {
+            parent = await Skill.findOne({name: skill.parents[i]} , function (err, skill) {
+                if (err) throw err;
+                return skill;
+            });
+        }
 
 		parents.push(parent);
 		dependency.push(parent);
 	}
 
 	for (var i = 0; i < parents.length; ++i) {
-		await getDependency(parents[i], dependency);
+		await getDependency(userSkills, parents[i], dependency);
 	}
 }
 
