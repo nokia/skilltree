@@ -97,7 +97,7 @@ function loadAddedTrees(){
     var tn = data.trees[i].name;
     var ithtree = document.createElement('a');
     ithtree.innerHTML = tn;
-    ithtree.className = "listedTree";
+    ithtree.className = "dropdown-item";
     ithtree.onclick = function() {
       showTree(this.innerHTML);
     }
