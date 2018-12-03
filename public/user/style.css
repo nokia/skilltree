@@ -56,3 +56,7 @@ a {
 .canvas{
   position: fixed;
 }
+
+#pixiCanvas{
+  position: fixed;
+}
