@@ -50,14 +50,11 @@ a {
 
 #userprofile {
     width: 35%!important;
-    margin-right: 10px;
     z-index: 100;
     position: relative;
 }
 
 #userCard {
-    width: 35%!important;
-    margin-right: 10px;
     z-index: 100;
     position: relative;
 }
