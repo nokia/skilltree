@@ -78,7 +78,7 @@
       </li> -->
     </ul>
     <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchedUser" onkeyup="searchUsersByName()">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchedUser" onkeyup="searchUsersByName()" list="UserSearchResult">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="getPublicUserData()">Search</button>
     </form>
   </div>
@@ -203,35 +203,35 @@
    </div>
 
      <canvas id = "pixiCanvas" style = "visibility: hidden;"></canvas>
-         <div id = "creator"  class = "creator-grid" style = "display: none;">
-             <div>
-                 <p>The name of the new tree</p>
-                 <p><input type = "text" id = "treeName"></p>
-                 <p>Focus area of the new tree</p>
-                 <p><select id = "focusarea">
-                     <option value = "People">People</option>
-                     <option value = "Engineering">Engineering</option>
-                     <option value = "Business">Business</option>
-                     <option value = "Communication">Communication</option>
-                     <option value = "Support functions">Support functions</option>
-                 </select></p>
-             </div>
-             <div>
-                 <p>Serch for a skill</p>
-                 <p><input type = "text" id = "skillSearch" list = "skillSearchResult" onkeypress="searchSkillsByName()"></p>
-                 <p><input type = "button" id = "addToTree" value = "Add skill to tree"></p>
-                 <p>OR</p>
-                 <p><input type = "button" id = "createSkill" value = "Create skill"></p>
-             </div>
-             <div>
-                 <p><input type = "button" id = "deleteFromList" value = "Delete selected"></p>
-                 <p><select id = "skillList" size = "10">
-                 </select></p>
-             </div>
-             <div>
-                 <p><input type = "button" id = "createTree" value = "Create tree"></p>
-             </div>
-         </div>
+     <div id = "creator"  class = "creator-grid" style = "display: none;">
+        <div>
+            <p>The name of the new tree</p>
+            <p><input type = "text" id = "treeName"></p>
+            <p>Focus area of the new tree</p>
+            <p><select id = "focusarea">
+                <option value = "People">People</option>
+                <option value = "Engineering">Engineering</option>
+                <option value = "Business">Business</option>
+                <option value = "Communication">Communication</option>
+                <option value = "Support functions">Support functions</option>
+            </select></p>
+        </div>
+        <div>
+            <p>Serch for a skill</p>
+            <p><input type = "text" id = "skillSearch" list = "skillSearchResult" onkeypress="searchSkillsByName()"></p>
+            <p><input type = "button" id = "addToTree" value = "Add skill to tree"></p>
+            <p>OR</p>
+            <p><input type = "button" id = "createSkill" value = "Create skill"></p>
+        </div>
+        <div>
+            <p><input type = "button" id = "deleteFromList" value = "Delete selected"></p>
+            <p><select id = "skillList" size = "10">
+            </select></p>
+        </div>
+        <div>
+            <p><input type = "button" id = "createTree" value = "Create tree"></p>
+        </div>
+      </div>
 
 
       <div id = "skillpage" class = "modal">
