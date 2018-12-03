@@ -69,7 +69,7 @@ a {
 }
 
 #treeList{
-  max-height: 50%;
+  max-height: 400px;
   overflow-y: auto;
 }
 
