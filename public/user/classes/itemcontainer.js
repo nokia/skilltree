@@ -120,8 +120,8 @@ class ItemContainer {
         this.skillborder.anchor.set(0.5, 0.5);
         this.skillborder.levelinfo.anchor.set(0.5,0.5);
 
-        this.skillicon.position.set(60, 60);
-        this.skillborder.position.set(60, 60);
+        this.skillicon.position.set(38.5, 38.5);
+        this.skillborder.position.set(38.5, 38.5);
 
         this.skillborder.levelinfo.position.set(96, 100);
         this.skillborder.levelinfo.scale.set(0.6);
