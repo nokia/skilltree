@@ -59,3 +59,8 @@ a {
   position: fixed;
   z-index: 1;
 }
+
+.dropdown-menu{
+  max-height: 800px;
+  overflow-y: auto;
+}
