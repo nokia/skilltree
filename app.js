@@ -296,7 +296,7 @@ setRoute.post('/searchSkillsByName', async function (req, res) { // should searc
 
         var user = await User.find({
             username: req.decoded.username,
-            skills.name: {$regex : ".*" + data.value + ".*", '$options' : 'i'}
+            "skills.name": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
         }, function(err, user) {
             if (err) throw err;
     		return user;
