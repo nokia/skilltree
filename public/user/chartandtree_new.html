@@ -103,9 +103,9 @@
       </div>
 
       <div class="card-body">
-          <span class="badge badge-secondary w-30">3<br>trees</span>
-          <span class="badge badge-secondary w-30">10<br>skills</span>
-          <span class="badge badge-secondary w-30">570<br>points</span>
+          <span class="badge badge-secondary w-30" id="treeCount">3</span>
+          <span class="badge badge-secondary w-30" id="skillCount"></span>
+          <span class="badge badge-secondary w-30" id="pointCount"></span>
       </div>
   </div>
 </div>
@@ -204,8 +204,7 @@
 
      <canvas id = "pixiCanvas" style = "visibility: hidden;"></canvas>
      <div id = "creator"  class = "creator-grid" style = "display: none;">
-        <div class = "creator-column">
-            <h1>1.</h1>
+        <div>
             <p>The name of the new tree</p>
             <p><input type = "text" id = "treeName"></p>
             <p>Focus area of the new tree</p>
@@ -217,22 +216,19 @@
                 <option value = "Support functions">Support functions</option>
             </select></p>
         </div>
-        <div class = "creator-column">
-            <h1>2.</h1>
+        <div>
             <p>Serch for a skill</p>
             <p><input type = "text" id = "skillSearch" list = "skillSearchResult" onkeypress="searchSkillsByName()"></p>
             <p><input type = "button" id = "addToTree" value = "Add skill to tree"></p>
             <p>OR</p>
             <p><input type = "button" id = "createSkill" value = "Create skill"></p>
         </div>
-        <div class = "creator-column">
-            <h1>3.</h1>
+        <div>
             <p><input type = "button" id = "deleteFromList" value = "Delete selected"></p>
             <p><select id = "skillList" size = "10">
             </select></p>
         </div>
-        <div class = "creator-column">
-            <h1>4.</h1>
+        <div>
             <p><input type = "button" id = "createTree" value = "Create tree"></p>
         </div>
       </div>
