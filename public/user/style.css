@@ -89,9 +89,10 @@ a {
 .creator-column {
     border: 3px solid black;
     border-radius: 12px;
+    padding: 20px;
 }
 
-.creator-column p {
+/*.creator-column p {
     margin-left: 20px;
 }
 
@@ -102,7 +103,7 @@ a {
 .creator-column input select {
     margin: auto;
     display: block;
-}
+}*/
 
 /* MODAL STYLE */
 
