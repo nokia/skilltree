@@ -60,7 +60,7 @@ a {
 
 #userCard {
     z-index: 100;
-    position: relative;
+    position: fixed;
 }
 
 #pixiCanvas{
