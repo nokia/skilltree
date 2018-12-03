@@ -44,6 +44,10 @@ a {
     border-color: #346134;
 }
 
+.card{
+  position: relative;
+}
+
 .card-body {
     padding: 0.5rem;
 }
@@ -56,7 +60,7 @@ a {
 
 #userCard {
     z-index: 100;
-    position: relative;
+    position: fixed;
 }
 
 #pixiCanvas{
