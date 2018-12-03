@@ -78,7 +78,7 @@ a {
 }
 
 #creator .card {
-    width: 400px;
+    width: 300px;
 }
 
 #creator .card * {
@@ -87,6 +87,10 @@ a {
 
 #creator .card h1 {
     margin-left: 5px;
+}
+
+#creator .card input {
+    width: 70%;
 }
 /*.creator-grid {
     display: grid;
