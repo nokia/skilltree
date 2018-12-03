@@ -80,8 +80,8 @@ a {
 .creator-grid {
     display: grid;
     grid-template-columns: auto auto auto auto;
-    min-height: 100%;
-    min-height: 100vh;
+    min-height: 100% - 64px;
+    min-height: 100vh - 64px;
     align-items: center;
 }
 
