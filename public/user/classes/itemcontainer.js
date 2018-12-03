@@ -10,8 +10,7 @@ class ItemContainer {
         this.tick = new PIXI.Sprite(PIXI.loader.resources["pictures/tick.png"].texture);
 
         //Setting border variables
-        this.skillborder.levelinfo = new PIXI.Text(this.skill.achievedPoint + "/" + this.skill.maxPoint, {fontSize: 20});
-        this.skillborder.levelinfo.resolution = 4;
+        this.skillborder.levelinfo = new PIXI.Text(this.skill.achievedPoint + "/" + this.skill.maxPoint, {fontSize: 12});
 
         //Creating details page
         var detailsWidth = 240;
@@ -119,13 +118,12 @@ class ItemContainer {
         //Setting size, position of objects in container
         this.skillicon.anchor.set(0.5, 0.5);
         this.skillborder.anchor.set(0.5, 0.5);
-        this.skillborder.levelinfo.anchor.set(0.5,0.5);
+        this.skillborder.levelinfo.anchor.set(0.5, 0.5);
 
         this.skillicon.position.set(38.5, 38.5);
         this.skillborder.position.set(38.5, 38.5);
 
         this.skillborder.levelinfo.position.set(61.5, 64);
-        this.skillborder.levelinfo.scale.set(0.6);
         this.skillborder.levelinfo.style.fill = 0xFFFFFF;
 
         this.details.position.set(74, 0);
@@ -137,8 +135,8 @@ class ItemContainer {
         } else this.tick.alpha = 0;
 
 
-        this.tick.anchor.set(0.5,0.5);
-        this.tick.position.set(60,60);
+        this.tick.anchor.set(0.5, 0.5);
+        this.tick.position.set(38.5, 38.5);
 
         //Adding events
         this.skillborder.interactive = true;
