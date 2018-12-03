@@ -591,6 +591,7 @@ setRoute.post('/newskill', async function(req, res) {
             description: data.description,
             skillIcon: data.skillIcon,
             categoryName: data.categoryName,
+            achievedPoint: 0,
             maxPoint: data.maxPoint,
             pointDescription: data.pointDescription,
             parents: data.parents,
