@@ -301,6 +301,7 @@ setRoute.post('/searchSkillsByName', async function (req, res) { // should searc
     		return user;
         });
 
+        user = user.toObject();
         var foundUserSkills = user.skills.filter(obj => obj.name.match("/.*" + data.value + ".*/i"));
         console.log(foundUserSkills);
 
