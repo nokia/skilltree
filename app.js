@@ -401,7 +401,6 @@ setRoute.post('/getskill', async function (req, res) {
 			message: 'User not found.'
 		});
 	} else {
-        console.log(user.skills);
         var skill = user.skills.find(obj => obj.name == data.value);
 
         if (skill == undefined) {
@@ -417,11 +416,6 @@ setRoute.post('/getskill', async function (req, res) {
         	}
         }
 
-        var skill = await Skill.findOne({name: data.value} , function (err, skill) {
-    				if (err) throw err;
-    				return skill;
-    	});
-
     	var dependency = [];
     	await getDependency(user.skills, skill, dependency);
 
@@ -436,7 +430,7 @@ setRoute.post('/getskill', async function (req, res) {
 async function getDependency (userSkills, skill, dependency) {
 	var parents = [];
 	for (var i = 0; skill.parents != undefined && i < skill.parents.length; ++i) {
-        var parent = userSkills.filter(obj => obj.name == skill.parents[i]);
+        var parent = userSkills.find(obj => obj.name == skill.parents[i]);
 
         if (parent == undefined) {
             parent = await Skill.findOne({name: skill.parents[i]} , function (err, skill) {
