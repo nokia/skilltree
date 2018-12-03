@@ -315,7 +315,6 @@ setRoute.post('/searchSkillsByName', async function (req, res) { // should searc
             resSkills[i] = {name: foundSkills[i].name};
         }
         res.json(resSkills);
-    }
 });
 
 setRoute.post('/getPublicUserData', async function (req, res) {
