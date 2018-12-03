@@ -127,7 +127,7 @@ class ItemContainer {
         this.skillborder.levelinfo.scale.set(0.6);
         this.skillborder.levelinfo.style.fill = 0xFFFFFF;
 
-        this.details.position.set(116, 0);
+        this.details.position.set(74, 0);
 
         // if it's already maxed out add the tick
         if (this.skill.achievedPoint == this.skill.maxPoint) {
