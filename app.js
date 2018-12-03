@@ -295,24 +295,27 @@ setRoute.post('/searchSkillsByName', async function (req, res) { // should searc
 		var data = req.body;
 
         var user = await User.find({
-            username: req.decoded.username,
-            "skills.name": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
+            username: req.decoded.username
         }, function(err, user) {
             if (err) throw err;
     		return user;
         });
 
-        console.log(user);
+        var foundUserSkills = user.skills.filter(obj => obj.name.match("/.*" + data.value + ".*/i"));
 
-        var foundSkills = await Skill.find({
+        var foundGlobalSkills = await Skill.find({
             "name": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
         }, function (err, skills) {
             if (err) throw err;
             return skills;
         });
+
         var resSkills = [];
-        for (var i = 0; i < foundSkills.length; i++) {
-            resSkills[i] = {name: foundSkills[i].name};
+        for (var i = 0; foundUserSkills != undefined && i < foundUserSkills.length; i++) {
+            resSkills.push({name: foundUserSkills[i].name});
+        }
+        for (var i = 0; i < foundGlobalSkills.length; i++) {
+            if (resSkills.find(obj => obj == foundGlobalSkills[i].name) == undefined) resSkills[i] = {name: foundGlobalSkills[i].name};
         }
         res.json(resSkills);
 });
