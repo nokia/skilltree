@@ -100,8 +100,8 @@ a {
 }
 
 .creator-column input select {
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
+    display: block;
 }
 
 /* MODAL STYLE */
