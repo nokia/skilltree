@@ -23,7 +23,7 @@ var app = new PIXI.Application({
         width: window.innerWidth,
         height: window.innerHeight - 64,
         backgroundColor: 0x183693,
-        antialias: false,
+        antialias: true,
         autoStart: false,
         autoResize: true
 });
