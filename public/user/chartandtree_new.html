@@ -206,30 +206,32 @@
      <div id = "creator"  class = "creator-grid" style = "display: none;">
         <div>
             <p>The name of the new tree</p>
-            <p><input type = "text" id = "treeName"></p>
+            <input type = "text" id = "treeName">
             <p>Focus area of the new tree</p>
-            <p><select id = "focusarea">
+            <select id = "focusarea">
                 <option value = "People">People</option>
                 <option value = "Engineering">Engineering</option>
                 <option value = "Business">Business</option>
                 <option value = "Communication">Communication</option>
                 <option value = "Support functions">Support functions</option>
-            </select></p>
+            </select>
         </div>
         <div>
             <p>Serch for a skill</p>
-            <p><input type = "text" id = "skillSearch" list = "skillSearchResult" onkeypress="searchSkillsByName()"></p>
-            <p><input type = "button" id = "addToTree" value = "Add skill to tree"></p>
+            <input type = "text" id = "skillSearch" list = "skillSearchResult" onkeypress="searchSkillsByName()">
+            <input type = "button" id = "addToTree" value = "Add skill to tree">
             <p>OR</p>
-            <p><input type = "button" id = "createSkill" value = "Create skill"></p>
+            <input type = "button" id = "createSkill" value = "Create skill">
         </div>
-        <div>
-            <p><input type = "button" id = "deleteFromList" value = "Delete selected"></p>
-            <p><select id = "skillList" size = "10">
-            </select></p>
+        <div class = "creator-column">
+            <h1>3.</h1>
+            <input type = "button" id = "deleteFromList" value = "Delete selected">
+            <select id = "skillList" size = "10">
+            </select>
         </div>
-        <div>
-            <p><input type = "button" id = "createTree" value = "Create tree"></p>
+        <div class = "creator-column">
+            <h1>4.</h1>
+            <input type = "button" id = "createTree" value = "Create tree">
         </div>
       </div>
 
