@@ -152,6 +152,8 @@ class ItemContainer {
         this.container
             .on('pointerover', this.onButtonOver)
             .on('pointerout', this.onButtonOut);
+
+        this.container.scale.set(.7);
     }
 
 
