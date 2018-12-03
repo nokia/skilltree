@@ -16,7 +16,7 @@ dataRequest.send();
 
 var app = new PIXI.Application({
         view: pixiCanvas,
-        width: window.innerWidth - 160,
+        width: window.innerWidth,
         height: window.innerHeight - 70,
         backgroundColor: 0x183693,
         antialias: true,
@@ -320,14 +320,14 @@ function showChart() {
     //app.stage.addChild(logo);
     chartContainer.addChild(logo);*/
 
-    chartContainer.position.set((window.innerWidth - 160) / 2, (window.innerHeight - 70) / 2);
+    chartContainer.position.set((window.innerWidth) / 2, (window.innerHeight - 70) / 2);
     app.stage.addChild(chartContainer);
 
     // scale chart
     var ratio = chartContainer.width / chartContainer.height;
-    if (window.innerWidth - 160 < window.innerHeight - 70) {
-        chartContainer.width = window.innerWidth - 200;
-        chartContainer.height = (window.innerWidth - 200) / ratio;
+    if (window.innerWidth < window.innerHeight - 70) {
+        chartContainer.width = window.innerWidth - 40;
+        chartContainer.height = (window.innerWidth - 40) / ratio;
     } else {
         chartContainer.width = (window.innerHeight - 70) * ratio;
         chartContainer.height = window.innerHeight - 70;
@@ -337,19 +337,19 @@ function showChart() {
 }
 
 window.onresize = function () {
-    app.renderer.resize(window.innerWidth - 160, window.innerHeight - 30);
+    app.renderer.resize(window.innerWidth, window.innerHeight - 30);
 
     if (chartContainer != undefined) {
         var ratio = chartContainer.width / chartContainer.height;
-        if (window.innerWidth - 160 < window.innerHeight - 30) {
-            chartContainer.width = window.innerWidth - 200;
-            chartContainer.height = (window.innerWidth - 200) / ratio;
+        if (window.innerWidth < window.innerHeight - 30) {
+            chartContainer.width = window.innerWidth - 40;
+            chartContainer.height = (window.innerWidth - 40) / ratio;
         } else {
             chartContainer.width = (window.innerHeight - 70) * ratio;
             chartContainer.height = window.innerHeight - 70;
         }
 
-        chartContainer.position.set((window.innerWidth - 160) / 2, (window.innerHeight - 30) / 2);
+        chartContainer.position.set((window.innerWidth) / 2, (window.innerHeight - 30) / 2);
     }
 
     if (tree != undefined) {
