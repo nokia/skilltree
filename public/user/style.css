@@ -82,3 +82,44 @@ a {
     grid-template-columns: auto auto auto auto;
     top: 50px;
 }
+
+/* TABLE STYLE */
+
+.divTable{
+	display: table;
+	width: 100%;
+  margin-bottom: 30px;
+}
+
+.divTableCaption {
+  width: inherit;
+  display: table-caption;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+}
+
+.divTableRow {
+  display: table-row;
+  width: 100%;
+}
+
+.divTableCell {
+	border: 1px solid #999999;
+	display: table-cell;
+  padding: 3px 10px;
+  width: 25%;
+}
+.divTableHead {
+  border: 1px solid #000000;
+	display: table-cell;
+  padding: 3px 10px;
+  font-weight: bold;
+  text-align: center;
+  width: 25%;
+}
+
+.divTableBody {
+  display: table-row-group;
+  width: inherit;
+}
