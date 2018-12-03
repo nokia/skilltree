@@ -294,6 +294,8 @@ setRoute.post('/searchTreesByName', async function (req, res) {
 setRoute.post('/searchSkillsByName', async function (req, res) { // should search first for user skills
 		var data = req.body;
 
+        console.log(data.value);
+
         var user = await User.findOne({
             username: req.decoded.username
         }, function(err, user) {
@@ -303,7 +305,6 @@ setRoute.post('/searchSkillsByName', async function (req, res) { // should searc
 
         user = user.toObject();
         var foundUserSkills = user.skills.filter(obj => obj.name == data.value);
-        console.log(user.skills);
         console.log(foundUserSkills);
 
         var foundGlobalSkills = await Skill.find({
