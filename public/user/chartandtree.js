@@ -625,6 +625,7 @@ function create() {
 
 function searchSkillsByName(){
     var skillToSearch = {value: document.getElementById('skillSearch').value};
+    console.log(skillToSearch);
     var skillSearchResult = document.getElementById('skillSearchResult');
     request('POST', '/set/searchSkillsByName', skillToSearch, function () {
         if (this.readyState == 4 && this.status == 200) {
