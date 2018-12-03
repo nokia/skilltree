@@ -80,7 +80,9 @@ a {
 .creator-grid {
     display: grid;
     grid-template-columns: auto auto auto auto;
-    top: 50px;
+    min-height: 100%;
+    min-height: 100vh;
+    align-items: center;
 }
 
 /* TABLE STYLE */
@@ -122,12 +124,4 @@ a {
 .divTableBody {
   display: table-row-group;
   width: inherit;
-}
-
-.vertical-center {
-  min-height: 100%;
-  min-height: 100vh;
-
-  display: flex;
-  align-items: center;
 }
