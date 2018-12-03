@@ -24,14 +24,18 @@ var app = new PIXI.Application({
         autoResize: true
 });
 
-function init(){
+function initCard(){
   var treeCount = document.getElementById('treeCount');
   var skillCount = document.getElementById('skillCount');
   var pointCount = document.getElementById('pointCount');
+  var cardUserName = document.getElementById('cardUserName');
+  var cardMainTree = document.getElementById('cardMainTree');
 
   treeCount.innerHTML = data.trees.length + "<br>trees";
   skillCount.innerHTML = data.skills.length + "<br>skills";
   pointCount.innerHTML = data.skills.sum("achievedPoint") + "<br>points";
+  cardUserName.innerHTML = data.username;
+  cardMainTree.innerHTML = data.mainTree;
 }
 
 // TOP BAR
