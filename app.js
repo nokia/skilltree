@@ -293,17 +293,29 @@ setRoute.post('/searchTreesByName', async function (req, res) {
 // Search for skills to add while typing
 setRoute.post('/searchSkillsByName', async function (req, res) { // should search first for user skills
 		var data = req.body;
-		var foundSkills = await Skill.find({
-					"name": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
-			}, function (err, skills) {
-					if (err) throw err;
-					return skills;
-		});
-		var resSkills = [];
-		for (var i = 0; i < foundSkills.length; i++) {
-			resSkills[i] = {name: foundSkills[i].name};
-		}
-		res.json(resSkills);
+
+        var user = await User.find({
+            username: req.decoded.username,
+            skills.name: {$regex : ".*" + data.value + ".*", '$options' : 'i'}
+        }, function(err, user) {
+            if (err) throw err;
+    		return user;
+        });
+
+        console.log(user);
+
+        var foundSkills = await Skill.find({
+            "name": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
+        }, function (err, skills) {
+            if (err) throw err;
+            return skills;
+        });
+        var resSkills = [];
+        for (var i = 0; i < foundSkills.length; i++) {
+            resSkills[i] = {name: foundSkills[i].name};
+        }
+        res.json(resSkills);
+    }
 });
 
 setRoute.post('/getPublicUserData', async function (req, res) {
