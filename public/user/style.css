@@ -55,14 +55,7 @@ a {
     position: relative;
 }
 
-.canvas{
-  position: fixed;
-  overflow: visible;
-  z-index: 1;
-}
-
 #pixiCanvas{
   position: fixed;
-  overflow: visible;
   z-index: 1;
 }
