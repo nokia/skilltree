@@ -17,18 +17,27 @@ dataRequest.send();
 var app = new PIXI.Application({
         view: pixiCanvas,
         width: window.innerWidth,
-        height: window.innerHeight - 70,
+        height: window.innerHeight - 64,
         backgroundColor: 0x183693,
         antialias: true,
         autoStart: false,
         autoResize: true
 });
 
+function init(){
+  var treeCount = document.getElementById('treeCount');
+  var skillCount = document.getElementById('skillCount');
+  var pointCount = document.getElementById('pointCount');
+
+  treeCount.innerHTML = data.trees.length + "<br>trees";
+  skillCount.innerHTML = data.skills.length + "<br>skills";
+  pointCount.innerHTML = data.skills.sum("achievedPoint") + "<br>points";
+}
+
 // TOP BAR
 
 // get username from token and show it
 var tokenPayload = parseJwt(localStorage.getItem("loginToken"));
-document.getElementById("welcome").innerText = "Hello " + tokenPayload.username + "!";
 
 function checkFirstLogin() {
     if (data.mainTree != undefined) startLoader();
@@ -107,18 +116,20 @@ function loadAddedTrees(){
 
 function searchUsersByName(){
   var userToSearch = {value: document.getElementById('searchedUser').value};
-  var sideBarUserSearchResult = document.getElementById('sideBarUserSearchResult');
+  var UserSearchResult = document.getElementById('UserSearchResult');
 
-  request('POST', '/set/searchUsersByName', userToSearch, function() {
-      if(this.readyState == 4 && this.status == 200) {
-        sideBarUserSearchResult.innerHTML = "";
-        for (var i = 0; i < this.response.length; i++) {
-          var mya = document.createElement('option');
-          mya.value = this.response[i].name;
-          sideBarUserSearchResult.appendChild(mya);
+  if (userToSearch !== "") {
+    request('POST', '/set/searchUsersByName', userToSearch, function() {
+        if(this.readyState == 4 && this.status == 200) {
+          UserSearchResult.innerHTML = "";
+          for (var i = 0; i < this.response.length; i++) {
+            var mya = document.createElement('option');
+            mya.value = this.response[i].name;
+            UserSearchResult.appendChild(mya);
+          }
         }
-      }
-  });
+    });
+  }
 }
 
 function getPublicUserData(){
@@ -320,17 +331,17 @@ function showChart() {
     //app.stage.addChild(logo);
     chartContainer.addChild(logo);*/
 
-    chartContainer.position.set((window.innerWidth) / 2, (window.innerHeight - 70) / 2);
+    chartContainer.position.set((window.innerWidth) / 2, (window.innerHeight - 64) / 2);
     app.stage.addChild(chartContainer);
 
     // scale chart
     var ratio = chartContainer.width / chartContainer.height;
-    if (window.innerWidth < window.innerHeight - 70) {
+    if (window.innerWidth < window.innerHeight - 64) {
         chartContainer.width = window.innerWidth - 40;
         chartContainer.height = (window.innerWidth - 40) / ratio;
     } else {
-        chartContainer.width = (window.innerHeight - 70) * ratio;
-        chartContainer.height = window.innerHeight - 70;
+        chartContainer.width = (window.innerHeight - 64) * ratio;
+        chartContainer.height = window.innerHeight - 64;
     }
 
     //app.renderer.render(app.stage);
@@ -345,8 +356,8 @@ window.onresize = function () {
             chartContainer.width = window.innerWidth - 40;
             chartContainer.height = (window.innerWidth - 40) / ratio;
         } else {
-            chartContainer.width = (window.innerHeight - 70) * ratio;
-            chartContainer.height = window.innerHeight - 70;
+            chartContainer.width = (window.innerHeight - 64) * ratio;
+            chartContainer.height = window.innerHeight - 64;
         }
 
         chartContainer.position.set((window.innerWidth) / 2, (window.innerHeight - 30) / 2);
