@@ -30,7 +30,7 @@ function init(){
   var pointCount = document.getElementById('pointCount');
 
   treeCount.innerHTML = data.trees.length + "<br>trees";
-  skillCount.innerHTML = data.skills.length + "<br>trees";
+  skillCount.innerHTML = data.skills.length + "<br>skills";
   pointCount.innerHTML = data.skills.sum("achievedPoint") + "<br>points";
 }
 
