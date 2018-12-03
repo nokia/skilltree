@@ -113,7 +113,7 @@ class ItemContainer {
         this.container.addChild(this.tick);
         this.container.addChild(this.skillborder);
         this.container.addChild(this.skillborder.levelinfo);
-        this.container.zOrder = 2;
+        this.container.zOrder = 3;
 
         //Setting size, position of objects in container
         this.skillicon.anchor.set(0.5, 0.5);
@@ -229,7 +229,7 @@ class ItemContainer {
 
         // Brings up hovered container
         container.addChild(details);
-        container.zOrder = 1;
+        container.zOrder = 5;
 
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
 
@@ -245,7 +245,7 @@ class ItemContainer {
         var container = this;
 
         container.removeChild(details);
-        container.zOrder = 2;
+        container.zOrder = 1;
 
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
 
