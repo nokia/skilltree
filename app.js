@@ -440,8 +440,6 @@ async function getDependency (userSkills, skill, dependency) {
             });
         }
 
-        console.log(parent);
-
 		parents.push(parent);
 		dependency.push(parent);
 	}
