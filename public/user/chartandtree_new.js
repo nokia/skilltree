@@ -452,7 +452,7 @@ function create() {
     canvas.style.display = "none";
 
     var creator = document.getElementById("creator");
-    creator.style.display = "block";
+    creator.style.display = "grid";
 
     document.getElementById("openCreator").value = "Close Creator";
     document.getElementById("openCreator").onclick = function() {
