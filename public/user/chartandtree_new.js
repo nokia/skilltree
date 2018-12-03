@@ -106,15 +106,15 @@ function loadAddedTrees(){
 
 function searchUsersByName(){
   var userToSearch = {value: document.getElementById('searchedUser').value};
-  var sideBarUserSearchResult = document.getElementById('sideBarUserSearchResult');
+  var UserSearchResult = document.getElementById('UserSearchResult');
 
   request('POST', '/set/searchUsersByName', userToSearch, function() {
       if(this.readyState == 4 && this.status == 200) {
-        sideBarUserSearchResult.innerHTML = "";
+        UserSearchResult.innerHTML = "";
         for (var i = 0; i < this.response.length; i++) {
           var mya = document.createElement('option');
           mya.value = this.response[i].name;
-          sideBarUserSearchResult.appendChild(mya);
+          UserSearchResult.appendChild(mya);
         }
       }
   });

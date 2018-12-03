@@ -24,7 +24,7 @@
     <title>User Profile</title>
   </head>
   <body>
-    <datalist id=""></datalist>
+    <datalist id="UserSearchResult"></datalist>
 
   <!-- user profile card -->
    <!-- <div class="card" style="width: 15rem;">
@@ -78,8 +78,8 @@
       </li> -->
     </ul>
     <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchedUser" onkeyup="searchUsersByName()">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="getPublicUserData()">Search</button>
     </form>
   </div>
 
@@ -144,7 +144,6 @@
                 <li class="nav-item">
                     <a class="nav-link" id="statistics-tab" data-toggle="tab" href="#statistics" role="tab" aria-controls="statistics" aria-selected="false">Statistics</a>
                 </li>
-
             </ul>
 <!-- end of card nav -->
 <div class="tab-content" id="myTabContent">
