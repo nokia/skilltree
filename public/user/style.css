@@ -99,6 +99,10 @@ a {
     margin-left: 10px;
 }
 
+.creator-column input select {
+    margin: 0 auto;
+}
+
 /* MODAL STYLE */
 
 .modal {
