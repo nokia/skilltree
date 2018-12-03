@@ -94,11 +94,6 @@ a {
 /* MODAL STYLE */
 
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
@@ -129,7 +124,7 @@ a {
 }
 
 .modalClose:hover,
-.modallose:focus {
+.modalClose:focus {
     color: rgb(43, 43, 43);
     text-decoration: none;
     cursor: pointer;
