@@ -80,13 +80,14 @@ a {
 .creator-grid {
     display: grid;
     grid-template-columns: auto auto auto auto;
+    grid-column-gap: 20px;
     min-height: 100% - 64px;
     min-height: 100vh - 64px;
     align-items: center;
 }
 
 .creator-column {
-    border: 3px;
+    border: 3px solid black;
     border-radius: 12px;
 }
 
