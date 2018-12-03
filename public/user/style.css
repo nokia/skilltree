@@ -91,8 +91,8 @@ a {
     border-radius: 12px;
 }
 
-.creator-column * {
-    margin-left: 15px;
+.creator-column p {
+    margin-left: 20px;
 }
 
 .creator-column h1 {
