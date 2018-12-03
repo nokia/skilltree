@@ -60,7 +60,7 @@ a {
   z-index: 1;
 }
 
-.dropdown-menu{
+#treeList{
   max-height: 800px;
   overflow-y: auto;
 }
