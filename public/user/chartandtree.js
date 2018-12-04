@@ -25,7 +25,7 @@ var app = new PIXI.Application({
         view: pixiCanvas,
         width: window.innerWidth,
         height: window.innerHeight - 64,
-        backgroundColor: 0x183693,
+        backgroundColor: 0x000000,
         antialias: true,
         autoStart: false,
         autoResize: true
@@ -208,6 +208,7 @@ function logout(){
 function startLoader () {
     PIXI.loader.add("pictures/skillborder.png")
                 //.add("tree.png")
+                .add("pictures/bg.jpg")
                 .add("pictures/back.png")
                 .add("pictures/tick.png");
     for (var i = 0; i < data.skills.length; ++i) {
@@ -220,6 +221,7 @@ function startLoader () {
 }
 
 app.stage = new PIXI.display.Stage();
+app.stage.addChild(PIXI.Sprite.fromImage('bg.jpg'));
 app.stage.group.enableSort = true;
 
 // CHART
