@@ -29,7 +29,7 @@ class ItemContainer {
         var description = new PIXI.Text(this.skill.description, {fontSize: descriptionFontSize, fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - detailsMargin * 2 });
         description.position.set(detailsMargin, detailsMargin * 2 + nameFontSize);
         detailsForeground.addChild(description);
-        detailsForeground.zOrder = 3;
+        detailsForeground.zOrder = 1;
 
         var btnG = new PIXI.Graphics();
         btnG.lineStyle(1, 0x888888);
@@ -229,7 +229,7 @@ class ItemContainer {
 
         // Brings up hovered container
         container.addChild(details);
-        container.zOrder = 5;
+        container.zOrder = 2;
 
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
 
@@ -245,7 +245,7 @@ class ItemContainer {
         var container = this;
 
         container.removeChild(details);
-        container.zOrder = 1;
+        container.zOrder = 4;
 
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
 
