@@ -221,7 +221,7 @@ function startLoader () {
 }
 
 app.stage = new PIXI.display.Stage();
-app.stage.addChild(PIXI.Sprite.fromImage('something.png'));
+app.stage.addChild(PIXI.Sprite.fromImage('bg.jpg'));
 app.stage.group.enableSort = true;
 
 // CHART
