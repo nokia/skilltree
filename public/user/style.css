@@ -95,8 +95,12 @@ a {
     margin-left: 5px;
 }
 
-#creator .card input {
+#creator .card .form-control {
     width: 70%;
+}
+
+#creator .card .btn {
+    width: 50%;
 }
 /*.creator-grid {
     display: grid;
