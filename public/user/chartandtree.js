@@ -155,15 +155,15 @@ function getPublicUserData(){
 
 function searchTreesByName(){
   var treeToSearch = {value: document.getElementById('searchedTree').value};
-  var sideBarTreeSearchResult = document.getElementById('sideBarTreeSearchResult');
+  var TreeSearchResult = document.getElementById('TreeSearchResult');
 
   request('POST', '/set/searchTreesByName', treeToSearch, function() {
       if(this.readyState == 4 && this.status == 200) {
-        sideBarTreeSearchResult.innerHTML = "";
+        TreeSearchResult.innerHTML = "";
         for (var i = 0; i < this.response.length; i++) {
           var mya = document.createElement('option');
           mya.value = this.response[i].name;
-          sideBarTreeSearchResult.appendChild(mya);
+          TreeSearchResult.appendChild(mya);
         }
       }
   });
