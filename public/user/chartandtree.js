@@ -12,8 +12,6 @@ function initData(){
       if(dataRequest.readyState == 4 && dataRequest.status == 200) {
           data = dataRequest.response;
 
-          console.log(data);
-
           if (data.admin) document.getElementById('openApproveMenu').style.display = "block";
 
           checkFirstLogin();
@@ -696,16 +694,30 @@ function approveTrees() {
     var canvas = document.getElementById("pixiCanvas");
     canvas.style.display = "none";
 
-    var approveMenu = document.getElementById("approveTrees");
-    approveMenu.style.display = "block";
+    var approveTrees = document.getElementById("approveTrees");
+    approveTrees.style.display = "block";
+
+    for (var i = 0; i < data.apprTrees.length; ++i) {
+        var text = data.apprTrees[i].name + " (" + data.apprTrees[i].username + ")";
+        var option = document.createElement('option');
+        option.value = option.text = text;
+        document.getElementById('apprTreeSel').add(option);
+    }
 }
 
 function approveSkills() {
     var canvas = document.getElementById("pixiCanvas");
     canvas.style.display = "none";
 
-    var approveMenu = document.getElementById("approveSkills");
-    approveMenu.style.display = "block";
+    var approveSkills = document.getElementById("approveSkills");
+    approveSkills.style.display = "block";
+
+    for (var i = 0; i < data.apprSkills.length; ++i) {
+        var text = data.apprSkills[i].name + " (" + data.apprSkills[i].username + ")";
+        var option = document.createElement('option');
+        option.value = option.text = text;
+        document.getElementById('apprSkillSel').add(option);
+    }
 }
 
 /*

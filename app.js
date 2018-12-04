@@ -667,6 +667,7 @@ setRoute.post('/newtree', async function (req, res) { // create user tree
         if (data.forApprove) {
             var tree = new ApprovableTree({
                 name: data.name,
+                username: user.username,
                 focusArea: data.focusArea,
                 skillNames: sn
             });

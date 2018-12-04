@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 // set up a mongoose model and pass it using module.exports
 module.exports = mongoose.model('ApprovableTree', new Schema({
     name: String,
+    username: String,
     skillNames: [String],
     focusArea: String
 }));
