@@ -12,6 +12,8 @@ function initData(){
       if(dataRequest.readyState == 4 && dataRequest.status == 200) {
           data = dataRequest.response;
 
+          console.log(data);
+
           if (data.admin) document.getElementById('openApproveMenu').style.display = "block";
 
           checkFirstLogin();
