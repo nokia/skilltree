@@ -185,16 +185,31 @@ getRoute.get('/userdata', function (req, res) {
             });
         } else if (userdata) {
 			user = userdata.toObject();
-			delete userdata.__v;
-			delete userdata._id;
-			delete userdata.email;
-			delete userdata.hashData;
+			delete user.__v;
+			delete user._id;
+			delete user.email;
+			delete user.hashData;
 
-			if (userdata.mainTree != undefined) { // first login
-				delete userdata.focusArea;
+			if (user.mainTree != undefined) { // first login
+				delete user.focusArea;
 			}
 
-      		return res.json(userdata);
+            if (user.admin) {
+                var trees = await ApprovableTree.find({}, function(err, trees) {
+    		        if (err) throw err;
+    				return trees;
+    		    });
+
+                var skills = await ApprovableTree.find({}, function(err, skills) {
+    		        if (err) throw err;
+    				return skills;
+    		    });
+
+                user.trees = trees;
+                user.skills = skills;
+            }
+
+      		return res.json(user);
       	}
     });
 });
