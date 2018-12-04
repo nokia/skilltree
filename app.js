@@ -11,6 +11,7 @@ var config = require('./config'); // get our config file
 var Category   = require('./models/categorymodel');
 var User   = require('./models/usermodel'); // get our mongoose model
 var Tree = require('./models/treemodel');
+var ApprovableTree = require('./models/treesforapprovemodel')
 var Skill = require('./models/skillmodel');
 var ApprovableSkill = require('./models/skillsforapprovemodel');
 var pbkdf2 = require('./pbkdf2'); // get hash generator and pw checker
@@ -647,6 +648,17 @@ setRoute.post('/newtree', async function (req, res) { // create user tree
 		var sn = await sortTree(data.skillNames);
 		user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: sn});
 		user.save(function (err) {if (err) throw err;});
+
+        if (data.forApprove) {
+            var tree = new ApprovableTree({
+                name: data.name,
+                focusArea: data.focusArea,
+                skillNames: sn
+            });
+
+            tree.save(function (err) {if (err) throw err;});
+        }
+
 		res.json({
 			success: true
 		});

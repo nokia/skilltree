@@ -628,6 +628,7 @@ function create() {
                 var treeData = {
                     name: document.getElementById('treeName').value,
                     focusArea: document.getElementById('focusarea').value,
+                    forApprove: document.getElementById('treeAppr').checked,
                     skillNames: skillNames
                 };
 
