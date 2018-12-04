@@ -102,6 +102,11 @@ a {
 #creator .card .btn {
     width: 150px;
 }
+
+.approve {
+    display: none;
+}
+
 /*.creator-grid {
     display: grid;
     grid-template-columns: auto auto auto auto;

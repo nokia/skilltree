@@ -688,11 +688,19 @@ function addRow(table) {
 *   Approve menu for admins
 */
 
-function approveMenu() {
+function approveTrees() {
     var canvas = document.getElementById("pixiCanvas");
     canvas.style.display = "none";
 
-    var approveMenu = document.getElementById("approveMenu");
+    var approveMenu = document.getElementById("approveTrees");
+    approveMenu.style.display = "block";
+}
+
+function approveSkills() {
+    var canvas = document.getElementById("pixiCanvas");
+    canvas.style.display = "none";
+
+    var approveMenu = document.getElementById("approveSkills");
     approveMenu.style.display = "block";
 }
 
