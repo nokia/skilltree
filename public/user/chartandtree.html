@@ -1,46 +1,46 @@
 <!doctype html>
 <html lang = "en" oncontextmenu = "return false;">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-    <script src = "pixi/pixi.min.js"></script>
-    <script src = "pixi/pixi-extra-filters.js"></script>
-    <script src = "pixi/pixi-layers.js"></script>
-    <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function() {
-    	var isIE = /*@cc_on!@*/false || !!document.documentMode;
-    	var isEdge = !isIE && !!window.StyleMedia;
-    	if(isIE || isEdge){
-    		window.open('https://www.google.com/chrome/','_self');
-    	}
-    }, false);
-    </script>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <script src = "pixi/pixi.min.js"></script>
+  <script src = "pixi/pixi-extra-filters.js"></script>
+  <script src = "pixi/pixi-layers.js"></script>
+  <script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+    var isIE = /*@cc_on!@*/false || !!document.documentMode;
+    var isEdge = !isIE && !!window.StyleMedia;
+    if(isIE || isEdge){
+      window.open('https://www.google.com/chrome/','_self');
+    }
+  }, false);
+  </script>
 
-    <title>User Profile</title>
-  </head>
-  <body>
-    <datalist id="UserSearchResult"></datalist>
+  <title>User Profile</title>
+</head>
+<body>
+  <datalist id="UserSearchResult"></datalist>
 
   <!-- user profile card -->
-   <!-- <div class="card" style="width: 15rem;">
-     <img class="card-img-top img-thumbnail w-50 mx-auto" src="profile_img.jpg" alt="Card image cap">
-     <div class="card-body text-center">
-    <h5 class="card-title">User Name</h5>
-    <h6 class="card-subtitle mb-2 small font-italic">Webdeveloper - Level 2</h6>
-    <span class="badge badge-secondary w-30">3<br>trees</span>
-    <span class="badge badge-secondary w-30">10<br>skills</span>
-    <span class="badge badge-secondary w-30">570<br>point</span>
-     </div>
-   </div> -->
-   <!-- end of card -->
+  <!-- <div class="card" style="width: 15rem;">
+  <img class="card-img-top img-thumbnail w-50 mx-auto" src="profile_img.jpg" alt="Card image cap">
+  <div class="card-body text-center">
+  <h5 class="card-title">User Name</h5>
+  <h6 class="card-subtitle mb-2 small font-italic">Webdeveloper - Level 2</h6>
+  <span class="badge badge-secondary w-30">3<br>trees</span>
+  <span class="badge badge-secondary w-30">10<br>skills</span>
+  <span class="badge badge-secondary w-30">570<br>point</span>
+</div>
+</div> -->
+<!-- end of card -->
 
-   <!-- navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<!-- navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#userCard" data-toggle="collapse" role="button"data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="initCard()">SKILLTREE</a>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,121 +74,122 @@
         <a class="nav-link" onclick="approveMenu()">Approve</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" onclick="logout()">Logout</a>
+        <a class="nav-link" onclick="submit()">Submit Changes</a>
       </li>
-     <!--  <li class="nav-item">
-        <a class="nav-link disabled" >Disabled</a>
-      </li> -->
-    </ul>
-    <div class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchedUser" onkeyup="searchUsersByName()" list="UserSearchResult">
-      <input class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="getPublicUserData()" value="Search">
-    </div>
-  </div>
 
-  <a class="nav-link" href="#userprofile" data-toggle="collapse" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <img src="./pictures/profile.png">
-            </a>
+      <!--  <li class="nav-item">
+      <a class="nav-link disabled" >Disabled</a>
+    </li> -->
+  </ul>
+  <div class="form-inline my-2 my-lg-0">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchedUser" onkeyup="searchUsersByName()" list="UserSearchResult">
+    <input class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="getPublicUserData()" value="Search">
+  </div>
+</div>
+
+<a class="nav-link" href="#userprofile" data-toggle="collapse" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <img src="./pictures/profile.png">
+</a>
 
 </nav>
 
 <div class="collapse float-left" id="userCard">
   <div class="card">
-      <div class="card-body">
-        <img class="img-thumbnail float-left d-inline w-25 m-1 mr-3" src="./pictures/profile_img.jpg" alt="Card image cap">
-        <h6 class="card-title d-inline" id="cardUserName"></h6>
-        <h6 class="card-subtitle mb-2 small font-italic" id="cardMainTree"></h6>
-           <!-- <p class="card-text">
-             <span class="badge badge-secondary w-30">3<br>trees</span>
-             <span class="badge badge-secondary w-30">10<br>skills</span>
-             <span class="badge badge-secondary w-30">570<br>points</span>
-            </p> -->
-      </div>
-
-      <div class="card-body">
-          <span class="badge badge-secondary w-30" id="treeCount"></span>
-          <span class="badge badge-secondary w-30" id="skillCount"></span>
-          <span class="badge badge-secondary w-30" id="pointCount"></span>
-      </div>
+    <div class="card-body">
+      <img class="img-thumbnail float-left d-inline w-25 m-1 mr-3" src="./pictures/profile_img.jpg" alt="Card image cap">
+      <h6 class="card-title d-inline" id="cardUserName"></h6>
+      <h6 class="card-subtitle mb-2 small font-italic" id="cardMainTree"></h6>
+      <!-- <p class="card-text">
+      <span class="badge badge-secondary w-30">3<br>trees</span>
+      <span class="badge badge-secondary w-30">10<br>skills</span>
+      <span class="badge badge-secondary w-30">570<br>points</span>
+    </p> -->
   </div>
+
+  <div class="card-body">
+    <span class="badge badge-secondary w-30" id="treeCount"></span>
+    <span class="badge badge-secondary w-30" id="skillCount"></span>
+    <span class="badge badge-secondary w-30" id="pointCount"></span>
+  </div>
+</div>
 </div>
 
 
 <!-- end of navbar -->
 
-  <!-- user profile mini -->
-    <!-- <a class="navbar-brand btn" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" role="button">
-      <div class="card" style="width: 15rem;">
-      <img class="card-img-top img-thumbnail w-50 mx-auto" src="profile_img.jpg" alt="Card image cap">
-      <div class="card-body text-center">
-    <h5 class="card-title">User Name</h5>
-    <h6 class="card-subtitle mb-2 small font-italic">Webdeveloper - Level 2</h6>
-    <span class="badge badge-secondary w-30">3<br>trees</span>
-    <span class="badge badge-secondary w-30">10<br>skills</span>
-    <span class="badge badge-secondary w-30">570<br>points</span>
-      </div>
-    </div>
-      </a> -->
-    <!-- end of user profile mini -->
+<!-- user profile mini -->
+<!-- <a class="navbar-brand btn" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" role="button">
+<div class="card" style="width: 15rem;">
+<img class="card-img-top img-thumbnail w-50 mx-auto" src="profile_img.jpg" alt="Card image cap">
+<div class="card-body text-center">
+<h5 class="card-title">User Name</h5>
+<h6 class="card-subtitle mb-2 small font-italic">Webdeveloper - Level 2</h6>
+<span class="badge badge-secondary w-30">3<br>trees</span>
+<span class="badge badge-secondary w-30">10<br>skills</span>
+<span class="badge badge-secondary w-30">570<br>points</span>
+</div>
+</div>
+</a> -->
+<!-- end of user profile mini -->
 
-   <!-- user profile details card -->
-   <div id="userprofile" class="collapse float-right">
-       <div class="card text-white bg-info mb-3">
-         <div class="card-header">User Profile</div>
-         <div class="card-body">
-            <!-- card nav -->
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="personal-tab" data-toggle="tab" href="#personal" role="tab" aria-controls="personal" aria-selected="true">Personal</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="trainings-tab" data-toggle="tab" href="#trainings" role="tab" aria-controls="trainings" aria-selected="false">Peer Learning</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="statistics-tab" data-toggle="tab" href="#statistics" role="tab" aria-controls="statistics" aria-selected="false">Statistics</a>
-                </li>
-            </ul>
-<!-- end of card nav -->
-<div class="tab-content" id="myTabContent">
-     <!-- personal-tab content -->
-      <div class="tab-pane fade show active" id="personal" role="tabpanel" aria-labelledby="personal-tab">
+<!-- user profile details card -->
+<div id="userprofile" class="collapse float-right">
+  <div class="card text-white bg-info mb-3">
+    <div class="card-header">User Profile</div>
+    <div class="card-body">
+      <!-- card nav -->
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="personal-tab" data-toggle="tab" href="#personal" role="tab" aria-controls="personal" aria-selected="true">Personal</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="trainings-tab" data-toggle="tab" href="#trainings" role="tab" aria-controls="trainings" aria-selected="false">Peer Learning</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="statistics-tab" data-toggle="tab" href="#statistics" role="tab" aria-controls="statistics" aria-selected="false">Statistics</a>
+        </li>
+      </ul>
+      <!-- end of card nav -->
+      <div class="tab-content" id="myTabContent">
+        <!-- personal-tab content -->
+        <div class="tab-pane fade show active" id="personal" role="tabpanel" aria-labelledby="personal-tab">
           <form class="pt-4">
-                 <div class="form-group row">
-                    <label for="username" class="col-sm-3 col-form-label">User name</label>
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="username" aria-describedby="emailHelp" placeholder="User name">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="exampleInputEmail1" class="col-sm-3 col-form-label">Email</label>
-                    <div class="col-sm-9">
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="user677@nokia.com">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="exampleInputEmail1" class="col-sm-3 col-form-label">Your place</label>
-                    <div class="col-sm-9">
-                      <input type="email" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp" placeholder="WhereAreYou link">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="inputPassword" class="col-sm-3 col-form-label">Password</label>
-                    <div class="col-sm-9">
-                      <input type="password" class="form-control" id="inputPassword" placeholder="****">
-                    </div>
-                  </div>
-            </form>
-      </div>
-      <!-- skilltrees-tab content -->
-      <div class="tab-pane fade" id="skilltrees" role="tabpanel" aria-labelledby="skilltrees-tab">
+            <div class="form-group row">
+              <label for="username" class="col-sm-3 col-form-label">User name</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="username" aria-describedby="emailHelp" placeholder="User name">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="exampleInputEmail1" class="col-sm-3 col-form-label">Email</label>
+              <div class="col-sm-9">
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="user677@nokia.com">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="exampleInputEmail1" class="col-sm-3 col-form-label">Your place</label>
+              <div class="col-sm-9">
+                <input type="email" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp" placeholder="WhereAreYou link">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputPassword" class="col-sm-3 col-form-label">Password</label>
+              <div class="col-sm-9">
+                <input type="password" class="form-control" id="inputPassword" placeholder="****">
+              </div>
+            </div>
+          </form>
+        </div>
+        <!-- skilltrees-tab content -->
+        <div class="tab-pane fade" id="skilltrees" role="tabpanel" aria-labelledby="skilltrees-tab">
           <h4 class="pt-4">Your Main Category</h4>
           <h4 class="pt-4">Your SkillTrees</h4>
           <h4 class="pt-4">Pick up new SkillTree</h4>
-      </div>
-      <!-- statistics-tab content -->
-      <div class="tab-pane fade" id="statistics" role="tabpanel" aria-labelledby="statistics-tab">...</div>
-      <!-- trainings-tab content -->
-      <div class="tab-pane fade" id="trainings" role="tabpanel" aria-labelledby="trainings-tab">
+        </div>
+        <!-- statistics-tab content -->
+        <div class="tab-pane fade" id="statistics" role="tabpanel" aria-labelledby="statistics-tab">...</div>
+        <!-- trainings-tab content -->
+        <div class="tab-pane fade" id="trainings" role="tabpanel" aria-labelledby="trainings-tab">
           <h5>Your Requested Trainings</h5>
           <p>details about your requested trainings</p>
 
@@ -197,253 +198,253 @@
           <p>days</p>
           <p>timeslot</p>
 
+        </div>
       </div>
+
+
+    </div>
+  </div>
 </div>
 
-
-         </div>
-       </div>
-   </div>
-
-     <canvas id = "pixiCanvas" style = "visibility: hidden;"></canvas>
-     <div id = "creator" style = "display: none;">
-        <div class = "card">
-            <h1>1.</h1>
-            <center><h5>The name of the new tree</h5></center>
-            <p><input type = "text" id = "treeName" class = "form-control"></p>
-            <center><h5>Focus area of the new tree</h5></center>
-            <p><select id = "focusarea" class = "form-control">
-                <option value = "People">People</option>
-                <option value = "Engineering">Engineering</option>
-                <option value = "Business">Business</option>
-                <option value = "Communication">Communication</option>
-                <option value = "Support functions">Support functions</option>
-            </select></p>
-        </div>
-        <div class = "card">
-            <h1>2.</h1>
-            <datalist id = "skillSearchResult"></datalist>
-            <center><h5>Serch for a skill</h5></center>
-            <p><input type = "text" id = "skillSearch" class = "form-control" list = "skillSearchResult" onkeypress="searchSkillsByName()"></p>
-            <p><input type = "button" id = "addToTree" class="btn btn-outline-secondary" value = "Add skill to tree"></p>
-            <center><h5>OR</h5></center>
-            <p><input type = "button" id = "createSkill" class="btn btn-outline-secondary" value = "Create skill"></p>
-        </div>
-        <div class = "card">
-            <h1>3.</h1>
-            <p><select id = "skillList" size = "10">
-                </select></p>
-            <p><input type = "button" id = "deleteFromList" class="btn btn-outline-secondary" value = "Delete selected"></p>
-        </div>
-        <div class = "card">
-            <h1>4.</h1>
-            <p><input type = "checkbox" class = "form-check-input" id = "treeAppr">
-                <label class = "form-check-label" for = "treeAppr">Send for approve</label></p>
-            <p><input type = "button" id = "createTree" class="btn btn-outline-secondary" value = "Create tree"></p>
-        </div>
-      </div>
-
-      <div id = "newSkillModal" class = "modal">
-          <div class = "modal-content">
-              <div class="modal-header">
-                  <span class="modalClose" id = "closeSkillModal">&times;</span>
-                  <h2>Create your own skill</h2>
-              </div>
-              <div class="modal-body">
-                  <form onsubmit = "return false">
-                      Name:
-                      <input type = "text" id = "newSkillName" required><br>
-                      Description:
-                      <textarea id = "newSkillDesc" required></textarea><br>
-                      Icon:
-                      <input type = "text" id = "newSkillIcon" value = "pictures/icons/.png" required><br>
-                      Category:
-                      <select id = "newSkillCat"></select><br>
-                      Points:<br>
-                      <table id = "pointsTable" border = "1">
-                          <tr>
-                              <td>Point</td>
-                              <td>Description</td>
-                              <td>Delete</td>
-                          </tr>
-                          <tr>
-                              <td>1</td>
-                              <td><input size=50 type="text" id = "pointDesc" required></td>
-                              <td><input type="button" value="Delete" onclick="deleteRow('pointsTable', this)"></td>
-                          </tr>
-                      </table>
-                      <input type="button" value="Add point" onclick="addRow('pointsTable')"><br>
-                      Parents:<br>
-                      <table id = "parentsTable" border = "1">
-                          <tr>
-                              <td>Parent</td>
-                              <td>Delete</td>
-                          </tr>
-                          <tr>
-                              <td><input size=30 type="text" id = "parent" list = "skillSearchResult" onkeypress="searchSkillsByName()" required></td>
-                              <td><input type="button" value="Delete" onclick="deleteRow('parentsTable', this)"></td>
-                          </tr>
-                      </table>
-                      <input type="button" value="Add parent" onclick="addRow('parentsTable')"><br>
-                      Children:<br>
-                      <table id = "childrenTable" border = "1">
-                          <tr>
-                              <td>Child</td>
-                              <td>Min point</td>
-                              <td>Required</td>
-                              <td>Delete</td>
-                          </tr>
-                          <tr>
-                              <td><input size=30 type="text" id = "child" list = "skillSearchResult" onkeypress="searchSkillsByName()" required></td>
-                              <td><input size=10 type="text" id = "minPoint" required></td>
-                              <td><input size=50 type="checkbox" id = "required"></td>
-                              <td><input type="button" value="Delete" onclick="deleteRow('childrenTable', this)"></td>
-                          </tr>
-                      </table>
-                      <input type="button" value="Add child" onclick="addRow('childrenTable')"><br>
-                      Trainings:<br>
-                      <table id = "trainingsTable" border = "1">
-                          <tr>
-                              <td>Name</td>
-                              <td>Level</td>
-                              <td>Description</td>
-                              <td>URL</td>
-                              <td>Delete</td>
-                          </tr>
-                          <tr>
-                              <td><input size=30 type="text" required></td>
-                              <td><input size=10 type="text" required></td>
-                              <td><input size=30 type="text" required></td>
-                              <td><input size=30 type="text" required></td>
-                              <td><input type="button" value="Delete" onclick="deleteRow('trainingsTable', this)" required></td>
-                          </tr>
-                      </table>
-                      <input type="button" value="Add child" onclick="addRow('trainingsTable')"><br>
-                      Send for approve:
-                      <input type = "checkbox" id = "forApprove"><br>
-                      <input type = "submit" value = "Save" id = "saveSkillBtn">
-                  </form>
-              </div>
-          </div>
-      </div>
-
-      <div id = "skillpage" class = "modal">
-        <div class = "modal-content">
-            <div class="modal-header">
-                <span class="modalClose" id = "closeORModal">&times;</span>
-                <h2 id="skillnameHeader"></h2>
-            </div>
-            <div class="modal-body">
-                <div class = "divTable">
-                    <div class= "divTableCaption">Trainings</div>
-                        <div class="divTableBody" id = "trainingTableBody">
-                            <div class="divTableRow">
-                                <div class="divTableHead"> Date </div>
-                                <div class="divTableHead"> Level </div>
-                                <div class="divTableHead"> Place</div>
-                                <div class="divTableHead"> Teacher</div>
-                            </div>
-                            <div class="divTableRow">
-                                <div class="divTableCell"> Data </div>
-                                <div class="divTableCell"> Data </div>
-                                <div class="divTableCell"> Data</div>
-                                <div class="divTableCell"> Data</div>
-                            </div>
-                        </div>
-
-                </div>
-
-
-
-                <div class = "divTable">
-                    <div class= "divTableCaption">Offers</div>
-                        <div class="divTableBody" id = "offerTableBody">
-                            <div class="divTableRow">
-                                <div class="divTableHead"> Username </div>
-                                <div class="divTableHead"> Location</div>
-                                <div class="divTableHead"> Day </div>
-                                <div class="divTableHead"> Time</div>
-                                <div class="divTableHead"> Skill Level</div>
-                            </div>
-
-                            <div class="divTableRow">
-                                <div class="divTableCell"> Data </div>
-                                <div class="divTableCell"> Data </div>
-                                <div class="divTableCell"> Data</div>
-                                <div class="divTableCell"> Data</div>
-                            </div>
-                        </div>
-
-                </div>
-
-
-
-                <div class = "divTable">
-                    <div class= "divTableCaption">Request</div>
-                        <div class="divTableBody" id = requestTableBody>
-                            <div class="divTableRow">
-                                <div class="divTableHead"> TODO </div>
-                                <div class="divTableHead"> TODO </div>
-                                <div class="divTableHead"> TODO</div>
-                                <div class="divTableHead"> TODO</div>
-                            </div>
-
-                            <div class="divTableRow">
-                                <div class="divTableCell"> Data </div>
-                                <div class="divTableCell"> Data </div>
-                                <div class="divTableCell"> Data</div>
-                                <div class="divTableCell"> Data</div>
-                            </div>
-                        </div>
-
-                </div>
-
-            </div>
-        </div>
+<canvas id = "pixiCanvas" style = "visibility: hidden;"></canvas>
+<div id = "creator" style = "display: none;">
+  <div class = "card">
+    <h1>1.</h1>
+    <center><h5>The name of the new tree</h5></center>
+    <p><input type = "text" id = "treeName" class = "form-control"></p>
+    <center><h5>Focus area of the new tree</h5></center>
+    <p><select id = "focusarea" class = "form-control">
+      <option value = "People">People</option>
+      <option value = "Engineering">Engineering</option>
+      <option value = "Business">Business</option>
+      <option value = "Communication">Communication</option>
+      <option value = "Support functions">Support functions</option>
+    </select></p>
+  </div>
+  <div class = "card">
+    <h1>2.</h1>
+    <datalist id = "skillSearchResult"></datalist>
+    <center><h5>Serch for a skill</h5></center>
+    <p><input type = "text" id = "skillSearch" class = "form-control" list = "skillSearchResult" onkeypress="searchSkillsByName()"></p>
+    <p><input type = "button" id = "addToTree" class="btn btn-outline-secondary" value = "Add skill to tree"></p>
+    <center><h5>OR</h5></center>
+    <p><input type = "button" id = "createSkill" class="btn btn-outline-secondary" value = "Create skill"></p>
+  </div>
+  <div class = "card">
+    <h1>3.</h1>
+    <p><select id = "skillList" size = "10">
+    </select></p>
+    <p><input type = "button" id = "deleteFromList" class="btn btn-outline-secondary" value = "Delete selected"></p>
+  </div>
+  <div class = "card">
+    <h1>4.</h1>
+    <p><input type = "checkbox" class = "form-check-input" id = "treeAppr">
+      <label class = "form-check-label" for = "treeAppr">Send for approve</label></p>
+      <p><input type = "button" id = "createTree" class="btn btn-outline-secondary" value = "Create tree"></p>
     </div>
+  </div>
 
-   <!-- end of user profile details card -->
+  <div id = "newSkillModal" class = "modal">
+    <div class = "modal-content">
+      <div class="modal-header">
+        <span class="modalClose" id = "closeSkillModal">&times;</span>
+        <h2>Create your own skill</h2>
+      </div>
+      <div class="modal-body">
+        <form onsubmit = "return false">
+          Name:
+          <input type = "text" id = "newSkillName" required><br>
+          Description:
+          <textarea id = "newSkillDesc" required></textarea><br>
+          Icon:
+          <input type = "text" id = "newSkillIcon" value = "pictures/icons/.png" required><br>
+          Category:
+          <select id = "newSkillCat"></select><br>
+          Points:<br>
+          <table id = "pointsTable" border = "1">
+            <tr>
+              <td>Point</td>
+              <td>Description</td>
+              <td>Delete</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td><input size=50 type="text" id = "pointDesc" required></td>
+              <td><input type="button" value="Delete" onclick="deleteRow('pointsTable', this)"></td>
+            </tr>
+          </table>
+          <input type="button" value="Add point" onclick="addRow('pointsTable')"><br>
+          Parents:<br>
+          <table id = "parentsTable" border = "1">
+            <tr>
+              <td>Parent</td>
+              <td>Delete</td>
+            </tr>
+            <tr>
+              <td><input size=30 type="text" id = "parent" list = "skillSearchResult" onkeypress="searchSkillsByName()" required></td>
+              <td><input type="button" value="Delete" onclick="deleteRow('parentsTable', this)"></td>
+            </tr>
+          </table>
+          <input type="button" value="Add parent" onclick="addRow('parentsTable')"><br>
+          Children:<br>
+          <table id = "childrenTable" border = "1">
+            <tr>
+              <td>Child</td>
+              <td>Min point</td>
+              <td>Required</td>
+              <td>Delete</td>
+            </tr>
+            <tr>
+              <td><input size=30 type="text" id = "child" list = "skillSearchResult" onkeypress="searchSkillsByName()" required></td>
+              <td><input size=10 type="text" id = "minPoint" required></td>
+              <td><input size=50 type="checkbox" id = "required"></td>
+              <td><input type="button" value="Delete" onclick="deleteRow('childrenTable', this)"></td>
+            </tr>
+          </table>
+          <input type="button" value="Add child" onclick="addRow('childrenTable')"><br>
+          Trainings:<br>
+          <table id = "trainingsTable" border = "1">
+            <tr>
+              <td>Name</td>
+              <td>Level</td>
+              <td>Description</td>
+              <td>URL</td>
+              <td>Delete</td>
+            </tr>
+            <tr>
+              <td><input size=30 type="text" required></td>
+              <td><input size=10 type="text" required></td>
+              <td><input size=30 type="text" required></td>
+              <td><input size=30 type="text" required></td>
+              <td><input type="button" value="Delete" onclick="deleteRow('trainingsTable', this)" required></td>
+            </tr>
+          </table>
+          <input type="button" value="Add child" onclick="addRow('trainingsTable')"><br>
+          Send for approve:
+          <input type = "checkbox" id = "forApprove"><br>
+          <input type = "submit" value = "Save" id = "saveSkillBtn">
+        </form>
+      </div>
+    </div>
+  </div>
 
-     <!-- <div class="card" style="width: 15rem;">
-     <img class="img-thumbnail float-left d-inline w-25 m-1 mr-3" src="profile_img.jpg" alt="Card image cap">
-            <h5 class="card-title">UserName</h5>
-            <h6 class="card-subtitle mb-2 text-white small font-italic">Webdeveloper - Level 2</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      </div> -->
+  <div id = "skillpage" class = "modal">
+    <div class = "modal-content">
+      <div class="modal-header">
+        <span class="modalClose" id = "closeORModal">&times;</span>
+        <h2 id="skillnameHeader"></h2>
+      </div>
+      <div class="modal-body">
+        <div class = "divTable">
+          <div class= "divTableCaption">Trainings</div>
+          <div class="divTableBody" id = "trainingTableBody">
+            <div class="divTableRow">
+              <div class="divTableHead"> Date </div>
+              <div class="divTableHead"> Level </div>
+              <div class="divTableHead"> Place</div>
+              <div class="divTableHead"> Teacher</div>
+            </div>
+            <div class="divTableRow">
+              <div class="divTableCell"> Data </div>
+              <div class="divTableCell"> Data </div>
+              <div class="divTableCell"> Data</div>
+              <div class="divTableCell"> Data</div>
+            </div>
+          </div>
 
-
-      <!-- small id card -->
-
-    <!-- end of small ID card -->
-
-    <!-- junk ID card -->
-    <!-- <div class="card" style="width: 25rem;">
-        <img class="img-thumbnail float-left d-inline w-25 m-1 mr-3" src="profile_img.jpg" alt="Card image cap">
-        <h5 class="card-title d-inline">User Name</h5>
-        <h6 class="card-subtitle mb-2 small font-italic">Webdeveloper - Level 2</h6>
-
-        <div class="card-body text-center">
-            <span class="badge badge-secondary w-30">3<br>trees</span>
-            <span class="badge badge-secondary w-30">10<br>skills</span>
-            <span class="badge badge-secondary w-30">570<br>points</span>
         </div>
-    </div> -->
-    <!-- end of junk ID -->
+
+
+
+        <div class = "divTable">
+          <div class= "divTableCaption">Offers</div>
+          <div class="divTableBody" id = "offerTableBody">
+            <div class="divTableRow">
+              <div class="divTableHead"> Username </div>
+              <div class="divTableHead"> Location</div>
+              <div class="divTableHead"> Day </div>
+              <div class="divTableHead"> Time</div>
+              <div class="divTableHead"> Skill Level</div>
+            </div>
+
+            <div class="divTableRow">
+              <div class="divTableCell"> Data </div>
+              <div class="divTableCell"> Data </div>
+              <div class="divTableCell"> Data</div>
+              <div class="divTableCell"> Data</div>
+            </div>
+          </div>
+
+        </div>
+
+
+
+        <div class = "divTable">
+          <div class= "divTableCaption">Request</div>
+          <div class="divTableBody" id = requestTableBody>
+            <div class="divTableRow">
+              <div class="divTableHead"> TODO </div>
+              <div class="divTableHead"> TODO </div>
+              <div class="divTableHead"> TODO</div>
+              <div class="divTableHead"> TODO</div>
+            </div>
+
+            <div class="divTableRow">
+              <div class="divTableCell"> Data </div>
+              <div class="divTableCell"> Data </div>
+              <div class="divTableCell"> Data</div>
+              <div class="divTableCell"> Data</div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- end of user profile details card -->
+
+  <!-- <div class="card" style="width: 15rem;">
+  <img class="img-thumbnail float-left d-inline w-25 m-1 mr-3" src="profile_img.jpg" alt="Card image cap">
+  <h5 class="card-title">UserName</h5>
+  <h6 class="card-subtitle mb-2 text-white small font-italic">Webdeveloper - Level 2</h6>
+  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+</div> -->
+
+
+<!-- small id card -->
+
+<!-- end of small ID card -->
+
+<!-- junk ID card -->
+<!-- <div class="card" style="width: 25rem;">
+<img class="img-thumbnail float-left d-inline w-25 m-1 mr-3" src="profile_img.jpg" alt="Card image cap">
+<h5 class="card-title d-inline">User Name</h5>
+<h6 class="card-subtitle mb-2 small font-italic">Webdeveloper - Level 2</h6>
+
+<div class="card-body text-center">
+<span class="badge badge-secondary w-30">3<br>trees</span>
+<span class="badge badge-secondary w-30">10<br>skills</span>
+<span class="badge badge-secondary w-30">570<br>points</span>
+</div>
+</div> -->
+<!-- end of junk ID -->
 
 
 
 
-    <!-- Optional JavaScript -->
+<!-- Optional JavaScript -->
 
-    <script src = "classes/link.js"></script>
-    <script src = "classes/itemcontainer.js"></script>
-    <script src = "classes/tree.js"></script>
-    <script src = "chartandtree.js"></script>
+<script src = "classes/link.js"></script>
+<script src = "classes/itemcontainer.js"></script>
+<script src = "classes/tree.js"></script>
+<script src = "chartandtree.js"></script>
 
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  </body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
 </html>
