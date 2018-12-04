@@ -54,7 +54,8 @@ module.exports = mongoose.model('User', new Schema({
     trees: [
         {
             name: String,
-            skillNames: [String]
+            skillNames: [String],
+            focusArea: String
         }
     ]
 }));
