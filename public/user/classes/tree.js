@@ -72,6 +72,7 @@ class Tree {
                         // Draw the line
                         var connection = new PIXI.Graphics();
                         connection.lineStyle(4, 0xffffff);
+                        connection.zOrder = 10;
                         connection.moveTo(this.skills[j].itemcontainer.container.x + this.skills[j].itemcontainer.skillborder.width / 2, this.skills[j].itemcontainer.container.position.y + this.skills[j].itemcontainer.skillborder.height - 8);
                         connection.lineTo(child.itemcontainer.container.position.x + child.itemcontainer.skillborder.width / 2, child.itemcontainer.container.position.y + 5);
 
