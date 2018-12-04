@@ -4,7 +4,7 @@
     "categoryName": "Engineering",
     "skillIcon": "pictures/icons/HTML.png",
     "description": "...",
-    "descriptionWikipediaURL" : "https://en.wikipedia.org/wiki/",
+    "descriptionWikipediaURL": "",
     "pointDescription": [
       "L1",
       "L2",
@@ -19,15 +19,23 @@
         "name": "CSS",
         "minPoint": 1,
         "recommended": false
+      },
+      {
+        "name": "CSS",
+        "minPoint": 1,
+        "recommended": false
       }
     ],
-     "trainings": [
+    "trainings": [
       {
         "name": "HTML Basics",
         "level": 1,
         "shortDescription": "HTML Crash Course For Absolute Beginners",
         "URL": "https://www.youtube.com/watch?v=UB1O30fR-EE",
-        "URLlastAccessed": "2018-11-19"
+        "URLlastAccessed": "2018-11-19",
+        "goal": "The goal of this training is to introduce the terms and basic concepts of creating a website with HTML.",
+        "length": 0,
+        "language": "en"
       }
     ]
   },
@@ -36,7 +44,7 @@
     "categoryName": "Maths, science and engineering",
     "skillIcon": "pictures/icons/CSS.png",
     "description": "...",
-    "descriptionWikipediaURL" : "https://en.wikipedia.org/wiki/",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/CSS",
     "pointDescription": [
       "L1",
       "L2",
@@ -60,13 +68,16 @@
         "recommended": false
       }
     ],
-     "trainings": [
+    "trainings": [
       {
         "name": "CSS Basics",
         "level": 1,
         "shortDescription": "HTML Crash Course For Absolute Beginners",
         "URL": "https://www.youtube.com/watch?v=UB1O30fR-EE",
-        "URLlastAccessed": "2018-11-19"
+        "URLlastAccessed": "2018-11-19",
+        "goal": "",
+        "length": 0,
+        "language": "en"
       }
     ]
   },
@@ -75,7 +86,7 @@
     "categoryName": "Maths, science and engineering",
     "skillIcon": "pictures/icons/CSS_tools.png",
     "description": "...",
-    "descriptionWikipediaURL" : "https://en.wikipedia.org/wiki/",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/CSS",
     "pointDescription": [
       "L1",
       "L2",
@@ -94,7 +105,10 @@
         "level": 1,
         "shortDescription": "HTML Crash Course For Absolute Beginners",
         "URL": "https://www.youtube.com/watch?v=UB1O30fR-EE",
-        "URLlastAccessed": "2018-11-19"
+        "URLlastAccessed": "2018-11-19",
+        "goal": "",
+        "length": 0,
+        "language": "en"
       }
     ]
   },
@@ -103,7 +117,7 @@
     "categoryName": "Maths, science and engineering",
     "skillIcon": "pictures/icons/Photoshop.png",
     "description": "...",
-    "descriptionWikipediaURL" : "https://en.wikipedia.org/wiki/",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Photoshop",
     "pointDescription": [
       "L1",
       "L2",
@@ -122,7 +136,10 @@
         "level": 1,
         "shortDescription": "HTML Crash Course For Absolute Beginners",
         "URL": "https://www.youtube.com/watch?v=UB1O30fR-EE",
-        "URLlastAccessed": "2018-11-19"
+        "URLlastAccessed": "2018-11-19",
+        "goal": "",
+        "length": 0,
+        "language": "en"
       }
     ]
   },
@@ -131,7 +148,7 @@
     "categoryName": "Maths, science and engineering",
     "skillIcon": "pictures/icons/JavaScript.png",
     "description": "...",
-    "descriptionWikipediaURL" : "https://en.wikipedia.org/wiki/Javascript",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Javascript",
     "pointDescription": [
       "L1",
       "L2",
@@ -150,7 +167,10 @@
         "level": 1,
         "shortDescription": "HTML Crash Course For Absolute Beginners",
         "URL": "https://www.youtube.com/watch?v=UB1O30fR-EE",
-        "URLlastAccessed": "2018-11-19"
+        "URLlastAccessed": "2018-11-19",
+        "goal": "",
+        "length": 0,
+        "language": "en"
       }
     ]
   },
@@ -159,7 +179,7 @@
     "categoryName": "Maths, science and engineering",
     "skillIcon": "pictures/icons/Java.png",
     "description": "...",
-    "descriptionWikipediaURL" : "https://en.wikipedia.org/wiki/Java",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Java",
     "pointDescription": [
       "L1",
       "L2",
@@ -168,17 +188,24 @@
       "L5"
     ],
     "maxPoint": 5,
-    "parents": [
-      "HTML"
+    "parents": [],
+    "children": [
+      {
+        "name": "JavaFX",
+        "minPoint": 1,
+        "recommended": false
+      }
     ],
-    "children": [],
     "trainings": [
       {
         "name": "HTML Basics",
         "level": 1,
         "shortDescription": "HTML Crash Course For Absolute Beginners",
         "URL": "https://www.youtube.com/watch?v=UB1O30fR-EE",
-        "URLlastAccessed": "2018-11-19"
+        "URLlastAccessed": "2018-11-19",
+        "goal": "",
+        "length": 0,
+        "language": "en"
       }
     ]
   },
@@ -187,7 +214,7 @@
     "categoryName": "Maths, science and engineering",
     "skillIcon": "pictures/icons/JavaFX.png",
     "description": "...",
-    "descriptionWikipediaURL" : "https://en.wikipedia.org/wiki/",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/JavaFX",
     "pointDescription": [
       "L1",
       "L2",
@@ -197,7 +224,7 @@
     ],
     "maxPoint": 5,
     "parents": [
-      "HTML"
+      "Java"
     ],
     "children": [],
     "trainings": [
@@ -206,7 +233,10 @@
         "level": 1,
         "shortDescription": "HTML Crash Course For Absolute Beginners",
         "URL": "https://www.youtube.com/watch?v=UB1O30fR-EE",
-        "URLlastAccessed": "2018-11-19"
+        "URLlastAccessed": "2018-11-19",
+        "goal": "",
+        "length": 0,
+        "language": "en"
       }
     ]
   },
@@ -215,7 +245,7 @@
     "categoryName": "Maths, science and engineering",
     "skillIcon": "pictures/icons/NodeJS.png",
     "description": "...",
-    "descriptionWikipediaURL" : "https://en.wikipedia.org/wiki/Node.js",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Node.js",
     "pointDescription": [
       "L1",
       "L2",
@@ -225,7 +255,8 @@
     ],
     "maxPoint": 5,
     "parents": [
-      "HTML"
+      "HTML",
+      "JavaScript"
     ],
     "children": [],
     "trainings": [
@@ -234,7 +265,10 @@
         "level": 1,
         "shortDescription": "HTML Crash Course For Absolute Beginners",
         "URL": "https://www.youtube.com/watch?v=UB1O30fR-EE",
-        "URLlastAccessed": "2018-11-19"
+        "URLlastAccessed": "2018-11-19",
+        "goal": "",
+        "length": 0,
+        "language": "en"
       }
     ]
   },
@@ -243,7 +277,7 @@
     "categoryName": "Maths, science and engineering",
     "skillIcon": "pictures/icons/Go.png",
     "description": "...",
-    "descriptionWikipediaURL" : "https://en.wikipedia.org/wiki/Go_(programming_language)",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Go_(programming_language)",
     "pointDescription": [
       "L1",
       "L2",
@@ -262,7 +296,10 @@
         "level": 1,
         "shortDescription": "HTML Crash Course For Absolute Beginners",
         "URL": "https://www.youtube.com/watch?v=UB1O30fR-EE",
-        "URLlastAccessed": "2018-11-19"
+        "URLlastAccessed": "2018-11-19",
+        "goal": "",
+        "length": 0,
+        "language": "en"
       }
     ]
   },
@@ -271,7 +308,7 @@
     "categoryName": "Maths, science and engineering",
     "skillIcon": "pictures/icons/Python.png",
     "description": "...",
-    "descriptionWikipediaURL" : "https://en.wikipedia.org/wiki/Python_(programming_language)",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Python_(programming_language)",
     "pointDescription": [
       "L1",
       "L2",
@@ -280,17 +317,24 @@
       "L5"
     ],
     "maxPoint": 5,
-    "parents": [
-      "HTML"
+    "parents": [],
+    "children": [
+      {
+        "name": "Machine Learning",
+        "minPoint": 3,
+        "recommended": false
+      }
     ],
-    "children": [],
     "trainings": [
       {
         "name": "HTML Basics",
         "level": 1,
         "shortDescription": "HTML Crash Course For Absolute Beginners",
         "URL": "https://www.youtube.com/watch?v=UB1O30fR-EE",
-        "URLlastAccessed": "2018-11-19"
+        "URLlastAccessed": "2018-11-19",
+        "goal": "",
+        "length": 0,
+        "language": "en"
       }
     ]
   },
@@ -299,7 +343,7 @@
     "categoryName": "Maths, science and engineering",
     "skillIcon": "pictures/icons/Scrum.png",
     "description": "...",
-    "descriptionWikipediaURL" : "https://en.wikipedia.org/wiki/Scrum",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Scrum",
     "pointDescription": [
       "L1",
       "L2",
@@ -316,7 +360,10 @@
         "level": 1,
         "shortDescription": "Scrum Crash Course",
         "URL": "https://www.youtube.com/watch?v=2Vt7Ik8Ublw",
-        "URLlastAccessed": "2018-11-19"
+        "URLlastAccessed": "2018-11-19",
+        "goal": "",
+        "length": 0,
+        "language": "en"
       }
     ]
   },
@@ -325,7 +372,7 @@
     "categoryName": "Soft",
     "skillIcon": "pictures/icons/Coaching.png",
     "description": "...",
-    "descriptionWikipediaURL" : "https://en.wikipedia.org/wiki/Coaching",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Coaching",
     "pointDescription": [
       "L1",
       "L2",
@@ -334,17 +381,18 @@
       "L5"
     ],
     "maxPoint": 5,
-    "parents": [
-      "HTML"
-    ],
+    "parents": [],
     "children": [],
     "trainings": [
       {
-        "name": "HTML Basics",
+        "name": "Introduction to Coaching",
         "level": 1,
-        "shortDescription": "Coaching for Beginners",
-        "URL": "",
-        "URLlastAccessed": ""
+        "shortDescription": "Introducing the basic aspects of coaching.",
+        "URL": "https://www.youtube.com/watch?v=vKwIi34C9zk",
+        "URLlastAccessed": "",
+        "goal": "",
+        "length": 0,
+        "language": "en"
       }
     ]
   },
@@ -353,7 +401,7 @@
     "categoryName": "Maths, science and engineering",
     "skillIcon": "pictures/icons/MachineLearning.png",
     "description": "Machine learning (ML) is a field of artificial intelligence that uses statistical techniques to give computer systems the ability to 'learn' (e.g., progressively improve performance on a specific task) from data, without being explicitly programmed.",
-    "descriptionWikipediaURL" : "https://en.wikipedia.org/wiki/Machine_learning",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Machine_learning",
     "pointDescription": [
       "L1",
       "L2",
@@ -363,7 +411,7 @@
     ],
     "maxPoint": 5,
     "parents": [
-      "HTML"
+      "Python"
     ],
     "children": [],
     "trainings": [
@@ -372,7 +420,10 @@
         "level": 1,
         "shortDescription": "A Friendly Introduction to Machine Learning",
         "URL": "https://www.youtube.com/watch?v=IpGxLWOIZy4",
-        "URLlastAccessed": "2018-11-19"
+        "URLlastAccessed": "2018-11-19",
+        "goal": "",
+        "length": 0,
+        "language": "en"
       }
     ]
   }
