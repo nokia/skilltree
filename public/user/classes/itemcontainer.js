@@ -11,7 +11,7 @@ class ItemContainer {
 
         //Setting border variables
         this.skillborder.levelinfo = new PIXI.Text(this.skill.achievedPoint + "/" + this.skill.maxPoint);
-        this.skillborder.levelinfo.scale = .4;
+        this.skillborder.levelinfo.scale.set(.4);
 
         //Creating details page
         var detailsWidth = 240;
