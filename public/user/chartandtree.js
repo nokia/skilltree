@@ -12,7 +12,7 @@ function initData(){
       if(dataRequest.readyState == 4 && dataRequest.status == 200) {
           data = dataRequest.response;
 
-          if (data.admin) document.getElementById('approveMenu').style.display = "block";
+          if (data.admin) document.getElementById('openApproveMenu').style.display = "block";
 
           checkFirstLogin();
       }
@@ -687,7 +687,11 @@ function addRow(table) {
 */
 
 function approveMenu() {
-    alert("jovicc");
+    var canvas = document.getElementById("pixiCanvas");
+    canvas.style.display = "none";
+
+    var approveMenu = document.getElementById("approveMenu");
+    approveMenu.style.display = "block";
 }
 
 /*
