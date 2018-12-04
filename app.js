@@ -200,13 +200,13 @@ getRoute.get('/userdata', function (req, res) {
     				return trees;
     		    });
 
-                var skills = await ApprovableTree.find({}, function(err, skills) {
+                var skills = await ApprovableSkill.find({}, function(err, skills) {
     		        if (err) throw err;
     				return skills;
     		    });
 
-                user.trees = trees;
-                user.skills = skills;
+                user.apprTrees = trees;
+                user.apprSkills = skills;
             }
 
       		return res.json(user);
