@@ -682,6 +682,18 @@ function addRow(table) {
 *   TREE CREATOR END
 */
 
+/*
+*   Approve menu for admins
+*/
+
+function approveMenu() {
+    
+}
+
+/*
+*   Approve menu for admins end
+*/
+
 // helper functions
 
 function parseJwt (token) {
