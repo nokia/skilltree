@@ -378,7 +378,7 @@ setRoute.post('/addTreeToUser', async function (req, res){
 
 			await skills.forEach(function (skill) {
 				skill.achievedPoint = 0;
-				user.skills.push(skill);
+                if (user.skills.find(obj => obj.name == skill.name) == undefined) user.skills.push(skill);
 			});
 
 			user.save(function (err) {if (err) throw err;});
@@ -662,6 +662,19 @@ setRoute.post('/newtree', async function (req, res) { // create user tree
 	else if (user.trees.find(obj => obj.name == data.name) == undefined) {
 		var sn = await sortTree(data.skillNames);
 		user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: sn});
+
+        var skills = await Skill.find({
+            name: data.skillNames,
+        }, function (err, skills) {
+            if (err) throw err;
+            return skills;
+        });
+
+        await skills.forEach(function (skill) {
+            skill.achievedPoint = 0;
+            if (user.skills.find(obj => obj.name == skill.name) == undefined) user.skills.push(skill);
+        });
+
 		user.save(function (err) {if (err) throw err;});
 
         if (data.forApprove) {
