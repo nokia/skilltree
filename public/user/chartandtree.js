@@ -687,7 +687,7 @@ function addRow(table) {
 */
 
 function approveMenu() {
-    
+    alert("jovicc");
 }
 
 /*
