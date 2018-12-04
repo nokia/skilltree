@@ -86,7 +86,9 @@ a {
 }
 
 #creator .card * {
-    margin-left: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 
 #creator .card h1 {
