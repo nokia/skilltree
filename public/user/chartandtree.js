@@ -44,12 +44,13 @@ function initCard(){
 }
 
 function initUI(self, data){
+  console.log(data);
   var card_username = document.getElementById('card_username');
   var treeOperationTitle = document.getElementById('treeOperationTitle');
   var searchedTree = document.getElementById('searchedTree');
   var addsearchedTree = document.getElementById('addsearchedTree');
   if (self) {
-    card_username.innerHTML = "Welcome" + data.username + "!";
+    card_username.innerHTML = "Welcome " + data.username + "!";
     treeOperationTitle.innerHTML = "Add existing trees!";
     searchedTree.onkeyup = searchTreesByName;
     addsearchedTree.value = "Add!";

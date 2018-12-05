@@ -346,7 +346,7 @@ setRoute.post('/getPublicUserData', async function (req, res) {
 		return user;
 		});
 		res.json({
-      username: foundUser.username,
+      username: data.value,
 			skills : foundUser.skills,
 			trees : foundUser.trees,
 			mainTree : foundUser.mainTree
