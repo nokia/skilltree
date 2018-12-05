@@ -121,7 +121,7 @@ function loadAddedTrees(){
     ithtree.innerHTML = tn;
     ithtree.className = "dropdown-item";
     ithtree.onclick = function() {
-      showTree(this.innerHTML);
+      showTree(this.innerHTML, data);
     }
     treeList.appendChild(ithtree);
   }
@@ -151,6 +151,7 @@ function getPublicUserData(){
   request('POST', '/set/getPublicUserData', userToSearch, function() {
       if(this.readyState == 4 && this.status == 200) {
         alert("User found, data loaded.");
+        showTree(response.mainTree, response);
       }
   });
 }
@@ -217,7 +218,7 @@ function startLoader () {
         PIXI.loader.add(data.skills[i].skillIcon.toString());
     }
     PIXI.loader.load(function () {
-        showTree(data.mainTree);
+        showTree(data.mainTree, data);
     });
     loadAddedTrees();
 }
@@ -242,7 +243,7 @@ function showChart() {
 
     document.getElementById("openchart").value = "Close Chart";
     document.getElementById("openchart").onclick = function() {
-        showTree(selectedTreeName);
+        showTree(selectedTreeName, data);
     };
 
     chartContainer = new PIXI.Container();
@@ -395,7 +396,7 @@ window.onresize = function () {
 var selectedTreeName;
 var tree = undefined;
 
-function showTree (treeName) {
+function showTree (treeName, data) {
     // load the tree's pictures
     if (tree != undefined) {
         app.stage.removeChild(tree.treeContainer);

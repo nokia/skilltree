@@ -56,6 +56,7 @@ a {
     width: 35%!important;
     z-index: 100;
     position: relative;
+    margin-right: 10px;
 }
 
 #userCard {
