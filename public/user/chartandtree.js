@@ -11,17 +11,13 @@ function initData(){
   dataRequest.onreadystatechange = function() {
       if(dataRequest.readyState == 4 && dataRequest.status == 200) {
           data = dataRequest.response;
-
-          console.log(data);
-
           if (data.admin) document.getElementById('openApproveMenu').style.display = "block";
-
           checkFirstLogin();
+          initUI(true, data);
       }
   }
   dataRequest.send();
-}
-// get data from server
+} // get data from server
 
 var app = new PIXI.Application({
         view: pixiCanvas,
@@ -45,6 +41,27 @@ function initCard(){
   pointCount.innerHTML = data.skills.sum("achievedPoint") + "<br>points";
   cardUserName.innerHTML = data.username;
   cardMainTree.innerHTML = data.mainTree;
+}
+
+function initUI(self, data){
+  var card_username = document.getElementById('card_username');
+  var treeOperationTitle = document.getElementById('treeOperationTitle');
+  var searchedTree = document.getElementById('searchedTree');
+  var addsearchedTree = document.getElementById('addsearchedTree');
+  if (self) {
+    card_username.innerHTML = "Welcome" + data.username + "!";
+    treeOperationTitle.innerHTML = "Add existing trees!";
+    searchedTree.onkeyup = searchTreesByName;
+    addsearchedTree.value = "Add!";
+    addsearchedTree.onclick = addTreeToUser;
+  }
+  else {
+    card_username.innerHTML = "You're now viewing " + data.username + "'s data.";
+    treeOperationTitle.innerHTML = "Browse " + data.username + "'s public trees!";
+    searchedTree.onkeyup = searchTreesByName;
+    addsearchedTree.value = "Search!";
+    addsearchedTree.onclick = showTree(searchedTree.value, data);
+  }
 }
 
 // TOP BAR
@@ -150,8 +167,8 @@ function getPublicUserData(){
 
   request('POST', '/set/getPublicUserData', userToSearch, function() {
       if(this.readyState == 4 && this.status == 200) {
-        alert("User found, data loaded.");
-        showTree(response.mainTree, response);
+        showTree(this.response.mainTree, this.response);
+        initUI(this.response, false);
       }
   });
 }

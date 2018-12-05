@@ -144,7 +144,7 @@
 <!-- user profile details card -->
 <div id="userprofile" class="collapse float-right">
     <div class="card text-white bg-info mb-3">
-        <div class="card-header">User Profile</div>
+        <div class="card-header" id="card_username"></div>
         <div class="card-body">
             <!-- card nav -->
             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -165,6 +165,7 @@
             <div class="tab-content" id="myTabContent">
                 <!-- personal-tab content -->
                 <div class="tab-pane fade show active" id="personal" role="tabpanel" aria-labelledby="personal-tab">
+
                     <form class="pt-4">
                         <div class="form-group row">
                             <label for="username" class="col-sm-3 col-form-label">User name</label>
@@ -194,10 +195,10 @@
                 </div>
                 <!-- skilltrees-tab content -->
                 <div class="tab-pane fade" id="skilltrees" role="tabpanel" aria-labelledby="skilltrees-tab">
-                  <h4 class="pt-4">Add existing trees</h4>
+                  <h5 class="pt-4" id="treeOperationTitle">Add existing trees</h5>
                   <div class="form-inline my-2 my-lg-0">
                       <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" onkeyup="searchTreesByName()" list="TreeSearchResult" id="searchedTree">
-                      <input class="btn btn-outline-dark my-2 my-sm-0" type="submit" onclick="addTreeToUser()" value="Add!">
+                      <input class="btn btn-outline-dark my-2 my-sm-0" type="submit" onclick="addTreeToUser()" value="Add!" id="addsearchedTree">
                   </div>
                 </div>
                 <!-- statistics-tab content -->
