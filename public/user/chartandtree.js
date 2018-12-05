@@ -169,7 +169,7 @@ function getPublicUserData(){
   request('POST', '/set/getPublicUserData', userToSearch, function() {
       if(this.readyState == 4 && this.status == 200) {
         showTree(this.response.mainTree, this.response);
-        initUI(this.response, false);
+        initUI(false, this.response);
       }
   });
 }
