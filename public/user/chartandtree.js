@@ -44,7 +44,6 @@ function initCard(){
 }
 
 function initUI(self, data){
-  console.log(data);
   var card_username = document.getElementById('card_username');
   var treeOperationTitle = document.getElementById('treeOperationTitle');
   var searchedTree = document.getElementById('searchedTree');
@@ -61,7 +60,6 @@ function initUI(self, data){
     treeOperationTitle.innerHTML = "Browse " + data.username + "'s public trees!";
     searchedTree.onkeyup = searchTreesByName;
     addsearchedTree.value = "Search!";
-    addsearchedTree.onclick = showTree(searchedTree.value, data);
   }
 }
 
