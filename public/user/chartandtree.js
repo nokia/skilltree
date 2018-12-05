@@ -61,12 +61,12 @@ function initUI(self, data){
     treeOperationTitle.innerHTML = "Browse " + data.username + "'s public trees!";
     searchedTree.onkeyup = searchTreesByName;
     addsearchedTree.value = "Search!";
-    addsearchedTree.onclick = showSomeTree(searchedTree.value, data);
+    addsearchedTree.onclick = showSomeTree(data);
   }
 }
 
-function showSomeTree(treeName, data){
-  showTree(treeName, data);
+function showSomeTree(data){
+  showTree(searchedTree.value, data);
 }
 
 // TOP BAR
