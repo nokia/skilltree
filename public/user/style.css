@@ -74,9 +74,13 @@ a {
   overflow-y: auto;
 }
 
+.navbar{
+  line-height: 2.5;
+  padding: .0rem 1rem;
+}
+
 .nav-item{
   cursor: pointer;
-  height: 100%;
 }
 
 .nav-item:active{
