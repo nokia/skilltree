@@ -329,6 +329,38 @@
   <!-- end of modal -->
 
   <!-- start of modal -->
+  <div id = "firstLogin" class = "modal">
+      <div class = "modal-content">
+          <div class="modal-header">
+              <h2>Set up your account</h2>
+          </div>
+          <div class="modal-body">
+              <h4>Please select your main skill tree!</h4>
+              <select id = "maintree"></select>
+              <div id = "teachingSettings">
+                  <br>
+                  <h4>Please specify your availability for teaching!</h4>
+                  On which day are you available for teching?
+                  <select id = "day">
+                     <option value = "Monday">Monday</option>
+                     <option value = "Tuesday">Tuesday</option>
+                     <option value = "Wednesday">Wednesday</option>
+                     <option value = "Thursday">Thursday</option>
+                     <option value = "Friday">Friday</option>
+                  </select><br>
+                  Timeslot when you are willing to teach on this day:
+                  <input type = "time" id = "timeStart"> - <input type = "time" id = "timeEnd"><br>
+                  Where can people find you?
+                  <input type = "text" id = "location"><br>
+             </div>
+             <br>
+             <input type = "button" value = "Save" id = "savebtn">
+          </div>
+      </div>
+  </div>
+  <!-- end of modal -->
+
+  <!-- start of modal -->
   <div id = "skillpage" class = "modal">
     <div class = "modal-content">
       <div class="modal-header">
