@@ -327,7 +327,7 @@ class ItemContainer {
                                     }
                                 }
 
-                            var addBeginnerRequest = document.getElementById('addBeginnerRequest');
+                            var addBeginnerRequest = document.getElementById('addBeginnerCount');
                             addBeginnerRequest.onclick = function() {
                                 console.log("clicked");
                             }
