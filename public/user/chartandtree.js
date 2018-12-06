@@ -13,7 +13,7 @@ function initData(){
           data = dataRequest.response;
           if (data.admin) document.getElementById('openApproveMenu').style.display = "block";
           checkFirstLogin();
-          initUI(true);
+          initUI(true, data);
       }
   }
   dataRequest.send();
@@ -43,7 +43,7 @@ function initCard(){
   cardMainTree.innerHTML = data.mainTree;
 }
 
-function initUI(self){
+function initUI(self, data){
   var card_username = document.getElementById('card_username');
   var treeOperationTitle = document.getElementById('treeOperationTitle');
   var searchedTree = document.getElementById('searchedTree');
@@ -61,7 +61,7 @@ function initUI(self){
     searchedTree.onkeyup = searchTreesByName;
     addsearchedTree.value = "Search!";
     addsearchedTree.onclick = function(){
-      showTree(searchedTree.value);
+      showTree(searchedTree.value, data);
     }
   }
 
@@ -142,7 +142,7 @@ function loadAddedTrees(){
     ithtree.innerHTML = tn;
     ithtree.className = "dropdown-item";
     ithtree.onclick = function() {
-      showTree(this.innerHTML);
+      showTree(this.innerHTML, data);
     }
     treeList.appendChild(ithtree);
   }
@@ -239,7 +239,7 @@ function startLoader () {
         PIXI.loader.add(data.skills[i].skillIcon.toString());
     }
     PIXI.loader.load(function () {
-        showTree(data.mainTree);
+        showTree(data.mainTree, data);
     });
     loadAddedTrees();
 }
@@ -252,6 +252,7 @@ app.stage.group.enableSort = true;
 
 // CHART
 
+document.getElementById("home").onclick = showTree(data.mainTree);
 document.getElementById("openchart").onclick = showChart;
 
 var chartContainer = new PIXI.Container();
@@ -417,7 +418,7 @@ window.onresize = function () {
 var selectedTreeName;
 var tree = undefined;
 
-function showTree (treeName) {
+function showTree (treeName, data) {
     document.getElementById('creator').style.display = "none";
     document.getElementById('approveTrees').style.display = "none";
     document.getElementById('approveSkills').style.display = "none";
