@@ -329,7 +329,28 @@ class ItemContainer {
 
                             var addBeginnerRequest = document.getElementById('addBeginnerCount');
                             addBeginnerRequest.onclick = function() {
-                                console.log("clicked");
+                                //request for requests
+                                var requestforrequests = new XMLHttpRequest();
+                                    requestforrequests.open('POST', '/set/skilldata', true);
+                                    requestforrequests.setRequestHeader('Content-type', 'application/json');
+                                    requestforrequests.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+                                    requestforrequests.responseType = "json";
+                                
+                                //if it returns
+                                requestforrequests.onreadystatechange = function() {
+                                    if(requestforrequests.readyState == 4 && requestforrequests.status == 200) {
+                                        console.log(requestforrequests.response.message);
+                                    }
+                                }
+
+                                requestforrequests.send(
+                                    JSON.stringify({
+                                        name: this.skill.name
+                                    })
+                                );
+
+
+
                             }
                             
 

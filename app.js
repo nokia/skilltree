@@ -927,6 +927,58 @@ setRoute.post('/dropoffers', async function (req, res) {
 	
 });
 
+//API call for request onclick
+setRoute.post('/request', async function (req, res){
+
+	var user = await User.findOne({
+			username: req.decoded.username
+	}, function(err, user) {
+			if (err) throw err;
+	return user;
+	});
+	var skill = await Skill.findOne({"name": req.body.value},  function (err, skill) {
+		if (err) throw err;
+		return skill;
+	});
+
+	if (skill != undefined) {
+		var userskill = user.skills.find(obj => obj.name == skill.name);
+
+		if(skill.requests.find(obj => obj.username == user.username) == undefined)
+		{
+			skill.requests.push({	username: user.username, 
+									achievedPoint: userskill.achievedPoint, 
+									email: user.email  });
+
+			skill.save(function (err) {if (err) throw err;});
+
+			res.json({
+				succes: true,
+				message: "added request"
+			});
+		} 
+		else
+		{
+			escape.json({
+				succes: false,
+				message: "Already requested."
+			});
+		}
+
+
+		
+		
+	} 
+	else
+	{
+		escape.json({
+			succes: false,
+			message: "Skill not found"
+		});
+	}
+	 
+});
+
 
 
 const httpServer = http.createServer(app);
