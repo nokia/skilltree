@@ -43,7 +43,7 @@ function initCard(){
   cardMainTree.innerHTML = data.mainTree;
 }
 
-function initUI(self, data){
+function initUI(self, _data){
   var card_username = document.getElementById('card_username');
   var treeOperationTitle = document.getElementById('treeOperationTitle');
   var searchedTree = document.getElementById('searchedTree');
@@ -416,7 +416,7 @@ window.onresize = function () {
 var selectedTreeName;
 var tree = undefined;
 
-function showTree (treeName, data) {
+function showTree (treeName, _data) {
     document.getElementById('creator').style.display = "none";
     document.getElementById('approveTrees').style.display = "none";
     document.getElementById('approveSkills').style.display = "none";
