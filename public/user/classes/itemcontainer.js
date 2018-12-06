@@ -291,6 +291,7 @@ class ItemContainer {
             offerHttpRequest.responseType = "json";
 
 				//Listener, if response comes, it runs.
+				//Listener, if response comes, it runs.
 				offerHttpRequest.onreadystatechange = function() {
 		    		if(offerHttpRequest.readyState == 4 && offerHttpRequest.status == 200) {
 						if (offerHttpRequest.response !== undefined) {
@@ -302,17 +303,26 @@ class ItemContainer {
 
                             //Empty the table
                             offerTable.innerHTML = "";
+
+                            
+                            offerTable.appendChild( createTableRow( "Name", 
+                                                                    "Contact", 
+                                                                    "Location", 
+                                                                    "Skill Level",
+                                                                    "divTableHead") );
+
+                            
                             //Filling the table
                             for(var i=0; i<globalskill.offers.length; i++ )
                                 {
                                 if(true) //TODO, only higher level offers should appear
                                     {
                                     offerTable.appendChild( createTableRow( globalskill.offers[i].username,
-                                                                            globalskill.offers[i].location,
+                                                                            globalskill.offers[i].location,   
                                                                             globalskill.offers[i].teachingDay,
-                                                                            globalskill.offers[i].teachingTime,
-                                                                            globalskill.offers[i].achievedPoint
-                                                                            ) );
+                                                                            globalskill.offers[i].teachingTime,  
+                                                                            globalskill.offers[i].achievedPoint,
+                                                                            "divTableCell") );
                                     }
                                 }
                             //Checking that the table is done (1 table out of 3)
@@ -321,7 +331,7 @@ class ItemContainer {
                             //Display the tables Window if all table has been loaded
                             displayWindow();
 
-						} else console.log("apád");
+						} 
 					}
 				}
 
