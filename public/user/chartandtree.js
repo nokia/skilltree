@@ -255,6 +255,11 @@ document.getElementById("openchart").onclick = showChart;
 var chartContainer = new PIXI.Container();
 
 function showChart() {
+    document.getElementById('creator').style.display = "none";
+    document.getElementById('approveTrees').style.display = "none";
+    document.getElementById('approveSkills').style.display = "none";
+    document.getElementById('pixiCanvas').style.display = "block";
+
     if (tree != undefined) {
         app.stage.removeChild(tree.treeContainer);
         tree = undefined;
@@ -416,7 +421,11 @@ var selectedTreeName;
 var tree = undefined;
 
 function showTree (treeName, data) {
-    // load the tree's pictures
+    document.getElementById('creator').style.display = "none";
+    document.getElementById('approveTrees').style.display = "none";
+    document.getElementById('approveSkills').style.display = "none";
+    document.getElementById('pixiCanvas').style.display = "block";
+
     if (tree != undefined) {
         app.stage.removeChild(tree.treeContainer);
         tree = undefined;
@@ -713,6 +722,9 @@ function addRow(table) {
 */
 
 function approveTrees() {
+    document.getElementById('creator').style.display = "none";
+    document.getElementById('approveSkills').style.display = "none";
+
     var canvas = document.getElementById("pixiCanvas");
     canvas.style.display = "none";
 
@@ -728,6 +740,9 @@ function approveTrees() {
 }
 
 function approveSkills() {
+    document.getElementById('creator').style.display = "none";
+    document.getElementById('approveTrees').style.display = "none";
+
     var canvas = document.getElementById("pixiCanvas");
     canvas.style.display = "none";
 
