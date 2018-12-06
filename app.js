@@ -664,6 +664,7 @@ setRoute.post('/newtree', async function (req, res) { // create user tree
 		user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: sn});
 
         await data.skillNames.forEach(async function (skillName) {
+            console.log(skillName);
             var skill = await Skill.findOne({
                 name: skillName,
             }, function (err, skill) {
