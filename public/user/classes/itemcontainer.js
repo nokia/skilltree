@@ -282,6 +282,7 @@ class ItemContainer {
         var span = document.getElementById("closeORModal");
         var globalskill = undefined;
 
+        var skillname = this.skill.name;
         
         //HTTP Request for offer data
         var offerHttpRequest = new XMLHttpRequest();
@@ -345,7 +346,7 @@ class ItemContainer {
 
                                 requestforrequests.send(
                                     JSON.stringify({
-                                        name: this.skill.name
+                                        name: skillname
                                     })
                                 );
 
@@ -363,7 +364,7 @@ class ItemContainer {
 
 				offerHttpRequest.send(
 					JSON.stringify({
-						name: this.skill.name
+						name: skillname
 					})
 				);
 
