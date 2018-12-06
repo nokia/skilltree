@@ -262,6 +262,8 @@ function showChart() {
     document.getElementById('approveSkills').style.display = "none";
     document.getElementById('pixiCanvas').style.display = "block";
 
+    document.getElementById("openchart").onclick = showTree(data.mainTree, data);
+
     if (tree != undefined) {
         app.stage.removeChild(tree.treeContainer);
         tree = undefined;
