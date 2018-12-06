@@ -734,6 +734,52 @@ setRoute.post('/skilldata', function(req, res) {
 	});
 });
 
+setRoute.post('/request', async function (req, res){
+
+	var user = await User.findOne({
+			username: req.decoded.username
+	}, function(err, user) {
+			if (err) throw err;
+	return user;
+	});
+	var skill = await Skill.findOne({"name": req.body.value},  function (err, skill) {
+		if (err) throw err;
+		return skill;
+	});
+
+	if (skill != undefined) {
+		var userskill = user.skills.find(obj => obj.name == skill.name);
+
+		if(skill.requests.find(obj => obj.username == user.username) == undefined)
+		{
+			skill.requests.push({	username: user.username, 
+									achievedPoint: userskill.achievedPoint, 
+									email: user.email  });
+		} 
+		else
+		{
+			escape.json({
+				succes: false,
+				message: "Already requested."
+			});
+
+		}
+
+
+		skill.save(function (err) {if (err) throw err;});
+		
+	} 
+	else
+	{
+		escape.json({
+			succes: false,
+			message: "Skill not found"
+		});
+	}
+	 
+});
+
+
 setRoute.post('/approvetree', async function (req, res) {
 	var data = req.body;
 
