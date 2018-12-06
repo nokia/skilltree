@@ -45,25 +45,25 @@ function initCard(){
   cardMainTree.innerHTML = data.mainTree;
 }
 
-function initUI(self, data){
+function initUI(self, _data){
   var card_username = document.getElementById('card_username');
   var treeOperationTitle = document.getElementById('treeOperationTitle');
   var searchedTree = document.getElementById('searchedTree');
   var addsearchedTree = document.getElementById('addsearchedTree');
   if (self) {
-    card_username.innerHTML = "Welcome " + data.username + "!";
+    card_username.innerHTML = "Welcome " + _data.username + "!";
     treeOperationTitle.innerHTML = "Add existing trees!";
     searchedTree.onkeyup = searchTreesByName;
     addsearchedTree.value = "Add!";
     addsearchedTree.onclick = addTreeToUser;
   }
   else {
-    card_username.innerHTML = "You're now viewing " + data.username + "'s data.";
-    treeOperationTitle.innerHTML = "Browse " + data.username + "'s public trees!";
+    card_username.innerHTML = "You're now viewing " + _data.username + "'s data.";
+    treeOperationTitle.innerHTML = "Browse " + _data.username + "'s public trees!";
     searchedTree.onkeyup = searchTreesByName;
     addsearchedTree.value = "Search!";
     addsearchedTree.onclick = function(){
-      showTree(searchedTree.value, data);
+      showTree(searchedTree.value, _data);
     }
   }
 }
@@ -417,7 +417,7 @@ window.onresize = function () {
 var selectedTreeName;
 var tree = undefined;
 
-function showTree (treeName, data) {
+function showTree (treeName, _data) {
     document.getElementById('creator').style.display = "none";
     document.getElementById('approveTrees').style.display = "none";
     document.getElementById('approveSkills').style.display = "none";
@@ -430,9 +430,9 @@ function showTree (treeName, data) {
     selectedTreeName = treeName;
 
     var skills = new Array();
-    for (var j = 0; j < data.trees.find(obj => obj.name == treeName).skillNames.length; ++j) {
-        var skillName = data.trees.find(obj => obj.name == treeName).skillNames[j];
-        var skill = data.skills.find(obj => obj.name == skillName);
+    for (var j = 0; j < _data.trees.find(obj => obj.name == treeName).skillNames.length; ++j) {
+        var skillName = _data.trees.find(obj => obj.name == treeName).skillNames[j];
+        var skill = _data.skills.find(obj => obj.name == skillName);
 
         skills.push(skill);
     }
