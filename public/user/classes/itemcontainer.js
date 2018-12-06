@@ -328,33 +328,15 @@ class ItemContainer {
                                 }
 
                             var addBeginnerRequest = document.getElementById('addBeginnerCount');
-                            
-                    addBeginnerRequest.onclick = function() {
-                            var addBeginnerCount = new XMLHttpRequest();
-                                addBeginnerCount.open('POST', '/set/request', true);
-                                addBeginnerCount.setRequestHeader('Content-type', 'application/json');
-                                addBeginnerCount.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-                                addBeginnerCount.responseType = "json";
-                                
-                                addBeginnerCount.onreadystatechange = function() {
-                                    if(addBeginnerCount.readyState == 4 && addBeginnerCount.status == 200) {
-
-
-                                    }
-                                }
-                            
-                                addBeginnerCount.send(
-                                    JSON.stringify({
-                                        name: this.skill.name
-                                    })
-                                );
+                            addBeginnerRequest.onclick = function() {
+                                console.log("clicked");
+                            }
                             
 
-                    } 
-                        
+                            //Display the tables Window if all table has been loaded
+                            displayWindow();
 
-                    //Display the tables Window if all table has been loaded
-                    displayWindow();
+						} 
 					}
                 }
 
@@ -452,6 +434,4 @@ class ItemContainer {
         {
             console.log("clicked");
         }
-} //end of toggledetails
-
-} //end of class
+}
