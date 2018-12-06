@@ -252,7 +252,6 @@ app.stage.group.enableSort = true;
 
 // CHART
 
-document.getElementById("home").onclick = showTree(data.mainTree);
 document.getElementById("openchart").onclick = showChart;
 
 var chartContainer = new PIXI.Container();
