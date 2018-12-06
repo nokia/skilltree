@@ -271,15 +271,15 @@
             </div>
             <div class="modal-body">
                 <form onsubmit = "return false">
-                    Name:
+                    <h5>Name:</h5>
                     <input type = "text" id = "newSkillName" required><br>
-                    Description:
+                    <h5>Description:</h5>
                     <textarea id = "newSkillDesc" required></textarea><br>
-                    Icon:
+                    <h5>Icon:</h5>
                     <input type = "text" id = "newSkillIcon" value = "pictures/icons/.png" required><br>
-                    Category:
+                    <h5>Category:</h5>
                     <select id = "newSkillCat"></select><br>
-                    Points:<br>
+                    <h5>Points:</h5><br>
                     <table id = "pointsTable" border = "1">
                         <tr>
                             <td>Point</td>
@@ -293,7 +293,7 @@
                         </tr>
                     </table>
                     <input type="button" value="Add point" onclick="addRow('pointsTable')"><br>
-                    Parents:<br>
+                    <h5>Parents:</h5><br>
                     <table id = "parentsTable" border = "1">
                         <tr>
                             <td>Parent</td>
@@ -305,7 +305,7 @@
                         </tr>
                     </table>
                     <input type="button" value="Add parent" onclick="addRow('parentsTable')"><br>
-                    Children:<br>
+                    <h5>Children:</h5><br>
                     <table id = "childrenTable" border = "1">
                         <tr>
                             <td>Child</td>
@@ -321,7 +321,7 @@
                         </tr>
                     </table>
                     <input type="button" value="Add child" onclick="addRow('childrenTable')"><br>
-                    Trainings:<br>
+                    <h5>Trainings:</h5><br>
                     <table id = "trainingsTable" border = "1">
                         <tr>
                             <td>Name</td>
@@ -331,11 +331,11 @@
                             <td>Delete</td>
                         </tr>
                         <tr>
-                            <td><input size=30 type="text" required></td>
-                            <td><input size=10 type="text" required></td>
-                            <td><input size=30 type="text" required></td>
-                            <td><input size=30 type="text" required></td>
-                            <td><input type="button" value="Delete" onclick="deleteRow('trainingsTable', this)" required></td>
+                            <td><input size=30 type="text"></td>
+                            <td><input size=10 type="text"></td>
+                            <td><input size=30 type="text"></td>
+                            <td><input size=30 type="text"></td>
+                            <td><input type="button" value="Delete" onclick="deleteRow('trainingsTable', this)"></td>
                         </tr>
                     </table>
                     <input type="button" value="Add child" onclick="addRow('trainingsTable')"><br>
