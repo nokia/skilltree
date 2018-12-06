@@ -670,15 +670,17 @@ setRoute.post('/newtree', async function (req, res) { // create user tree
             return skills;
         });
 
+        console.log(skills);
+
         await skills.forEach(function (skill) {
             skill.achievedPoint = 0;
             if (user.skills.find(obj => obj.name == skill.name) == undefined) {
-                console.log(skill);
+                //console.log(skill);
                 user.skills.push(skill);
             }
         });
 
-        console.log(user);
+        //console.log(user);
 
 		user.save(function (err) {if (err) throw err;});
 
