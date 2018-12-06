@@ -350,7 +350,7 @@ class ItemContainer {
         var requestTable = document.getElementById('requestTableBody');
 
 
-        function createTableRow( data1, data2, data3, data4, data5 )
+        function createTableRow( data1, data2, data3, data4, data5, classname )
         {
             //Creating an offer tablerow
             var Row = document.createElement('div');
@@ -360,7 +360,7 @@ class ItemContainer {
             if(data1 !== undefined)
             {
             var Column1 = document.createElement('div');
-            Column1.className = "divTableCell";
+            Column1.className = classname;
             Column1.innerHTML = data1;
             Row.appendChild(Column1);
             }
@@ -368,7 +368,7 @@ class ItemContainer {
             if(data2 !== undefined)
             {
             var Column2 = document.createElement('div');
-            Column2.className = "divTableCell";
+            Column2.className = classname;
             Column2.innerHTML = data2;
             Row.appendChild(Column2);
             }
@@ -376,7 +376,7 @@ class ItemContainer {
             if(data3 !== undefined)
             {
             var Column3 = document.createElement('div');
-            Column3.className = "divTableCell";
+            Column3.className = classname;
             Column3.innerHTML = data3;
             Row.appendChild(Column3);
             }
@@ -384,7 +384,7 @@ class ItemContainer {
             if(data4 !== undefined)
             {
             var Column4 = document.createElement('div');
-            Column4.className = "divTableCell";
+            Column4.className = classname;
             Column4.innerHTML = data4;
             Row.appendChild(Column4);
             }
@@ -392,7 +392,7 @@ class ItemContainer {
             if(data5 !== undefined)
             {
             var Column5 = document.createElement('div');
-            Column5.className = "divTableCell";
+            Column5.className = classname;
             Column5.innerHTML = data5;
             Row.appendChild(Column5);
             }
