@@ -65,7 +65,7 @@ function initUI(self){
     }
   }
 
-    document.getElementById("home").onclick = function () {alert('ss'); showTree(data.mainTree);};
+    document.getElementById("home").onclick = function () {showTree(data.mainTree);};
 }
 
 // TOP BAR
