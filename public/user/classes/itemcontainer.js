@@ -309,7 +309,7 @@ class ItemContainer {
                                                                     "Location", 
                                                                     "Teaching Day",
                                                                     "Teaching Time",
-                                                                    undefined,
+                                                                    "Achieved Point",
                                                                     "divTableHead") );
 
                             
@@ -322,7 +322,7 @@ class ItemContainer {
                                                                             globalskill.offers[i].location,   
                                                                             globalskill.offers[i].teachingDay,
                                                                             globalskill.offers[i].teachingTime,  
-                                                                            undefined,
+                                                                            globalskill.offers[i].achievedPoint,
                                                                             "divTableCell") );
                                     }
                                 }
