@@ -110,8 +110,8 @@ a {
     margin-right: auto;
 }
 
-#newSkillModal input, select, table {
-    margin-left: 10px;
+#newSkillModal input, select, table. textarea {
+    margin-left: 20px;
 }
 
 /*.creator-grid {
