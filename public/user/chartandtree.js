@@ -100,7 +100,7 @@ function checkFirstLogin() {
             });
         }
 
-        /*var span = document.getElementsByClassName("modalClose")[0];
+        var span = document.getElementsByClassName("modalClose")[0];
 
         span.onclick = function() {
             modal.style.display = "none";
@@ -110,7 +110,7 @@ function checkFirstLogin() {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
-        }*/
+        }
 
         for (var i = 0; i < data.focusArea.treeNames.length; ++i) {
             var option = document.createElement('option');
