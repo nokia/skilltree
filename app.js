@@ -936,7 +936,7 @@ setRoute.post('/request', async function (req, res){
 			if (err) throw err;
 	return user;
 	});
-	var skill = await Skill.findOne({"name": req.body.value},  function (err, skill) {
+	var skill = await Skill.findOne({name: req.body.name},  function (err, skill) {
 		if (err) throw err;
 		return skill;
 	});
@@ -964,10 +964,6 @@ setRoute.post('/request', async function (req, res){
 				message: "Already requested."
 			});
 		}
-
-
-		
-		
 	} 
 	else
 	{
