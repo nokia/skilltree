@@ -309,7 +309,7 @@ class ItemContainer {
                                                                     "Location", 
                                                                     "Teaching Day",
                                                                     "Teaching Time",
-                                                                    null,
+                                                                    undefined,
                                                                     "divTableHead") );
 
                             
@@ -322,7 +322,7 @@ class ItemContainer {
                                                                             globalskill.offers[i].location,   
                                                                             globalskill.offers[i].teachingDay,
                                                                             globalskill.offers[i].teachingTime,  
-                                                                            null,
+                                                                            undefined,
                                                                             "divTableCell") );
                                     }
                                 }
@@ -357,35 +357,35 @@ class ItemContainer {
             Row.className = "divTableRow";
             
             
-            if(data1!=null)
+            if(data1 !== undefined)
             {
             var Column1 = document.createElement('div');
             Column1.className = "divTableCell";
             Column1.innerHTML = data1;
             }
 
-            if(data2!=null)
+            if(data2 !== undefined)
             {
             var Column2 = document.createElement('div');
             Column2.className = "divTableCell";
             Column2.innerHTML = data2;
             }
 
-            if(data3!=null)
+            if(data3 !== undefined)
             {
             var Column3 = document.createElement('div');
             Column3.className = "divTableCell";
             Column3.innerHTML = data3;
             }
 
-            if(data4!=null)
+            if(data4 !== undefined)
             {
             var Column4 = document.createElement('div');
             Column4.className = "divTableCell";
             Column4.innerHTML = data4;
             }
 
-            if(data5!=null)
+            if(data5 !== undefined)
             {
             var Column5 = document.createElement('div');
             Column5.className = "divTableCell";
