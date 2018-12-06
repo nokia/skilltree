@@ -14,6 +14,8 @@ function initData(){
           if (data.admin) document.getElementById('openApproveMenu').style.display = "block";
           checkFirstLogin();
           initUI(true, data);
+
+          document.getElementById("home").onclick = function () {showTree(data.mainTree);};
       }
   }
   dataRequest.send();
@@ -64,8 +66,6 @@ function initUI(self, data){
       showTree(searchedTree.value, data);
     }
   }
-
-    document.getElementById("home").onclick = function () {showTree(data.mainTree);};
 }
 
 // TOP BAR
