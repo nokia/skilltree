@@ -76,6 +76,7 @@ a {
 
 .nav-item{
   cursor: pointer;
+  height: 100%;
 }
 
 .nav-item:active{
