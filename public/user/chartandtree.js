@@ -250,6 +250,7 @@ app.stage.group.enableSort = true;
 
 // CHART
 
+document.getElementById("home").onclick = showTree(data.mainTree, data);
 document.getElementById("openchart").onclick = showChart;
 
 var chartContainer = new PIXI.Container();
@@ -264,11 +265,6 @@ function showChart() {
         app.stage.removeChild(tree.treeContainer);
         tree = undefined;
     }
-
-    document.getElementById("openchart").value = "Close Chart";
-    document.getElementById("openchart").onclick = function() {
-        showTree(selectedTreeName, data);
-    };
 
     chartContainer = new PIXI.Container();
 
