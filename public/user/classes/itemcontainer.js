@@ -344,26 +344,42 @@ class ItemContainer {
             //Creating an offer tablerow
             var Row = document.createElement('div');
             Row.className = "divTableRow";
-
+            
+            
+            if(data1!=null)
+            {
             var Column1 = document.createElement('div');
             Column1.className = "divTableCell";
             Column1.innerHTML = data1;
+            }
 
+            if(data2!=null)
+            {
             var Column2 = document.createElement('div');
             Column2.className = "divTableCell";
             Column2.innerHTML = data2;
+            }
 
+            if(data3!=null)
+            {
             var Column3 = document.createElement('div');
             Column3.className = "divTableCell";
             Column3.innerHTML = data3;
+            }
 
+            if(data4!=null)
+            {
             var Column4 = document.createElement('div');
             Column4.className = "divTableCell";
             Column4.innerHTML = data4;
+            }
 
+            if(data5!=null)
+            {
             var Column5 = document.createElement('div');
             Column5.className = "divTableCell";
             Column5.innerHTML = data5;
+            }
 
             Row.appendChild(Column1);
             Row.appendChild(Column2);
