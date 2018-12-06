@@ -645,19 +645,20 @@ setRoute.post('/newtree', async function (req, res) {
 		var sn = await sortTree(data.skillNames);
 		user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: sn});
 
-        var skills = await Skill.find({
-            name: data.skillNames,
-        }, function (err, skills) {
-            if (err) throw err;
-            return skills;
-        });
+        await data.skillNames.forEach(async function (skillName) {
+            var skill = await Skill.findOne({
+                name: skillName,
+            }, function (err, skill) {
+                if (err) throw err;
+                return skill;
+            });
 
-        await skills.forEach(function (skill) {
             skill.achievedPoint = 0;
-            if (user.skills.find(obj => obj.name == skill.name) == undefined) user.skills.push(skill);
+            if (user.skills.find(obj => obj.name == skill.name) == undefined) {
+                user.skills.push(skill);
+                console.log(skill);
+            }
         });
-
-        console.log(users);
 
 		user.save(function (err) {if (err) throw err;});
 
