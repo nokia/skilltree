@@ -751,6 +751,15 @@ function approveSkills() {
     }
 }
 
+function dropoffers() {
+    request('POST', '/set/searchSkillsByName', skillToSearch, function () {
+        if (this.readyState == 4 && this.status == 200) {
+            window.open("/user/", "_self");
+        }
+    });
+
+}
+
 /*
 *   Approve menu for admins end
 */
