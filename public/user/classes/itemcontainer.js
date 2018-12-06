@@ -424,5 +424,9 @@ class ItemContainer {
         }
 
 
+        function addBeginnerRequest()
+        {
+            
+        }
     }
 }
