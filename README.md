@@ -18,7 +18,7 @@ Skill Tree needs the following components to operate:
 * [Express] - A web framework for Node.js
 * [MongoDB] - A free and open-source cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with schemata.
 * [Nginx] - A web server which can also be used as a reverse proxy, load balancer, mail proxy and HTTP cache.
-* A GNU/Linux distribution, e.g. Debian or Ubuntu.
+* A GNU/Linux distribution, e.g. [Debian] or [Ubuntu].
 
 ## Installation
 
@@ -34,7 +34,7 @@ wget https://raw.githubusercontent.com/sicambria/skilltree/master/install/skillt
 ## Development
 
 Want to contribute? Great!
-You need an IDE of your choice, we recommend [AtomIDE] or [VScode].
+You need an IDE of your choice, we recommend [Atom] or [Visual Studio Code].
 
 For Atom, installing some plugins are helpful:
 
@@ -98,5 +98,7 @@ BSD License 2.0
    [MongoDB]: <https://www.mongodb.com/>
    [Express]: <https://expressjs.com/>
    [Nginx]: <https://www.nginx.com/>
-   [VScode]: <https://code.visualstudio.com/>
-   [AtomIDE]: <https://github.com/atom/atom>
+   [Visual Studio Code]: <https://code.visualstudio.com/>
+   [Atom]: <https://github.com/atom/atom>
+   [Debian]: <https://www.debian.org/>
+   [Ubuntu]: <https://www.ubuntu.com/>
