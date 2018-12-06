@@ -661,7 +661,7 @@ setRoute.post('/newtree', async function (req, res) { // create user tree
 
         await data.skillNames.forEach(async function (skillName) {
             var skill = await Skill.findOne({
-                name: skillName,
+                name: skillName.name,
             }, function (err, skill) {
                 if (err) throw err;
                 return skill;
