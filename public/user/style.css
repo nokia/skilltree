@@ -110,7 +110,7 @@ a {
     margin-right: auto;
 }
 
-#newSkillModal input {
+#newSkillModal input, select, table {
     margin-left: 10px;
 }
 
