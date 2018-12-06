@@ -426,7 +426,7 @@ class ItemContainer {
 
         function addBeginnerRequest()
         {
-            
+            console.log("clicked");
         }
     }
 }
