@@ -290,7 +290,7 @@ class ItemContainer {
             offerHttpRequest.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
             offerHttpRequest.responseType = "json";
 
-				//Listener, if response comes, it runs.
+				
 				//Listener, if response comes, it runs.
 				offerHttpRequest.onreadystatechange = function() {
 		    		if(offerHttpRequest.readyState == 4 && offerHttpRequest.status == 200) {
@@ -309,7 +309,7 @@ class ItemContainer {
                                                                     "Location", 
                                                                     "Teaching Day",
                                                                     "Teaching Time",
-                                                                    "Achieved Point",
+                                                                    "Level",
                                                                     "divTableHead") );
 
                             
@@ -334,7 +334,7 @@ class ItemContainer {
 
 						} 
 					}
-				}
+                }
 
 				offerHttpRequest.send(
 					JSON.stringify({
@@ -342,6 +342,8 @@ class ItemContainer {
 					})
 				);
 
+
+        //HTTP Request for offer request data
 
 
         //Adding
