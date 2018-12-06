@@ -61,11 +61,11 @@ function initUI(self){
     searchedTree.onkeyup = searchTreesByName;
     addsearchedTree.value = "Search!";
     addsearchedTree.onclick = function(){
-      showTree(searchedTree.value, data);
+      showTree(searchedTree.value);
     }
   }
 
-    document.getElementById("home").onclick = showTree(data.mainTree);
+    //document.getElementById("home").onclick = showTree(data.mainTree);
 }
 
 // TOP BAR
