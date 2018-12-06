@@ -280,7 +280,7 @@ class ItemContainer {
         var modal = document.getElementById('skillpage');
         var header = document.getElementById('skillnameHeader');
         var span = document.getElementById("closeORModal");
-
+        var globalskill = undefined;
 
         var allLoaded = 0;
         //HTTP Request for offer data
@@ -298,7 +298,7 @@ class ItemContainer {
                             //Got the offer data, fill the offers table
 
                             //Initialize table variables
-                            var globalskill = offerHttpRequest.response;
+                            globalskill = offerHttpRequest.response;
                             var offerTable = document.getElementById('offerTableBody');
 
                             //Empty the table
