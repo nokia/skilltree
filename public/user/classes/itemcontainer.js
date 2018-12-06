@@ -362,6 +362,7 @@ class ItemContainer {
             var Column1 = document.createElement('div');
             Column1.className = "divTableCell";
             Column1.innerHTML = data1;
+            Row.appendChild(Column1);
             }
 
             if(data2 !== undefined)
@@ -369,6 +370,7 @@ class ItemContainer {
             var Column2 = document.createElement('div');
             Column2.className = "divTableCell";
             Column2.innerHTML = data2;
+            Row.appendChild(Column2);
             }
 
             if(data3 !== undefined)
@@ -376,6 +378,7 @@ class ItemContainer {
             var Column3 = document.createElement('div');
             Column3.className = "divTableCell";
             Column3.innerHTML = data3;
+            Row.appendChild(Column3);
             }
 
             if(data4 !== undefined)
@@ -383,6 +386,7 @@ class ItemContainer {
             var Column4 = document.createElement('div');
             Column4.className = "divTableCell";
             Column4.innerHTML = data4;
+            Row.appendChild(Column4);
             }
 
             if(data5 !== undefined)
@@ -390,13 +394,8 @@ class ItemContainer {
             var Column5 = document.createElement('div');
             Column5.className = "divTableCell";
             Column5.innerHTML = data5;
-            }
-
-            Row.appendChild(Column1);
-            Row.appendChild(Column2);
-            Row.appendChild(Column3);
-            Row.appendChild(Column4);
             Row.appendChild(Column5);
+            }
 
             return Row;
         }
