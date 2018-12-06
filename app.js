@@ -486,11 +486,9 @@ async function getDependency (userSkills, skill, dependency) {
 var rootlevel = 0;
 
 async function insertSkill(skillToInsert, skillArray) {
-	console.log({txt: "rootlevel:" , rootlevel: rootlevel});
 	if (!skillArray.includes(skillToInsert)) {
 		if (skillArray.length === 0) {
 			skillToInsert.level = rootlevel;
-			console.log({name: skillToInsert.name, level: skillToInsert.level, pos: 0, entry: 0});
 			skillArray.push(skillToInsert);
 			return;
 		}
@@ -518,7 +516,6 @@ async function insertSkill(skillToInsert, skillArray) {
 								svc++;
 							}
 							skillToInsert.level = ithChild.level;
-							console.log({name: skillToInsert.name, level: skillToInsert.level, pos: svc, entry: 1});
 							skillArray.splice(svc, 0, skillToInsert);
 							return;
 						}
@@ -528,7 +525,6 @@ async function insertSkill(skillToInsert, skillArray) {
 						svp++;
 					}
 					skillToInsert.level = ithParent.level + 1;
-					console.log({name: skillToInsert.name, level: skillToInsert.level, pos: svp, entry: 2});
 					skillArray.splice(svp, 0, skillToInsert);
 					return;
 				}
@@ -549,7 +545,6 @@ async function insertSkill(skillToInsert, skillArray) {
 						c++;
 					}
 					skillToInsert.level = ithChild.level - 1;
-					console.log({name: skillToInsert.name, level: skillToInsert.level, pos: c, entry: 3})
 					skillArray.splice(c, 0, skillToInsert);
 					if (skillToInsert.level < rootlevel) rootlevel = skillToInsert.level;
 					return;
@@ -561,7 +556,6 @@ async function insertSkill(skillToInsert, skillArray) {
 				sn++;
 			}
 			skillToInsert.level = rootlevel;
-			console.log({name: skillToInsert.name, level: skillToInsert.level, pos: sn, entry: 4});
 			skillArray.splice(sn, 0, skillToInsert);
 			return;
 		}
