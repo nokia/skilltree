@@ -959,7 +959,7 @@ setRoute.post('/request', async function (req, res){
 		} 
 		else
 		{
-			escape.json({
+			res.json({
 				succes: false,
 				message: "Already requested."
 			});
@@ -971,7 +971,7 @@ setRoute.post('/request', async function (req, res){
 	} 
 	else
 	{
-		escape.json({
+		res.json({
 			succes: false,
 			message: "Skill not found"
 		});
