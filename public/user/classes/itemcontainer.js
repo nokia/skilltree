@@ -301,7 +301,7 @@ class ItemContainer {
                             var offerTable = document.getElementById('offerTableBody');
 
                             //Empty the table
-                            //offerTable.innerHTML = "";
+                            offerTable.innerHTML = "";
                             //Filling the table
                             for(var i=0; i<globalskill.offers.length; i++ )
                                 {
