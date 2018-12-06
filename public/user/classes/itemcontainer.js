@@ -424,9 +424,11 @@ class ItemContainer {
         }
 
 
-        function addBeginnerRequest()
+        
+    }
+
+    addBeginnerRequest()
         {
             console.log("clicked");
         }
-    }
 }
