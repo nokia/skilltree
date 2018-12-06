@@ -233,10 +233,7 @@ getRoute.get('/offers', function(req, res) {
 
 			return res.json(skilldata);
 		}
-
-
 	});
-
 });
 
 
@@ -346,6 +343,7 @@ setRoute.post('/getPublicUserData', async function (req, res) {
 		return user;
 		});
 		res.json({
+      username: foundUser.username,
 			skills : foundUser.skills,
 			trees : foundUser.trees,
 			mainTree : foundUser.mainTree
