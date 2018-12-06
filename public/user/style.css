@@ -110,12 +110,8 @@ a {
     margin-right: auto;
 }
 
-#newSkillModal * {
+#newSkillModal input select table {
     margin-left: 10px;
-}
-
-#newSkillModal h5 {
-    margin-left: 0px;
 }
 
 /*.creator-grid {
