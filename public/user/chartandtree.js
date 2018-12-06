@@ -506,19 +506,14 @@ function showTree (treeName, data) {
 */
 
 function create() {
+    document.getElementById('approveTrees').style.display = "none";
+    document.getElementById('approveSkills').style.display = "none";
+
     var canvas = document.getElementById("pixiCanvas");
     canvas.style.display = "none";
 
     var creator = document.getElementById("creator");
     creator.style.display = "grid";
-
-    document.getElementById("openCreator").value = "Close Creator";
-    document.getElementById("openCreator").onclick = function() {
-        creator.style.display = "none";
-        canvas.style.display = "block";
-        document.getElementById("openCreator").value = "Create Tree";
-        document.getElementById("openCreator").onclick = create;
-    };
 
     creator.style.width = canvas.style.width;
     creator.style.height = canvas.style.height;
