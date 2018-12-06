@@ -770,12 +770,12 @@ Array.prototype.sum = function (prop) {
     return total;
 }
 
-function request (type, url, data, callback) {
+function request (type, url, sendData, callback) {
     var req = new XMLHttpRequest();
     req.open(type, url, true);
     req.setRequestHeader('Content-type', 'application/json');
     req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
     req.responseType = "json";
     req.onreadystatechange = callback;
-    req.send(JSON.stringify(data));
+    req.send(JSON.stringify(sendData));
 }
