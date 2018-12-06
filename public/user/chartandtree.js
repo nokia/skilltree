@@ -15,7 +15,7 @@ function initData(){
           checkFirstLogin();
           initUI(true, data);
 
-          document.getElementById("home").onclick = function () {showTree(data.mainTree);};
+          document.getElementById("home").onclick = function () {showTree(data.mainTree, data);};
       }
   }
   dataRequest.send();
