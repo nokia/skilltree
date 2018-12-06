@@ -277,12 +277,12 @@ class ItemContainer {
     }
 
     toggleSkillDetailsPage(){
-        var modal = document.getElementById('skillpage');
+                var modal = document.getElementById('skillpage');
         var header = document.getElementById('skillnameHeader');
         var span = document.getElementById("closeORModal");
         var globalskill = undefined;
 
-        var allLoaded = 0;
+        
         //HTTP Request for offer data
         var offerHttpRequest = new XMLHttpRequest();
             offerHttpRequest.open('POST', '/set/skilldata', true);
@@ -326,8 +326,12 @@ class ItemContainer {
                                                                             "divTableCell") );
                                     }
                                 }
-                            //Checking that the table is done (1 table out of 3)
-                            allLoaded ++;
+
+                            var addBeginnerRequest = document.getElementById('addBeginnerRequest');
+                            addBeginnerRequest.onclick = function() {
+                                console.log("clicked");
+                            }
+                            
 
                             //Display the tables Window if all table has been loaded
                             displayWindow();
@@ -343,12 +347,12 @@ class ItemContainer {
 				);
 
 
-        //HTTP Request for offer request data
+        
 
 
-        //Adding
+
+        //Adding trainings to table
         var trainingTable = document.getElementById('trainingTableBody');
-
         var requestTable = document.getElementById('requestTableBody');
 
 
@@ -404,7 +408,7 @@ class ItemContainer {
 
         header.innerText = this.skill.name;
 
-
+        
 
 
         span.onclick = function() {
@@ -419,8 +423,7 @@ class ItemContainer {
         }
 
         function displayWindow(){
-            if(allLoaded == 1)
-                modal.style.display = "block";
+            modal.style.display = "block";
         }
 
 
