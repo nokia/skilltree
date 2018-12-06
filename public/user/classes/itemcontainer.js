@@ -340,7 +340,11 @@ class ItemContainer {
                                 //if it returns
                                 requestforrequests.onreadystatechange = function() {
                                     if(requestforrequests.readyState == 4 && requestforrequests.status == 200) {
-                                        console.log(requestforrequests.response.message);
+                                        if(requestforrequests.response !== undefined)
+                                        {
+                                            console.log("succes: " + requestforrequests.response.succes);
+                                            console.log("message: " + requestforrequests.response.message);
+                                        }
                                     }
                                 }
 

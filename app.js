@@ -934,7 +934,7 @@ setRoute.post('/request', async function (req, res){
 		if (err) throw err;
 		return user;
 	});
-	
+
 	var skill = await Skill.findOne({name: req.body.name},  function (err, skill) {
 		if (err) throw err;
 		return skill;
@@ -953,14 +953,14 @@ setRoute.post('/request', async function (req, res){
 
 			res.json({
 				succes: true,
-				message: "added request"
+				message: 'Added request.'
 			});
 		} 
 		else
 		{
 			res.json({
 				succes: false,
-				message: "Already requested."
+				message: 'Already requested.'
 			});
 		}
 	} 
