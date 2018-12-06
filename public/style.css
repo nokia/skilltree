@@ -50,3 +50,7 @@ span{
   font-weight: bold;
   float: right;
 }
+
+p.bolded {    
+    font-weight: bolder;
+}
