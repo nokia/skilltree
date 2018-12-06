@@ -675,7 +675,7 @@ setRoute.post('/newtree', async function (req, res) { // create user tree
             if (user.skills.find(obj => obj.name == skill.name) == undefined) user.skills.push(skill);
         });
 
-        console.log(users);
+        console.log(user);
 
 		user.save(function (err) {if (err) throw err;});
 
