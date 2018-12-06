@@ -752,7 +752,7 @@ function approveSkills() {
 }
 
 function dropoffers() {
-    request('POST', '/set/searchSkillsByName', skillToSearch, function () {
+    request('POST', '/set/dropoffers', {} , function () {
         if (this.readyState == 4 && this.status == 200) {
             window.open("/user/", "_self");
         }
