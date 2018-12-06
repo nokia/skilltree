@@ -92,9 +92,9 @@ pm2 list
 BSD License 2.0
 
 
-[//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
+[//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - https://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
-   [node.js]: <http://nodejs.org>
+   [node.js]: <https://nodejs.org>
    [MongoDB]: <https://www.mongodb.com/>
    [Express]: <https://expressjs.com/>
    [Nginx]: <https://www.nginx.com/>
