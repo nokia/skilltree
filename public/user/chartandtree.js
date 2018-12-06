@@ -13,7 +13,7 @@ function initData(){
           data = dataRequest.response;
           if (data.admin) document.getElementById('openApproveMenu').style.display = "block";
           checkFirstLogin();
-          initUI(true, data);
+          initUI(true);
       }
   }
   dataRequest.send();
@@ -43,7 +43,7 @@ function initCard(){
   cardMainTree.innerHTML = data.mainTree;
 }
 
-function initUI(self, _data){
+function initUI(self){
   var card_username = document.getElementById('card_username');
   var treeOperationTitle = document.getElementById('treeOperationTitle');
   var searchedTree = document.getElementById('searchedTree');
@@ -142,7 +142,7 @@ function loadAddedTrees(){
     ithtree.innerHTML = tn;
     ithtree.className = "dropdown-item";
     ithtree.onclick = function() {
-      showTree(this.innerHTML, data);
+      showTree(this.innerHTML);
     }
     treeList.appendChild(ithtree);
   }
@@ -239,7 +239,7 @@ function startLoader () {
         PIXI.loader.add(data.skills[i].skillIcon.toString());
     }
     PIXI.loader.load(function () {
-        showTree(data.mainTree, data);
+        showTree(data.mainTree);
     });
     loadAddedTrees();
 }
@@ -417,7 +417,7 @@ window.onresize = function () {
 var selectedTreeName;
 var tree = undefined;
 
-function showTree (treeName, _data) {
+function showTree (treeName) {
     document.getElementById('creator').style.display = "none";
     document.getElementById('approveTrees').style.display = "none";
     document.getElementById('approveSkills').style.display = "none";
