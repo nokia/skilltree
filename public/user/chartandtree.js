@@ -11,7 +11,7 @@ function initData(){
   dataRequest.onreadystatechange = function() {
       if(dataRequest.readyState == 4 && dataRequest.status == 200) {
           data = dataRequest.response;
-          if (data.admin) document.getElementById('openApproveMenu').style.display = "block";
+          if (data.admin) document.getElementById('openAdminMenu').style.display = "block";
           checkFirstLogin();
           initUI(true, data);
 

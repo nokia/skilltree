@@ -67,11 +67,12 @@
             <a class="dropdown-item" onclick = "createTree()" id = "openCreator">Create SkillTree</a>
           </div>
         </li>
-        <li class="nav-item dropdown" id = "openApproveMenu" style = "display: none;">
-          <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Approve</a>
+        <li class="nav-item dropdown" id = "openAdminMenu" style = "display: none;">
+          <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" onclick = "approveTrees()">Trees</a>
-            <a class="dropdown-item" onclick = "approveSkills()">Skills</a>
+            <a class="dropdown-item" onclick = "approveTrees()">Approve Trees</a>
+            <a class="dropdown-item" onclick = "approveSkills()">ApproveSkills</a>
+            <a class="dropdown-item" onclick = "dropoffers()">Drop Offers</a>
           </div>
         </li>
         <li class="nav-item">
@@ -79,9 +80,6 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" onclick="logout()">Logout</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" onclick="dropoffers()">drop offers(dev)</a>
         </li>
       </ul>
       <div class="form-inline my-2 my-lg-0">
