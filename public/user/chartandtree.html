@@ -61,10 +61,10 @@
             Editor
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" >Add Skill</a>
+            <a class="dropdown-item" onclick = "createSkill()">Create Skill</a>
             <a class="dropdown-item" >Add Training Link</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" onclick="create()" id = "openCreator">Add SkillTree</a>
+            <a class="dropdown-item" onclick = "createTree()" id = "openCreator">Create SkillTree</a>
           </div>
         </li>
         <li class="nav-item dropdown" id = "openApproveMenu" style = "display: none;">
@@ -372,12 +372,12 @@
       </div>
       <div class="modal-body">
 
-        
+
         <div class = "divTable">
           <div class= "divTableCaption"></div>
           <div class="divTableBody" id = "trainingTableBody">
             <div class="divTableRow">
-          
+
             </div>
           </div>
 
