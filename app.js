@@ -652,19 +652,22 @@ setRoute.post('/newtree', async function (req, res) { // create user tree
 		});
 	}
 	else if (user.trees.find(obj => obj.name == data.name) == undefined) {
-		var sn = await sortTree(data.skillNames);
+		var sn = await sortTree(data.skills);
 		user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: sn});
 
         console.log("data");
         console.log(data);
 
-        await data.skillNames.forEach(async function (skillName) {
-            var skill = await Skill.findOne({
+        console.log("sn");
+        console.log(sn);
+
+        await data.skills.forEach(async function (skill) {
+            /*var skill = await Skill.findOne({
                 name: skillName,
             }, function (err, skill) {
                 if (err) throw err;
                 return skill;
-            });
+            });*/
 
             skill.achievedPoint = 0;
             if (user.skills.find(obj => obj.name == skill.name) == undefined) {
