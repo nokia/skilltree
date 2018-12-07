@@ -35,7 +35,7 @@
 
   <!-- navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#userCard" data-toggle="collapse" role="button"data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="initCard()">SKILLTREE</a>
+    <a class="navbar-brand" href="#userCard" data-toggle="collapse" role="button"data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="initCard()"><img class="logo" src="../public/user/pictures/logo_32x32.png">SKILLTREE</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -78,9 +78,9 @@
         <li class="nav-item">
           <a class="nav-link" onclick="submit()">Submit Changes</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" onclick="logout()">Logout</a>
-        </li>
+        </li> -->
       </ul>
       <div class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchedUser" onkeyup="searchUsersByName()" list="UserSearchResult">
@@ -114,7 +114,7 @@
   <!-- user profile details card -->
 
   <div id="userprofile" class="collapse float-right">
-    <div class="card text-white bg-info mb-3">
+    <div class="card text-white bg-success mb-3">
       <div class="card-header" id="card_username"></div>
       <div class="card-body">
 
@@ -133,7 +133,13 @@
             <li class="nav-item">
             <a class="nav-link" id="statistics-tab" data-toggle="tab" href="#statistics" role="tab" aria-controls="statistics" aria-selected="false">Statistics</a>
           </li> -->
+         <li class="nav-item">
+             <!-- <a class="nav-link" id="logout" onclick="logout()">Logout</a> -->
+             <span class="float-right"><a class="btn btn-light" href="#" role="button" onclick="logout()">Logout</a></span>
+          </li>
         </ul>
+        
+        
 
         <!-- end of card nav -->
 
