@@ -942,15 +942,17 @@ setRoute.post('/request', async function (req, res){
 
 	var user = await User.findOne({username: req.decoded.username}, function(err, user) {
 		if (err) throw err;
+		console.log('user find done');
 		return user;
 	});
 
 	var skill = await Skill.findOne({name: req.body.name},  function (err, skill) {
 		if (err) throw err;
+		console.log('skill find done');
 		return skill;
 	});
 
-	if (skill != undefined) {
+	if (skill !== undefined) {
 		var userskill = user.skills.find(obj => obj.name == skill.name);
 
 		if(skill.requests.find(obj => obj.username == user.username) == undefined)
