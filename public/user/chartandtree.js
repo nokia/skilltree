@@ -24,7 +24,7 @@ function initData(){
 var app = new PIXI.Application({
         view: pixiCanvas,
         width: window.innerWidth,
-        height: window.innerHeight - 64,
+        height: window.innerHeight - 60,
         backgroundColor: 0x000000,
         antialias: true,
         autoStart: false,
