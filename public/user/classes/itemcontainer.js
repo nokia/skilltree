@@ -504,7 +504,7 @@ class ItemContainer {
 
         var childNames = '';
         for (var i = 0; i < this.skill.children.length; ++i) {
-            childrenNames += this.skill.children[i].name + ' (min point: ' + this.skill.children[i].minPoint;
+            childNames += this.skill.children[i].name + ' (min point: ' + this.skill.children[i].minPoint;
             if (!this.skill.children[i].recommended) childNames += ', required), ';
             else childNames += '), ';
         }
