@@ -666,8 +666,6 @@ function createTree() {
                     skills: skillsToAdd
                 };
 
-                console.log(treeData);
-
                 request('POST', '/set/newtree', treeData, function () {
                     if (this.readyState == 4 && this.status == 200) {
                         if (this.response.success) window.open("/user/", "_self");

@@ -655,12 +655,6 @@ setRoute.post('/newtree', async function (req, res) { // create user tree
 		var sn = await sortTree(data.skills);
 		user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: sn});
 
-        console.log("data");
-        console.log(data);
-
-        console.log("sn");
-        console.log(sn);
-
         await data.skills.forEach(async function (skill) {
             /*var skill = await Skill.findOne({
                 name: skillName,
@@ -672,13 +666,8 @@ setRoute.post('/newtree', async function (req, res) { // create user tree
             skill.achievedPoint = 0;
             if (user.skills.find(obj => obj.name == skill.name) == undefined) {
                 user.skills.push(skill);
-                console.log("skill");
-                console.log(skill);
             }
         });
-
-        console.log("user");
-        console.log(user);
 
 		user.save(function (err) {if (err) throw err;});
 
