@@ -244,9 +244,6 @@ function startLoader () {
 
 app.stage = new PIXI.display.Stage();
 app.stage.group.enableSort = true;
-var bgimage = PIXI.Sprite.fromImage('pictures/bg.jpg');
-bgimage.zOrder = 1000;
-app.stage.addChild(bgimage);
 
 // CHART
 
