@@ -486,9 +486,17 @@ class ItemContainer {
         var modal = document.getElementById('skillinfopage');
         var header = document.getElementById('infoSkillnameHeader');
         var span = document.getElementById("closeInfoModal");
+        var desc = document.getElementById("imDesc");
+        var categ = document.getElementById("imCateg");
+        var parents = document.getElementById("imParents");
+        var children = document.getElementById("imChildren");
 
         var skillname = this.skill.name;
         header.innerText = this.skill.name;
+
+        desc.innerText = this.skill.description;
+        categ.innerText = this.skill.categoryName;
+        
 
         span.onclick = function() {
             modal.style.display = "none";
