@@ -655,9 +655,12 @@ setRoute.post('/newtree', async function (req, res) { // create user tree
 		var sn = await sortTree(data.skillNames);
 		user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: sn});
 
+        console.log("data");
+        console.log(data);
+
         await data.skillNames.forEach(async function (skillName) {
             var skill = await Skill.findOne({
-                name: skillName.name,
+                name: skillName,
             }, function (err, skill) {
                 if (err) throw err;
                 return skill;
@@ -666,8 +669,13 @@ setRoute.post('/newtree', async function (req, res) { // create user tree
             skill.achievedPoint = 0;
             if (user.skills.find(obj => obj.name == skill.name) == undefined) {
                 user.skills.push(skill);
+                console.log("skill");
+                console.log(skill);
             }
         });
+
+        console.log("user");
+        console.log(user);
 
 		user.save(function (err) {if (err) throw err;});
 
@@ -919,12 +927,12 @@ setRoute.post('/dropoffers', async function (req, res) {
 
         skills.map(skill => {
 			skill.offers = [];
-			
+
 			skill.save(  function (err) {if (err) throw err;} );
         })
 	})
-	
-	
+
+
 });
 
 //API call for request onclick
@@ -945,8 +953,8 @@ setRoute.post('/request', async function (req, res){
 
 		if(skill.requests.find(obj => obj.username == user.username) == undefined)
 		{
-			skill.requests.push({	username: user.username, 
-									achievedPoint: userskill.achievedPoint, 
+			skill.requests.push({	username: user.username,
+									achievedPoint: userskill.achievedPoint,
 									email: user.email  });
 
 			skill.save(function (err) {if (err) throw err;});
@@ -955,7 +963,7 @@ setRoute.post('/request', async function (req, res){
 				succes: true,
 				message: 'Added request.'
 			});
-		} 
+		}
 		else
 		{
 			res.json({
@@ -963,7 +971,7 @@ setRoute.post('/request', async function (req, res){
 				message: 'Already requested.'
 			});
 		}
-	} 
+	}
 	else
 	{
 		res.json({
@@ -971,7 +979,7 @@ setRoute.post('/request', async function (req, res){
 			message: "Skill not found"
 		});
 	}
-	 
+
 });
 
 

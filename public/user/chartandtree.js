@@ -657,7 +657,7 @@ function createTree() {
         if (document.getElementById('treeName').value.length > 0) {
             if (skillsToAdd.length > 0) {
                 var skillNames = [];
-                for (var i = 0; i < skillsToAdd.length; ++i) skillNames.push(skillsToAdd[i]);
+                for (var i = 0; i < skillsToAdd.length; ++i) skillNames.push(skillsToAdd[i].name);
 
                 var treeData = {
                     name: document.getElementById('treeName').value,
@@ -665,6 +665,8 @@ function createTree() {
                     forApprove: document.getElementById('treeAppr').checked,
                     skillNames: skillNames
                 };
+
+                console.log(treeData);
 
                 request('POST', '/set/newtree', treeData, function () {
                     if (this.readyState == 4 && this.status == 200) {
