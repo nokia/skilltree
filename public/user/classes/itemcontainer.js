@@ -47,11 +47,11 @@ class ItemContainer {
 
         var txtInfo = new PIXI.Text("INFORMATION", {fontSize: 14, fill: 0x000000});
         txtInfo.anchor.set(0.5, 0.5);
-        txtInfo.position.set(15,13);
+        txtInfo.position.set(35,13);
 
         var btnInfoContainer = new PIXI.Container();
         btnInfoContainer.addChild(btnInfo, txtInfo);
-        btnInfoContainer.position.set((detailsWidth - btnInfoContainer.width) / 2  , description.position.y + description.height + 10);
+        btnInfoContainer.position.set((detailsWidth - btnInfoContainer.width) / 4  , description.position.y + description.height + 10);
         btnInfoContainer.interactive = true;
         btnInfoContainer.buttonMode = true;
         btnInfoContainer.parentObj = this;
@@ -77,7 +77,7 @@ class ItemContainer {
 
         var btn1Container = new PIXI.Container();
         btn1Container.addChild(btn1, txt1);
-        btn1Container.position.set(  (detailsWidth - btn1Container.width)/2  , description.position.y + description.height + 10);
+        btn1Container.position.set(  (detailsWidth - btn1Container.width) * .75  , description.position.y + description.height + 10);
         btn1Container.interactive = true;
         btn1Container.buttonMode = true;
         btn1Container.parentObj = this;
