@@ -492,6 +492,7 @@ class ItemContainer {
         var points = document.getElementById("imPoints");
         var parents = document.getElementById("imParents");
         var children = document.getElementById("imChildren");
+        var trainings = document.getElementById("imTrainings");
 
         var skillname = this.skill.name;
         header.innerText = this.skill.name;
@@ -518,6 +519,8 @@ class ItemContainer {
         }
         childNames = childNames.substring(0, childNames.length - 2);
         children.innerText = childNames;
+
+        trainings.innerText = this.skill.trainings;
 
         span.onclick = function() {
             modal.style.display = "none";
