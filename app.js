@@ -614,7 +614,7 @@ setRoute.post('/newskill', async function(req, res) {
         }
 
         for (var i = 0; i < data.children.length; ++i) {
-            user.skills.find(obj => obj.name == data.children[i]).parents.push(data.name);
+            user.skills.find(obj => obj.name == data.children[i].name).parents.push(data.name);
         }
 
         user.save(function (err) {if (err) throw err;});
