@@ -65,7 +65,7 @@ class ItemContainer {
                         app.renderer.render(app.stage);
                         })
                 .on('click', function () {
-                        this.parentObj.toggleSkillDetailsPage();
+                        this.parentObj.toggleSkillInfoPage();
                         });
         detailsForeground.addChild(btnInfoContainer);
 
@@ -480,6 +480,25 @@ class ItemContainer {
 
 
 
+    }
+
+    toggleSkillInfoPage(){
+        var modal = document.getElementById('skillpage');
+        var header = document.getElementById('skillnameHeader');
+        var span = document.getElementById("closeORModal");
+
+        var skillname = this.skill.name;
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        modal.style.display = "block";
     }
 
     addBeginnerRequest()
