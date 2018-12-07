@@ -67,6 +67,7 @@ a {
 #pixiCanvas{
   position: fixed;
   z-index: 10;
+  background-image: url(pictures/pixi_bg.jpeg);
 }
 
 #treeList{
