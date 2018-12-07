@@ -15,7 +15,7 @@
       var isIE = /*@cc_on!@*/false || !!document.documentMode;
       var isEdge = !isIE && !!window.StyleMedia;
       if(isIE || isEdge){
-        window.open('https://www.google.com/chrome/','_self');
+        /* TODO: Show ribbon on top that IE is not supported. */
       }
     }, false);
     </script>
@@ -25,9 +25,8 @@
 
     <div class="container jumbocontainer p-3">
         <div class="jumbotron p-3">
-          <h1 class="display-4 d-none d-lg-block">Welcome to the SkillTree</h1>
-          <h5 class="d-block d-lg-none">Welcome to the SkillTree</h5>
-          <p class="lead">What is SkillTree? <a href="">></a></p>
+          <h1 class="display-4 d-none d-lg-block">Register to SkillTree</h1>
+          <h5 class="d-block d-lg-none">Register to SkillTree</h5>
           <p class="lead">Already have an account? <a href="login.html">Login</a></p>
           <hr class="my-4">
           <form onsubmit = "return false">
@@ -47,7 +46,7 @@
                 <!-- <label for="exampleInputEmail1">Email address</label> -->
                 <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email">
               </div>
-              <p>Select a focus area:</p>
+              <p class="bolded">Select a focus area:</p>
               <p>
                   <select id = "focusarea">
                       <option value = "People">People</option>
@@ -57,16 +56,13 @@
                       <option value = "Support functions">Support functions</option>
                   </select>
               </p></br>
-              <p>I am willing to share knowledge<input type = "checkbox" id = "teach"></p>
+              <p class="bolded">I want to help others by sharing my knowledge: <input type = "checkbox" id = "teach"></p>
+              <p>&nbsp;</p>
+
               <button type="submit" id = "submit" value = "Register" class="btn btn-primary btn-lg" onclick = "validate()">Register</button>
           </form>
         </div>
     </div>
-
-
-
-
-
 
 
     <!-- Optional JavaScript -->

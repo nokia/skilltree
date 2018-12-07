@@ -18,7 +18,7 @@ Skill Tree needs the following components to operate:
 * [Express] - A web framework for Node.js
 * [MongoDB] - A free and open-source cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with schemata.
 * [Nginx] - A web server which can also be used as a reverse proxy, load balancer, mail proxy and HTTP cache.
-* A GNU/Linux distribution, e.g. Debian or Ubuntu.
+* A GNU/Linux distribution, e.g. [Debian] or [Ubuntu].
 
 ## Installation
 
@@ -28,14 +28,13 @@ Skill Tree needs the following components to operate:
 cd
 mkdir skilltree
 cd skilltree
-wget ... skilltree_install_debian9.sh ; chmod +x skilltree_install_debian9.sh ; ./skilltree_install_debian9.sh
+wget https://raw.githubusercontent.com/sicambria/skilltree/master/install/skilltree_install_debian9.sh ; chmod +x skilltree_install_debian9.sh ; ./skilltree_install_debian9.sh
 ```
-
 
 ## Development
 
 Want to contribute? Great!
-You need an IDE of your choice, we recommend [AtomIDE] or [VScode]
+You need an IDE of your choice, we recommend [Atom] or [Visual Studio Code].
 
 For Atom, installing some plugins are helpful:
 
@@ -43,7 +42,7 @@ For Atom, installing some plugins are helpful:
 apm install emmet todo minimap pigments minimap-pigments linter file-icons git-diff atom-beautify ask-stack highlight-selected
 ```
 After running the install script, setup your web server.
-In case you use
+For Nginx:
 
 ```sh
 cat /etc/nginx/sites-available/default
@@ -54,8 +53,8 @@ server {
         listen 443 ssl default_server;
         listen [::]:443 ssl default_server;
 
-        ssl_certificate     /etc/letsencrypt/live/skilltree.ga/cert.pem;
-        ssl_certificate_key /etc/letsencrypt/live/skilltree.ga/privkey.pem;
+        ssl_certificate     /etc/letsencrypt/live/YOUR_DOMAIN.ORG/cert.pem;
+        ssl_certificate_key /etc/letsencrypt/live/YOUR_DOMAIN.ORG/privkey.pem;
 
         location / {
                 proxy_pass http://localhost:3000/;
@@ -68,7 +67,6 @@ server {
         return 301 https://$host$request_uri;
 }
 ```
-
 
 ```sh
 cd skilltree
@@ -94,11 +92,13 @@ pm2 list
 BSD License 2.0
 
 
-[//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
+[//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - https://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
-   [node.js]: <http://nodejs.org>
+   [node.js]: <https://nodejs.org>
    [MongoDB]: <https://www.mongodb.com/>
    [Express]: <https://expressjs.com/>
    [Nginx]: <https://www.nginx.com/>
-   [VScode]: <https://code.visualstudio.com/>
-   [AtomIDE]: <https://github.com/atom/atom>
+   [Visual Studio Code]: <https://code.visualstudio.com/>
+   [Atom]: <https://github.com/atom/atom>
+   [Debian]: <https://www.debian.org/>
+   [Ubuntu]: <https://www.ubuntu.com/>

@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 // set up a mongoose model and pass it using module.exports
 module.exports = mongoose.model('User', new Schema({
     username: String,
+    admin: Boolean,
     email: String,
     hashData: Buffer,
     focusArea: {
@@ -54,7 +55,8 @@ module.exports = mongoose.model('User', new Schema({
     trees: [
         {
             name: String,
-            skillNames: [String]
+            skillNames: [String],
+            focusArea: String
         }
     ]
 }));

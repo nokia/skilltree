@@ -48,4 +48,9 @@ a {
 span{
   font-size: 12px;
   font-weight: bold;
+  float: right;
+}
+
+p.bolded {    
+    font-weight: bolder;
 }

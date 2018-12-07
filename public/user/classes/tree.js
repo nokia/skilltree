@@ -40,8 +40,8 @@ class Tree {
         for(var i = 0; i < this.skills.length; i++){
           this.skills[i].itemcontainer = new ItemContainer(app, this.skills, this.skills[i].name);
 
-          this.skills[i].itemcontainer.container.position.x = (this.skills[i].place - 1) * 130 - (levelLength[this.skills[i].level] * 130) / 2;
-          this.skills[i].itemcontainer.container.position.y = this.skills[i].level * 150;
+          this.skills[i].itemcontainer.container.position.x = (this.skills[i].place - 1) * 100 - (levelLength[this.skills[i].level] * 100) / 2;
+          this.skills[i].itemcontainer.container.position.y = this.skills[i].level * 115;
 
           this.skills[i].itemcontainer.container.parentLayer = skillLayer;
           this.treeContainer.addChild(this.skills[i].itemcontainer.container);
@@ -72,6 +72,7 @@ class Tree {
                         // Draw the line
                         var connection = new PIXI.Graphics();
                         connection.lineStyle(4, 0xffffff);
+                        //connection.zOrder = 10;
                         connection.moveTo(this.skills[j].itemcontainer.container.x + this.skills[j].itemcontainer.skillborder.width / 2, this.skills[j].itemcontainer.container.position.y + this.skills[j].itemcontainer.skillborder.height - 8);
                         connection.lineTo(child.itemcontainer.container.position.x + child.itemcontainer.skillborder.width / 2, child.itemcontainer.container.position.y + 5);
 

@@ -219,6 +219,36 @@
                 "2018-11-19"
               ],
               "pattern": "^(.*)$"
+            },
+            "goal": {
+              "$id": "#/items/properties/trainings/items/properties/goal",
+              "type": "string",
+              "title": "The Goal Schema",
+              "default": "",
+              "examples": [
+                "The goal of this training is to introduce the terms and basic concepts of creating a website with HTML."
+              ],
+              "pattern": "^(.*)$"
+            },
+            "length": {
+              "$id": "#/items/properties/trainings/items/properties/length",
+              "type": "integer",
+              "title": "The Length Schema",
+              "default": 0,
+              "examples": [
+                "300"
+              ],
+              "pattern": "^(.*)$"
+            },
+            "language": {
+              "$id": "#/items/properties/trainings/items/properties/language",
+              "type": "string",
+              "title": "The Language Schema",
+              "default": "",
+              "examples": [
+                "en"
+              ],
+              "pattern": "^(..)$"
             }
           }
         }
