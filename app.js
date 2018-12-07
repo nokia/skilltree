@@ -940,12 +940,12 @@ setRoute.post('/dropoffers', async function (req, res) {
 //API call for request onclick
 setRoute.post('/request', async function (req, res){
 
-	var user = await User.findOne({username: req.decoded.username}, function(err, user) {
+	var user = User.findOne({username: req.decoded.username}, function(err, user) {
 		if (err) throw err;
 		return user;
 	});
 
-	var skill = await Skill.findOne({name: req.body.name},  function (err, skill) {
+	var skill = Skill.findOne({name: req.body.name},  function (err, skill) {
 		if (err) throw err;
 		return skill;
 	});
