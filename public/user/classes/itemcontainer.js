@@ -520,7 +520,10 @@ class ItemContainer {
         childNames = childNames.substring(0, childNames.length - 2);
         children.innerText = childNames;
 
-        trainings.innerText = this.skill.trainings;
+        var trainingNames = '';
+        for (var i = 0; i < this.skill.trainings.length; ++i) trainingNames += this.skill.trainings[i].name + ' (' + this.skill.trainings[i].url + '), ';
+        trainingNames = trainingNames.substring(0, trainingNames.length - 2);
+        trainings.innerText = trainingNames;
 
         span.onclick = function() {
             modal.style.display = "none";
