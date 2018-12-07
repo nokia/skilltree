@@ -231,9 +231,7 @@ function logout(){
 
 function startLoader () {
     PIXI.loader.add("pictures/skillborder.png")
-                //.add("tree.png")
                 .add("pictures/bg.jpg")
-                .add("pictures/back.png")
                 .add("pictures/tick.png");
     for (var i = 0; i < data.skills.length; ++i) {
         PIXI.loader.add(data.skills[i].skillIcon.toString());
