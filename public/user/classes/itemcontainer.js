@@ -499,16 +499,16 @@ class ItemContainer {
 
         var parentNames = '';
         for (var i = 0; i < this.skill.parents.length; ++i) parentNames += this.skill.parents[i] + ', ';
-        parentNames.substring(0, parentNames.length - 2);
+        parentNames.substring(0, parentNames.length - 3);
         parents.innerText = parentNames;
 
         var childNames = '';
         for (var i = 0; i < this.skill.children.length; ++i) {
-            childNames += this.skill.children[i].name + ' (min point: ' + this.skill.children[i].minPoint;
+            childNames += this.skill.children[i].name + ' (minimum point: ' + this.skill.children[i].minPoint;
             if (!this.skill.children[i].recommended) childNames += ', required), ';
             else childNames += '), ';
         }
-        childNames.substring(0, childNames.length - 2);
+        childNames.substring(0, childNames.length - 3);
         children.innerText = childNames;
 
         span.onclick = function() {
