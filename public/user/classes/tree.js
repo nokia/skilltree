@@ -60,7 +60,7 @@ class Tree {
     // not ready yet
 
     drawConnectionLines() {
-        var connectionGroup = new PIXI.display.Group(-1, false);
+        var connectionGroup = new PIXI.display.Group(100, false);
 
         for (var j = 0; j < this.skills.length; j++) {
             if (this.skills[j].children !== undefined) {
