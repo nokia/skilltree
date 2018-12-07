@@ -496,7 +496,20 @@ class ItemContainer {
 
         desc.innerText = this.skill.description;
         categ.innerText = this.skill.categoryName;
-        
+
+        var parentNames = '';
+        for (var i = 0; i < this.skill.parents.length; ++i) parentNames += this.skill.parents[i] + ', ';
+        parentNames.substring(0, parentNames.length - 2);
+        parents.innerText = parentNames;
+
+        var childNames = '';
+        for (var i = 0; i < this.skill.children.length; ++i) {
+            childrenNames += this.skill.children[i].name + ' (min point: ' + this.skill.children[i].minPoint;
+            if (!this.skill.children[i].recommended) childNames += ', required), ';
+            else childNames += '), ';
+        }
+        childNames.substring(0, childNames.length - 2);
+        children.innerText = childNames;
 
         span.onclick = function() {
             modal.style.display = "none";
