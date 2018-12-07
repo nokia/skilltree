@@ -607,6 +607,8 @@ setRoute.post('/newskill', async function(req, res) {
             trainings: data.trainings
         });
 
+        console.log(data);
+
         for (var i = 0; i < data.parents.length; ++i) {
             user.skills.find(obj => obj.name == data.parents[i]).children.push({name: data.name, minPoint: 1, recommended: false});
         }
