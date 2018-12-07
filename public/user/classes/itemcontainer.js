@@ -71,7 +71,7 @@ class ItemContainer {
 
         var btn1 = new PIXI.Sprite(btnG.generateTexture());
 
-        var txt1 = new PIXI.Text("TRAINING", {fontSize: 14, fill: 0x000000});
+        var txt1 = new PIXI.Text("OFFERS", {fontSize: 14, fill: 0x000000});
         txt1.anchor.set(0.5, 0.5);
         txt1.position.set(35,13);
 
