@@ -43,6 +43,32 @@ class ItemContainer {
         btnGHover.drawRect(0, 0, 70, 26);
         btnGHover.endFill();
 
+        var btnInfo = new PIXI.Sprite(btnG.generateTexture());
+
+        var txtInfo = new PIXI.Text("INFORMATION", {fontSize: 14, fill: 0x000000});
+        txtInfo.anchor.set(0.5, 0.5);
+        txtInfo.position.set(15,13);
+
+        var btnInfoContainer = new PIXI.Container();
+        btnInfoContainer.addChild(btnInfo, txtInfo);
+        btnInfoContainer.position.set((detailsWidth - btnInfoContainer.width) / 2  , description.position.y + description.height + 10);
+        btnInfoContainer.interactive = true;
+        btnInfoContainer.buttonMode = true;
+        btnInfoContainer.parentObj = this;
+        btnInfoContainer
+                .on('pointerover', function () {
+                        btnInfo.texture = btnGHover.generateTexture();
+                        app.renderer.render(app.stage);
+                        })
+                .on('pointerout', function () {
+                        btnInfo.texture = btnG.generateTexture();
+                        app.renderer.render(app.stage);
+                        })
+                .on('click', function () {
+                        this.parentObj.toggleSkillDetailsPage();
+                        });
+        detailsForeground.addChild(btnInfoContainer);
+
         var btn1 = new PIXI.Sprite(btnG.generateTexture());
 
         var txt1 = new PIXI.Text("TRAINING", {fontSize: 14, fill: 0x000000});
@@ -283,7 +309,7 @@ class ItemContainer {
         var globalskill = undefined;
 
         var skillname = this.skill.name;
-        
+
         //HTTP Request for offer data
         var offerHttpRequest = new XMLHttpRequest();
             offerHttpRequest.open('POST', '/set/skilldata', true);
@@ -291,7 +317,7 @@ class ItemContainer {
             offerHttpRequest.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
             offerHttpRequest.responseType = "json";
 
-				
+
 				//Listener, if response comes, it runs.
 				offerHttpRequest.onreadystatechange = function() {
 		    		if(offerHttpRequest.readyState == 4 && offerHttpRequest.status == 200) {
@@ -305,24 +331,24 @@ class ItemContainer {
                             //Empty the table
                             offerTable.innerHTML = "";
 
-                            
-                            offerTable.appendChild( createTableRow( "Name", 
-                                                                    "Location", 
+
+                            offerTable.appendChild( createTableRow( "Name",
+                                                                    "Location",
                                                                     "Teaching Day",
                                                                     "Teaching Time",
                                                                     "Level",
                                                                     "divTableHead") );
 
-                            
+
                             //Filling the table
                             for(var i=0; i<globalskill.offers.length; i++ )
                                 {
                                 if(true) //TODO, only higher level offers should appear
                                     {
                                     offerTable.appendChild( createTableRow( globalskill.offers[i].username,
-                                                                            globalskill.offers[i].location,   
+                                                                            globalskill.offers[i].location,
                                                                             globalskill.offers[i].teachingDay,
-                                                                            globalskill.offers[i].teachingTime,  
+                                                                            globalskill.offers[i].teachingTime,
                                                                             globalskill.offers[i].achievedPoint,
                                                                             "divTableCell") );
                                     }
@@ -336,7 +362,7 @@ class ItemContainer {
                                     requestforrequests.setRequestHeader('Content-type', 'application/json');
                                     requestforrequests.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
                                     requestforrequests.responseType = "json";
-                                
+
                                 //if it returns
                                 requestforrequests.onreadystatechange = function() {
                                     if(requestforrequests.readyState == 4 && requestforrequests.status == 200) {
@@ -357,12 +383,12 @@ class ItemContainer {
 
 
                             }
-                            
+
 
                             //Display the tables Window if all table has been loaded
                             displayWindow();
 
-						} 
+						}
 					}
                 }
 
@@ -373,7 +399,7 @@ class ItemContainer {
 				);
 
 
-        
+
 
 
 
@@ -387,8 +413,8 @@ class ItemContainer {
             //Creating an offer tablerow
             var Row = document.createElement('div');
             Row.className = "divTableRow";
-            
-            
+
+
             if(data1 !== undefined)
             {
             var Column1 = document.createElement('div');
@@ -434,7 +460,7 @@ class ItemContainer {
 
         header.innerText = this.skill.name;
 
-        
+
 
 
         span.onclick = function() {
@@ -453,7 +479,7 @@ class ItemContainer {
         }
 
 
-        
+
     }
 
     addBeginnerRequest()
