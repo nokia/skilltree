@@ -483,9 +483,9 @@ class ItemContainer {
     }
 
     toggleSkillInfoPage(){
-        var modal = document.getElementById('skillpage');
-        var header = document.getElementById('skillnameHeader');
-        var span = document.getElementById("closeORModal");
+        var modal = document.getElementById('skillinfopage');
+        var header = document.getElementById('infoSkillnameHeader');
+        var span = document.getElementById("closeInfoModal");
 
         var skillname = this.skill.name;
 
