@@ -488,6 +488,8 @@ class ItemContainer {
         var span = document.getElementById("closeInfoModal");
         var desc = document.getElementById("imDesc");
         var categ = document.getElementById("imCateg");
+        var maxP = document.getElementById("imMaxPoint");
+        var points = document.getElementById("imPoints");
         var parents = document.getElementById("imParents");
         var children = document.getElementById("imChildren");
 
@@ -496,6 +498,12 @@ class ItemContainer {
 
         desc.innerText = this.skill.description;
         categ.innerText = this.skill.categoryName;
+        maxP.innerText = this.skill.maxPoint;
+
+        var pointDesc = '';
+        for (var i = 0; i < this.skill.pointDescription.length; ++i) pointDesc += this.skill.pointDescription[i] + ', ';
+        pointDesc = pointDesc.substring(0, pointDesc.length - 2);
+        points.innerText = pointDesc;
 
         var parentNames = '';
         for (var i = 0; i < this.skill.parents.length; ++i) parentNames += this.skill.parents[i] + ', ';
