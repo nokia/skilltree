@@ -965,6 +965,8 @@ setRoute.post('/request', async function (req, res){
 
 			skill.save(function (err) {if (err) throw err;});
 
+			console.log(skill.requests.length);
+
 			res.json({
 				succes: true,
 				message: 'Added request.',
