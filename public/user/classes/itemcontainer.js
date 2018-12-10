@@ -327,8 +327,13 @@ class ItemContainer {
                             //Initialize table variables
                             globalskill = offerHttpRequest.response;
                             var offerTable = document.getElementById('offerTableBody');
+                            //initialize the request counts
                             var beginnerCount = document.getElementById('beginnerCount');
-                            beginnerCount.innerHTML = globalskill.requests.length;
+                            beginnerCount.innerHTML = globalskill.beginnerRequests.length;
+                            var intermediateCount = document.getElementById('intermediateCount');
+                            intermediateCount.innerHTML = globalskill.intermediateRequests.length;
+                            var advancedCount = document.getElementById('advancedCount');
+                            advancedCount.innerHTML = globalskill.advancedRequests.length;
 
 
                             //Empty the table
@@ -387,7 +392,7 @@ class ItemContainer {
                                 );
                             }
 
-                            var addIntermediateRequest = document.getElementById('addBeginnerCount');
+                            var addIntermediateRequest = document.getElementById('addIntermediateCount');
                             addIntermediateRequest.onclick = function() {
                                 //request for requests
                                 var requestforrequests = new XMLHttpRequest();
