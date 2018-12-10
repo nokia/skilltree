@@ -600,7 +600,7 @@ function createTree() {
     var skillList = document.getElementById("skillList");
     var skillsToAdd = [];
     addBtn.onclick = function () {
-        var skill = {value: document.getElementById('skillSearch').value};
+        var skill = {value: document.getElementById('skillSearchTree').value};
 
         request('POST', '/set/getskill', skill, function() {
             if(this.readyState == 4 && this.status == 200) {
