@@ -389,12 +389,12 @@ function showChart() {
         chartContainer.addChild(tempContainer);
     }
 
-    var logo = new PIXI.Sprite(PIXI.loader.resources["tree.png"].texture);
+    /*var logo = new PIXI.Sprite(PIXI.loader.resources["tree.png"].texture);
     logo.anchor.set(0.5, 0.5);
     logo.position.set(window.innerWidth / 2, window.innerHeight / 2);
     logo.scale.set(0.42);
     app.stage.addChild(logo);
-    chartContainer.addChild(logo);
+    chartContainer.addChild(logo);*/
 
     chartContainer.position.set((window.innerWidth) / 2, (window.innerHeight - 64) / 2);
     app.stage.addChild(chartContainer);
