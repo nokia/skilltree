@@ -355,6 +355,7 @@ class ItemContainer {
                                 }
 
                             var addBeginnerRequest = document.getElementById('addBeginnerCount');
+                            var BeginnerCount = document.getElementById('beginnerCount');
                             addBeginnerRequest.onclick = function() {
                                 //request for requests
                                 var requestforrequests = new XMLHttpRequest();
@@ -371,6 +372,8 @@ class ItemContainer {
                                             alert(requestforrequests.response.message);
                                             console.log(requestforrequests.response);
                                             console.log(requestforrequests.response.sumRequest);
+                                            BeginnerCount.innerHTML = (requestforrequests.response.sumRequest + " people");
+
                                         }
                                     }
                                 }
