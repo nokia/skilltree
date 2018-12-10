@@ -87,6 +87,22 @@ To query the status:
 pm2 list
 ```
 
+### Testing
+
+Youtube tutorial for testing using Mocha and Chai:
+https://www.youtube.com/watch?v=NhlpFD5EL_Q
+
+install mocha: npm install mocha
+install chai: npm install chai --save-dev
+
+~Already installed in this project.
+
+To run tests: 
+1: cd assets  ~move to assets directory
+2: mocha     ~run mocha tests
+
+Edit tests in assets/test folder. Create new JavaScript file or use the existing unit-test.js and add functions
+
 ### License
 
 BSD License 2.0
