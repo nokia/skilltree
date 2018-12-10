@@ -368,8 +368,8 @@ class ItemContainer {
                                     if(requestforrequests.readyState == 4 && requestforrequests.status == 200) {
                                         if(requestforrequests.response !== undefined)
                                         {
-                                            console.log(requestforrequests.response);
                                             alert(requestforrequests.response.message);
+                                            
                                         }
                                     }
                                 }
