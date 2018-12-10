@@ -381,13 +381,72 @@ class ItemContainer {
 
                                 requestforrequests.send(
                                     JSON.stringify({
-                                        name: skillname
+                                        name: skillname,
+                                        requestType: "beginner"
                                     })
                                 );
-
-
-
                             }
+
+                            var addIntermediateRequest = document.getElementById('addBeginnerCount');
+                            addIntermediateRequest.onclick = function() {
+                                //request for requests
+                                var requestforrequests = new XMLHttpRequest();
+                                    requestforrequests.open('POST', '/set/request', true);
+                                    requestforrequests.setRequestHeader('Content-type', 'application/json');
+                                    requestforrequests.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+                                    requestforrequests.responseType = "json";
+
+                                //if it returns
+                                requestforrequests.onreadystatechange = function() {
+                                    if(requestforrequests.readyState == 4 && requestforrequests.status == 200) {
+                                        if(requestforrequests.response !== undefined)
+                                        {
+                                            alert(requestforrequests.response.message);
+                                            console.log(requestforrequests.response);
+                                            beginnerCount.innerHTML = (requestforrequests.response.sumRequest);
+
+                                        }
+                                    }
+                                }
+
+                                requestforrequests.send(
+                                    JSON.stringify({
+                                        name: skillname,
+                                        requestType: "intermediate"
+                                    })
+                                );
+                            }
+
+                            var addAdvancedRequest = document.getElementById('addAdvancedCount');
+                            addAdvancedRequest.onclick = function() {
+                                //request for requests
+                                var requestforrequests = new XMLHttpRequest();
+                                    requestforrequests.open('POST', '/set/request', true);
+                                    requestforrequests.setRequestHeader('Content-type', 'application/json');
+                                    requestforrequests.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+                                    requestforrequests.responseType = "json";
+
+                                //if it returns
+                                requestforrequests.onreadystatechange = function() {
+                                    if(requestforrequests.readyState == 4 && requestforrequests.status == 200) {
+                                        if(requestforrequests.response !== undefined)
+                                        {
+                                            alert(requestforrequests.response.message);
+                                            console.log(requestforrequests.response);
+                                            beginnerCount.innerHTML = (requestforrequests.response.sumRequest);
+
+                                        }
+                                    }
+                                }
+
+                                requestforrequests.send(
+                                    JSON.stringify({
+                                        name: skillname,
+                                        requestType: "advanced"
+                                    })
+                                );
+                            }
+
 
 
                             //Display the tables Window if all table has been loaded
