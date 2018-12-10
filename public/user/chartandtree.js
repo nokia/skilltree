@@ -389,7 +389,7 @@ function showChart() {
         chartContainer.addChild(tempContainer);
     }
 
-    var logo = new PIXI.Sprite(PIXI.loader.resources["tree.png"].texture);
+    var logo = new PIXI.Sprite(PIXI.loader.resources["tree.png"]);
     logo.anchor.set(0.5, 0.5);
     logo.position.set(window.innerWidth / 2, window.innerHeight / 2);
     logo.scale.set(0.42);
