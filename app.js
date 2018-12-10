@@ -216,7 +216,7 @@ getRoute.get('/userdata', function (req, res) {
 
 
 
-
+// getting the skilldata of a skillname (used for offers)
 getRoute.get('/offers', function(req, res) {
 	Skill.findOne({
 		name: req.body.name
@@ -237,7 +237,7 @@ getRoute.get('/offers', function(req, res) {
 });
 
 
-//Creating a setRoute, thats protected with Token. API calls are under /set/...
+// Creating a setRoute, thats protected with Token. API calls are under /set/...
 var setRoute = express.Router();
 app.use('/set', setRoute);
 
@@ -334,6 +334,7 @@ setRoute.post('/searchSkillsByName', async function (req, res) {
         res.json(resSkills);
 });
 
+// Getting the name, skills, trees and maintree of a user.
 setRoute.post('/getPublicUserData', async function (req, res) {
 		var data = req.body;
 		var foundUser = await User.findOne({
@@ -350,6 +351,7 @@ setRoute.post('/getPublicUserData', async function (req, res) {
 		});
 });
 
+// Adds a public tree to the current user.
 setRoute.post('/addTreeToUser', async function (req, res){
 	var data = req.body;
 	var user = await User.findOne({
@@ -399,6 +401,7 @@ setRoute.post('/addTreeToUser', async function (req, res){
 	}
 });
 
+// gets a skill and all it's dependencies by name.
 setRoute.post('/getskill', async function (req, res) {
 	var data = req.body;
 
@@ -441,6 +444,7 @@ setRoute.post('/getskill', async function (req, res) {
     }
 });
 
+// recursive function for dependency determinating
 async function getDependency (userSkills, skill, dependency) {
 	var parents = [];
 	for (var i = 0; skill.parents != undefined && i < skill.parents.length; ++i) {
@@ -462,27 +466,11 @@ async function getDependency (userSkills, skill, dependency) {
 	}
 }
 
-/*async function getParents (skill, skillFamily) {
-	var parents = [];
-	console.log(skill);
-	for (var i = 0; skill.parents != undefined && i < skill.parents.length; ++i) {
-		var parent = await Skill.findOne({name: skill.parents[i]} , function (err, skill) {
-						if (err) throw err;
-						return skill;
-		});
 
-		parents.push(parent);
-		skillFamily.push(parent);
-	}
-
-	for (var i = 0; i < parents.length; ++i) {
-		getParents(parents[i], skillFamily);
-	}
-}*/
-
-
+// variable used for insertSkill
 var rootlevel = 0;
 
+// inserts a skill to a tree.
 async function insertSkill(skillToInsert, skillArray) {
 	if (!skillArray.includes(skillToInsert)) {
 		if (skillArray.length === 0) {
@@ -560,6 +548,7 @@ async function insertSkill(skillToInsert, skillArray) {
 	}
 }
 
+// gets the skillnames of a skillarray.
 async function extractNames(skillArray){
 	var exctractedArray = [];
 	for (var i = 0; i < skillArray.length; i++) {
@@ -568,6 +557,7 @@ async function extractNames(skillArray){
 	return exctractedArray;
 }
 
+// creates an ordered tree from an array of skills.
 async function sortTree(skillArray){
 	rootlevel = 0;
 	var sortedArray = [];
@@ -578,6 +568,7 @@ async function sortTree(skillArray){
 	return skillArray;
 }
 
+// Creates a skill from the data the user added.
 setRoute.post('/newskill', async function(req, res) {
     var data = req.body;
 
@@ -594,6 +585,12 @@ setRoute.post('/newskill', async function(req, res) {
 			message: 'User not found.'
 		});
 	} else if (user.skills.find(obj => obj.name == data.name) == undefined) {
+        var parentNames = [];
+        for (var i = 0; i < data.parents.length; ++i) {
+            user.skills.find(obj => obj.name == data.parents[i].name).children.push(data.parents);
+            parentNames.push(data.parents[i].name);
+        }
+
 		user.skills.push({
             name: data.name,
             description: data.description,
@@ -602,20 +599,14 @@ setRoute.post('/newskill', async function(req, res) {
             achievedPoint: 0,
             maxPoint: data.maxPoint,
             pointDescription: data.pointDescription,
-            parents: data.parents,
-            children: data.children,
+            parents: parentNames,
+            //children: data.children,
             trainings: data.trainings
         });
 
-        console.log(data);
-
-        for (var i = 0; i < data.parents.length; ++i) {
-            user.skills.find(obj => obj.name == data.parents[i]).children.push({name: data.name, minPoint: 1, recommended: false});
-        }
-
-        for (var i = 0; i < data.children.length; ++i) {
+        /*for (var i = 0; i < data.children.length; ++i) {
             user.skills.find(obj => obj.name == data.children[i].name).parents.push(data.name);
-        }
+        }*/
 
         user.save(function (err) {if (err) throw err;});
 
@@ -628,7 +619,7 @@ setRoute.post('/newskill', async function(req, res) {
                 categoryName: data.categoryName,
                 maxPoint: data.maxPoint,
                 pointDescription: data.pointDescription,
-                parents: data.parents,
+                parents: parentNames,
                 children: data.children,
                 trainings: data.trainings
             });
@@ -647,7 +638,8 @@ setRoute.post('/newskill', async function(req, res) {
 	}
 });
 
-setRoute.post('/newtree', async function (req, res) { // create user tree
+// creates a new tree only for the user.
+setRoute.post('/newtree', async function (req, res) {
 	var data = req.body;
     var user = await User.findOne({
         username: req.decoded.username
@@ -704,7 +696,8 @@ setRoute.post('/newtree', async function (req, res) { // create user tree
 	}
 });
 
-setRoute.post('/addskilltotree', async function(req, res) { // to user tree
+// add skill to user tree
+setRoute.post('/addskilltotree', async function(req, res) {
     var data = req.body;
 
     var user = await User.findOne({
@@ -725,6 +718,7 @@ setRoute.post('/addskilltotree', async function(req, res) { // to user tree
 	}
 });
 
+// gets the skilldata of a skillname
 setRoute.post('/skilldata', function(req, res) {
 	Skill.findOne({
 		name: req.body.name
@@ -744,6 +738,7 @@ setRoute.post('/skilldata', function(req, res) {
 	});
 });
 
+// approves a tree.
 setRoute.post('/approvetree', async function (req, res) {
 	var data = req.body;
 
@@ -766,54 +761,7 @@ setRoute.post('/approvetree', async function (req, res) {
 	}
 });
 
-/*setRoute.post('/maintree', async function (req, res) {
-	var data = req.body;
-
-    var user = await User.findOne({
-        username: req.decoded.username
-    }, function(err, user) {
-        if (err) throw err;
-		return user;
-    });
-
-	if (!user) {
-		res.json({
-			success: false,
-			message: 'User not found.'
-		});
-	} else {
-		user.mainTree = data.name;
-
-		var mainTree = await Tree.findOne({
-	        name: data.name,
-	    }, function (err, tree) {
-	        if (err) throw err;
-			return tree;
-		});
-
-
-		user.trees.push(mainTree);
-
-		var skills = await Skill.find({
-	        name: mainTree.skillNames,
-	    }, function (err, skills) {
-	        if (err) throw err;
-			return skills;
-	    });
-
-		await skills.forEach(function (skill) {
-			skill.achievedPoint = 0;
-			user.skills.push(skill);
-		});
-
-		user.save(function (err) {if (err) throw err;});
-
-		res.json({
-			success: true,
-		});
-	}
-});*/
-
+// sets the user data aquired from the first login
 setRoute.post('/firstlogindata', async function (req, res) {
 	var data = req.body;
 
@@ -865,6 +813,7 @@ setRoute.post('/firstlogindata', async function (req, res) {
 	}
 });
 
+// submits all changes made by the user to the skills.
 setRoute.post('/submitall', async function (req, res) {
 	var data = req.body;
 
@@ -942,39 +891,108 @@ setRoute.post('/request', async function (req, res){
 
 	var user = await User.findOne({username: req.decoded.username}, function(err, user) {
 		if (err) throw err;
-		console.log('user find done');
 		return user;
 	});
 
 	var skill = await Skill.findOne({name: req.body.name},  function (err, skill) {
 		if (err) throw err;
-		console.log('skill find done');
 		return skill;
 	});
 
 	if (skill !== undefined) {
 		var userskill = user.skills.find(obj => obj.name == skill.name);
 
-		if(skill.requests.find(obj => obj.username == user.username) == undefined)
+		if(req.body.requestType == "beginner")
 		{
-			skill.requests.push({	username: user.username,
-									achievedPoint: userskill.achievedPoint,
-									email: user.email  });
+			if(skill.beginnerRequests.find(obj => obj.username == user.username) == undefined)
+			{
+				skill.beginnerRequests.push({	username: user.username,
+										achievedPoint: userskill.achievedPoint,
+										email: user.email  });
 
-			skill.save(function (err) {if (err) throw err;});
+				skill.save(function (err) {if (err) throw err;});
 
-			res.json({
-				succes: true,
-				message: 'Added request.'
-			});
+
+
+				res.json({
+					succes: true,
+					message: 'Added request.',
+					sumRequest: skill.beginnerRequests.length
+				});
+			}
+			else
+			{
+
+
+				res.json({
+					succes: false,
+					message: 'Already requested.',
+					sumRequest: skill.beginnerRequests.length
+				});
+			}
 		}
-		else
+
+		if(req.body.requestType == "intermediate")
 		{
-			res.json({
-				succes: false,
-				message: 'Already requested.'
-			});
+			if(skill.intermediateRequests.find(obj => obj.username == user.username) == undefined)
+			{
+				skill.intermediateRequests.push({	username: user.username,
+										achievedPoint: userskill.achievedPoint,
+										email: user.email  });
+
+				skill.save(function (err) {if (err) throw err;});
+
+
+
+				res.json({
+					succes: true,
+					message: 'Added request.',
+					sumRequest: skill.intermediateRequests.length
+				});
+			}
+			else
+			{
+
+
+				res.json({
+					succes: false,
+					message: 'Already requested.',
+					sumRequest: skill.intermediateRequests.length
+				});
+			}
 		}
+
+		if(req.body.requestType == "advanced")
+		{
+			if(skill.advancedRequests.find(obj => obj.username == user.username) == undefined)
+			{
+				skill.advancedRequests.push({	username: user.username,
+										achievedPoint: userskill.achievedPoint,
+										email: user.email  });
+
+				skill.save(function (err) {if (err) throw err;});
+
+
+
+				res.json({
+					succes: true,
+					message: 'Added request.',
+					sumRequest: skill.advancedRequests.length
+				});
+			}
+			else
+			{
+
+
+				res.json({
+					succes: false,
+					message: 'Already requested.',
+					sumRequest: skill.advancedRequests.length
+				});
+			}
+		}
+
+
 	}
 	else
 	{
@@ -985,8 +1003,6 @@ setRoute.post('/request', async function (req, res){
 	}
 
 });
-
-
 
 const httpServer = http.createServer(app);
 httpServer.listen(3000);

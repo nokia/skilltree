@@ -38,12 +38,27 @@ module.exports = mongoose.model('Skill', new Schema({
         }
     ],
 
-    requests: [
+    beginnerRequests: [
+        {
+            username: String,
+            achievedPoint: Number,
+            email: String
+        }
+    ],
+    intermediateRequests: [
+        {
+            username: String,
+            achievedPoint: Number,
+            email: String
+        }
+    ],
+    advancedRequests: [
         {
             username: String,
             achievedPoint: Number,
             email: String
         }
     ]
+
 
 }));

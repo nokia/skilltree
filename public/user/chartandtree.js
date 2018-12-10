@@ -2,6 +2,7 @@ var data = undefined;
 
 initData();
 
+// get data from server
 function initData(){
   var dataRequest = new XMLHttpRequest();
   dataRequest.open('GET', '/get/userdata', true);
@@ -19,8 +20,9 @@ function initData(){
       }
   }
   dataRequest.send();
-} // get data from server
+}
 
+// creates the pixi app
 var app = new PIXI.Application({
         view: pixiCanvas,
         width: window.innerWidth,
@@ -31,6 +33,7 @@ var app = new PIXI.Application({
         autoResize: true
 });
 
+// initializes the data of the card on the top-left corner of the page.
 function initCard(){
   var treeCount = document.getElementById('treeCount');
   var skillCount = document.getElementById('skillCount');
@@ -45,6 +48,7 @@ function initCard(){
   cardMainTree.innerHTML = data.mainTree;
 }
 
+// initializes tge data of the card on the top-right corner of the page.
 function initUI(self, _data){
   var card_username = document.getElementById('card_username');
   var treeOperationTitle = document.getElementById('treeOperationTitle');
@@ -131,8 +135,7 @@ function checkFirstLogin() {
 
 }*/
 
-// ???
-
+// loads the user's public and private trees.
 function loadAddedTrees(){
   var treeList = document.getElementById('treeList');
   treeList.innerHTML = "";
@@ -148,6 +151,7 @@ function loadAddedTrees(){
   }
 }
 
+// searches users by the string provided.
 function searchUsersByName(){
   var userToSearch = {value: document.getElementById('searchedUser').value};
   var UserSearchResult = document.getElementById('UserSearchResult');
@@ -166,17 +170,23 @@ function searchUsersByName(){
   }
 }
 
-function getPublicUserData(){
-  var userToSearch = {value: document.getElementById('searchedUser').value};
-
-  request('POST', '/set/getPublicUserData', userToSearch, function() {
-      if(this.readyState == 4 && this.status == 200) {
-        showTree(this.response.mainTree, this.response);
-        initUI(false, this.response);
-      }
-  });
+// searches skills by provided name
+function searchSkillsByName(){
+    var skillToSearch = {value: document.getElementById('skillSearch').value};
+    var skillSearchResult = document.getElementById('skillSearchResult');
+    request('POST', '/set/searchSkillsByName', skillToSearch, function () {
+        if (this.readyState == 4 && this.status == 200) {
+            skillSearchResult.innerText = "";
+            for (var i = 0; i < this.response.length; i++) {
+                var mya = document.createElement('option');
+                mya.value = this.response[i].name;
+                skillSearchResult.appendChild(mya);
+            }
+        }
+    });
 }
 
+// searches trees by the provided name
 function searchTreesByName(){
   var treeToSearch = {value: document.getElementById('searchedTree').value};
   var TreeSearchResult = document.getElementById('TreeSearchResult');
@@ -193,18 +203,32 @@ function searchTreesByName(){
   });
 }
 
+// gets the username, trees, skills and maintree of the user.
+function getPublicUserData(){
+  var userToSearch = {value: document.getElementById('searchedUser').value};
+
+  request('POST', '/set/getPublicUserData', userToSearch, function() {
+      if(this.readyState == 4 && this.status == 200) {
+        showTree(this.response.mainTree, this.response);
+        initUI(false, this.response);
+      }
+  });
+}
+
+// adds a public tree to the user
 function addTreeToUser(){
   var treeToAdd = {value: document.getElementById('searchedTree').value};
 
   request('POST', '/set/addTreeToUser', treeToAdd, function() {
       if (this.readyState == 4 && this.status == 200) {
         if (this.response.success){
-          var forest = document.getElementById("forest");
+          var forest = document.getElementById("treeList");
           var nt = document.createElement('div');
           nt.innerText = this.response.name;
           nt.className = "listedTree";
           forest.appendChild(nt);
           alert("Selected tree successfully added.");
+          initData();
           loadAddedTrees();
         } else if (this.response.message == "existing") alert("Selected tree is already added.");
         else if (this.response.message == "notfound") alert("The tree is not found.");
@@ -212,6 +236,7 @@ function addTreeToUser(){
   });
 }
 
+// confirm the changes made to skill levels.
 function submit(){
     var submitData = data.skills;
     for (var i = 0; i < submitData.length; ++i) {
@@ -219,19 +244,24 @@ function submit(){
     }
     request('POST', '/set/submitall', submitData, function() {
         if(this.readyState == 4 && this.status == 200) {
-          window.open("/user/", "_self");
+          initData();
         }
     });
 }
 
+// logout.
 function logout(){
     localStorage.setItem("loginToken", "");
     window.open("/", "_self");
 }
 
+// loads the needed pics for the tree, then loads the tree.
 function startLoader () {
+    PIXI.loader.reset();
+
     PIXI.loader.add("pictures/skillborder.png")
                 .add("pictures/bg.jpg")
+                .add("pictures/tree.png")
                 .add("pictures/tick.png");
     for (var i = 0; i < data.skills.length; ++i) {
         PIXI.loader.add(data.skills[i].skillIcon.toString());
@@ -251,6 +281,7 @@ document.getElementById("openchart").onclick = showChart;
 
 var chartContainer = new PIXI.Container();
 
+// hides tree, shows chart.
 function showChart() {
     document.getElementById('creator').style.display = "none";
     document.getElementById('approveTrees').style.display = "none";
@@ -362,9 +393,9 @@ function showChart() {
 
     /*var logo = new PIXI.Sprite(PIXI.loader.resources["tree.png"].texture);
     logo.anchor.set(0.5, 0.5);
-    //logo.position.set(window.innerWidth / 2, window.innerHeight / 2);
+    logo.position.set(window.innerWidth / 2, window.innerHeight / 2);
     logo.scale.set(0.42);
-    //app.stage.addChild(logo);
+    app.stage.addChild(logo);
     chartContainer.addChild(logo);*/
 
     chartContainer.position.set((window.innerWidth) / 2, (window.innerHeight - 64) / 2);
@@ -414,6 +445,7 @@ window.onresize = function () {
 var selectedTreeName;
 var tree = undefined;
 
+// hides chart, shows tree
 function showTree (treeName, _data) {
     document.getElementById('creator').style.display = "none";
     document.getElementById('approveTrees').style.display = "none";
@@ -452,6 +484,8 @@ function showTree (treeName, _data) {
     app.renderer.render(app.stage);
     document.getElementById("pixiCanvas").style.visibility = "visible";
     app.start();
+
+    // fading animation, disabled for now.
     /*var fadein = function (delta) {
         tree.treeContainer.alpha += .05;
         if (tree.treeContainer.alpha == 1) {
@@ -462,43 +496,7 @@ function showTree (treeName, _data) {
     app.ticker.add(fadein);*/
 }
 
-
-
-/*function openEditor () {
-    app.stage.removeChild(tree.treeContainer);
-    app.localLoader.destroy();
-    tree = undefined;
-
-    // load the tree's pictures
-    app.localLoader = new PIXI.loaders.Loader();
-    var treeID2 = 0;
-    var editedTree = data.trees.find(obj => obj.id == treeID2);
-    for(var i = 0; i < editedTree.skillIDs.length; i++){
-      var skill = data.skills.find(obj => obj.id == editedTree.skillIDs[i]);
-      app.localLoader.add(skill.skillIcon.toString());
-    }
-
-    app.localLoader.load(function () {
-        app.renderer.resize(.75 * window.innerWidth - 150, window.innerHeight - 30);
-
-        // passes the details of the skills used by the tree.
-        for(var i = 0; i < editedTree.skillIDs.length; i++){
-          editedTree.skills[i] = data.skills.find(obj => obj.id == editedTree.skillIDs[i]);
-        }
-        //tree = new EditorTree(app, treeID2, treeData.find(obj => obj.treeID == treeID2), 150, 30);
-        // needs a new constructor, where we pass the expanded editedTree, the app, and xy.
-        tree = new EditorTree(app, editedTree, 150, 30);
-
-        app.stage.addChild(tree.treeContainer);
-
-        app.renderer.render(app.stage);
-    });
-}*/
-
-/*
-*   TREE CREATOR
-*/
-
+// opens skill creation, and manages it.
 function createSkill () {
     var modal = document.getElementById("newSkillModal");
     modal.style.display = "block";
@@ -531,9 +529,15 @@ function createSkill () {
 
         var parentsTable = document.getElementById('parentsTable');
         var parents = [];
-        for (i = 1; i < parentsTable.rows.length; ++i) parents.push(parentsTable.rows[i].cells[0].children[0].value);
+        for (i = 1; i < parentsTable.rows.length; ++i) {
+            parents.push({
+                name: parentsTable.rows[i].cells[0].children[0].value,
+                minPoint: parentsTable.rows[i].cells[1].children[0].value,
+                recommended: !parentsTable.rows[i].cells[2].children[0].checked
+            });
+        }
 
-        var childrenTable = document.getElementById('childrenTable');
+        /*var childrenTable = document.getElementById('childrenTable');
         var children = [];
         for (i = 1; i < childrenTable.rows.length; ++i) {
             children.push({
@@ -541,7 +545,7 @@ function createSkill () {
                 minPoint: childrenTable.rows[i].cells[1].children[0].value,
                 recommended: !childrenTable.rows[i].cells[2].children[0].checked
             });
-        }
+        }*/
 
         var trainingsTable = document.getElementById('trainingsTable');
         var trainings = [];
@@ -562,7 +566,7 @@ function createSkill () {
             maxPoint: pointsNum,
             pointDescription: pointDescription,
             parents: parents,
-            children: children,
+            //children: children,
             trainings: trainings,
             forApprove: document.getElementById('forApprove').checked
         };
@@ -577,6 +581,7 @@ function createSkill () {
     };
 };
 
+// opens tree creator and manages it.
 function createTree() {
     document.getElementById('approveTrees').style.display = "none";
     document.getElementById('approveSkills').style.display = "none";
@@ -672,26 +677,13 @@ function createTree() {
     };
 }
 
-function searchSkillsByName(){
-    var skillToSearch = {value: document.getElementById('skillSearch').value};
-    var skillSearchResult = document.getElementById('skillSearchResult');
-    request('POST', '/set/searchSkillsByName', skillToSearch, function () {
-        if (this.readyState == 4 && this.status == 200) {
-            skillSearchResult.innerText = "";
-            for (var i = 0; i < this.response.length; i++) {
-                var mya = document.createElement('option');
-                mya.value = this.response[i].name;
-                skillSearchResult.appendChild(mya);
-            }
-        }
-    });
-}
-
+// deletes a row from a table
 function deleteRow(table, row) {
   var i = row.parentNode.parentNode.rowIndex;
   document.getElementById(table).deleteRow(i);
 }
 
+// adds a row to a table
 function addRow(table) {
   var x = document.getElementById(table);
   var new_row = x.rows[1].cloneNode(true);
@@ -712,6 +704,7 @@ function addRow(table) {
 *   Approve menu for admins
 */
 
+// adds trees to approve.
 function approveTrees() {
     document.getElementById('creator').style.display = "none";
     document.getElementById('approveSkills').style.display = "none";
@@ -730,6 +723,7 @@ function approveTrees() {
     }
 }
 
+// adds skills to approve
 function approveSkills() {
     document.getElementById('creator').style.display = "none";
     document.getElementById('approveTrees').style.display = "none";
@@ -748,6 +742,7 @@ function approveSkills() {
     }
 }
 
+// drops all offers from all users (used for dev)
 function dropoffers() {
     request('POST', '/set/dropoffers', {} , function () {
         if (this.readyState == 4 && this.status == 200) {

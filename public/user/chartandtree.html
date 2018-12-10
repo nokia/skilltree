@@ -78,20 +78,58 @@
         <li class="nav-item">
           <a class="nav-link" onclick="submit()">Submit Changes</a>
         </li>
-        <!-- <li class="nav-item">
+        <li class="nav-item">
           <a class="nav-link" onclick="logout()">Logout</a>
-        </li> -->
+        </li>
       </ul>
       <div class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchedUser" onkeyup="searchUsersByName()" list="UserSearchResult">
         <input class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="getPublicUserData()" value="Search">
       </div>
     </div>
+    <a class="nav-link" href="#advSearch" data-toggle="collapse" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Advanced Search
+    </a>
     <a class="nav-link" href="#userprofile" data-toggle="collapse" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <img src="./pictures/profile.png">
     </a>
   </nav>
   <!-- end of navbar -->
+
+  <!-- start of advanced search -->
+  <div class="collapse float-left" id="advSearch">
+    <div class="card">
+      <div class="card-body">
+        <!-- card nav -->
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link" id="userSearch-tab" data-toggle="tab" href="#userSearch" role="tab" aria-controls="userSearch" aria-selected="true">User Search</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="skillSearch-tab" data-toggle="tab" href="#skillSearch" role="tab" aria-controls="skillSearch" aria-selected="false">Skill Search</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="treeSearch-tab" data-toggle="tab" href="#treeSearch" role="tab" aria-controls="treeSearch" aria-selected="false">Tree Search</a>
+          </li>
+        </ul>
+        <!-- end of card nav -->
+        <!-- card content -->
+        <div class="tab-content" id="mySearchTabContent">
+          <div class="tab-pane fade" id="userSearch" role="tabpanel" aria-labelledby="userSearch-tab">
+            <h5 class="pt-4">Beep</h5>
+          </div>
+          <div class="tab-pane fade" id="skillSearch" role="tabpanel" aria-labelledby="skillSearch-tab">
+            <h5 class="pt-4">Boop</h5>
+          </div>
+          <div class="tab-pane fade" id="treeSearch" role="tabpanel" aria-labelledby="treeSearch-tab">
+            <h5 class="pt-4">F T L</h5>
+          </div>
+        </div>
+        <!-- end of card content -->
+      </div>
+    </div>
+  </div>
+  <!-- end of advanced search -->
 
   <!-- user card  -->
   <div class="collapse float-left" id="userCard">
@@ -122,24 +160,20 @@
 
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" id="personal-tab" data-toggle="tab" href="#personal" role="tab" aria-controls="personal" aria-selected="true">Personal</a>
+            <a class="nav-link" id="personal-tab" data-toggle="tab" href="#personal" role="tab" aria-controls="personal" aria-selected="false">Personal</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" id="trainings-tab" data-toggle="tab" href="#trainings" role="tab" aria-controls="trainings" aria-selected="false">Peer Learning</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="skilltrees-tab" data-toggle="tab" href="#skilltrees" role="tab" aria-controls="skilltrees" aria-selected="false">Skilltrees</a>
+            <a class="nav-link active" id="skilltrees-tab" data-toggle="tab" href="#skilltrees" role="tab" aria-controls="skilltrees" aria-selected="true">Skilltrees</a>
           </li><!--
             <li class="nav-item">
             <a class="nav-link" id="statistics-tab" data-toggle="tab" href="#statistics" role="tab" aria-controls="statistics" aria-selected="false">Statistics</a>
           </li> -->
-         <li class="nav-item">
-             <!-- <a class="nav-link" id="logout" onclick="logout()">Logout</a> -->
-             <span class="float-right"><a class="btn btn-light" href="#" role="button" onclick="logout()">Logout</a></span>
-          </li>
         </ul>
-        
-        
+
+
 
         <!-- end of card nav -->
 
@@ -148,7 +182,7 @@
 
           <!-- personal-tab content -->
 
-          <div class="tab-pane fade show active" id="personal" role="tabpanel" aria-labelledby="personal-tab">
+          <div class="tab-pane fade" id="personal" role="tabpanel" aria-labelledby="personal-tab">
 
             <form class="pt-4">
               <div class="form-group row">
@@ -180,7 +214,7 @@
 
           <!-- skilltrees-tab content -->
 
-          <div class="tab-pane fade" id="skilltrees" role="tabpanel" aria-labelledby="skilltrees-tab">
+          <div class="tab-pane fade show active" id="skilltrees" role="tabpanel" aria-labelledby="skilltrees-tab">
             <h5 class="pt-4" id="treeOperationTitle">Add existing trees</h5>
             <div class="form-inline my-2 my-lg-0">
               <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" onkeyup="searchTreesByName()" list="TreeSearchResult" id="searchedTree">
@@ -284,15 +318,19 @@
           <table id = "parentsTable" border = "1">
             <tr>
               <td>Parent</td>
+              <td>Min point</td>
+              <td>Required</td>
               <td>Delete</td>
             </tr>
             <tr>
               <td><input size=30 type="text" id = "parent" list = "skillSearchResult" onkeypress="searchSkillsByName()" required></td>
+              <td><input size=10 type="text" id = "minPoint" required></td>
+              <td><input size=50 type="checkbox" id = "required"></td>
               <td><input type="button" value="Delete" onclick="deleteRow('parentsTable', this)"></td>
             </tr>
           </table>
           <input type="button" value="Add parent" onclick="addRow('parentsTable')"><br>
-          <h5>Children:</h5>
+          <!--<h5>Children:</h5>
           <table id = "childrenTable" border = "1">
             <tr>
               <td>Child</td>
@@ -307,7 +345,7 @@
               <td><input type="button" value="Delete" onclick="deleteRow('childrenTable', this)"></td>
             </tr>
           </table>
-          <input type="button" value="Add child" onclick="addRow('childrenTable')"><br>
+          <input type="button" value="Add child" onclick="addRow('childrenTable')"><br>-->
           <h5>Trainings:</h5>
           <table id = "trainingsTable" border = "1">
             <tr>
@@ -325,7 +363,7 @@
               <td><input type="button" value="Delete" onclick="deleteRow('trainingsTable', this)"></td>
             </tr>
           </table>
-          <input type="button" value="Add child" onclick="addRow('trainingsTable')"><br><br>
+          <input type="button" value="Add training" onclick="addRow('trainingsTable')"><br><br>
           Send for approve:
           <input type = "checkbox" id = "forApprove"><br><br>
           <input type = "submit" value = "Save" id = "saveSkillBtn">
@@ -440,13 +478,13 @@
             <div class="divTableRow">
               <div class="divTableHead"> Intermediate </div>
               <div class="divTableCell" id="intermediateCount"> People </div>
-              <div class="divTableCell"> + </div>
+              <div class="divTableCell" id="addIntermediateCount">  + </div>
 
             </div>
             <div class="divTableRow">
               <div class="divTableHead"> Advanced </div>
               <div class="divTableCell" id="advancedCount"> People </div>
-              <div class="divTableCell"> + </div>
+              <div class="divTableCell" id="addAdvancedCount"> + </div>
 
             </div>
         </div>
