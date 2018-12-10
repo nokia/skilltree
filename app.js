@@ -878,7 +878,7 @@ setRoute.post('/submitall', async function (req, res) {
 });
 
 
-//drops the offers from global skills. Needed if we delete users
+//drops the offers from global skills. Needed if we delete users 
 setRoute.post('/dropoffers', async function (req, res) {
 	Skill.find({} , (err, skills) => {
         if(err) console.log("error");
