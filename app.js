@@ -902,32 +902,97 @@ setRoute.post('/request', async function (req, res){
 	if (skill !== undefined) {
 		var userskill = user.skills.find(obj => obj.name == skill.name);
 
-		if(skill.requests.find(obj => obj.username == user.username) == undefined)
+		if(req.body.requestType == "beginner")
 		{
-			skill.requests.push({	username: user.username,
-									achievedPoint: userskill.achievedPoint,
-									email: user.email  });
-
-			skill.save(function (err) {if (err) throw err;});
-
-
-
-			res.json({
-				succes: true,
-				message: 'Added request.',
-				sumRequest: skill.requests.length
-			});
+			if(skill.beginnerRequests.find(obj => obj.username == user.username) == undefined)
+			{
+				skill.beginnerRequests.push({	username: user.username,
+										achievedPoint: userskill.achievedPoint,
+										email: user.email  });
+	
+				skill.save(function (err) {if (err) throw err;});
+	
+	
+	
+				res.json({
+					succes: true,
+					message: 'Added request.',
+					sumRequest: skill.beginnerRequests.length
+				});
+			}
+			else
+			{
+	
+	
+				res.json({
+					succes: false,
+					message: 'Already requested.',
+					sumRequest: skill.beginnerRequests.length
+				});
+			}
 		}
-		else
+
+		if(req.body.requestType == "intermediate")
 		{
-
-
-			res.json({
-				succes: false,
-				message: 'Already requested.',
-				sumRequest: skill.requests.length
-			});
+			if(skill.intermediateRequests.find(obj => obj.username == user.username) == undefined)
+			{
+				skill.intermediateRequests.push({	username: user.username,
+										achievedPoint: userskill.achievedPoint,
+										email: user.email  });
+	
+				skill.save(function (err) {if (err) throw err;});
+	
+	
+	
+				res.json({
+					succes: true,
+					message: 'Added request.',
+					sumRequest: skill.intermediateRequests.length
+				});
+			}
+			else
+			{
+	
+	
+				res.json({
+					succes: false,
+					message: 'Already requested.',
+					sumRequest: skill.intermediateRequests.length
+				});
+			}
 		}
+
+		if(req.body.requestType == "advanced")
+		{
+			if(skill.advancedRequests.find(obj => obj.username == user.username) == undefined)
+			{
+				skill.advancedRequests.push({	username: user.username,
+										achievedPoint: userskill.achievedPoint,
+										email: user.email  });
+	
+				skill.save(function (err) {if (err) throw err;});
+	
+	
+	
+				res.json({
+					succes: true,
+					message: 'Added request.',
+					sumRequest: skill.advancedRequests.length
+				});
+			}
+			else
+			{
+	
+	
+				res.json({
+					succes: false,
+					message: 'Already requested.',
+					sumRequest: skill.advancedRequests.length
+				});
+			}
+		}
+
+
 	}
 	else
 	{
