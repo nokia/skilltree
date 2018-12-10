@@ -941,12 +941,14 @@ setRoute.post('/dropoffers', async function (req, res) {
 setRoute.post('/request', async function (req, res){
 
 	var user = await User.findOne({username: req.decoded.username}, function(err, user) {
+		console.log('skill find start');
 		if (err) throw err;
 		console.log('user find done');
 		return user;
 	});
 
 	var skill = await Skill.findOne({name: req.body.name},  function (err, skill) {
+		console.log('skill find start');
 		if (err) throw err;
 		console.log('skill find done');
 		return skill;
