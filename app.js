@@ -967,7 +967,8 @@ setRoute.post('/request', async function (req, res){
 
 			res.json({
 				succes: true,
-				message: 'Added request.'
+				message: 'Added request.',
+				sumRequest: skill.requests.length
 			});
 		}
 		else
