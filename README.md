@@ -92,6 +92,8 @@ pm2 list
 Youtube tutorial for testing using Mocha and Chai:
 https://www.youtube.com/watch?v=NhlpFD5EL_Q
 
+To open terminal: ctrl + ö, or view -> terminal
+
 install mocha: npm install mocha
 install chai: npm install chai --save-dev
 
@@ -101,7 +103,8 @@ To run tests:
 1: cd assets  ~move to assets directory
 2: mocha     ~run mocha tests
 
-Edit tests in assets/test folder. Create new JavaScript file or use the existing unit-test.js and add functions
+Edit tests in assets/test folder. Create new JavaScript file or use the existing unit-test.js and add functions.
+
 
 ### License
 
