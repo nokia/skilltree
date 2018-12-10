@@ -307,8 +307,6 @@ setRoute.post('/searchTreesByName', async function (req, res) {
 setRoute.post('/searchSkillsByName', async function (req, res) {
 		var data = req.body;
 
-        console.log(data);
-
         var user = await User.findOne({
             username: req.decoded.username
         }, function(err, user) {

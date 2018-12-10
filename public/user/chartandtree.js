@@ -174,6 +174,7 @@ function searchUsersByName(){
 function searchSkillsByName(){
     var skillToSearch = {value: document.getElementById('skillSearch').value};
     var skillSearchResult = document.getElementById('skillSearchResult');
+    console.log(skillToSearch);
     request('POST', '/set/searchSkillsByName', skillToSearch, function () {
         if (this.readyState == 4 && this.status == 200) {
             skillSearchResult.innerText = "";
