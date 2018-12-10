@@ -222,7 +222,7 @@ function addTreeToUser(){
   request('POST', '/set/addTreeToUser', treeToAdd, function() {
       if (this.readyState == 4 && this.status == 200) {
         if (this.response.success){
-          var forest = document.getElementById("forest");
+          var forest = document.getElementById("treeList");
           var nt = document.createElement('div');
           nt.innerText = this.response.name;
           nt.className = "listedTree";
