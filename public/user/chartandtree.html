@@ -35,7 +35,7 @@
 
   <!-- navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#userCard" data-toggle="collapse" role="button"data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="initCard()">SKILLTREE</a>
+    <a class="navbar-brand" href="#userCard" data-toggle="collapse" role="button"data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="initCard()"><img class="logo" src="pictures/logo_32x32.png">SKILLTREE</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -61,28 +61,26 @@
             Editor
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" >Add Skill</a>
+            <a class="dropdown-item" onclick = "createSkill()">Create Skill</a>
             <a class="dropdown-item" >Add Training Link</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" onclick="create()" id = "openCreator">Add SkillTree</a>
+            <a class="dropdown-item" onclick = "createTree()" id = "openCreator">Create SkillTree</a>
           </div>
         </li>
-        <li class="nav-item dropdown" id = "openApproveMenu" style = "display: none;">
-          <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Approve</a>
+        <li class="nav-item dropdown" id = "openAdminMenu" style = "display: none;">
+          <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" onclick = "approveTrees()">Trees</a>
-            <a class="dropdown-item" onclick = "approveSkills()">Skills</a>
+            <a class="dropdown-item" onclick = "approveTrees()">Approve Trees</a>
+            <a class="dropdown-item" onclick = "approveSkills()">Approve Skills</a>
+            <a class="dropdown-item" onclick = "dropoffers()">Drop Offers</a>
           </div>
         </li>
         <li class="nav-item">
           <a class="nav-link" onclick="submit()">Submit Changes</a>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" onclick="logout()">Logout</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" onclick="dropoffers()">drop offers(dev)</a>
-        </li>
+        </li> -->
       </ul>
       <div class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchedUser" onkeyup="searchUsersByName()" list="UserSearchResult">
@@ -116,7 +114,7 @@
   <!-- user profile details card -->
 
   <div id="userprofile" class="collapse float-right">
-    <div class="card text-white bg-info mb-3">
+    <div class="card text-white bg-success mb-3">
       <div class="card-header" id="card_username"></div>
       <div class="card-body">
 
@@ -135,7 +133,13 @@
             <li class="nav-item">
             <a class="nav-link" id="statistics-tab" data-toggle="tab" href="#statistics" role="tab" aria-controls="statistics" aria-selected="false">Statistics</a>
           </li> -->
+         <li class="nav-item">
+             <!-- <a class="nav-link" id="logout" onclick="logout()">Logout</a> -->
+             <span class="float-right"><a class="btn btn-light" href="#" role="button" onclick="logout()">Logout</a></span>
+          </li>
         </ul>
+        
+        
 
         <!-- end of card nav -->
 
@@ -363,6 +367,24 @@
   </div>
   <!-- end of modal -->
 
+  <div id = "skillinfopage" class = "modal">
+      <div class = "modal-content">
+          <div class="modal-header">
+              <span class="modalClose" id = "closeInfoModal">&times;</span>
+              <h2 id="infoSkillnameHeader"></h2>
+          </div>
+          <div class="modal-body">
+              <p><span id = "imDesc"></span></p>
+              <p><b>Category:</b> <span id = "imCateg"></span></p>
+              <p><b>Points (maximum: <span id = "imMaxPoint"></span>):</b> <span id = "imPoints"></span></p>
+              <p><b>Parents:</b> <span id = "imParents"></span></p>
+              <p><b>Children:</b> <span id = "imChildren"></span></p>
+              <p><b>Trainings:</b></p>
+              <span style = "margin-left: 20px" id = "imTrainings"></span>
+          </div>
+      </div>
+  </div>
+
   <!-- start of modal -->
   <div id = "skillpage" class = "modal">
     <div class = "modal-content">
@@ -371,14 +393,13 @@
         <h2 id="skillnameHeader"></h2>
       </div>
       <div class="modal-body">
+
+
         <div class = "divTable">
-          <div class= "divTableCaption">Trainings</div>
+          <div class= "divTableCaption"></div>
           <div class="divTableBody" id = "trainingTableBody">
             <div class="divTableRow">
-              <div class="divTableHead"> Date </div>
-              <div class="divTableHead"> Level </div>
-              <div class="divTableHead"> Place</div>
-              <div class="divTableHead"> Teacher</div>
+
             </div>
           </div>
 
@@ -406,10 +427,27 @@
           <div class= "divTableCaption">Request</div>
           <div class="divTableBody" id = requestTableBody>
             <div class="divTableRow">
-              <div class="divTableHead"> TODO </div>
-              <div class="divTableHead"> TODO </div>
-              <div class="divTableHead"> TODO</div>
-              <div class="divTableHead"> TODO</div>
+              <div class="divTableHead"> Level </div>
+              <div class="divTableHead"> Times requested </div>
+              <div class="divTableHead"> Request </div>
+            </div>
+            <div class="divTableRow">
+              <div class="divTableHead"> Beginner </div>
+              <div class="divTableCell" id="beginnerCount"> People </div>
+              <div class="divTableCell" id="addBeginnerCount"> + </div>
+
+            </div>
+            <div class="divTableRow">
+              <div class="divTableHead"> Intermediate </div>
+              <div class="divTableCell" id="intermediateCount"> People </div>
+              <div class="divTableCell"> + </div>
+
+            </div>
+            <div class="divTableRow">
+              <div class="divTableHead"> Advanced </div>
+              <div class="divTableCell" id="advancedCount"> People </div>
+              <div class="divTableCell"> + </div>
+
             </div>
         </div>
 

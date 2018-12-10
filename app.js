@@ -607,6 +607,16 @@ setRoute.post('/newskill', async function(req, res) {
             trainings: data.trainings
         });
 
+        console.log(data);
+
+        for (var i = 0; i < data.parents.length; ++i) {
+            user.skills.find(obj => obj.name == data.parents[i]).children.push({name: data.name, minPoint: 1, recommended: false});
+        }
+
+        for (var i = 0; i < data.children.length; ++i) {
+            user.skills.find(obj => obj.name == data.children[i].name).parents.push(data.name);
+        }
+
         user.save(function (err) {if (err) throw err;});
 
         if (data.forApprove) {
@@ -652,16 +662,16 @@ setRoute.post('/newtree', async function (req, res) { // create user tree
 		});
 	}
 	else if (user.trees.find(obj => obj.name == data.name) == undefined) {
-		var sn = await sortTree(data.skillNames);
+		var sn = await sortTree(data.skills);
 		user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: sn});
 
-        await data.skillNames.forEach(async function (skillName) {
-            var skill = await Skill.findOne({
-                name: skillName.name,
+        await data.skills.forEach(async function (skill) {
+            /*var skill = await Skill.findOne({
+                name: skillName,
             }, function (err, skill) {
                 if (err) throw err;
                 return skill;
-            });
+            });*/
 
             skill.achievedPoint = 0;
             if (user.skills.find(obj => obj.name == skill.name) == undefined) {
@@ -919,13 +929,67 @@ setRoute.post('/dropoffers', async function (req, res) {
 
         skills.map(skill => {
 			skill.offers = [];
-			
+
 			skill.save(  function (err) {if (err) throw err;} );
         })
 	})
-	
-	
+
+
 });
+
+//API call for request onclick
+setRoute.post('/request', async function (req, res){
+
+	var user = await User.findOne({username: req.decoded.username}, function(err, user) {
+		console.log('skill find start');
+		if (err) throw err;
+		console.log('user find done');
+		return user;
+	});
+
+	var skill = await Skill.findOne({name: req.body.name},  function (err, skill) {
+		console.log('skill find start');
+		if (err) throw err;
+		console.log('skill find done');
+		return skill;
+	});
+
+	if (skill !== undefined) {
+		var userskill = user.skills.find(obj => obj.name == skill.name);
+
+		if(skill.requests.find(obj => obj.username == user.username) == undefined)
+		{
+			skill.requests.push({	username: user.username,
+									achievedPoint: userskill.achievedPoint,
+									email: user.email  });
+
+			skill.save(function (err) {if (err) throw err;});
+
+			res.json({
+				succes: true,
+				message: 'Added request.',
+				sumRequest: skill.requests.length
+			});
+		}
+		else
+		{
+			res.json({
+				succes: false,
+				message: 'Already requested.'
+			});
+		}
+	}
+	else
+	{
+		res.json({
+			succes: false,
+			message: "Skill not found"
+		});
+	}
+
+});
+
+
 
 const httpServer = http.createServer(app);
 httpServer.listen(3000);

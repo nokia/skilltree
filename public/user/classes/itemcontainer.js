@@ -43,15 +43,41 @@ class ItemContainer {
         btnGHover.drawRect(0, 0, 70, 26);
         btnGHover.endFill();
 
+        var btnInfo = new PIXI.Sprite(btnG.generateTexture());
+
+        var txtInfo = new PIXI.Text("INFO", {fontSize: 14, fill: 0x000000});
+        txtInfo.anchor.set(0.5, 0.5);
+        txtInfo.position.set(35,13);
+
+        var btnInfoContainer = new PIXI.Container();
+        btnInfoContainer.addChild(btnInfo, txtInfo);
+        btnInfoContainer.position.set((detailsWidth - btnInfoContainer.width) / 4  , description.position.y + description.height + 10);
+        btnInfoContainer.interactive = true;
+        btnInfoContainer.buttonMode = true;
+        btnInfoContainer.parentObj = this;
+        btnInfoContainer
+                .on('pointerover', function () {
+                        btnInfo.texture = btnGHover.generateTexture();
+                        app.renderer.render(app.stage);
+                        })
+                .on('pointerout', function () {
+                        btnInfo.texture = btnG.generateTexture();
+                        app.renderer.render(app.stage);
+                        })
+                .on('click', function () {
+                        this.parentObj.toggleSkillInfoPage();
+                        });
+        detailsForeground.addChild(btnInfoContainer);
+
         var btn1 = new PIXI.Sprite(btnG.generateTexture());
 
-        var txt1 = new PIXI.Text("TRAINING", {fontSize: 14, fill: 0x000000});
+        var txt1 = new PIXI.Text("OFFERS", {fontSize: 14, fill: 0x000000});
         txt1.anchor.set(0.5, 0.5);
         txt1.position.set(35,13);
 
         var btn1Container = new PIXI.Container();
         btn1Container.addChild(btn1, txt1);
-        btn1Container.position.set(  (detailsWidth - btn1Container.width)/2  , description.position.y + description.height + 10);
+        btn1Container.position.set(  (detailsWidth - btn1Container.width) * .75  , description.position.y + description.height + 10);
         btn1Container.interactive = true;
         btn1Container.buttonMode = true;
         btn1Container.parentObj = this;
@@ -277,18 +303,20 @@ class ItemContainer {
     }
 
     toggleSkillDetailsPage(){
-        var modal = document.getElementById('skillpage');
+                var modal = document.getElementById('skillpage');
         var header = document.getElementById('skillnameHeader');
         var span = document.getElementById("closeORModal");
+        var globalskill = undefined;
 
+        var skillname = this.skill.name;
 
-        var allLoaded = 0;
         //HTTP Request for offer data
         var offerHttpRequest = new XMLHttpRequest();
             offerHttpRequest.open('POST', '/set/skilldata', true);
             offerHttpRequest.setRequestHeader('Content-type', 'application/json');
             offerHttpRequest.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
             offerHttpRequest.responseType = "json";
+
 
 				//Listener, if response comes, it runs.
 				offerHttpRequest.onreadystatechange = function() {
@@ -297,11 +325,21 @@ class ItemContainer {
                             //Got the offer data, fill the offers table
 
                             //Initialize table variables
-                            var globalskill = offerHttpRequest.response;
+                            globalskill = offerHttpRequest.response;
                             var offerTable = document.getElementById('offerTableBody');
 
                             //Empty the table
                             offerTable.innerHTML = "";
+
+
+                            offerTable.appendChild( createTableRow( "Name",
+                                                                    "Location",
+                                                                    "Teaching Day",
+                                                                    "Teaching Time",
+                                                                    "Level",
+                                                                    "divTableHead") );
+
+
                             //Filling the table
                             for(var i=0; i<globalskill.offers.length; i++ )
                                 {
@@ -311,81 +349,111 @@ class ItemContainer {
                                                                             globalskill.offers[i].location,
                                                                             globalskill.offers[i].teachingDay,
                                                                             globalskill.offers[i].teachingTime,
-                                                                            globalskill.offers[i].achievedPoint
-                                                                            ) );
+                                                                            globalskill.offers[i].achievedPoint,
+                                                                            "divTableCell") );
                                     }
                                 }
-                            //Checking that the table is done (1 table out of 3)
-                            allLoaded ++;
+
+                            var addBeginnerRequest = document.getElementById('addBeginnerCount');
+                            addBeginnerRequest.onclick = function() {
+                                //request for requests
+                                var requestforrequests = new XMLHttpRequest();
+                                    requestforrequests.open('POST', '/set/request', true);
+                                    requestforrequests.setRequestHeader('Content-type', 'application/json');
+                                    requestforrequests.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+                                    requestforrequests.responseType = "json";
+
+                                //if it returns
+                                requestforrequests.onreadystatechange = function() {
+                                    if(requestforrequests.readyState == 4 && requestforrequests.status == 200) {
+                                        if(requestforrequests.response !== undefined)
+                                        {
+                                            console.log(requestforrequests.response);
+                                            alert(requestforrequests.response.message);
+                                        }
+                                    }
+                                }
+
+                                requestforrequests.send(
+                                    JSON.stringify({
+                                        name: skillname
+                                    })
+                                );
+
+
+
+                            }
+
 
                             //Display the tables Window if all table has been loaded
                             displayWindow();
 
-						} else console.log("apád");
+						}
 					}
-				}
+                }
 
 				offerHttpRequest.send(
 					JSON.stringify({
-						name: this.skill.name
+						name: skillname
 					})
 				);
 
 
 
-        //Adding
-        var trainingTable = document.getElementById('trainingTableBody');
 
+
+
+        //Adding trainings to table
+        var trainingTable = document.getElementById('trainingTableBody');
         var requestTable = document.getElementById('requestTableBody');
 
 
-        function createTableRow( data1, data2, data3, data4, data5 )
+        function createTableRow( data1, data2, data3, data4, data5, classname )
         {
             //Creating an offer tablerow
             var Row = document.createElement('div');
             Row.className = "divTableRow";
-            
-            
-            if(data1!=null)
+
+
+            if(data1 !== undefined)
             {
             var Column1 = document.createElement('div');
-            Column1.className = "divTableCell";
+            Column1.className = classname;
             Column1.innerHTML = data1;
+            Row.appendChild(Column1);
             }
 
-            if(data2!=null)
+            if(data2 !== undefined)
             {
             var Column2 = document.createElement('div');
-            Column2.className = "divTableCell";
+            Column2.className = classname;
             Column2.innerHTML = data2;
+            Row.appendChild(Column2);
             }
 
-            if(data3!=null)
+            if(data3 !== undefined)
             {
             var Column3 = document.createElement('div');
-            Column3.className = "divTableCell";
+            Column3.className = classname;
             Column3.innerHTML = data3;
+            Row.appendChild(Column3);
             }
 
-            if(data4!=null)
+            if(data4 !== undefined)
             {
             var Column4 = document.createElement('div');
-            Column4.className = "divTableCell";
+            Column4.className = classname;
             Column4.innerHTML = data4;
+            Row.appendChild(Column4);
             }
 
-            if(data5!=null)
+            if(data5 !== undefined)
             {
             var Column5 = document.createElement('div');
-            Column5.className = "divTableCell";
+            Column5.className = classname;
             Column5.innerHTML = data5;
-            }
-
-            Row.appendChild(Column1);
-            Row.appendChild(Column2);
-            Row.appendChild(Column3);
-            Row.appendChild(Column4);
             Row.appendChild(Column5);
+            }
 
             return Row;
         }
@@ -407,10 +475,70 @@ class ItemContainer {
         }
 
         function displayWindow(){
-            if(allLoaded == 1)
-                modal.style.display = "block";
+            modal.style.display = "block";
         }
 
 
+
     }
+
+    toggleSkillInfoPage () {
+        var modal = document.getElementById('skillinfopage');
+        var header = document.getElementById('infoSkillnameHeader');
+        var span = document.getElementById("closeInfoModal");
+        var desc = document.getElementById("imDesc");
+        var categ = document.getElementById("imCateg");
+        var maxP = document.getElementById("imMaxPoint");
+        var points = document.getElementById("imPoints");
+        var parents = document.getElementById("imParents");
+        var children = document.getElementById("imChildren");
+        var trainings = document.getElementById("imTrainings");
+
+        var skillname = this.skill.name;
+        header.innerText = this.skill.name;
+
+        desc.innerText = this.skill.description;
+        categ.innerText = this.skill.categoryName;
+        maxP.innerText = this.skill.maxPoint;
+
+        var pointDesc = '';
+        for (var i = 0; i < this.skill.pointDescription.length; ++i) pointDesc += this.skill.pointDescription[i] + ', ';
+        pointDesc = pointDesc.substring(0, pointDesc.length - 2);
+        points.innerText = pointDesc;
+
+        var parentNames = '';
+        for (var i = 0; i < this.skill.parents.length; ++i) parentNames += this.skill.parents[i] + ', ';
+        parentNames = parentNames.substring(0, parentNames.length - 2);
+        parents.innerText = parentNames;
+
+        var childNames = '';
+        for (var i = 0; i < this.skill.children.length; ++i) {
+            childNames += this.skill.children[i].name + ' (minimum point: ' + this.skill.children[i].minPoint;
+            if (!this.skill.children[i].recommended) childNames += ', required), ';
+            else childNames += '), ';
+        }
+        childNames = childNames.substring(0, childNames.length - 2);
+        children.innerText = childNames;
+
+        var trainingNames = '';
+        for (var i = 0; i < this.skill.trainings.length; ++i) trainingNames += this.skill.trainings[i].name + ' (' + this.skill.trainings[i].url + '), ';
+        trainingNames = trainingNames.substring(0, trainingNames.length - 2);
+        trainings.innerText = trainingNames;
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        modal.style.display = "block";
+    }
+
+    addBeginnerRequest()
+        {
+            console.log("clicked");
+        }
 }

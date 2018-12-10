@@ -67,6 +67,7 @@ a {
 #pixiCanvas{
   position: fixed;
   z-index: 10;
+  background-image: url(pictures/pixi_bg.jpeg);
 }
 
 #treeList{
@@ -192,7 +193,7 @@ a {
     cursor: pointer;
 }
 
-/* TABLE STYLE */
+/*Table style */
 
 .divTable{
 	display: table;
@@ -231,4 +232,8 @@ a {
 .divTableBody {
   display: table-row-group;
   width: inherit;
+}
+
+.logo {
+    margin-right: 5px;
 }

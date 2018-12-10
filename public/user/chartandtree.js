@@ -11,7 +11,7 @@ function initData(){
   dataRequest.onreadystatechange = function() {
       if(dataRequest.readyState == 4 && dataRequest.status == 200) {
           data = dataRequest.response;
-          if (data.admin) document.getElementById('openApproveMenu').style.display = "block";
+          if (data.admin) document.getElementById('openAdminMenu').style.display = "block";
           checkFirstLogin();
           initUI(true, data);
 
@@ -24,7 +24,7 @@ function initData(){
 var app = new PIXI.Application({
         view: pixiCanvas,
         width: window.innerWidth,
-        height: window.innerHeight - 64,
+        height: window.innerHeight - 60,
         backgroundColor: 0x000000,
         antialias: true,
         autoStart: false,
@@ -231,9 +231,7 @@ function logout(){
 
 function startLoader () {
     PIXI.loader.add("pictures/skillborder.png")
-                //.add("tree.png")
                 .add("pictures/bg.jpg")
-                .add("pictures/back.png")
                 .add("pictures/tick.png");
     for (var i = 0; i < data.skills.length; ++i) {
         PIXI.loader.add(data.skills[i].skillIcon.toString());
@@ -245,9 +243,6 @@ function startLoader () {
 }
 
 app.stage = new PIXI.display.Stage();
-var bgimage = PIXI.Sprite.fromImage('pictures/bg.jpg');
-bgimage.zOrder = 1000;
-app.stage.addChild(bgimage);
 app.stage.group.enableSort = true;
 
 // CHART
@@ -504,7 +499,85 @@ function showTree (treeName, _data) {
 *   TREE CREATOR
 */
 
-function create() {
+function createSkill () {
+    var modal = document.getElementById("newSkillModal");
+    modal.style.display = "block";
+
+    var span = document.getElementById("closeSkillModal");
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    var catSelect = document.getElementById("newSkillCat");
+    for (var i = 0; i < data.categories.length; ++i) {
+        var option = document.createElement("option");
+        option.text = data.categories[i].name;
+        catSelect.add(option);
+    }
+
+    var save = document.getElementById("saveSkillBtn");
+    save.onclick = function () {
+        var pointsTable = document.getElementById('pointsTable');
+        var pointsNum = pointsTable.rows.length - 1;
+        var pointDescription = [];
+        for (i = 1; i < pointsNum + 1; ++i) pointDescription.push(pointsTable.rows[i].cells[1].children[0].value);
+
+        var parentsTable = document.getElementById('parentsTable');
+        var parents = [];
+        for (i = 1; i < parentsTable.rows.length; ++i) parents.push(parentsTable.rows[i].cells[0].children[0].value);
+
+        var childrenTable = document.getElementById('childrenTable');
+        var children = [];
+        for (i = 1; i < childrenTable.rows.length; ++i) {
+            children.push({
+                name: childrenTable.rows[i].cells[0].children[0].value,
+                minPoint: childrenTable.rows[i].cells[1].children[0].value,
+                recommended: !childrenTable.rows[i].cells[2].children[0].checked
+            });
+        }
+
+        var trainingsTable = document.getElementById('trainingsTable');
+        var trainings = [];
+        for (i = 1; i < trainingsTable.rows.length; ++i) {
+            trainings.push({
+                name: trainingsTable.rows[i].cells[0].children[0].value,
+                level: trainingsTable.rows[i].cells[1].children[0].value,
+                description: trainingsTable.rows[i].cells[2].children[0].value,
+                url: trainingsTable.rows[i].cells[3].children[0].value
+            });
+        }
+
+        var skillData = {
+            name: document.getElementById('newSkillName').value,
+            description: document.getElementById('newSkillDesc').value,
+            skillIcon: document.getElementById('newSkillIcon').value,
+            categoryName: catSelect.value,
+            maxPoint: pointsNum,
+            pointDescription: pointDescription,
+            parents: parents,
+            children: children,
+            trainings: trainings,
+            forApprove: document.getElementById('forApprove').checked
+        };
+
+        request('POST', '/set/newskill', skillData, function () {
+            if (this.readyState == 4 && this.status == 200) {
+                if (this.response.success) {
+                    modal.style.display = "none";
+                }
+            }
+        });
+    };
+};
+
+function createTree() {
     document.getElementById('approveTrees').style.display = "none";
     document.getElementById('approveSkills').style.display = "none";
 
@@ -565,83 +638,7 @@ function create() {
     };
 
     var createSkillBtn = document.getElementById("createSkill");
-    createSkillBtn.onclick = function () {
-        var modal = document.getElementById("newSkillModal");
-        modal.style.display = "block";
-
-        var span = document.getElementById("closeSkillModal");
-
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-
-        var catSelect = document.getElementById("newSkillCat");
-        for (var i = 0; i < data.categories.length; ++i) {
-            var option = document.createElement("option");
-            option.text = data.categories[i].name;
-            catSelect.add(option);
-        }
-
-        var save = document.getElementById("saveSkillBtn");
-        save.onclick = function () {
-            var pointsTable = document.getElementById('pointsTable');
-            var pointsNum = pointsTable.rows.length - 1;
-            var pointDescription = [];
-            for (i = 1; i < pointsNum + 1; ++i) pointDescription.push(pointsTable.rows[i].cells[1].children[0].value);
-
-            var parentsTable = document.getElementById('parentsTable');
-            var parents = [];
-            for (i = 1; i < parentsTable.rows.length; ++i) parents.push(parentsTable.rows[i].cells[0].children[0].value);
-
-            var childrenTable = document.getElementById('childrenTable');
-            var children = [];
-            for (i = 1; i < childrenTable.rows.length; ++i) {
-                children.push({
-                    name: childrenTable.rows[i].cells[0].children[0].value,
-                    minPoint: childrenTable.rows[i].cells[1].children[0].value,
-                    recommended: !childrenTable.rows[i].cells[2].children[0].checked
-                });
-            }
-
-            var trainingsTable = document.getElementById('trainingsTable');
-            var trainings = [];
-            for (i = 1; i < trainingsTable.rows.length; ++i) {
-                trainings.push({
-                    name: trainingsTable.rows[i].cells[0].children[0].value,
-                    level: trainingsTable.rows[i].cells[1].children[0].value,
-                    description: trainingsTable.rows[i].cells[2].children[0].value,
-                    url: trainingsTable.rows[i].cells[3].children[0].value
-                });
-            }
-
-            var skillData = {
-                name: document.getElementById('newSkillName').value,
-                description: document.getElementById('newSkillDesc').value,
-                skillIcon: document.getElementById('newSkillIcon').value,
-                categoryName: catSelect.value,
-                maxPoint: pointsNum,
-                pointDescription: pointDescription,
-                parents: parents,
-                children: children,
-                trainings: trainings,
-                forApprove: document.getElementById('forApprove').checked
-            };
-
-            request('POST', '/set/newskill', skillData, function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    if (this.response.success) {
-                        modal.style.display = "none";
-                    }
-                }
-            });
-        };
-    };
+    createSkillBtn.onclick = createSkill;
 
     var deleteBtn = document.getElementById("deleteFromList");
     deleteBtn.onclick = function () {
@@ -654,14 +651,14 @@ function create() {
     createBtn.onclick = function () {
         if (document.getElementById('treeName').value.length > 0) {
             if (skillsToAdd.length > 0) {
-                var skillNames = [];
-                for (var i = 0; i < skillsToAdd.length; ++i) skillNames.push(skillsToAdd[i]);
+                /*var skillNames = [];
+                for (var i = 0; i < skillsToAdd.length; ++i) skillNames.push(skillsToAdd[i].name);*/
 
                 var treeData = {
                     name: document.getElementById('treeName').value,
                     focusArea: document.getElementById('focusarea').value,
                     forApprove: document.getElementById('treeAppr').checked,
-                    skillNames: skillNames
+                    skills: skillsToAdd
                 };
 
                 request('POST', '/set/newtree', treeData, function () {

@@ -36,6 +36,14 @@ module.exports = mongoose.model('Skill', new Schema({
             location: String,
             achievedPoint: Number
         }
+    ],
+
+    requests: [
+        {
+            username: String,
+            achievedPoint: Number,
+            email: String
+        }
     ]
 
 }));

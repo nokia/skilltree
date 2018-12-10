@@ -50,5 +50,9 @@ a {
 
 #userprofile {
     width: 35%!important;
-    margin-right: 10px;
+    /* margin-right: 10px; */
+}
+
+.logo {
+    margin-right: 5px;
 }
