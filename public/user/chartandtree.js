@@ -244,7 +244,7 @@ function submit(){
     }
     request('POST', '/set/submitall', submitData, function() {
         if(this.readyState == 4 && this.status == 200) {
-          window.open("/user/", "_self");
+          initData();
         }
     });
 }
