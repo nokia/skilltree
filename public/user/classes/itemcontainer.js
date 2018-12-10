@@ -369,7 +369,7 @@ class ItemContainer {
                                         if(requestforrequests.response !== undefined)
                                         {
                                             alert(requestforrequests.response.message);
-                                            
+                                            console.log(requestforrequests.response);
                                         }
                                     }
                                 }
