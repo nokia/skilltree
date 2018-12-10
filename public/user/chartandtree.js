@@ -257,6 +257,8 @@ function logout(){
 
 // loads the needed pics for the tree, then loads the tree.
 function startLoader () {
+    PIXI.loader.reset();
+
     PIXI.loader.add("pictures/skillborder.png")
                 .add("pictures/bg.jpg")
                 .add("pictures/tree.png")
