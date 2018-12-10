@@ -358,7 +358,7 @@ class ItemContainer {
                             addBeginnerRequest.onclick = function() {
                                 //request for requests
                                 var requestforrequests = new XMLHttpRequest();
-                                    requestforrequests.open('POST', '/set/skilldata', true);
+                                    requestforrequests.open('POST', '/set/request', true);
                                     requestforrequests.setRequestHeader('Content-type', 'application/json');
                                     requestforrequests.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
                                     requestforrequests.responseType = "json";
