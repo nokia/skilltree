@@ -517,12 +517,17 @@ async function insertSkill(skillToInsert, skillArray) {
 			}
 
 			for (var i = 0; i < skillToInsert.children.length; i++) {
-				var ithChild = await Skill.findOne({
-						name: skillToInsert.children[i].name
-				}, function(err, skill) {
-						if (err) throw err;
-				return skill;
-				});
+
+                var ithChild = user.skills.find(obj => obj.name == skillToInsert.children[i].name);
+
+                if (ithChild == undefined) {
+                    ithChild = await Skill.findOne({
+    						name: skillToInsert.children[i].name
+    				}, function(err, skill) {
+    						if (err) throw err;
+    				        return skill;
+    				});
+                }
 
 				if (skillArray.find(obj => obj.name == ithChild.name) !== undefined) {
 					ithChild = skillArray.find(obj => obj.name == ithChild.name);
