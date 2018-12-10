@@ -844,22 +844,24 @@ setRoute.post('/submitall', async function (req, res) {
 		    });
 
 			data.forEach(function (userSkill) {
-				var globalSkill = globalSkills.find(obj => obj.name == userSkill.name);
-				if (userSkill.achievedPoint > 0) {
-					if (globalSkill.offers.find(obj => obj.username == user.username) == undefined) {
-						globalSkills.find(obj => obj.name == userSkill.name).offers.push({
-							username: user.username,
-							location: user.location,
-							teachingDay: user.teachingDay,
-							teachingTime: user.teachingTime,
-							achievedPoint: userSkill.achievedPoint,
-						});
-					} else globalSkill.offers.find(obj => obj.username == user.username).achievedPoint = userSkill.achievedPoint;
-				} else {
-					if (globalSkill.offers.find(obj => obj.username == user.username) != undefined) {
-						globalSkills.find(obj => obj.name == userSkill.name).offers = globalSkill.offers.filter(obj => obj.username != user.username);
-					}
-				}
+                var globalSkill = globalSkills.find(obj => obj.name == userSkill.name);
+                if (globalSkill != undefined) {
+                    if (userSkill.achievedPoint > 0) {
+                        if (globalSkill.offers.find(obj => obj.username == user.username) == undefined) {
+                            globalSkills.find(obj => obj.name == userSkill.name).offers.push({
+                                username: user.username,
+                                location: user.location,
+                                teachingDay: user.teachingDay,
+                                teachingTime: user.teachingTime,
+                                achievedPoint: userSkill.achievedPoint,
+                            });
+                        } else globalSkill.offers.find(obj => obj.username == user.username).achievedPoint = userSkill.achievedPoint;
+                    } else {
+                        if (globalSkill.offers.find(obj => obj.username == user.username) != undefined) {
+                            globalSkills.find(obj => obj.name == userSkill.name).offers = globalSkill.offers.filter(obj => obj.username != user.username);
+                        }
+                    }
+                }
 			});
 
 			globalSkills.forEach(function (skill) {
