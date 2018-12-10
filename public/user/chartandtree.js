@@ -205,6 +205,7 @@ function addTreeToUser(){
           nt.className = "listedTree";
           forest.appendChild(nt);
           alert("Selected tree successfully added.");
+          initData();
           loadAddedTrees();
         } else if (this.response.message == "existing") alert("Selected tree is already added.");
         else if (this.response.message == "notfound") alert("The tree is not found.");
