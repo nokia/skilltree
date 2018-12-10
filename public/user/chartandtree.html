@@ -82,14 +82,14 @@
           <a class="nav-link" onclick="logout()">Logout</a>
         </li>
       </ul>
+      <div class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchedUser" onkeyup="searchUsersByName()" list="UserSearchResult">
+        <input class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="getPublicUserData()" value="Search">
+      </div>
     </div>
-    <div class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchedUser" onkeyup="searchUsersByName()" list="UserSearchResult">
-      <input class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="getPublicUserData()" value="Search">
-      <a class="nav-link" href="#advSearch" data-toggle="collapse" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Advanced Search
-      </a>
-    </div>
+    <a class="nav-link" href="#advSearch" data-toggle="collapse" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Advanced Search
+    </a>
     <a class="nav-link" href="#userprofile" data-toggle="collapse" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <img src="./pictures/profile.png">
     </a>
