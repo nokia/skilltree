@@ -564,7 +564,7 @@ function createSkill () {
             maxPoint: pointsNum,
             pointDescription: pointDescription,
             parents: parents,
-            children: children,
+            //children: children,
             trainings: trainings,
             forApprove: document.getElementById('forApprove').checked
         };
