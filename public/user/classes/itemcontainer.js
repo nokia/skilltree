@@ -438,7 +438,7 @@ class ItemContainer {
                                         {
                                             alert(requestforrequests.response.message);
                                             console.log(requestforrequests.response);
-                                            beginnerCount.innerHTML = (requestforrequests.response.sumRequest);
+                                            advancedCount.innerHTML = (requestforrequests.response.sumRequest);
 
                                         }
                                     }
