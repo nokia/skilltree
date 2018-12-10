@@ -368,6 +368,8 @@ class ItemContainer {
                                     if(requestforrequests.readyState == 4 && requestforrequests.status == 200) {
                                         if(requestforrequests.response !== undefined)
                                         {
+                                            console.log(requestforrequests);
+                                            console.log('---------');
                                             console.log("succes: " + requestforrequests.response.succes);
                                             console.log("message: " + requestforrequests.response.message);
                                         }
