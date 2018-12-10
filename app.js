@@ -585,6 +585,12 @@ setRoute.post('/newskill', async function(req, res) {
 			message: 'User not found.'
 		});
 	} else if (user.skills.find(obj => obj.name == data.name) == undefined) {
+        var parentNames = [];
+        for (var i = 0; i < data.parents.length; ++i) {
+            user.skills.find(obj => obj.name == data.parents[i]).children.push(data.parents);
+            parentNames.push(data.parents[i].name);
+        }
+
 		user.skills.push({
             name: data.name,
             description: data.description,
@@ -593,20 +599,14 @@ setRoute.post('/newskill', async function(req, res) {
             achievedPoint: 0,
             maxPoint: data.maxPoint,
             pointDescription: data.pointDescription,
-            parents: data.parents,
-            children: data.children,
+            parents: parentNames,
+            //children: data.children,
             trainings: data.trainings
         });
 
-        console.log(data);
-
-        for (var i = 0; i < data.parents.length; ++i) {
-            user.skills.find(obj => obj.name == data.parents[i]).children.push({name: data.name, minPoint: 1, recommended: false});
-        }
-
-        for (var i = 0; i < data.children.length; ++i) {
+        /*for (var i = 0; i < data.children.length; ++i) {
             user.skills.find(obj => obj.name == data.children[i].name).parents.push(data.name);
-        }
+        }*/
 
         user.save(function (err) {if (err) throw err;});
 
@@ -619,7 +619,7 @@ setRoute.post('/newskill', async function(req, res) {
                 categoryName: data.categoryName,
                 maxPoint: data.maxPoint,
                 pointDescription: data.pointDescription,
-                parents: data.parents,
+                parents: parentNames,
                 children: data.children,
                 trainings: data.trainings
             });
@@ -909,11 +909,11 @@ setRoute.post('/request', async function (req, res){
 				skill.beginnerRequests.push({	username: user.username,
 										achievedPoint: userskill.achievedPoint,
 										email: user.email  });
-	
+
 				skill.save(function (err) {if (err) throw err;});
-	
-	
-	
+
+
+
 				res.json({
 					succes: true,
 					message: 'Added request.',
@@ -922,8 +922,8 @@ setRoute.post('/request', async function (req, res){
 			}
 			else
 			{
-	
-	
+
+
 				res.json({
 					succes: false,
 					message: 'Already requested.',
@@ -939,11 +939,11 @@ setRoute.post('/request', async function (req, res){
 				skill.intermediateRequests.push({	username: user.username,
 										achievedPoint: userskill.achievedPoint,
 										email: user.email  });
-	
+
 				skill.save(function (err) {if (err) throw err;});
-	
-	
-	
+
+
+
 				res.json({
 					succes: true,
 					message: 'Added request.',
@@ -952,8 +952,8 @@ setRoute.post('/request', async function (req, res){
 			}
 			else
 			{
-	
-	
+
+
 				res.json({
 					succes: false,
 					message: 'Already requested.',
@@ -969,11 +969,11 @@ setRoute.post('/request', async function (req, res){
 				skill.advancedRequests.push({	username: user.username,
 										achievedPoint: userskill.achievedPoint,
 										email: user.email  });
-	
+
 				skill.save(function (err) {if (err) throw err;});
-	
-	
-	
+
+
+
 				res.json({
 					succes: true,
 					message: 'Added request.',
@@ -982,8 +982,8 @@ setRoute.post('/request', async function (req, res){
 			}
 			else
 			{
-	
-	
+
+
 				res.json({
 					succes: false,
 					message: 'Already requested.',

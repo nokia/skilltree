@@ -527,9 +527,15 @@ function createSkill () {
 
         var parentsTable = document.getElementById('parentsTable');
         var parents = [];
-        for (i = 1; i < parentsTable.rows.length; ++i) parents.push(parentsTable.rows[i].cells[0].children[0].value);
+        for (i = 1; i < parentsTable.rows.length; ++i) {
+            parents.push({
+                name: parentsTable.rows[i].cells[0].children[0].value,
+                minPoint: parentsTable.rows[i].cells[1].children[0].value,
+                recommended: !parentsTable.rows[i].cells[2].children[0].checked
+            });
+        }
 
-        var childrenTable = document.getElementById('childrenTable');
+        /*var childrenTable = document.getElementById('childrenTable');
         var children = [];
         for (i = 1; i < childrenTable.rows.length; ++i) {
             children.push({
@@ -537,7 +543,7 @@ function createSkill () {
                 minPoint: childrenTable.rows[i].cells[1].children[0].value,
                 recommended: !childrenTable.rows[i].cells[2].children[0].checked
             });
-        }
+        }*/
 
         var trainingsTable = document.getElementById('trainingsTable');
         var trainings = [];
