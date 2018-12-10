@@ -85,7 +85,9 @@
       <div class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchedUser" onkeyup="searchUsersByName()" list="UserSearchResult">
         <input class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="getPublicUserData()" value="Search">
-        <input class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="#" value="Advanced Search">
+        <a class="nav-link" href="#advSearch" data-toggle="collapse" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Advanced Search
+        </a>
       </div>
     </div>
     <a class="nav-link" href="#userprofile" data-toggle="collapse" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -95,7 +97,7 @@
   <!-- end of navbar -->
 
   <!-- start of advanced search -->
-  <div class="collapse float-left" id="userCard">
+  <div class="collapse float-left" id="advSearch">
     <div class="card">
       <div class="card-body">
         <!-- card nav -->
