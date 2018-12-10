@@ -587,7 +587,7 @@ setRoute.post('/newskill', async function(req, res) {
 	} else if (user.skills.find(obj => obj.name == data.name) == undefined) {
         var parentNames = [];
         for (var i = 0; i < data.parents.length; ++i) {
-            user.skills.find(obj => obj.name == data.parents[i].name).children.push(data.name);
+            user.skills.find(obj => obj.name == data.parents[i].name).children.push({name: data.name, minPoint: data.parents[i].minPoint, recommended: data.parents[i].recommended});
             parentNames.push(data.parents[i].name);
         }
 
