@@ -370,6 +370,7 @@ class ItemContainer {
                                         {
                                             alert(requestforrequests.response.message);
                                             console.log(requestforrequests.response);
+                                            console.log(requestforrequests.response.sumRequest);
                                         }
                                     }
                                 }
