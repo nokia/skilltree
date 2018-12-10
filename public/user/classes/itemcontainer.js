@@ -303,7 +303,7 @@ class ItemContainer {
     }
 
     toggleSkillDetailsPage(){
-                var modal = document.getElementById('skillpage');
+        var modal = document.getElementById('skillpage');
         var header = document.getElementById('skillnameHeader');
         var span = document.getElementById("closeORModal");
         var globalskill = undefined;
@@ -327,6 +327,9 @@ class ItemContainer {
                             //Initialize table variables
                             globalskill = offerHttpRequest.response;
                             var offerTable = document.getElementById('offerTableBody');
+                            var beginnerCount = document.getElementById('beginnerCount');
+                            beginnerCount.innerHTML = globalskill.requests.length;
+
 
                             //Empty the table
                             offerTable.innerHTML = "";
@@ -355,7 +358,6 @@ class ItemContainer {
                                 }
 
                             var addBeginnerRequest = document.getElementById('addBeginnerCount');
-                            var BeginnerCount = document.getElementById('beginnerCount');
                             addBeginnerRequest.onclick = function() {
                                 //request for requests
                                 var requestforrequests = new XMLHttpRequest();
@@ -371,7 +373,7 @@ class ItemContainer {
                                         {
                                             alert(requestforrequests.response.message);
                                             console.log(requestforrequests.response);
-                                            BeginnerCount.innerHTML = (requestforrequests.response.sumRequest + " people");
+                                            beginnerCount.innerHTML = (requestforrequests.response.sumRequest);
 
                                         }
                                     }
