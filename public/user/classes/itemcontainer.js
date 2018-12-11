@@ -219,44 +219,52 @@ class ItemContainer {
 
     onClick(event) {
         if (!event.drag) {
-            var children = this.parentObj.skill.children;
+            if (this.parentObj.self) {
+                var children = this.parentObj.skill.children;
 
-            // Increase skill level
-            if (this.parentObj.skill.achievedPoint < this.parentObj.skill.maxPoint) {
-                this.parentObj.skill.achievedPoint++;
-                this.levelinfo.text = (this.parentObj.skill.achievedPoint + "/" + this.parentObj.skill.maxPoint);
-                if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint) {
-                    this.parentObj.tick.alpha = 1;
-                    this.parentObj.skillborder.filters = null;
+                // Increase skill level
+                if (this.parentObj.skill.achievedPoint < this.parentObj.skill.maxPoint) {
+                    this.parentObj.skill.achievedPoint++;
+                    this.levelinfo.text = (this.parentObj.skill.achievedPoint + "/" + this.parentObj.skill.maxPoint);
+                    if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint) {
+                        this.parentObj.tick.alpha = 1;
+                        this.parentObj.skillborder.filters = null;
+                    }
+
+                    //save level change (kell?)
+                    //this.parentObj.skills.find(obj => obj.name == this.parentObj.skill.name).achievedPoint++;
                 }
 
-                //save level change (kell?)
-                //this.parentObj.skills.find(obj => obj.name == this.parentObj.skill.name).achievedPoint++;
+                this.parentObj.app.renderer.render(this.parentObj.app.stage);
+                this.parentObj.refreshAvaliability();
+            } else {
+                
             }
-
-            this.parentObj.app.renderer.render(this.parentObj.app.stage);
-            this.parentObj.refreshAvaliability();
         }
     }
 
     onRightClick() {
-        var children = this.parentObj.skill.children;
+        if (this.parentObj.self) {
+            var children = this.parentObj.skill.children;
 
 
-        // Decrease skill level
-        if(this.parentObj.skill.achievedPoint > 0)
-        {
-            this.parentObj.skill.achievedPoint--;
-            this.levelinfo.text = (this.parentObj.skill.achievedPoint + "/" + this.parentObj.skill.maxPoint);
+            // Decrease skill level
+            if(this.parentObj.skill.achievedPoint > 0)
+            {
+                this.parentObj.skill.achievedPoint--;
+                this.levelinfo.text = (this.parentObj.skill.achievedPoint + "/" + this.parentObj.skill.maxPoint);
 
-            //save level change (kell?)
-            //this.parentObj.skills.find(obj => obj.name == this.parentObj.skill.name).achievedPoint--;
-        } else return;
-        this.parentObj.tick.alpha = 0;
-        this.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFFBF00, 1)];
+                //save level change (kell?)
+                //this.parentObj.skills.find(obj => obj.name == this.parentObj.skill.name).achievedPoint--;
+            } else return;
+            this.parentObj.tick.alpha = 0;
+            this.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFFBF00, 1)];
 
-        this.parentObj.app.renderer.render(this.parentObj.app.stage);
-        this.parentObj.refreshAvaliability();
+            this.parentObj.app.renderer.render(this.parentObj.app.stage);
+            this.parentObj.refreshAvaliability();
+        } else {
+
+        }
     }
 
     refreshAvaliability(){
