@@ -44,8 +44,8 @@ class ItemContainer {
         btnGHover.drawRect(0, 0, 70, 26);
         btnGHover.endFill();
 
-        var btnInfoPosX = (detailsWidth - btnInfoContainer.width) / 4;
-        var btn1PosX = (detailsWidth - btn1Container.width) * .75;
+        var btnInfoPosX = 0;
+        var btn1PosX = 0;
         if (!self) {
             var btnEndorse = new PIXI.Sprite(btnG.generateTexture());
 
@@ -85,6 +85,7 @@ class ItemContainer {
 
         var btnInfoContainer = new PIXI.Container();
         btnInfoContainer.addChild(btnInfo, txtInfo);
+        if (self) btnInfoPosX = (detailsWidth - btnInfoContainer.width) / 4;
         btnInfoContainer.position.set(btnInfoPosX, description.position.y + description.height + 10);
         btnInfoContainer.interactive = true;
         btnInfoContainer.buttonMode = true;
@@ -111,6 +112,7 @@ class ItemContainer {
 
         var btn1Container = new PIXI.Container();
         btn1Container.addChild(btn1, txt1);
+        if (self) btn1PosX = (detailsWidth - btn1Container.width) * .75;
         btn1Container.position.set(btn1PosX, description.position.y + description.height + 10);
         btn1Container.interactive = true;
         btn1Container.buttonMode = true;
