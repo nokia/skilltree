@@ -477,7 +477,8 @@ function showTree (treeName, _data, self) {
     document.getElementById("openchart").value = "Open Chart";
     document.getElementById("openchart").onclick = showChart;
 
-    tree = new Tree(app, skills, self);
+    var owner = {self: self, username: _data.username};
+    tree = new Tree(app, skills, owner);
     app.stage.addChild(tree.treeContainer);
     tree.treeContainer.pivot.set(tree.treeContainer.width / 2, tree.treeContainer.height / 2);
     tree.treeContainer.position.set(app.renderer.width / 2 + tree.treeContainer.width / 2, app.renderer.height / 2);
