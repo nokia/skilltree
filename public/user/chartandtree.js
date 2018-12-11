@@ -732,7 +732,8 @@ function approveSkills() {
     canvas.style.display = "none";
 
     var approveSkills = document.getElementById("approveSkills");
-    approveSkills.style.display = "grid";
+    //approveSkills.style.display = "grid";
+
 
     for (var i = 0; i < data.apprSkills.length; ++i) {
         var text = data.apprSkills[i].name + " (" + data.apprSkills[i].username + ")";
