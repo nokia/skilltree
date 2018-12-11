@@ -1137,12 +1137,11 @@ setRoute.post('/endorse', async function (req, res) {
 			success: false,
 			message: 'User not found.'
 		});
-        console.log(data.username);
 	} else {
-        if (user.endorsement == undefined) user.endorsement = [];
+        if (user.skills.find(obj => obj.name == data.skillName).endorsement == undefined) user.skills.find(obj => obj.name == data.skillName).endorsement = [];
 
-		if (user.endorsement.find(obj => obj == req.decoded.username) == undefined) {
-            user.endorsement.push(req.decoded.username);
+		if (user.skills.find(obj => obj.name == data.skillName).endorsement.find(obj => obj == req.decoded.username) == undefined) {
+            user.skills.find(obj => obj.name == data.skillName).endorsement.push(req.decoded.username);
 
             user.save(function (err) {if (err) throw err;});
         }
