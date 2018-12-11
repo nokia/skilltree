@@ -92,8 +92,8 @@ class ItemContainer {
 
                 req.send(
                     JSON.stringify({
-                        skillName: this.skill.name,
-                        username: this.username
+                        skillName: this.parentObj.skill.name,
+                        username: this.parentObj.username
                     })
                 );
             });
