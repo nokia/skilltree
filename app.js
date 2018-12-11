@@ -249,8 +249,6 @@ getRoute.get('/skillsforapproval', function(req, res) {
 					succes: false,
 					message: 'User not found.'
 				});
-
-
 		}
 	});
 });
@@ -422,9 +420,57 @@ setRoute.post('/addTreeToUser', async function (req, res){
 });
 
 
-setRoute.post('/approveskill', async function (req,res)  {
+setRoute.post('/approveskill', async function (req, res)  {
 	var skillforapproval = req.body.skillforapproval;
-	var approvecollection = req.body.approvecollection;
+
+	var approvecollection = ApprovableSkill.find( {} , async function(err, approvecollection) {
+		if(err) throw err;
+		else return approvecollection;
+	});
+	
+	newSkill = new Skill({
+		username: String,
+   		name: String,
+    	categoryName: String,
+    	skillIcon: String,
+    	description: String,
+    	pointDescription: [String],
+    	maxPoint: Number,
+    	parents: [String],
+    	children: [
+        {
+            name: String,
+            minPoint: Number,
+            recommended: Boolean
+        }
+    		],
+    	trainings: [
+        {
+            date: String,
+            level: String,
+            place: String,
+            teacher: String
+        }
+    ]
+	});
+
+
+
+
+
+	var globalskill = Skill.find( { name : skillforapproval.name } , async function(err, globalskill){ 
+		if(err) throw err;
+		else return globalskill;
+	});
+
+	
+
+	
+
+
+	var dependency = [];
+    await getDependency(approvecollection, skillforapproval, dependency);
+
 
 	
 

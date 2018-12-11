@@ -21,10 +21,11 @@ module.exports = mongoose.model('ApprovableSkill', new Schema({
     ],
     trainings: [
         {
-            date: String,
-            level: String,
-            place: String,
-            teacher: String
+            name: String,
+            level: Number,
+            description: String,
+            url: String,
+            urlLastAccessed: String
         }
     ]
 }));
