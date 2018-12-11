@@ -1138,6 +1138,7 @@ setRoute.post('/endorse', async function (req, res) {
 			message: 'User not found.'
 		});
 	} else {
+        if (user.endorsement == undefined) user.endorsement = [];
 		if (user.endorsement.find(obj => obj == req.decoded.username) == undefined) {
             user.endorsement.push(req.decoded.username);
             user.save(function (err) {if (err) throw err;});
