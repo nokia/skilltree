@@ -731,20 +731,23 @@ function approveSkills() {
     var canvas = document.getElementById("pixiCanvas");
     var approveSkills = document.getElementById("approveSkills");
     var approveSkillsSelect = document.getElementById('apprSkillSel');
-    
+    var skillsforapproval = undefined;
 
     request('GET', '/get/skillsforapproval', undefined, function() {
         if(this.readyState == 4 && this.status == 200){
             if(this.response !== undefined){
                 
-                var skillsforapproval = this.response;
+                skillsforapproval = this.response;
                 console.log(skillsforapproval);
                 for(var i=0; i < skillsforapproval.length; i++)
+                {
                     var text = skillsforapproval[i].name + " (" + skillsforapproval[i].username + ")";
                     var option = document.createElement('option');
                     option.value = skillsforapproval[i];
                     option.text = text;
                     approveSkillsSelect.add(option);
+                }
+                
             }
         }
     });

@@ -421,6 +421,26 @@ setRoute.post('/addTreeToUser', async function (req, res){
 	}
 });
 
+
+setRoute.post('/approveskill', async function (req,res)  {
+	var skillforapproval = req.body.skillforapproval;
+	var approvecollection = req.body.approvecollection;
+
+	
+
+
+
+	/*
+	var globalskill = Skill.findOne({name: skillforapproval.name}, function(err, globalskill){
+		if(err) throw err;
+		return globalskill;
+	});*/
+
+
+
+});
+
+
 // gets a skill and all it's dependencies by name.
 setRoute.post('/getskill', async function (req, res) {
 	var data = req.body;
