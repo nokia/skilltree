@@ -730,15 +730,19 @@ function approveSkills() {
 
     var canvas = document.getElementById("pixiCanvas");
     var approveSkills = document.getElementById("approveSkills");
-    canvas.style.display = "none";
-    approveSkills.style.display = "block";
+    var approveSkillsSelect = document.getElementById('apprSkillSel');
+    
 
-    request('POST', '/set/getskill', skill, function() {
-        if(this.readyState == 4 && this.status == 200) {
-            
+    request('POST', '/get/skillsforapproval', undefined, function() {
+        if(this.readyState == 4 && this.status == 200){
+            if(this.response !== undefined){
+                approveSkillsSelect.option.add(this.response.name);
+            }
         }
     });
 
+    canvas.style.display = "none";
+    approveSkills.style.display = "block";
 /*
     for (var i = 0; i < data.apprSkills.length; ++i) {
         var text = data.apprSkills[i].name + " (" + data.apprSkills[i].username + ")";
