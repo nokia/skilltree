@@ -729,10 +729,13 @@ function approveSkills() {
     document.getElementById('approveTrees').style.display = "none";
 
     var canvas = document.getElementById("pixiCanvas");
-    //canvas.style.display = "none";
-
     var approveSkills = document.getElementById("approveSkills");
-    approveSkills.style.display = "grid";
+
+    request('POST', '/set/getskill', skill, function() {
+        if(this.readyState == 4 && this.status == 200) {
+            
+        }
+    });
 
 
     for (var i = 0; i < data.apprSkills.length; ++i) {
@@ -741,6 +744,10 @@ function approveSkills() {
         option.value = option.text = text;
         document.getElementById('apprSkillSel').add(option);
     }
+
+   //Making the approve page visible
+   canvas.style.display = "none";
+   approveSkills.style.display = "grid";
 }
 
 // drops all offers from all users (used for dev)

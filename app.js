@@ -236,6 +236,26 @@ getRoute.get('/offers', function(req, res) {
 	});
 });
 
+// getting the skilldata of a skillname (used for offers)
+getRoute.get('/skillsforapproval', function(req, res) {
+	ApprovableSkill.find( {} , async function(err, skillsforapproval) {
+		if(err) throw err;
+
+		if(skillsforapproval !== undefined){
+				return res.json(skillsforapproval);
+		} else 
+			{
+				res.json({
+					succes: false,
+					message: 'User not found.'
+				});
+
+				
+		}
+	});
+});
+
+
 
 // Creating a setRoute, thats protected with Token. API calls are under /set/...
 var setRoute = express.Router();
@@ -1010,6 +1030,8 @@ setRoute.post('/request', async function (req, res){
 	}
 
 });
+
+
 
 const httpServer = http.createServer(app);
 httpServer.listen(3000);
