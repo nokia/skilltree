@@ -731,7 +731,7 @@ function approveSkills() {
     var canvas = document.getElementById("pixiCanvas");
     var approveSkills = document.getElementById("approveSkills");
     canvas.style.display = "none";
-    approveSkills.style.display = "grid";
+    approveSkills.style.display = "block";
 
     request('POST', '/set/getskill', skill, function() {
         if(this.readyState == 4 && this.status == 200) {
