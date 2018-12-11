@@ -1141,6 +1141,7 @@ setRoute.post('/endorse', async function (req, res) {
         if (user.endorsement == undefined) user.endorsement = [];
 		if (user.endorsement.find(obj => obj == req.decoded.username) == undefined) {
             user.endorsement.push(req.decoded.username);
+            console.log(user);
             user.save(function (err) {if (err) throw err;});
         }
 	}
