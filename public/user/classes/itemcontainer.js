@@ -1,9 +1,10 @@
 class ItemContainer {
-    constructor(app, skills, skillName, self) {
+    constructor(app, skills, skillName, owner) {
         this.app = app;
         this.skills = skills;
         this.skill = skills.find(obj => obj.name == skillName);
-        this.self = self;
+        this.self = owner.self;
+        this.username = owner.username;
 
         //Creating images
         this.skillicon = new PIXI.Sprite(PIXI.loader.resources[this.skill.skillIcon].texture); //100x100
@@ -69,7 +70,25 @@ class ItemContainer {
                 app.renderer.render(app.stage);
             })
             .on('click', function () {
-                this.parentObj.toggleSkillInfoPage();
+                var req = new XMLHttpRequest();
+                req.open('POST', '/set/endorse', true);
+                req.setRequestHeader('Content-type', 'application/json');
+                req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+                req.responseType = "json";
+
+                //if it returns
+                req.onreadystatechange = function() {
+                    if(req.readyState == 4 && req.status == 200) {
+                        
+                    }
+                }
+
+                req.send(
+                    JSON.stringify({
+                        skillName: this.skill.name,
+                        username: this.username
+                    })
+                );
             });
             detailsForeground.addChild(btnEndorseContainer);
         }

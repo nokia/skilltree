@@ -427,7 +427,7 @@ setRoute.post('/approveskill', async function (req, res)  {
 		if(err) throw err;
 		else return approvecollection;
 	});
-	
+
 	newGlobalSkill = new Skill({
 	name: skillforapproval.name,
     categoryName: skillforapproval.categoryName,
@@ -458,21 +458,21 @@ setRoute.post('/approveskill', async function (req, res)  {
 
 
 
-	var globalskill = Skill.find( { name : skillforapproval.name } , async function(err, globalskill){ 
+	var globalskill = Skill.find( { name : skillforapproval.name } , async function(err, globalskill){
 		if(err) throw err;
 		else return globalskill;
 	});
 
-	
 
-	
+
+
 
 
 	var dependency = [];
     await getDependency(approvecollection, skillforapproval, dependency);
 
 
-	
+
 
 
 
@@ -1122,7 +1122,28 @@ setRoute.post('/request', async function (req, res){
 
 });
 
+setRoute.post('/endorse', async function (req, res) {
+	var data = req.body;
 
+    var user = await User.findOne({
+        username: data.username//req.decoded.username
+    }, function(err, user) {
+        if (err) throw err;
+		return user;
+    });
+
+	if (!user) {
+		res.json({
+			success: false,
+			message: 'User not found.'
+		});
+	} else {
+		if (user.endorsement.find(obj => obj == req.decoded.username) == undefined) {
+            user.endorsement.push(req.decoded.username);
+            user.save(function (err) {if (err) throw err;});
+        }
+	}
+});
 
 const httpServer = http.createServer(app);
 httpServer.listen(3000);
