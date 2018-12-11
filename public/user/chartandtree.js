@@ -729,10 +729,10 @@ function approveSkills() {
     document.getElementById('approveTrees').style.display = "none";
 
     var canvas = document.getElementById("pixiCanvas");
-    canvas.style.display = "none";
+    //canvas.style.display = "none";
 
     var approveSkills = document.getElementById("approveSkills");
-    //approveSkills.style.display = "grid";
+    approveSkills.style.display = "grid";
 
 
     for (var i = 0; i < data.apprSkills.length; ++i) {
