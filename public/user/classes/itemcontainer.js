@@ -1,8 +1,9 @@
 class ItemContainer {
-    constructor(app, skills, skillName) {
+    constructor(app, skills, skillName, self) {
         this.app = app;
         this.skills = skills;
         this.skill = skills.find(obj => obj.name == skillName);
+        this.self = self;
 
         //Creating images
         this.skillicon = new PIXI.Sprite(PIXI.loader.resources[this.skill.skillIcon].texture); //100x100
@@ -43,6 +44,39 @@ class ItemContainer {
         btnGHover.drawRect(0, 0, 70, 26);
         btnGHover.endFill();
 
+        var btnInfoPosX = (detailsWidth - btnInfoContainer.width) / 4;
+        var btn1PosX = (detailsWidth - btn1Container.width) * .75;
+        if (!self) {
+            var btnEndorse = new PIXI.Sprite(btnG.generateTexture());
+
+            var txtEndorse = new PIXI.Text("ENDORSE", {fontSize: 14, fill: 0x000000});
+            txtEndorse.anchor.set(0.5, 0.5);
+            txtEndorse.position.set(35,13);
+
+            var btnEndorseContainer = new PIXI.Container();
+            btnEndorseContainer.addChild(btnEndorse, txtEndorse);
+            btnEndorseContainer.position.set(detailsWidth * .75 - btnEndorseContainer.width / 2, description.position.y + description.height + 10);
+            btnEndorseContainer.interactive = true;
+            btnEndorseContainer.buttonMode = true;
+            btnEndorseContainer.parentObj = this;
+            btnEndorseContainer
+            .on('pointerover', function () {
+                btnEndorse.texture = btnGHover.generateTexture();
+                app.renderer.render(app.stage);
+            })
+            .on('pointerout', function () {
+                btnEndorse.texture = btnG.generateTexture();
+                app.renderer.render(app.stage);
+            })
+            .on('click', function () {
+                this.parentObj.toggleSkillInfoPage();
+            });
+            detailsForeground.addChild(btnEndorseContainer);
+
+            btnInfoPosX = 10;
+            btn1PosX = detailsWidth - btn1Container.width - 10;
+        }
+
         var btnInfo = new PIXI.Sprite(btnG.generateTexture());
 
         var txtInfo = new PIXI.Text("INFO", {fontSize: 14, fill: 0x000000});
@@ -51,7 +85,7 @@ class ItemContainer {
 
         var btnInfoContainer = new PIXI.Container();
         btnInfoContainer.addChild(btnInfo, txtInfo);
-        btnInfoContainer.position.set((detailsWidth - btnInfoContainer.width) / 4  , description.position.y + description.height + 10);
+        btnInfoContainer.position.set(btnInfoPosX, description.position.y + description.height + 10);
         btnInfoContainer.interactive = true;
         btnInfoContainer.buttonMode = true;
         btnInfoContainer.parentObj = this;
@@ -77,7 +111,7 @@ class ItemContainer {
 
         var btn1Container = new PIXI.Container();
         btn1Container.addChild(btn1, txt1);
-        btn1Container.position.set(  (detailsWidth - btn1Container.width) * .75  , description.position.y + description.height + 10);
+        btn1Container.position.set(btn1PosX, description.position.y + description.height + 10);
         btn1Container.interactive = true;
         btn1Container.buttonMode = true;
         btn1Container.parentObj = this;

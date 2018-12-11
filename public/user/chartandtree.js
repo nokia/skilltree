@@ -67,7 +67,7 @@ function initUI(self, _data){
     searchedTree.onkeyup = searchTreesByName;
     addsearchedTree.value = "Search!";
     addsearchedTree.onclick = function(){
-      showTree(searchedTree.value, _data);
+      showTree(searchedTree.value, _data, false);
     }
   }
 }
@@ -145,7 +145,7 @@ function loadAddedTrees(){
     ithtree.innerHTML = tn;
     ithtree.className = "dropdown-item";
     ithtree.onclick = function() {
-      showTree(this.innerHTML, data);
+      showTree(this.innerHTML, data, true); // bator?
     }
     treeList.appendChild(ithtree);
   }
@@ -209,7 +209,7 @@ function getPublicUserData(){
 
   request('POST', '/set/getPublicUserData', userToSearch, function() {
       if(this.readyState == 4 && this.status == 200) {
-        showTree(this.response.mainTree, this.response);
+        showTree(this.response.mainTree, this.response, false);
         initUI(false, this.response);
       }
   });
@@ -267,7 +267,7 @@ function startLoader () {
         PIXI.loader.add(data.skills[i].skillIcon.toString());
     }
     PIXI.loader.load(function () {
-        showTree(data.mainTree, data);
+        showTree(data.mainTree, data, true);
     });
     loadAddedTrees();
 }
@@ -288,7 +288,7 @@ function showChart() {
     document.getElementById('approveSkills').style.display = "none";
     document.getElementById('pixiCanvas').style.display = "block";
 
-    document.getElementById("openchart").onclick = showTree(data.mainTree, data);
+    document.getElementById("openchart").onclick = showTree(data.mainTree, data, true);
 
     if (tree != undefined) {
         app.stage.removeChild(tree.treeContainer);
@@ -446,7 +446,7 @@ var selectedTreeName;
 var tree = undefined;
 
 // hides chart, shows tree
-function showTree (treeName, _data) {
+function showTree (treeName, _data, self) {
     document.getElementById('creator').style.display = "none";
     document.getElementById('approveTrees').style.display = "none";
     document.getElementById('approveSkills').style.display = "none";
@@ -474,7 +474,7 @@ function showTree (treeName, _data) {
     document.getElementById("openchart").value = "Open Chart";
     document.getElementById("openchart").onclick = showChart;
 
-    tree = new Tree(app, skills);
+    tree = new Tree(app, skills, self);
     app.stage.addChild(tree.treeContainer);
     tree.treeContainer.pivot.set(tree.treeContainer.width / 2, tree.treeContainer.height / 2);
     tree.treeContainer.position.set(app.renderer.width / 2 + tree.treeContainer.width / 2, app.renderer.height / 2);

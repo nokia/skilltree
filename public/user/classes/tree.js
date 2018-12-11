@@ -1,5 +1,5 @@
 class Tree {
-    constructor (app, skills) {
+    constructor (app, skills, self) {
         this.skills = skills;
         this.treeContainer = new PIXI.Container();
         this.treeContainer.enableSort = true;
@@ -38,7 +38,7 @@ class Tree {
         }
 
         for(var i = 0; i < this.skills.length; i++){
-          this.skills[i].itemcontainer = new ItemContainer(app, this.skills, this.skills[i].name);
+          this.skills[i].itemcontainer = new ItemContainer(app, this.skills, this.skills[i].name, self);
 
           this.skills[i].itemcontainer.container.position.x = (this.skills[i].place - 1) * 100 - (levelLength[this.skills[i].level] * 100) / 2;
           this.skills[i].itemcontainer.container.position.y = this.skills[i].level * 115;
