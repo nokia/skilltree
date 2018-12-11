@@ -15,14 +15,21 @@
       var isIE = /*@cc_on!@*/false || !!document.documentMode;
       var isEdge = !isIE && !!window.StyleMedia;
       if(isIE || isEdge){
-        /* TODO: Show ribbon on top that IE is not supported. */
+        var block_to_insert ;
+        var container_block ;
+
+        block_to_insert = document.createElement( 'div' );
+        block_to_insert.innerHTML = '<div class="unsupportedBrowserAlertDIV alert alert-danger" role="alert"><p style="text-align:center;"<a href="#" class="alert-link">You are using an unsupported browser. Please use Mozilla Firefox or Google Chrome.</a></p></div>' ;
+
+        container_block = document.getElementById( 'unsupportedBrowserAlert' );
+        container_block.appendChild( block_to_insert );
       }
     }, false);
     </script>
     <script src="register.js"></script>
   </head>
   <body id="body">
-
+    <div id="unsupportedBrowserAlert">
     <div class="container jumbocontainer p-3">
         <div class="jumbotron p-3">
           <h1 class="display-4 d-none d-lg-block">Register to SkillTree</h1>
