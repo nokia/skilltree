@@ -243,14 +243,14 @@ getRoute.get('/skillsforapproval', function(req, res) {
 
 		if(skillsforapproval !== undefined){
 				return res.json(skillsforapproval);
-		} else 
+		} else
 			{
 				res.json({
 					succes: false,
 					message: 'User not found.'
 				});
 
-				
+
 		}
 	});
 });
@@ -612,7 +612,18 @@ setRoute.post('/newskill', async function(req, res) {
 	} else if (user.skills.find(obj => obj.name == data.name) == undefined) {
         var parentNames = [];
         for (var i = 0; i < data.parents.length; ++i) {
+            if (user.skills.find(obj => obj.name == data.parents[i].name) == undefined) { // add parent skill to user if not already there
+                var parent = await Skill.findOne({
+						name: data.parents[i].name
+				}, function(err, skill) {
+						if (err) throw err;
+						return skill;
+				});
+                user.skills.push(parent);
+            }
+            // add new skill as child of parent skill
             user.skills.find(obj => obj.name == data.parents[i].name).children.push({name: data.name, minPoint: data.parents[i].minPoint, recommended: data.parents[i].recommended});
+            // when we save the new skill we only need the name of the parents (no minPoint and recommended)
             parentNames.push(data.parents[i].name);
         }
 
@@ -636,6 +647,20 @@ setRoute.post('/newskill', async function(req, res) {
         user.save(function (err) {if (err) throw err;});
 
         if (data.forApprove) {
+            for (var i = 0; i < data.parents.length; ++i) {
+                var apprParent = await ApprovableSkill.find({
+                    name: data.parents[i].name
+                }, function (err, skill) {
+        	        if (err) throw err;
+        			return skill;
+        	    });
+
+                if (apprParent != undefined) {
+                    apprParent.children.push({name: data.name, minPoint: data.parents[i].minPoint, recommended: data.parents[i].recommended});
+                    apprParent.save(function (err) {if (err) throw err;});
+                }
+            }
+
             var apprSkill = new ApprovableSkill({
                 username: user.username,
                 name: data.name,
@@ -898,7 +923,7 @@ setRoute.post('/submitall', async function (req, res) {
 });
 
 
-//drops the offers from global skills. Needed if we delete users 
+//drops the offers from global skills. Needed if we delete users
 setRoute.post('/dropoffers', async function (req, res) {
 	Skill.find({} , (err, skills) => {
         if(err) console.log("error");
