@@ -736,7 +736,13 @@ function approveSkills() {
     request('POST', '/get/skillsforapproval', undefined, function() {
         if(this.readyState == 4 && this.status == 200){
             if(this.response !== undefined){
-                approveSkillsSelect.option.add(this.response.name);
+                var skillsforapproval = this.response.skillsforapproval;
+                for(var i=0; i < skillsforapproval.length; i++)
+                    var text = skillsforapproval[i].name + " (" + skillsforapproval[i].username + ")";
+                    var option = document.createElement('option');
+                    option.value = skillsforapproval[i];
+                    option.text = text;
+                    approveSkillsSelect.option.add(option);
             }
         }
     });
