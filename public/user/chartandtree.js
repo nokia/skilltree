@@ -736,7 +736,7 @@ function approveSkills() {
     request('GET', '/get/skillsforapproval', undefined, function() {
         if(this.readyState == 4 && this.status == 200){
             if(this.response !== undefined){
-                var skillsforapproval = this.response.skillsforapproval;
+                var skillsforapproval = this.response;
                 for(var i=0; i < skillsforapproval.length; i++)
                     var text = skillsforapproval[i].name + " (" + skillsforapproval[i].username + ")";
                     var option = document.createElement('option');
