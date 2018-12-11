@@ -514,6 +514,7 @@ function createSkill () {
     }
 
     var catSelect = document.getElementById("newSkillCat");
+    catSelect.innerHTML = "";
     for (var i = 0; i < data.categories.length; ++i) {
         var option = document.createElement("option");
         option.text = data.categories[i].name;
@@ -731,12 +732,12 @@ function approveSkills() {
     var canvas = document.getElementById("pixiCanvas");
     var approveSkills = document.getElementById("approveSkills");
     var approveSkillsSelect = document.getElementById('apprSkillSel');
-    
+
 
     request('GET', '/get/skillsforapproval', undefined, function() {
         if(this.readyState == 4 && this.status == 200){
             if(this.response !== undefined){
-                
+
                 var skillsforapproval = this.response;
                 console.log(skillsforapproval);
                 for(var i=0; i < skillsforapproval.length; i++)
@@ -760,7 +761,7 @@ function approveSkills() {
     }
 */
    //Making the approve page visible
-   
+
 }
 
 // drops all offers from all users (used for dev)
