@@ -736,7 +736,7 @@ function approveSkills() {
     request('GET', '/get/skillsforapproval', undefined, function() {
         if(this.readyState == 4 && this.status == 200){
             if(this.response !== undefined){
-                approveSkillsSelect.innerHTML = "" ;
+                approveSkillsSelect.innerHTML = "";
                 
                 skillsforapproval = this.response;
                 console.log(skillsforapproval);
