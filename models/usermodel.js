@@ -49,7 +49,8 @@ module.exports = mongoose.model('User', new Schema({
                     url: String,
                     urlLastAccessed: String
                 }
-            ]
+            ],
+            endorsement: [String]
         }
     ],
     mainTree: String,
