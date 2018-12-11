@@ -800,5 +800,9 @@ function request (type, url, sendData, callback) {
     req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
     req.responseType = "json";
     req.onreadystatechange = callback;
-    req.send(JSON.stringify(sendData));
+
+    if(sendData !== undefined)
+        req.send(JSON.stringify(sendData));
+    else
+        req.send();
 }
