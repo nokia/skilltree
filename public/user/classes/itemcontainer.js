@@ -15,6 +15,9 @@ class ItemContainer {
         this.skillborder.levelinfo = new PIXI.Text(this.skill.achievedPoint + "/" + this.skill.maxPoint);
         this.skillborder.levelinfo.scale.set(.5);
 
+        this.skillborder.endorsement = new PIXI.Text(this.skill.endorsement.length);
+        this.skillborder.endorsement.scale.set(.5);
+
         //Creating details page
         var detailsWidth = 240;
         var detailsMargin = 10;
@@ -79,7 +82,7 @@ class ItemContainer {
                 //if it returns
                 req.onreadystatechange = function() {
                     if(req.readyState == 4 && req.status == 200) {
-                        
+
                     }
                 }
 
@@ -206,6 +209,9 @@ class ItemContainer {
 
         this.skillborder.levelinfo.position.set(61, 63);
         this.skillborder.levelinfo.style.fill = 0xFFFFFF;
+
+        this.skillborder.endorsement.position.set(5, 63);
+        this.skillborder.endorsement.style.fill = 0xFFFFFF;
 
         this.details.position.set(74, 0);
 
