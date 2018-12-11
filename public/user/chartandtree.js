@@ -733,7 +733,7 @@ function approveSkills() {
     var approveSkillsSelect = document.getElementById('apprSkillSel');
     
 
-    request('POST', '/get/skillsforapproval', undefined, function() {
+    request('GET', '/get/skillsforapproval', undefined, function() {
         if(this.readyState == 4 && this.status == 200){
             if(this.response !== undefined){
                 var skillsforapproval = this.response.skillsforapproval;
