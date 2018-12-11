@@ -38,9 +38,7 @@ class Tree {
         }
 
         for (var i = 0; i < this.skills.length; i++) {
-            var owner;
-            owner.self = self;
-            owner.username = this.username;
+            var owner = {self: self, username: this.username};
             this.skills[i].itemcontainer = new ItemContainer(app, this.skills, this.skills[i].name, owner);
 
             this.skills[i].itemcontainer.container.position.x = (this.skills[i].place - 1) * 100 - (levelLength[this.skills[i].level] * 100) / 2;
