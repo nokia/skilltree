@@ -238,7 +238,7 @@ class ItemContainer {
                 this.parentObj.app.renderer.render(this.parentObj.app.stage);
                 this.parentObj.refreshAvaliability();
             } else {
-                
+
             }
         }
     }
@@ -599,6 +599,7 @@ class ItemContainer {
         var header = document.getElementById('infoSkillnameHeader');
         var span = document.getElementById("closeInfoModal");
         var desc = document.getElementById("imDesc");
+        var wikiURL = document.getElementById("imWiki");
         var categ = document.getElementById("imCateg");
         var maxP = document.getElementById("imMaxPoint");
         var points = document.getElementById("imPoints");
@@ -610,6 +611,7 @@ class ItemContainer {
         header.innerText = this.skill.name;
 
         desc.innerText = this.skill.description;
+        wikiURL.innerText = this.skill.descriptionWikipediaURL;
         categ.innerText = this.skill.categoryName;
         maxP.innerText = this.skill.maxPoint;
 
