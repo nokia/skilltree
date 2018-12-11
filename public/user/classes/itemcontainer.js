@@ -55,7 +55,7 @@ class ItemContainer {
 
             var btnEndorseContainer = new PIXI.Container();
             btnEndorseContainer.addChild(btnEndorse, txtEndorse);
-            btnEndorseContainer.position.set(detailsWidth * .75 - btnEndorseContainer.width / 2, description.position.y + description.height + 10);
+            btnEndorseContainer.position.set(detailsWidth - btn1Container.width - 10, description.position.y + description.height + 10);
             btnEndorseContainer.interactive = true;
             btnEndorseContainer.buttonMode = true;
             btnEndorseContainer.parentObj = this;
@@ -111,7 +111,7 @@ class ItemContainer {
         var btn1Container = new PIXI.Container();
         btn1Container.addChild(btn1, txt1);
         if (self) btn1PosX = (detailsWidth - btn1Container.width) * .75;
-        else btn1PosX = detailsWidth - btn1Container.width - 10;
+        else btn1PosX = (detailsWidth - btn1Container.width) / 2;
         btn1Container.position.set(btn1PosX, description.position.y + description.height + 10);
         btn1Container.interactive = true;
         btn1Container.buttonMode = true;
