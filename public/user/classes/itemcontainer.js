@@ -108,7 +108,7 @@ class ItemContainer {
 
         var btnInfoContainer = new PIXI.Container();
         btnInfoContainer.addChild(btnInfo, txtInfo);
-        if (self) btnInfoPosX = (detailsWidth - btnInfoContainer.width) / 4;
+        if (this.self) btnInfoPosX = (detailsWidth - btnInfoContainer.width) / 4;
         else btnInfoPosX = 10;
         btnInfoContainer.position.set(btnInfoPosX, description.position.y + description.height + 10);
         btnInfoContainer.interactive = true;
@@ -136,7 +136,7 @@ class ItemContainer {
 
         var btn1Container = new PIXI.Container();
         btn1Container.addChild(btn1, txt1);
-        if (self) btn1PosX = (detailsWidth - btn1Container.width) * .75;
+        if (this.self) btn1PosX = (detailsWidth - btn1Container.width) * .75;
         else btn1PosX = (detailsWidth - btn1Container.width) / 2;
         btn1Container.position.set(btn1PosX, description.position.y + description.height + 10);
         btn1Container.interactive = true;
