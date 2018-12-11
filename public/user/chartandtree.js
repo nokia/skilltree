@@ -742,7 +742,7 @@ function approveSkills() {
                     var option = document.createElement('option');
                     option.value = skillsforapproval[i];
                     option.text = text;
-                    approveSkillsSelect.option.add(option);
+                    approveSkillsSelect.add(option);
             }
         }
     });
