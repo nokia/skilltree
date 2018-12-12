@@ -52,6 +52,22 @@ a {
     padding: 0.5rem;
 }
 
+#cardSearch{
+  width: 92%;
+  margin: 2% 4%;
+}
+
+#buttonGroup{
+  margin: 2% 6%;
+  width: 92%;
+  display: block;
+}
+#cardSearchBar{
+  margin: 2% 4%;
+  width: 92%;
+  display: block;
+}
+
 #userprofile {
     width: 35%!important;
     z-index: 100;
@@ -68,6 +84,7 @@ a {
     z-index: 100;
     position: relative;
     margin-right: 10px;
+    width: 400px;
 }
 
 #pixiCanvas{
