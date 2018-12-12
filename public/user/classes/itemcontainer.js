@@ -92,10 +92,12 @@ class ItemContainer {
                             this.skillborder.endorsement.position.set(10, 50);
                             this.skillborder.endorsement.style.fill = 0xFFFFFF;
                             this.container.addChild(this.skillborder.endorsement);
+                            alert('a');
                         } else {
                             var t = parseInt(this.parentObj.endorsement.text.substr(1));
                             ++t;
                             this.parentObj.endorsement.text = "+" + t;
+                            alert('b');
                         }
                         app.renderer.render(app.stage);
                     }
