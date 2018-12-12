@@ -16,6 +16,7 @@ class ItemContainer {
         this.skillborder.levelinfo.scale.set(.5);
 
         if (this.skill.endorsement != undefined) {
+            console.log("SSSS");
             this.skillborder.endorsement = new PIXI.Text("+" + this.skill.endorsement.length);
             this.skillborder.endorsement.scale.set(.5);
             this.skillborder.endorsement.position.set(5, 63);
