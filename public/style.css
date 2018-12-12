@@ -51,6 +51,11 @@ span{
   float: right;
 }
 
-p.bolded {    
+p.bolded {
     font-weight: bolder;
+}
+
+.unsupportedBrowserAlertDIV {
+  display: contents;
+
 }

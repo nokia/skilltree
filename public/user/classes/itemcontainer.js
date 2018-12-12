@@ -1,8 +1,10 @@
 class ItemContainer {
-    constructor(app, skills, skillName) {
+    constructor(app, skills, skillName, owner) {
         this.app = app;
         this.skills = skills;
         this.skill = skills.find(obj => obj.name == skillName);
+        this.self = owner.self;
+        this.username = owner.username;
 
         //Creating images
         this.skillicon = new PIXI.Sprite(PIXI.loader.resources[this.skill.skillIcon].texture); //100x100
@@ -12,6 +14,13 @@ class ItemContainer {
         //Setting border variables
         this.skillborder.levelinfo = new PIXI.Text(this.skill.achievedPoint + "/" + this.skill.maxPoint);
         this.skillborder.levelinfo.scale.set(.5);
+
+        if (this.skill.endorsement != undefined) {
+            this.skillborder.endorsement = new PIXI.Text("+" + this.skill.endorsement.length);
+            this.skillborder.endorsement.scale.set(.5);
+            this.skillborder.endorsement.position.set(5, 63);
+            this.skillborder.endorsement.style.fill = 0xFFFFFF;
+        }
 
         //Creating details page
         var detailsWidth = 240;
@@ -43,6 +52,54 @@ class ItemContainer {
         btnGHover.drawRect(0, 0, 70, 26);
         btnGHover.endFill();
 
+        var btnInfoPosX = 0;
+        var btn1PosX = 0;
+        if (!this.self) {
+            var btnEndorse = new PIXI.Sprite(btnG.generateTexture());
+
+            var txtEndorse = new PIXI.Text("ENDORSE", {fontSize: 14, fill: 0x000000});
+            txtEndorse.anchor.set(0.5, 0.5);
+            txtEndorse.position.set(35,13);
+
+            var btnEndorseContainer = new PIXI.Container();
+            btnEndorseContainer.addChild(btnEndorse, txtEndorse);
+            btnEndorseContainer.position.set(detailsWidth - btnEndorseContainer.width - 10, description.position.y + description.height + 10);
+            btnEndorseContainer.interactive = true;
+            btnEndorseContainer.buttonMode = true;
+            btnEndorseContainer.parentObj = this;
+            btnEndorseContainer
+            .on('pointerover', function () {
+                btnEndorse.texture = btnGHover.generateTexture();
+                app.renderer.render(app.stage);
+            })
+            .on('pointerout', function () {
+                btnEndorse.texture = btnG.generateTexture();
+                app.renderer.render(app.stage);
+            })
+            .on('click', function () {
+                var req = new XMLHttpRequest();
+                req.open('POST', '/set/endorse', true);
+                req.setRequestHeader('Content-type', 'application/json');
+                req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+                req.responseType = "json";
+
+                //if it returns
+                req.onreadystatechange = function() {
+                    if(req.readyState == 4 && req.status == 200) {
+
+                    }
+                }
+
+                req.send(
+                    JSON.stringify({
+                        skillName: this.parentObj.skill.name,
+                        username: this.parentObj.username
+                    })
+                );
+            });
+            detailsForeground.addChild(btnEndorseContainer);
+        }
+
         var btnInfo = new PIXI.Sprite(btnG.generateTexture());
 
         var txtInfo = new PIXI.Text("INFO", {fontSize: 14, fill: 0x000000});
@@ -51,7 +108,9 @@ class ItemContainer {
 
         var btnInfoContainer = new PIXI.Container();
         btnInfoContainer.addChild(btnInfo, txtInfo);
-        btnInfoContainer.position.set((detailsWidth - btnInfoContainer.width) / 4  , description.position.y + description.height + 10);
+        if (this.self) btnInfoPosX = (detailsWidth - btnInfoContainer.width) / 4;
+        else btnInfoPosX = 10;
+        btnInfoContainer.position.set(btnInfoPosX, description.position.y + description.height + 10);
         btnInfoContainer.interactive = true;
         btnInfoContainer.buttonMode = true;
         btnInfoContainer.parentObj = this;
@@ -77,7 +136,9 @@ class ItemContainer {
 
         var btn1Container = new PIXI.Container();
         btn1Container.addChild(btn1, txt1);
-        btn1Container.position.set(  (detailsWidth - btn1Container.width) * .75  , description.position.y + description.height + 10);
+        if (this.self) btn1PosX = (detailsWidth - btn1Container.width) * .75;
+        else btn1PosX = (detailsWidth - btn1Container.width) / 2;
+        btn1Container.position.set(btn1PosX, description.position.y + description.height + 10);
         btn1Container.interactive = true;
         btn1Container.buttonMode = true;
         btn1Container.parentObj = this;
@@ -184,44 +245,52 @@ class ItemContainer {
 
     onClick(event) {
         if (!event.drag) {
-            var children = this.parentObj.skill.children;
+            if (this.parentObj.self) {
+                var children = this.parentObj.skill.children;
 
-            // Increase skill level
-            if (this.parentObj.skill.achievedPoint < this.parentObj.skill.maxPoint) {
-                this.parentObj.skill.achievedPoint++;
-                this.levelinfo.text = (this.parentObj.skill.achievedPoint + "/" + this.parentObj.skill.maxPoint);
-                if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint) {
-                    this.parentObj.tick.alpha = 1;
-                    this.parentObj.skillborder.filters = null;
+                // Increase skill level
+                if (this.parentObj.skill.achievedPoint < this.parentObj.skill.maxPoint) {
+                    this.parentObj.skill.achievedPoint++;
+                    this.levelinfo.text = (this.parentObj.skill.achievedPoint + "/" + this.parentObj.skill.maxPoint);
+                    if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint) {
+                        this.parentObj.tick.alpha = 1;
+                        this.parentObj.skillborder.filters = null;
+                    }
+
+                    //save level change (kell?)
+                    //this.parentObj.skills.find(obj => obj.name == this.parentObj.skill.name).achievedPoint++;
                 }
 
-                //save level change (kell?)
-                //this.parentObj.skills.find(obj => obj.name == this.parentObj.skill.name).achievedPoint++;
-            }
+                this.parentObj.app.renderer.render(this.parentObj.app.stage);
+                this.parentObj.refreshAvaliability();
+            } else {
 
-            this.parentObj.app.renderer.render(this.parentObj.app.stage);
-            this.parentObj.refreshAvaliability();
+            }
         }
     }
 
     onRightClick() {
-        var children = this.parentObj.skill.children;
+        if (this.parentObj.self) {
+            var children = this.parentObj.skill.children;
 
 
-        // Decrease skill level
-        if(this.parentObj.skill.achievedPoint > 0)
-        {
-            this.parentObj.skill.achievedPoint--;
-            this.levelinfo.text = (this.parentObj.skill.achievedPoint + "/" + this.parentObj.skill.maxPoint);
+            // Decrease skill level
+            if(this.parentObj.skill.achievedPoint > 0)
+            {
+                this.parentObj.skill.achievedPoint--;
+                this.levelinfo.text = (this.parentObj.skill.achievedPoint + "/" + this.parentObj.skill.maxPoint);
 
-            //save level change (kell?)
-            //this.parentObj.skills.find(obj => obj.name == this.parentObj.skill.name).achievedPoint--;
-        } else return;
-        this.parentObj.tick.alpha = 0;
-        this.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFFBF00, 1)];
+                //save level change (kell?)
+                //this.parentObj.skills.find(obj => obj.name == this.parentObj.skill.name).achievedPoint--;
+            } else return;
+            this.parentObj.tick.alpha = 0;
+            this.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFFBF00, 1)];
 
-        this.parentObj.app.renderer.render(this.parentObj.app.stage);
-        this.parentObj.refreshAvaliability();
+            this.parentObj.app.renderer.render(this.parentObj.app.stage);
+            this.parentObj.refreshAvaliability();
+        } else {
+
+        }
     }
 
     refreshAvaliability(){
@@ -327,8 +396,13 @@ class ItemContainer {
                             //Initialize table variables
                             globalskill = offerHttpRequest.response;
                             var offerTable = document.getElementById('offerTableBody');
+                            //initialize the request counts
                             var beginnerCount = document.getElementById('beginnerCount');
-                            beginnerCount.innerHTML = globalskill.requests.length;
+                            beginnerCount.innerHTML = globalskill.beginnerRequests.length;
+                            var intermediateCount = document.getElementById('intermediateCount');
+                            intermediateCount.innerHTML = globalskill.intermediateRequests.length;
+                            var advancedCount = document.getElementById('advancedCount');
+                            advancedCount.innerHTML = globalskill.advancedRequests.length;
 
 
                             //Empty the table
@@ -387,7 +461,7 @@ class ItemContainer {
                                 );
                             }
 
-                            var addIntermediateRequest = document.getElementById('addBeginnerCount');
+                            var addIntermediateRequest = document.getElementById('addIntermediateCount');
                             addIntermediateRequest.onclick = function() {
                                 //request for requests
                                 var requestforrequests = new XMLHttpRequest();
@@ -403,7 +477,7 @@ class ItemContainer {
                                         {
                                             alert(requestforrequests.response.message);
                                             console.log(requestforrequests.response);
-                                            beginnerCount.innerHTML = (requestforrequests.response.sumRequest);
+                                            intermediateCount.innerHTML = (requestforrequests.response.sumRequest);
 
                                         }
                                     }
@@ -433,7 +507,7 @@ class ItemContainer {
                                         {
                                             alert(requestforrequests.response.message);
                                             console.log(requestforrequests.response);
-                                            beginnerCount.innerHTML = (requestforrequests.response.sumRequest);
+                                            advancedCount.innerHTML = (requestforrequests.response.sumRequest);
 
                                         }
                                     }
@@ -551,6 +625,7 @@ class ItemContainer {
         var header = document.getElementById('infoSkillnameHeader');
         var span = document.getElementById("closeInfoModal");
         var desc = document.getElementById("imDesc");
+        var wikiURL = document.getElementById("imWiki");
         var categ = document.getElementById("imCateg");
         var maxP = document.getElementById("imMaxPoint");
         var points = document.getElementById("imPoints");
@@ -562,6 +637,7 @@ class ItemContainer {
         header.innerText = this.skill.name;
 
         desc.innerText = this.skill.description;
+        wikiURL.innerText = this.skill.descriptionWikipediaURL;
         categ.innerText = this.skill.categoryName;
         maxP.innerText = this.skill.maxPoint;
 

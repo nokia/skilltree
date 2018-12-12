@@ -16,7 +16,10 @@ function initData(){
           checkFirstLogin();
           initUI(true, data);
 
-          document.getElementById("home").onclick = function () {showTree(data.mainTree, data); initUI(true, data)};
+          document.getElementById("home").onclick = function () {
+              showTree(data.mainTree, data, true);
+              initUI(true, data)
+          };
       }
   }
   dataRequest.send();
@@ -67,7 +70,7 @@ function initUI(self, _data){
     searchedTree.onkeyup = searchTreesByName;
     addsearchedTree.value = "Search!";
     addsearchedTree.onclick = function(){
-      showTree(searchedTree.value, _data);
+      showTree(searchedTree.value, _data, false);
     }
   }
 }
@@ -145,7 +148,7 @@ function loadAddedTrees(){
     ithtree.innerHTML = tn;
     ithtree.className = "dropdown-item";
     ithtree.onclick = function() {
-      showTree(this.innerHTML, data);
+      showTree(this.innerHTML, data, true); // bator?
     }
     treeList.appendChild(ithtree);
   }
@@ -171,8 +174,8 @@ function searchUsersByName(){
 }
 
 // searches skills by provided name
-function searchSkillsByName(){
-    var skillToSearch = {value: document.getElementById('skillSearch').value};
+function searchSkillsByName(element){
+    var skillToSearch = {value: element.value};
     var skillSearchResult = document.getElementById('skillSearchResult');
     request('POST', '/set/searchSkillsByName', skillToSearch, function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -209,7 +212,7 @@ function getPublicUserData(){
 
   request('POST', '/set/getPublicUserData', userToSearch, function() {
       if(this.readyState == 4 && this.status == 200) {
-        showTree(this.response.mainTree, this.response);
+        showTree(this.response.mainTree, this.response, false);
         initUI(false, this.response);
       }
   });
@@ -222,7 +225,7 @@ function addTreeToUser(){
   request('POST', '/set/addTreeToUser', treeToAdd, function() {
       if (this.readyState == 4 && this.status == 200) {
         if (this.response.success){
-          var forest = document.getElementById("forest");
+          var forest = document.getElementById("treeList");
           var nt = document.createElement('div');
           nt.innerText = this.response.name;
           nt.className = "listedTree";
@@ -244,7 +247,7 @@ function submit(){
     }
     request('POST', '/set/submitall', submitData, function() {
         if(this.readyState == 4 && this.status == 200) {
-          window.open("/user/", "_self");
+          initData();
         }
     });
 }
@@ -257,6 +260,8 @@ function logout(){
 
 // loads the needed pics for the tree, then loads the tree.
 function startLoader () {
+    PIXI.loader.reset();
+
     PIXI.loader.add("pictures/skillborder.png")
                 .add("pictures/bg.jpg")
                 .add("pictures/tree.png")
@@ -265,7 +270,7 @@ function startLoader () {
         PIXI.loader.add(data.skills[i].skillIcon.toString());
     }
     PIXI.loader.load(function () {
-        showTree(data.mainTree, data);
+        showTree(data.mainTree, data, true);
     });
     loadAddedTrees();
 }
@@ -286,7 +291,7 @@ function showChart() {
     document.getElementById('approveSkills').style.display = "none";
     document.getElementById('pixiCanvas').style.display = "block";
 
-    document.getElementById("openchart").onclick = showTree(data.mainTree, data);
+    document.getElementById("openchart").onclick = showTree(data.mainTree, data, true);
 
     if (tree != undefined) {
         app.stage.removeChild(tree.treeContainer);
@@ -389,12 +394,12 @@ function showChart() {
         chartContainer.addChild(tempContainer);
     }
 
-    var logo = new PIXI.Sprite(PIXI.loader.resources["tree.png"].texture);
+    /*var logo = new PIXI.Sprite(PIXI.loader.resources["tree.png"].texture);
     logo.anchor.set(0.5, 0.5);
     logo.position.set(window.innerWidth / 2, window.innerHeight / 2);
     logo.scale.set(0.42);
     app.stage.addChild(logo);
-    chartContainer.addChild(logo);
+    chartContainer.addChild(logo);*/
 
     chartContainer.position.set((window.innerWidth) / 2, (window.innerHeight - 64) / 2);
     app.stage.addChild(chartContainer);
@@ -444,7 +449,7 @@ var selectedTreeName;
 var tree = undefined;
 
 // hides chart, shows tree
-function showTree (treeName, _data) {
+function showTree (treeName, _data, self) {
     document.getElementById('creator').style.display = "none";
     document.getElementById('approveTrees').style.display = "none";
     document.getElementById('approveSkills').style.display = "none";
@@ -472,7 +477,8 @@ function showTree (treeName, _data) {
     document.getElementById("openchart").value = "Open Chart";
     document.getElementById("openchart").onclick = showChart;
 
-    tree = new Tree(app, skills);
+    var owner = {self: self, username: _data.username};
+    tree = new Tree(app, skills, owner);
     app.stage.addChild(tree.treeContainer);
     tree.treeContainer.pivot.set(tree.treeContainer.width / 2, tree.treeContainer.height / 2);
     tree.treeContainer.position.set(app.renderer.width / 2 + tree.treeContainer.width / 2, app.renderer.height / 2);
@@ -512,6 +518,7 @@ function createSkill () {
     }
 
     var catSelect = document.getElementById("newSkillCat");
+    catSelect.innerHTML = "";
     for (var i = 0; i < data.categories.length; ++i) {
         var option = document.createElement("option");
         option.text = data.categories[i].name;
@@ -527,9 +534,15 @@ function createSkill () {
 
         var parentsTable = document.getElementById('parentsTable');
         var parents = [];
-        for (i = 1; i < parentsTable.rows.length; ++i) parents.push(parentsTable.rows[i].cells[0].children[0].value);
+        for (i = 1; i < parentsTable.rows.length; ++i) {
+            parents.push({
+                name: parentsTable.rows[i].cells[0].children[0].value,
+                minPoint: parentsTable.rows[i].cells[1].children[0].value,
+                recommended: !parentsTable.rows[i].cells[2].children[0].checked
+            });
+        }
 
-        var childrenTable = document.getElementById('childrenTable');
+        /*var childrenTable = document.getElementById('childrenTable');
         var children = [];
         for (i = 1; i < childrenTable.rows.length; ++i) {
             children.push({
@@ -537,7 +550,7 @@ function createSkill () {
                 minPoint: childrenTable.rows[i].cells[1].children[0].value,
                 recommended: !childrenTable.rows[i].cells[2].children[0].checked
             });
-        }
+        }*/
 
         var trainingsTable = document.getElementById('trainingsTable');
         var trainings = [];
@@ -558,7 +571,7 @@ function createSkill () {
             maxPoint: pointsNum,
             pointDescription: pointDescription,
             parents: parents,
-            children: children,
+            //children: children,
             trainings: trainings,
             forApprove: document.getElementById('forApprove').checked
         };
@@ -591,7 +604,7 @@ function createTree() {
     var skillList = document.getElementById("skillList");
     var skillsToAdd = [];
     addBtn.onclick = function () {
-        var skill = {value: document.getElementById('skillSearch').value};
+        var skill = {value: document.getElementById('skillSearchTree').value};
 
         request('POST', '/set/getskill', skill, function() {
             if(this.readyState == 4 && this.status == 200) {
@@ -721,17 +734,42 @@ function approveSkills() {
     document.getElementById('approveTrees').style.display = "none";
 
     var canvas = document.getElementById("pixiCanvas");
-    canvas.style.display = "none";
-
     var approveSkills = document.getElementById("approveSkills");
-    approveSkills.style.display = "block";
+    var approveSkillsSelect = document.getElementById('apprSkillSel');
+    var skillsforapproval = undefined;
 
+    request('GET', '/get/skillsforapproval', undefined, function() {
+        if(this.readyState == 4 && this.status == 200){
+            if(this.response !== undefined){
+                approveSkillsSelect.innerHTML = "";
+
+                skillsforapproval = this.response;
+                console.log(skillsforapproval);
+                for(var i=0; i < skillsforapproval.length; i++)
+                {
+                    var text = skillsforapproval[i].name + " (" + skillsforapproval[i].username + ")";
+                    var option = document.createElement('option');
+                    option.value = skillsforapproval[i];
+                    option.text = text;
+                    approveSkillsSelect.add(option);
+                }
+
+            }
+        }
+    });
+
+    canvas.style.display = "none";
+    approveSkills.style.display = "block";
+/*
     for (var i = 0; i < data.apprSkills.length; ++i) {
         var text = data.apprSkills[i].name + " (" + data.apprSkills[i].username + ")";
         var option = document.createElement('option');
         option.value = option.text = text;
         document.getElementById('apprSkillSel').add(option);
     }
+*/
+   //Making the approve page visible
+
 }
 
 // drops all offers from all users (used for dev)
@@ -773,5 +811,9 @@ function request (type, url, sendData, callback) {
     req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
     req.responseType = "json";
     req.onreadystatechange = callback;
-    req.send(JSON.stringify(sendData));
+
+    if(sendData !== undefined)
+        req.send(JSON.stringify(sendData));
+    else
+        req.send();
 }

@@ -8,6 +8,7 @@ module.exports = mongoose.model('Skill', new Schema({
     categoryName: String,
     skillIcon: String,
     description: String,
+    descriptionWikipediaURL: String,
     pointDescription: [String],
     achievedPoint: Number,
     maxPoint: Number,

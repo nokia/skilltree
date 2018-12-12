@@ -22,14 +22,57 @@ Skill Tree needs the following components to operate:
 
 ## Installation
 
+You will need a domain name to install (HTTPS will be configured by default via [Let's Encrypt].)
+
 #### Debian 9
 
-```sh
-cd
-mkdir skilltree
-cd skilltree
-wget https://raw.githubusercontent.com/sicambria/skilltree/master/install/skilltree_install_debian9.sh ; chmod +x skilltree_install_debian9.sh ; ./skilltree_install_debian9.sh
-```
+If you are not familiar with server setup, we recommend to read through the following tutorials:
+* Preferred - using Nginx: [How To Secure Nginx with Let's Encrypt on Debian 9]
+
+
+  * Or if you want to use Apache:
+    * [How To Secure Apache with Let's Encrypt on Debian 9]
+    * [How To Install the Apache Web Server on Debian 9]
+
+
+##### Install script (MongoDB, Let's Encrypt, SkillTree & dependencies)
+  ```sh
+  cd
+  mkdir skilltree
+  cd skilltree
+  wget https://raw.githubusercontent.com/sicambria/skilltree/master/install/skilltree_install_debian9.sh ; chmod +x skilltree_install_debian9.sh ; nano skilltree_install_debian9.sh
+  ```
+
+
+  After running the install script, finalize server configuration.
+
+  For Nginx, edit "sites-available/default" (or your domain specific config file) after the installation. Replace YOUR_DOMAIN.ORG to you own domain name.
+
+  ```sh
+  nano /etc/nginx/sites-available/default
+  ```
+
+
+  ```sh
+  server {
+          listen 443 ssl default_server;
+          listen [::]:443 ssl default_server;
+
+          ssl_certificate     /etc/letsencrypt/live/YOUR_DOMAIN.ORG/cert.pem;
+          ssl_certificate_key /etc/letsencrypt/live/YOUR_DOMAIN.ORG/privkey.pem;
+
+          location / {
+                  proxy_pass http://localhost:3000/;
+          }
+  }
+
+  server {
+          listen 80 default_server;
+          listen [::]:80 default_server;
+          return 301 https://$host$request_uri;
+  }
+  ```
+
 
 ## Development
 
@@ -41,32 +84,8 @@ For Atom, installing some plugins are helpful:
 ```sh
 apm install emmet todo minimap pigments minimap-pigments linter file-icons git-diff atom-beautify ask-stack highlight-selected
 ```
-After running the install script, setup your web server.
-For Nginx:
 
-```sh
-cat /etc/nginx/sites-available/default
-```
-
-```sh
-server {
-        listen 443 ssl default_server;
-        listen [::]:443 ssl default_server;
-
-        ssl_certificate     /etc/letsencrypt/live/YOUR_DOMAIN.ORG/cert.pem;
-        ssl_certificate_key /etc/letsencrypt/live/YOUR_DOMAIN.ORG/privkey.pem;
-
-        location / {
-                proxy_pass http://localhost:3000/;
-        }
-}
-
-server {
-        listen 80 default_server;
-        listen [::]:80 default_server;
-        return 301 https://$host$request_uri;
-}
-```
+On the server, give it a try:
 
 ```sh
 cd skilltree
@@ -87,6 +106,26 @@ To query the status:
 pm2 list
 ```
 
+### Testing
+
+Youtube tutorial for testing using Mocha and Chai:
+https://www.youtube.com/watch?v=NhlpFD5EL_Q
+
+Install mocha and chai (already installed in this project):
+```sh
+npm install mocha
+npm install chai --save-dev
+```
+
+To run tests:
+```sh
+cd assets
+mocha
+```
+
+Edit tests in assets/test folder. Create new JavaScript file or use the existing unit-test.js and add functions.
+
+
 ### License
 
 BSD License 2.0
@@ -102,3 +141,7 @@ BSD License 2.0
    [Atom]: <https://github.com/atom/atom>
    [Debian]: <https://www.debian.org/>
    [Ubuntu]: <https://www.ubuntu.com/>
+   [Let's Encrypt]: <https://letsencrypt.org/>
+   [How To Secure Nginx with Let's Encrypt on Debian 9]: <https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-debian-9>
+   [How To Secure Apache with Let's Encrypt on Debian 9]: <https://www.digitalocean.com/community/tutorials/how-to-secure-apache-with-let-s-encrypt-on-debian-9>
+   [How To Install the Apache Web Server on Debian 9]: <https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-debian-9>

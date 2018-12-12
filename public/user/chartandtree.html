@@ -16,7 +16,14 @@
     var isIE = /*@cc_on!@*/false || !!document.documentMode;
     var isEdge = !isIE && !!window.StyleMedia;
     if(isIE || isEdge){
-      window.open('https://www.google.com/chrome/','_self');
+      var block_to_insert ;
+      var container_block ;
+
+      block_to_insert = document.createElement( 'div' );
+      block_to_insert.innerHTML = '<div class="unsupportedBrowserAlertDIV alert alert-danger" role="alert"><p style="text-align:center;"<a href="#" class="alert-link">You are using an unsupported browser. Please use Mozilla Firefox or Google Chrome.</a></p></div>' ;
+
+      container_block = document.getElementById( 'unsupportedBrowserAlert' );
+      container_block.appendChild( block_to_insert );
     }
   }, false);
   </script>
@@ -24,7 +31,7 @@
   <title>User Profile</title>
 </head>
 <body>
-
+  <div id="unsupportedBrowserAlert">
   <!-- Datalists required for searching -->
 
   <datalist id="UserSearchResult"></datalist>
@@ -87,11 +94,49 @@
         <input class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="getPublicUserData()" value="Search">
       </div>
     </div>
+    <a class="nav-link" href="#advSearch" data-toggle="collapse" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Advanced Search
+    </a>
     <a class="nav-link" href="#userprofile" data-toggle="collapse" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <img src="./pictures/profile.png">
     </a>
   </nav>
   <!-- end of navbar -->
+
+  <!-- start of advanced search -->
+  <div class="collapse float-left" id="advSearch">
+    <div class="card">
+      <div class="card-body">
+        <!-- card nav -->
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link" id="userSearch-tab" data-toggle="tab" href="#userSearch" role="tab" aria-controls="userSearch" aria-selected="true">User Search</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="skillSearch-tab" data-toggle="tab" href="#skillSearch" role="tab" aria-controls="skillSearch" aria-selected="false">Skill Search</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="treeSearch-tab" data-toggle="tab" href="#treeSearch" role="tab" aria-controls="treeSearch" aria-selected="false">Tree Search</a>
+          </li>
+        </ul>
+        <!-- end of card nav -->
+        <!-- card content -->
+        <div class="tab-content" id="mySearchTabContent">
+          <div class="tab-pane fade" id="userSearch" role="tabpanel" aria-labelledby="userSearch-tab">
+            <h5 class="pt-4">Beep</h5>
+          </div>
+          <div class="tab-pane fade" id="skillSearch" role="tabpanel" aria-labelledby="skillSearch-tab">
+            <h5 class="pt-4">Boop</h5>
+          </div>
+          <div class="tab-pane fade" id="treeSearch" role="tabpanel" aria-labelledby="treeSearch-tab">
+            <h5 class="pt-4">F T L</h5>
+          </div>
+        </div>
+        <!-- end of card content -->
+      </div>
+    </div>
+  </div>
+  <!-- end of advanced search -->
 
   <!-- user card  -->
   <div class="collapse float-left" id="userCard">
@@ -227,7 +272,7 @@
   <div class = "card">
     <h1>2.</h1>
     <center><h5>Serch for a skill</h5></center>
-    <p><input type = "text" id = "skillSearch" class = "form-control" list = "skillSearchResult" onkeypress="searchSkillsByName()"></p>
+    <p><input type = "text" id = "skillSearchTree" class = "form-control" list = "skillSearchResult" onkeypress="searchSkillsByName(this)"></p>
     <p><input type = "button" id = "addToTree" class="btn btn-outline-secondary" value = "Add skill to tree"></p>
     <center><h5>OR</h5></center>
     <p><input type = "button" id = "createSkill" class="btn btn-outline-secondary" value = "Create skill"></p>
@@ -239,7 +284,7 @@
   </div>
   <div class = "card">
     <h1>4.</h1>
-    <p><input type = "checkbox" class = "form-check-input" id = "treeAppr"><label class = "form-check-label" for = "treeAppr">Send for approve</label></p>
+    <p><input type = "checkbox" class = "form-check-input" id = "treeAppr"><label class = "form-check-label" for = "treeAppr" disabled>Send for approve</label></p>
     <p><input type = "button" id = "createTree" class="btn btn-outline-secondary" value = "Create tree"></p>
     </div>
   </div>
@@ -280,15 +325,19 @@
           <table id = "parentsTable" border = "1">
             <tr>
               <td>Parent</td>
+              <td>Min point</td>
+              <td>Required</td>
               <td>Delete</td>
             </tr>
             <tr>
-              <td><input size=30 type="text" id = "parent" list = "skillSearchResult" onkeypress="searchSkillsByName()" required></td>
+              <td><input size=30 type="text" id = "parent" list = "skillSearchResult" onkeypress="searchSkillsByName(this)" required></td>
+              <td><input size=10 type="text" id = "minPoint" required></td>
+              <td><input size=50 type="checkbox" id = "required"></td>
               <td><input type="button" value="Delete" onclick="deleteRow('parentsTable', this)"></td>
             </tr>
           </table>
           <input type="button" value="Add parent" onclick="addRow('parentsTable')"><br>
-          <h5>Children:</h5>
+          <!--<h5>Children:</h5>
           <table id = "childrenTable" border = "1">
             <tr>
               <td>Child</td>
@@ -303,7 +352,7 @@
               <td><input type="button" value="Delete" onclick="deleteRow('childrenTable', this)"></td>
             </tr>
           </table>
-          <input type="button" value="Add child" onclick="addRow('childrenTable')"><br>
+          <input type="button" value="Add child" onclick="addRow('childrenTable')"><br>-->
           <h5>Trainings:</h5>
           <table id = "trainingsTable" border = "1">
             <tr>
@@ -321,7 +370,7 @@
               <td><input type="button" value="Delete" onclick="deleteRow('trainingsTable', this)"></td>
             </tr>
           </table>
-          <input type="button" value="Add child" onclick="addRow('trainingsTable')"><br><br>
+          <input type="button" value="Add training" onclick="addRow('trainingsTable')"><br><br>
           Send for approve:
           <input type = "checkbox" id = "forApprove"><br><br>
           <input type = "submit" value = "Save" id = "saveSkillBtn">
@@ -371,6 +420,7 @@
           </div>
           <div class="modal-body">
               <p><span id = "imDesc"></span></p>
+              <p><b>Wikipedia article:</b> <span id = "imWiki"></span></p>
               <p><b>Category:</b> <span id = "imCateg"></span></p>
               <p><b>Points (maximum: <span id = "imMaxPoint"></span>):</b> <span id = "imPoints"></span></p>
               <p><b>Parents:</b> <span id = "imParents"></span></p>
@@ -450,10 +500,11 @@
       </div>
     </div>
   </div>
+  </div>
   <!-- end of modal -->
 
 
-  <div class = "approve" id = "approveTrees">
+  <div class = "approve" id = "approveTrees" >
     <select id = "apprTreeSel">
     </select>
   </div>
