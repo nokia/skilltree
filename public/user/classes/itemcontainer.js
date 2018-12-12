@@ -96,8 +96,8 @@ class ItemContainer {
                             var t = parseInt(this.parentObj.endorsement.text.substr(1));
                             ++t;
                             this.parentObj.endorsement.text = "+" + t;
-                            app.renderer.render(app.stage);
                         }
+                        app.renderer.render(app.stage);
                     }
                 }
 
