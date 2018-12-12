@@ -64,6 +64,11 @@ a {
     position: fixed;
 }
 
+#advSearch {
+    z-index: 100;
+    position: fixed;
+}
+
 #pixiCanvas{
   position: fixed;
   z-index: 10;
