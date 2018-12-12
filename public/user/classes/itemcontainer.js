@@ -201,7 +201,7 @@ class ItemContainer {
         this.container.addChild(this.tick);
         this.container.addChild(this.skillborder);
         this.container.addChild(this.skillborder.levelinfo);
-        if (this.skill.endorsement != undefined) this.container.addChild(this.skillborder.endorse);
+        if (this.skill.endorsement != undefined) this.container.addChild(this.skillborder.endorsement);
         this.container.zOrder = 3;
 
         //Setting size, position of objects in container
