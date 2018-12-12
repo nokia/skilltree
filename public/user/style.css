@@ -52,6 +52,11 @@ a {
     padding: 0.5rem;
 }
 
+#cardSearch{
+  width: 92%;
+  margin: 0% 4%;
+}
+
 #userprofile {
     width: 35%!important;
     z-index: 100;
