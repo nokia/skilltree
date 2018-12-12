@@ -67,6 +67,7 @@ a {
 #advSearch {
     z-index: 100;
     position: relative;
+    margin-right: 10px;
 }
 
 #pixiCanvas{
