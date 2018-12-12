@@ -86,7 +86,7 @@ class ItemContainer {
                 //if it returns
                 req.onreadystatechange = function() {
                     if(req.readyState == 4 && req.status == 200) {
-                        this.parentObj.endorsement.text = "+" + ++this.parentObj.endorsement.text.substr(1);
+                        this.parentObj.endorsement.text = "+" + ++parseInt(this.parentObj.endorsement.text.substr(1));
                     }
                 }
 
