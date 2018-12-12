@@ -472,23 +472,87 @@ setRoute.post('/approveskill', async function (req, res)  {
 			]
 			});
 			newGlobalSkill.save();
+
+			var dependency = [];
+			await getDependency(approvecollection, skillforapproval, dependency);
+
+			var lastdependency = dependency[dependency.length-1];
+			
+			for(var i=0;i<dependency.length;i++)
+			{
+				var globalskill = Skill.find( { name : dependency[i].name } , async function(err, globalskill){
+					if(err) throw err;
+					else return globalskill;
+				});
+
+				if(globalskill !== undefined)
+				{
+					res.json({
+						success: false,
+						message: "dependency " + i + " is already in database"
+					});
+				}
+				else
+					{
+						newGlobalSkill = new Skill({
+							name: dependency[i].name,
+							categoryName: dependency[i].categoryName,
+							skillIcon: dependency[i].skillIcon,
+							description: dependency[i].description,
+							pointDescription: dependency[i].pointDescription,
+							maxPoint: dependency[i].maxPoint,
+							parents: dependency[i].parent,
+							children: [
+								{
+									name: dependency[i].name,
+									minPoint: dependency[i].minPoint,
+									recommended: dependency[i].recommended
+								}
+							],
+							trainings: [
+								{
+									name: dependency[i].name,
+									level: dependency[i].minPoint,
+									description: dependency[i].recommended,
+									url: dependency[i].url,
+									urlLastAccessed: dependency[i].urlLastAccessed
+								}
+							]
+							});
+							newGlobalSkill.save();
+
+					}
+
+					
+			}
+
+
+			/*
+			//finding the last dependencys global dependencies
+			globalskillcollection = Skill.find( { } , async function(err, globalskillcollection){
+				if(err) throw err;
+				else return globalskillcollection;
+			});
+
+			var globaldependency = [];
+			await getDependency(globalskillcollection, lastdependency , globaldependency);
+			*/
+			
+
+
 	}
 	
 
 
 
-	var globalskill = Skill.find( { name : skillforapproval.name } , async function(err, globalskill){
-		if(err) throw err;
-		else return globalskill;
-	});
+	
 
 
 
 
 
 
-	var dependency = [];
-    await getDependency(approvecollection, skillforapproval, dependency);
+	
 
 
 
