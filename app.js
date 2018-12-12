@@ -420,6 +420,7 @@ setRoute.post('/addTreeToUser', async function (req, res){
 });
 
 
+//Approve a skill thats sent in the body as skillforaproval to the api
 setRoute.post('/approveskill', async function (req, res)  {
 	var skillforapproval = req.body.skillforapproval;
 
@@ -428,33 +429,51 @@ setRoute.post('/approveskill', async function (req, res)  {
 		else return approvecollection;
 	});
 
-	newGlobalSkill = new Skill({
-	name: skillforapproval.name,
-    categoryName: skillforapproval.categoryName,
-    skillIcon: skillforapproval.skillIcon,
-    description: skillforapproval.description,
-    pointDescription: skillforapproval.pointDescription,
-    maxPoint: skillforapproval.maxPoint,
-    parents: skillforapproval.parent,
-    children: [
-        {
-            name: skillforapproval.name,
-            minPoint: skillforapproval.minPoint,
-            recommended: skillforapproval.recommended
-        }
-    ],
-    trainings: [
-        {
-            name: skillforapproval.name,
-            level: skillforapproval.minPoint,
-            description: skillforapproval.recommended,
-            url: skillforapproval.url,
-            urlLastAccessed: skillforapproval.urlLastAccessed
-        }
-    ]
+
+	//Look for the skill in the database, if already exists
+	var globalskill = Skill.find( { name : skillforapproval.name } , async function(err, globalskill){
+		if(err) throw err;
+		else return globalskill;
 	});
 
-	newGlobalSkill.save();
+	//Check if skill is already in the database or not
+	if(globalskill !== undefined)
+		{
+			res.json({
+				success: false,
+				message: "Skill already exists"
+			});
+		}
+	else  //If its not, add to the database
+	{
+		newGlobalSkill = new Skill({
+			name: skillforapproval.name,
+			categoryName: skillforapproval.categoryName,
+			skillIcon: skillforapproval.skillIcon,
+			description: skillforapproval.description,
+			pointDescription: skillforapproval.pointDescription,
+			maxPoint: skillforapproval.maxPoint,
+			parents: skillforapproval.parent,
+			children: [
+				{
+					name: skillforapproval.name,
+					minPoint: skillforapproval.minPoint,
+					recommended: skillforapproval.recommended
+				}
+			],
+			trainings: [
+				{
+					name: skillforapproval.name,
+					level: skillforapproval.minPoint,
+					description: skillforapproval.recommended,
+					url: skillforapproval.url,
+					urlLastAccessed: skillforapproval.urlLastAccessed
+				}
+			]
+			});
+			newGlobalSkill.save();
+	}
+	
 
 
 
