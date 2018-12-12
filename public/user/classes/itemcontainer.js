@@ -83,7 +83,6 @@ class ItemContainer {
                 req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
                 req.responseType = "json";
 
-                //if it returns
                 req.onreadystatechange = function() {
                     if(req.readyState == 4 && req.status == 200) {
                         if (this.skill.endorsement.length == 0){
