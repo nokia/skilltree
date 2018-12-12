@@ -8,7 +8,7 @@
 }
 
 .ctbody {
-    background-image: url(pictures/tree_bg/art-background-blank-951240.jpg);
+    /*background-image: url(pictures/tree_bg/landscape1920_CC0.jpg);*/
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Do not repeat the image */
     background-size: cover;
@@ -97,7 +97,7 @@ a {
 #pixiCanvas{
   position: fixed;
   z-index: 10;
-  background-image: url(pictures/pixi_bg.jpeg);
+  background-image: url(pictures/tree_bg/landscape1920_CC0.jpg);
 }
 
 #treeList{
