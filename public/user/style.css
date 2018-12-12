@@ -54,7 +54,12 @@ a {
 
 #cardSearch{
   width: 92%;
-  margin: 0% 4%;
+  margin: 2% 4%;
+}
+
+.btn-group btn-group-toggle{
+  margin: 2% 4%;
+  width: 92%;
 }
 
 #userprofile {
