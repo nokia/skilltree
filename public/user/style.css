@@ -79,6 +79,7 @@ a {
     z-index: 100;
     position: relative;
     margin-right: 10px;
+    width: 400px;
 }
 
 #pixiCanvas{
