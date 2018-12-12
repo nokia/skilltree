@@ -86,9 +86,18 @@ class ItemContainer {
                 //if it returns
                 req.onreadystatechange = function() {
                     if(req.readyState == 4 && req.status == 200) {
-                        /*var t = parseInt(this.parentObj.endorsement.text.substr(1));
-                        ++t;
-                        this.parentObj.endorsement.text = "+" + t;*/
+                        if (this.skill.endorsement.length == 0){
+                            this.skillborder.endorsement = new PIXI.Text("+" + 1);
+                            this.skillborder.endorsement.scale.set(.5);
+                            this.skillborder.endorsement.position.set(10, 50);
+                            this.skillborder.endorsement.style.fill = 0xFFFFFF;
+                            this.container.addChild(this.skillborder.endorsement);
+                        } else {
+                            var t = parseInt(this.parentObj.endorsement.text.substr(1));
+                            ++t;
+                            this.parentObj.endorsement.text = "+" + t;
+                        }
+                        app.renderer.render(app.stage);
                     }
                 }
 
