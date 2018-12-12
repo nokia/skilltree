@@ -18,7 +18,7 @@ class ItemContainer {
         if (this.skill.endorsement != undefined) {
             this.skillborder.endorsement = new PIXI.Text("+" + this.skill.endorsement.length);
             this.skillborder.endorsement.scale.set(.5);
-            this.skillborder.endorsement.position.set(5, 63);
+            this.skillborder.endorsement.position.set(5, 60);
             this.skillborder.endorsement.style.fill = 0xFFFFFF;
         }
 
