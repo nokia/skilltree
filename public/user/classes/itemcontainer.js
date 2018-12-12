@@ -88,7 +88,7 @@ class ItemContainer {
                     if(req.readyState == 4 && req.status == 200) {
                         var t = parseInt(this.parentObj.endorsement.text.substr(1));
                         ++t;
-                        this.parentObj.endorsement.text = "+" + t);
+                        this.parentObj.endorsement.text = "+" + t;
                     }
                 }
 
