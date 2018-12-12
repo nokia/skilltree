@@ -30,7 +30,8 @@ var app = new PIXI.Application({
         view: pixiCanvas,
         width: window.innerWidth,
         height: window.innerHeight - 60,
-        backgroundColor: 0x000000,
+        //backgroundColor: 0x000000,
+        transparent: true,
         antialias: true,
         autoStart: false,
         autoResize: true
