@@ -263,7 +263,7 @@ function startLoader () {
     PIXI.loader.reset();
 
     PIXI.loader.add("pictures/skillborder.png")
-                .add("pictures/bg.jpg")
+                //.add("pictures/tree_bg/art-background-blank-951240.jpg")
                 .add("pictures/tree.png")
                 .add("pictures/tick.png");
     for (var i = 0; i < data.skills.length; ++i) {

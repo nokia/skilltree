@@ -7,6 +7,13 @@
     /* background-attachment: fixed; */ /* fixed (will not scroll with the rest of the page) */
 }
 
+.ctbody {
+    background-image: url(pictures/tree_bg/art-background-blank-951240.jpg);
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover;
+}
+
 .jumbocontainer {
     width: 35%;
     /* margin-top: 5%; */
