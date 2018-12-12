@@ -15,10 +15,10 @@ class ItemContainer {
         this.skillborder.levelinfo = new PIXI.Text(this.skill.achievedPoint + "/" + this.skill.maxPoint);
         this.skillborder.levelinfo.scale.set(.5);
 
-        if (this.skill.endorsement != undefined) {
+        if (this.skill.endorsement != undefined && this.skill.endorsement.length > 0) {
             this.skillborder.endorsement = new PIXI.Text("+" + this.skill.endorsement.length);
             this.skillborder.endorsement.scale.set(.5);
-            this.skillborder.endorsement.position.set(5, 63);
+            this.skillborder.endorsement.position.set(10, 50);
             this.skillborder.endorsement.style.fill = 0xFFFFFF;
         }
 
@@ -86,7 +86,9 @@ class ItemContainer {
                 //if it returns
                 req.onreadystatechange = function() {
                     if(req.readyState == 4 && req.status == 200) {
-
+                        /*var t = parseInt(this.parentObj.endorsement.text.substr(1));
+                        ++t;
+                        this.parentObj.endorsement.text = "+" + t;*/
                     }
                 }
 
@@ -201,6 +203,7 @@ class ItemContainer {
         this.container.addChild(this.tick);
         this.container.addChild(this.skillborder);
         this.container.addChild(this.skillborder.levelinfo);
+        if (this.skill.endorsement != undefined && this.skill.endorsement.length > 0) this.container.addChild(this.skillborder.endorsement);
         this.container.zOrder = 3;
 
         //Setting size, position of objects in container
