@@ -476,7 +476,7 @@ setRoute.post('/searchSkillByName', async function (req, res) {
 });
 //Approve a skill thats sent in the body as skillforaproval to the api
 setRoute.post('/approveskill', async function (req, res)  {
-	console.log(req.body);
+	
 	var skillforapproval = req.body;
 
 	var approvecollection = await ApprovableSkill.find( {} , async function(err, approvecollection) {
@@ -491,6 +491,8 @@ setRoute.post('/approveskill', async function (req, res)  {
 		else return globalskill;
 	});
 
+	console.log(globalskill);
+	
 	//Check if skill is already in the database or not
 	if(globalskill !== undefined)
 		{
