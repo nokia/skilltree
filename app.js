@@ -547,7 +547,7 @@ setRoute.post('/approveskill', async function (req, res)  {
 				{
 					res.json({
 						success: false,
-						message: "dependency " + i + " is already in database"
+						message: "dependency " + dependency[i].name + " is already in database"
 					});
 				}
 				else
