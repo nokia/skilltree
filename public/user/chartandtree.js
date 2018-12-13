@@ -791,7 +791,7 @@ function approveSkills() {
         console.log(selectedSkill);
 
 
-        request('POST', '/set/approveskill', selectedSkill, function(){
+        request('POST', '/set/approveskill', { skillsforapproval: selectedSkill }, function(){
             if(this.readyState == 4 && this.status == 200){
                 if(this.response !== undefined){
                     alert(this.response.message);
