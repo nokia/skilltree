@@ -75,6 +75,7 @@ function initUI(self, _data){
     }
   }
   initCard();
+  switchSearch("User");
 }
 
 // TOP BAR
@@ -224,21 +225,21 @@ function switchSearch(type){
   document.getElementById('advSearchDetails').innerHTML = "";
   if (type === "Skill") {
     document.getElementById('cardSearchBar').onkeyup = searchSkillsByName();
-    document.getElementById('cardSearchBar').list = "SkillSearchResult";
+    document.getElementById('cardSearchBar').setAttribute('list', "skillSearchResult");
     addCheckBox("1", "Skill Option 1", 'advSearchDetails');
     addCheckBox("2", "Skill Option 2", 'advSearchDetails');
     addCheckBox("3", "Skill Option 3", 'advSearchDetails');
   }
   else if (type === "Tree") {
     document.getElementById('cardSearchBar').onkeyup = searchTreesByName();
-    document.getElementById('cardSearchBar').list = "TreeSearchResult";
+    document.getElementById('cardSearchBar').setAttribute('list', "TreeSearchResult");
     addCheckBox("1", "Tree Option 1", 'advSearchDetails');
     addCheckBox("2", "Tree Option 2", 'advSearchDetails');
     addCheckBox("3", "Tree Option 3", 'advSearchDetails');
   }
   else if (type === "User"){
     document.getElementById('cardSearchBar').onkeyup = searchUsersByName();
-    document.getElementById('cardSearchBar').list = "UserSearchResult";
+    document.getElementById('cardSearchBar').setAttribute('list', "UserSearchResult");
     addCheckBox("1", "User Option 1", 'advSearchDetails');
     addCheckBox("2", "User Option 2", 'advSearchDetails');
     addCheckBox("3", "User Option 3", 'advSearchDetails');
@@ -530,21 +531,6 @@ function showTree (treeName, _data, self) {
 // opens skill creation, and manages it.
 
 // searches skills by provided name
-function searchSkillByName(element){
-    var skillToSearch = {value: element.value};
-    var skillSearchResult = document.getElementById('skillSearchResult');
-    request('POST', '/set/searchSkillByName', skillToSearch, function () {
-        if (this.readyState == 4 && this.status == 200) {
-            skillSearchResult.innerText = "";
-            for (var i = 0; i < this.response.length; i++) {
-                var mya = document.createElement('option');
-                mya.value = this.response[i].name;
-                skillSearchResult.appendChild(mya);
-            }
-        }
-    });
-}
-
 
 function createSkill () {
     var modal = document.getElementById("newSkillModal");
@@ -682,12 +668,6 @@ function createTree() {
                         }
                     } else alert("You have already added this skill");
                 } else alert("Skill is not found");
-                /*skillSearchResult.innerText = "";
-                for (var i = 0; i < sch.response.length; i++) {
-                    var mya = document.createElement('option');
-                    mya.value = sch.response[i].name;
-                    skillSearchResult.appendChild(mya);
-                }*/
             }
         });
     };
