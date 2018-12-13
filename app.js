@@ -337,6 +337,7 @@ setRoute.post('/searchTreesByName', async function (req, res) {
 		for (var i = 0; i < foundTrees.length; i++) {
 			resTrees[i] = {name: foundTrees[i].name};
 		}
+    console.log(resTrees);
 		res.json(resTrees);
 });
 
