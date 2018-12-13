@@ -355,21 +355,56 @@ setRoute.post('/searchSkillsByName', async function (req, res) {
         res.json(resSkills);
 });
 
-// Getting the name, skills, trees and maintree of a user.
+// Getting the name, skills, trees and maintree of a user. (will be needed for advanced search)
 setRoute.post('/getPublicUserData', async function (req, res) {
 		var data = req.body;
-		var foundUser = await User.findOne({
-				"username": data.value
-		}, function(err, user) {
-				if (err) throw err;
-		return user;
-		});
+    var foundUser = await User.findOne({
+        "username": data.value
+    }, function(err, user) {
+        if (err) throw err;
+    return user;
+    });
 		res.json({
       username: foundUser.username,
 			skills : foundUser.skills,
 			trees : foundUser.trees,
 			mainTree : foundUser.mainTree
 		});
+});
+
+// Getting the name, skillnames, focusarea of a tree. (will be needed for advanced search)
+setRoute.post('/getPublicTreeData', async function (req, res) {
+		var data = req.body;
+    var foundTree = await Tree.findOne({
+				"name": data.value
+		}, function(err, tree) {
+				if (err) throw err;
+		return tree;
+		});
+    res.json({
+      name: foundTree.name,
+      skillNames: foundTree.skillNames,
+      focusArea: foundTree.focusArea
+    });
+});
+
+// Getting the name, caterory, desc, relations and training data of a skill. (will be needed for advanced search)
+setRoute.post('/getPublicSkillData', async function (req, res) {
+    var data = req.body;
+    var foundSkill = await Skill.findOne({
+				"name": data.value
+		}, function(err, skill) {
+				if (err) throw err;
+		return skill;
+		});
+    res.json({
+      name: foundSkill.name,
+      categoryName: foundSkill.categoryName,
+      description: foundSkill.description,
+      parents: foundSkill.parents,
+      children: foundSkill.children.map(obj => obj.name),
+      trainings: foundSkill.trainings
+    });
 });
 
 // Adds a public tree to the current user.
