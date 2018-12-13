@@ -477,7 +477,7 @@ setRoute.post('/searchSkillByName', async function (req, res) {
 //Approve a skill thats sent in the body as skillforaproval to the api
 setRoute.post('/approveskill', async function (req, res)  {
 	console.log(req.body);
-	var skillforapproval = req.body.skillforapproval;
+	var skillforapproval = req.body;
 
 	var approvecollection = await ApprovableSkill.find( {} , async function(err, approvecollection) {
 		if(err) throw err;
