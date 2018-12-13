@@ -538,16 +538,16 @@ setRoute.post('/approveskill', async function (req, res)  {
 
 			for(var i=0;i<dependency.length;i++)
 			{
-				var globalskill = await Skill.find( { name : dependency[i].name } , async function(err, globalskill){
+				var globalskill = await Skill.findOne( { name : dependency[i].name } , async function(err, globalskill){
 					if(err) throw err;
 					else return globalskill;
 				});
 
-				if(globalskill !== undefined)
+				if(globalskill !== null)
 				{
 					res.json({
 						success: false,
-						message: "dependency " + dependency[i].name + " is already in database"
+						message: "dependency " +i + " " + dependency[i].name + " is already in database"
 					});
 				}
 				else
