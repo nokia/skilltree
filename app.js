@@ -319,7 +319,7 @@ setRoute.post('/searchSkillsByName', async function (req, res) {
 		});
 		var resSkills = [];
 		for (var i = 0; i < foundSkills.length; i++) {
-			resSkills[i] = {name: foundSkills[i].username};
+			resSkills[i] = {name: foundSkills[i].name};
 		}
 		res.json(resSkills);
 });
@@ -336,7 +336,6 @@ setRoute.post('/searchTreesByName', async function (req, res) {
 		var resTrees = [];
 		for (var i = 0; i < foundTrees.length; i++) {
 			resTrees[i] = {name: foundTrees[i].name};
-      console.log(foundTrees[i].name);
 		}
 		res.json(resTrees);
 });
