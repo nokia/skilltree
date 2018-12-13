@@ -811,10 +811,7 @@ function approveSkills() {
         var selectedSkill = approveSkillsSelect.options[approveSkillsSelect.selectedIndex].text;
         console.log(selectedSkill);
 
-        var skill = skillsforapproval.find( { name : selectedSkill } , async function(err, globalskill){
-            if(err) throw err;
-            else return globalskill;
-        });
+        var skill = skillsforapproval.find(obj => obj.name == selectedSkill);
 
 
         request('POST', '/set/approveskill', { skill }, function(){
