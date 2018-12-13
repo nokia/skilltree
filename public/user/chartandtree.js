@@ -813,6 +813,8 @@ function approveSkills() {
 
         var skillforapproval = skillsforapproval.find(obj => obj.name == selectedSkill);
 
+        console.log(skillforapproval);
+
 
         request('POST', '/set/approveskill', skillforapproval, function(){
             if(this.readyState == 4 && this.status == 200){
