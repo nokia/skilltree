@@ -158,7 +158,7 @@ function loadAddedTrees(){
 
 // searches users by the string provided.
 function searchUsersByName(){
-  var userToSearch = {value: document.getElementById('searchedUser').value};
+  var userToSearch = {value: document.getElementById('cardSearch').value};
   var UserSearchResult = document.getElementById('UserSearchResult');
 
   if (userToSearch !== "") {
@@ -176,8 +176,8 @@ function searchUsersByName(){
 }
 
 // searches skills by provided name
-function searchSkillByName(element){
-    var skillToSearch = {value: element.value};
+function searchSkillsByName(){
+    var skillToSearch = {value: document.getElementById('cardSearch').value};
     var skillSearchResult = document.getElementById('skillSearchResult');
     request('POST', '/set/searchSkillByName', skillToSearch, function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -193,7 +193,7 @@ function searchSkillByName(element){
 
 // searches trees by the provided name
 function searchTreesByName(){
-  var treeToSearch = {value: document.getElementById('searchedTree').value};
+  var treeToSearch = {value: document.getElementById('cardSearch').value};
   var TreeSearchResult = document.getElementById('TreeSearchResult');
   request('POST', '/set/searchTreesByName', treeToSearch, function() {
       if(this.readyState == 4 && this.status == 200) {
@@ -528,6 +528,24 @@ function showTree (treeName, _data, self) {
 }
 
 // opens skill creation, and manages it.
+
+// searches skills by provided name
+function searchSkillByName(element){
+    var skillToSearch = {value: element.value};
+    var skillSearchResult = document.getElementById('skillSearchResult');
+    request('POST', '/set/searchSkillByName', skillToSearch, function () {
+        if (this.readyState == 4 && this.status == 200) {
+            skillSearchResult.innerText = "";
+            for (var i = 0; i < this.response.length; i++) {
+                var mya = document.createElement('option');
+                mya.value = this.response[i].name;
+                skillSearchResult.appendChild(mya);
+            }
+        }
+    });
+}
+
+
 function createSkill () {
     var modal = document.getElementById("newSkillModal");
     modal.style.display = "block";
