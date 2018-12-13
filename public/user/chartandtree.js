@@ -237,7 +237,7 @@ function switchSearch(type){
     addCheckBox("2", "Tree Option 2", 'advSearchDetails');
     addCheckBox("3", "Tree Option 3", 'advSearchDetails');
   }
-  else{
+  else if (type === "User"){
     document.getElementById('cardSearchBar').onkeyup = searchUsersByName();
     document.getElementById('cardSearchBar').list = "UserSearchResult";
     addCheckBox("1", "User Option 1", 'advSearchDetails');
@@ -808,6 +808,7 @@ function addCheckBox(id, boxText, parent){
   boxToAdd.type = "checkbox";
   boxToAdd.id = id;
   spanToAdd.appendChild(boxToAdd);
+  spanToAdd.innerHTML += boxText;
   divToAdd.appendChild(spanToAdd);
   document.getElementById(parent).appendChild(divToAdd);
 }
