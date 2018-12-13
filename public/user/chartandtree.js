@@ -790,7 +790,16 @@ function approveSkills() {
         var selectedSkill = approveSkillsSelect.options[approveSkillsSelect.selectedIndex].text;
         console.log(selectedSkill);
 
-        //request('POST', '/set/approveskill', )
+
+        request('POST', '/set/approveskill', selectedSkill, function(){
+            if(this.readyState == 4 && this.status == 200){
+                if(this.response !== undefined){
+                    alert(this.response.message);
+
+                }
+            }
+
+        });
     }
 
 
