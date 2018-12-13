@@ -474,7 +474,6 @@ setRoute.post('/searchSkillByName', async function (req, res) {
         }
         res.json(resSkills);
 });
-
 //Approve a skill thats sent in the body as skillforaproval to the api
 setRoute.post('/approveskill', async function (req, res)  {
 	var skillforapproval = req.body.skillforapproval;
@@ -590,60 +589,18 @@ setRoute.post('/approveskill', async function (req, res)  {
 				
 				lastdependencyParent.children.push({
 						name: lastdependency.name,
-            			minPoint: 0, //skillsforapproval model to be changed, got no real data to be read
-            			recommended: false //skillsforapproval model to be changed, ^
+            			minPoint: 0, //TODO skillsforapproval model to be changed, got no real data to be read
+            			recommended: false // ^
 				});
 
+				lastdependencyParent.save();
 
 			}
 
-			var lastdependencyParent = Skill.find( { name : lastdependency.parents.name } , async function(err, lastdependencyParents){
-				if(err) throw err;
-				else return lastdependencyParents;
-			});
-
-
-			/*
-			//finding the last dependencys global dependencies
-			globalskillcollection = Skill.find( { } , async function(err, globalskillcollection){
-				if(err) throw err;
-				else return globalskillcollection;
-			});
-
-			var globaldependency = [];
-			await getDependency(globalskillcollection, lastdependency , globaldependency);
-			*/
-
-
-
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	/*
-	var globalskill = Skill.findOne({name: skillforapproval.name}, function(err, globalskill){
-		if(err) throw err;
-		return globalskill;
-	});*/
-
-
-
 });
+
 
 
 // gets a skill and all it's dependencies by name.
