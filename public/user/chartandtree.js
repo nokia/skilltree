@@ -194,7 +194,7 @@ function searchSkillsByName(){
 
 // searches trees by the provided name
 function searchTreesByName(){
-  var treeToSearch = {value: document.getElementById('cardSearch').value};
+  var treeToSearch = {value: document.getElementById('cardSearchBar').value};
   var TreeSearchResult = document.getElementById('TreeSearchResult');
   request('POST', '/set/searchTreesByName', treeToSearch, function() {
       if(this.readyState == 4 && this.status == 200) {
