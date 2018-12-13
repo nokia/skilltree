@@ -811,7 +811,7 @@ function approveSkills() {
         var selectedSkill = approveSkillsSelect.options[approveSkillsSelect.selectedIndex].text;
         console.log(selectedSkill);
 
-        var skill = await skillsforapproval.find( { name : selectedSkill } , async function(err, globalskill){
+        var skill = skillsforapproval.find( { name : selectedSkill } , async function(err, globalskill){
             if(err) throw err;
             else return globalskill;
         });
