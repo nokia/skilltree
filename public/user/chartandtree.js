@@ -795,6 +795,7 @@ function approveSkills() {
             if(this.readyState == 4 && this.status == 200){
                 if(this.response !== undefined){
                     alert(this.response.message);
+                    console.log(this.response.message);
 
                 }
             }
