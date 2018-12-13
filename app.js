@@ -478,14 +478,14 @@ setRoute.post('/searchSkillByName', async function (req, res) {
 setRoute.post('/approveskill', async function (req, res)  {
 	var skillforapproval = req.body.skillforapproval;
 
-	var approvecollection = ApprovableSkill.find( {} , async function(err, approvecollection) {
+	var approvecollection = await ApprovableSkill.find( {} , async function(err, approvecollection) {
 		if(err) throw err;
 		else return approvecollection;
 	});
 
 
 	//Look for the skill in the database, if already exists
-	var globalskill = Skill.find( { name : skillforapproval.name } , async function(err, globalskill){
+	var globalskill = await Skill.find( { name : skillforapproval.name } , async function(err, globalskill){
 		if(err) throw err;
 		else return globalskill;
 	});
@@ -534,7 +534,7 @@ setRoute.post('/approveskill', async function (req, res)  {
 
 			for(var i=0;i<dependency.length;i++)
 			{
-				var globalskill = Skill.find( { name : dependency[i].name } , async function(err, globalskill){
+				var globalskill = await Skill.find( { name : dependency[i].name } , async function(err, globalskill){
 					if(err) throw err;
 					else return globalskill;
 				});
@@ -582,7 +582,7 @@ setRoute.post('/approveskill', async function (req, res)  {
 
 			for(var i=0; i<lastdependency.parents.length; i++)
 			{
-				var lastdependencyParent =  Skill.find( { name : lastdependency.parents[i] } , async function(err, lastdependencyParent){
+				var lastdependencyParent =  await Skill.find( { name : lastdependency.parents[i] } , async function(err, lastdependencyParent){
 					if(err) throw err;
 					else return lastdependencyParent;
 				});
