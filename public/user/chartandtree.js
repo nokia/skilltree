@@ -811,8 +811,13 @@ function approveSkills() {
         var selectedSkill = approveSkillsSelect.options[approveSkillsSelect.selectedIndex].text;
         console.log(selectedSkill);
 
+        var skill = await skillsforapproval.find( { name : selectedSkill } , async function(err, globalskill){
+            if(err) throw err;
+            else return globalskill;
+        });
 
-        request('POST', '/set/approveskill', { skillsforapproval: selectedSkill }, function(){
+
+        request('POST', '/set/approveskill', { skill }, function(){
             if(this.readyState == 4 && this.status == 200){
                 if(this.response !== undefined){
                     alert(this.response.message);
