@@ -793,7 +793,7 @@ function approveSkills() {
                 console.log(skillsforapproval);
                 for(var i=0; i < skillsforapproval.length; i++)
                 {
-                    var text = skillsforapproval[i].name + " (" + skillsforapproval[i].username + ")";
+                    var text = skillsforapproval[i].name/* + " (" + skillsforapproval[i].username + ")"*/;
                     var option = document.createElement('option');
                     option.value = skillsforapproval[i];
                     option.text = text;
@@ -803,6 +803,27 @@ function approveSkills() {
             }
         }
     });
+
+
+
+    var approveButton = document.getElementById("approvebtn");
+    approveButton.onclick = function() {
+        var selectedSkill = approveSkillsSelect.options[approveSkillsSelect.selectedIndex].text;
+        console.log(selectedSkill);
+
+
+        request('POST', '/set/approveskill', { skillsforapproval: selectedSkill }, function(){
+            if(this.readyState == 4 && this.status == 200){
+                if(this.response !== undefined){
+                    alert(this.response.message);
+                    console.log(this.response.message);
+
+                }
+            }
+
+        });
+    }
+
 
     canvas.style.display = "none";
     approveSkills.style.display = "block";

@@ -595,6 +595,11 @@ setRoute.post('/approveskill', async function (req, res)  {
 
 				lastdependencyParent.save();
 
+				res.json({
+					message: "Succes",
+					success: true
+				});
+
 			}
 
 	}
