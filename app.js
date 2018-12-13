@@ -492,7 +492,7 @@ setRoute.post('/approveskill', async function (req, res)  {
 		else return globalskill;
 	});
 
-	
+	console.log(globalskill);
 
 	//Check if skill is already in the database or not
 	if(globalskill !== undefined)
