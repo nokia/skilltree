@@ -318,8 +318,8 @@ setRoute.post('/searchSkillsByName', async function (req, res) {
 			return skill;
 		});
 		var resSkills = [];
-		for (var i = 0; i < foundUsers.length; i++) {
-			resSkills[i] = {name: foundSkills[i].username};
+		for (var i = 0; i < foundSkills.length; i++) {
+			resSkills[i] = {name: foundSkills[i].name};
 		}
 		res.json(resSkills);
 });

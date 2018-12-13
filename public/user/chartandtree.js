@@ -75,6 +75,7 @@ function initUI(self, _data){
     }
   }
   initCard();
+  switchSearch("User");
 }
 
 // TOP BAR
@@ -158,7 +159,7 @@ function loadAddedTrees(){
 
 // searches users by the string provided.
 function searchUsersByName(){
-  var userToSearch = {value: document.getElementById('searchedUser').value};
+  var userToSearch = {value: document.getElementById('cardSearchBar').value};
   var UserSearchResult = document.getElementById('UserSearchResult');
 
   if (userToSearch !== "") {
@@ -176,10 +177,10 @@ function searchUsersByName(){
 }
 
 // searches skills by provided name
-function searchSkillByName(element){
-    var skillToSearch = {value: element.value};
+function searchSkillsByName(){
+    var skillToSearch = {value: document.getElementById('cardSearchBar').value};
     var skillSearchResult = document.getElementById('skillSearchResult');
-    request('POST', '/set/searchSkillByName', skillToSearch, function () {
+    request('POST', '/set/searchSkillsByName', skillToSearch, function () {
         if (this.readyState == 4 && this.status == 200) {
             skillSearchResult.innerText = "";
             for (var i = 0; i < this.response.length; i++) {
@@ -193,7 +194,7 @@ function searchSkillByName(element){
 
 // searches trees by the provided name
 function searchTreesByName(){
-  var treeToSearch = {value: document.getElementById('searchedTree').value};
+  var treeToSearch = {value: document.getElementById('cardSearchBar').value};
   var TreeSearchResult = document.getElementById('TreeSearchResult');
   request('POST', '/set/searchTreesByName', treeToSearch, function() {
       if(this.readyState == 4 && this.status == 200) {
@@ -223,22 +224,22 @@ function getPublicUserData(){
 function switchSearch(type){
   document.getElementById('advSearchDetails').innerHTML = "";
   if (type === "Skill") {
-    document.getElementById('cardSearchBar').onkeyup = searchSkillsByName();
-    document.getElementById('cardSearchBar').list = "SkillSearchResult";
+    document.getElementById('cardSearchBar').onkeyup = searchSkillsByName;
+    document.getElementById('cardSearchBar').setAttribute('list', "skillSearchResult");
     addCheckBox("1", "Skill Option 1", 'advSearchDetails');
     addCheckBox("2", "Skill Option 2", 'advSearchDetails');
     addCheckBox("3", "Skill Option 3", 'advSearchDetails');
   }
   else if (type === "Tree") {
-    document.getElementById('cardSearchBar').onkeyup = searchTreesByName();
-    document.getElementById('cardSearchBar').list = "TreeSearchResult";
+    document.getElementById('cardSearchBar').onkeyup = searchTreesByName;
+    document.getElementById('cardSearchBar').setAttribute('list', "TreeSearchResult");
     addCheckBox("1", "Tree Option 1", 'advSearchDetails');
     addCheckBox("2", "Tree Option 2", 'advSearchDetails');
     addCheckBox("3", "Tree Option 3", 'advSearchDetails');
   }
   else if (type === "User"){
-    document.getElementById('cardSearchBar').onkeyup = searchUsersByName();
-    document.getElementById('cardSearchBar').list = "UserSearchResult";
+    document.getElementById('cardSearchBar').onkeyup = searchUsersByName;
+    document.getElementById('cardSearchBar').setAttribute('list', "UserSearchResult");
     addCheckBox("1", "User Option 1", 'advSearchDetails');
     addCheckBox("2", "User Option 2", 'advSearchDetails');
     addCheckBox("3", "User Option 3", 'advSearchDetails');
@@ -528,6 +529,9 @@ function showTree (treeName, _data, self) {
 }
 
 // opens skill creation, and manages it.
+
+// searches skills by provided name
+
 function createSkill () {
     var modal = document.getElementById("newSkillModal");
     modal.style.display = "block";
@@ -664,12 +668,6 @@ function createTree() {
                         }
                     } else alert("You have already added this skill");
                 } else alert("Skill is not found");
-                /*skillSearchResult.innerText = "";
-                for (var i = 0; i < sch.response.length; i++) {
-                    var mya = document.createElement('option');
-                    mya.value = sch.response[i].name;
-                    skillSearchResult.appendChild(mya);
-                }*/
             }
         });
     };
