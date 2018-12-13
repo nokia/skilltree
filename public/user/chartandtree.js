@@ -772,7 +772,7 @@ function approveSkills() {
                 console.log(skillsforapproval);
                 for(var i=0; i < skillsforapproval.length; i++)
                 {
-                    var text = skillsforapproval[i].name + " (" + skillsforapproval[i].username + ")";
+                    var text = skillsforapproval[i].name/* + " (" + skillsforapproval[i].username + ")"*/;
                     var option = document.createElement('option');
                     option.value = skillsforapproval[i];
                     option.text = text;
