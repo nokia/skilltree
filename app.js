@@ -144,32 +144,35 @@ var getRoute = express.Router();
 app.use('/get', getRoute);
 
 getRoute.use(function(req, res, next) {
-    var token = req.get('x-access-token');
+  var token = req.get('x-access-token');
 
-    // decode token
-    if (token) {
-        // verifies secret and checks exp
-        jwt.verify(token, app.get('superSecret'), function(err, decoded) {
-            if (err) {
-                return res.json({
-                    success: false,
-                    message: 'Failed to authenticate token.'
-                });
-            } else {
-                req.decoded = decoded;
-                next();
-            }
-        });
-
+  // decode token
+  if (token) {
+    // verifies secret and checks exp
+    jwt.verify(token, app.get('superSecret'), function(err, decoded) {
+      if (err) {
+        return res.sendFile('login.html', { root: path.join(__dirname, './public') })
+        /*return res.json({
+        success: false,
+        message: 'Failed to authenticate token.'
+      });*/
     } else {
-        // if there is no token
-        // return an error
-        return res.status(403).send({
-            success: false,
-            message: 'No token provided.'
-        });
-
+      req.decoded = decoded;
+      next();
     }
+  });
+
+} else {
+  // if there is no token
+  // return an error
+  /*
+  return res.status(403).send({
+  success: false,
+  message: 'No token provided.'
+});*/
+return res.sendFile('login.html', { root: path.join(__dirname, './public') });
+
+}
 });
 
 getRoute.get('/userdata', function (req, res) {
@@ -477,7 +480,7 @@ setRoute.post('/approveskill', async function (req, res)  {
 			await getDependency(approvecollection, skillforapproval, dependency);
 
 			var lastdependency = dependency[dependency.length-1];
-			
+
 			for(var i=0;i<dependency.length;i++)
 			{
 				var globalskill = Skill.find( { name : dependency[i].name } , async function(err, globalskill){
@@ -523,7 +526,7 @@ setRoute.post('/approveskill', async function (req, res)  {
 
 					}
 
-					
+
 			}
 
 
@@ -537,22 +540,22 @@ setRoute.post('/approveskill', async function (req, res)  {
 			var globaldependency = [];
 			await getDependency(globalskillcollection, lastdependency , globaldependency);
 			*/
-			
+
 
 
 	}
-	
-
-
-
-	
 
 
 
 
 
 
-	
+
+
+
+
+
+
 
 
 
