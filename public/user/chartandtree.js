@@ -12,10 +12,9 @@ function initData(){
   dataRequest.onreadystatechange = function() {
       if(dataRequest.readyState == 4 && dataRequest.status == 200) {
           data = dataRequest.response;
+          initUI(true, data);
           if (data.admin) document.getElementById('openAdminMenu').style.display = "block";
           checkFirstLogin();
-          initUI(true, data);
-
           document.getElementById("home").onclick = function () {
               showTree(data.mainTree, data, true);
               initUI(true, data)
@@ -74,7 +73,6 @@ function initUI(self, _data){
       showTree(searchedTree.value, _data, false);
     }
   }
-  initCard();
 }
 
 // TOP BAR
