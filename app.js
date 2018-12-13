@@ -538,10 +538,12 @@ setRoute.post('/approveskill', async function (req, res)  {
 
 			for(var i=0;i<dependency.length;i++)
 			{
+				console.log(dependency[i].name);
 				var globalskill = await Skill.findOne( { name : dependency[i].name } , async function(err, globalskill){
 					if(err) throw err;
 					else return globalskill;
 				});
+				console.log(globalskill);
 
 				if(globalskill !== null)
 				{
