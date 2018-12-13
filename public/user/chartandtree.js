@@ -176,10 +176,10 @@ function searchUsersByName(){
 }
 
 // searches skills by provided name
-function searchSkillsByName(element){
+function searchSkillByName(element){
     var skillToSearch = {value: element.value};
     var skillSearchResult = document.getElementById('skillSearchResult');
-    request('POST', '/set/searchSkillsByName', skillToSearch, function () {
+    request('POST', '/set/searchSkillByName', skillToSearch, function () {
         if (this.readyState == 4 && this.status == 200) {
             skillSearchResult.innerText = "";
             for (var i = 0; i < this.response.length; i++) {
@@ -195,7 +195,6 @@ function searchSkillsByName(element){
 function searchTreesByName(){
   var treeToSearch = {value: document.getElementById('searchedTree').value};
   var TreeSearchResult = document.getElementById('TreeSearchResult');
-
   request('POST', '/set/searchTreesByName', treeToSearch, function() {
       if(this.readyState == 4 && this.status == 200) {
         TreeSearchResult.innerHTML = "";

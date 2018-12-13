@@ -274,7 +274,7 @@
   <div class = "card">
     <h1>2.</h1>
     <center><h5>Serch for a skill</h5></center>
-    <p><input type = "text" id = "skillSearchTree" class = "form-control" list = "skillSearchResult" onkeypress="searchSkillsByName(this)"></p>
+    <p><input type = "text" id = "skillSearchTree" class = "form-control" list = "skillSearchResult" onkeypress="searchSkillByName(this)"></p>
     <p><input type = "button" id = "addToTree" class="btn btn-outline-secondary" value = "Add skill to tree"></p>
     <center><h5>OR</h5></center>
     <p><input type = "button" id = "createSkill" class="btn btn-outline-secondary" value = "Create skill"></p>
@@ -332,7 +332,7 @@
               <td>Delete</td>
             </tr>
             <tr>
-              <td><input size=30 type="text" id = "parent" list = "skillSearchResult" onkeypress="searchSkillsByName(this)" required></td>
+              <td><input size=30 type="text" id = "parent" list = "skillSearchResult" onkeypress="searchSkillByName(this)" required></td>
               <td><input size=10 type="text" id = "minPoint" required></td>
               <td><input size=50 type="checkbox" id = "required"></td>
               <td><input type="button" value="Delete" onclick="deleteRow('parentsTable', this)"></td>
@@ -348,7 +348,7 @@
               <td>Delete</td>
             </tr>
             <tr>
-              <td><input size=30 type="text" id = "child" list = "skillSearchResult" onkeypress="searchSkillsByName()" required></td>
+              <td><input size=30 type="text" id = "child" list = "skillSearchResult" onkeypress="searchSkillByName()" required></td>
               <td><input size=10 type="text" id = "minPoint" required></td>
               <td><input size=50 type="checkbox" id = "required"></td>
               <td><input type="button" value="Delete" onclick="deleteRow('childrenTable', this)"></td>
