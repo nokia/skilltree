@@ -158,7 +158,7 @@ function loadAddedTrees(){
 
 // searches users by the string provided.
 function searchUsersByName(){
-  var userToSearch = {value: document.getElementById('cardSearch').value};
+  var userToSearch = {value: document.getElementById('cardSearchBar').value};
   var UserSearchResult = document.getElementById('UserSearchResult');
 
   if (userToSearch !== "") {
@@ -177,7 +177,7 @@ function searchUsersByName(){
 
 // searches skills by provided name
 function searchSkillsByName(){
-    var skillToSearch = {value: document.getElementById('cardSearch').value};
+    var skillToSearch = {value: document.getElementById('cardSearchBar').value};
     var skillSearchResult = document.getElementById('skillSearchResult');
     request('POST', '/set/searchSkillByName', skillToSearch, function () {
         if (this.readyState == 4 && this.status == 200) {
