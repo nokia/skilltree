@@ -581,6 +581,27 @@ setRoute.post('/approveskill', async function (req, res)  {
 
 			}
 
+			for(var i=0; i<lastdependency.parents.length; i++)
+			{
+				var lastdependencyParent =  Skill.find( { name : lastdependency.parents[i] } , async function(err, lastdependencyParent){
+					if(err) throw err;
+					else return lastdependencyParent;
+				});
+				
+				lastdependencyParent.children.push({
+						name: lastdependency.name,
+            			minPoint: 0, //skillsforapproval model to be changed, got no real data to be read
+            			recommended: false //skillsforapproval model to be changed, ^
+				});
+
+
+			}
+
+			var lastdependencyParent = Skill.find( { name : lastdependency.parents.name } , async function(err, lastdependencyParents){
+				if(err) throw err;
+				else return lastdependencyParents;
+			});
+
 
 			/*
 			//finding the last dependencys global dependencies
