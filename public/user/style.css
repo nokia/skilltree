@@ -55,6 +55,11 @@ a {
   position: relative;
 }
 
+#innerCard{
+  width: 92%;
+  margin: 4% 4%;
+}
+
 .card-body {
     padding: 0.5rem;
 }
@@ -84,7 +89,7 @@ a {
 
 #userCard {
     z-index: 100;
-    position: fixed;
+    position: relative;
 }
 
 #advSearch {
@@ -92,6 +97,21 @@ a {
     position: relative;
     margin-right: 10px;
     width: 400px;
+}
+
+#advSearchDetails{
+  margin: 2% 4%;
+  padding: 2px;
+  display: block;
+  width: auto;
+  position: relative;
+}
+
+.advSearchDetailsItem{
+  margin: 0px;
+  padding: 1px;
+  line-height: 16px;
+  font-size: 14px;
 }
 
 #pixiCanvas{

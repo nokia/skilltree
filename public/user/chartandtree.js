@@ -219,6 +219,32 @@ function getPublicUserData(){
   });
 }
 
+// switches the advanced search card to the requested type
+function switchSearch(type){
+  document.getElementById('advSearchDetails').innerHTML = "";
+  if (type === "Skill") {
+    document.getElementById('cardSearchBar').onkeyup = searchSkillsByName();
+    document.getElementById('cardSearchBar').list = "SkillSearchResult";
+    addCheckBox("1", "Skill Option 1", 'advSearchDetails');
+    addCheckBox("2", "Skill Option 2", 'advSearchDetails');
+    addCheckBox("3", "Skill Option 3", 'advSearchDetails');
+  }
+  else if (type === "Tree") {
+    document.getElementById('cardSearchBar').onkeyup = searchTreesByName();
+    document.getElementById('cardSearchBar').list = "TreeSearchResult";
+    addCheckBox("1", "Tree Option 1", 'advSearchDetails');
+    addCheckBox("2", "Tree Option 2", 'advSearchDetails');
+    addCheckBox("3", "Tree Option 3", 'advSearchDetails');
+  }
+  else{
+    document.getElementById('cardSearchBar').onkeyup = searchUsersByName();
+    document.getElementById('cardSearchBar').list = "UserSearchResult";
+    addCheckBox("1", "User Option 1", 'advSearchDetails');
+    addCheckBox("2", "User Option 2", 'advSearchDetails');
+    addCheckBox("3", "User Option 3", 'advSearchDetails');
+  }
+}
+
 // adds a public tree to the user
 function addTreeToUser(){
   var treeToAdd = {value: document.getElementById('searchedTree').value};
@@ -771,6 +797,18 @@ function approveSkills() {
 */
    //Making the approve page visible
 
+}
+
+function addCheckBox(id, boxText, parent){
+  var divToAdd = document.createElement('div');
+  divToAdd.className = "advSearchDetailsItem";
+  var spanToAdd = document.createElement('span');
+  var boxToAdd = document.createElement('input');
+  boxToAdd.type = "checkbox";
+  boxToAdd.id = id;
+  spanToAdd.appendChild(boxToAdd);
+  divToAdd.appendChild(spanToAdd);
+  document.getElementById(parent).appendChild(divToAdd);
 }
 
 // drops all offers from all users (used for dev)

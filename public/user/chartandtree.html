@@ -127,8 +127,18 @@
               <input type="radio" name="options" id="option3" autocomplete="off"> Skill Search
             </label>
           </div>
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="cardSearchBar">
-          <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search" id="cardSearch">
+          <div class="card" id="innerCard">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="cardSearchBar">
+            <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search" id="cardSearch">
+            <div class="card-body" id="advSearchDetails">
+              <div class="advSearchDetailsItem">
+                <span><input type="checkbox">Option 1</span>
+              </div>
+              <div class="advSearchDetailsItem">
+                <span><input type="checkbox">Option 1</span>
+              </div>
+            </div>
+          </div>
         </div>
         <!-- end of card content -->
       </div>
@@ -137,7 +147,7 @@
   <!-- end of advanced search -->
 
   <!-- user card  -->
-  <div class="collapse float-left" id="userCard">
+  <div class="collapse float-left show" id="userCard">
     <div class="card">
       <div class="card-body">
         <img class="img-thumbnail float-left d-inline w-25 m-1 mr-3" src="./pictures/profile_img.jpg" alt="Card image cap">
