@@ -210,12 +210,30 @@ function searchTreesByName(){
 
 // gets the username, trees, skills and maintree of the user.
 function getPublicUserData(){
-  var userToSearch = {value: document.getElementById('searchedUser').value};
-
+  var userToSearch = {value: document.getElementById('cardSearchBar').value};
   request('POST', '/set/getPublicUserData', userToSearch, function() {
       if(this.readyState == 4 && this.status == 200) {
-        showTree(this.response.mainTree, this.response, false);
-        initUI(false, this.response);
+
+      }
+  });
+}
+
+// gets the name, skillnames, focusarea of a tree.
+function getPublicTreeData(){
+  var treeToSearch = {value: document.getElementById('cardSearchBar').value};
+  request('POST', '/set/getPublicTreeData', userToSearch, function() {
+      if(this.readyState == 4 && this.status == 200) {
+
+      }
+  });
+}
+
+// gets the name, caterory, desc, relations and training data of a skill.
+function getPublicSkillData(){
+  var treeToSearch = {value: document.getElementById('cardSearchBar').value};
+  request('POST', '/set/getPublicSkillData', userToSearch, function() {
+      if(this.readyState == 4 && this.status == 200) {
+
       }
   });
 }
@@ -226,6 +244,7 @@ function switchSearch(type){
   if (type === "Skill") {
     document.getElementById('cardSearchBar').onkeyup = searchSkillsByName;
     document.getElementById('cardSearchBar').setAttribute('list', "skillSearchResult");
+    document.getElementById('cardSearch').onclick = searchSkillsByName;
     addCheckBox("1", "Skill Option 1", 'advSearchDetails');
     addCheckBox("2", "Skill Option 2", 'advSearchDetails');
     addCheckBox("3", "Skill Option 3", 'advSearchDetails');
@@ -233,6 +252,7 @@ function switchSearch(type){
   else if (type === "Tree") {
     document.getElementById('cardSearchBar').onkeyup = searchTreesByName;
     document.getElementById('cardSearchBar').setAttribute('list', "TreeSearchResult");
+    document.getElementById('cardSearch').onclick = searchTreesByName;
     addCheckBox("1", "Tree Option 1", 'advSearchDetails');
     addCheckBox("2", "Tree Option 2", 'advSearchDetails');
     addCheckBox("3", "Tree Option 3", 'advSearchDetails');
@@ -240,6 +260,7 @@ function switchSearch(type){
   else if (type === "User"){
     document.getElementById('cardSearchBar').onkeyup = searchUsersByName;
     document.getElementById('cardSearchBar').setAttribute('list', "UserSearchResult");
+    document.getElementById('cardSearch').onclick = searchUsersByName;
     addCheckBox("1", "User Option 1", 'advSearchDetails');
     addCheckBox("2", "User Option 2", 'advSearchDetails');
     addCheckBox("3", "User Option 3", 'advSearchDetails');
