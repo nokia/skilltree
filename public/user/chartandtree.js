@@ -814,7 +814,7 @@ function approveSkills() {
         var skill = skillsforapproval.find(obj => obj.name == selectedSkill);
 
 
-        request('POST', '/set/approveskill', { skill }, function(){
+        request('POST', '/set/approveskill', skill, function(){
             if(this.readyState == 4 && this.status == 200){
                 if(this.response !== undefined){
                     alert(this.response.message);
