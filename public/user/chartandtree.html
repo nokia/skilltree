@@ -118,25 +118,19 @@
         <div class="tab-content" id="mySearchTabContent">
           <div class="btn-group btn-group-toggle" data-toggle="buttons" id="buttonGroup">
             <label class="btn btn-secondary active">
-              <input type="radio" name="options" id="option1" autocomplete="off" checked> User Search
+              <input type="radio" name="options" id="option1" autocomplete="off" onclick="switchSearch(2)" checked> User Search
             </label>
             <label class="btn btn-secondary">
-              <input type="radio" name="options" id="option2" autocomplete="off"> Tree Search
+              <input type="radio" name="options" id="option2" autocomplete="off" onclick="switchSearch(1)"> Tree Search
             </label>
             <label class="btn btn-secondary">
-              <input type="radio" name="options" id="option3" autocomplete="off"> Skill Search
+              <input type="radio" name="options" id="option3" autocomplete="off" onclick="switchSearch(0)"> Skill Search
             </label>
           </div>
           <div class="card" id="innerCard">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="cardSearchBar">
             <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search" id="cardSearch">
             <div class="card-body" id="advSearchDetails">
-              <div class="advSearchDetailsItem">
-                <span><input type="checkbox">Option 1</span>
-              </div>
-              <div class="advSearchDetailsItem">
-                <span><input type="checkbox">Option 1</span>
-              </div>
             </div>
           </div>
         </div>

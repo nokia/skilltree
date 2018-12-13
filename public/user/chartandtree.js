@@ -223,14 +223,14 @@ function getPublicUserData(){
 // switches the advanced search card to the requested type
 function switchSearch(type){
   document.getElementById('advSearchDetails').innerHTML = "";
-  if (type === "Skill") {
+  if (type === 0) {
     document.getElementById('cardSearchBar').onkeyup = searchSkillsByName();
     document.getElementById('cardSearchBar').list = "SkillSearchResult";
     addCheckBox("1", "Skill Option 1", 'advSearchDetails');
     addCheckBox("2", "Skill Option 2", 'advSearchDetails');
     addCheckBox("3", "Skill Option 3", 'advSearchDetails');
   }
-  else if (type === "Tree") {
+  else if (type === 1) {
     document.getElementById('cardSearchBar').onkeyup = searchTreesByName();
     document.getElementById('cardSearchBar').list = "TreeSearchResult";
     addCheckBox("1", "Tree Option 1", 'advSearchDetails');
