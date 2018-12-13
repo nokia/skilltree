@@ -783,6 +783,17 @@ function approveSkills() {
         }
     });
 
+
+
+    var approveButton = document.getElementById("approvebtn");
+    approveButton.onclick = function() {
+        var selectedSkill = approveSkillsSelect.options[approveSkillsSelect.selectedIndex].text;
+        console.log(selectedSkill);
+
+        //request('POST', '/set/approveskill', )
+    }
+
+
     canvas.style.display = "none";
     approveSkills.style.display = "block";
 /*
