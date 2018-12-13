@@ -180,7 +180,7 @@ function searchUsersByName(){
 function searchSkillsByName(){
     var skillToSearch = {value: document.getElementById('cardSearchBar').value};
     var skillSearchResult = document.getElementById('skillSearchResult');
-    request('POST', '/set/searchSkillByName', skillToSearch, function () {
+    request('POST', '/set/searchSkillsByName', skillToSearch, function () {
         if (this.readyState == 4 && this.status == 200) {
             skillSearchResult.innerText = "";
             for (var i = 0; i < this.response.length; i++) {
@@ -224,21 +224,21 @@ function getPublicUserData(){
 function switchSearch(type){
   document.getElementById('advSearchDetails').innerHTML = "";
   if (type === "Skill") {
-    document.getElementById('cardSearchBar').onkeyup = searchSkillsByName();
+    document.getElementById('cardSearchBar').onkeyup = searchSkillsByName;
     document.getElementById('cardSearchBar').setAttribute('list', "skillSearchResult");
     addCheckBox("1", "Skill Option 1", 'advSearchDetails');
     addCheckBox("2", "Skill Option 2", 'advSearchDetails');
     addCheckBox("3", "Skill Option 3", 'advSearchDetails');
   }
   else if (type === "Tree") {
-    document.getElementById('cardSearchBar').onkeyup = searchTreesByName();
+    document.getElementById('cardSearchBar').onkeyup = searchTreesByName;
     document.getElementById('cardSearchBar').setAttribute('list', "TreeSearchResult");
     addCheckBox("1", "Tree Option 1", 'advSearchDetails');
     addCheckBox("2", "Tree Option 2", 'advSearchDetails');
     addCheckBox("3", "Tree Option 3", 'advSearchDetails');
   }
   else if (type === "User"){
-    document.getElementById('cardSearchBar').onkeyup = searchUsersByName();
+    document.getElementById('cardSearchBar').onkeyup = searchUsersByName;
     document.getElementById('cardSearchBar').setAttribute('list', "UserSearchResult");
     addCheckBox("1", "User Option 1", 'advSearchDetails');
     addCheckBox("2", "User Option 2", 'advSearchDetails');
