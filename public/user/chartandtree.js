@@ -74,6 +74,7 @@ function initUI(self, _data){
       showTree(searchedTree.value, _data, false);
     }
   }
+  initCard();
 }
 
 // TOP BAR
