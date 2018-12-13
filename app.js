@@ -531,19 +531,23 @@ setRoute.post('/approveskill', async function (req, res)  {
 			});
 			newGlobalSkill.save();
 
+			console.log(approvecollection);
+			console.log("----------");
 			var dependency = [];
 			await getDependency(approvecollection, skillforapproval, dependency);
 
+			console.log(dependency);
+			
 			var lastdependency = dependency[dependency.length-1];
 
 			for(var i=0;i<dependency.length;i++)
 			{
-				console.log(dependency[i].name);
+				
 				var globalskill = await Skill.findOne( { name : dependency[i].name } , async function(err, globalskill){
 					if(err) throw err;
 					else return globalskill;
 				});
-				console.log(globalskill);
+				
 
 				if(globalskill !== null)
 				{
