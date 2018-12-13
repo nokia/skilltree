@@ -487,7 +487,7 @@ setRoute.post('/approveskill', async function (req, res)  {
 
 	//Look for the skill in the database, if already exists
 	var globalskill = undefined;
-	globalskill = await Skill.find( { name : skillforapproval.name } , async function(err, globalskill){
+	globalskill = await Skill.findOne( { name : skillforapproval.name } , async function(err, globalskill){
 		if(err) throw err;
 		else return globalskill;
 	});
