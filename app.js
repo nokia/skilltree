@@ -781,6 +781,51 @@ async function sortTree(skillArray){
 	return skillArray;
 }
 
+setRoute.post('/newtraining', async function(req, res) {
+    var data = req.body;
+
+    var user = await User.findOne({
+        username: req.decoded.username
+    }, function(err, user) {
+        if (err) throw err;
+		return user;
+    });
+
+	if (!user) {
+		res.json({
+			success: false,
+			message: 'User not found.'
+		});
+	} else if (user.skills.find(obj => obj.name == data.skillName) != undefined) {
+        for (var i = 0; i < data.trainings.length; ++i) user.skills.find(obj => obj.name == data.skillName).trainings.push(data.trainings[i]);
+
+        user.save(function (err) {if (err) throw err;});
+
+        if (data.forApprove) {
+            for (var i = 0; i < data.trainings.length; ++i) {
+                var apprTraining = new ApprovableTraining({
+                    skillName: data.skillName,
+                    name: data.name,
+                    level: data.level,
+                    description: data.description,
+                    url: data.url
+                });
+            }
+
+            apprTraining.save(function (err) {if (err) throw err;});
+        }
+
+		res.json({
+			success: true
+		});
+	} else {
+		res.json({
+			success: false,
+			message: 'skillnotexists'
+		});
+	}
+});
+
 // Creates a skill from the data the user added.
 setRoute.post('/newskill', async function(req, res) {
     var data = req.body;

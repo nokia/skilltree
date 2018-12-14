@@ -606,6 +606,8 @@ function addTraining () {
             if (this.readyState == 4 && this.status == 200) {
                 if (this.response.success) {
                     modal.style.display = "none";
+                } else if (this.response.message == "skillnotexists") {
+                    alert("Skill not found");
                 }
             }
         });
