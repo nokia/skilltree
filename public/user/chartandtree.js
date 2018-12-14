@@ -602,7 +602,7 @@ function addTraining () {
             forApprove: document.getElementById('trainingForApprove').checked
         };
 
-        request('POST', '/set/newtraining', skillData, function () {
+        request('POST', '/set/newtraining', trainingData, function () {
             if (this.readyState == 4 && this.status == 200) {
                 if (this.response.success) {
                     modal.style.display = "none";
