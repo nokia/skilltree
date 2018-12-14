@@ -22,7 +22,7 @@ class ItemContainer {
             this.skillborder.endorsement.style.fill = 0xFFFFFF;
         }
 
-        //Creating details page
+        // Creating details page
         var detailsWidth = 240;
         var detailsMargin = 10;
         var nameFontSize = 20;
