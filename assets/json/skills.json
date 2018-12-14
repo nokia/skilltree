@@ -84,7 +84,7 @@
   {
     "name": "CSS tools",
     "categoryName": "Maths, science and engineering",
-    "skillIcon": "pictures/icons/CSS_tools.png",
+    "skillIcon": "pictures/icons/CSS_Tools.png",
     "description": "...",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/CSS",
     "pointDescription": [
@@ -399,7 +399,7 @@
   {
     "name": "Machine Learning",
     "categoryName": "Maths, science and engineering",
-    "skillIcon": "pictures/icons/MachineLearning.png",
+    "skillIcon": "pictures/icons/Machine_Learning.png",
     "description": "Machine learning (ML) is a field of artificial intelligence that uses statistical techniques to give computer systems the ability to 'learn' (e.g., progressively improve performance on a specific task) from data, without being explicitly programmed.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Machine_learning",
     "pointDescription": [
