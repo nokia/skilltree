@@ -798,6 +798,7 @@ setRoute.post('/newtraining', async function(req, res) {
 		});
 	} else if (user.skills.find(obj => obj.name == data.skillName) != undefined) {
         for (var i = 0; i < data.trainings.length; ++i) {
+            console.log(data.trainings[i]);
             user.skills.find(obj => obj.name == data.skillName).trainings.push({
                 name: data.trainings[i].name,
                 level: data.trainings[i].level,
@@ -805,6 +806,8 @@ setRoute.post('/newtraining', async function(req, res) {
                 url: data.trainings[i].url
             });
         }
+
+        console.log(user);
 
         user.save(function (err) {if (err) throw err;});
 
