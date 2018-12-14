@@ -814,7 +814,7 @@ setRoute.post('/newtraining', async function(req, res) {
         if (data.forApprove) {
             for (var i = 0; i < data.trainings.length; ++i) {
                 var apprTraining = new ApprovableTraining({
-                    skillName: data.trainings[i].skillName,
+                    skillName: data.skillName,
                     name: data.trainings[i].name,
                     level: data.trainings[i].level,
                     description: data.trainings[i].description,
