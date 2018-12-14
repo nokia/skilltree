@@ -353,10 +353,15 @@ setRoute.post('/searchUserSkillsByName', async function (req, res) {
         user = user.toObject();
         var foundUserSkills = user.skills.filter(obj => obj.name.match(new RegExp(".*" + data.value + ".*", "i")) != null);
 
+        console.log(data.value);
+
         var resSkills = [];
         for (var i = 0; foundUserSkills != undefined && i < foundUserSkills.length; i++) {
             resSkills.push({name: foundUserSkills[i].name});
         }
+
+        console.log(resSkills);
+
         res.json(resSkills);
 });
 
