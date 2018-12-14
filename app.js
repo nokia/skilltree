@@ -14,6 +14,7 @@ var Tree = require('./models/treemodel');
 var ApprovableTree = require('./models/treesforapprovemodel')
 var Skill = require('./models/skillmodel');
 var ApprovableSkill = require('./models/skillsforapprovemodel');
+var ApprovableTraining = require('./models/trainingsforapprovemodel');
 var pbkdf2 = require('./pbkdf2'); // get hash generator and pw checker
 
 const app = express();

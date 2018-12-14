@@ -599,7 +599,7 @@ function addTraining () {
         var trainingData = {
             skillName: document.getElementById('trainingSkillName').value,
             trainings: trainings,
-            //forApprove: document.getElementById('forApprove').checked
+            forApprove: document.getElementById('trainingForApprove').checked
         };
 
         request('POST', '/set/newtraining', skillData, function () {
