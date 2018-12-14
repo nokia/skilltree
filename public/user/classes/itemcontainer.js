@@ -85,7 +85,7 @@ class ItemContainer {
                 req.parentObj = this.parentObj;
                 req.onreadystatechange = function () {
                     if(this.readyState == 4 && this.status == 200) {
-                        alert(this.parentObj);
+                        console.log(this.parentObj);
                     }
                 };
 
