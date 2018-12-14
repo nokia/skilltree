@@ -196,9 +196,11 @@ function searchSkillsByName(element){
 function searchUserSkillsByName(element){
     var skillToSearch = {value: element.value};
     var skillSearchResult = document.getElementById('skillSearchResult');
+    console.log('a');
     request('POST', '/set/searchUserSkillsByName', skillToSearch, function () {
         if (this.readyState == 4 && this.status == 200) {
             skillSearchResult.innerText = "";
+            console.log(this.response);
             for (var i = 0; i < this.response.length; i++) {
                 var mya = document.createElement('option');
                 mya.value = this.response[i].name;
