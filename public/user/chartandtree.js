@@ -596,8 +596,6 @@ function addTraining () {
             });
         }
 
-        console.log(trainings);
-
         var trainingData = {
             skillName: document.getElementById('trainingSkillName').value,
             trainings: trainings,
