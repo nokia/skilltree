@@ -88,7 +88,7 @@ class ItemContainer {
                     }
                 };
 
-                req.send());
+                req.send();
 
                 var endorseReq = new XMLHttpRequest();
                 endorseReq.open('POST', '/set/endorse', true);
