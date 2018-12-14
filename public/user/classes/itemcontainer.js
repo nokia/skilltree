@@ -91,8 +91,8 @@ class ItemContainer {
                 };
 
                 req.send(JSON.stringify({
-                    skillName: skillName,
-                    username: username
+                    skillName: "a",
+                    username: "b"
                 }));
 
                 var endorseReq = new XMLHttpRequest();
