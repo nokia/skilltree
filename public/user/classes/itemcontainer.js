@@ -85,6 +85,7 @@ class ItemContainer {
 
                 req.onreadystatechange = function() {
                     if(req.readyState == 4 && req.status == 200) {
+                        alert("ssss");
                         if (this.skill.endorsement.length == 0){
                             this.skillborder.endorsement = new PIXI.Text("+" + 1);
                             this.skillborder.endorsement.scale.set(.5);
