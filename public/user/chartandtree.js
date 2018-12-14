@@ -594,7 +594,7 @@ function addTraining () {
                 description: trainingsTable.rows[i].cells[2].children[0].value,
                 url: trainingsTable.rows[i].cells[3].children[0].value
             });
-        }
+        }f
 
         var trainingData = {
             skillName: document.getElementById('trainingSkillName').value,
@@ -605,7 +605,7 @@ function addTraining () {
         request('POST', '/set/newtraining', trainingData, function () {
             if (this.readyState == 4 && this.status == 200) {
                 if (this.response.success) {
-                    modal.style.display = "none";
+                    window.open("/user/", "_self");
                 } else if (this.response.message == "skillnotexists") {
                     alert("Skill not found");
                 }
