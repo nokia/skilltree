@@ -82,7 +82,7 @@ class ItemContainer {
                 req.setRequestHeader('Content-type', 'application/json');
                 req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
                 req.responseType = "json";
-                endorseReq.parentObj = this.parentObj;
+                req.parentObj = this.parentObj;
                 req.onreadystatechange = function () {
                     if(this.readyState == 4 && this.status == 200) {
                         alert(this.parentObj);
