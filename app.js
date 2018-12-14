@@ -308,20 +308,35 @@ setRoute.post('/searchUsersByName', async function (req, res) {
 		res.json(resUsers);
 });
 
-// Search for users to view by name
+// searchkes a skill for editor
 setRoute.post('/searchSkillsByName', async function (req, res) {
 		var data = req.body;
-		var foundSkills = await Skill.find({
-					"name": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
-			}, function (err, skill) {
-					if (err) throw err;
-			return skill;
-		});
-		var resSkills = [];
-		for (var i = 0; i < foundSkills.length; i++) {
-			resSkills[i] = {name: foundSkills[i].name};
-		}
-		res.json(resSkills);
+
+        var user = await User.findOne({
+            username: req.decoded.username
+        }, function(err, user) {
+            if (err) throw err;
+    		return user;
+        });
+
+        user = user.toObject();
+        var foundUserSkills = user.skills.filter(obj => obj.name.match(new RegExp(".*" + data.value + ".*", "i")) != null);
+
+        var foundGlobalSkills = await Skill.find({
+            "name": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
+        }, function (err, skills) {
+            if (err) throw err;
+            return skills;
+        });
+
+        var resSkills = [];
+        for (var i = 0; foundUserSkills != undefined && i < foundUserSkills.length; i++) {
+            resSkills.push({name: foundUserSkills[i].name});
+        }
+        for (var i = 0; i < foundGlobalSkills.length; i++) {
+            if (resSkills.find(obj => obj == foundGlobalSkills[i].name) == undefined) resSkills[i] = {name: foundGlobalSkills[i].name};
+        }
+        res.json(resSkills);
 });
 
 // Search for trees to add while typing
@@ -443,40 +458,9 @@ setRoute.post('/addTreeToUser', async function (req, res){
 	}
 });
 
-
-// searchkes a skill for editor
-setRoute.post('/searchSkillByName', async function (req, res) {
-		var data = req.body;
-
-        var user = await User.findOne({
-            username: req.decoded.username
-        }, function(err, user) {
-            if (err) throw err;
-    		return user;
-        });
-
-        user = user.toObject();
-        var foundUserSkills = user.skills.filter(obj => obj.name.match(new RegExp(".*" + data.value + ".*", "i")) != null);
-
-        var foundGlobalSkills = await Skill.find({
-            "name": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
-        }, function (err, skills) {
-            if (err) throw err;
-            return skills;
-        });
-
-        var resSkills = [];
-        for (var i = 0; foundUserSkills != undefined && i < foundUserSkills.length; i++) {
-            resSkills.push({name: foundUserSkills[i].name});
-        }
-        for (var i = 0; i < foundGlobalSkills.length; i++) {
-            if (resSkills.find(obj => obj == foundGlobalSkills[i].name) == undefined) resSkills[i] = {name: foundGlobalSkills[i].name};
-        }
-        res.json(resSkills);
-});
 //Approve a skill thats sent in the body as skillforaproval to the api
 setRoute.post('/approveskill', async function (req, res)  {
-	
+
 	var skillforapproval = req.body;
 
 	var approvecollection = await ApprovableSkill.find( {} , async function(err, approvecollection) {
@@ -537,17 +521,17 @@ setRoute.post('/approveskill', async function (req, res)  {
 			await getDependency(approvecollection, skillforapproval, dependency);
 
 			console.log(dependency);
-			
+
 			var lastdependency = dependency[dependency.length-1];
 
 			for(var i=0;i<dependency.length;i++)
 			{
-				
+
 				var globalskill = await Skill.findOne( { name : dependency[i].name } , async function(err, globalskill){
 					if(err) throw err;
 					else return globalskill;
 				});
-				
+
 
 				if(globalskill !== null)
 				{
@@ -596,7 +580,7 @@ setRoute.post('/approveskill', async function (req, res)  {
 					if(err) throw err;
 					else return lastdependencyParent;
 				});
-				
+
 				lastdependencyParent.children.push({
 						name: lastdependency.name,
             			minPoint: 0, //TODO skillsforapproval model to be changed, got no real data to be read
