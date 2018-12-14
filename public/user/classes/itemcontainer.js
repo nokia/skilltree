@@ -77,6 +77,7 @@ class ItemContainer {
                 app.renderer.render(app.stage);
             })
             .on('click', function () {
+                alert("ss");
                 var endorseReq = new XMLHttpRequest();
                 endorseReq.open('POST', '/set/endorse', true);
                 endorseReq.setRequestHeader('Content-type', 'application/json');
