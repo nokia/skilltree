@@ -387,7 +387,7 @@ function showChart() {
         var innerSlice = new PIXI.Graphics();
         innerSlice.lineStyle(3, 0x000000);
         innerSlice.moveTo(x + Math.cos(e) * h1, y + Math.sin(e) * h1);
-        innerSlice.beginFill(0xFF0000);
+        innerSlice.beginFill(0x5cb85c);
         innerSlice.arc(x, y, h1, e, s, true);
         innerSlice.arc(x, y, h2, s, e, false);
         innerSlice.lineTo(x + Math.cos(e) * h1, y + Math.sin(e) * h1);
