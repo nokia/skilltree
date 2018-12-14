@@ -177,8 +177,8 @@ function searchUsersByName(){
 }
 
 // searches skills by provided name
-function searchSkillsByName(){
-    var skillToSearch = {value: document.getElementById('cardSearchBar').value};
+function searchSkillsByName (element){
+    var skillToSearch = {value: element.value};
     var skillSearchResult = document.getElementById('skillSearchResult');
     request('POST', '/set/searchSkillsByName', skillToSearch, function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -565,7 +565,7 @@ function addTraining () {
         }
     }
 
-    
+
 }
 
 // opens skill creation, and manages it.
