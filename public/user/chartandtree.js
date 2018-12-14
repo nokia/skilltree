@@ -549,6 +549,23 @@ function showTree (treeName, _data, self) {
     app.ticker.add(fadein);*/
 }
 
+function addTraining () {
+    var modal = document.getElementById("addTrainingModal");
+    modal.style.display = "block";
+
+    var span = document.getElementById("closeTrainingModal");
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+}
+
 // opens skill creation, and manages it.
 
 // searches skills by provided name
@@ -639,7 +656,7 @@ function createSkill () {
 };
 
 // opens tree creator and manages it.
-function createTree() {
+function createTree () {
     document.getElementById('approveTrees').style.display = "none";
     document.getElementById('approveSkills').style.display = "none";
 
