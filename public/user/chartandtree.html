@@ -383,7 +383,7 @@
       <div class="modal-body">
         <form onsubmit = "return false">
           <h5>Skill:</h5>
-          <input type = "text" id = "trainingSkillName" required><br>
+          <input type = "text" id = "trainingSkillName" list = "skillSearchResult" onkeypress="searchSkillByName(this)" required><br>
           <h5>Trainings:</h5>
           <table id = "addTrainingsTable" border = "1">
             <tr>

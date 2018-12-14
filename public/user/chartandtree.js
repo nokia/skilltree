@@ -564,6 +564,8 @@ function addTraining () {
             modal.style.display = "none";
         }
     }
+
+    
 }
 
 // opens skill creation, and manages it.
