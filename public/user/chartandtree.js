@@ -177,7 +177,7 @@ function searchUsersByName(){
 }
 
 // searches skills by provided name
-function searchSkillByName(element){
+function searchSkillsByName(element){
     var skillToSearch = {value: element.value};
     var skillSearchResult = document.getElementById('skillSearchResult');
     request('POST', '/set/searchSkillsByName', skillToSearch, function () {
