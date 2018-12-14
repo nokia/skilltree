@@ -91,11 +91,11 @@ class ItemContainer {
                 };
 
                 req.send(JSON.stringify({
-                    skillName: "a",
-                    username: "b"
+                    skillName: skillName,
+                    username: username
                 }));
 
-                var endorseReq = new XMLHttpRequest();
+                /*var endorseReq = new XMLHttpRequest();
                 endorseReq.open('POST', '/set/endorse', true);
                 endorseReq.setRequestHeader('Content-type', 'application/json');
                 endorseReq.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
@@ -125,7 +125,7 @@ class ItemContainer {
                         skillName: this.parentObj.skill.name,
                         username: this.parentObj.username
                     })
-                );
+                );*/
             });
             detailsForeground.addChild(btnEndorseContainer);
         }
