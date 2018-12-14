@@ -77,7 +77,17 @@ class ItemContainer {
                 app.renderer.render(app.stage);
             })
             .on('click', function () {
-                alert("ss");
+                var req = new XMLHttpRequest();
+                req.open('POST', '/set/endorse', true);
+                req.setRequestHeader('Content-type', 'application/json');
+                req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+                req.responseType = "json";
+                req.onreadystatechange = function () {
+                    
+                };
+
+                req.send();
+
                 var endorseReq = new XMLHttpRequest();
                 endorseReq.open('POST', '/set/endorse', true);
                 endorseReq.setRequestHeader('Content-type', 'application/json');
