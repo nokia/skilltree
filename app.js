@@ -365,7 +365,7 @@ setRoute.post('/getPublicUserData', async function (req, res) {
 					if (err) throw err;
 			return user;
 		});
-		res.json(JSON.stringify(foundUsers));
+		res.json(foundUsers);
 });
 
 // Getting the name, skillnames, focusarea of a tree. (will be needed for advanced search)
@@ -377,7 +377,7 @@ setRoute.post('/getPublicTreeData', async function (req, res) {
 					if (err) throw err;
 			return tree;
 		});
-    res.json(JSON.stringify(foundTrees));
+    res.json(foundTrees);
 });
 
 // Getting the name, caterory, desc, relations and training data of a skill. (will be needed for advanced search)
@@ -389,7 +389,7 @@ setRoute.post('/getPublicSkillData', async function (req, res) {
 				if (err) throw err;
 		return skill;
 		});
-    res.json(JSON.stringify(foundSkills));
+    res.json(foundSkills);
 });
 
 // Adds a public tree to the current user.
