@@ -89,7 +89,10 @@ class ItemContainer {
                     }
                 };
 
-                req.send();
+                req.send(JSON.stringify({
+                    skillName: this.parentObj.skill.name,
+                    username: this.parentObj.username
+                }));
 
                 var endorseReq = new XMLHttpRequest();
                 endorseReq.open('POST', '/set/endorse', true);
