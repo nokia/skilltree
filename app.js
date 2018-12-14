@@ -339,6 +339,27 @@ setRoute.post('/searchSkillsByName', async function (req, res) {
         res.json(resSkills);
 });
 
+// searchkes a skill for editor
+setRoute.post('/searchUserSkillsByName', async function (req, res) {
+		var data = req.body;
+
+        var user = await User.findOne({
+            username: req.decoded.username
+        }, function(err, user) {
+            if (err) throw err;
+    		return user;
+        });
+
+        user = user.toObject();
+        var foundUserSkills = user.skills.filter(obj => obj.name.match(new RegExp(".*" + data.value + ".*", "i")) != null);
+
+        var resSkills = [];
+        for (var i = 0; foundUserSkills != undefined && i < foundUserSkills.length; i++) {
+            resSkills.push({name: foundUserSkills[i].name});
+        }
+        res.json(resSkills);
+});
+
 // Search for trees to add while typing
 setRoute.post('/searchTreesByName', async function (req, res) {
 		var data = req.body;

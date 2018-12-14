@@ -192,6 +192,22 @@ function searchSkillsByName(element){
     });
 }
 
+// searches skills by provided name
+function searchUserSkillsByName(element){
+    var skillToSearch = {value: element.value};
+    var skillSearchResult = document.getElementById('skillSearchResult');
+    request('POST', '/set/searchUserSkillsByName', skillToSearch, function () {
+        if (this.readyState == 4 && this.status == 200) {
+            skillSearchResult.innerText = "";
+            for (var i = 0; i < this.response.length; i++) {
+                var mya = document.createElement('option');
+                mya.value = this.response[i].name;
+                skillSearchResult.appendChild(mya);
+            }
+        }
+    });
+}
+
 // searches trees by the provided name
 function searchTreesByName(){
   var treeToSearch = {value: document.getElementById('cardSearchBar').value};
@@ -565,7 +581,33 @@ function addTraining () {
         }
     }
 
+    var save = document.getElementById("saveTrainingsBtn");
+    save.onclick = function () {
+        var trainingsTable = document.getElementById('trainingsTable');
+        var trainings = [];
+        for (i = 1; i < trainingsTable.rows.length; ++i) {
+            trainings.push({
+                name: trainingsTable.rows[i].cells[0].children[0].value,
+                level: trainingsTable.rows[i].cells[1].children[0].value,
+                description: trainingsTable.rows[i].cells[2].children[0].value,
+                url: trainingsTable.rows[i].cells[3].children[0].value
+            });
+        }
 
+        var trainingData = {
+            skillName: document.getElementById('trainingSkillName').value,
+            trainings: trainings,
+            //forApprove: document.getElementById('forApprove').checked
+        };
+
+        request('POST', '/set/newtraining', skillData, function () {
+            if (this.readyState == 4 && this.status == 200) {
+                if (this.response.success) {
+                    modal.style.display = "none";
+                }
+            }
+        });
+    };
 }
 
 // opens skill creation, and manages it.
