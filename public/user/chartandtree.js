@@ -418,7 +418,7 @@ function showChart() {
         //var text = new PIXI.Text(treeData.find(obj => obj.treeID == userData[i].treeID).treeName, {fill: '#ffffff', wordWrap: true, wordWrapWidth: 200, align: 'center'});
 
         //Write category names
-        var text = new PIXI.Text(data.categories[i].name, {fill: '#ffffff', wordWrap: true, wordWrapWidth: 200, align: 'center'});
+        var text = new PIXI.Text(data.categories[i].name, {fill: '#000000', wordWrap: true, wordWrapWidth: 200, align: 'center'});
         var points = [];
         var radius = 320 + (text.height / 29 - 1) * 15;
         var pointsCount = 20;
