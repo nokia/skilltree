@@ -84,14 +84,11 @@ class ItemContainer {
                 req.responseType = "json";
                 req.onreadystatechange = function () {
                     if(this.readyState == 4 && this.status == 200) {
-                        alert("ssss");
+                        alert(this.parentObj);
                     }
                 };
 
-                req.send(JSON.stringify({
-                    skillName: this.parentObj.skill.name,
-                    username: this.parentObj.username
-                }));
+                req.send());
 
                 var endorseReq = new XMLHttpRequest();
                 endorseReq.open('POST', '/set/endorse', true);
