@@ -797,22 +797,29 @@ setRoute.post('/newtraining', async function(req, res) {
 			message: 'User not found.'
 		});
 	} else if (user.skills.find(obj => obj.name == data.skillName) != undefined) {
-        for (var i = 0; i < data.trainings.length; ++i) user.skills.find(obj => obj.name == data.skillName).trainings.push(data.trainings[i]);
+        for (var i = 0; i < data.trainings.length; ++i) {
+            user.skills.find(obj => obj.name == data.skillName).trainings.push({
+                name: data.trainings[i].name,
+                level: data.trainings[i].level,
+                description: data.trainings[i].description,
+                url: data.trainings[i].url
+            });
+        }
 
         user.save(function (err) {if (err) throw err;});
 
         if (data.forApprove) {
             for (var i = 0; i < data.trainings.length; ++i) {
                 var apprTraining = new ApprovableTraining({
-                    skillName: data.skillName,
-                    name: data.name,
-                    level: data.level,
-                    description: data.description,
-                    url: data.url
+                    skillName: data.trainings[i].skillName,
+                    name: data.trainings[i].name,
+                    level: data.trainings[i].level,
+                    description: data.trainings[i].description,
+                    url: data.trainings[i].url
                 });
-            }
 
-            apprTraining.save(function (err) {if (err) throw err;});
+                apprTraining.save(function (err) {if (err) throw err;});
+            }
         }
 
 		res.json({
