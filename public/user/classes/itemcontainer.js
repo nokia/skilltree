@@ -54,7 +54,7 @@ class ItemContainer {
 
         var btnInfoPosX = 0;
         var btn1PosX = 0;
-        if (this.self) {
+        if (!this.self) {
             var btnEndorse = new PIXI.Sprite(btnG.generateTexture());
 
             var txtEndorse = new PIXI.Text("ENDORSE", {fontSize: 14, fill: 0x000000});
