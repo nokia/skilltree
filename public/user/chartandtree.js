@@ -585,7 +585,7 @@ function addTraining () {
 
     var save = document.getElementById("saveTrainingsBtn");
     save.onclick = function () {
-        var trainingsTable = document.getElementById('trainingsTable');
+        var trainingsTable = document.getElementById('addTrainingsTable');
         var trainings = [];
         for (i = 1; i < trainingsTable.rows.length; ++i) {
             trainings.push({
