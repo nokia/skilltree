@@ -77,14 +77,15 @@ class ItemContainer {
                 app.renderer.render(app.stage);
             })
             .on('click', function () {
-                var req = new XMLHttpRequest();
-                req.open('POST', '/set/endorse', true);
-                req.setRequestHeader('Content-type', 'application/json');
-                req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-                req.responseType = "json";
+                var endorseReq = new XMLHttpRequest();
+                endorseReq.open('POST', '/set/endorse', true);
+                endorseReq.setRequestHeader('Content-type', 'application/json');
+                endorseReq.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+                endorseReq.responseType = "json";
+                endorseReq.parentObj = this.parentObj;
 
-                req.onreadystatechange = function() {
-                    if(req.readyState == 4 && req.status == 200) {
+                endorseReq.onreadystatechange = function() {
+                    if(this.readyState == 4 && this.status == 200) {
                         alert("ssss");
                         if (this.skill.endorsement.length == 0){
                             this.skillborder.endorsement = new PIXI.Text("+" + 1);
@@ -101,7 +102,7 @@ class ItemContainer {
                     }
                 }
 
-                req.send(
+                endorseReq.send(
                     JSON.stringify({
                         skillName: this.parentObj.skill.name,
                         username: this.parentObj.username
