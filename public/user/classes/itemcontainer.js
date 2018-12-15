@@ -442,8 +442,8 @@ class ItemContainer {
 
                             offerTable.appendChild( createTableRow( "Name",
                                                                     "Location",
-                                                                    "Teaching Day",
-                                                                    "Teaching Time",
+                                                                    "Day",
+                                                                    "Time",
                                                                     "Level",
                                                                     "divTableHead") );
 
