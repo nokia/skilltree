@@ -57,5 +57,9 @@ p.bolded {
 
 .unsupportedBrowserAlertDIV {
   display: contents;
+}
 
+.badge-green {
+  .color: #fff;
+  background-color: #58964ee6;
 }
