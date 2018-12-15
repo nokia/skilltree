@@ -1,10 +1,10 @@
 [
   {
     "name": "HTML",
-    "categoryName": "Engineering",
+    "categoryName": "Maths, science and engineeging",
     "skillIcon": "pictures/icons/HTML.png",
     "description": "...",
-    "descriptionWikipediaURL": "",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/",
     "pointDescription": [
       "L1",
       "L2",
@@ -44,7 +44,7 @@
     "categoryName": "Maths, science and engineering",
     "skillIcon": "pictures/icons/CSS.png",
     "description": "...",
-    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/CSS",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/",
     "pointDescription": [
       "L1",
       "L2",
@@ -84,9 +84,9 @@
   {
     "name": "CSS tools",
     "categoryName": "Maths, science and engineering",
-    "skillIcon": "pictures/icons/CSS_Tools.png",
+    "skillIcon": "pictures/icons/CSS_tools.png",
     "description": "...",
-    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/CSS",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/",
     "pointDescription": [
       "L1",
       "L2",
@@ -115,9 +115,9 @@
   {
     "name": "Photoshop",
     "categoryName": "Maths, science and engineering",
-    "skillIcon": "pictures/icons/Photoshop.png",
+    "skillIcon": "pictures/icons/Adobe_Photoshop.png",
     "description": "...",
-    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Photoshop",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/",
     "pointDescription": [
       "L1",
       "L2",
@@ -214,7 +214,7 @@
     "categoryName": "Maths, science and engineering",
     "skillIcon": "pictures/icons/JavaFX.png",
     "description": "...",
-    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/JavaFX",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/",
     "pointDescription": [
       "L1",
       "L2",
@@ -276,7 +276,7 @@
     "name": "Go",
     "categoryName": "Maths, science and engineering",
     "skillIcon": "pictures/icons/Go.png",
-    "description": "...",
+    "description": "",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Go_(programming_language)",
     "pointDescription": [
       "L1",
@@ -307,7 +307,7 @@
     "name": "Python",
     "categoryName": "Maths, science and engineering",
     "skillIcon": "pictures/icons/Python.png",
-    "description": "...",
+    "description": "",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Python_(programming_language)",
     "pointDescription": [
       "L1",
@@ -342,7 +342,7 @@
     "name": "Scrum",
     "categoryName": "Maths, science and engineering",
     "skillIcon": "pictures/icons/Scrum.png",
-    "description": "...",
+    "description": "",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Scrum",
     "pointDescription": [
       "L1",
@@ -399,7 +399,7 @@
   {
     "name": "Machine Learning",
     "categoryName": "Maths, science and engineering",
-    "skillIcon": "pictures/icons/Machine_Learning.png",
+    "skillIcon": "pictures/icons/MachineLearning.png",
     "description": "Machine learning (ML) is a field of artificial intelligence that uses statistical techniques to give computer systems the ability to 'learn' (e.g., progressively improve performance on a specific task) from data, without being explicitly programmed.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Machine_learning",
     "pointDescription": [
@@ -421,6 +421,657 @@
         "shortDescription": "A Friendly Introduction to Machine Learning",
         "URL": "https://www.youtube.com/watch?v=IpGxLWOIZy4",
         "URLlastAccessed": "2018-11-19",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "UI/UX Design",
+    "categoryName": "Maths, science and engineering",
+    "skillIcon": "pictures/icons/UI_UX_Design.png",
+    "description": "User experience design (UX, UXD, UED or XD) is the process of enhancing user satisfaction with a product by improving the usability, accessibility, and pleasure provided in the interaction with the product. User experience design encompasses traditional human–computer interaction (HCI) design, and extends it by addressing all aspects of a product or service as perceived by users.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/User_experience_design",
+    "pointDescription": [
+      "L1",
+      "L2",
+      "L3",
+      "L4",
+      "L5"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "Software engineering"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "UX Design Tutorial for Beginners (#1)",
+        "level": 1,
+        "shortDescription": "UX design tutorial for beginners. Easy to understand UX design tutorial, no jargon.",
+        "URL": "https://youtu.be/I0-vBdh4sZ8",
+        "URLlastAccessed": "2018-12-11",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "React",
+    "categoryName": "Maths,science and engineering",
+    "skillIcon": "pictures/icons/React.png",
+    "description": "In computing, React (also known as React.js or ReactJS) is a JavaScript library for building user interfaces. It is maintained by Facebook and a community of individual developers and companies. React can be used as a base in the development of single-page or mobile applications. Complex React applications usually require the use of additional libraries for state management, routing, and interaction with an API.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/React_(JavaScript_library)",
+    "pointDescription": [
+      "L1",
+      "L2",
+      "L3",
+      "L4",
+      "L5"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "Javascript"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "React JS Crash Course",
+        "level": 1,
+        "shortDescription": "In this video we will cover the fundamentals for React.js.",
+        "URL": "https://youtu.be/A71aqufiNtQ",
+        "URLlastAccessed": "2018-12-11",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "Search Engine Optimization",
+    "categoryName": "Maths, science and engineering",
+    "skillIcon": "pictures/icons/SEO.png",
+    "description": "Search engine optimization (SEO) is the process of affecting the online visibility of a website or a web page in a web search engine's unpaid results—often referred to as 'natural', 'organic', or 'earned' results. In general, the earlier (or higher ranked on the search results page), and more frequently a website appears in the search results list, the more visitors it will receive from the search engine's users; these visitors can then be converted into customers. SEO may target different kinds of search, including image search, video search, academic search, news search, and industry-specific vertical search engines. SEO differs from local search engine optimization in that the latter is focused on optimizing a business' online presence so that its web pages will be displayed by search engines when a user enters a local search for its products or services. The former instead is more focused on national or international searches.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Search_engine_optimization",
+    "pointDescription": [
+      "L1",
+      "L2",
+      "L3",
+      "L4",
+      "L5"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "Software Engineering"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "SEO For Beginners - How to Rank High In Google?",
+        "level": 1,
+        "shortDescription": "SEO (Search Engine Optimization) tutorial for beginners. In this video, you will learn all the necessary SEO techniques to rank your websites high in Google search engine. All the training is provided in a step-by-step newbie friendly way.",
+        "URL": "https://youtu.be/y_AAO7QfsiI",
+        "URLlastAccessed": "2018-12-11",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "Project Coordination",
+    "categoryName": "Management",
+    "skillIcon": "pictures/icons/Project_Coordination.png",
+    "description": "Administration that oversees the day-to-day operations of a particular project within an organization. ",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/",
+    "pointDescription": [
+      "L1",
+      "L2",
+      "L3",
+      "L4",
+      "L5"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "Management"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "Beginner's Guide to Project Coordination",
+        "level": 1,
+        "shortDescription": "We will talk about how to run, staff, and organize a project. Topics include creating a project proposal, timeline, budget, how to implement your project plan, and strategies for overcoming challenges that may arise.",
+        "URL": "https://youtu.be/B9FG3VyTJGI",
+        "URLlastAccessed": "2018-12-11",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "Stakeholder Engagement",
+    "categoryName": "Management",
+    "skillIcon": "pictures/icons/Stakeholder_Engagement.png",
+    "description": "Stakeholder engagement is the process by which an organization involves people who may be affected by the decisions it makes or can influence the implementation of its decisions. They may support or oppose the decisions, be influential in the organization or within the community in which it operates, hold relevant official positions or be affected in the long term.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Stakeholder_engagement",
+    "pointDescription": [
+      "L1",
+      "L2",
+      "L3",
+      "L4",
+      "L5"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "Management"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "Introduction to Stakeholder Engagement",
+        "level": 1,
+        "shortDescription": "Learn about involving stakeholders in SLDS work through “Stakeholder Land,” a fictional board game about navigating the process of stakeholder engagement.",
+        "URL": "https://youtu.be/l3_Hhe24W3g",
+        "URLlastAccessed": "2018-12-11",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "Microsoft Excel",
+    "categoryName": "Tools",
+    "skillIcon": "pictures/icons/Microsoft_Excel.png",
+    "description": "Microsoft Excel is a spreadsheet developed by Microsoft for Windows, macOS, Android and iOS. It features calculation, graphing tools, pivot tables, and a macro programming language called Visual Basic for Applications.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Microsoft_Excel",
+    "pointDescription": [
+      "L1",
+      "L2",
+      "L3",
+      "L4",
+      "L5"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "HR"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "The Beginner's Guide to Excel - Excel Basics Tutorial",
+        "level": 1,
+        "shortDescription": "Learn the basics of using Microsoft Excel, including the anatomy of a spreadsheet, how to enter data, how to make your data look good so it's easier to read and use, and more. This tutorial was made using Excel 2016, but is applicable to older versions of Excel and newer versions too.",
+        "URL": "https://youtu.be/rwbho0CgEAE",
+        "URLlastAccessed": "2018-12-11",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "Microsoft Outlook",
+    "categoryName": "Tools",
+    "skillIcon": "pictures/icons/Microsoft_Outlook.png",
+    "description": "Microsoft Outlook is a personal information manager from Microsoft, available as a part of the Microsoft Office suite. Although often used mainly as an email application, it also includes a calendar, task manager, contact manager, note taking, journal, and web browsing.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Microsoft_Outlook",
+    "pointDescription": [
+      "L1",
+      "L2",
+      "L3",
+      "L4",
+      "L5"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "HR"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "Microsoft Outlook 2016 Tutorial | Basics ,Tricks And Tips",
+        "level": 1,
+        "shortDescription": "We show you best practices for managing your email and calendar efficiently, including switching views in calendar and email, scheduling meetings and conference rooms, and categorizing your appointments with colors. Learn how to assign permissions to a delegate and share your calendar with others.",
+        "URL": "https://youtu.be/ZeXHWdgtH6k",
+        "URLlastAccessed": "2018-12-11",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "Microsoft Word",
+    "categoryName": "Tools",
+    "skillIcon": "pictures/icons/Microsoft_Word.png",
+    "description": "Microsoft Word (or simply Word) is a word processor developed by Microsoft.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Microsoft_Word",
+    "pointDescription": [
+      "L1",
+      "L2",
+      "L3",
+      "L4",
+      "L5"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "HR"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "Beginner's Guide to Microsoft Word",
+        "level": 1,
+        "shortDescription": "Learn the basics of effectively using Microsoft Word, including how to format images so that they can be moved freely around your document and positioned where you want them to be.",
+        "URL": "https://youtu.be/S-nHYzK-BVg",
+        "URLlastAccessed": "2018-12-15",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "Commercial Awareness",
+    "categoryName": "Entrepreneurship (Business)",
+    "skillIcon": "pictures/icons/Commercial_Awareness.png",
+    "description": "Knowledge of how businesses make money, what customers want, and what problems there are in particular areas of business:",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/",
+    "pointDescription": [
+      "L1",
+      "L2",
+      "L3",
+      "L4",
+      "L5"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "HR"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "What is Commercial Awareness?",
+        "level": 1,
+        "shortDescription": "Bright Network's resident commercial awareness guru, Ben explains what it is, why it's an important skill to demonstrate when applying for graduate opportunities and how you can build up up your commercial awareness.",
+        "URL": "https://youtu.be/cPefkxTvG04",
+        "URLlastAccessed": "2018-12-11",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "Robot Framework",
+    "categoryName": "Maths, science and engineering",
+    "skillIcon": "pictures/icons/Robot_Framework.png",
+    "description": "The Robot Framework is a generic test automation framework for acceptance testing and acceptance test-driven development (ATDD). It is a keyword-driven testing framework that uses tabular test data syntax.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Robot_Framework",
+    "pointDescription": [
+      "L1",
+      "L2",
+      "L3",
+      "L4",
+      "L5"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "HTML"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "Robot Framework Beginner Tutorial 1",
+        "level": 1,
+        "shortDescription": "Getting started with Robot Framework Step by Step",
+        "URL": "https://youtu.be/8h5knh2jLCA",
+        "URLlastAccessed": "2018-12-15",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "Scaled Agile Framweork (SAFe)",
+    "categoryName": "Maths, science and engineering",
+    "skillIcon": "pictures/icons/SAFe.png",
+    "description": "SAFe promotes alignment, collaboration, and delivery across large numbers of agile teams. It was developed by and for practitioners, by leveraging three primary bodies of knowledge: agile software development, lean product development, and systems thinking.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Scaled_agile_framework",
+    "pointDescription": [
+      "L1",
+      "L2",
+      "L3",
+      "L4",
+      "L5"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "HTML"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "SAFe in 7 minutes",
+        "level": 1,
+        "shortDescription": "An overview to the Scaled Agile Framework - SAFe in 7 minutes.",
+        "URL": "https://youtu.be/RXzurBazN-I",
+        "URLlastAccessed": "2018-12-15",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "Test-driven development",
+    "categoryName": "Maths, science and engineering",
+    "skillIcon": "pictures/icons/TDD.png",
+    "description": "Test-driven development (TDD) is a software development process that relies on the repetition of a very short development cycle: requirements are turned into very specific test cases, then the software is improved to pass the new tests, only. This is opposed to software development that allows software to be added that is not proven to meet requirements.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Test-driven_development",
+    "pointDescription": [
+      "L1",
+      "L2",
+      "L3",
+      "L4",
+      "L5"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "HTML"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "Agile in Practice: Test Driven Development",
+        "level": 1,
+        "shortDescription": "Agile in Practice: Test Driven Development",
+        "URL": "https://youtu.be/uGaNkTahrIw",
+        "URLlastAccessed": "2018-12-15",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "Conflict resolution",
+    "categoryName": "Maths, science and engineering",
+    "skillIcon": "pictures/icons/Conflict_Resolution.png",
+    "description": "Conflict resolution is conceptualized as the methods and processes involved in facilitating the peaceful ending of conflict and retribution. Committed group members attempt to resolve group conflicts by actively communicating information about their conflicting motives or ideologies to the rest of the group (e.g., intentions; reasons for holding certain beliefs) and by engaging in collective negotiation.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Conflict_resolution",
+    "pointDescription": [
+      "L1",
+      "L2",
+      "L3",
+      "L4",
+      "L5"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "HTML"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "Conflict – Use It, Don’t Defuse It",
+        "level": 1,
+        "shortDescription": "The #1 source of pain on a team, or in any relationship, is conflict. What if conflict wasn’t good or bad? What if conflict was an energy source your team could harness to produce innovative, creative, and transformational results? Invest 18 minutes learning the two magic ingredients and how you can put them to work with any team you care about.",
+        "URL": "https://youtu.be/o97fVGTjE4w",
+        "URLlastAccessed": "2018-12-15",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "Negotiation",
+    "categoryName": "Soft skills (& civic competence)",
+    "skillIcon": "pictures/icons/Negotiation.png",
+    "description": "Conflict resolution is conceptualized as the methods and processes involved in facilitating the peaceful ending of conflict and retribution. Committed group members attempt to resolve group conflicts by actively communicating information about their conflicting motives or ideologies to the rest of the group (e.g., intentions; reasons for holding certain beliefs) and by engaging in collective negotiation.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Negotiation",
+    "pointDescription": [
+      "L1",
+      "L2",
+      "L3",
+      "L4",
+      "L5"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "HTML"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "The Art of Negotiation | Maria Ploumaki",
+        "level": 1,
+        "shortDescription": "Maria describes the most important skills behind successful negotiation, and she explains how to develop and master such qualities.",
+        "URL": "https://youtu.be/pjlPgJ1wBdM",
+        "URLlastAccessed": "2018-12-15",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "HR Policies",
+    "categoryName": "Entrepreneurship (Business)",
+    "skillIcon": "pictures/icons/HR_Policies.png",
+    "description": "Series of policies country-, business- and company-dependant which shape contractual relationships.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/",
+    "pointDescription": [
+      "L1",
+      "L2",
+      "L3",
+      "L4",
+      "L5"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "HTML"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "HR Policies and Procedures",
+        "level": 1,
+        "shortDescription": "PHR SPHR Human Resources Study Guide",
+        "URL": "https://youtu.be/XKYGO3oN_ck",
+        "URLlastAccessed": "2018-12-15",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "Spring framework",
+    "categoryName": "Maths, science and engineering",
+    "skillIcon": "pictures/icons/Spring_Framework.png",
+    "description": "The Spring Framework is an application framework and inversion of control container for the Java platform. The framework's core features can be used by any Java application, but there are extensions for building web applications on top of the Java EE (Enterprise Edition) platform. Although the framework does not impose any specific programming model, it has become popular in the Java community as an addition to, or even replacement for the Enterprise JavaBeans (EJB) model. The Spring Framework is open source.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Spring_Framework",
+    "pointDescription": [
+      "L1",
+      "L2",
+      "L3",
+      "L4",
+      "L5"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "HTML"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "Spring Tutorial For Beginners With Examples",
+        "level": 1,
+        "shortDescription": "This Edureka Spring Framework Tutorial will help you in understanding the fundamentals of Spring Framework and help you in building a strong foundation in Spring with examples.",
+        "URL": "https://youtu.be/rMLP-NEPgnM",
+        "URLlastAccessed": "2018-12-15",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "Git",
+    "categoryName": "Maths, science and engineering",
+    "skillIcon": "pictures/icons/Git.png",
+    "description": "Git is a version-control system for tracking changes in computer files and coordinating work on those files among multiple people. It is primarily used for source-code management in software development, but it can be used to keep track of changes in any set of files. As a distributed revision-control system, it is aimed at speed, data integrity, and support for distributed, non-linear workflows.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Git",
+    "pointDescription": [
+      "L1",
+      "L2",
+      "L3",
+      "L4",
+      "L5"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "HTML"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "Learn Git in 20 Minutes",
+        "level": 1,
+        "shortDescription": "In this video you learn how to initialize repositories, track files, stage changes, branch and merge, handle merge conflicts, stash changes, pull from and commit to remote repositories like GitHub.",
+        "URL": "https://youtu.be/Y9XZQO1n_7c",
+        "URLlastAccessed": "2018-12-15",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "Docker",
+    "categoryName": "Maths, science and engineering",
+    "skillIcon": "pictures/icons/Docker.png",
+    "description": "Docker is a computer program that performs operating-system-level virtualization, also known as 'containerization'.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Docker_(software)",
+    "pointDescription": [
+      "L1",
+      "L2",
+      "L3",
+      "L4",
+      "L5"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "HTML"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "Docker Tutorial - What is Docker & Docker Containers, Images, etc?",
+        "level": 1,
+        "shortDescription": "In these tutorials, I'll be breaking down exactly what a Docker container is and how to use it.",
+        "URL": "https://youtu.be/pGYAg7TMmp0",
+        "URLlastAccessed": "2018-12-15",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "Redis",
+    "categoryName": "Maths, science and engineering",
+    "skillIcon": "pictures/icons/Redis.png",
+    "description": "Redis is an open-source in-memory data structure project implementing a distributed, in-memory key-value database with optional durability. Redis supports different kinds of abstract data structures, such as strings, lists, maps, sets, sorted sets, hyperloglogs, bitmaps, streams and spatial indexes.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Redis",
+    "pointDescription": [
+      "L1",
+      "L2",
+      "L3",
+      "L4",
+      "L5"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "HTML"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "Redis Crash Course Tutorial",
+        "level": 1,
+        "shortDescription": "In this crash course we will discuss and demonstrate the fundamentals of Redis.",
+        "URL": "https://youtu.be/Hbt56gFj998",
+        "URLlastAccessed": "2018-12-15",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "Jira",
+    "categoryName": "Maths, science and engineering",
+    "skillIcon": "pictures/icons/Jira.png",
+    "description": "Jira is a proprietary issue tracking product developed by Atlassian which allows bug tracking and agile project management.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Jira_(software)",
+    "pointDescription": [
+      "L1",
+      "L2",
+      "L3",
+      "L4",
+      "L5"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "HTML"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "JIRA in a Nutshell demo video",
+        "level": 1,
+        "shortDescription": "An overview of JIRA: issue and project tracking for software teams.",
+        "URL": "https://youtu.be/xrCJv0fTyR8",
+        "URLlastAccessed": "2018-12-15",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "PostgreSQL",
+    "categoryName": "Maths, science and engineering",
+    "skillIcon": "pictures/icons/PostgreSQL.png",
+    "description": "PostgreSQL, often simply Postgres, is an object-relational database management system (ORDBMS) with an emphasis on extensibility and standards compliance. It can handle workloads ranging from small single-machine applications to large Internet-facing applications (or for data warehousing) with many concurrent users; on macOS Server, PostgreSQL is the default database; and it is also available for Microsoft Windows and Linux (supplied in most distributions).",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/PostgreSQL",
+    "pointDescription": [
+      "L1",
+      "L2",
+      "L3",
+      "L4",
+      "L5"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "HTML"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "Introduction To PostgreSQL",
+        "level": 1,
+        "shortDescription": "Introduce yourself to PostgreSQL , and learn about its features and usage.",
+        "URL": "https://youtu.be/jNq5EAb2biY",
+        "URLlastAccessed": "2018-12-15",
         "goal": "",
         "length": 0,
         "language": "en"
