@@ -216,7 +216,7 @@ a {
 
 .modal-header {
     padding: 2px 16px;
-    background-color: #5f5f5f;
+    background-color: #8fc880;
     color: white;
 }
 
@@ -289,10 +289,10 @@ a {
 }
 
 .badge-green {
-  .color: #fff;
+  color: #fff;
   background-color: #58964ee6;
 }
 
 .bg-lightgreen{
-  background-color: #28a745 !important;
+  background-color: #8fc880 !important;
 }
