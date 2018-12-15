@@ -79,6 +79,7 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" onclick = "approveTrees()">Approve Trees</a>
             <a class="dropdown-item" onclick = "approveSkills()">Approve Skills</a>
+            <a class="dropdown-item" onclick = "approveTrainings()">Approve Trainings</a>
             <a class="dropdown-item" onclick = "dropoffers()">Drop Offers</a>
           </div>
         </li>
@@ -265,7 +266,7 @@
   <div class = "card">
     <h1>2.</h1>
     <center><h5>Serch for a skill</h5></center>
-    <p><input type = "text" id = "skillSearchTree" class = "form-control" list = "skillSearchResult" onkeypress="searchSkillByName(this)"></p>
+    <p><input type = "text" id = "skillSearchTree" class = "form-control" list = "skillSearchResult" onkeyup="searchSkillsByName(this)"></p>
     <p><input type = "button" id = "addToTree" class="btn btn-outline-secondary" value = "Add skill to tree"></p>
     <center><h5>OR</h5></center>
     <p><input type = "button" id = "createSkill" class="btn btn-outline-secondary" value = "Create skill"></p>
@@ -282,6 +283,37 @@
     </div>
   </div>
 <!-- end of creator -->
+
+<!-- start of modal -->
+<div class="modal" id="userSearchModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="modalClose" id="closeSearchModal">&times;</span>
+      <h2>Search Results</h2>
+    </div>
+    <div class="modal-body">
+      <table class="table table-striped table-dark">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+          </tr>
+        </thead>
+        <tbody id="searchModalBody">
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- end of modal -->
 
   <!-- start of modal -->
   <div id = "newSkillModal" class = "modal">
@@ -323,7 +355,7 @@
               <td>Delete</td>
             </tr>
             <tr>
-              <td><input size=30 type="text" id = "parent" list = "skillSearchResult" onkeypress="searchSkillByName(this)" required></td>
+              <td><input size=30 type="text" id = "parent" list = "skillSearchResult" onkeyup="searchSkillsByName(this)" required></td>
               <td><input size=10 type="text" id = "minPoint" required></td>
               <td><input size=50 type="checkbox" id = "required"></td>
               <td><input type="button" value="Delete" onclick="deleteRow('parentsTable', this)"></td>
@@ -383,7 +415,7 @@
       <div class="modal-body">
         <form onsubmit = "return false">
           <h5>Skill:</h5>
-          <input type = "text" id = "trainingSkillName" required><br>
+          <input type = "text" id = "trainingSkillName" list = "skillSearchResult" onkeyup="searchUserSkillsByName(this)" required><br>
           <h5>Trainings:</h5>
           <table id = "addTrainingsTable" border = "1">
             <tr>
@@ -394,15 +426,17 @@
               <td>Delete</td>
             </tr>
             <tr>
-              <td><input size=30 type="text"></td>
-              <td><input size=10 type="text"></td>
-              <td><input size=30 type="text"></td>
-              <td><input size=30 type="text"></td>
+              <td><input size=30 type="text" required></td>
+              <td><input size=10 type="text" required></td>
+              <td><input size=30 type="text" required></td>
+              <td><input size=30 type="text" required></td>
               <td><input type="button" value="Delete" onclick="deleteRow('addTrainingsTable', this)"></td>
             </tr>
           </table>
           <input type="button" value="Add training" onclick="addRow('addTrainingsTable')"><br><br>
-          <input type = "submit" value = "Save" id = "saveTrainingBtn">
+          Send for approve:
+          <input type = "checkbox" id = "trainingForApprove"><br><br>
+          <input type = "submit" value = "Save" id = "saveTrainingsBtn">
         </form>
       </div>
     </div>
@@ -485,7 +519,7 @@
 
 
         <div class = "divTable">
-          <div class= "divTableCaption">Offers</div>
+          <div class= "divTableCaption">Peer learning offers</div>
           <div class="divTableBody" id = "offerTableBody">
             <div class="divTableRow">
               <div class="divTableHead"> Username </div>
@@ -501,29 +535,29 @@
 
 
         <div class = "divTable">
-          <div class= "divTableCaption">Request</div>
+          <div class= "divTableCaption">Request organized training</div>
           <div class="divTableBody" id = requestTableBody>
             <div class="divTableRow">
               <div class="divTableHead"> Level </div>
-              <div class="divTableHead"> Times requested </div>
               <div class="divTableHead"> Request </div>
+              <div class="divTableHead"> Times requested </div>
             </div>
             <div class="divTableRow">
               <div class="divTableHead"> Beginner </div>
+              <div class="divTableCell" id="addBeginnerCount"> Sign up </div>
               <div class="divTableCell" id="beginnerCount"> People </div>
-              <div class="divTableCell" id="addBeginnerCount"> + </div>
 
             </div>
             <div class="divTableRow">
               <div class="divTableHead"> Intermediate </div>
+              <div class="divTableCell" id="addIntermediateCount"> Sign up </div>
               <div class="divTableCell" id="intermediateCount"> People </div>
-              <div class="divTableCell" id="addIntermediateCount">  + </div>
 
             </div>
             <div class="divTableRow">
               <div class="divTableHead"> Advanced </div>
+              <div class="divTableCell" id="addAdvancedCount"> Sign up </div>
               <div class="divTableCell" id="advancedCount"> People </div>
-              <div class="divTableCell" id="addAdvancedCount"> + </div>
 
             </div>
         </div>

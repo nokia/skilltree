@@ -177,10 +177,26 @@ function searchUsersByName(){
 }
 
 // searches skills by provided name
-function searchSkillsByName(){
-    var skillToSearch = {value: document.getElementById('cardSearchBar').value};
+function searchSkillsByName(element){
+    var skillToSearch = {value: element.value};
     var skillSearchResult = document.getElementById('skillSearchResult');
     request('POST', '/set/searchSkillsByName', skillToSearch, function () {
+        if (this.readyState == 4 && this.status == 200) {
+            skillSearchResult.innerText = "";
+            for (var i = 0; i < this.response.length; i++) {
+                var mya = document.createElement('option');
+                mya.value = this.response[i].name;
+                skillSearchResult.appendChild(mya);
+            }
+        }
+    });
+}
+
+// searches skills by provided name
+function searchUserSkillsByName(element){
+    var skillToSearch = {value: element.value};
+    var skillSearchResult = document.getElementById('skillSearchResult');
+    request('POST', '/set/searchUserSkillsByName', skillToSearch, function () {
         if (this.readyState == 4 && this.status == 200) {
             skillSearchResult.innerText = "";
             for (var i = 0; i < this.response.length; i++) {
@@ -242,9 +258,11 @@ function getPublicSkillData(){
 function switchSearch(type){
   document.getElementById('advSearchDetails').innerHTML = "";
   if (type === "Skill") {
-    document.getElementById('cardSearchBar').onkeyup = searchSkillsByName;
+    document.getElementById('cardSearchBar').onkeyup = function(){
+      searchSkillsByName(this);
+    };
     document.getElementById('cardSearchBar').setAttribute('list', "skillSearchResult");
-    document.getElementById('cardSearch').onclick = searchSkillsByName;
+    document.getElementById('cardSearch').onclick = getPublicSkillData;
     addCheckBox("1", "Skill Option 1", 'advSearchDetails');
     addCheckBox("2", "Skill Option 2", 'advSearchDetails');
     addCheckBox("3", "Skill Option 3", 'advSearchDetails');
@@ -252,7 +270,7 @@ function switchSearch(type){
   else if (type === "Tree") {
     document.getElementById('cardSearchBar').onkeyup = searchTreesByName;
     document.getElementById('cardSearchBar').setAttribute('list', "TreeSearchResult");
-    document.getElementById('cardSearch').onclick = searchTreesByName;
+    document.getElementById('cardSearch').onclick = getPublicTreeData;
     addCheckBox("1", "Tree Option 1", 'advSearchDetails');
     addCheckBox("2", "Tree Option 2", 'advSearchDetails');
     addCheckBox("3", "Tree Option 3", 'advSearchDetails');
@@ -260,7 +278,7 @@ function switchSearch(type){
   else if (type === "User"){
     document.getElementById('cardSearchBar').onkeyup = searchUsersByName;
     document.getElementById('cardSearchBar').setAttribute('list', "UserSearchResult");
-    document.getElementById('cardSearch').onclick = searchUsersByName;
+    document.getElementById('cardSearch').onclick = getPublicUserData;
     addCheckBox("1", "User Option 1", 'advSearchDetails');
     addCheckBox("2", "User Option 2", 'advSearchDetails');
     addCheckBox("3", "User Option 3", 'advSearchDetails');
@@ -564,6 +582,36 @@ function addTraining () {
             modal.style.display = "none";
         }
     }
+
+    var save = document.getElementById("saveTrainingsBtn");
+    save.onclick = function () {
+        var trainingsTable = document.getElementById('addTrainingsTable');
+        var trainings = [];
+        for (i = 1; i < trainingsTable.rows.length; ++i) {
+            trainings.push({
+                name: trainingsTable.rows[i].cells[0].children[0].value,
+                level: trainingsTable.rows[i].cells[1].children[0].value,
+                description: trainingsTable.rows[i].cells[2].children[0].value,
+                url: trainingsTable.rows[i].cells[3].children[0].value
+            });
+        }f
+
+        var trainingData = {
+            skillName: document.getElementById('trainingSkillName').value,
+            trainings: trainings,
+            forApprove: document.getElementById('trainingForApprove').checked
+        };
+
+        request('POST', '/set/newtraining', trainingData, function () {
+            if (this.readyState == 4 && this.status == 200) {
+                if (this.response.success) {
+                    window.open("/user/", "_self");
+                } else if (this.response.message == "skillnotexists") {
+                    alert("Skill not found");
+                }
+            }
+        });
+    };
 }
 
 // opens skill creation, and manages it.

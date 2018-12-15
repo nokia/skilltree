@@ -22,7 +22,7 @@ class ItemContainer {
             this.skillborder.endorsement.style.fill = 0xFFFFFF;
         }
 
-        //Creating details page
+        // Creating details page
         var detailsWidth = 240;
         var detailsMargin = 10;
         var nameFontSize = 20;
@@ -82,9 +82,29 @@ class ItemContainer {
                 req.setRequestHeader('Content-type', 'application/json');
                 req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
                 req.responseType = "json";
+                var skillName = this.parentObj.skill.name;
+                var username = this.parentObj.username;
+                req.onreadystatechange = function () {
+                    if(this.readyState == 4 && this.status == 200) {
+                        console.log(this.parentObj);
+                    }
+                };
 
-                req.onreadystatechange = function() {
-                    if(req.readyState == 4 && req.status == 200) {
+                req.send(JSON.stringify({
+                    skillName: skillName,
+                    username: username
+                }));
+
+                /*var endorseReq = new XMLHttpRequest();
+                endorseReq.open('POST', '/set/endorse', true);
+                endorseReq.setRequestHeader('Content-type', 'application/json');
+                endorseReq.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+                endorseReq.responseType = "json";
+                endorseReq.parentObj = this.parentObj;
+
+                endorseReq.onreadystatechange = function() {
+                    if(this.readyState == 4 && this.status == 200) {
+                        alert("ssss");
                         if (this.skill.endorsement.length == 0){
                             this.skillborder.endorsement = new PIXI.Text("+" + 1);
                             this.skillborder.endorsement.scale.set(.5);
@@ -100,12 +120,12 @@ class ItemContainer {
                     }
                 }
 
-                req.send(
+                endorseReq.send(
                     JSON.stringify({
                         skillName: this.parentObj.skill.name,
                         username: this.parentObj.username
                     })
-                );
+                );*/
             });
             detailsForeground.addChild(btnEndorseContainer);
         }
@@ -422,8 +442,8 @@ class ItemContainer {
 
                             offerTable.appendChild( createTableRow( "Name",
                                                                     "Location",
-                                                                    "Teaching Day",
-                                                                    "Teaching Time",
+                                                                    "Day",
+                                                                    "Time",
                                                                     "Level",
                                                                     "divTableHead") );
 
