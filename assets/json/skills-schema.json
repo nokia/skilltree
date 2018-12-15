@@ -248,7 +248,7 @@
               "examples": [
                 "en"
               ],
-              "pattern": "^(..)$"
+              "pattern": "^(..|many)$"
             }
           }
         }
