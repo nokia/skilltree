@@ -3,8 +3,8 @@
     "name": "HTML",
     "categoryName": "Maths, science and engineeging",
     "skillIcon": "pictures/icons/HTML.png",
-    "description": "...",
-    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/",
+    "description": "Hypertext Markup Language is the standard markup language for creating web pages and web applications. With Cascading Style Sheets and JavaScript, it forms a triad of cornerstone technologies for the World Wide Web.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/HTML",
     "pointDescription": [
       "L1",
       "L2",
@@ -43,8 +43,8 @@
     "name": "CSS",
     "categoryName": "Maths, science and engineering",
     "skillIcon": "pictures/icons/CSS.png",
-    "description": "...",
-    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/",
+    "description": "Cascading Style Sheets is a style sheet language used for describing the presentation of a document written in a markup language like HTML. CSS is a cornerstone technology of the World Wide Web, alongside HTML and JavaScript.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/CSS",
     "pointDescription": [
       "L1",
       "L2",
@@ -85,8 +85,8 @@
     "name": "CSS tools",
     "categoryName": "Maths, science and engineering",
     "skillIcon": "pictures/icons/CSS_tools.png",
-    "description": "...",
-    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/",
+    "description": "CSS tools and frameworks are meant to allow for easier, more standards-compliant web design using the Cascading Style Sheets language.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/CSS_framework",
     "pointDescription": [
       "L1",
       "L2",
@@ -101,12 +101,12 @@
     "children": [],
     "trainings": [
       {
-        "name": "Photoshop Basics",
+        "name": "Top10 CSS Tools",
         "level": 1,
-        "shortDescription": "HTML Crash Course For Absolute Beginners",
-        "URL": "https://www.youtube.com/watch?v=UB1O30fR-EE",
+        "shortDescription": "10 Best CSS Tools & Web-Based Apps For Developers",
+        "URL": "https://1stwebdesigner.com/best-css-tools/",
         "URLlastAccessed": "2018-11-19",
-        "goal": "",
+        "goal": "Describing the top 10 CSS libraries, tools, webapps and automated scripts that make it so much easier to build websites.",
         "length": 0,
         "language": "en"
       }
@@ -115,9 +115,9 @@
   {
     "name": "Photoshop",
     "categoryName": "Maths, science and engineering",
-    "skillIcon": "pictures/icons/Adobe_Photoshop.png",
+    "skillIcon": "pictures/icons/Photoshop.png",
     "description": "...",
-    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Photoshop",
     "pointDescription": [
       "L1",
       "L2",
@@ -147,7 +147,7 @@
     "name": "JavaScript",
     "categoryName": "Maths, science and engineering",
     "skillIcon": "pictures/icons/JavaScript.png",
-    "description": "...",
+    "description": "JavaScript, often abbreviated as JS, is a high-level, interpreted programming language that conforms to the ECMAScript specification. It is a language which is also characterized as dynamic, weakly typed, prototype-based and multi-paradigm.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Javascript",
     "pointDescription": [
       "L1",
@@ -214,7 +214,7 @@
     "categoryName": "Maths, science and engineering",
     "skillIcon": "pictures/icons/JavaFX.png",
     "description": "...",
-    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/JavaFX",
     "pointDescription": [
       "L1",
       "L2",
@@ -276,7 +276,7 @@
     "name": "Go",
     "categoryName": "Maths, science and engineering",
     "skillIcon": "pictures/icons/Go.png",
-    "description": "",
+    "description": "Go (often referred to as Golang) is a fully open-source programming language. It is statically typed, compiled, and syntactically similar to C, with the added benefits of memory safety, garbage collection, structural typing, and CSP-style concurrency.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Go_(programming_language)",
     "pointDescription": [
       "L1",
@@ -307,7 +307,7 @@
     "name": "Python",
     "categoryName": "Maths, science and engineering",
     "skillIcon": "pictures/icons/Python.png",
-    "description": "",
+    "description": "Python is an interpreted, high-level, general-purpose programming language. Created by Guido van Rossum and first released in 1991, Python has a design philosophy that emphasizes code readability, notably using significant whitespace.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Python_(programming_language)",
     "pointDescription": [
       "L1",
@@ -320,19 +320,50 @@
     "parents": [],
     "children": [
       {
-        "name": "Machine Learning",
+        "name": "NumPy",
         "minPoint": 3,
         "recommended": false
       }
     ],
     "trainings": [
       {
-        "name": "HTML Basics",
+        "name": "Python Basics #1 of 8 - Integers, Floats and Maths",
         "level": 1,
-        "shortDescription": "HTML Crash Course For Absolute Beginners",
-        "URL": "https://www.youtube.com/watch?v=UB1O30fR-EE",
+        "shortDescription": "If you're a beginner and/or mildly interested in learning Python scripting/programming, this is a place to start!",
+        "URL": "https://www.youtube.com/watch?v=D48iCw3WWpI",
         "URLlastAccessed": "2018-11-19",
-        "goal": "",
+        "goal": "Will walking you through a bit of programming theory, some of the basics for variable creation and math functions used in Python.",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "NumPy",
+    "categoryName": "Maths, science and engineering",
+    "skillIcon": "pictures/icons/Python.png",
+    "description": "NumPy is the fundamental package for scientific computing with Python.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/NumPy",
+    "pointDescription": [
+      "L1",
+      "L2",
+      "L3",
+      "L4",
+      "L5"
+    ],
+    "maxPoint": 3,
+    "parents": [
+      "Python"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "NumPy Tutorial",
+        "level": 2,
+        "shortDescription": "Before reading this tutorial you should know a bit of Python. If you would like to refresh your memory, take a look at the Python tutorial.",
+        "URL": "https://www.numpy.org/",
+        "URLlastAccessed": "2018-11-19",
+        "goal": "Quickstart with NumPy from basics to Shape Manipulation, Copies and Views, Indexing and other tips and tricks.",
         "length": 0,
         "language": "en"
       }
@@ -342,7 +373,7 @@
     "name": "Scrum",
     "categoryName": "Maths, science and engineering",
     "skillIcon": "pictures/icons/Scrum.png",
-    "description": "",
+    "description": "Scrum is an agile framework for managing knowledge work, with an emphasis on software development. It is designed for teams of three to nine members, who break their work into actions that can be completed within timeboxed iterations, called 'sprints', no longer than one month and most commonly two weeks, then track progress and re-plan in 15-minute stand-up meetings, called daily scrums.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Scrum",
     "pointDescription": [
       "L1",
@@ -364,6 +395,16 @@
         "goal": "",
         "length": 0,
         "language": "en"
+      },
+      {
+        "name": " The Scrum Guide",
+        "level": 1,
+        "shortDescription": "Scrum is defined completely in the Scrum Guide by Ken Schwaber and Jeff Sutherland, the originators of Scrum.",
+        "URL": "https://www.scrumguides.org/",
+        "URLlastAccessed": "2018-11-19",
+        "goal": "This Guide contains the definition of Scrum. This definition consists of Scrum’s roles, events, artifacts, and the rules that bind them together.",
+        "length": 0,
+        "language": "many"
       }
     ]
   },
@@ -410,9 +451,7 @@
       "L5"
     ],
     "maxPoint": 5,
-    "parents": [
-      "Python"
-    ],
+    "parents": [],
     "children": [],
     "trainings": [
       {
