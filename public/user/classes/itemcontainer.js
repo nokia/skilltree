@@ -82,8 +82,6 @@ class ItemContainer {
                 req.setRequestHeader('Content-type', 'application/json');
                 req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
                 req.responseType = "json";
-                var skillName = this.parentObj.skill.name;
-                var username = this.parentObj.username;
                 req.onreadystatechange = function () {
                     if(this.readyState == 4 && this.status == 200) {
                         console.log(this.parentObj);
@@ -92,7 +90,7 @@ class ItemContainer {
 
                 req.send(JSON.stringify({
                     skillName: skillName,
-                    username: username
+                    username: owner.username
                 }));
 
                 /*var endorseReq = new XMLHttpRequest();
