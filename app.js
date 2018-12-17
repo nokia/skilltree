@@ -1097,6 +1097,8 @@ setRoute.post('/approvetraining', async function (req, res) {
                     description: training.description,
                     url: training.url,
                 });
+
+                user.save(function (err) {if (err) throw err;});
             }
         })
     })
