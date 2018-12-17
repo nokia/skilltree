@@ -922,7 +922,7 @@ function approveTrainings () {
     approveTrees.style.display = "block";
 
     for (var i = 0; i < data.apprTrainings.length; ++i) {
-        var text = data.apprTrainings[i].name + " (" + data.apprTrainings[i].username + ")";
+        var text = data.apprTrainings[i].name + " (" + data.apprTrainings[i].skillName + ", " +  data.apprTrainings[i].username + ")";
         var option = document.createElement('option');
         option.value = option.text = text;
         document.getElementById('apprTrainingSel').add(option);
