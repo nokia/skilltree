@@ -216,7 +216,7 @@ getRoute.get('/userdata', function (req, res) {
 
                 user.apprTrees = trees;
                 user.apprSkills = skills;
-                user.apprTraingins = trainings;
+                user.apprTrainings = trainings;
             }
 
       		return res.json(user);
