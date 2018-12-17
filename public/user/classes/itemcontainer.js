@@ -76,55 +76,7 @@ class ItemContainer {
                 btnEndorse.texture = btnG.generateTexture();
                 app.renderer.render(app.stage);
             })
-            .on('click', function () {
-                var req = new XMLHttpRequest();
-                req.open('POST', '/set/endorse', true);
-                req.setRequestHeader('Content-type', 'application/json');
-                req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-                req.responseType = "json";
-                req.onreadystatechange = function () {
-                    if(this.readyState == 4 && this.status == 200) {
-                        console.log("nnn");
-                    }
-                };
-
-                req.send(JSON.stringify({
-                    skillName: skillName,
-                    username: owner.username
-                }));
-
-                /*var endorseReq = new XMLHttpRequest();
-                endorseReq.open('POST', '/set/endorse', true);
-                endorseReq.setRequestHeader('Content-type', 'application/json');
-                endorseReq.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-                endorseReq.responseType = "json";
-                endorseReq.parentObj = this.parentObj;
-
-                endorseReq.onreadystatechange = function() {
-                    if(this.readyState == 4 && this.status == 200) {
-                        alert("ssss");
-                        if (this.skill.endorsement.length == 0){
-                            this.skillborder.endorsement = new PIXI.Text("+" + 1);
-                            this.skillborder.endorsement.scale.set(.5);
-                            this.skillborder.endorsement.position.set(10, 50);
-                            this.skillborder.endorsement.style.fill = 0xFFFFFF;
-                            this.container.addChild(this.skillborder.endorsement);
-                        } else {
-                            var t = parseInt(this.parentObj.endorsement.text.substr(1));
-                            ++t;
-                            this.parentObj.endorsement.text = "+" + t;
-                        }
-                        app.renderer.render(app.stage);
-                    }
-                }
-
-                endorseReq.send(
-                    JSON.stringify({
-                        skillName: this.parentObj.skill.name,
-                        username: this.parentObj.username
-                    })
-                );*/
-            });
+            .on('click', endorse());
             detailsForeground.addChild(btnEndorseContainer);
         }
 
@@ -706,8 +658,59 @@ class ItemContainer {
         modal.style.display = "block";
     }
 
-    addBeginnerRequest()
-        {
-            console.log("clicked");
-        }
+    addBeginnerRequest() {
+        console.log("clicked");
+    }
+
+    endorse () {
+        console.log(this.skill.name);
+        console.log(this.username);
+        var req = new XMLHttpRequest();
+        req.open('POST', '/set/endorse', true);
+        req.setRequestHeader('Content-type', 'application/json');
+        req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+        req.responseType = "json";
+        req.onreadystatechange = function () {
+            if(this.readyState == 4 && this.status == 200) {
+                console.log("nnn");
+            }
+        };
+
+        req.send(JSON.stringify({
+            skillName: this.skill.name,
+            username: username
+        }));
+
+        /*var endorseReq = new XMLHttpRequest();
+        endorseReq.open('POST', '/set/endorse', true);
+        endorseReq.setRequestHeader('Content-type', 'application/json');
+        endorseReq.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+        endorseReq.responseType = "json";
+        endorseReq.parentObj = this.parentObj;
+
+        endorseReq.onreadystatechange = function() {
+        if(this.readyState == 4 && this.status == 200) {
+        alert("ssss");
+        if (this.skill.endorsement.length == 0){
+        this.skillborder.endorsement = new PIXI.Text("+" + 1);
+        this.skillborder.endorsement.scale.set(.5);
+        this.skillborder.endorsement.position.set(10, 50);
+        this.skillborder.endorsement.style.fill = 0xFFFFFF;
+        this.container.addChild(this.skillborder.endorsement);
+    } else {
+    var t = parseInt(this.parentObj.endorsement.text.substr(1));
+    ++t;
+    this.parentObj.endorsement.text = "+" + t;
+}
+app.renderer.render(app.stage);
+}
+}
+
+endorseReq.send(
+JSON.stringify({
+skillName: this.parentObj.skill.name,
+username: this.parentObj.username
+})
+);*/
+    }
 }
