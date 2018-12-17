@@ -24,11 +24,6 @@
           "name": "JavaScript",
           "minPoint": 1,
           "recommended": false
-      },
-      {
-          "name": "NodeJS",
-          "minPoint": 1,
-          "recommended": false
       }
     ],
     "trainings": [
@@ -165,7 +160,13 @@
     "parents": [
       "HTML"
     ],
-    "children": [],
+    "children": [
+        {
+            "name": "NodeJS",
+            "minPoint": 1,
+            "recommended": false
+        }
+    ],
     "trainings": [
       {
         "name": "HTML Basics",
@@ -260,7 +261,6 @@
     ],
     "maxPoint": 5,
     "parents": [
-      "HTML",
       "JavaScript"
     ],
     "children": [],
