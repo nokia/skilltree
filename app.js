@@ -518,11 +518,13 @@ setRoute.post('/approveskill', async function (req, res)  {
 			],
 			trainings: [
 				{
-					name: skillforapproval.name,
-					level: skillforapproval.minPoint,
-					description: skillforapproval.recommended,
-					url: skillforapproval.url,
-					urlLastAccessed: skillforapproval.urlLastAccessed
+                    name: skillforapproval.training.name,
+                    level: skillforapproval.training.level,
+                    shortDescription: skillforapproval.training.shortDescription,
+                    URL: skillforapproval.training.URL,
+                    goal: skillforapproval.training.goal,
+                    length: skillforapproval.traininglength,
+                    language: skillforapproval.training.language
 				}
 			]
 			});
@@ -572,11 +574,13 @@ setRoute.post('/approveskill', async function (req, res)  {
 							],
 							trainings: [
 								{
-									name: dependency[i].name,
-									level: dependency[i].minPoint,
-									description: dependency[i].recommended,
-									url: dependency[i].url,
-									urlLastAccessed: dependency[i].urlLastAccessed
+                                    name: dependency[i].training.name,
+                                    level: dependency[i].training.level,
+                                    shortDescription: dependency[i].training.shortDescription,
+                                    URL: dependency[i].training.URL,
+                                    goal: dependency[i].training.goal,
+                                    length: dependency[i].traininglength,
+                                    language: dependency[i].training.language
 								}
 							]
 							});
@@ -807,8 +811,11 @@ setRoute.post('/newtraining', async function(req, res) {
             user.skills.find(obj => obj.name == data.skillName).trainings.push({
                 name: data.trainings[i].name,
                 level: data.trainings[i].level,
-                description: data.trainings[i].description,
-                url: data.trainings[i].url
+                shortDescription: data.trainings[i].shortDescription,
+                URL: data.trainings[i].URL,
+                goal: data.trainings[i].goal,
+                length: data.trainings[i].length,
+                language: data.trainings[i].language
             });
         }
 
@@ -821,8 +828,11 @@ setRoute.post('/newtraining', async function(req, res) {
                     skillName: data.skillName,
                     name: data.trainings[i].name,
                     level: data.trainings[i].level,
-                    description: data.trainings[i].description,
-                    url: data.trainings[i].url
+                    shortDescription: data.trainings[i].shortDescription,
+                    URL: data.trainings[i].URL,
+                    goal: data.trainings[i].goal,
+                    length: data.trainings[i].length,
+                    language: data.trainings[i].language
                 });
 
                 apprTraining.save(function (err) {if (err) throw err;});
@@ -1080,8 +1090,11 @@ setRoute.post('/approvetraining', async function (req, res) {
     globalSkill.trainings.push({
         name: training.name,
         level: training.level,
-        description: training.description,
-        url: training.url,
+        shortDescription: training.shortDescription,
+        URL: training.URL,
+        goal: training.goal,
+        length: traininglength,
+        language: training.language
     });
 
     globalSkill.save(function (err) {if (err) throw err;});
@@ -1094,8 +1107,11 @@ setRoute.post('/approvetraining', async function (req, res) {
                 user.skills.find(obj => obj.name == data.skillName).trainings.push({
                     name: training.name,
                     level: training.level,
-                    description: training.description,
-                    url: training.url,
+                    shortDescription: training.shortDescription,
+                    URL: training.URL,
+                    goal: training.goal,
+                    length: traininglength,
+                    language: training.language
                 });
 
                 user.save(function (err) {if (err) throw err;});

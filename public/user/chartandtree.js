@@ -595,7 +595,7 @@ function addTraining () {
                 URL: trainingsTable.rows[i].cells[3].children[0].value,
                 goal: trainingsTable.rows[i].cells[4].children[0].value,
                 length: trainingsTable.rows[i].cells[5].children[0].value,
-                language: trainingsTable.rows[i].cells[6].children[0].value,
+                language: trainingsTable.rows[i].cells[6].children[0].value
             });
         }
 
@@ -937,9 +937,16 @@ function approveTrainings () {
         select.add(option);
     }
 
+    var selectedTraining = select.options[select.selectedIndex].text;
+    console.log(selectedTraining);
+
+    /*var skillforapproval = skillsforapproval.find(obj => obj.name == selectedSkill);
+
     btn.onclick = function () {
-        request('POST', '/set/approvetraining', {name})
-    };
+        request('POST', '/set/approvetraining', {
+            name:
+        })
+    };*/
 }
 
 function addCheckBox(id, boxText, parent){
@@ -995,7 +1002,7 @@ function request (type, url, sendData, callback) {
     req.responseType = "json";
     req.onreadystatechange = callback;
 
-    if(sendData !== undefined)
+    if (sendData !== undefined)
         req.send(JSON.stringify(sendData));
     else
         req.send();
