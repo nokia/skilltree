@@ -76,7 +76,7 @@ class ItemContainer {
                 btnEndorse.texture = btnG.generateTexture();
                 app.renderer.render(app.stage);
             })
-            .on('click', this.endorse(skillName, owner.username));
+            .on('click', this.endorse);
             detailsForeground.addChild(btnEndorseContainer);
         }
 
@@ -662,9 +662,9 @@ class ItemContainer {
         console.log("clicked");
     }
 
-    endorse (skillName, username) {
-        //console.log(this.parentObj.skill.name);
-        //console.log(this.parentObj.username);
+    endorse () {
+        console.log(this.parentObj.skill.name);
+        console.log(this.parentObj.username);
         var req = new XMLHttpRequest();
         req.open('POST', '/set/endorse', true);
         req.setRequestHeader('Content-type', 'application/json');
@@ -677,8 +677,8 @@ class ItemContainer {
         };
 
         req.send(JSON.stringify({
-            skillName: skillName,
-            username: username
+            skillName: "ss",
+            username: "ss"
         }));
     }
 }
