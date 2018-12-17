@@ -21,9 +21,14 @@
         "recommended": false
       },
       {
-        "name": "JavaScript",
-        "minPoint": 1,
-        "recommended": false
+          "name": "JavaScript",
+          "minPoint": 1,
+          "recommended": false
+      },
+      {
+          "name": "NodeJS",
+          "minPoint": 1,
+          "recommended": false
       }
     ],
     "trainings": [
