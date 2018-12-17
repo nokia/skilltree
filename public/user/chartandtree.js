@@ -820,10 +820,11 @@ function addRow(table) {
 *   Approve menu for admins
 */
 
-// adds trees to approve.
+// make trees globally available
 function approveTrees() {
     document.getElementById('creator').style.display = "none";
     document.getElementById('approveSkills').style.display = "none";
+    document.getElementById('approveTrainings').style.display = "none";
 
     var canvas = document.getElementById("pixiCanvas");
     canvas.style.display = "none";
@@ -839,13 +840,18 @@ function approveTrees() {
     }
 }
 
-// adds skills to approve
+// make skills globally available
 function approveSkills() {
     document.getElementById('creator').style.display = "none";
     document.getElementById('approveTrees').style.display = "none";
+    document.getElementById('approveTrainings').style.display = "none";
 
     var canvas = document.getElementById("pixiCanvas");
     var approveSkills = document.getElementById("approveSkills");
+
+    canvas.style.display = "none";
+    approveSkills.style.display = "block";
+
     var approveSkillsSelect = document.getElementById('apprSkillSel');
     var skillsforapproval = undefined;
 
@@ -892,10 +898,6 @@ function approveSkills() {
 
         });
     }
-
-
-    canvas.style.display = "none";
-    approveSkills.style.display = "block";
 /*
     for (var i = 0; i < data.apprSkills.length; ++i) {
         var text = data.apprSkills[i].name + " (" + data.apprSkills[i].username + ")";
@@ -906,6 +908,25 @@ function approveSkills() {
 */
    //Making the approve page visible
 
+}
+
+function approveTrainings () {
+    document.getElementById('creator').style.display = "none";
+    document.getElementById('approveTrees').style.display = "none";
+    document.getElementById('approveSkills').style.display = "none";
+
+    var canvas = document.getElementById("pixiCanvas");
+    canvas.style.display = "none";
+
+    var approveTrees = document.getElementById("approveTrees");
+    approveTrees.style.display = "block";
+
+    for (var i = 0; i < data.apprTrees.length; ++i) {
+        var text = data.apprTrees[i].name + " (" + data.apprTrees[i].username + ")";
+        var option = document.createElement('option');
+        option.value = option.text = text;
+        document.getElementById('apprTreeSel').add(option);
+    }
 }
 
 function addCheckBox(id, boxText, parent){
