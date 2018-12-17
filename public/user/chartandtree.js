@@ -918,14 +918,14 @@ function approveTrainings () {
     var canvas = document.getElementById("pixiCanvas");
     canvas.style.display = "none";
 
-    var approveTrees = document.getElementById("approveTrees");
+    var approveTrees = document.getElementById("approveTrainings");
     approveTrees.style.display = "block";
 
-    for (var i = 0; i < data.apprTrees.length; ++i) {
-        var text = data.apprTrees[i].name + " (" + data.apprTrees[i].username + ")";
+    for (var i = 0; i < data.apprTrainings.length; ++i) {
+        var text = data.apprTrainings[i].name + " (" + data.apprTrainings[i].username + ")";
         var option = document.createElement('option');
         option.value = option.text = text;
-        document.getElementById('apprTreeSel').add(option);
+        document.getElementById('apprTrainingSel').add(option);
     }
 }
 

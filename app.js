@@ -209,8 +209,14 @@ getRoute.get('/userdata', function (req, res) {
     				return skills;
     		    });
 
+                var trainings = await ApprovableTraining.find({}, function(err, trainings) {
+    		        if (err) throw err;
+    				return trainings;
+    		    });
+
                 user.apprTrees = trees;
                 user.apprSkills = skills;
+                user.apprTraingins = trainings;
             }
 
       		return res.json(user);
@@ -811,6 +817,7 @@ setRoute.post('/newtraining', async function(req, res) {
         if (data.forApprove) {
             for (var i = 0; i < data.trainings.length; ++i) {
                 var apprTraining = new ApprovableTraining({
+                    username: user.username,
                     skillName: data.skillName,
                     name: data.trainings[i].name,
                     level: data.trainings[i].level,
