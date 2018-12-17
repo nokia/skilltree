@@ -278,6 +278,7 @@ class ItemContainer {
     refreshAvaliability(){
       for (var i = 0; i < this.skills.length; i++) {
         for (var j = 0; j < this.skills[i].parents.length; j++) {
+            console.log(this.skills[i]);
           var par = this.skills.find(obj => obj.name == this.skills[i].parents[j]);
           if(par !== undefined){
             if(par.children.find(obj => obj.name == this.skills[i].name).minPoint > par.achievedPoint || par.itemcontainer.container.interactive == false){

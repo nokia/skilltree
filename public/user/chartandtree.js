@@ -591,8 +591,11 @@ function addTraining () {
             trainings.push({
                 name: trainingsTable.rows[i].cells[0].children[0].value,
                 level: trainingsTable.rows[i].cells[1].children[0].value,
-                description: trainingsTable.rows[i].cells[2].children[0].value,
-                url: trainingsTable.rows[i].cells[3].children[0].value
+                shortDescription: trainingsTable.rows[i].cells[2].children[0].value,
+                URL: trainingsTable.rows[i].cells[3].children[0].value,
+                goal: trainingsTable.rows[i].cells[4].children[0].value,
+                length: trainingsTable.rows[i].cells[5].children[0].value,
+                language: trainingsTable.rows[i].cells[6].children[0].value,
             });
         }
 
@@ -675,8 +678,11 @@ function createSkill () {
             trainings.push({
                 name: trainingsTable.rows[i].cells[0].children[0].value,
                 level: trainingsTable.rows[i].cells[1].children[0].value,
-                description: trainingsTable.rows[i].cells[2].children[0].value,
-                url: trainingsTable.rows[i].cells[3].children[0].value
+                shortDescription: trainingsTable.rows[i].cells[2].children[0].value,
+                URL: trainingsTable.rows[i].cells[3].children[0].value,
+                goal: trainingsTable.rows[i].cells[4].children[0].value,
+                length: trainingsTable.rows[i].cells[5].children[0].value,
+                language: trainingsTable.rows[i].cells[6].children[0].value
             });
         }
 
