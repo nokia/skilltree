@@ -921,12 +921,19 @@ function approveTrainings () {
     var approveTrees = document.getElementById("approveTrainings");
     approveTrees.style.display = "block";
 
+    var select = document.getElementById('apprTrainingSel');
+    var btn = document.getElementById('approveTrainingsBtn');
+
     for (var i = 0; i < data.apprTrainings.length; ++i) {
         var text = data.apprTrainings[i].name + " (" + data.apprTrainings[i].skillName + ", " +  data.apprTrainings[i].username + ")";
         var option = document.createElement('option');
         option.value = option.text = text;
-        document.getElementById('apprTrainingSel').add(option);
+        select.add(option);
     }
+
+    btn.onclick = function () {
+        request('POST', '/set/approvetraining', {name})
+    };
 }
 
 function addCheckBox(id, boxText, parent){
