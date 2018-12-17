@@ -663,8 +663,8 @@ class ItemContainer {
     }
 
     endorse () {
-        console.log(this.skill.name);
-        console.log(this.username);
+        console.log(this.parentObj.skill.name);
+        console.log(this.parentObj.username);
         var req = new XMLHttpRequest();
         req.open('POST', '/set/endorse', true);
         req.setRequestHeader('Content-type', 'application/json');
@@ -677,8 +677,8 @@ class ItemContainer {
         };
 
         req.send(JSON.stringify({
-            skillName: this.skill.name,
-            username: username
+            skillName: this.parentObj.skill.name,
+            username: this.parentObj.username
         }));
     }
 }
