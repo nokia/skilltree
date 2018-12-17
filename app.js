@@ -1058,6 +1058,50 @@ setRoute.post('/approvetree', async function (req, res) {
 	}
 });
 
+setRoute.post('/approvetraining', async function (req, res) {
+	var data = req.body;
+
+    var training = await ApprovableTraining.findOne({
+        username: data.username,
+        skillName: data.skillName,
+        name: data.name
+    }, function(err, training) {
+        if (err) throw err;
+		return training;
+    });
+
+    var globalSkill = await Skill.findOne({
+        skillName: data.skillName
+    }, function(err, skill) {
+        if (err) throw err;
+		return skill;
+    });
+
+    globalSkill.trainings.push({
+        name: training.name,
+        level: training.level,
+        description: training.description,
+        url: training.url,
+    });
+
+    globalSkill.save(function (err) {if (err) throw err;});
+
+    User.find({} , (err, users) => {
+        if (err) throw err;
+
+        users.map(user => {
+            if (user.skills.find(obj => obj.name == data.skillName) != undefined) {
+                user.skills.find(obj => obj.name == data.skillName).trainings.push({
+                    name: training.name,
+                    level: training.level,
+                    description: training.description,
+                    url: training.url,
+                });
+            }
+        })
+    })
+});
+
 // sets the user data aquired from the first login
 setRoute.post('/firstlogindata', async function (req, res) {
 	var data = req.body;
