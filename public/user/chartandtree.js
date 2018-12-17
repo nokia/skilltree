@@ -594,7 +594,7 @@ function addTraining () {
                 description: trainingsTable.rows[i].cells[2].children[0].value,
                 url: trainingsTable.rows[i].cells[3].children[0].value
             });
-        }f
+        }
 
         var trainingData = {
             skillName: document.getElementById('trainingSkillName').value,
