@@ -274,13 +274,12 @@ class ItemContainer {
         }
     }
 
-// TODO comment
+    // TODO comments
     refreshAvaliability(){
       for (var i = 0; i < this.skills.length; i++) {
         for (var j = 0; j < this.skills[i].parents.length; j++) {
           var par = this.skills.find(obj => obj.name == this.skills[i].parents[j]);
-          console.log(this.skills[i]);
-          if(par.children !== undefined){
+          if(par !== undefined){
             if(par.children.find(obj => obj.name == this.skills[i].name).minPoint > par.achievedPoint || par.itemcontainer.container.interactive == false){
               var colorMatrixFilter = new PIXI.filters.ColorMatrixFilter;
               colorMatrixFilter.brightness(0.4);
