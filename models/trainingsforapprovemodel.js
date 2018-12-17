@@ -8,7 +8,10 @@ module.exports = mongoose.model('ApprovableTraining', new Schema({
     skillName: String,
     name: String,
     level: Number,
-    description: String,
-    url: String,
-    urlLastAccessed: String
+    shortDescription: String,
+    URL: String,
+    URLLastAccessed: String,
+    goal: String,
+    length: Number,
+    language: String
 }));
