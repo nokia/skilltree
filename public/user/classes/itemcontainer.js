@@ -681,6 +681,6 @@ class ItemContainer {
             username: this.parentObj.username
         };
 
-        req.send(data);
+        req.send(JSON.stringify(data));
     }
 }
