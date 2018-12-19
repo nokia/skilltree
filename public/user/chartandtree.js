@@ -229,11 +229,13 @@ function getPublicUserData(){
   var userToSearch = {value: document.getElementById('cardSearchBar').value};
   request('POST', '/set/getPublicUserData', userToSearch, function() {
       if(this.readyState == 4 && this.status == 200) {
-        var modal = document.getElementById('userSearchModal');
+        var modal = document.getElementById('searchModal');
         var searchModalBody = document.getElementById('searchModalBody');
+        var searchModalHeader = document.getElementById('searchModalHeader');
         document.getElementById('closeSearchModal').onclick = function() {
           modal.style.display = "none";
         };
+        searchModalHeader.innerHTML = '<th scope="col">#</th><th scope="col">Name</th><th scope="col">MainTree</th><th scope="col">Willing to help</th>';
         searchModalBody.innerHTML = "";
         for (var i = 0; i < this.response.length; i++) {
           var row = document.createElement('tr');
@@ -253,7 +255,22 @@ function getPublicTreeData(){
   var treeToSearch = {value: document.getElementById('cardSearchBar').value};
   request('POST', '/set/getPublicTreeData', userToSearch, function() {
       if(this.readyState == 4 && this.status == 200) {
-
+        var modal = document.getElementById('searchModal');
+        var searchModalBody = document.getElementById('searchModalBody');
+        var searchModalHeader = document.getElementById('searchModalHeader');
+        document.getElementById('closeSearchModal').onclick = function() {
+          modal.style.display = "none";
+        };
+        searchModalHeader.innerHTML = '<th scope="col">#</th><th scope="col">Name</th><th scope="col">Focus Area</th>';
+        searchModalBody.innerHTML = "";
+        for (var i = 0; i < this.response.length; i++) {
+          var row = document.createElement('tr');
+          row.innerHTML += "<th>" + i + "</th>";
+          row.innerHTML += "<td>" + this.response[i].name + "</td>";
+          row.innerHTML += "<td>" + this.response[i].focusArea + "</td>";
+          searchModalBody.appendChild(row);
+        }
+        modal.style.display = "block";
       }
   });
 }
