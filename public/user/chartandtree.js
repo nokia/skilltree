@@ -231,7 +231,7 @@ function getPublicUserData(){
       if(this.readyState == 4 && this.status == 200) {
         var modal = document.getElementById('userSearchModal');
         var searchModalBody = document.getElementById('searchModalBody');
-        document.getElementById('closeSearchModal').onclick() {
+        document.getElementById('closeSearchModal').onclick = function() {
           modal.style.display = "none";
         };
         searchModalBody.innerHTML = "";
