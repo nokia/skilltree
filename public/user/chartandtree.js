@@ -253,7 +253,7 @@ function getPublicUserData(){
 // gets the name, skillnames, focusarea of a tree.
 function getPublicTreeData(){
   var treeToSearch = {value: document.getElementById('cardSearchBar').value};
-  request('POST', '/set/getPublicTreeData', userToSearch, function() {
+  request('POST', '/set/getPublicTreeData', treeToSearch, function() {
       if(this.readyState == 4 && this.status == 200) {
         var modal = document.getElementById('searchModal');
         var searchModalBody = document.getElementById('searchModalBody');
@@ -277,8 +277,8 @@ function getPublicTreeData(){
 
 // gets the name, caterory, desc, relations and training data of a skill.
 function getPublicSkillData(){
-  var treeToSearch = {value: document.getElementById('cardSearchBar').value};
-  request('POST', '/set/getPublicSkillData', userToSearch, function() {
+  var skillToSearch = {value: document.getElementById('cardSearchBar').value};
+  request('POST', '/set/getPublicSkillData', skillToSearch, function() {
       if(this.readyState == 4 && this.status == 200) {
 
       }
