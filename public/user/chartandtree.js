@@ -229,7 +229,7 @@ function getPublicUserData(){
   var userToSearch = {value: document.getElementById('cardSearchBar').value};
   request('POST', '/set/getPublicUserData', userToSearch, function() {
       if(this.readyState == 4 && this.status == 200) {
-
+        console.log(this.response);
       }
   });
 }
