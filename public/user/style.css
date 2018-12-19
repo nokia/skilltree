@@ -296,3 +296,8 @@ a {
 .bg-lightgreen{
   background-color: #8fc880 !important;
 }
+
+.table-light{
+  margin: 2% 5%;
+  width: 90%;
+}
