@@ -239,7 +239,7 @@ function getPublicUserData(){
         searchModalBody.innerHTML = "";
         for (var i = 0; i < this.response.length; i++) {
           var row = document.createElement('tr');
-          row.innerHTML += "<th>" + i + "</th>";
+          row.innerHTML += "<th>" + (i+1) + "</th>";
           row.innerHTML += "<td>" + this.response[i].username + "</td>";
           row.innerHTML += "<td>" + this.response[i].mainTree + "</td>";
           row.innerHTML += "<td>" + this.response[i].willingToTeach + "</td>";
@@ -265,7 +265,7 @@ function getPublicTreeData(){
         searchModalBody.innerHTML = "";
         for (var i = 0; i < this.response.length; i++) {
           var row = document.createElement('tr');
-          row.innerHTML += "<th>" + i + "</th>";
+          row.innerHTML += "<th>" + (i+1) + "</th>";
           row.innerHTML += "<td>" + this.response[i].name + "</td>";
           row.innerHTML += "<td>" + this.response[i].focusArea + "</td>";
           searchModalBody.appendChild(row);
@@ -290,7 +290,7 @@ function getPublicSkillData(){
         searchModalBody.innerHTML = "";
         for (var i = 0; i < this.response.length; i++) {
           var row = document.createElement('tr');
-          row.innerHTML += "<th>" + i + "</th>";
+          row.innerHTML += "<th>" + (i+1) + "</th>";
           row.innerHTML += "<td>" + this.response[i].name + "</td>";
           row.innerHTML += "<td>" + this.response[i].categoryName + "</td>";
           row.innerHTML += "<td>" + this.response[i].description + "</td>";
