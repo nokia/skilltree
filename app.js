@@ -409,12 +409,12 @@ setRoute.post('/getPublicTreeData', async function (req, res) {
     res.json(foundTrees);
 });
 
-// Getting the name, caterory, desc, relations and training data of a skill.
+// Getting the name, caterory, desc of a skill.
 setRoute.post('/getPublicSkillData', async function (req, res) {
     var data = req.body;
     var foundSkills = await Skill.find({
 				"name": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
-		}, 'name categoryName description parents children trainings', function(err, skill) {
+		}, 'name categoryName description', function(err, skill) {
 				if (err) throw err;
 		return skill;
 		});

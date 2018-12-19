@@ -280,7 +280,23 @@ function getPublicSkillData(){
   var skillToSearch = {value: document.getElementById('cardSearchBar').value};
   request('POST', '/set/getPublicSkillData', skillToSearch, function() {
       if(this.readyState == 4 && this.status == 200) {
-
+        var modal = document.getElementById('searchModal');
+        var searchModalBody = document.getElementById('searchModalBody');
+        var searchModalHeader = document.getElementById('searchModalHeader');
+        document.getElementById('closeSearchModal').onclick = function() {
+          modal.style.display = "none";
+        };
+        searchModalHeader.innerHTML = '<th scope="col">#</th><th scope="col">Name</th><th scope="col">Category</th><th scope="col">Description</th>';
+        searchModalBody.innerHTML = "";
+        for (var i = 0; i < this.response.length; i++) {
+          var row = document.createElement('tr');
+          row.innerHTML += "<th>" + i + "</th>";
+          row.innerHTML += "<td>" + this.response[i].name + "</td>";
+          row.innerHTML += "<td>" + this.response[i].categoryName + "</td>";
+          row.innerHTML += "<td>" + this.response[i].description + "</td>";
+          searchModalBody.appendChild(row);
+        }
+        modal.style.display = "block";
       }
   });
 }
