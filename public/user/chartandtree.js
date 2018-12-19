@@ -229,7 +229,17 @@ function getPublicUserData(){
   var userToSearch = {value: document.getElementById('cardSearchBar').value};
   request('POST', '/set/getPublicUserData', userToSearch, function() {
       if(this.readyState == 4 && this.status == 200) {
-        console.log(this.response);
+        var searchModalBody = document.getElementById('searchModalBody');
+        searchModalBody.innerHTML = "";
+        for (var i = 0; i < this.response.length; i++) {
+          var row = document.createElement('tr');
+          row.innerHTML += "<th>" + i + "</th>";
+          row.innerHTML += "<td>" + this.response[i].username + "</td>";
+          row.innerHTML += "<td>" + this.response[i].mainTree + "</td>";
+          row.innerHTML += "<td>" + this.response[i].willingToTeach + "</td>";
+          searchModalBody.appendChild(row);
+        }
+        document.getElementById('userSearchModal').display = block;
       }
   });
 }

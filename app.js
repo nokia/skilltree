@@ -385,19 +385,19 @@ setRoute.post('/searchTreesByName', async function (req, res) {
 });
 
 
-// Getting the name, skills, trees and maintree of a user. (will be needed for advanced search)
+// Getting the name, willingToTeach and maintree of a user.
 setRoute.post('/getPublicUserData', async function (req, res) {
 		var data = req.body;
     var foundUsers = await User.find({
 					"username": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
-			}, 'username skills trees maintree', function (err, user) {
+			}, 'username mainTree willingToTeach ', function (err, user) {
 					if (err) throw err;
 			return user;
 		});
 		res.json(foundUsers);
 });
 
-// Getting the name, skillnames, focusarea of a tree. (will be needed for advanced search)
+// Getting the name, skillnames, focusarea of a tree.
 setRoute.post('/getPublicTreeData', async function (req, res) {
 		var data = req.body;
     var foundTrees = await Tree.find({
@@ -409,7 +409,7 @@ setRoute.post('/getPublicTreeData', async function (req, res) {
     res.json(foundTrees);
 });
 
-// Getting the name, caterory, desc, relations and training data of a skill. (will be needed for advanced search)
+// Getting the name, caterory, desc, relations and training data of a skill.
 setRoute.post('/getPublicSkillData', async function (req, res) {
     var data = req.body;
     var foundSkills = await Skill.find({
