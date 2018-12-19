@@ -239,7 +239,7 @@ function getPublicUserData(){
           row.innerHTML += "<td>" + this.response[i].willingToTeach + "</td>";
           searchModalBody.appendChild(row);
         }
-        document.getElementById('userSearchModal').display = block;
+        document.getElementById('userSearchModal').display = "block";
       }
   });
 }
