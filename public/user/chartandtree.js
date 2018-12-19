@@ -8,7 +8,7 @@ function initData(){
   dataRequest.open('GET', '/get/userdata', true);
   dataRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
   dataRequest.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-  dataRequest.responseType = "json";
+  dataRequest.responseType = "json"; 
   dataRequest.onreadystatechange = function() {
       if(dataRequest.readyState == 4 && dataRequest.status == 200) {
           data = dataRequest.response;
