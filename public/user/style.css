@@ -296,3 +296,8 @@ a {
 .bg-lightgreen{
   background-color: #8fc880 !important;
 }
+
+.table .table-striped .table-bordered .table-sm{
+  margin: 2% 5%;
+  width: 90%;
+}
