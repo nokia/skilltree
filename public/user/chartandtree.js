@@ -229,7 +229,11 @@ function getPublicUserData(){
   var userToSearch = {value: document.getElementById('cardSearchBar').value};
   request('POST', '/set/getPublicUserData', userToSearch, function() {
       if(this.readyState == 4 && this.status == 200) {
+        var modal = document.getElementById('userSearchModal');
         var searchModalBody = document.getElementById('searchModalBody');
+        document.getElementById('closeSearchModal').onclick() {
+          modal.style.display = "none";
+        };
         searchModalBody.innerHTML = "";
         for (var i = 0; i < this.response.length; i++) {
           var row = document.createElement('tr');
@@ -239,7 +243,7 @@ function getPublicUserData(){
           row.innerHTML += "<td>" + this.response[i].willingToTeach + "</td>";
           searchModalBody.appendChild(row);
         }
-        document.getElementById('userSearchModal').display = "block";
+        modal.style.display = "block";
       }
   });
 }
