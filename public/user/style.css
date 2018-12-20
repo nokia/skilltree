@@ -303,11 +303,11 @@ a {
 }
 
 .foundElementRow{
-  transition: all ease-in-out 0.3;
+  transition: all .2s ease-out;
 }
 
 .foundElementRow:hover{
   cursor: pointer;
   opacity: 0.8;
-  transform: translateX(10px);
+  transform: scale(1.1);
 }
