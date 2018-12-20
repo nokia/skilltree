@@ -987,16 +987,18 @@ function approveTrainings () {
         select.add(option);
     }
 
-    var selectedTraining = select.options[select.selectedIndex].name;
-    console.log(selectedTraining);
-
-    /*var skillforapproval = skillsforapproval.find(obj => obj.name == selectedSkill);
-
     btn.onclick = function () {
+        var selectedTraining = select.options[select.selectedIndex]
         request('POST', '/set/approvetraining', {
-            name:
-        })
-    };*/
+            name: selectedTraining.name,
+            skillName: selectedTraining.skillName,
+            username: selectedTraining
+        }, function () {
+            if (this.readyState == 4 && this.status == 200) {
+                window.open("/user/", "_self");
+            }
+        });
+    };
 }
 
 function addCheckBox(id, boxText, parent){
