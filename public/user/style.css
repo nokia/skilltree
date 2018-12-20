@@ -220,13 +220,19 @@ a {
     color: white;
 }
 
-.modal-body {padding: 2px 16px;}
+.modal-body {
+  padding: 2px 16px;
+  height: 100%;
+  overflow: auto;
+}
 
 .modal-content {
     background-color: #fefefe;
     margin: 8% auto; /* 8% from the top and centered */
     border: 1px solid #888;
     width: 90%; /* Could be more or less, depending on screen size */
+    height: 100%;
+    overflow: auto;
 }
 
 .modalClose {
