@@ -1112,7 +1112,7 @@ setRoute.post('/approvetraining', async function (req, res) {
                     shortDescription: training.shortDescription,
                     URL: training.URL,
                     goal: training.goal,
-                    length: traininglength,
+                    length: training.length,
                     language: training.language
                 });
 
