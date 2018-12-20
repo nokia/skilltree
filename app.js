@@ -1080,6 +1080,8 @@ setRoute.post('/approvetraining', async function (req, res) {
 		return training;
     });
 
+    console.log(training);
+
     var globalSkill = await Skill.findOne({
         skillName: data.skillName
     }, function(err, skill) {
@@ -1113,6 +1115,9 @@ setRoute.post('/approvetraining', async function (req, res) {
                     length: traininglength,
                     language: training.language
                 });
+
+
+                console.log(user);
 
                 user.save(function (err) {if (err) throw err;});
             }
