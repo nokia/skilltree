@@ -55,14 +55,11 @@ function initCard(){
 // initializes tge data of the card on the top-right corner of the page.
 function initUI(self, _data){
   var card_username = document.getElementById('card_username');
-  var treeOperationTitle = document.getElementById('treeOperationTitle');
   if (self) {
     card_username.innerHTML = "Welcome " + _data.username + "!";
-    treeOperationTitle.innerHTML = "Add existing trees!";
   }
   else {
     card_username.innerHTML = "You're now viewing " + _data.username + "'s data.";
-    treeOperationTitle.innerHTML = "Browse " + _data.username + "'s public trees!";
   }
   initCard();
   switchSearch("User");
