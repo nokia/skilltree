@@ -239,6 +239,7 @@ function getPublicUserData(){
         searchModalBody.innerHTML = "";
         for (var i = 0; i < this.response.length; i++) {
           var row = document.createElement('tr');
+          row.className = "foundElementRow";
           row.innerHTML += "<th>" + (i+1) + "</th>";
           row.innerHTML += "<td>" + this.response[i].username + "</td>";
           row.innerHTML += "<td>" + this.response[i].mainTree + "</td>";
