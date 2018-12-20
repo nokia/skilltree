@@ -1093,8 +1093,6 @@ setRoute.post('/approvetraining', async function (req, res) {
 		return skill;
     });
 
-    console.log(globalSkill);
-
     globalSkill.trainings.push({
         name: training.name,
         level: training.level,
@@ -1121,9 +1119,6 @@ setRoute.post('/approvetraining', async function (req, res) {
                     length: training.length,
                     language: training.language
                 });
-
-
-                console.log(user);
 
                 user.save(function (err) {if (err) throw err;});
             }
