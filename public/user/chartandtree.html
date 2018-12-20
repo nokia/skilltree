@@ -161,84 +161,19 @@
 
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item">
-            <a class="nav-link" id="personal-tab" data-toggle="tab" href="#personal" role="tab" aria-controls="personal" aria-selected="false">Account</a>
+            <a class="nav-link active" id="personal-tab" data-toggle="tab" href="#personal" role="tab" aria-controls="personal" aria-selected="true">Options</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" id="trainings-tab" data-toggle="tab" href="#trainings" role="tab" aria-controls="trainings" aria-selected="false">Peer Learning</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" id="skilltrees-tab" data-toggle="tab" href="#skilltrees" role="tab" aria-controls="skilltrees" aria-selected="true">Skill Trees</a>
-          </li><!--
-            <li class="nav-item">
-            <a class="nav-link" id="statistics-tab" data-toggle="tab" href="#statistics" role="tab" aria-controls="statistics" aria-selected="false">Statistics</a>
-          </li> -->
         </ul>
-
-
-
         <!-- end of card nav -->
 
         <!-- tab contents -->
         <div class="tab-content" id="myTabContent">
-
           <!-- personal-tab content -->
-
-          <div class="tab-pane fade" id="personal" role="tabpanel" aria-labelledby="personal-tab">
-
-            <form class="pt-4">
-              <div class="form-group row">
-                <label for="username" class="col-sm-3 col-form-label">User name</label>
-                <div class="col-sm-9">
-                  <input type="text" class="form-control" id="username" aria-describedby="emailHelp" placeholder="User name">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="exampleInputEmail1" class="col-sm-3 col-form-label">Email</label>
-                <div class="col-sm-9">
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="user677@nokia.com">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="exampleInputEmail1" class="col-sm-3 col-form-label">Location</label>
-                <div class="col-sm-9">
-                  <input type="text" class="form-control" id="ptlocation" aria-describedby="place" placeholder="WhereAreYou link">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="inputPassword" class="col-sm-3 col-form-label">Password</label>
-                <div class="col-sm-9">
-                  <input type="password" class="form-control" id="inputPassword" placeholder="****">
-                </div>
-              </div>
-            </form>
+          <div class="tab-panel show active" id="personal" role="tabpanel" aria-labelledby="personal-tab">
+            <h5>Options</h5>
+            <p>Options</p>
           </div>
-
-          <!-- skilltrees-tab content -->
-
-          <div class="tab-pane fade show active" id="skilltrees" role="tabpanel" aria-labelledby="skilltrees-tab">
-            <h5 class="pt-4" id="treeOperationTitle">Add existing trees</h5>
-            <div class="form-inline my-2 my-lg-0">
-              
-            </div>
-          </div>
-
-          <!-- statistics-tab content -->
-
-          <div class="tab-pane fade" id="statistics" role="tabpanel" aria-labelledby="statistics-tab">
-            ...
-          </div>
-
-          <!-- trainings-tab content -->
-
-          <div class="tab-pane fade" id="trainings" role="tabpanel" aria-labelledby="trainings-tab">
-            <h5>Your Requested Trainings</h5>
-            <p>details about your requested trainings</p>
-
-            <h5>Your Offered Trainings</h5>
-            <p>details about your offered trainings</p>
-            <p>days</p>
-            <p>timeslot</p>
-          </div>
+          <!-- end of personal-tab content -->
         </div>
         <!-- end of tab contents -->
       </div>
