@@ -992,7 +992,7 @@ function approveTrainings () {
         request('POST', '/set/approvetraining', {
             name: selectedTraining.name,
             skillName: selectedTraining.skillName,
-            username: selectedTraining
+            username: selectedTraining.username
         }, function () {
             if (this.readyState == 4 && this.status == 200) {
                 window.open("/user/", "_self");

@@ -1071,10 +1071,10 @@ setRoute.post('/approvetree', async function (req, res) {
 setRoute.post('/approvetraining', async function (req, res) {
 	var data = req.body;
 
-    console.log(data);
-
-    var training = await ApprovableTraining.find({
-        username: data.username
+    var training = await ApprovableTraining.findOne({
+        username: data.username,
+        skillName: data.skillName,
+        name: data.name
     }, function(err, training) {
         if (err) throw err;
 		return training;
@@ -1099,7 +1099,7 @@ setRoute.post('/approvetraining', async function (req, res) {
         language: training.language
     });
 
-    //globalSkill.save(function (err) {if (err) throw err;});
+    globalSkill.save(function (err) {if (err) throw err;});
 
     User.find({} , (err, users) => {
         if (err) throw err;
@@ -1119,7 +1119,7 @@ setRoute.post('/approvetraining', async function (req, res) {
 
                 console.log(user);
 
-                //user.save(function (err) {if (err) throw err;});
+                user.save(function (err) {if (err) throw err;});
             }
         })
     })
