@@ -1072,9 +1072,11 @@ setRoute.post('/approvetraining', async function (req, res) {
 	var data = req.body;
 
     var training = await ApprovableTraining.findOne({
-        username: data.username,
-        skillName: data.skillName,
-        name: data.name
+        $and: [
+            {username: data.username},
+            {skillName: data.skillName},
+            {name: data.name}
+        ]
     }, function(err, training) {
         if (err) throw err;
 		return training;
