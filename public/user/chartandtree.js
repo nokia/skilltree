@@ -56,23 +56,13 @@ function initCard(){
 function initUI(self, _data){
   var card_username = document.getElementById('card_username');
   var treeOperationTitle = document.getElementById('treeOperationTitle');
-  var searchedTree = document.getElementById('searchedTree');
-  var addsearchedTree = document.getElementById('addsearchedTree');
   if (self) {
     card_username.innerHTML = "Welcome " + _data.username + "!";
     treeOperationTitle.innerHTML = "Add existing trees!";
-    searchedTree.onkeyup = searchTreesByName;
-    addsearchedTree.value = "Add!";
-    addsearchedTree.onclick = addTreeToUser;
   }
   else {
     card_username.innerHTML = "You're now viewing " + _data.username + "'s data.";
     treeOperationTitle.innerHTML = "Browse " + _data.username + "'s public trees!";
-    searchedTree.onkeyup = searchTreesByName;
-    addsearchedTree.value = "Search!";
-    addsearchedTree.onclick = function(){
-      showTree(searchedTree.value, _data, false);
-    }
   }
   initCard();
   switchSearch("User");
