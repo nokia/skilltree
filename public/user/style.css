@@ -302,6 +302,10 @@ a {
   width: 90%;
 }
 
+.foundElementRow{
+  transition: all ease-in-out 0.3;
+}
+
 .foundElementRow:hover{
   cursor: pointer;
   opacity: 0.8;
