@@ -1080,6 +1080,12 @@ setRoute.post('/approvetraining', async function (req, res) {
 		return training;
     });
 
+    await ApprovableTraining.remove({
+        username: data.username,
+        skillName: data.skillName,
+        name: data.name
+    });
+
     var globalSkill = await Skill.findOne({
         name: data.skillName
     }, function(err, skill) {
