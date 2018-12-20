@@ -262,7 +262,7 @@ function getPublicTreeData(){
           row.innerHTML += "<td>" + this.response[i].focusArea + "</td>";
           row.treeName = this.response[i].name;
           row.onclick = function() {
-            addTreeToUser(this.treeName);
+            addTreeToUser({value: this.treeName});
           }
           searchModalBody.appendChild(row);
         }
