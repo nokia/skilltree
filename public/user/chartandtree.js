@@ -270,6 +270,10 @@ function getPublicTreeData(){
           row.innerHTML += "<th>" + (i+1) + "</th>";
           row.innerHTML += "<td>" + this.response[i].name + "</td>";
           row.innerHTML += "<td>" + this.response[i].focusArea + "</td>";
+          row.treeName = this.response[i].name;
+          row.onclick = function() {
+            addTreeToUser(this.treeName);
+          }
           searchModalBody.appendChild(row);
         }
         modal.style.display = "block";
@@ -297,6 +301,9 @@ function getPublicSkillData(){
           row.innerHTML += "<td>" + this.response[i].name + "</td>";
           row.innerHTML += "<td>" + this.response[i].categoryName + "</td>";
           row.innerHTML += "<td>" + this.response[i].description + "</td>";
+          row.onclick = function(){
+
+          }
           searchModalBody.appendChild(row);
         }
         modal.style.display = "block";
@@ -336,9 +343,7 @@ function switchSearch(type){
 }
 
 // adds a public tree to the user
-function addTreeToUser(){
-  var treeToAdd = {value: document.getElementById('searchedTree').value};
-
+function addTreeToUser(treeToAdd){
   request('POST', '/set/addTreeToUser', treeToAdd, function() {
       if (this.readyState == 4 && this.status == 200) {
         if (this.response.success){
