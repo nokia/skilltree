@@ -1071,6 +1071,8 @@ setRoute.post('/approvetree', async function (req, res) {
 setRoute.post('/approvetraining', async function (req, res) {
 	var data = req.body;
 
+    console.log(data);
+
     var training = await ApprovableTraining.find({
         username: data.username
     }, function(err, training) {
