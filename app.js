@@ -1020,7 +1020,8 @@ setRoute.post('/editmytree', async function (req, res) {
     }
     else if (user.trees.find(obj => obj.name == data.name) != undefined) {
         var sn = await sortTree(data.skills);
-        user.trees.find(obj => obj.name == data.name) = {name: data.name, focusArea: data.focusArea, skillNames: sn};
+        user.trees = user.trees.filter(obj => obj.name != data.name);
+        user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: sn});
 
         await data.skills.forEach(async function (skill) {
         	if (skill.achievedPoint == undefined) skill.achievedPoint = 0;
@@ -1038,7 +1039,7 @@ setRoute.post('/editmytree', async function (req, res) {
     else {
         res.json({
             success: false,
-            message: 'treeexists'
+            message: 'treenotexists'
         });
     }
 });
