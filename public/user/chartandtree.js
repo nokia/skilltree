@@ -887,6 +887,15 @@ function editMyTree () {
     creator.style.width = canvas.style.width;
     creator.style.height = canvas.style.height;
 
+    loadTree.onclick = function () {
+        var tree = data.trees.find(obj => obj.name == document.getElementById("treeName"));
+
+        if (tree == undefined) alert("Tree is not found");
+        else {
+            alert("ok");
+        }
+    };
+
     var addBtn = document.getElementById("addToTree");
     var skillList = document.getElementById("skillList");
     var skillsToAdd = [];
