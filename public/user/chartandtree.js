@@ -876,6 +876,9 @@ function editMyTree () {
     var canvas = document.getElementById("pixiCanvas");
     canvas.style.display = "none";
 
+    var loadTree = document.getElementById("loadTree");
+    loadTree.style.display = "block";
+
     var creator = document.getElementById("creator");
     creator.style.display = "grid";
 
