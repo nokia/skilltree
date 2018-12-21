@@ -1023,14 +1023,7 @@ setRoute.post('/editmytree', async function (req, res) {
         user.trees.find(obj => obj.name == data.name) = {name: data.name, focusArea: data.focusArea, skillNames: sn};
 
         await data.skills.forEach(async function (skill) {
-            /*var skill = await Skill.findOne({
-                name: skillName,
-            }, function (err, skill) {
-                if (err) throw err;
-                return skill;
-            });*/
-
-            skill.achievedPoint = 0;
+        	if (skill.achievedPoint == undefined) skill.achievedPoint = 0;
             if (user.skills.find(obj => obj.name == skill.name) == undefined) {
                 user.skills.push(skill);
             }
