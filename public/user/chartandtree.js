@@ -882,6 +882,8 @@ function editMyTree () {
     var creator = document.getElementById("creator");
     creator.style.display = "grid";
 
+    document.getElementById("apprP").style.display = "none";
+
     creator.style.width = canvas.style.width;
     creator.style.height = canvas.style.height;
 
