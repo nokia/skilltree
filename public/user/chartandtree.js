@@ -948,14 +948,12 @@ function editMyTree () {
                 var treeData = {
                     name: document.getElementById('treeName').value,
                     focusArea: document.getElementById('focusarea').value,
-                    forApprove: document.getElementById('treeAppr').checked,
                     skills: skillsToAdd
                 };
 
-                request('POST', '/set/newtree', treeData, function () {
+                request('POST', '/set/editmytree', treeData, function () {
                     if (this.readyState == 4 && this.status == 200) {
                         if (this.response.success) window.open("/user/", "_self");
-                        else if (this.response.message == "treeexists") alert("There is already a tree with this name");
                     }
                 });
             } else alert("Please add at least one skill to the tree");
