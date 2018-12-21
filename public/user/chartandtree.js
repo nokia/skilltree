@@ -888,7 +888,7 @@ function editMyTree () {
     creator.style.height = canvas.style.height;
 
     loadTree.onclick = function () {
-        var tree = data.trees.find(obj => obj.name == document.getElementById("treeName"));
+        var tree = data.trees.find(obj => obj.name == document.getElementById("treeName").value);
 
         if (tree == undefined) alert("Tree is not found");
         else {
