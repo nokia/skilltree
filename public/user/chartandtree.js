@@ -762,10 +762,12 @@ function editMySkill () {
     }
 
     document.getElementById("loadSkill").style.display = "block";
+    document.getElementById("newSkillModalTitle").innerText = "Edit your skill";
 
     window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = "none";
+            document.getElementById("newSkillModalTitle").innerText = "Create your own skill";
         }
     }
 
