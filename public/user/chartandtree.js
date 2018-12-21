@@ -887,18 +887,24 @@ function editMyTree () {
     creator.style.width = canvas.style.width;
     creator.style.height = canvas.style.height;
 
+    var skillList = document.getElementById("skillList");
+    var skillsToAdd = [];
     loadTree.onclick = function () {
         var tree = data.trees.find(obj => obj.name == document.getElementById("treeName").value);
 
         if (tree == undefined) alert("Tree is not found");
         else {
-            alert("ok");
+            document.getElementById("focusarea").value = tree.focusArea;
+            for (var i = 0; i < tree.skillNames.length; ++i) {
+                skillsToAdd.push(data.skills.find(obj => obj.name == tree.skillNames[i]));
+                var option = document.createElement("option");
+                option.text = tree.skillNames[i];
+                skillList.add(option);
+            }
         }
     };
 
     var addBtn = document.getElementById("addToTree");
-    var skillList = document.getElementById("skillList");
-    var skillsToAdd = [];
     addBtn.onclick = function () {
         var skill = {value: document.getElementById('skillSearchTree').value};
 
