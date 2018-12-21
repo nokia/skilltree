@@ -1003,6 +1003,53 @@ setRoute.post('/newtree', async function (req, res) {
 	}
 });
 
+// creates a new tree only for the user.
+setRoute.post('/editmytree', async function (req, res) {
+    var data = req.body;
+    var user = await User.findOne({
+        username: req.decoded.username
+    }, function(err, user) {
+        if (err) throw err;
+        return user;
+    });
+    if (!user) {
+        res.json({
+            success: false,
+            message: 'User not found.'
+        });
+    }
+    else if (user.trees.find(obj => obj.name == data.name) != undefined) {
+        var sn = await sortTree(data.skills);
+        user.trees.find(obj => obj.name == data.name) = {name: data.name, focusArea: data.focusArea, skillNames: sn};
+
+        await data.skills.forEach(async function (skill) {
+            /*var skill = await Skill.findOne({
+                name: skillName,
+            }, function (err, skill) {
+                if (err) throw err;
+                return skill;
+            });*/
+
+            skill.achievedPoint = 0;
+            if (user.skills.find(obj => obj.name == skill.name) == undefined) {
+                user.skills.push(skill);
+            }
+        });
+
+        user.save(function (err) {if (err) throw err;});
+
+        res.json({
+            success: true
+        });
+    }
+    else {
+        res.json({
+            success: false,
+            message: 'treeexists'
+        });
+    }
+});
+
 // add skill to user tree
 setRoute.post('/addskilltotree', async function(req, res) {
     var data = req.body;
