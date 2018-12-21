@@ -869,7 +869,7 @@ function addRow(table) {
 */
 
 // opens tree creator and manages it.
-function editTree () {
+function editMyTree () {
     document.getElementById('approveTrees').style.display = "none";
     document.getElementById('approveSkills').style.display = "none";
 
