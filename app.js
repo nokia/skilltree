@@ -1320,8 +1320,8 @@ setRoute.post('/parentTableData', async function (req, res) {
 
 
 	var parents = [];
-	req.body.forEach(function(parent){
-		var parent = user.skills.find(obj => obj.name == parent.name);
+	req.body.forEach(function(parentname){
+		var parent = user.skills.find(obj => obj.name == parentname);
 		parents.push(parent);
 	});
 	
