@@ -721,11 +721,11 @@ function createSkill () {
                         }
                     }
                 });
-
+/*
                 name: parentsTable.rows[1].cells[0].children[0].value = this.response.parents[0].name;
                 minPoint: parentsTable.rows[1].cells[1].children[0].value = this.reponse.parents[0].minPoint;
                 recommended: !parentsTable.rows[1].cells[2].children[0].checked
-        
+       */ 
                 /*
                 pointsNum = this.response.maxPoint;
                 pointDescription = this.response.pointDescription;
