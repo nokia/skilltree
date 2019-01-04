@@ -1321,17 +1321,22 @@ setRoute.post('/parentTableData', async function (req, res) {
 
 	var parents = [];
 	req.body.parents.forEach(function(parentname){
+
+		//find the parent, each of them in the foreach 1 by 1
 		var parent = user.skills.find(obj => obj.name == parentname);
 
+		//find the child in the parent for minpoint and recommended
 		var child = parent.children.find(obj => obj.name == req.body.name );
 
 
-
+		//build the json file we need
 		var name_minpoint_required = {
-			name: req.body.name,
+			name: parent.name,
 			minPoint: child.minPoint,
 			recommended: child.recommended
 		}
+
+		//push the json file to an array that we are going to return, includes all rows for the table.
 		parents.push(name_minpoint_required);
 	});
 	

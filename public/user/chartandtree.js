@@ -842,11 +842,10 @@ function editMySkill () {
                             console.log(this.response);
                             for(var i=0;i<this.response.length;i++)
                             {   
-                                console.log("yup");
-                                /*
-                                parentsTable.rows[1].cells[0].children[0].value = "";
-                                parentsTable.rows[1].cells[1].children[0].value = "";
-                                parentsTable.rows[1].cells[2].children[0].checked = false;*/
+                                
+                                parentsTable.rows[1].cells[0].children[0].value = this.response[i].name;
+                                parentsTable.rows[1].cells[1].children[0].value = this.response[i].minPoint;
+                                parentsTable.rows[1].cells[2].children[0].checked = !this.response[i].recommended;
                             }
                             
                         }
