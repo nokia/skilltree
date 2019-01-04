@@ -702,7 +702,7 @@ function createSkill () {
                 document.getElementById('newSkillName').value = this.response.name;
                 document.getElementById('newSkillDesc').value = this.response.description;
                 document.getElementById('newSkillIcon').value = this.response.skillIcon;
-                document.getElementById("newSkillCat").value = this.response.caregoryName;
+                document.getElementById("newSkillCat").value = "??" ;//this.response.caregoryName;
 
                 //var parentsTable = document.getElementById('parentsTable');
 
