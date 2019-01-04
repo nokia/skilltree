@@ -701,6 +701,15 @@ function createSkill () {
                 console.log(this.response);
                 document.getElementById('newSkillName').value = this.response.name;
                 document.getElementById('newSkillDesc').value = this.response.description;
+                document.getElementById('newSkillIcon').value = this.response.skillIcon;
+                catSelect.value = this.response.caregoryName;
+                pointsNum = this.response.maxPoint;
+                pointDescription = this.response.pointDescription;
+                parents = this.reponse.parents;
+                trainings = this.reponse.trainings;
+                
+
+
             }
         }
             
