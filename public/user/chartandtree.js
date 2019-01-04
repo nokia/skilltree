@@ -804,7 +804,7 @@ function editMySkill () {
 
                 var tr = document.createElement('tr');
                 var td1 = document.createElement('td');
-                td.value = "Parent";
+                td1.value = "Parent";
                 tr.appendChild(td1);
                 var td2 = document.createElement('td');
                 td2.value = "Min Point";
