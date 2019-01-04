@@ -1309,7 +1309,7 @@ setRoute.post('/searchUserSkillByName', async function (req, res) {
 	res.json(skill);
 });
 
-setRoute.post('/searchUserSkillByNames', async function (req, res) {
+setRoute.post('/parentTableData', async function (req, res) {
 
 	var user = await User.findOne({
 		username: req.decoded.username

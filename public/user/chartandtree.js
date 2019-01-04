@@ -805,7 +805,7 @@ function editMySkill () {
                     var a = 0;
                 }
                 
-                request('POST', '/set/searchUserSkillByNames', skillData, function(){
+                request('POST', '/set/searchUserSkillByNames', [{ name: "HTML" }], function(){
                     if (this.readyState == 4 && this.status == 200) {
                         if(this.response !== undefined)
                         {
