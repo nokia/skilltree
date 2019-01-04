@@ -688,9 +688,12 @@ function createSkill () {
     //TODO fill data with requested data
     loadSkill.onclick =function(){
         //request for the skill to load data from
-        request('POST', '/set/searchUserSkillsByName', document.getElementById('newSkillName').value, function () {
-        if (this.readyState == 4 && this.status == 200) 
+        var skillname = document.getElementById('newSkillName').value
+        request('POST', '/set/searchUserSkillsByName', skillname, function () {
+        if (this.readyState == 4 && this.status == 200) {
             console.log(this.response);
+        }
+            
         });
 
         /*
