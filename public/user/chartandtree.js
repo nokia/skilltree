@@ -800,9 +800,13 @@ function editMySkill () {
 
                 //Filling parents table
                 var parentsTable = document.getElementById('parentsTable');
-                for (i = 2; i < parentsTable.rows.length; ++i){
+                var i=parentsTable.rows.length;
+                while(i>1)
+                {
                     parentsTable.deleteRow(i);
+                    i--;
                 }
+                
                 
                 /*
                 parentsTable.innerHTML = "";
