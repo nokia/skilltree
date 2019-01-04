@@ -1294,6 +1294,21 @@ setRoute.post('/dropoffers', async function (req, res) {
 
 });
 
+// searches a userskill
+setRoute.post('/searchUserSkillByName', async function (req, res) {
+
+	var user = await User.findOne({
+		username: req.decoded.username
+	}, function(err, user) {
+		if (err) throw err;
+		return user;
+	});
+
+	var skill = user.skills.find(obj => obj.name == req.body);
+
+	res.json(skill);
+});
+
 //API call for request onclick
 setRoute.post('/request', async function (req, res){
 
