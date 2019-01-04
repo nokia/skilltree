@@ -703,8 +703,8 @@ function createSkill () {
                 document.getElementById('newSkillDesc').value = this.response.description;
                 document.getElementById('newSkillIcon').value = this.response.skillIcon;
                 console.log(document.getElementById("newSkillCat").value);
-                console.log(this.response.caregoryName);
-                document.getElementById("newSkillCat").value = this.response.caregoryName;
+                console.log(this.response.categoryName);
+                document.getElementById("newSkillCat").value = this.response.categoryName;
                 console.log(document.getElementById("newSkillCat").value);
 
                 //var parentsTable = document.getElementById('parentsTable');
