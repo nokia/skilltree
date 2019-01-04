@@ -741,6 +741,7 @@ function createSkill () {
     for (var i = 0; i < data.categories.length; ++i) {
         var option = document.createElement("option");
         option.text = data.categories[i].name;
+        option.value = data.categories[i].name;
         catSelect.add(option);
     }
 
