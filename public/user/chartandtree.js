@@ -679,6 +679,35 @@ function createSkill () {
         }
     }
 
+
+    
+
+
+
+    var loadSkill = document.getElementById("loadSkill");
+    //TODO fill data with requested data
+    loadSkill.onclick =function(){
+        //request for the skill to load data from
+        request('POST', '/set/searchUserSkillsByName', document.getElementById('newSkillName').value, function () {
+        if (this.readyState == 4 && this.status == 200) 
+            console.log(this.response);
+        });
+
+        /*
+        var skillData = {
+            name: document.getElementById('newSkillName').value,
+            description: document.getElementById('newSkillDesc').value,
+            skillIcon: document.getElementById('newSkillIcon').value,
+            categoryName: catSelect.value,
+            maxPoint: pointsNum,
+            pointDescription: pointDescription,
+            parents: parents,
+            //children: children,
+            trainings: trainings,
+            forApprove: document.getElementById('forApprove').checked
+        };*/
+    }
+
     var catSelect = document.getElementById("newSkillCat");
     catSelect.innerHTML = "";
     for (var i = 0; i < data.categories.length; ++i) {
