@@ -798,7 +798,7 @@ function editMySkill () {
                 
 
 
-                //Filling parents table
+                //Dropping data
                 var parentsTable = document.getElementById('parentsTable');
                 var i=parentsTable.rows.length-1;
                 while(i>1)
@@ -806,6 +806,9 @@ function editMySkill () {
                     parentsTable.deleteRow(i);
                     i--;
                 }
+                parentsTable.rows[1].cells[0].children[0].value = null;
+                parentsTable.rows[1].cells[1].children[0].value = null;
+                parentsTable.rows[1].cells[2].children[0].checked = false;
                 
                 
                 /*
