@@ -1320,9 +1320,19 @@ setRoute.post('/parentTableData', async function (req, res) {
 
 
 	var parents = [];
-	req.body.forEach(function(parentname){
+	req.body.parents.forEach(function(parentname){
 		var parent = user.skills.find(obj => obj.name == parentname);
-		parents.push(parent);
+
+		var child = parent.children.find(obj => obj.name == req.body.name );
+
+
+
+		var name_minpoint_required = {
+			name: req.body.name,
+			minPoint: child.minPoint,
+			recommended: child.recommended
+		}
+		parents.push(name_minpoint_required);
 	});
 	
 	res.json(parents);

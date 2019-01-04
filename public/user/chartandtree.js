@@ -833,13 +833,22 @@ function editMySkill () {
                 */
                 
                 var parents = this.response.parents;
+                var skillname = this.response.name;
                 console.log(parents);
-                request('POST', '/set/parentTableData', parents, function(){
+                request('POST', '/set/parentTableData', {name: skillname, parents: [parents] } , function(){
                     if (this.readyState == 4 && this.status == 200) {
                         if(this.response !== undefined)
                         {
-                                console.log("the response");
-                                console.log(this.response);
+                            console.log(this.response);
+                            for(var i=0;i<this.response.length;i++)
+                            {   
+                                console.log("yup");
+                                /*
+                                parentsTable.rows[1].cells[0].children[0].value = "";
+                                parentsTable.rows[1].cells[1].children[0].value = "";
+                                parentsTable.rows[1].cells[2].children[0].checked = false;*/
+                            }
+                            
                         }
                     }
                 });
