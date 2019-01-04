@@ -804,16 +804,16 @@ function editMySkill () {
 
                 var tr = document.createElement('tr');
                 var td1 = document.createElement('td');
-                td1.value = "Parent";
+                td1.innerHTML = "Parent";
                 tr.appendChild(td1);
                 var td2 = document.createElement('td');
-                td2.value = "Min Point";
+                td2.innerHTML = "Min Point";
                 tr.appendChild(td2);
                 var td3 = document.createElement('td');
-                td3.value = "Required";
+                td3.innerHTML = "Required";
                 tr.appendChild(td3);
                 var td4 = document.createElement('td');
-                td4.value = "Delete";
+                td4.innerHTML = "Delete";
                 tr.appendChild(td4);
 
                 parentsTable.appendChild(tr);
