@@ -800,8 +800,14 @@ function editMySkill () {
 
                 //Filling parents table
                 var parentsTable = document.getElementById('parentsTable');
+                for (i = 2; i < parentsTable.rows.length; ++i){
+                    parentsTable.deleteRow(i);
+                }
+                
+                /*
                 parentsTable.innerHTML = "";
 
+                
                 //basic headers smh
                 var tr = document.createElement('tr');
                 var td1 = document.createElement('td');
@@ -816,8 +822,8 @@ function editMySkill () {
                 var td4 = document.createElement('td');
                 td4.innerHTML = "Delete";
                 tr.appendChild(td4);
-
                 parentsTable.appendChild(tr);
+                */
                 
                 var parents = this.response.parents;
                 console.log(parents);
@@ -1032,6 +1038,8 @@ function deleteRow(table, row) {
   var i = row.parentNode.parentNode.rowIndex;
   document.getElementById(table).deleteRow(i);
 }
+
+
 
 // adds a row to a table
 function addRow(table) {
