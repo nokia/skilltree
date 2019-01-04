@@ -689,10 +689,17 @@ function createSkill () {
     loadSkill.onclick =function(){
         //request for the skill to load data from
         var skillname = document.getElementById('newSkillName').value;
-        console.log(skillname);
-        request('POST', '/set/searchUserSkillByName', skillname, function () {
+        
+        skillData = {
+            name: skillname
+        }
+
+        request('POST', '/set/searchUserSkillByName', skillData , function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log(this.response);
+            if(this.response !== undefined)
+            {
+                console.log(this.response);
+            }
         }
             
         });

@@ -1304,7 +1304,7 @@ setRoute.post('/searchUserSkillByName', async function (req, res) {
 		return user;
 	});
 
-	var skill = user.skills.find(obj => obj.name == req.body);
+	var skill = user.skills.find(obj => obj.name == req.body.name);
 
 	res.json(skill);
 });
