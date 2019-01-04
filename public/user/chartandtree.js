@@ -819,8 +819,8 @@ function editMySkill () {
 
                 parentsTable.appendChild(tr);
                 
-
-                request('POST', '/set/parentTableData', this.response.parents, function(){
+                var parents = this.response.parents;
+                request('POST', '/set/parentTableData', parents, function(){
                     if (this.readyState == 4 && this.status == 200) {
                         if(this.response !== undefined)
                         {
