@@ -816,6 +816,7 @@ function editMySkill () {
                 td4.value = "Delete";
                 tr.appendChild(td4);
 
+                parentsTable.appendChild(tr);
                 
                 request('POST', '/set/parentTableData', [{ name: "HTML" }, { name: "CSS"}], function(){
                     if (this.readyState == 4 && this.status == 200) {
