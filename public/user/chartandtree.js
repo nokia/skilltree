@@ -699,7 +699,7 @@ function createSkill () {
             if(this.response !== undefined)
             {
                 console.log(this.response);
-                document.getElementById('newSkillName').value = this.respone.name;
+                document.getElementById('newSkillName').value = this.response.name;
                 document.getElementById('newSkillDesc').value = this.response.description;
             }
         }
