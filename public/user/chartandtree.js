@@ -802,6 +802,7 @@ function editMySkill () {
                 var parentsTable = document.getElementById('parentsTable');
                 parentsTable.innerHTML = "";
 
+                //basic headers smh
                 var tr = document.createElement('tr');
                 var td1 = document.createElement('td');
                 td1.innerHTML = "Parent";
@@ -818,11 +819,12 @@ function editMySkill () {
 
                 parentsTable.appendChild(tr);
                 
-                request('POST', '/set/parentTableData', [{ name: "HTML" }, { name: "CSS"}], function(){
+
+                request('POST', '/set/parentTableData', this.response.parents, function(){
                     if (this.readyState == 4 && this.status == 200) {
                         if(this.response !== undefined)
                         {
-                                console.log("haha");
+                                console.log(this.response);
                         }
                     }
                 });

@@ -1319,13 +1319,13 @@ setRoute.post('/parentTableData', async function (req, res) {
 	});
 
 
-	var skills = [];
+	var parents = [];
 	req.body.forEach(function(parent){
-		var skill = user.skills.find(obj => obj.name == parent.name);
-		skills.push(skill);
+		var parent = user.skills.find(obj => obj.name == parent.name);
+		parents.push(parent);
 	});
 	
-	res.json(skills);
+	res.json(parents);
 });
 
 //API call for request onclick
