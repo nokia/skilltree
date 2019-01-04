@@ -801,15 +801,27 @@ function editMySkill () {
                 //Filling parents table
                 var parentsTable = document.getElementById('parentsTable');
                 parentsTable.innerHTML = "";
-                for (i = 0; i < this.response.parents.length; ++i) {
-                    var a = 0;
-                }
+
+                var tr = document.createElement('tr');
+                var td1 = document.createElement('td');
+                td.value = "Parent";
+                tr.appendChild(td1);
+                var td2 = document.createElement('td');
+                td2.value = "Min Point";
+                tr.appendChild(td2);
+                var td3 = document.createElement('td');
+                td3.value = "Required";
+                tr.appendChild(td3);
+                var td4 = document.createElement('td');
+                td4.value = "Delete";
+                tr.appendChild(td4);
+
                 
                 request('POST', '/set/parentTableData', [{ name: "HTML" }, { name: "CSS"}], function(){
                     if (this.readyState == 4 && this.status == 200) {
                         if(this.response !== undefined)
                         {
-                                console.log(this.response);
+                                console.log("haha");
                         }
                     }
                 });
