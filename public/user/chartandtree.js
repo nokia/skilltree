@@ -702,13 +702,30 @@ function createSkill () {
                 document.getElementById('newSkillName').value = this.response.name;
                 document.getElementById('newSkillDesc').value = this.response.description;
                 document.getElementById('newSkillIcon').value = this.response.skillIcon;
-                console.log(document.getElementById("newSkillCat").value);
-                console.log(this.response.categoryName);
                 document.getElementById("newSkillCat").value = this.response.categoryName;
-                console.log(document.getElementById("newSkillCat").value);
+                
 
-                //var parentsTable = document.getElementById('parentsTable');
 
+                //Filling parents table
+                var parentsTable = document.getElementById('parentsTable');
+                parentsTable.innerHTML = "";
+                for (i = 0; i < this.response.parents.length; ++i) {
+                    var a = 0;
+                }
+
+                request('POST', '/set/searchUserSkillByNames', skillData, function(){
+                    if (this.readyState == 4 && this.status == 200) {
+                        if(this.response !== undefined)
+                        {
+                                console.log(this.response);
+                        }
+                    }
+                });
+
+                name: parentsTable.rows[1].cells[0].children[0].value = this.response.parents[0].name;
+                minPoint: parentsTable.rows[1].cells[1].children[0].value = this.reponse.parents[0].minPoint;
+                recommended: !parentsTable.rows[1].cells[2].children[0].checked
+        
                 /*
                 pointsNum = this.response.maxPoint;
                 pointDescription = this.response.pointDescription;

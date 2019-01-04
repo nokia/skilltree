@@ -1309,6 +1309,25 @@ setRoute.post('/searchUserSkillByName', async function (req, res) {
 	res.json(skill);
 });
 
+setRoute.post('/searchUserSkillByNames', async function (req, res) {
+
+	var user = await User.findOne({
+		username: req.decoded.username
+	}, function(err, user) {
+		if (err) throw err;
+		return user;
+	});
+
+
+	var skills = [];
+	req.body.forEach(function(parent){
+		var skill = user.skills.find(obj => obj.name == parent.name);
+		skills.push(skill);
+	});
+	
+	res.json(skills);
+});
+
 //API call for request onclick
 setRoute.post('/request', async function (req, res){
 
