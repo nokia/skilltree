@@ -683,79 +683,6 @@ function createSkill () {
     
 
 
-
-    var loadSkill = document.getElementById("loadSkill");
-    //TODO fill data with requested data
-    loadSkill.onclick =function(){
-        //request for the skill to load data from
-        var skillname = document.getElementById('newSkillName').value;
-        
-        skillData = {
-            name: skillname
-        }
-
-        request('POST', '/set/searchUserSkillByName', skillData , function () {
-        if (this.readyState == 4 && this.status == 200) {
-            if(this.response !== undefined)
-            {
-                console.log(this.response);
-                document.getElementById('newSkillName').value = this.response.name;
-                document.getElementById('newSkillDesc').value = this.response.description;
-                document.getElementById('newSkillIcon').value = this.response.skillIcon;
-                document.getElementById("newSkillCat").value = this.response.categoryName;
-                
-
-
-                //Filling parents table
-                var parentsTable = document.getElementById('parentsTable');
-                parentsTable.innerHTML = "";
-                for (i = 0; i < this.response.parents.length; ++i) {
-                    var a = 0;
-                }
-
-                request('POST', '/set/searchUserSkillByNames', skillData, function(){
-                    if (this.readyState == 4 && this.status == 200) {
-                        if(this.response !== undefined)
-                        {
-                                console.log(this.response);
-                        }
-                    }
-                });
-/*
-                name: parentsTable.rows[1].cells[0].children[0].value = this.response.parents[0].name;
-                minPoint: parentsTable.rows[1].cells[1].children[0].value = this.reponse.parents[0].minPoint;
-                recommended: !parentsTable.rows[1].cells[2].children[0].checked
-       */ 
-                /*
-                pointsNum = this.response.maxPoint;
-                pointDescription = this.response.pointDescription;
-                parents = this.reponse.parents;
-                trainings = this.reponse.trainings;
-                */
-
-
-            }
-        }
-            
-        });
-
-
-
-        /*
-        var skillData = {
-            name: document.getElementById('newSkillName').value,
-            description: document.getElementById('newSkillDesc').value,
-            skillIcon: document.getElementById('newSkillIcon').value,
-            categoryName: catSelect.value,
-            maxPoint: pointsNum,
-            pointDescription: pointDescription,
-            parents: parents,
-            //children: children,
-            trainings: trainings,
-            forApprove: document.getElementById('forApprove').checked
-        };*/
-    }
-
     var catSelect = document.getElementById("newSkillCat");
     catSelect.innerHTML = "";
     for (var i = 0; i < data.categories.length; ++i) {
@@ -847,6 +774,78 @@ function editMySkill () {
             modal.style.display = "none";
             document.getElementById("newSkillModalTitle").innerText = "Create your own skill";
         }
+    }
+
+    var loadSkill = document.getElementById("loadSkill");
+    //TODO fill data with requested data
+    loadSkill.onclick =function(){
+        //request for the skill to load data from
+        var skillname = document.getElementById('newSkillName').value;
+        
+        skillData = {
+            name: skillname
+        }
+
+        request('POST', '/set/searchUserSkillByName', skillData , function () {
+        if (this.readyState == 4 && this.status == 200) {
+            if(this.response !== undefined)
+            {
+                console.log(this.response);
+                document.getElementById('newSkillName').value = this.response.name;
+                document.getElementById('newSkillDesc').value = this.response.description;
+                document.getElementById('newSkillIcon').value = this.response.skillIcon;
+                document.getElementById("newSkillCat").value = this.response.categoryName;
+                
+
+
+                //Filling parents table
+                var parentsTable = document.getElementById('parentsTable');
+                parentsTable.innerHTML = "";
+                for (i = 0; i < this.response.parents.length; ++i) {
+                    var a = 0;
+                }
+                
+                request('POST', '/set/searchUserSkillByNames', skillData, function(){
+                    if (this.readyState == 4 && this.status == 200) {
+                        if(this.response !== undefined)
+                        {
+                                console.log(this.response);
+                        }
+                    }
+                });
+/*
+                name: parentsTable.rows[1].cells[0].children[0].value = this.response.parents[0].name;
+                minPoint: parentsTable.rows[1].cells[1].children[0].value = this.reponse.parents[0].minPoint;
+                recommended: !parentsTable.rows[1].cells[2].children[0].checked
+       */ 
+                /*
+                pointsNum = this.response.maxPoint;
+                pointDescription = this.response.pointDescription;
+                parents = this.reponse.parents;
+                trainings = this.reponse.trainings;
+                */
+
+
+            }
+        }
+            
+        });
+
+
+
+        /*
+        var skillData = {
+            name: document.getElementById('newSkillName').value,
+            description: document.getElementById('newSkillDesc').value,
+            skillIcon: document.getElementById('newSkillIcon').value,
+            categoryName: catSelect.value,
+            maxPoint: pointsNum,
+            pointDescription: pointDescription,
+            parents: parents,
+            //children: children,
+            trainings: trainings,
+            forApprove: document.getElementById('forApprove').checked
+        };*/
     }
 
     var catSelect = document.getElementById("newSkillCat");
