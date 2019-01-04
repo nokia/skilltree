@@ -806,9 +806,9 @@ function editMySkill () {
                     parentsTable.deleteRow(i);
                     i--;
                 }
-                parentsTable.rows[1].cells[0].children[0].value = null;
-                parentsTable.rows[1].cells[1].children[0].value = null;
-                parentsTable.rows[1].cells[2].children[0].checked = false;
+                parentsTable.rows[1].cells[0].innerHTML = null;
+                parentsTable.rows[1].cells[1].innerHTML = null;
+                parentsTable.rows[1].cells[2].checked = false;
                 
                 
                 /*
