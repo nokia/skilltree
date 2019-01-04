@@ -842,7 +842,7 @@ function editMySkill () {
                             console.log(this.response);
                             for(var i=0;i<this.response.length;i++)
                             {   
-                                addRow(parentsTable);
+                                addRow("parentsTable");
 
                                 parentsTable.rows[i+1].cells[0].children[0].value = this.response[i].name;
                                 parentsTable.rows[i+1].cells[1].children[0].value = this.response[i].minPoint;
