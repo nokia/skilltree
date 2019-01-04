@@ -820,10 +820,12 @@ function editMySkill () {
                 parentsTable.appendChild(tr);
                 
                 var parents = this.response.parents;
+                console.log(parents);
                 request('POST', '/set/parentTableData', parents, function(){
                     if (this.readyState == 4 && this.status == 200) {
                         if(this.response !== undefined)
                         {
+                                console.log("the response");
                                 console.log(this.response);
                         }
                     }
