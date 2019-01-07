@@ -300,7 +300,7 @@ function getPublicSkillData(){
             document.getElementById('searchedSkillModalCategory').innerHTML = this.data.category;
             document.getElementById('searchedSkillModalPDesc').innerHTML = this.data.pointDescription;
             document.getElementById('searchedSkillModalDesc').innerHTML = this.data.descriptionWikipediaURL;
-            document.getElementById('searchedSkillModal').display = block;
+            document.getElementById('searchedSkillModal').display = "block";
             document.getElementById('closeSearchedSkillModal').onClick = function(){
               document.getElementById('searchedSkillModal').style.display = "none";
             }
