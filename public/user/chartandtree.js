@@ -296,13 +296,14 @@ function getPublicSkillData(){
             descriptionWikipediaURL: this.response[i].descriptionWikipediaURL
           }
           row.onclick = function(){
+            var foundmodal = document.getElementById('searchedSkillModal');
             document.getElementById('searchedSkillModalHeader').innerHTML = this.data.name;
             document.getElementById('searchedSkillModalCategory').innerHTML = this.data.category;
             document.getElementById('searchedSkillModalPDesc').innerHTML = this.data.pointDescription;
             document.getElementById('searchedSkillModalDesc').innerHTML = this.data.descriptionWikipediaURL;
-            document.getElementById('searchedSkillModal').display = "block";
+            foundmodal.display = "block";
             document.getElementById('closeSearchedSkillModal').onClick = function(){
-              document.getElementById('searchedSkillModal').style.display = "none";
+              foundmodal.style.display = "none";
             }
           }
           searchModalBody.appendChild(row);
