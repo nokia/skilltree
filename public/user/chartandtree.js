@@ -810,31 +810,9 @@ function editMySkill () {
                 parentsTable.rows[1].cells[1].children[0].value = "";
                 parentsTable.rows[1].cells[2].children[0].checked = false;
                 
-                
-                /*
-                parentsTable.innerHTML = "";
 
-                
-                //basic headers smh
-                var tr = document.createElement('tr');
-                var td1 = document.createElement('td');
-                td1.innerHTML = "Parent";
-                tr.appendChild(td1);
-                var td2 = document.createElement('td');
-                td2.innerHTML = "Min Point";
-                tr.appendChild(td2);
-                var td3 = document.createElement('td');
-                td3.innerHTML = "Required";
-                tr.appendChild(td3);
-                var td4 = document.createElement('td');
-                td4.innerHTML = "Delete";
-                tr.appendChild(td4);
-                parentsTable.appendChild(tr);
-                */
-                
                 var parents = this.response.parents;
                 var skillname = this.response.name;
-                console.log(parents);
                 request('POST', '/set/parentTableData', {name: skillname, parents: [parents] } , function(){
                     if (this.readyState == 4 && this.status == 200) {
                         if(this.response !== undefined)
@@ -853,17 +831,17 @@ function editMySkill () {
                         }
                     }
                 });
-/*
-                name: parentsTable.rows[1].cells[0].children[0].value = this.response.parents[0].name;
-                minPoint: parentsTable.rows[1].cells[1].children[0].value = this.reponse.parents[0].minPoint;
-                recommended: !parentsTable.rows[1].cells[2].children[0].checked
-       */ 
-                /*
-                pointsNum = this.response.maxPoint;
-                pointDescription = this.response.pointDescription;
-                parents = this.reponse.parents;
-                trainings = this.reponse.trainings;
-                */
+
+                request('POST', '/set/trainingTableData', undefined , function(){
+                    if (this.readyState == 4 && this.status == 200) {
+                        if(this.response !== undefined)
+                        {
+                            console.log(this.response);
+                        }
+                    }
+                });
+
+                
 
 
             }

@@ -1343,6 +1343,18 @@ setRoute.post('/parentTableData', async function (req, res) {
 	res.json(parents);
 });
 
+setRoute.post('/trainingTableData', async function (req, res) {
+
+	var user = await User.findOne({
+		username: req.decoded.username
+	}, function(err, user) {
+		if (err) throw err;
+		return user;
+	});
+
+	res.json(user.trainings);
+});
+
 //API call for request onclick
 setRoute.post('/request', async function (req, res){
 
@@ -1486,6 +1498,8 @@ setRoute.post('/endorse', async function (req, res) {
         }
 	}
 });
+
+module.exports = app;
 
 const httpServer = http.createServer(app);
 httpServer.listen(3000);
