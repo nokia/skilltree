@@ -304,10 +304,10 @@ function getPublicSkillData(){
             var wiki = document.getElementById('searchedSkillModalWiki');
             var closer = document.getElementById('closeSearchedSkillModal');
             header.innerHTML = this.data.name;
-            category.innerHTML = this.data.categoryName;
-            pdesc.innerHTML = this.data.pointDescription;
-            desc.innerHTML = this.data.description;
-            wiki.innerHTML = this.data.descriptionWikipediaURL;
+            category.innerHTML = "Category: " + this.data.categoryName;
+            pdesc.innerHTML = "Description by points: " + this.data.pointDescription;
+            desc.innerHTML = "Description: " + this.data.description;
+            wiki.innerHTML = "Wiki link: " + this.data.descriptionWikipediaURL;
             foundmodal.style.display = "block";
             closer.onclick = function(){
               foundmodal.style.display = "none";
@@ -843,7 +843,7 @@ function editMySkill () {
                 trainingsTable.rows[1].cells[0].children[0].value = "";
                 trainingsTable.rows[1].cells[1].children[0].value = "";
                 trainingsTable.rows[1].cells[2].children[0].checked = false;
-                
+
 
                 var parents = this.response.parents;
                 var skillname = this.response.name;
@@ -876,7 +876,7 @@ function editMySkill () {
 
                             if(this.response!=null)
                             for(var i=0;i<this.response.length;i++)
-                            {   
+                            {
                                 addRow("trainingsTable");
 
                                 parentsTable.rows[i+1].cells[0].children[0].value = this.response[i].name;
