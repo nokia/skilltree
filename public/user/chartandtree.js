@@ -887,9 +887,9 @@ function editMySkill () {
                             {
                                 addRow("trainingsTable");
 
-                                parentsTable.rows[i+1].cells[0].children[0].value = this.response[i].name;
-                                parentsTable.rows[i+1].cells[1].children[0].value = this.response[i].minPoint;
-                                parentsTable.rows[i+1].cells[2].children[0].checked = !this.response[i].recommended;
+                                trainingsTable.rows[i+1].cells[0].children[0].value = this.response[i].name;
+                                trainingsTable.rows[i+1].cells[1].children[0].value = this.response[i].minPoint;
+                                trainingsTable.rows[i+1].cells[2].children[0].checked = !this.response[i].recommended;
 
                             }
                         }
