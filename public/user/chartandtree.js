@@ -288,8 +288,23 @@ function getPublicSkillData(){
           row.innerHTML += "<td>" + this.response[i].name + "</td>";
           row.innerHTML += "<td>" + this.response[i].categoryName + "</td>";
           row.innerHTML += "<td>" + this.response[i].description + "</td>";
+          row.data = {
+            name: this.response[i].name,
+            categoryName: this.response[i].categoryName,
+            description: this.response[i].description,
+            pointDescription: this.response[i].pointDescription,
+            descriptionWikipediaURL: this.response[i].descriptionWikipediaURL
+          }
           row.onclick = function(){
-
+            var foundmodal = document.getElementById('searchedSkillModal');
+            document.getElementById('searchedSkillModalHeader').innerHTML = this.data.name;
+            document.getElementById('searchedSkillModalCategory').innerHTML = this.data.category;
+            document.getElementById('searchedSkillModalPDesc').innerHTML = this.data.pointDescription;
+            document.getElementById('searchedSkillModalDesc').innerHTML = this.data.descriptionWikipediaURL;
+            foundmodal.display = "block";
+            document.getElementById('closeSearchedSkillModal').onClick = function(){
+              foundmodal.style.display = "none";
+            }
           }
           searchModalBody.appendChild(row);
         }
@@ -680,7 +695,7 @@ function createSkill () {
     }
 
 
-    
+
 
 
     var catSelect = document.getElementById("newSkillCat");
@@ -781,7 +796,7 @@ function editMySkill () {
     loadSkill.onclick =function(){
         //request for the skill to load data from
         var skillname = document.getElementById('newSkillName').value;
-        
+
         skillData = {
             name: skillname
         }
@@ -795,7 +810,7 @@ function editMySkill () {
                 document.getElementById('newSkillDesc').value = this.response.description;
                 document.getElementById('newSkillIcon').value = this.response.skillIcon;
                 document.getElementById("newSkillCat").value = this.response.categoryName;
-                
+
 
 
                 //Dropping data from parentsTable
@@ -831,7 +846,7 @@ function editMySkill () {
                         {
                             console.log(this.response);
                             for(var i=0;i<this.response.length;i++)
-                            {   
+                            {
                                 addRow("parentsTable");
 
                                 parentsTable.rows[i+1].cells[0].children[0].value = this.response[i].name;
@@ -839,7 +854,7 @@ function editMySkill () {
                                 parentsTable.rows[i+1].cells[2].children[0].checked = !this.response[i].recommended;
 
                             }
-                            
+
                         }
                     }
                 });
@@ -862,12 +877,12 @@ function editMySkill () {
                     }
                 });
 
-                
+
 
 
             }
         }
-            
+
         });
 
 
