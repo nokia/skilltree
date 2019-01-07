@@ -311,7 +311,7 @@ function getPublicSkillData(){
                                                           "4: " + this.data.pointDescription[3] + "<br>" +
                                                           "5: " + this.data.pointDescription[4];
             desc.innerHTML = "Description: " + this.data.description;
-            wiki.innerHTML = "Wiki link: " + this.data.descriptionWikipediaURL;
+            wiki.innerHTML = "Wiki link: <a href=" + this.data.descriptionWikipediaURL + ">" + this.data.descriptionWikipediaURL + "</a>";
             foundmodal.style.display = "block";
             closer.onclick = function(){
               foundmodal.style.display = "none";
