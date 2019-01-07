@@ -826,7 +826,7 @@ function editMySkill () {
                 parentsTable.rows[1].cells[2].children[0].checked = false;
 
                 //Dropping data from trainingsTable
-                var parentsTable = document.getElementById('trainingsTable');
+                var trainingsTable = document.getElementById('trainingsTable');
                 var i=trainingsTable.rows.length-1;
                 while(i>1)
                 {
