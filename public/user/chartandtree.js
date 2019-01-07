@@ -820,7 +820,7 @@ function editMySkill () {
 
 
 
-                //Dropping data
+                //Dropping data from parentsTable
                 var parentsTable = document.getElementById('parentsTable');
                 var i=parentsTable.rows.length-1;
                 while(i>1)
@@ -832,6 +832,18 @@ function editMySkill () {
                 parentsTable.rows[1].cells[1].children[0].value = "";
                 parentsTable.rows[1].cells[2].children[0].checked = false;
 
+                //Dropping data from trainingsTable
+                var trainingsTable = document.getElementById('trainingsTable');
+                var i=trainingsTable.rows.length-1;
+                while(i>1)
+                {
+                    trainingsTable.deleteRow(i);
+                    i--;
+                }
+                trainingsTable.rows[1].cells[0].children[0].value = "";
+                trainingsTable.rows[1].cells[1].children[0].value = "";
+                trainingsTable.rows[1].cells[2].children[0].checked = false;
+                
 
                 var parents = this.response.parents;
                 var skillname = this.response.name;
@@ -840,6 +852,8 @@ function editMySkill () {
                         if(this.response !== undefined)
                         {
                             console.log(this.response);
+
+                            if(this.response!=null)
                             for(var i=0;i<this.response.length;i++)
                             {
                                 addRow("parentsTable");
@@ -859,6 +873,17 @@ function editMySkill () {
                         if(this.response !== undefined)
                         {
                             console.log(this.response);
+
+                            if(this.response!=null)
+                            for(var i=0;i<this.response.length;i++)
+                            {   
+                                addRow("trainingsTable");
+
+                                parentsTable.rows[i+1].cells[0].children[0].value = this.response[i].name;
+                                parentsTable.rows[i+1].cells[1].children[0].value = this.response[i].minPoint;
+                                parentsTable.rows[i+1].cells[2].children[0].checked = !this.response[i].recommended;
+
+                            }
                         }
                     }
                 });
