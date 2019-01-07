@@ -882,6 +882,11 @@ function editMySkill () {
                         {
                             console.log(this.response);
 
+                            var a = "aba";
+                            var b = "ba";
+
+                            console.log( a < b);
+
                             if(this.response!=null)
                             for(var i=0;i<this.response.length;i++)
                             {
