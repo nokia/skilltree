@@ -7,11 +7,11 @@ module.exports = mongoose.model('ApprovableTraining', new Schema({
     username: String,
     skillName: String,
     name: String,
-    level: Number,
+    level: String,
     shortDescription: String,
     URL: String,
     URLLastAccessed: String,
     goal: String,
-    length: Number,
+    length: String,
     language: String
 }));
