@@ -278,7 +278,7 @@ class ItemContainer {
     refreshAvaliability(){
       for (var i = 0; i < this.skills.length; i++) {
         for (var j = 0; j < this.skills[i].parents.length; j++) {
-            console.log(this.skills[i]);
+
           var par = this.skills.find(obj => obj.name == this.skills[i].parents[j]);
           if(par !== undefined){
             if(par.children.find(obj => obj.name == this.skills[i].name).minPoint > par.achievedPoint || par.itemcontainer.container.interactive == false){
@@ -429,7 +429,7 @@ class ItemContainer {
                                         if(requestforrequests.response !== undefined)
                                         {
                                             alert(requestforrequests.response.message);
-                                            console.log(requestforrequests.response);
+
                                             beginnerCount.innerHTML = (requestforrequests.response.sumRequest);
 
                                         }
@@ -459,7 +459,7 @@ class ItemContainer {
                                         if(requestforrequests.response !== undefined)
                                         {
                                             alert(requestforrequests.response.message);
-                                            console.log(requestforrequests.response);
+                                            //console.log(requestforrequests.response);
                                             intermediateCount.innerHTML = (requestforrequests.response.sumRequest);
 
                                         }
@@ -489,7 +489,7 @@ class ItemContainer {
                                         if(requestforrequests.response !== undefined)
                                         {
                                             alert(requestforrequests.response.message);
-                                            console.log(requestforrequests.response);
+                                            //console.log(requestforrequests.response);
                                             advancedCount.innerHTML = (requestforrequests.response.sumRequest);
 
                                         }
@@ -661,12 +661,12 @@ class ItemContainer {
     }
 
     addBeginnerRequest() {
-        console.log("clicked");
+        //console.log("clicked");
     }
 
     endorse () {
-        console.log(this.parentObj.skill.name);
-        console.log(this.parentObj.username);
+        //console.log(this.parentObj.skill.name);
+        //console.log(this.parentObj.username);
         var req = new XMLHttpRequest();
         req.open('POST', '/set/endorse', true);
         req.setRequestHeader('Content-type', 'application/json');
@@ -674,7 +674,7 @@ class ItemContainer {
         req.responseType = "json";
         req.onreadystatechange = function () {
             if(this.readyState == 4 && this.status == 200) {
-                console.log("nnn");
+                //console.log("nnn");
             }
         };
 
@@ -683,7 +683,7 @@ class ItemContainer {
             username: this.parentObj.username
         };
 
-        console.log(JSON.stringify(data));
+        //console.log(JSON.stringify(data));
 
         req.send(JSON.stringify(data));
     }
