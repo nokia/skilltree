@@ -297,12 +297,19 @@ function getPublicSkillData(){
           }
           row.onclick = function(){
             var foundmodal = document.getElementById('searchedSkillModal');
-            document.getElementById('searchedSkillModalHeader').innerHTML = this.data.name;
-            document.getElementById('searchedSkillModalCategory').innerHTML = this.data.category;
-            document.getElementById('searchedSkillModalPDesc').innerHTML = this.data.pointDescription;
-            document.getElementById('searchedSkillModalDesc').innerHTML = this.data.descriptionWikipediaURL;
-            foundmodal.display = "block";
-            document.getElementById('closeSearchedSkillModal').onClick = function(){
+            var header = document.getElementById('searchedSkillModalHeader');
+            var category = document.getElementById('searchedSkillModalCategory');
+            var pdesc = document.getElementById('searchedSkillModalPDesc');
+            var desc = document.getElementById('searchedSkillModalDesc');
+            var wiki = document.getElementById('searchedSkillModalWiki');
+            var closer = document.getElementById('closeSearchedSkillModal');
+            header.innerHTML = this.data.name;
+            category.innerHTML = this.data.categoryName;
+            pdesc.innerHTML = this.data.pointDescription;
+            desc.innerHTML = this.data.description;
+            wiki.innerHTML = this.data.descriptionWikipediaURL;
+            foundmodal.style.display = "block";
+            closer.onclick = function(){
               foundmodal.style.display = "none";
             }
           }
