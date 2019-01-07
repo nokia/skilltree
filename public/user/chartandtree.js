@@ -231,6 +231,9 @@ function getPublicUserData(){
           row.innerHTML += "<td>" + this.response[i].username + "</td>";
           row.innerHTML += "<td>" + this.response[i].mainTree + "</td>";
           row.innerHTML += "<td>" + this.response[i].willingToTeach + "</td>";
+          row.onclick = function(){
+            console.log(this.response);
+          }
           searchModalBody.appendChild(row);
         }
         modal.style.display = "block";
