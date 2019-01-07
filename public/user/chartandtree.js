@@ -233,7 +233,7 @@ function getPublicUserData(){
           row.innerHTML += "<td>" + this.response[i].willingToTeach + "</td>";
           row.data = this.response[i];
           row.onclick = function(){
-            console.log(this.data);
+            //console.log(this.data);
           }
           searchModalBody.appendChild(row);
         }
@@ -820,7 +820,6 @@ function editMySkill () {
         if (this.readyState == 4 && this.status == 200) {
             if(this.response !== undefined)
             {
-                console.log(this.response);
                 document.getElementById('newSkillName').value = this.response.name;
                 document.getElementById('newSkillDesc').value = this.response.description;
                 document.getElementById('newSkillIcon').value = this.response.skillIcon;
@@ -859,8 +858,6 @@ function editMySkill () {
                     if (this.readyState == 4 && this.status == 200) {
                         if(this.response !== undefined)
                         {
-                            console.log(this.response);
-
                             if(this.response!=null)
                             for(var i=0;i<this.response.length;i++)
                             {
@@ -880,13 +877,6 @@ function editMySkill () {
                     if (this.readyState == 4 && this.status == 200) {
                         if(this.response !== undefined)
                         {
-                            console.log(this.response);
-
-                            var a = "010";
-                            var b = "10";
-
-                            console.log( a > b);
-
                             if(this.response!=null)
                             for(var i=0;i<this.response.length;i++)
                             {
@@ -1270,7 +1260,6 @@ function approveSkills() {
                 approveSkillsSelect.innerHTML = "";
 
                 skillsforapproval = this.response;
-                console.log(skillsforapproval);
                 for(var i=0; i < skillsforapproval.length; i++)
                 {
                     var text = skillsforapproval[i].name/* + " (" + skillsforapproval[i].username + ")"*/;
@@ -1289,19 +1278,13 @@ function approveSkills() {
     var approveButton = document.getElementById("approvebtn");
     approveButton.onclick = function() {
         var selectedSkill = approveSkillsSelect.options[approveSkillsSelect.selectedIndex].text;
-        console.log(selectedSkill);
 
         var skillforapproval = skillsforapproval.find(obj => obj.name == selectedSkill);
-
-        console.log(skillforapproval);
-
 
         request('POST', '/set/approveskill', skillforapproval, function(){
             if(this.readyState == 4 && this.status == 200){
                 if(this.response !== undefined){
                     alert(this.response.message);
-                    console.log(this.response.message);
-
                 }
             }
 
