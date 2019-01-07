@@ -885,7 +885,7 @@ function editMySkill () {
                             var a = "010";
                             var b = "10";
 
-                            console.log("result: " +  a < b);
+                            console.log( a > b);
 
                             if(this.response!=null)
                             for(var i=0;i<this.response.length;i++)
