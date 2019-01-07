@@ -882,8 +882,8 @@ function editMySkill () {
                         {
                             console.log(this.response);
 
-                            var a = "010";
-                            var b = "11";
+                            var a = "011";
+                            var b = "10";
 
                             console.log("result: " +  a < b);
 
