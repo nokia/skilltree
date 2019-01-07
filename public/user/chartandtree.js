@@ -680,7 +680,23 @@ function addTraining () {
         request('POST', '/set/newtraining', trainingData, function () {
             if (this.readyState == 4 && this.status == 200) {
                 if (this.response.success) {
-                    window.open("/user/", "_self");
+                //reset table
+                var i=trainingsTable.rows.length-1;
+                while(i>1)
+                {
+                    trainingsTable.deleteRow(i);
+                    i--;
+                }
+                trainingsTable.rows[i+1].cells[0].children[0].value = "";
+                trainingsTable.rows[i+1].cells[1].children[0].value = "";
+                trainingsTable.rows[i+1].cells[2].children[0].value = "";
+                trainingsTable.rows[i+1].cells[3].children[0].value = "";
+                trainingsTable.rows[i+1].cells[4].children[0].value = "";
+                trainingsTable.rows[i+1].cells[5].children[0].value = "";
+                trainingsTable.rows[i+1].cells[6].children[0].value = "";
+
+                alert("Succes");
+                
                 } else if (this.response.message == "skillnotexists") {
                     alert("Skill not found");
                 }
@@ -847,9 +863,13 @@ function editMySkill () {
                     trainingsTable.deleteRow(i);
                     i--;
                 }
-                trainingsTable.rows[1].cells[0].children[0].value = "";
-                trainingsTable.rows[1].cells[1].children[0].value = "";
-                trainingsTable.rows[1].cells[2].children[0].checked = false;
+                trainingsTable.rows[i+1].cells[0].children[0].value = "";
+                trainingsTable.rows[i+1].cells[1].children[0].value = "";
+                trainingsTable.rows[i+1].cells[2].children[0].value = "";
+                trainingsTable.rows[i+1].cells[3].children[0].value = "";
+                trainingsTable.rows[i+1].cells[4].children[0].value = "";
+                trainingsTable.rows[i+1].cells[5].children[0].value = "";
+                trainingsTable.rows[i+1].cells[6].children[0].value = "";
 
 
                 var parents = this.response.parents;
@@ -884,11 +904,11 @@ function editMySkill () {
 
                                 trainingsTable.rows[i+1].cells[0].children[0].value = this.response[i].name;
                                 trainingsTable.rows[i+1].cells[1].children[0].value = this.response[i].level;
-                                trainingsTable.rows[i+1].cells[2].children[0].checked = !this.response[i].shortDescription;
+                                trainingsTable.rows[i+1].cells[2].children[0].value = !this.response[i].shortDescription;
                                 trainingsTable.rows[i+1].cells[3].children[0].value = this.response[i].URL;
                                 trainingsTable.rows[i+1].cells[4].children[0].value = this.response[i].goal;
-                                trainingsTable.rows[i+1].cells[5].children[0].checked = !this.response[i].length;
-                                trainingsTable.rows[i+1].cells[6].children[0].checked = !this.response[i].language;
+                                trainingsTable.rows[i+1].cells[5].children[0].value = !this.response[i].length;
+                                trainingsTable.rows[i+1].cells[6].children[0].value = !this.response[i].language;
 
                             }
                         }
