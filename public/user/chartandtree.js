@@ -876,7 +876,7 @@ function editMySkill () {
                     }
                 });
 
-                request('POST', '/set/trainingTableData', skillname , function(){
+                request('POST', '/set/trainingTableData', {skillname: skillname} , function(){
                     if (this.readyState == 4 && this.status == 200) {
                         if(this.response !== undefined)
                         {

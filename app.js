@@ -1352,7 +1352,7 @@ setRoute.post('/trainingTableData', async function (req, res) {
 		return user;
 	});
 
-	var skill = user.skills.find(obj => obj.name == req.body);
+	var skill = user.skills.find(obj => obj.name == req.body.skillname);
 
 	var trainings = skill.trainings;
 
