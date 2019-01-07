@@ -305,10 +305,10 @@ function getPublicSkillData(){
             var closer = document.getElementById('closeSearchedSkillModal');
             header.innerHTML = this.data.name;
             category.innerHTML = "Category: " + this.data.categoryName;
-            pdesc.innerHTML = "Description by points: <br> 1: " + this.data.pointDescription[0] +
-                                                          "2: " + this.data.pointDescription[1] +
-                                                          "3: " + this.data.pointDescription[2] +
-                                                          "4: " + this.data.pointDescription[3] +
+            pdesc.innerHTML = "Description by points: <br> 1: " + this.data.pointDescription[0] + "<br>" +
+                                                          "2: " + this.data.pointDescription[1] + "<br>" +
+                                                          "3: " + this.data.pointDescription[2] + "<br>" +
+                                                          "4: " + this.data.pointDescription[3] + "<br>" +
                                                           "5: " + this.data.pointDescription[4];
             desc.innerHTML = "Description: " + this.data.description;
             wiki.innerHTML = "Wiki link: " + this.data.descriptionWikipediaURL;
