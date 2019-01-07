@@ -681,6 +681,7 @@ function addTraining () {
             if (this.readyState == 4 && this.status == 200) {
                 if (this.response.success) {
                 //reset table
+                var trainingsTable = document.getElementById('addTrainingsTable');
                 var i=trainingsTable.rows.length-1;
                 while(i>1)
                 {
@@ -696,7 +697,7 @@ function addTraining () {
                 trainingsTable.rows[i+1].cells[6].children[0].value = "";
 
                 alert("Succes");
-                
+
                 } else if (this.response.message == "skillnotexists") {
                     alert("Skill not found");
                 }
