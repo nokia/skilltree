@@ -1352,7 +1352,10 @@ setRoute.post('/trainingTableData', async function (req, res) {
 		return user;
 	});
 
-	res.json(user.trainings);
+
+	var trainings = user.trainings;
+
+	res.json(trainings);
 });
 
 //API call for request onclick
