@@ -44,12 +44,12 @@ module.exports = mongoose.model('User', new Schema({
             trainings: [
                 {
                     name: String,
-                    level: Number,
+                    level: String,
                     shortDescription: String,
                     URL: String,
                     URLLastAccessed: String,
                     goal: String,
-                    length: Number,
+                    length: String,
                     language: String
                 }
             ],
