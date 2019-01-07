@@ -409,12 +409,12 @@ setRoute.post('/getPublicTreeData', async function (req, res) {
     res.json(foundTrees);
 });
 
-// Getting the name, caterory, desc of a skill.
+// Getting the name, caterory, descs of a skill.
 setRoute.post('/getPublicSkillData', async function (req, res) {
     var data = req.body;
     var foundSkills = await Skill.find({
 				"name": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
-		}, 'name categoryName description', function(err, skill) {
+		}, 'name categoryName description descriptionWikipediaURL pointDescription', function(err, skill) {
 				if (err) throw err;
 		return skill;
 		});
@@ -1339,7 +1339,7 @@ setRoute.post('/parentTableData', async function (req, res) {
 		//push the json file to an array that we are going to return, includes all rows for the table.
 		parents.push(name_minpoint_required);
 	});
-	
+
 	res.json(parents);
 });
 

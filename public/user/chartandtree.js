@@ -288,8 +288,22 @@ function getPublicSkillData(){
           row.innerHTML += "<td>" + this.response[i].name + "</td>";
           row.innerHTML += "<td>" + this.response[i].categoryName + "</td>";
           row.innerHTML += "<td>" + this.response[i].description + "</td>";
+          row.data = {
+            name: this.response[i].name,
+            categoryName: this.response[i].categoryName,
+            description: this.response[i].description,
+            pointDescription: this.response[i].pointDescription,
+            descriptionWikipediaURL: this.response[i].descriptionWikipediaURL
+          }
           row.onclick = function(){
-
+            document.getElementById('searchedSkillModalHeader').innerHTML = this.data.name;
+            document.getElementById('searchedSkillModalCategory').innerHTML = this.data.category;
+            document.getElementById('searchedSkillModalPDesc').innerHTML = this.data.pointDescription;
+            document.getElementById('searchedSkillModalDesc').innerHTML = this.data.descriptionWikipediaURL;
+            document.getElementById('searchedSkillModal').display = block;
+            document.getElementById('closeSearchedSkillModal').onClick = function(){
+              document.getElementById('searchedSkillModal').style.display = "none";
+            }
           }
           searchModalBody.appendChild(row);
         }
@@ -680,7 +694,7 @@ function createSkill () {
     }
 
 
-    
+
 
 
     var catSelect = document.getElementById("newSkillCat");
@@ -781,7 +795,7 @@ function editMySkill () {
     loadSkill.onclick =function(){
         //request for the skill to load data from
         var skillname = document.getElementById('newSkillName').value;
-        
+
         skillData = {
             name: skillname
         }
@@ -795,7 +809,7 @@ function editMySkill () {
                 document.getElementById('newSkillDesc').value = this.response.description;
                 document.getElementById('newSkillIcon').value = this.response.skillIcon;
                 document.getElementById("newSkillCat").value = this.response.categoryName;
-                
+
 
 
                 //Dropping data
@@ -809,12 +823,12 @@ function editMySkill () {
                 parentsTable.rows[1].cells[0].children[0].value = "";
                 parentsTable.rows[1].cells[1].children[0].value = "";
                 parentsTable.rows[1].cells[2].children[0].checked = false;
-                
-                
+
+
                 /*
                 parentsTable.innerHTML = "";
 
-                
+
                 //basic headers smh
                 var tr = document.createElement('tr');
                 var td1 = document.createElement('td');
@@ -831,7 +845,7 @@ function editMySkill () {
                 tr.appendChild(td4);
                 parentsTable.appendChild(tr);
                 */
-                
+
                 var parents = this.response.parents;
                 var skillname = this.response.name;
                 console.log(parents);
@@ -841,7 +855,7 @@ function editMySkill () {
                         {
                             console.log(this.response);
                             for(var i=0;i<this.response.length;i++)
-                            {   
+                            {
                                 addRow("parentsTable");
 
                                 parentsTable.rows[i+1].cells[0].children[0].value = this.response[i].name;
@@ -849,7 +863,7 @@ function editMySkill () {
                                 parentsTable.rows[i+1].cells[2].children[0].checked = !this.response[i].recommended;
 
                             }
-                            
+
                         }
                     }
                 });
@@ -857,7 +871,7 @@ function editMySkill () {
                 name: parentsTable.rows[1].cells[0].children[0].value = this.response.parents[0].name;
                 minPoint: parentsTable.rows[1].cells[1].children[0].value = this.reponse.parents[0].minPoint;
                 recommended: !parentsTable.rows[1].cells[2].children[0].checked
-       */ 
+       */
                 /*
                 pointsNum = this.response.maxPoint;
                 pointDescription = this.response.pointDescription;
@@ -868,7 +882,7 @@ function editMySkill () {
 
             }
         }
-            
+
         });
 
 
