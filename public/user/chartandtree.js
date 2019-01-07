@@ -845,7 +845,7 @@ function editMySkill () {
                         if(this.response !== undefined)
                         {
                             console.log(this.response);
-                            
+
                             if(this.response!=null)
                             for(var i=0;i<this.response.length;i++)
                             {
@@ -866,6 +866,8 @@ function editMySkill () {
                         if(this.response !== undefined)
                         {
                             console.log(this.response);
+
+                            if(this.response!=null)
                             for(var i=0;i<this.response.length;i++)
                             {   
                                 addRow("trainingsTable");
