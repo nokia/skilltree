@@ -55,6 +55,10 @@ class ItemContainer {
             detailsForeground.addChild(nextLvlDesc);
         }
 
+        var btnPosY = description.position.y + description.height + 10;
+        if (nextLvlDesc != undefined) btnPosY = nextLvlDesc.position.y + nextLvlDesc.height + 10;
+        else if (curLvlDesc != undefined) btnPosY = curLvlDesc.position.y + curLvlDesc.height + 10;
+
         var btnG = new PIXI.Graphics();
         btnG.lineStyle(1, 0x888888);
         btnG.beginFill(0x44cc44);
@@ -86,7 +90,7 @@ class ItemContainer {
 
             var btnEndorseContainer = new PIXI.Container();
             btnEndorseContainer.addChild(btnEndorse, txtEndorse);
-            btnEndorseContainer.position.set(detailsWidth - btnEndorseContainer.width - 10, description.position.y + description.height + 10);
+            btnEndorseContainer.position.set(detailsWidth - btnEndorseContainer.width - 10, );
             btnEndorseContainer.interactive = true;
             btnEndorseContainer.buttonMode = true;
             btnEndorseContainer.parentObj = this;
