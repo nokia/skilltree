@@ -1146,7 +1146,7 @@ function editMyTree () {
 
     var treeName = document.getElementById("treeName");
     treeName.setAttribute('list', 'treeSearchResult');
-    treeName.onkeyup = searchTreesByName(treeName);
+    treeName.onkeyup = function() {searchTreesByName(treeName)};
 
     var loadTree = document.getElementById("loadTree");
     loadTree.style.display = "block";
