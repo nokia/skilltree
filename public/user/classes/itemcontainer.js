@@ -344,7 +344,10 @@ class ItemContainer {
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
 
         if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint) return;
-        if (skillborder.filters == null) skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFFBF00, 1)];
+        if (skillborder.filters == null) {
+            this.parentObj.disabled = false;
+            skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFFBF00, 1)];
+        } else this.parentObj.disabled = true;
 
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
     }
@@ -359,7 +362,7 @@ class ItemContainer {
 
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
 
-        if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint) return;
+        if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint || this.parentObj.disabled) return;
         skillborder.filters = null;
 
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
