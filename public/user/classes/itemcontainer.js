@@ -51,7 +51,7 @@ class ItemContainer {
         if (this.skill.achievedPoint < this.skill.maxPoint) {
             var nextLvlDesc = new PIXI.Text("Next level: " + this.skill.pointDescription[this.skill.achievedPoint], {fontSize: descriptionFontSize, fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - detailsMargin * 2 });
             if (this.skill.achievedPoint == 0) nextLvlDesc.position.set(detailsMargin, description.position.y + description.height + 10);
-            else nextLvlDesc.position.set(detailsMargin, curLvlDesc.position.y + description.height + 10);
+            else nextLvlDesc.position.set(detailsMargin, curLvlDesc.position.y + curLvlDesc.height + 10);
             detailsForeground.addChild(nextLvlDesc);
         }
 
@@ -67,6 +67,7 @@ class ItemContainer {
         btnGHover.drawRect(0, 0, 70, 26);
         btnGHover.endFill();
 
+        // check if need to show endorse button
         var base64Url = localStorage.getItem("loginToken").split('.')[1];
         var base64 = base64Url.replace('-', '+').replace('_', '/');
         var payload = JSON.parse(window.atob(base64));
