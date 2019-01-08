@@ -51,7 +51,7 @@ class ItemContainer {
         if (this.skill.achievedPoint < this.skill.maxPoint) {
             var nextLvlDesc = new PIXI.Text("Next level: " + this.skill.pointDescription[this.skill.achievedPoint], {fontSize: descriptionFontSize, fontStyle: 'italic', fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - detailsMargin * 2});
             if (this.skill.achievedPoint == 0) nextLvlDesc.position.set(detailsMargin, description.position.y + description.height + 10);
-            else nextLvlDesc.position.set(detailsMargin, curLvlDesc.position.y + curLvlDesc.height + 10);
+            else nextLvlDesc.position.set(detailsMargin, curLvlDesc.position.y + curLvlDesc.height + 5);
             detailsForeground.addChild(nextLvlDesc);
         }
 
