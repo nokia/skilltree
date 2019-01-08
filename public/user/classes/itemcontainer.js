@@ -40,6 +40,21 @@ class ItemContainer {
         detailsForeground.addChild(description);
         detailsForeground.zOrder = 1;
 
+        var curLvlDesc = undefined;
+        var nextLvlDesc = undefined;
+        if (this.skill.achievedPoint > 0) {
+            curLvlDesc = new PIXI.Text("Current level: " + this.skill.pointDescription[this.skill.achievedPoint - 1], {fontSize: descriptionFontSize, fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - detailsMargin * 2 });
+            curLvlDesc.position.set(detailsMargin, description.position.y + description.height + 10);
+            detailsForeground.addChild(curLvlDesc);
+        }
+
+        if (this.skill.achievedPoint < this.skill.maxPoint) {
+            var nextLvlDesc = new PIXI.Text("Next level: " + this.skill.pointDescription[this.skill.achievedPoint], {fontSize: descriptionFontSize, fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - detailsMargin * 2 });
+            if (this.skill.achievedPoint == 0) nextLvlDesc.position.set(detailsMargin, description.position.y + description.height + 10);
+            else nextLvlDesc.position.set(detailsMargin, curLvlDesc.position.y + description.height + 10);
+            detailsForeground.addChild(nextLvlDesc);
+        }
+
         var btnG = new PIXI.Graphics();
         btnG.lineStyle(1, 0x888888);
         btnG.beginFill(0x44cc44);
