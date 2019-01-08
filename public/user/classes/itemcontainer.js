@@ -344,7 +344,7 @@ class ItemContainer {
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
 
         if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint) return;
-        skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFFBF00, 1)];
+        if (skillborder.filters == null) skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFFBF00, 1)];
 
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
     }
