@@ -949,6 +949,8 @@ function editMySkill () {
         catSelect.add(option);
     }
 
+
+    //get the save skill button, write the onclick function
     var save = document.getElementById("saveSkillBtn");
     save.onclick = function () {
         var pointsTable = document.getElementById('pointsTable');
@@ -976,6 +978,7 @@ function editMySkill () {
             });
         }*/
 
+        
         var trainingsTable = document.getElementById('trainingsTable');
         var trainings = [];
         for (i = 1; i < trainingsTable.rows.length; ++i) {
