@@ -1112,20 +1112,6 @@ setRoute.post('/approvetree', async function (req, res) {
 setRoute.post('/approvetraining', async function (req, res) {
 	var data = req.body;
 
-    var training = await ApprovableTraining.findOne({
-        username: data.username,
-        skillName: data.skillName,
-        name: data.name
-    }, function(err, training) {
-        if (err) throw err;
-		return training;
-    });
-
-    await ApprovableTraining.remove({
-        username: data.username,
-        skillName: data.skillName,
-        name: data.name
-    });
 
     var globalSkill = await Skill.findOne({
         name: data.skillName
@@ -1134,40 +1120,54 @@ setRoute.post('/approvetraining', async function (req, res) {
 		return skill;
     });
 
-    console.log(data);
-    console.log(globalSkill);
+    if (globalSkill.trainings.find(obj => obj.name == data.name) == undefined) {
+        await ApprovableTraining.remove({
+            username: data.username,
+            skillName: data.skillName,
+            name: data.name
+        });
 
-    globalSkill.trainings.push({
-        name: training.name,
-        level: training.level,
-        shortDescription: training.shortDescription,
-        URL: training.URL,
-        goal: training.goal,
-        length: training.length,
-        language: training.language
-    });
+        var training = await ApprovableTraining.findOne({
+            username: data.username,
+            skillName: data.skillName,
+            name: data.name
+        }, function(err, training) {
+            if (err) throw err;
+            return training;
+        });
 
-    globalSkill.save(function (err) {if (err) throw err;});
+        globalSkill.trainings.push({
+            name: training.name,
+            level: training.level,
+            shortDescription: training.shortDescription,
+            URL: training.URL,
+            goal: training.goal,
+            length: training.length,
+            language: training.language
+        });
 
-    User.find({} , (err, users) => {
-        if (err) throw err;
+        globalSkill.save(function (err) {if (err) throw err;});
 
-        users.map(user => {
-            if (user.skills.find(obj => obj.name == data.skillName) != undefined) {
-                user.skills.find(obj => obj.name == data.skillName).trainings.push({
-                    name: training.name,
-                    level: training.level,
-                    shortDescription: training.shortDescription,
-                    URL: training.URL,
-                    goal: training.goal,
-                    length: training.length,
-                    language: training.language
-                });
+        User.find({} , (err, users) => {
+            if (err) throw err;
 
-                user.save(function (err) {if (err) throw err;});
-            }
+            users.map(user => {
+                if (user.skills.find(obj => obj.name == data.skillName) != undefined) {
+                    user.skills.find(obj => obj.name == data.skillName).trainings.push({
+                        name: training.name,
+                        level: training.level,
+                        shortDescription: training.shortDescription,
+                        URL: training.URL,
+                        goal: training.goal,
+                        length: training.length,
+                        language: training.language
+                    });
+
+                    user.save(function (err) {if (err) throw err;});
+                }
+            })
         })
-    })
+    }
 });
 
 // sets the user data aquired from the first login
