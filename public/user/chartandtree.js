@@ -1170,8 +1170,6 @@ function editMyTree () {
                 skillList.add(option);
             }
         }
-
-        console.log(skillsToAdd);
     };
 
     var addBtn = document.getElementById("addToTree");
@@ -1225,7 +1223,6 @@ function editMyTree () {
 
     var createBtn = document.getElementById("createTree");
     createBtn.onclick = function () {
-        console.log(skillsToAdd);
         if (document.getElementById('treeName').value.length > 0) {
             if (skillsToAdd.length > 0) {
                 /*var skillNames = [];
@@ -1236,6 +1233,8 @@ function editMyTree () {
                     focusArea: document.getElementById('focusarea').value,
                     skills: skillsToAdd
                 };
+
+                console.log(treeData);
 
                 request('POST', '/set/editmytree', treeData, function () {
                     if (this.readyState == 4 && this.status == 200) {
