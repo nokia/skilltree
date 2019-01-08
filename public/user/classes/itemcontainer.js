@@ -374,7 +374,7 @@ class ItemContainer {
         var colorMatrixFilter = new PIXI.filters.ColorMatrixFilter;
         colorMatrixFilter.brightness(0.4);
         this.container.filters = [colorMatrixFilter];
-        this.container.interactive = false;
+        //this.container.interactive = false;
         this.skillborder.interactive = false;
         this.skillborder.buttonMode = false;
 
