@@ -671,9 +671,9 @@ class ItemContainer {
         children.innerText = childNames;
 
         var trainingNames = '';
-        for (var i = 0; i < this.skill.trainings.length; ++i) trainingNames += this.skill.trainings[i].name + ' (' + this.skill.trainings[i].URL + '), ';
-        trainingNames = trainingNames.substring(0, trainingNames.length - 2);
-        trainings.innerText = trainingNames;
+        for (var i = 0; i < this.skill.trainings.length; ++i) trainingNames += "<a href = '" + this.skill.trainings[i].URL + "'>" this.skill.trainings[i].name + '</a><br>';
+        trainingNames = trainingNames.substring(0, trainingNames.length - 4);
+        trainings.innerHTML = trainingNames;
 
         span.onclick = function() {
             modal.style.display = "none";
