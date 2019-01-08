@@ -1256,12 +1256,12 @@ function getDependency (skills, skill, dependency) {
 	for (var i = 0; skill.parents != undefined && i < skill.parents.length; ++i) {
         var parent = skills.find(obj => obj.name == skill.parents[i]);
 
-        if (parent == undefined) {
+        /*if (parent == undefined) {
             parent = await Skill.findOne({name: skill.parents[i]} , function (err, skill) {
                 if (err) throw err;
                 return skill;
             });
-        }
+        }*/
 
 		parents.push(parent);
 		dependency.push(parent);
