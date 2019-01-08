@@ -197,7 +197,6 @@ function searchUserSkillsByName(element){
 
 // searches trees by the provided name
 function searchTreesByName(element){
-    console.log("ss");
   var treeToSearch = {value: element.value};
   var TreeSearchResult = document.getElementById('TreeSearchResult');
   request('POST', '/set/searchTreesByName', treeToSearch, function() {
@@ -1146,7 +1145,7 @@ function editMyTree () {
     canvas.style.display = "none";
 
     var treeName = document.getElementById("treeName");
-    treeName.setAttribute('list', 'treeSearchResult');
+    treeName.setAttribute('list', 'TreeSearchResult');
     treeName.onkeyup = function() {searchTreesByName(treeName)};
 
     var loadTree = document.getElementById("loadTree");
