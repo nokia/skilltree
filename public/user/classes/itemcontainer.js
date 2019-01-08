@@ -671,7 +671,7 @@ class ItemContainer {
         children.innerText = childNames;
 
         var trainingNames = '';
-        for (var i = 0; i < this.skill.trainings.length; ++i) trainingNames += "<a href = '" + this.skill.trainings[i].URL + "'>" this.skill.trainings[i].name + '</a><br>';
+        for (var i = 0; i < this.skill.trainings.length; ++i) trainingNames += "<a href = '" + this.skill.trainings[i].URL + "'>" + this.skill.trainings[i].name + '</a><br>';
         trainingNames = trainingNames.substring(0, trainingNames.length - 4);
         trainings.innerHTML = trainingNames;
 
