@@ -1255,7 +1255,7 @@ function editMyTree () {
     };
 }
 
-// TODO (jo torleshez)
+// TODO (jo torleshez) 
 function getDependency (skills, skill, dependency) {
 	var parents = [];
 	for (var i = 0; skill.parents != undefined && i < skill.parents.length; ++i) {
