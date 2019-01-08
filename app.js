@@ -1134,6 +1134,9 @@ setRoute.post('/approvetraining', async function (req, res) {
 		return skill;
     });
 
+    console.log(data);
+    console.log(globalSkill);
+
     globalSkill.trainings.push({
         name: training.name,
         level: training.level,
