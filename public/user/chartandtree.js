@@ -1146,7 +1146,7 @@ function editMyTree () {
 
     var treeName = document.getElementById("treeName");
     treeName.list = "skillSearchResult";
-    treeName.onkeyup = "searchSkillsByName(this)";
+    treeName.onkeyup = searchSkillsByName(treeName);
 
     var loadTree = document.getElementById("loadTree");
     loadTree.style.display = "block";
