@@ -658,8 +658,12 @@ class ItemContainer {
 
         var parentNames = '';
         for (var i = 0; i < this.skill.parents.length; ++i) parentNames += this.skill.parents[i] + ', ';
-        parentNames = parentNames.substring(0, parentNames.length - 2);
-        parents.innerText = parentNames;
+        if (parentNames != '') {
+            parentNames = parentNames.substring(0, parentNames.length - 2);
+            parents.innerText = parentNames;
+        } else {
+            parents.innerText = '-';
+        }
 
         var childNames = '';
         for (var i = 0; i < this.skill.children.length; ++i) {
@@ -667,13 +671,20 @@ class ItemContainer {
             if (!this.skill.children[i].recommended) childNames += ', required), ';
             else childNames += '), ';
         }
-        childNames = childNames.substring(0, childNames.length - 2);
-        children.innerText = childNames;
+        if (childNames != '') {
+            childNames = childNames.substring(0, childNames.length - 2);
+            children.innerText = childNames;
+        } else children.innerText = '-';
 
         var trainingNames = '';
-        for (var i = 0; i < this.skill.trainings.length; ++i) trainingNames += "<a href = '" + this.skill.trainings[i].URL + "'>" + this.skill.trainings[i].name + '</a><br>';
-        trainingNames = trainingNames.substring(0, trainingNames.length - 4);
-        trainings.innerHTML = trainingNames;
+        for (var i = 0; i < this.skill.trainings.length; ++i) {
+            if (this.skill.trainings[i].URL == undefined) trainingNames += this.skill.trainings[i].name + ', ';
+            else trainingNames += "<a href = '" + this.skill.trainings[i].URL + "'>" + this.skill.trainings[i].name + '</a>, ';
+        }
+        if (trainingNames != '') {
+            trainingNames = trainingNames.substring(0, trainingNames.length - 2);
+            trainings.innerHTML = trainingNames;
+        } else trainings.innerText = '-';
 
         span.onclick = function() {
             modal.style.display = "none";
