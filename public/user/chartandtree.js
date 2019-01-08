@@ -1231,7 +1231,7 @@ function editMyTree () {
                 var treeData = {
                     name: document.getElementById('treeName').value,
                     focusArea: document.getElementById('focusarea').value,
-                    skills: skillsNames
+                    skills: skillNames
                 };
 
                 console.log(treeData);
