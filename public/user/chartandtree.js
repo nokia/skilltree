@@ -196,8 +196,8 @@ function searchUserSkillsByName(element){
 }
 
 // searches trees by the provided name
-function searchTreesByName(){
-  var treeToSearch = {value: document.getElementById('cardSearchBar').value};
+function searchTreesByName(element){
+  var treeToSearch = {value: element.value};
   var TreeSearchResult = document.getElementById('TreeSearchResult');
   request('POST', '/set/searchTreesByName', treeToSearch, function() {
       if(this.readyState == 4 && this.status == 200) {
@@ -1144,6 +1144,10 @@ function editMyTree () {
     var canvas = document.getElementById("pixiCanvas");
     canvas.style.display = "none";
 
+    var treeName = document.getElementById("treeName");
+    treeName.list = "skillSearchResult";
+    treeName.onkeyup = "searchSkillsByName(this)";
+
     var loadTree = document.getElementById("loadTree");
     loadTree.style.display = "block";
 
@@ -1245,6 +1249,27 @@ function editMyTree () {
             } else alert("Please add at least one skill to the tree");
         } else alert("Please provide a name to the tree");
     };
+}
+
+function getDependency (skills, skill, dependency) {
+	var parents = [];
+	for (var i = 0; skill.parents != undefined && i < skill.parents.length; ++i) {
+        var parent = skills.find(obj => obj.name == skill.parents[i]);
+
+        if (parent == undefined) {
+            parent = await Skill.findOne({name: skill.parents[i]} , function (err, skill) {
+                if (err) throw err;
+                return skill;
+            });
+        }
+
+		parents.push(parent);
+		dependency.push(parent);
+	}
+
+	for (var i = 0; i < parents.length; ++i) {
+		getDependency(skills, parents[i], dependency);
+	}
 }
 
 // make trees globally available
