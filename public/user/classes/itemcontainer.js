@@ -52,9 +52,16 @@ class ItemContainer {
         btnGHover.drawRect(0, 0, 70, 26);
         btnGHover.endFill();
 
+        var base64Url = localStorage.getItem("loginToken").split('.')[1];
+        var base64 = base64Url.replace('-', '+').replace('_', '/');
+        var payload = JSON.parse(window.atob(base64));
+
+        var showEndorseBtn = false;
+        if (!this.self && this.skill.endorsement.find(obj => obj == payload.username) == undefined) showEndorseBtn = true;
+
         var btnInfoPosX = 0;
         var btn1PosX = 0;
-        if (!this.self) {
+        if (showEndorseBtn) {
             var btnEndorse = new PIXI.Sprite(btnG.generateTexture());
 
             var txtEndorse = new PIXI.Text("ENDORSE", {fontSize: 14, fill: 0x000000});
@@ -88,7 +95,7 @@ class ItemContainer {
 
         var btnInfoContainer = new PIXI.Container();
         btnInfoContainer.addChild(btnInfo, txtInfo);
-        if (this.self) btnInfoPosX = (detailsWidth - btnInfoContainer.width) / 4;
+        if (!showEndorseBtn) btnInfoPosX = (detailsWidth - btnInfoContainer.width) / 4;
         else btnInfoPosX = 10;
         btnInfoContainer.position.set(btnInfoPosX, description.position.y + description.height + 10);
         btnInfoContainer.interactive = true;
