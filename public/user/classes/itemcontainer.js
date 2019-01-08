@@ -362,7 +362,10 @@ class ItemContainer {
 
 
     enable () {
-        this.container.filters = null;
+        this.skillborder.filters = null;
+        this.skillicon.filters = null;
+        this.skillborder.levelinfo.filters = null;
+        if (this.skillborder.endorsement != undefined) this.skillborder.endorsement.filters = null;
         this.container.interactive = true;
         this.skillborder.interactive = true;
         this.skillborder.buttonMode = true;
@@ -373,8 +376,10 @@ class ItemContainer {
     disable () {
         var colorMatrixFilter = new PIXI.filters.ColorMatrixFilter;
         colorMatrixFilter.brightness(0.4);
-        this.container.filters = [colorMatrixFilter];
-        //this.container.interactive = false;
+        this.skillborder.filters = [colorMatrixFilter];
+        this.skillicon.filters = [colorMatrixFilter];
+        this.skillborder.levelinfo.filters = [colorMatrixFilter];
+        if (this.skillborder.endorsement != undefined) this.skillborder.endorsement.filters = [colorMatrixFilter];
         this.skillborder.interactive = false;
         this.skillborder.buttonMode = false;
 
