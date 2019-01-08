@@ -43,21 +43,21 @@ class ItemContainer {
         var curLvlDesc = undefined;
         var nextLvlDesc = undefined;
         if (this.skill.achievedPoint > 0) {
-            curLvlDesc = new PIXI.Text("Current level: " + this.skill.pointDescription[this.skill.achievedPoint - 1], {fontSize: descriptionFontSize, fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - detailsMargin * 2 });
+            curLvlDesc = new PIXI.Text("Current level: " + this.skill.pointDescription[this.skill.achievedPoint - 1], {fontSize: descriptionFontSize, fontStyle: 'italic', fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - detailsMargin * 2});
             curLvlDesc.position.set(detailsMargin, description.position.y + description.height + 10);
             detailsForeground.addChild(curLvlDesc);
         }
 
         if (this.skill.achievedPoint < this.skill.maxPoint) {
-            var nextLvlDesc = new PIXI.Text("Next level: " + this.skill.pointDescription[this.skill.achievedPoint], {fontSize: descriptionFontSize, fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - detailsMargin * 2 });
+            var nextLvlDesc = new PIXI.Text("Next level: " + this.skill.pointDescription[this.skill.achievedPoint], {fontSize: descriptionFontSize, fontStyle: 'italic', fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - detailsMargin * 2});
             if (this.skill.achievedPoint == 0) nextLvlDesc.position.set(detailsMargin, description.position.y + description.height + 10);
             else nextLvlDesc.position.set(detailsMargin, curLvlDesc.position.y + curLvlDesc.height + 10);
             detailsForeground.addChild(nextLvlDesc);
         }
 
         var btnPosY = description.position.y + description.height + 10;
-        if (nextLvlDesc != undefined) btnPosY = nextLvlDesc.position.y + nextLvlDesc.height + 10;
-        else if (curLvlDesc != undefined) btnPosY = curLvlDesc.position.y + curLvlDesc.height + 10;
+        if (nextLvlDesc != undefined) btnPosY = nextLvlDesc.position.y + nextLvlDesc.height + 15;
+        else if (curLvlDesc != undefined) btnPosY = curLvlDesc.position.y + curLvlDesc.height + 15;
 
         var btnG = new PIXI.Graphics();
         btnG.lineStyle(1, 0x888888);
