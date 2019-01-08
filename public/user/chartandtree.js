@@ -1024,6 +1024,10 @@ function createTree () {
     var canvas = document.getElementById("pixiCanvas");
     canvas.style.display = "none";
 
+    var treeName = document.getElementById("treeName");
+    treeName.setAttribute('list', '');
+    treeName.onkeyup = undefined;
+
     var creator = document.getElementById("creator");
     creator.style.display = "grid";
 
