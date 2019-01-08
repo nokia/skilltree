@@ -312,7 +312,7 @@ class ItemContainer {
               var colorMatrixFilter = new PIXI.filters.ColorMatrixFilter;
               colorMatrixFilter.brightness(0.4);
               this.skills[i].itemcontainer.container.filters = [colorMatrixFilter];
-              this.skills[i].itemcontainer.container.interactive = false;
+              //this.skills[i].itemcontainer.container.interactive = false;
               this.skills[i].itemcontainer.skillborder.interactive = false;
               this.skills[i].itemcontainer.skillborder.buttonMode = false;
             }
@@ -375,7 +375,7 @@ class ItemContainer {
         colorMatrixFilter.brightness(0.4);
         this.container.filters = [colorMatrixFilter];
         //this.container.interactive = false;
-        //this.skillborder.interactive = false;
+        this.skillborder.interactive = false;
         this.skillborder.buttonMode = false;
 
         this.app.renderer.render(this.app.stage);
