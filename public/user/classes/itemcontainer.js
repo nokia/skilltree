@@ -303,28 +303,33 @@ class ItemContainer {
 
     // TODO comments
     refreshAvaliability(){
-      for (var i = 0; i < this.skills.length; i++) {
-        for (var j = 0; j < this.skills[i].parents.length; j++) {
+        for (var i = 0; i < this.skills.length; i++) {
+            for (var j = 0; j < this.skills[i].parents.length; j++) {
 
-          var par = this.skills.find(obj => obj.name == this.skills[i].parents[j]);
-          if(par !== undefined){
-            if(par.children.find(obj => obj.name == this.skills[i].name).minPoint > par.achievedPoint || par.itemcontainer.container.interactive == false){
-              var colorMatrixFilter = new PIXI.filters.ColorMatrixFilter;
-              colorMatrixFilter.brightness(0.4);
-              this.skills[i].itemcontainer.container.filters = [colorMatrixFilter];
-              //this.skills[i].itemcontainer.container.interactive = false;
-              this.skills[i].itemcontainer.skillborder.interactive = false;
-              this.skills[i].itemcontainer.skillborder.buttonMode = false;
+                var par = this.skills.find(obj => obj.name == this.skills[i].parents[j]);
+                if(par !== undefined){
+                    if(par.children.find(obj => obj.name == this.skills[i].name).minPoint > par.achievedPoint || par.itemcontainer.container.interactive == false){
+                        var colorMatrixFilter = new PIXI.filters.ColorMatrixFilter;
+                        colorMatrixFilter.brightness(0.4);
+                        this.skills[i].itemcontainer.skillborder.filters = [colorMatrixFilter];
+                        this.skills[i].itemcontainer.skillicon.filters = [colorMatrixFilter];
+                        this.skills[i].itemcontainer.skillborder.levelinfo.filters = [colorMatrixFilter];
+                        if (this.skills[i].itemcontainer.skillborder.endorsement != undefined) this.skills[i].itemcontainer.skillborder.endorsement.filters = [colorMatrixFilter];
+                        this.skills[i].itemcontainer.skillborder.interactive = false;
+                        this.skills[i].itemcontainer.skillborder.buttonMode = false;
+                    }
+                    else {
+                        this.skills[i].itemcontainer.skillborder.filters = null;
+                        this.skills[i].itemcontainer.skillicon.filters = null;
+                        this.skills[i].itemcontainer.skillborder.levelinfo.filters = null;
+                        if (this.skills[i].itemcontainer.skillborder.endorsement != undefined) this.skills[i].itemcontainer.skillborder.endorsement.filters = null;
+                        this.skills[i].itemcontainer.container.interactive = true;
+                        this.skills[i].itemcontainer.skillborder.interactive = true;
+                        this.skills[i].itemcontainer.skillborder.buttonMode = true;
+                    }
+                }
             }
-            else{
-              this.skills[i].itemcontainer.container.filters = null;
-              this.skills[i].itemcontainer.container.interactive = true;
-              this.skills[i].itemcontainer.skillborder.interactive = true;
-              this.skills[i].itemcontainer.skillborder.buttonMode = true;
-            }
-          }
         }
-      }
     }
 
     onButtonOver() {
