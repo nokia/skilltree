@@ -647,7 +647,7 @@ class ItemContainer {
         header.innerText = this.skill.name;
 
         desc.innerText = this.skill.description;
-        wikiURL.innerText = this.skill.descriptionWikipediaURL;
+        wikiURL.href = this.skill.descriptionWikipediaURL;
         categ.innerText = this.skill.categoryName;
         maxP.innerText = this.skill.maxPoint;
 
