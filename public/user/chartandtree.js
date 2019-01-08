@@ -978,7 +978,7 @@ function editMySkill () {
             });
         }*/
 
-        
+
         var trainingsTable = document.getElementById('trainingsTable');
         var trainings = [];
         for (i = 1; i < trainingsTable.rows.length; ++i) {
@@ -1116,6 +1116,7 @@ function deleteRow(table, row) {
 
 // adds a row to a table
 function addRow(table) {
+    console.log(table);
   var x = document.getElementById(table);
   var new_row = x.rows[1].cloneNode(true);
   var len = x.rows.length;
