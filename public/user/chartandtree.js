@@ -1494,12 +1494,29 @@ function approveTrees() {
     var approveTrees = document.getElementById("approveTrees");
     approveTrees.style.display = "block";
 
+    var btn = document.getElementById('approveTreesBtn');
+    var select = document.getElementById('apprTreeSel');
+
     for (var i = 0; i < data.apprTrees.length; ++i) {
         var text = data.apprTrees[i].name + " (" + data.apprTrees[i].username + ")";
         var option = document.createElement('option');
         option.value = option.text = text;
-        document.getElementById('apprTreeSel').add(option);
+        option.name = data.apprTrees[i].name;
+        option.username = data.apprTrees[i].username;
+        select.add(option);
     }
+
+    btn.onclick = function () {
+        var selectedTraining = select.options[select.selectedIndex]
+        request('POST', '/set/approvetree', {
+            name: selectedTraining.name,
+            username: selectedTraining.username
+        }, function () {
+            if (this.readyState == 4 && this.status == 200) {
+                window.open("/user/", "_self");
+            }
+        });
+    };
 }
 
 // make skills globally available
