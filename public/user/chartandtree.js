@@ -1288,7 +1288,7 @@ function getChildren (skills, skill, children) {
 	}
 
 	for (var i = 0; i < temp.length; ++i) {
-		getDependency(skills, temp[i], children);
+		getChildren(skills, temp[i], children);
 	}
 }
 
