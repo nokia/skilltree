@@ -244,7 +244,61 @@ function getPublicUserData(){
           row.innerHTML += "<td>" + this.response[i].willingToTeach + "</td>";
           row.data = this.response[i];
           row.onclick = function(){
-            //console.log(this.data);
+            var searchedUserModal = document.getElementById('searchedUserModal');
+            var closeSearchedUserModal = document.getElementById('closeSearchedUserModal');
+            var searchedUserModalHeader = document.getElementById('searchedUserModalHeader');
+            var searchedUserlModalInfo = document.getElementById('searchedUserlModalInfo');
+            var searchedUserlModalAdress = document.getElementById('searchedUserlModalAdress');
+            var userSkillsModalHeader = document.getElementById('userSkillsModalHeader');
+            var userSkillsModalBody = document.getElementById('userSkillsModalBody');
+
+            searchedUserModalHeader.innerHTML = this.data.username;
+            searchedUserlModalInfo.innerHTML = this.data.username + "s focusarea is " + this.data.focusArea + ", and his/her main Tree is " + this.data.mainTree + ". ";
+            searchedUserlModalAdress.innerHTML = "He/She is avalible at <br><b>Date</b>: " + this.data.teachingDay + this.data.teachingTime + "<br><b>Place</b>: " + this.data.location;
+            userSkillsModalHeader.innerHTML = '<th scope="col">#</th><th scope="col">Name</th><th scope="col">Level</th><th scope="col">Endorsement</th>';
+            userSkillsModalBody.innerHTML = "";
+            for (var i = 0; i < this.data.skills.length; i++) {
+              var row = document.createElement('tr');
+              row.className = "foundElementRow";
+              row.innerHTML += "<th>" + (i+1) + "</th>";
+              row.innerHTML += "<th>" + this.data[i].name + "</th>";
+              row.innerHTML += "<th>" + this.data[i].achievedPoint + "</th>";
+              row.innerHTML += "<th>" + this.data[i].Endorsement.length + "</th>";
+              row.data = {
+                name: this.data[i].name,
+                categoryName: this.data[i].categoryName,
+                description: this.data[i].description,
+                pointDescription: this.data[i].pointDescription,
+                descriptionWikipediaURL: this.data[i].descriptionWikipediaURL
+              }
+              row.onclick = function(){
+                var foundmodal = document.getElementById('searchedSkillModal');
+                var header = document.getElementById('searchedSkillModalHeader');
+                var category = document.getElementById('searchedSkillModalCategory');
+                var pdesc = document.getElementById('searchedSkillModalPDesc');
+                var desc = document.getElementById('searchedSkillModalDesc');
+                var wiki = document.getElementById('searchedSkillModalWiki');
+                var closer = document.getElementById('closeSearchedSkillModal');
+                header.innerHTML = this.data.name;
+                category.innerHTML = "<b>Category</b>: " + this.data.categoryName;
+                pdesc.innerHTML = "<b>Description by points</b>: <br> 1: " + this.data.pointDescription[0] + "<br>" +
+                                                              "2: " + this.data.pointDescription[1] + "<br>" +
+                                                              "3: " + this.data.pointDescription[2] + "<br>" +
+                                                              "4: " + this.data.pointDescription[3] + "<br>" +
+                                                              "5: " + this.data.pointDescription[4];
+                desc.innerHTML = "<b>Description</b>: " + this.data.description;
+                wiki.innerHTML = "<b>Wiki link</b>: <a href=" + this.data.descriptionWikipediaURL + ">" + this.data.descriptionWikipediaURL + "</a>";
+                foundmodal.style.display = "block";
+                closer.onclick = function(){
+                  foundmodal.style.display = "none";
+                }
+              }
+              userSkillsModalBody.appendChild(row);
+            }
+            closeSearchedUserModal.onclick = function(){
+              searchedUserModal.style.display = "none";
+            }
+            searchedUserModal.style.display = "block";
           }
           searchModalBody.appendChild(row);
         }
