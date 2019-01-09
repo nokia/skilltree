@@ -1343,7 +1343,7 @@ function editTree () {
         }
 
 
-        request('POST', '/set/gettree', {name: treeToSearch}, function() {
+        request('POST', '/set/gettree', {name: document.getElementById("treeName").value}, function() {
             if(this.readyState == 4 && this.status == 200) {
                 TreeSearchResult.innerHTML = "";
                 console.log(this.response);
