@@ -1241,7 +1241,7 @@ function editMyTree () {
                 for (var i = 0; i < children.length; ++i) {
                     skillsToAdd = skillsToAdd.filter(obj => obj.name != children[i].name);
                     for (var j = 0; j < skillList.options.length; ++j) {
-                        if (skillList.options[j].text == children[j].name) skillList.remove(j);
+                        if (skillList.options[j].text == children[i].name) skillList.remove(j);
                     }
                 }
             }
