@@ -1135,23 +1135,7 @@ setRoute.post('/skilldata', function(req, res) {
 setRoute.post('/approvetree', async function (req, res) {
 	var data = req.body;
 
-    var user = await User.findOne({
-        username: req.decoded.username
-    }, function(err, user) {
-        if (err) throw err;
-		return user;
-    });
 
-	if (!user) {
-		res.json({
-			success: false,
-			message: 'User not found.'
-		});
-	} else {
-		var tree = new Tree();
-		tree = user.trees.find(obj => obj.name == data.name);
-		tree.save(function (err) {if (err) throw err;});
-	}
 });
 
 setRoute.post('/approvetraining', async function (req, res) {
@@ -1165,12 +1149,6 @@ setRoute.post('/approvetraining', async function (req, res) {
     });
 
     if (globalSkill.trainings.find(obj => obj.name == data.name) == undefined) {
-        await ApprovableTraining.remove({
-            username: data.username,
-            skillName: data.skillName,
-            name: data.name
-        });
-
         var training = await ApprovableTraining.findOne({
             username: data.username,
             skillName: data.skillName,
@@ -1210,7 +1188,13 @@ setRoute.post('/approvetraining', async function (req, res) {
                     user.save(function (err) {if (err) throw err;});
                 }
             })
-        })
+        });
+
+        await ApprovableTraining.remove({
+            username: data.username,
+            skillName: data.skillName,
+            name: data.name
+        });
     }
 });
 
