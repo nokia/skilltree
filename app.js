@@ -665,7 +665,7 @@ setRoute.post('/getskill', async function (req, res) {
 // recursive function for dependency determinating
 async function getDependency (userSkills, skill, dependency) {
 	var parents = [];
-	for (var i = 0; skill.parents != undefined && i < skill.parents.length; ++i) {
+	for (var i = 0; skill != undefined && skill.parents != undefined && i < skill.parents.length; ++i) {
         var parent = userSkills.find(obj => obj.name == skill.parents[i]);
 
         if (parent == undefined) {
