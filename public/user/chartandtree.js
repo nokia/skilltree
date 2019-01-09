@@ -253,8 +253,8 @@ function getPublicUserData(){
             var userSkillsModalBody = document.getElementById('userSkillsModalBody');
 
             searchedUserModalHeader.innerHTML = this.data.username;
-            searchedUserlModalInfo.innerHTML = this.data.username + "s focusarea is " + this.data.focusArea + ", and his/her main Tree is " + this.data.mainTree + ". ";
-            searchedUserlModalAdress.innerHTML = "He/She is avalible at <br><b>Date</b>: " + this.data.teachingDay + this.data.teachingTime + "<b>Place</b>: <a href=" + this.data.location + ">" + this.data.location + "</a><br>";
+            searchedUserlModalInfo.innerHTML = this.data.username + "s focusarea is " + this.data.focusArea.name + ", and his/her main Tree is " + this.data.mainTree + ". ";
+            searchedUserlModalAdress.innerHTML = "He/She is avalible at <br><b>Date</b>: " + this.data.teachingDay + this.data.teachingTime + "<br><b>Place</b>: <a href=" + this.data.location + ">" + this.data.location + "</a><br>";
             userSkillsModalHeader.innerHTML = '<th scope="col">#</th><th scope="col">Name</th><th scope="col">Level</th><th scope="col">Endorsement</th>';
             userSkillsModalBody.innerHTML = "";
             for (var i = 0; i < this.data.skills.length; i++) {
