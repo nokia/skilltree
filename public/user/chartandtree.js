@@ -1080,6 +1080,8 @@ function createTree () {
     var loadTree = document.getElementById("loadTree");
     loadTree.style.display = "none";
 
+    var canvas = document.getElementById("pixiCanvas");
+
     creator.style.width = canvas.style.width;
     creator.style.height = canvas.style.height;
 
@@ -1222,16 +1224,10 @@ function editMyTree () {
     var creator = document.getElementById("creator");
     creator.style.display = "grid";
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     document.getElementById("apprP").style.display = "none";
 
     var canvas = document.getElementById("pixiCanvas");
 
-=======
->>>>>>> parent of b121a5a... Revert "."
-=======
->>>>>>> parent of b121a5a... Revert "."
     creator.style.width = canvas.style.width;
     creator.style.height = canvas.style.height;
 
@@ -1359,6 +1355,8 @@ function editTree () {
 
     var creator = document.getElementById("creator");
     creator.style.display = "grid";
+
+    var canvas = document.getElementById("pixiCanvas");
 
     creator.style.width = canvas.style.width;
     creator.style.height = canvas.style.height;
