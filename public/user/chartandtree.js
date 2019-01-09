@@ -556,7 +556,7 @@ function showChart() {
 
     // scale chart
     var ratio = chartContainer.width / chartContainer.height;
-    if (window.innerWidth < window.innerHeight - 64) {
+    if (window.innerWidth < window.innerHeight - 90) {
         chartContainer.width = window.innerWidth - 40;
         chartContainer.height = (window.innerWidth - 40) / ratio;
     } else {
@@ -572,7 +572,7 @@ window.onresize = function () {
 
     if (chartContainer != undefined) {
         var ratio = chartContainer.width / chartContainer.height;
-        if (window.innerWidth < window.innerHeight - 64) {
+        if (window.innerWidth < window.innerHeight - 90) {
             chartContainer.width = window.innerWidth - 40;
             chartContainer.height = (window.innerWidth - 40) / ratio;
         } else {
