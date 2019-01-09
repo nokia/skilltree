@@ -1,16 +1,16 @@
 [
   {
     "name": "HTML",
-    "categoryName": "Maths, science and engineeging",
+    "categoryName": "Maths, science and engineering",
     "skillIcon": "pictures/icons/HTML.png",
     "description": "Hypertext Markup Language is the standard markup language for creating web pages and web applications. With Cascading Style Sheets and JavaScript, it forms a triad of cornerstone technologies for the World Wide Web.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/HTML",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
-      "L5"
+      "Understanding basic HTML terms, tags, structure of a website and interlinkage of basic web technologies (Cascading Style Sheets and JavaScript).",
+      "Understanding of basic HTML elements and the basic flow of creating HTML documents.",
+      "An understanding of how opening tags and closing tags work, how to create an HTML document with the proper DOCTYPE, how to nest HTML tags within another, how to use attributes, and use them to inline style or add required data. How to use <style> and <script> to put CSS and JavaScript onto a HTML document",
+      "Knowing most of HTML tags in the language, understand when to use tags. The client-server relationship in the abstract, how to use attributes to style and identification for tags, how to link external resources like CSS, and JavaScript into your HTML.  An understanding of the Document Object Model or DOM works and how your HTML will be read by accessible hardware such as screen readers",
+      "Knowing all the HTML tags, the ability to manipulate the DOM, understanding how to create your own attributes using data-*, Build HTML documents semantically, How your HTML will be read by blogs, social networks, etc. for content"
     ],
     "maxPoint": 5,
     "parents": [],
@@ -21,9 +21,9 @@
         "recommended": false
       },
       {
-          "name": "JavaScript",
-          "minPoint": 1,
-          "recommended": false
+        "name": "CSS",
+        "minPoint": 1,
+        "recommended": false
       }
     ],
     "trainings": [
@@ -46,11 +46,11 @@
     "description": "Cascading Style Sheets is a style sheet language used for describing the presentation of a document written in a markup language like HTML. CSS is a cornerstone technology of the World Wide Web, alongside HTML and JavaScript.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/CSS",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
-      "L5"
+      "L1\nUnderstand that the purpose of CSS is keeping design and content separate, to the highest extent that is possible.\nHave made extensive modifications to a CSS template.\nHave used a WYSIWYG editor to create CSS web page.\nHave a basic understanding of CSS layout techniques.",
+      "I have designed a reasonably complex website from scratch using only CSS for layout.I have a solid understanding of the structure of CSS, the CSS box model, and CSS positioning.I understand how to use float and deal with it's quirks.I have a basic understanding that different browsers render some CSS differently and that needs to be accounted for and tested.I have a growing collection of CSS resources to draw from.I do not use tables for layout whatsoever anymore. I understand that tables are for tabular data, not page layout.",
+      "\n\nI have designed and coded a large number of CSS web sites.  I can \nconvert a design from any format into a CSS layout: Photoshop, \nIllustrator, napkin drawings, etc.I am completely comfortable writing and editing CSS by hand.I have a strong understanding of the cascading part of CSS. \nParticularly how some some CSS properties do, some don't, and some \ndepend on how the value is declared.I have a solid understanding of cross-browser CSS. I know how to use\n browser specific CSS statements and delclare browser specific \nstylesheets.I know and have tried some CSS hacks and understand the advantages and disadvantages of using them.I have a strong understanding of the different sizing values \navailable in CSS (e.g. em, px, %, pt, \"small\", etc.) and in what \nsituations each make the most sense.I can quickly troubleshoot and solve CSS problems.I have a great collection of tools and resources at my disposal for inspiration, debugging, or reference.",
+      "I feel like I could tackle any design idea with CSS.I can do pixel-perfect cross-browser conversions of designs into CSS websites.I can visualize markup structure easily, just by looking at a design.I have utilized additional web technologies to expand the possibilities and break through the limitations of CSS.I have my own CSS framework I use, complete with my own customized CSS reset.I have a strong understanding of advanced CSS like pseudo classes, pseudo elements, and attribute selectors.I keep up to date on browser support and development progress.",
+      "I am involved with the future of CSS specifications or support.I am a CSS Celebrity.I've written books, given seminars, taught classes, knew CSS since she was a little girl, etc.I don't need to do testing, I just know."
     ],
     "maxPoint": 5,
     "parents": [
@@ -115,7 +115,7 @@
   {
     "name": "Photoshop",
     "categoryName": "Maths, science and engineering",
-    "skillIcon": "pictures/icons/Adobe_Photoshop.svg",
+    "skillIcon": "pictures/icons/Photoshop.png",
     "description": "...",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Photoshop",
     "pointDescription": [
@@ -160,13 +160,7 @@
     "parents": [
       "HTML"
     ],
-    "children": [
-        {
-            "name": "NodeJS",
-            "minPoint": 1,
-            "recommended": false
-        }
-    ],
+    "children": [],
     "trainings": [
       {
         "name": "HTML Basics",
@@ -261,6 +255,7 @@
     ],
     "maxPoint": 5,
     "parents": [
+      "HTML",
       "JavaScript"
     ],
     "children": [],
@@ -381,10 +376,10 @@
     "description": "Scrum is an agile framework for managing knowledge work, with an emphasis on software development. It is designed for teams of three to nine members, who break their work into actions that can be completed within timeboxed iterations, called 'sprints', no longer than one month and most commonly two weeks, then track progress and re-plan in 15-minute stand-up meetings, called daily scrums.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Scrum",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
+      "L1\nSprint Planning – The Team decides what to work on for the current period",
+      "L2\nDaily Scrum – The Development Team meets for 15 minutes (or less) every \nday of the Sprint to inspect progress toward the Sprint Goal.",
+      "L3\nSprint Review – The Team collaborates about what was done and adapts the Backlog as needed",
+      "L4\nSprint Retrospective – The Team discusses what went right, what went wrong, and how to improve\n",
       "L5"
     ],
     "maxPoint": 5,
@@ -420,10 +415,10 @@
     "description": "...",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Coaching",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
+      "Understanding concepts, values and beliefs; the use of \nfacilitative behaviours such as active listening, paraphrasing, \nquestioning, summarising, managing time; encouraging participation; \nkeeping clear and accurate notes; using basic tools like problem solving\n and action planning.",
+      "Mastering process tools; designing meetings; skilled at\n using the right decision making method, achieving consensus, and \ngetting true closure; handling feedback activities and conducting \nprocess checks; using exit surveys; good at managing meetings in an \neffective manner; able to help a group set goals and objectives that are\n measurable; skilled at checking assumptions and challenging ideas.",
+      "Skilled at managing conflict and making immediate \ninterventions; able to deal with resistance and personal attacks; making\n design changes on the spot; sizing up a group and using the right \nstrategies for its development stage; managing survey feedback \nexercises; able to design and conduct interviews and focus groups, \ndesign and implement surveys; consolidating ideas from a mass of \ninformation into coherent summaries.",
+      "Design and implement process interventions in response \nto complex organisational issues; use tools to promote process \nimprovement, customer intimacy, and overall organisational \neffectiveness; able to support teams in the various stages of team \ndevelopment.",
       "L5"
     ],
     "maxPoint": 5,
@@ -850,10 +845,10 @@
     "description": "Conflict resolution is conceptualized as the methods and processes involved in facilitating the peaceful ending of conflict and retribution. Committed group members attempt to resolve group conflicts by actively communicating information about their conflicting motives or ideologies to the rest of the group (e.g., intentions; reasons for holding certain beliefs) and by engaging in collective negotiation.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Conflict_resolution",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
+      "Identify the source of the conflict. The more \ninformation you have about the cause of the conflict, the more \neasily you can help to resolve it. To get the information you need, use a\n series of questions to identify the cause, like, “When did you feel \nupset?” “Do you see a relationship between that and this incident?” “How\n did this incident begin?” ",
+      " Active listening\nSeveral strategies help with distinguishing who has a problem \nwith a behavior and who takes ownership. One of those strategies is \nactive listening. Active listening is attending carefully to all aspects\n of what a student says and attempting to understand or empathize as \nmuch as one can (Seifert & Sutton). Active listening consists of \ncontinually asking questions in order to test your understanding. It \nalso requires giving encouragement to the student by letting them tell \ntheir story, and paraphrasing what the student says so you can form an \nunbiased conclusion. It is key not to move too quickly at solving the \nproblem by just giving advice, instructions, or scolding. Responding too\n soon with solutions can shut down the student’s communication and leave\n you with inaccurate impressions of the source or nature of the problem \n(Seifert & Sutton)",
+      " After getting each party’s viewpoint on the conflict, \nthe next step is to get each to identify how the situation could be \nchanged. Again, question the parties to solicit their ideas: “How can \nyou make things better between you?” ",
+      " Identify solutions both disputants can support. You \nare listening for the most acceptable course of action. Point out the \nmerits of various ideas, not only from each other’s perspective, but in \nterms of the benefits to the organization.",
       "L5"
     ],
     "maxPoint": 5,
@@ -881,9 +876,9 @@
     "description": "Conflict resolution is conceptualized as the methods and processes involved in facilitating the peaceful ending of conflict and retribution. Committed group members attempt to resolve group conflicts by actively communicating information about their conflicting motives or ideologies to the rest of the group (e.g., intentions; reasons for holding certain beliefs) and by engaging in collective negotiation.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Negotiation",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
+      "At the basic level, the negotiator has learned and developed an \norganized or systematic framework for preparing for and conducting \nnegotiations.  Generally, basic level negotiators have limited \nexperience and skill in applying a limited set of tools.  ",
+      "At the intermediate level, the negotiator has mastered basic negotiating\n tools and has begun adding additional tools to his or her negotiation \ntool kit.  More importantly, the negotiator uses the tools to prepare \nfor, conduct and review each negotiation.  The negotiator explicitly \nuses the tools across a range of experiences so that he or she develops a\n great deal of experience and confidence in applying these tools. ",
+      "The advanced negotiation skill level is reached when the negotiator has \nnot only accumulated a wide range of negotiation tools, frameworks and \nprocesses, through study, practice and experience but has also developed\n awareness of his or her own negotiation strengths and weaknesses and \nconsciously uses that knowledge to manage him or herself so that \nnegotiation strengths are maximized and negotiation weaknesses don’t \nimpede the negotiations.  A negotiator who has reached the advanced \nstage also has strong skills in negotiation process design(designing how\n the parties will negotiate, not just that about which they will \nnegotiate) and has developed the discretion as to when to use which \ntools and processes and can execute the selected tools with skill.   ",
       "L4",
       "L5"
     ],
@@ -995,6 +990,16 @@
         "goal": "",
         "length": 0,
         "language": "en"
+      },
+      {
+        "name": "Handling git commits",
+        "level": 2,
+        "shortDescription": "On undoing, fixing, or removing commits in git",
+        "URL": "http://sethrobertson.github.io/GitFixUm/fixup.html",
+        "URLlastAccessed": "2019-01-03",
+        "goal": "This document is an attempt to be a fairly comprehensive guide to recovering from what you did not mean to do when using git.",
+        "length": 0,
+        "language": "en"
       }
     ]
   },
@@ -1022,6 +1027,16 @@
         "level": 1,
         "shortDescription": "In these tutorials, I'll be breaking down exactly what a Docker container is and how to use it.",
         "URL": "https://youtu.be/pGYAg7TMmp0",
+        "URLlastAccessed": "2018-12-15",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      },
+      {
+        "name": "Docker Tutorial - What is Docker & Docker Containers, Images, etc?",
+        "level": 1,
+        "shortDescription": "In these tutorials, I'll be breaking down exactly what a Docker container is and how to use it.",
+        "URL": "http://training.docker.com/category/self-paced-online",
         "URLlastAccessed": "2018-12-15",
         "goal": "",
         "length": 0,
