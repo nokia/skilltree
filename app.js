@@ -1231,6 +1231,8 @@ setRoute.post('/approvetraining', async function (req, res) {
                         language: training.language
                     });
 
+                    console.log(user.username);
+
                     user.save(function (err) {if (err) throw err;});
                 }
             })
