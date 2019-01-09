@@ -1240,7 +1240,6 @@ function editMyTree () {
                 skillList.remove(skillList.selectedIndex);
                 for (var i = 0; i < children.length; ++i) {
                     skillsToAdd = skillsToAdd.filter(obj => obj.name != children[i].name);
-                    var options= document.getElementById('ddp').options;
                     for (var i = 0; i < skillList.options.length; ++i) {
                         if (skillList.options[i].text == children[i].name) skillList.remove(i);
                     }
