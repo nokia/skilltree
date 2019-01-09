@@ -1133,9 +1133,37 @@ setRoute.post('/skilldata', function(req, res) {
 
 // approves a tree.
 setRoute.post('/approvetree', async function (req, res) {
-	var data = req.body;
+    var data = req.body;
 
+    var globalTree = await Tree.findOne({
+        name: data.name
+    }, function(err, tree) {
+        if (err) throw err;
+		return tree;
+    });
 
+    if (globalTree == undefined) {
+        var tree = await ApprovableTree.findOne({
+            username: data.username,
+            name: data.name
+        }, function(err, tree) {
+            if (err) throw err;
+            return tree;
+        });
+
+        var newTree = new Tree({
+            name: tree.name,
+            focusArea: tree.focusArea,
+            skillNames: tree.skillNames
+        });
+
+        newTree.save(function (err) {if (err) throw err;});
+
+        await ApprovableTree.remove({
+            username: data.username,
+            name: data.name
+        });
+    }
 });
 
 setRoute.post('/approvetraining', async function (req, res) {
