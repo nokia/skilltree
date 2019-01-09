@@ -385,12 +385,12 @@ setRoute.post('/searchTreesByName', async function (req, res) {
 });
 
 
-// Getting the name, willingToTeach and maintree of a user.
+// Getting the name, willingToTeach, teachingDay, teachingTime, location, focusArea, skills and maintree of a user.
 setRoute.post('/getPublicUserData', async function (req, res) {
 		var data = req.body;
     var foundUsers = await User.find({
 					"username": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
-			}, 'username mainTree willingToTeach ', function (err, user) {
+			}, 'username mainTree willingToTeach teachingDay teachingTime location focusArea skills', function (err, user) {
 					if (err) throw err;
 			return user;
 		});
