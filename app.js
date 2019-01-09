@@ -1538,14 +1538,12 @@ setRoute.post('/request', async function (req, res){
 
 setRoute.post('/endorse', async function (req, res) {
   var data = req.body;
-  console.log(data);
   var user = await User.findOne({
     username: data.username//req.decoded.username
   }, function(err, user) {
     if (err) throw err;
     return user;
   });
-
   if (!user) {
     res.json({
       success: false,
@@ -1556,8 +1554,11 @@ setRoute.post('/endorse', async function (req, res) {
 
     if (user.skills.find(obj => obj.name == data.skillName).endorsement.find(obj => obj == req.decoded.username) == undefined) {
       user.skills.find(obj => obj.name == data.skillName).endorsement.push(req.decoded.username);
-
       user.save(function (err) {if (err) throw err;});
+      res.json({
+  			succes: true,
+  			message: "Lmao Yeet"
+  		});
     }
   }
 });
