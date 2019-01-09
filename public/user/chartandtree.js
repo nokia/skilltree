@@ -196,19 +196,29 @@ function searchUserSkillsByName(element){
 }
 
 // searches trees by the provided name
-function searchTreesByName(element){
-  var treeToSearch = {value: element.value};
-  var TreeSearchResult = document.getElementById('TreeSearchResult');
-  request('POST', '/set/searchTreesByName', treeToSearch, function() {
-      if(this.readyState == 4 && this.status == 200) {
-        TreeSearchResult.innerHTML = "";
-        for (var i = 0; i < this.response.length; i++) {
-          var mya = document.createElement('option');
-          mya.value = this.response[i].name;
-          TreeSearchResult.appendChild(mya);
+function searchTreesByName (element, global) {
+    var treeToSearch = {value: element.value};
+    var TreeSearchResult = document.getElementById('TreeSearchResult');
+
+    if (global) {
+        request('POST', '/set/searchTreesByName', treeToSearch, function() {
+            if(this.readyState == 4 && this.status == 200) {
+                TreeSearchResult.innerHTML = "";
+                for (var i = 0; i < this.response.length; ++i) {
+                    var mya = document.createElement('option');
+                    mya.value = this.response[i].name;
+                    TreeSearchResult.appendChild(mya);
+                }
+            }
+        });
+    } else {
+        var res = data.trees.filter(obj => obj.name.match(new RegExp("/.*" + treeToSearch + ".*/i")));
+        for (var i = 0; i < res.length; ++i) {
+            var mya = document.createElement('option');
+            mya.value = res[i].name;
+            TreeSearchResult.appendChild(mya);
         }
-      }
-  });
+    }
 }
 
 // gets the username, trees, skills and maintree of the user.
@@ -1169,7 +1179,7 @@ function editMyTree () {
 
     var treeName = document.getElementById("treeName");
     treeName.setAttribute('list', 'TreeSearchResult');
-    treeName.onkeyup = function() {searchTreesByName(treeName)};
+    treeName.onkeyup = function() {searchTreesByName(treeName, false)};
 
     var loadTree = document.getElementById("loadTree");
     loadTree.style.display = "block";
