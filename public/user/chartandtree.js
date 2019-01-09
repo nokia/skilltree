@@ -1080,9 +1080,28 @@ function createTree () {
 
     var deleteBtn = document.getElementById("deleteFromList");
     deleteBtn.onclick = function () {
-        skillsToAdd = skillsToAdd.filter(obj => obj.name != skillList.options[skillList.selectedIndex].text);
-        skillList.remove(skillList.selectedIndex);
-        // nem kene engednie, hogy torolje a dependecyt vagy mashol kell ezt ellenorizni
+        var children = [];
+        getChildren(skillsToAdd, skillsToAdd.find(obj => obj.name == skillList.options[skillList.selectedIndex].text), children);
+
+        if (children.length == 0) {
+            skillsToAdd = skillsToAdd.filter(obj => obj.name != skillList.options[skillList.selectedIndex].text);
+            skillList.remove(skillList.selectedIndex);
+        } else {
+            var text = "The following skills depend on the selected. Do you want to delete them?\n";
+            for (var i = 0; i < children.length; ++i) {
+                text += children[i].name + "\n";
+            }
+            if (confirm(text)) {
+                skillsToAdd = skillsToAdd.filter(obj => obj.name != skillList.options[skillList.selectedIndex].text);
+                skillList.remove(skillList.selectedIndex);
+                for (var i = 0; i < children.length; ++i) {
+                    skillsToAdd = skillsToAdd.filter(obj => obj.name != children[i].name);
+                    for (var j = 0; j < skillList.options.length; ++j) {
+                        if (skillList.options[j].text == children[i].name) skillList.remove(j);
+                    }
+                }
+            }
+        }
     };
 
     var createBtn = document.getElementById("createTree");
