@@ -560,8 +560,8 @@ function showChart() {
         chartContainer.width = window.innerWidth - 40;
         chartContainer.height = (window.innerWidth - 40) / ratio;
     } else {
-        chartContainer.width = (window.innerHeight - 64) * ratio;
-        chartContainer.height = window.innerHeight - 64;
+        chartContainer.width = (window.innerHeight - 80) * ratio;
+        chartContainer.height = window.innerHeight - 80;
     }
 
     //app.renderer.render(app.stage);
