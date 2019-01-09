@@ -1069,6 +1069,11 @@ function createTree () {
     var creator = document.getElementById("creator");
     creator.style.display = "grid";
 
+    var loadTree = document.getElementById("loadTree");
+    loadTree.style.display = "none";
+
+    document.getElementById("apprP").style.display = "block";
+
     creator.style.width = canvas.style.width;
     creator.style.height = canvas.style.height;
 
