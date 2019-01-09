@@ -1276,8 +1276,6 @@ function editMyTree () {
 
 function getChildren (skills, skill, children) {
 	var temp = [];
-    console.log(skills);
-    console.log(skill);
 	for (var i = 0; skill.children != undefined && i < skill.children.length; ++i) {
         var child = skills.find(obj => obj.name == skill.children[i].name);
 
