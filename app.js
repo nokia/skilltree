@@ -1550,8 +1550,6 @@ setRoute.post('/endorse', async function (req, res) {
       message: 'User not found.'
     });
   } else {
-    if (user.skills.find(obj => obj.name == data.skillName).endorsement == undefined) user.skills.find(obj => obj.name == data.skillName).endorsement = [];
-
     if (user.skills.find(obj => obj.name == data.skillName).endorsement.find(obj => obj == req.decoded.username) == undefined) {
       console.log(user.skills.find(obj => obj.name == data.skillName).endorsement);
       user.skills.find(obj => obj.name == data.skillName).endorsement.push(req.decoded.username);
