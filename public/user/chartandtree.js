@@ -1230,6 +1230,8 @@ function editMyTree () {
     loadTree.onclick = function () {
         var tree = data.trees.find(obj => obj.name == document.getElementById("treeName").value);
 
+        alert('sss');
+
         if (tree == undefined) alert("Tree is not found");
         else {
             document.getElementById("focusarea").value = tree.focusArea;
