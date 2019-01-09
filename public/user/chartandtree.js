@@ -1223,10 +1223,13 @@ function editMyTree () {
     creator.style.display = "grid";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     document.getElementById("apprP").style.display = "none";
 
     var canvas = document.getElementById("pixiCanvas");
 
+=======
+>>>>>>> parent of b121a5a... Revert "."
 =======
 >>>>>>> parent of b121a5a... Revert "."
     creator.style.width = canvas.style.width;
