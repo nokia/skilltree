@@ -1283,6 +1283,7 @@ function getChildren (skills, skill, children) {
 
     console.log(temp);
 	for (var i = 0; i < temp.length; ++i) {
+        console.log(i);
         if (skills.find(obj => obj.name == temp[i].name) != undefined) getChildren(skills, temp[i], children);
 	}
 }
