@@ -1277,11 +1277,13 @@ function getChildren (skills, skill, children) {
 	for (var i = 0; skill.children != undefined && i < skill.children.length; ++i) {
         var child = skills.find(obj => obj.name == skill.children[i].name);
 
-		temp.push(child);
-		children.push(child);
+        if (child != undefined) {
+            temp.push(child);
+            children.push(child);
+        }
 	}
 
-    console.log(temp);
+    console.log(temp.length);
 	for (var i = 0; i < temp.length; ++i) {
         console.log(i);
         if (skills.find(obj => obj.name == temp[i].name) != undefined) getChildren(skills, temp[i], children);
