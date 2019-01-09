@@ -431,7 +431,7 @@ function submit(){
     request('POST', '/set/submitall', submitData, function() {
         if(this.readyState == 4 && this.status == 200) {
           //initData();
-          initUI(true, data);
+          initUI(true, data); // not working opening another users tree
         }
     });
 }
