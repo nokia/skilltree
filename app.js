@@ -1044,6 +1044,18 @@ setRoute.post('/editmytree', async function (req, res) {
     }
 });
 
+// Search for trees to add while typing
+setRoute.post('/gettree', async function (req, res) {
+		var data = req.body;
+		var foundTree = await Tree.findOne({
+					"name": data.name
+			}, function (err, tree) {
+					if (err) throw err;
+			return tree;
+		});
+		res.json(foundTree);
+});
+
 // add skill to user tree
 setRoute.post('/addskilltotree', async function(req, res) {
     var data = req.body;

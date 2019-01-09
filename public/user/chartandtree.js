@@ -1302,6 +1302,147 @@ function editMyTree () {
     };
 }
 
+// global (for admins)
+function editTree () {
+    document.getElementById('approveTrees').style.display = "none";
+    document.getElementById('approveSkills').style.display = "none";
+
+    var canvas = document.getElementById("pixiCanvas");
+    canvas.style.display = "none";
+
+    var treeName = document.getElementById("treeName");
+    treeName.setAttribute('list', 'TreeSearchResult');
+    treeName.onkeyup = function() {searchTreesByName(treeName, true)};
+
+    var loadTree = document.getElementById("loadTree");
+    loadTree.style.display = "block";
+
+    var creator = document.getElementById("creator");
+    creator.style.display = "grid";
+
+    document.getElementById("apprP").style.display = "none";
+
+    creator.style.width = canvas.style.width;
+    creator.style.height = canvas.style.height;
+
+    var skillList = document.getElementById("skillList");
+    var skillsToAdd = [];
+    loadTree.onclick = function () {
+        document.getElementById("treeName").value
+        var tree = data.trees.find(obj => obj.name == document.getElementById("treeName").value);
+
+        if (tree == undefined) alert("Tree is not found");
+        else {
+            document.getElementById("focusarea").value = tree.focusArea;
+            for (var i = 0; i < tree.skillNames.length; ++i) {
+                skillsToAdd.push(data.skills.find(obj => obj.name == tree.skillNames[i]));
+                var option = document.createElement("option");
+                option.text = tree.skillNames[i];
+                skillList.add(option);
+            }
+        }
+
+
+        request('POST', '/set/gettree', {name: treeToSearch}, function() {
+            if(this.readyState == 4 && this.status == 200) {
+                TreeSearchResult.innerHTML = "";
+                console.log(this.response);
+            }
+        });
+    };
+
+    var addBtn = document.getElementById("addToTree");
+    addBtn.onclick = function () {
+        var skill = {value: document.getElementById('skillSearchTree').value};
+
+        request('POST', '/set/getskill', skill, function() {
+            if(this.readyState == 4 && this.status == 200) {
+                if (this.response.success) {
+                    if (skillsToAdd.find(obj => obj.name == this.response.skill.name) == undefined) {
+                        if (this.response.dependency.length > 0) {
+                            var text = "The selected skill depends on the following skills. Do you want to add these?\n";
+                            for (var i = 0; i < this.response.dependency.length; ++i) {
+                                text += this.response.dependency[i].name + "\n";
+                            }
+                            if (confirm(text)) {
+                                skillsToAdd.push(this.response.skill);
+                                var option = document.createElement("option");
+                                option.text = this.response.skill.name;
+                                skillList.add(option);
+                                for (var i = 0; i < this.response.dependency.length; ++i) {
+                                    if (skillsToAdd.find(obj => obj.name == this.response.dependency[i].name) == undefined) {
+                                        skillsToAdd.push(this.response.dependency[i]);
+                                        var option = document.createElement("option");
+                                        option.text = this.response.dependency[i].name;
+                                        skillList.add(option);
+                                    }
+                                }
+                            }
+                        } else {
+                            skillsToAdd.push(this.response.skill);
+                            var option = document.createElement("option");
+                            option.text = this.response.skill.name;
+                            skillList.add(option);
+                        }
+                    } else alert("You have already added this skill");
+                } else alert("Skill is not found");
+            }
+        });
+    };
+
+    var createSkillBtn = document.getElementById("createSkill");
+    createSkillBtn.onclick = createSkill;
+
+    var deleteBtn = document.getElementById("deleteFromList");
+    deleteBtn.onclick = function () {
+        var children = [];
+        getChildren(skillsToAdd, skillsToAdd.find(obj => obj.name == skillList.options[skillList.selectedIndex].text), children);
+
+        if (children.length == 0) {
+            skillsToAdd = skillsToAdd.filter(obj => obj.name != skillList.options[skillList.selectedIndex].text);
+            skillList.remove(skillList.selectedIndex);
+        } else {
+            var text = "The following skills depend on the selected. Do you want to delete them?\n";
+            for (var i = 0; i < children.length; ++i) {
+                text += children[i].name + "\n";
+            }
+            if (confirm(text)) {
+                skillsToAdd = skillsToAdd.filter(obj => obj.name != skillList.options[skillList.selectedIndex].text);
+                skillList.remove(skillList.selectedIndex);
+                for (var i = 0; i < children.length; ++i) {
+                    skillsToAdd = skillsToAdd.filter(obj => obj.name != children[i].name);
+                    for (var j = 0; j < skillList.options.length; ++j) {
+                        if (skillList.options[j].text == children[i].name) skillList.remove(j);
+                    }
+                }
+            }
+        }
+    };
+
+    var createBtn = document.getElementById("createTree");
+    createBtn.onclick = function () {
+        if (document.getElementById('treeName').value.length > 0) {
+            if (skillsToAdd.length > 0) {
+                for (var i = 0; i < skillsToAdd.length; ++i) {
+                    delete skillsToAdd[i].itemcontainer;
+                }
+
+                var treeData = {
+                    name: document.getElementById('treeName').value,
+                    focusArea: document.getElementById('focusarea').value,
+                    skills: skillsToAdd
+                };
+
+                request('POST', '/set/editmytree', treeData, function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        if (this.response.success) window.open("/user/", "_self");
+                    }
+                });
+            } else alert("Please add at least one skill to the tree");
+        } else alert("Please provide a name to the tree");
+    };
+}
+
 function getChildren (skills, skill, children) {
 	var temp = [];
 	for (var i = 0; skill.children != undefined && i < skill.children.length; ++i) {
