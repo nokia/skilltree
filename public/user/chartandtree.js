@@ -212,8 +212,8 @@ function searchTreesByName (element, global) {
             }
         });
     } else {
+        TreeSearchResult.innerHTML = "";
         var res = data.trees.filter(obj => (new RegExp(".*" + treeToSearch + ".*", "i")).test(obj.name));
-        console.log();
         for (var i = 0; i < res.length; ++i) {
             var mya = document.createElement('option');
             mya.value = res[i].name;
