@@ -1227,8 +1227,7 @@ function editMyTree () {
         var children = [];
         getChildren(skillsToAdd, skillsToAdd.find(obj => obj.name == skillList.options[skillList.selectedIndex].text), children);
 
-        console.log("sss" + children.length);
-        if (children.lenght == 0) {
+        if (children.length == 0) {
             skillsToAdd = skillsToAdd.filter(obj => obj.name != skillList.options[skillList.selectedIndex].text);
             skillList.remove(skillList.selectedIndex);
         } else {
