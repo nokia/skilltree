@@ -440,6 +440,7 @@ function submit(){
 
 window.setInterval(function(){
     submit();
+    console.log("saved");
 }, 5000);
 
 // logout.
