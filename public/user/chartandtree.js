@@ -264,11 +264,16 @@ function getPublicUserData(){
               row.innerHTML += "<th>" + this.data.skills[i].name + "</th>";
               row.innerHTML += "<th>" + this.data.skills[i].achievedPoint + "</th>";
               row.innerHTML += "<th>" + this.data.skills[i].endorsement.length + "</th>";
-              row.data = {endorsement: this.data.skills[i].endorsement, name: this.data.username}
+              row.data = {name: this.data.skills[i].name, username: this.data.username}
               row.onclick = function(){
-                if (!this.data.endorsement.includes(this.data.username)) {
-                  this.data.endorsement.push(this.data.username);
-                }
+                request('POST', '/set/endorse', {username: this.data.username, skillName: this.data.name}, function() {
+                    if(this.readyState == 4 && this.status == 200) {
+                      alert("Endorsed.");
+                    }
+                    else {
+                      alert(this.response.message);
+                    }
+                });
               }
               userSkillsModalBody.appendChild(row);
             }
