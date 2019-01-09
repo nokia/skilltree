@@ -1226,6 +1226,8 @@ function editMyTree () {
 
     document.getElementById("apprP").style.display = "none";
 
+    var canvas = document.getElementById("pixiCanvas");
+
     creator.style.width = canvas.style.width;
     creator.style.height = canvas.style.height;
 
