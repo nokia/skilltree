@@ -724,7 +724,7 @@ function addTraining () {
         var trainingData = {
             skillName: document.getElementById('trainingSkillName').value,
             trainings: trainings,
-            forApprove: true
+            forApprove: document.getElementById('trainingForApprove').checked
         };
 
         request('POST', '/set/newtraining', trainingData, function () {
@@ -840,7 +840,7 @@ function createSkill () {
             parents: parents,
             //children: children,
             trainings: trainings,
-            forApprove: true
+            forApprove: document.getElementById('forApprove').checked
         };
 
         request('POST', '/set/newskill', skillData, function () {
@@ -1053,7 +1053,7 @@ function editMySkill () {
             parents: parents,
             //children: children,
             trainings: trainings,
-            forApprove: true
+            forApprove: document.getElementById('forApprove').checked
         };
 
         request('POST', '/set/newskill', skillData, function () {
@@ -1079,6 +1079,8 @@ function createTree () {
 
     var loadTree = document.getElementById("loadTree");
     loadTree.style.display = "none";
+
+    document.getElementById("apprP").style.display = "block";
 
     creator.style.width = canvas.style.width;
     creator.style.height = canvas.style.height;
@@ -1163,7 +1165,7 @@ function createTree () {
                 var treeData = {
                     name: document.getElementById('treeName').value,
                     focusArea: document.getElementById('focusarea').value,
-                    forApprove: true,
+                    forApprove: document.getElementById('treeAppr').checked,
                     skills: skillsToAdd
                 };
 
@@ -1221,6 +1223,8 @@ function editMyTree () {
 
     var creator = document.getElementById("creator");
     creator.style.display = "grid";
+
+    document.getElementById("apprP").style.display = "none";
 
     creator.style.width = canvas.style.width;
     creator.style.height = canvas.style.height;
@@ -1349,6 +1353,8 @@ function editTree () {
 
     var creator = document.getElementById("creator");
     creator.style.display = "grid";
+
+    document.getElementById("apprP").style.display = "none";
 
     creator.style.width = canvas.style.width;
     creator.style.height = canvas.style.height;
