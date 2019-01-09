@@ -213,7 +213,7 @@ function searchTreesByName (element, global) {
         });
     } else {
         var res = data.trees.filter(obj => obj.name.match(new RegExp("/.*" + treeToSearch + ".*/i")) != null);
-        console.log(res);
+        console.log(("Web Developer").match(new RegExp("/.*" + treeToSearch + ".*/i")));
         for (var i = 0; i < res.length; ++i) {
             var mya = document.createElement('option');
             mya.value = res[i].name;
