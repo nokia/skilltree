@@ -1076,8 +1076,8 @@ setRoute.post('/edittree', async function (req, res) {
 
         users.map(user => {
             if (user.trees.find(obj => obj.name == data.name) != undefined) {
-                user.trees.find(obj => obj.name == data.skillName).focusArea = data.focusArea;
-                user.trees.find(obj => obj.name == data.skillName).skillNames = sn;
+                user.trees.find(obj => obj.name == data.name).focusArea = data.focusArea;
+                user.trees.find(obj => obj.name == data.name).skillNames = sn;
 
                 user.save(function (err) {if (err) throw err;});
             }
