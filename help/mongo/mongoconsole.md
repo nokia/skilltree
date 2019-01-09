@@ -12,6 +12,12 @@ use <dbasename>
 db.users.find()
 ```
 
+## List skills in a nice list
+```sh
+db.skills.find({}, {name: 1, _id: 0})
+```
+
+
 #### Change field values in a collection
 
 Change a string attribute for a single item (selected by "username"):
