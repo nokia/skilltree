@@ -1224,9 +1224,29 @@ function editMyTree () {
 
     var deleteBtn = document.getElementById("deleteFromList");
     deleteBtn.onclick = function () {
-        skillsToAdd = skillsToAdd.filter(obj => obj.name != skillList.options[skillList.selectedIndex].text);
-        skillList.remove(skillList.selectedIndex);
-        // nem kene engednie, hogy torolje a dependencyt vagy mashol kell ezt ellenorizni
+        var children = [];
+        getChildren(skillsToAdd, skillList.options[skillList.selectedIndex].text, children);
+
+        if (children.lenght == 0) {
+            skillsToAdd = skillsToAdd.filter(obj => obj.name != skillList.options[skillList.selectedIndex].text);
+            skillList.remove(skillList.selectedIndex);
+        } else {
+            var text = "The following skills depend on the selected. Do you want to delete them?\n";
+            for (var i = 0; i < children.length; ++i) {
+                text += children[i].name + "\n";
+            }
+            if (confirm(text)) {
+                skillsToAdd = skillsToAdd.filter(obj => obj.name != skillList.options[skillList.selectedIndex].text);
+                skillList.remove(skillList.selectedIndex);
+                for (var i = 0; i < children.length; ++i) {
+                    skillsToAdd = skillsToAdd.filter(obj => obj.name != children[i].name);
+                    var options= document.getElementById('ddp').options;
+                    for (var i = 0; i < skillList.options.length; ++i) {
+                        if (skillList.options[i].text == children[i].name) skillList.remove(i);
+                    }
+                }
+            }
+        }
     };
 
     var createBtn = document.getElementById("createTree");
@@ -1243,8 +1263,6 @@ function editMyTree () {
                     skills: skillsToAdd
                 };
 
-                console.log(treeData);
-
                 request('POST', '/set/editmytree', treeData, function () {
                     if (this.readyState == 4 && this.status == 200) {
                         if (this.response.success) window.open("/user/", "_self");
@@ -1255,25 +1273,17 @@ function editMyTree () {
     };
 }
 
-// TODO (jo torleshez) 
-function getDependency (skills, skill, dependency) {
-	var parents = [];
-	for (var i = 0; skill.parents != undefined && i < skill.parents.length; ++i) {
-        var parent = skills.find(obj => obj.name == skill.parents[i]);
+function getChildren (skills, skill, children) {
+	var temp = [];
+	for (var i = 0; skill.children != undefined && i < skill.children.length; ++i) {
+        var child = skills.find(obj => obj.name == skill.children[i].name);
 
-        /*if (parent == undefined) {
-            parent = await Skill.findOne({name: skill.parents[i]} , function (err, skill) {
-                if (err) throw err;
-                return skill;
-            });
-        }*/
-
-		parents.push(parent);
-		dependency.push(parent);
+		temp.push(child);
+		children.push(children);
 	}
 
-	for (var i = 0; i < parents.length; ++i) {
-		getDependency(skills, parents[i], dependency);
+	for (var i = 0; i < temp.length; ++i) {
+		getDependency(skills, temp[i], children);
 	}
 }
 
