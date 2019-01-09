@@ -1083,11 +1083,7 @@ function editMySkill () {
 
 // opens tree creator and manages it.
 function createTree () {
-    document.getElementById('approveTrees').style.display = "none";
-    document.getElementById('approveSkills').style.display = "none";
-
-    var canvas = document.getElementById("pixiCanvas");
-    canvas.style.display = "none";
+    hideAll();
 
     var treeName = document.getElementById("treeName");
     treeName.setAttribute('list', '');
@@ -1226,11 +1222,7 @@ function addRow(table) {
 
 // opens tree creator and manages it.
 function editMyTree () {
-    document.getElementById('approveTrees').style.display = "none";
-    document.getElementById('approveSkills').style.display = "none";
-
-    var canvas = document.getElementById("pixiCanvas");
-    canvas.style.display = "none";
+    hideAll();
 
     var treeName = document.getElementById("treeName");
     treeName.setAttribute('list', 'TreeSearchResult');
@@ -1358,11 +1350,7 @@ function editMyTree () {
 
 // global (for admins)
 function editTree () {
-    document.getElementById('approveTrees').style.display = "none";
-    document.getElementById('approveSkills').style.display = "none";
-
-    var canvas = document.getElementById("pixiCanvas");
-    canvas.style.display = "none";
+    hideAll();
 
     var treeName = document.getElementById("treeName");
     treeName.setAttribute('list', 'TreeSearchResult');
@@ -1509,12 +1497,7 @@ function getChildren (skills, skill, children) {
 
 // make trees globally available
 function approveTrees() {
-    document.getElementById('creator').style.display = "none";
-    document.getElementById('approveSkills').style.display = "none";
-    document.getElementById('approveTrainings').style.display = "none";
-
-    var canvas = document.getElementById("pixiCanvas");
-    canvas.style.display = "none";
+    hideAll();
 
     var approveTrees = document.getElementById("approveTrees");
     approveTrees.style.display = "block";
@@ -1529,14 +1512,10 @@ function approveTrees() {
 
 // make skills globally available
 function approveSkills() {
-    document.getElementById('creator').style.display = "none";
-    document.getElementById('approveTrees').style.display = "none";
-    document.getElementById('approveTrainings').style.display = "none";
+    hideAll();
 
-    var canvas = document.getElementById("pixiCanvas");
     var approveSkills = document.getElementById("approveSkills");
 
-    canvas.style.display = "none";
     approveSkills.style.display = "block";
 
     var approveSkillsSelect = document.getElementById('apprSkillSel');
@@ -1591,12 +1570,7 @@ function approveSkills() {
 }
 
 function approveTrainings () {
-    document.getElementById('creator').style.display = "none";
-    document.getElementById('approveTrees').style.display = "none";
-    document.getElementById('approveSkills').style.display = "none";
-
-    var canvas = document.getElementById("pixiCanvas");
-    canvas.style.display = "none";
+    hideAll();
 
     var approveTrees = document.getElementById("approveTrainings");
     approveTrees.style.display = "block";
@@ -1654,6 +1628,14 @@ function dropoffers() {
 /*
 *   Approve menu for admins end
 */
+
+function hideAll () {
+    var elements = document.getElementsByClassName("hide");
+
+    for (var i = 0; i < elements.length; ++i) {
+        elements[i].style.display = "none";
+    }
+}
 
 // helper functions
 
