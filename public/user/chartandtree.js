@@ -436,10 +436,10 @@ function submit(){
     });
 }
 
-window.setInterval(function(){
+/*window.setInterval(function(){
     submit();
     console.log("saved");
-}, 5000);
+}, 5000);*/
 
 // logout.
 function logout(){
