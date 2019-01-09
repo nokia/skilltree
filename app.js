@@ -1056,6 +1056,39 @@ setRoute.post('/gettree', async function (req, res) {
 		res.json(foundTree);
 });
 
+setRoute.post('/edittree', async function (req, res) {
+    var data = req.body;
+
+    var globalTree = await Tree.findOne({
+                "name": data.name
+        }, function (err, tree) {
+                if (err) throw err;
+        return tree;
+    });
+
+    var sn = await sortTree(data.skills);
+    globalTree.focusArea = data.focusArea;
+    globalTree.skillNames = sn;
+    globalTree.save(function (err) {if (err) throw err;});
+
+    User.find({} , (err, users) => {
+        if (err) throw err;
+
+        users.map(user => {
+            if (user.trees.find(obj => obj.name == data.name) != undefined) {
+                user.trees.find(obj => obj.name == data.name).focusArea = data.focusArea;
+                user.trees.find(obj => obj.name == data.name).skillNames = sn;
+
+                user.save(function (err) {if (err) throw err;});
+            }
+        })
+    })
+
+    res.json({
+        success: true
+    });
+});
+
 // add skill to user tree
 setRoute.post('/addskilltotree', async function(req, res) {
     var data = req.body;
@@ -1102,28 +1135,11 @@ setRoute.post('/skilldata', function(req, res) {
 setRoute.post('/approvetree', async function (req, res) {
 	var data = req.body;
 
-    var user = await User.findOne({
-        username: req.decoded.username
-    }, function(err, user) {
-        if (err) throw err;
-		return user;
-    });
 
-	if (!user) {
-		res.json({
-			success: false,
-			message: 'User not found.'
-		});
-	} else {
-		var tree = new Tree();
-		tree = user.trees.find(obj => obj.name == data.name);
-		tree.save(function (err) {if (err) throw err;});
-	}
 });
 
 setRoute.post('/approvetraining', async function (req, res) {
 	var data = req.body;
-
 
     var globalSkill = await Skill.findOne({
         name: data.skillName
@@ -1133,12 +1149,6 @@ setRoute.post('/approvetraining', async function (req, res) {
     });
 
     if (globalSkill.trainings.find(obj => obj.name == data.name) == undefined) {
-        await ApprovableTraining.remove({
-            username: data.username,
-            skillName: data.skillName,
-            name: data.name
-        });
-
         var training = await ApprovableTraining.findOne({
             username: data.username,
             skillName: data.skillName,
@@ -1178,7 +1188,13 @@ setRoute.post('/approvetraining', async function (req, res) {
                     user.save(function (err) {if (err) throw err;});
                 }
             })
-        })
+        });
+
+        await ApprovableTraining.remove({
+            username: data.username,
+            skillName: data.skillName,
+            name: data.name
+        });
     }
 });
 

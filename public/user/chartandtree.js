@@ -519,6 +519,8 @@ function showChart() {
         var skills = data.skills.filter(obj => obj.categoryName == data.categories[i].name);
         var sumAP = skills.sum("achievedPoint");
         var sumMP = skills.sum("maxPoint");
+        console.log(sumAP);
+        console.log(sumMP)
         var percent = 0;
         if (sumMP != 0) percent = sumAP / sumMP;
 
@@ -610,31 +612,31 @@ function showChart() {
 
     // scale chart
     var ratio = chartContainer.width / chartContainer.height;
-    if (window.innerWidth < window.innerHeight - 64) {
+    if (window.innerWidth < window.innerHeight - 90) {
         chartContainer.width = window.innerWidth - 40;
         chartContainer.height = (window.innerWidth - 40) / ratio;
     } else {
-        chartContainer.width = (window.innerHeight - 64) * ratio;
-        chartContainer.height = window.innerHeight - 64;
+        chartContainer.width = (window.innerHeight - 90) * ratio;
+        chartContainer.height = window.innerHeight - 90;
     }
 
     //app.renderer.render(app.stage);
 }
 
 window.onresize = function () {
-    app.renderer.resize(window.innerWidth, window.innerHeight - 30);
+    app.renderer.resize(window.innerWidth, window.innerHeight - 60);
 
     if (chartContainer != undefined) {
         var ratio = chartContainer.width / chartContainer.height;
-        if (window.innerWidth < window.innerHeight - 30) {
+        if (window.innerWidth < window.innerHeight - 90) {
             chartContainer.width = window.innerWidth - 40;
             chartContainer.height = (window.innerWidth - 40) / ratio;
         } else {
-            chartContainer.width = (window.innerHeight - 64) * ratio;
-            chartContainer.height = window.innerHeight - 64;
+            chartContainer.width = (window.innerHeight - 90) * ratio;
+            chartContainer.height = window.innerHeight - 90;
         }
 
-        chartContainer.position.set((window.innerWidth) / 2, (window.innerHeight - 30) / 2);
+        chartContainer.position.set((window.innerWidth) / 2, (window.innerHeight - 64) / 2);
     }
 
     if (tree != undefined) {
@@ -1481,7 +1483,7 @@ function editTree () {
                     skills: skillsToAdd
                 };
 
-                request('POST', '/set/editmytree', treeData, function () {
+                request('POST', '/set/edittree', treeData, function () {
                     if (this.readyState == 4 && this.status == 200) {
                         if (this.response.success) window.open("/user/", "_self");
                     }
