@@ -1243,7 +1243,7 @@ function editMyTree () {
                     for (var i = 0; i < skillList.options.length; ++i) {
                         if (skillList.options[i].text == children[i].name) skillList.remove(i);
                     }
-                    console.log(skillsToAdd);
+                    console.log(children[i]);
                 }
             }
         }
