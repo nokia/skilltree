@@ -560,8 +560,8 @@ function showChart() {
         chartContainer.width = window.innerWidth - 40;
         chartContainer.height = (window.innerWidth - 40) / ratio;
     } else {
-        chartContainer.width = (window.innerHeight - 80) * ratio;
-        chartContainer.height = window.innerHeight - 80;
+        chartContainer.width = (window.innerHeight - 90) * ratio;
+        chartContainer.height = window.innerHeight - 90;
     }
 
     //app.renderer.render(app.stage);
@@ -576,8 +576,8 @@ window.onresize = function () {
             chartContainer.width = window.innerWidth - 40;
             chartContainer.height = (window.innerWidth - 40) / ratio;
         } else {
-            chartContainer.width = (window.innerHeight - 64) * ratio;
-            chartContainer.height = window.innerHeight - 64;
+            chartContainer.width = (window.innerHeight - 90) * ratio;
+            chartContainer.height = window.innerHeight - 90;
         }
 
         chartContainer.position.set((window.innerWidth) / 2, (window.innerHeight - 30) / 2);
