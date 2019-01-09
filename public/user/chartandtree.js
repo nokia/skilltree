@@ -1329,6 +1329,7 @@ function editTree () {
     var skillsToAdd = [];
     loadTree.onclick = function () {
         skillsToAdd = [];
+        skillList.innerHTML = "";
 
         request('POST', '/set/gettree', {name: document.getElementById("treeName").value}, function() {
             if(this.readyState == 4 && this.status == 200) {
