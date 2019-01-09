@@ -1056,6 +1056,63 @@ setRoute.post('/gettree', async function (req, res) {
 		res.json(foundTree);
 });
 
+setRoute.post('/edittree', async function (req, res) {
+    var data = req.body;
+
+    var globalTree = await Tree.findOne({
+                "name": data.name
+        }, function (err, tree) {
+                if (err) throw err;
+        return tree;
+    });
+
+    var sn = await sortTree(data.skills);
+    globalTree.focusArea = data.focusArea;
+    globalTree.skillNames = sn;
+    globalTree.save(function (err) {if (err) throw err;});
+
+    User.find({} , (err, users) => {
+        if (err) throw err;
+
+        users.map(user => {
+            if (user.trees.find(obj => obj.name == data.name) != undefined) {
+                user.trees.find(obj => obj.name == data.skillName).focusArea = data.focusArea;
+                user.trees.find(obj => obj.name == data.skillName).skillNames = sn;
+
+                user.save(function (err) {if (err) throw err;});
+            }
+        })
+    })
+
+
+
+
+    if (user.trees.find(obj => obj.name == data.name) != undefined) {
+        var sn = await sortTree(data.skills);
+        user.trees = user.trees.filter(obj => obj.name != data.name);
+        user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: sn});
+
+        await data.skills.forEach(async function (skill) {
+        	if (skill.achievedPoint == undefined) skill.achievedPoint = 0;
+            if (user.skills.find(obj => obj.name == skill.name) == undefined) {
+                user.skills.push(skill);
+            }
+        });
+
+        user.save(function (err) {if (err) throw err;});
+
+        res.json({
+            success: true
+        });
+    }
+    else {
+        res.json({
+            success: false,
+            message: 'treenotexists'
+        });
+    }
+});
+
 // add skill to user tree
 setRoute.post('/addskilltotree', async function(req, res) {
     var data = req.body;
@@ -1123,7 +1180,6 @@ setRoute.post('/approvetree', async function (req, res) {
 
 setRoute.post('/approvetraining', async function (req, res) {
 	var data = req.body;
-
 
     var globalSkill = await Skill.findOne({
         name: data.skillName

@@ -1427,7 +1427,7 @@ function editTree () {
                     skills: skillsToAdd
                 };
 
-                request('POST', '/set/editmytree', treeData, function () {
+                request('POST', '/set/edittree', treeData, function () {
                     if (this.readyState == 4 && this.status == 200) {
                         if (this.response.success) window.open("/user/", "_self");
                     }
