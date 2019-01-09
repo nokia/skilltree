@@ -1284,7 +1284,7 @@ function getChildren (skills, skill, children) {
 	}
 
 	for (var i = 0; i < temp.length; ++i) {
-		getChildren(skills, temp[i], children);
+        if (skills.find(obj => obj.name == temp[i].name) != undefined) getChildren(skills, temp[i], children);
 	}
 }
 
