@@ -1346,7 +1346,13 @@ function editTree () {
         request('POST', '/set/gettree', {name: document.getElementById("treeName").value}, function() {
             if(this.readyState == 4 && this.status == 200) {
                 TreeSearchResult.innerHTML = "";
-                console.log(this.response);
+                document.getElementById("focusarea").value = this.response.focusArea;
+                for (var i = 0; i < this.response.skillNames.length; ++i) {
+                    skillsToAdd.push(data.skills.find(obj => obj.name == this.response.skillNames[i]));
+                    var option = document.createElement("option");
+                    option.text = this.response.skillNames[i];
+                    skillList.add(option);
+                }
             }
         });
     };
