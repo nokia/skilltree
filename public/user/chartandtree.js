@@ -1328,20 +1328,7 @@ function editTree () {
     var skillList = document.getElementById("skillList");
     var skillsToAdd = [];
     loadTree.onclick = function () {
-        document.getElementById("treeName").value
-        var tree = data.trees.find(obj => obj.name == document.getElementById("treeName").value);
-
-        if (tree == undefined) alert("Tree is not found");
-        else {
-            document.getElementById("focusarea").value = tree.focusArea;
-            for (var i = 0; i < tree.skillNames.length; ++i) {
-                skillsToAdd.push(data.skills.find(obj => obj.name == tree.skillNames[i]));
-                var option = document.createElement("option");
-                option.text = tree.skillNames[i];
-                skillList.add(option);
-            }
-        }
-
+        skillsToAdd = [];
 
         request('POST', '/set/gettree', {name: document.getElementById("treeName").value}, function() {
             if(this.readyState == 4 && this.status == 200) {
