@@ -261,15 +261,15 @@ function getPublicUserData(){
               var row = document.createElement('tr');
               row.className = "foundElementRow";
               row.innerHTML += "<th>" + (i+1) + "</th>";
-              row.innerHTML += "<th>" + this.data[i].name + "</th>";
-              row.innerHTML += "<th>" + this.data[i].achievedPoint + "</th>";
-              row.innerHTML += "<th>" + this.data[i].Endorsement.length + "</th>";
+              row.innerHTML += "<th>" + this.data.skills[i].name + "</th>";
+              row.innerHTML += "<th>" + this.data.skills[i].achievedPoint + "</th>";
+              row.innerHTML += "<th>" + this.data.skills[i].Endorsement.length + "</th>";
               row.data = {
-                name: this.data[i].name,
-                categoryName: this.data[i].categoryName,
-                description: this.data[i].description,
-                pointDescription: this.data[i].pointDescription,
-                descriptionWikipediaURL: this.data[i].descriptionWikipediaURL
+                name: this.data.skills[i].name,
+                categoryName: this.data.skills[i].categoryName,
+                description: this.data.skills[i].description,
+                pointDescription: this.data.skills[i].pointDescription,
+                descriptionWikipediaURL: this.data.skills[i].descriptionWikipediaURL
               }
               row.onclick = function(){
                 var foundmodal = document.getElementById('searchedSkillModal');
