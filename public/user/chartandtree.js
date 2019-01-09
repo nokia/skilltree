@@ -264,9 +264,9 @@ function getPublicUserData(){
               row.innerHTML += "<th>" + this.data.skills[i].name + "</th>";
               row.innerHTML += "<th>" + this.data.skills[i].achievedPoint + "</th>";
               row.innerHTML += "<th>" + this.data.skills[i].endorsement.length + "</th>";
-              row.data = {name: this.data.skills[i].name, username: this.data.username}
+              var sv = name: this.data.skills[i].name, username: this.data.username;
               row.onclick = function(){
-                request('POST', '/set/endorse', {username: this.data.username, skillName: this.data.name}, function() {
+                request('POST', '/set/endorse', sv, function() {
                     if(this.readyState == 4 && this.status == 200) {
                       alert("Endorsed.");
                     }
