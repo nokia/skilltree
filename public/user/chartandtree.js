@@ -268,9 +268,6 @@ function getPublicUserData(){
               row.onclick = function(){
                 request('POST', '/set/endorse', sv, function() {
                     if(this.readyState == 4 && this.status == 200) {
-                      alert("Endorsed.");
-                    }
-                    else {
                       alert(this.response.message);
                     }
                 });
