@@ -1083,34 +1083,6 @@ setRoute.post('/edittree', async function (req, res) {
             }
         })
     })
-
-
-
-
-    if (user.trees.find(obj => obj.name == data.name) != undefined) {
-        var sn = await sortTree(data.skills);
-        user.trees = user.trees.filter(obj => obj.name != data.name);
-        user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: sn});
-
-        await data.skills.forEach(async function (skill) {
-        	if (skill.achievedPoint == undefined) skill.achievedPoint = 0;
-            if (user.skills.find(obj => obj.name == skill.name) == undefined) {
-                user.skills.push(skill);
-            }
-        });
-
-        user.save(function (err) {if (err) throw err;});
-
-        res.json({
-            success: true
-        });
-    }
-    else {
-        res.json({
-            success: false,
-            message: 'treenotexists'
-        });
-    }
 });
 
 // add skill to user tree
@@ -1230,8 +1202,6 @@ setRoute.post('/approvetraining', async function (req, res) {
                         length: training.length,
                         language: training.language
                     });
-
-                    console.log(user.username);
 
                     user.save(function (err) {if (err) throw err;});
                 }
