@@ -1083,6 +1083,10 @@ setRoute.post('/edittree', async function (req, res) {
             }
         })
     })
+
+    res.json({
+        success: true
+    });
 });
 
 // add skill to user tree
