@@ -1223,8 +1223,6 @@ function editMyTree () {
     var creator = document.getElementById("creator");
     creator.style.display = "grid";
 
-    document.getElementById("apprP").style.display = "none";
-
     var canvas = document.getElementById("pixiCanvas");
 
     creator.style.width = canvas.style.width;
