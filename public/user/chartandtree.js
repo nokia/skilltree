@@ -568,7 +568,7 @@ function showChart() {
 }
 
 window.onresize = function () {
-    app.renderer.resize(window.innerWidth, window.innerHeight - 64);
+    app.renderer.resize(window.innerWidth, window.innerHeight - 60);
 
     if (chartContainer != undefined) {
         var ratio = chartContainer.width / chartContainer.height;
@@ -580,7 +580,7 @@ window.onresize = function () {
             chartContainer.height = window.innerHeight - 90;
         }
 
-        chartContainer.position.set((window.innerWidth) / 2, (window.innerHeight - 30) / 2);
+        chartContainer.position.set((window.innerWidth) / 2, (window.innerHeight - 64) / 2);
     }
 
     if (tree != undefined) {
