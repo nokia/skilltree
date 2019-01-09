@@ -263,7 +263,7 @@ function getPublicUserData(){
               row.innerHTML += "<th>" + (i+1) + "</th>";
               row.innerHTML += "<th>" + this.data.skills[i].name + "</th>";
               row.innerHTML += "<th>" + this.data.skills[i].achievedPoint + "</th>";
-              row.innerHTML += "<th>" + this.data.skills[i].Endorsement.length + "</th>";
+              row.innerHTML += "<th>" + this.data.skills[i].endorsement.length + "</th>";
               row.data = {
                 name: this.data.skills[i].name,
                 categoryName: this.data.skills[i].categoryName,
