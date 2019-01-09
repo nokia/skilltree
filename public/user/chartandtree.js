@@ -253,23 +253,23 @@ function getPublicUserData(){
             var userSkillsModalBody = document.getElementById('userSkillsModalBody');
 
             searchedUserModalHeader.innerHTML = this.data.username;
-            searchedUserlModalInfo.innerHTML = this.data.username + "s focusarea is " + this.data.focusArea + ", and his/her main Tree is " + this.data.mainTree + ". ";
-            searchedUserlModalAdress.innerHTML = "He/She is avalible at <br><b>Date</b>: " + this.data.teachingDay + this.data.teachingTime + "<br><b>Place</b>: " + this.data.location;
+            searchedUserlModalInfo.innerHTML = this.data.username + "s focusarea is " + this.data.focusArea.name + ", and his/her main Tree is " + this.data.mainTree + ". ";
+            searchedUserlModalAdress.innerHTML = "He/She is avalible at <br><b>Date</b>: " + this.data.teachingDay + this.data.teachingTime + "<br><b>Place</b>: <a href=" + this.data.location + ">" + this.data.location + "</a><br>";
             userSkillsModalHeader.innerHTML = '<th scope="col">#</th><th scope="col">Name</th><th scope="col">Level</th><th scope="col">Endorsement</th>';
             userSkillsModalBody.innerHTML = "";
             for (var i = 0; i < this.data.skills.length; i++) {
               var row = document.createElement('tr');
               row.className = "foundElementRow";
               row.innerHTML += "<th>" + (i+1) + "</th>";
-              row.innerHTML += "<th>" + this.data[i].name + "</th>";
-              row.innerHTML += "<th>" + this.data[i].achievedPoint + "</th>";
-              row.innerHTML += "<th>" + this.data[i].Endorsement.length + "</th>";
+              row.innerHTML += "<th>" + this.data.skills[i].name + "</th>";
+              row.innerHTML += "<th>" + this.data.skills[i].achievedPoint + "</th>";
+              row.innerHTML += "<th>" + this.data.skills[i].endorsement.length + "</th>";
               row.data = {
-                name: this.data[i].name,
-                categoryName: this.data[i].categoryName,
-                description: this.data[i].description,
-                pointDescription: this.data[i].pointDescription,
-                descriptionWikipediaURL: this.data[i].descriptionWikipediaURL
+                name: this.data.skills[i].name,
+                categoryName: this.data.skills[i].categoryName,
+                description: this.data.skills[i].description,
+                pointDescription: this.data.skills[i].pointDescription,
+                descriptionWikipediaURL: this.data.skills[i].descriptionWikipediaURL
               }
               row.onclick = function(){
                 var foundmodal = document.getElementById('searchedSkillModal');
