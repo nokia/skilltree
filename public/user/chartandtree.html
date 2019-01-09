@@ -219,6 +219,7 @@
   </div>
   <div class = "card">
     <h1>4.</h1>
+    <p id = "apprP"><input type = "checkbox" class = "form-check-input" id = "treeAppr"><label class = "form-check-label" for = "treeAppr" disabled>Send for approve</label></p>
     <p><input type = "button" id = "createTree" class="btn btn-outline-secondary" value = "Save"></p>
     </div>
   </div>
@@ -353,6 +354,8 @@
             </tr>
           </table>
           <input type="button" value="Add training" onclick="addRow('trainingsTable')"><br><br>
+          Send for approve:
+          <input type = "checkbox" id = "forApprove"><br><br>
           <input type = "submit" value = "Save" id = "saveSkillBtn">
         </form>
       </div>
@@ -395,6 +398,8 @@
               </tr>
           </table>
           <input type="button" value="Add training" onclick="addRow('addTrainingsTable')"><br><br>
+          Send for approve:
+          <input type = "checkbox" id = "trainingForApprove"><br><br>
           <input type = "submit" value = "Save" id = "saveTrainingsBtn">
         </form>
       </div>
