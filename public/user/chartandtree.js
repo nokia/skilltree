@@ -264,33 +264,10 @@ function getPublicUserData(){
               row.innerHTML += "<th>" + this.data.skills[i].name + "</th>";
               row.innerHTML += "<th>" + this.data.skills[i].achievedPoint + "</th>";
               row.innerHTML += "<th>" + this.data.skills[i].endorsement.length + "</th>";
-              row.data = {
-                name: this.data.skills[i].name,
-                categoryName: this.data.skills[i].categoryName,
-                description: this.data.skills[i].description,
-                pointDescription: this.data.skills[i].pointDescription,
-                descriptionWikipediaURL: this.data.skills[i].descriptionWikipediaURL
-              }
+              row.data = {endorsement: this.data.skills[i].endorsement, name: this.data.username}
               row.onclick = function(){
-                var foundmodal = document.getElementById('searchedSkillModal');
-                var header = document.getElementById('searchedSkillModalHeader');
-                var category = document.getElementById('searchedSkillModalCategory');
-                var pdesc = document.getElementById('searchedSkillModalPDesc');
-                var desc = document.getElementById('searchedSkillModalDesc');
-                var wiki = document.getElementById('searchedSkillModalWiki');
-                var closer = document.getElementById('closeSearchedSkillModal');
-                header.innerHTML = this.data.name;
-                category.innerHTML = "<b>Category</b>: " + this.data.categoryName;
-                pdesc.innerHTML = "<b>Description by points</b>: <br> 1: " + this.data.pointDescription[0] + "<br>" +
-                                                              "2: " + this.data.pointDescription[1] + "<br>" +
-                                                              "3: " + this.data.pointDescription[2] + "<br>" +
-                                                              "4: " + this.data.pointDescription[3] + "<br>" +
-                                                              "5: " + this.data.pointDescription[4];
-                desc.innerHTML = "<b>Description</b>: " + this.data.description;
-                wiki.innerHTML = "<b>Wiki link</b>: <a href=" + this.data.descriptionWikipediaURL + ">" + this.data.descriptionWikipediaURL + "</a>";
-                foundmodal.style.display = "block";
-                closer.onclick = function(){
-                  foundmodal.style.display = "none";
+                if (!this.data.endorsement.includes(this.data.username)) {
+                  this.data.endorsement.push(this.data.username);
                 }
               }
               userSkillsModalBody.appendChild(row);
