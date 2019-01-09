@@ -1225,8 +1225,6 @@ function editMyTree () {
     var deleteBtn = document.getElementById("deleteFromList");
     deleteBtn.onclick = function () {
         var children = [];
-        console.log(skillList.options[skillList.selectedIndex].text);
-        console.log(skillsToAdd);
         getChildren(skillsToAdd, skillsToAdd.find(obj => obj.name == skillList.options[skillList.selectedIndex].text), children);
 
         if (children.lenght == 0) {
@@ -1283,6 +1281,7 @@ function getChildren (skills, skill, children) {
 		children.push(child);
 	}
 
+    console.log(temp);
 	for (var i = 0; i < temp.length; ++i) {
         if (skills.find(obj => obj.name == temp[i].name) != undefined) getChildren(skills, temp[i], children);
 	}
