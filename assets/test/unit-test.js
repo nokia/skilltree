@@ -44,10 +44,10 @@ describe("API test", function(){
 describe("API TEST", function(){
     it("Should return true", function(done){
         
-        request.get({ url: "https://skilltree.benis.hu/apitest/" },
+        request.get({ url: "https://anapioficeandfire.com/api/characters/583" },
             function(error, response, body) {
-                    console.log(response);
-                    
+                    var json = JSON.parse(response.body);
+                    console.log(json);
                 done();
             });
 
