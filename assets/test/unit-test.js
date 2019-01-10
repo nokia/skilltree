@@ -4,7 +4,8 @@ var expect = require("chai").expect;
 var baseUrl = "https://skilltree.benis.hu";
 var util = require("util");
 
-var tools = require("../../pbkdf2");
+var pbkdf2 = require("../../pbkdf2");
+var chartandtree = require("../../public/user/chartandtree");
 //var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 
@@ -12,12 +13,28 @@ var tools = require("../../pbkdf2");
 describe("hashPassword() and verifyPassword()", function(){
     it("Should hash the password and decode it correctly", function(){
 
-        var hashedPW = tools.hashPassword("VeryPassword");
-        var result = tools.verifyPassword("VeryPassword", hashedPW)
+        var hashedPW = pbkdf2.hashPassword("VeryPassword");
+        var result = pbkdf2.verifyPassword("VeryPassword", hashedPW)
 
         expect(result).to.equal(true);
     });
-} )
+});
+
+describe("API test", function(){
+    it("?", function(){
+
+        chartandtree.request("GET", "/apitest", undefined, function(){
+            if (this.readyState == 4 && this.status == 200){
+                console.log(this.response);
+            }
+            expect(true).to.equal(true);
+            
+        });
+        
+    });
+});
+
+
 /*
 describe("API TEST", function(){
     it("Should return true", function(done){
