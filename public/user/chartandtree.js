@@ -1624,7 +1624,7 @@ function addCheckBox(id, boxText, parent){
 
 // drops all offers from all users (used for dev)
 function dropoffers() {
-    request('POST', '/set/dropoffers', {} , function () {
+    request('POST', '/set/dropoffers', undefined , function () {
         if (this.readyState == 4 && this.status == 200) {
             window.open("/user/", "_self");
         }
