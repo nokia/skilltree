@@ -28,7 +28,7 @@ describe("API test", function(){
         request('GET', "/apitest", undefined, function(){
             if (this.readyState == 4 && this.status == 200){
                 
-                expect(this.body.succes).to.equal(true);
+                expect(this.body.succes).to.equal(false);
             }
             
             
