@@ -396,7 +396,9 @@ function switchSearch(type){
     addCheckBox("3", "Skill Option 3", 'advSearchDetails');*/
   }
   else if (type === "Tree") {
-    document.getElementById('cardSearchBar').onkeyup = searchTreesByName;
+    document.getElementById('cardSearchBar').onkeyup = function() {
+      searchTreesByName(document.getElementById('cardSearchBar').value, true);
+    };
     document.getElementById('cardSearchBar').setAttribute('list', "TreeSearchResult");
     document.getElementById('cardSearch').onclick = getPublicTreeData;
     /*addCheckBox("1", "Tree Option 1", 'advSearchDetails');
