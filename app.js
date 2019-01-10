@@ -1278,6 +1278,7 @@ setRoute.post('/endorse', async function (req, res) {
 */
 
 setRoute.use(function(req, res, next) {
+    console.log(req.decoded);
     if (req.decoded.admin) next();
     else {
         return res.status(403).send({
