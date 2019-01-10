@@ -164,19 +164,29 @@ function searchUsersByName(){
 }
 
 // searches skills by provided name
-function searchSkillsByName(element){
+function searchSkillsByName(element, global){
     var skillToSearch = {value: element.value};
     var skillSearchResult = document.getElementById('skillSearchResult');
-    request('POST', '/set/searchSkillsByName', skillToSearch, function () {
-        if (this.readyState == 4 && this.status == 200) {
-            skillSearchResult.innerText = "";
-            for (var i = 0; i < this.response.length; i++) {
-                var mya = document.createElement('option');
-                mya.value = this.response[i].name;
-                skillSearchResult.appendChild(mya);
+    if (global) {
+        request('POST', '/set/searchSkillsByName', skillToSearch, function () {
+            if (this.readyState == 4 && this.status == 200) {
+                skillSearchResult.innerText = "";
+                for (var i = 0; i < this.response.length; i++) {
+                    var mya = document.createElement('option');
+                    mya.value = this.response[i].name;
+                    skillSearchResult.appendChild(mya);
+                }
             }
+        });
+    } else {
+        skillSearchResult.innerHTML = "";
+        var res = data.skills.filter(obj => (new RegExp(".*" + skillToSearch + ".*", "i")).test(obj.name));
+        for (var i = 0; i < res.length; ++i) {
+            var mya = document.createElement('option');
+            mya.value = res[i].name;
+            skillSearchResult.appendChild(mya);
         }
-    });
+    }
 }
 
 // searches skills by provided name
@@ -377,7 +387,7 @@ function switchSearch(type){
   document.getElementById('advSearchDetails').innerHTML = "";
   if (type === "Skill") {
     document.getElementById('cardSearchBar').onkeyup = function(){
-      searchSkillsByName(this);
+      searchSkillsByName(this, true);
     };
     document.getElementById('cardSearchBar').setAttribute('list', "skillSearchResult");
     document.getElementById('cardSearch').onclick = getPublicSkillData;
@@ -386,7 +396,9 @@ function switchSearch(type){
     addCheckBox("3", "Skill Option 3", 'advSearchDetails');*/
   }
   else if (type === "Tree") {
-    document.getElementById('cardSearchBar').onkeyup = searchTreesByName;
+    document.getElementById('cardSearchBar').onkeyup = function() {
+      searchTreesByName(document.getElementById('cardSearchBar'), true);
+    };
     document.getElementById('cardSearchBar').setAttribute('list', "TreeSearchResult");
     document.getElementById('cardSearch').onclick = getPublicTreeData;
     /*addCheckBox("1", "Tree Option 1", 'advSearchDetails');
@@ -436,9 +448,9 @@ function submit(){
     });
 }
 
-window.setInterval(function(){
+/*window.setInterval(function(){
     submit();
-}, 5000);
+}, 5000);*/
 
 // logout.
 function logout(){
@@ -872,7 +884,7 @@ function editMySkill () {
 
     var skillName = document.getElementById("newSkillName");
     skillName.setAttribute('list', 'skillSearchResult');
-    skillName.onkeyup = function() {searchSkillsByName(this)};
+    skillName.onkeyup = function() {searchSkillsByName(this, false)};
 
     var loadSkill = document.getElementById("loadSkill");
     //TODO fill data with requested data
@@ -1460,7 +1472,7 @@ function editTree () {
                     skills: skillsToAdd
                 };
 
-                request('POST', '/set/edittree', treeData, function () {
+                request('POST', '/admin/edittree', treeData, function () {
                     if (this.readyState == 4 && this.status == 200) {
                         if (this.response.success) window.open("/user/", "_self");
                     }
@@ -1507,7 +1519,7 @@ function approveTrees() {
 
     btn.onclick = function () {
         var selectedTraining = select.options[select.selectedIndex]
-        request('POST', '/set/approvetree', {
+        request('POST', '/admin/approvetree', {
             name: selectedTraining.name,
             username: selectedTraining.username
         }, function () {
@@ -1555,7 +1567,7 @@ function approveSkills() {
 
         var skillforapproval = skillsforapproval.find(obj => obj.name == selectedSkill);
 
-        request('POST', '/set/approveskill', skillforapproval, function(){
+        request('POST', '/admin/approveskill', skillforapproval, function(){
             if(this.readyState == 4 && this.status == 200){
                 if(this.response !== undefined){
                     alert(this.response.message);
@@ -1597,7 +1609,7 @@ function approveTrainings () {
 
     btn.onclick = function () {
         var selectedTraining = select.options[select.selectedIndex]
-        request('POST', '/set/approvetraining', {
+        request('POST', '/admin/approvetraining', {
             name: selectedTraining.name,
             skillName: selectedTraining.skillName,
             username: selectedTraining.username
