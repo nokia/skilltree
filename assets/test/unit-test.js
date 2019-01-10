@@ -1,5 +1,6 @@
 var expect = require("chai").expect;
 var tools = require("../../pbkdf2");
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 var api = require("../../app");
 
 describe("hashPassword() and verifyPassword()", function(){
@@ -14,7 +15,7 @@ describe("hashPassword() and verifyPassword()", function(){
 
 describe("asd", function(){
     it("should do smth", function(){
-        request('POST', '/set/dropoffers', undefined , function () {
+        request('GET', '/apitest', undefined , function () {
             if (this.readyState == 4 && this.status == 200) {
                 expect(this.response.succes).to.equal(true);
             }
