@@ -1093,7 +1093,6 @@ function createTree () {
         request('POST', '/set/getskill', skill, function() {
             if(this.readyState == 4 && this.status == 200) {
                 if (this.response.success) {
-                    console.log("ssss");
                     if (skillsToAdd.find(obj => obj.name == this.response.skill.name) == undefined) {
                         if (this.response.dependency.length > 0) {
                             var text = "The selected skill depends on the following skills. Do you want to add these?\n";
@@ -1233,8 +1232,6 @@ function editMyTree () {
     var skillsToAdd = [];
     loadTree.onclick = function () {
         var tree = data.trees.find(obj => obj.name == document.getElementById("treeName").value);
-
-        alert('sss');
 
         if (tree == undefined) alert("Tree is not found");
         else {
