@@ -872,6 +872,10 @@ function editMySkill () {
         }
     }
 
+    var skillName = document.getElementById("newSkillName");
+    skillName.setAttribute('list', 'skillSearchResult');
+    skillName.onkeyup = function() {searchSkillsByName(this)};
+
     var loadSkill = document.getElementById("loadSkill");
     //TODO fill data with requested data
     loadSkill.onclick =function(){
