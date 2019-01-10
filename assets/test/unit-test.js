@@ -5,7 +5,7 @@ var baseUrl = "https://skilltree.benis.hu";
 var util = require("util");
 
 var pbkdf2 = require("../../pbkdf2");
-var chartandtree = require("../../public/user/chartandtree");
+//var chartandtree = require("../../public/user/chartandtree");
 //var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 
