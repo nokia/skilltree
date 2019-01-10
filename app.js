@@ -1496,8 +1496,7 @@ setRoute.post('/approvetree', async function (req, res) {
 
         newTree.save(function (err) {if (err) throw err;});
 
-        await ApprovableTree.remove({
-            username: data.username,
+        await ApprovableTree.remove({ // delete ALL trees from approve with this name
             name: data.name
         });
     }
@@ -1555,8 +1554,7 @@ setRoute.post('/approvetraining', async function (req, res) {
             })
         });
 
-        await ApprovableTraining.remove({
-            username: data.username,
+        await ApprovableTraining.remove({ // delete ALL trainings for the skill from approve with this name
             skillName: data.skillName,
             name: data.name
         });
