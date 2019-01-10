@@ -308,7 +308,6 @@ class ItemContainer {
 
                 var par = this.skills.find(obj => obj.name == this.skills[i].parents[j]);
                 if(par !== undefined) {
-                    console.log(par);
                     if(par.children.find(obj => obj.name == this.skills[i].name).minPoint > par.achievedPoint || par.itemcontainer.container.interactive == false){
                         var colorMatrixFilter = new PIXI.filters.ColorMatrixFilter;
                         colorMatrixFilter.brightness(0.4);
