@@ -1,14 +1,14 @@
-var expect = require("chai").expect;
 var should = require("should");
 var request = require("request");
+var expect = require("chai").expect;
 var baseUrl = "https://skilltree.benis.hu";
 var util = require("util");
 
-var tools = require("../../pbkdf2");
+//var tools = require("../../pbkdf2");
 //var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 
-/*
+
 describe("hashPassword() and verifyPassword()", function(){
     it("Should hash the password and decode it correctly", function(){
 
@@ -17,19 +17,25 @@ describe("hashPassword() and verifyPassword()", function(){
 
         expect(result).to.equal(true);
     });
-} )*/
-
+} )
+/*
 describe("API TEST", function(){
     it("Should return true", function(done){
-        request.get({ url: 'https://skilltree.benis.hu/apitest' },
+        
+        request.get({ url: "https://skilltree.benis.hu/apitest/" },
             function(error, response, body) {
-                    expect(response.succes).to.equal(true);
-                   // console.log(body);
+                    
+                    expect(response.statusCode).to.equal(200);
+                    console.log(body);
+
+
                 done();
             });
+
+            
     });
 });
-
+*/
 
 
 
