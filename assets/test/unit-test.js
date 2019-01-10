@@ -39,7 +39,7 @@ describe("API test", function(){
 describe("API TEST", function(){
     it("Should return true", function(done){
         
-        request.get({ url: "https://skilltree.benis.hu/apitest/" },
+        request.type('json').get({ url: "https://skilltree.benis.hu/apitest/" },
             function(error, response, body) {
                     
                     expect(response.statusCode).to.equal(200);
