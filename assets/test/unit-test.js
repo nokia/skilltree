@@ -1,12 +1,12 @@
 
-//var request = require("request");
+var request = require("request");
 var expect = require("chai").expect;
 var baseUrl = "https://skilltree.benis.hu";
 var util = require("util");
 
 var pbkdf2 = require("../../pbkdf2");
 //var chartandtree = require("../../public/user/chartandtree");
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+//var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 
 
@@ -21,7 +21,7 @@ describe("hashPassword() and verifyPassword()", function(){
 });
 
 
-
+/*
 describe("API test", function(){
     it("?", function(){
 
@@ -35,12 +35,12 @@ describe("API test", function(){
         });
         
     });
-});
+});*/
 
 
 
 //NPM REQUEST
-/* 
+
 describe("API TEST", function(){
     it("Should return true", function(done){
         
@@ -57,7 +57,7 @@ describe("API TEST", function(){
             
     });
 });
-*/
+
 
 
 
