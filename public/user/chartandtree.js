@@ -1470,7 +1470,7 @@ function editTree () {
                     skills: skillsToAdd
                 };
 
-                request('POST', '/set/edittree', treeData, function () {
+                request('POST', '/admin/edittree', treeData, function () {
                     if (this.readyState == 4 && this.status == 200) {
                         if (this.response.success) window.open("/user/", "_self");
                     }
@@ -1517,7 +1517,7 @@ function approveTrees() {
 
     btn.onclick = function () {
         var selectedTraining = select.options[select.selectedIndex]
-        request('POST', '/set/approvetree', {
+        request('POST', '/admin/approvetree', {
             name: selectedTraining.name,
             username: selectedTraining.username
         }, function () {
@@ -1565,7 +1565,7 @@ function approveSkills() {
 
         var skillforapproval = skillsforapproval.find(obj => obj.name == selectedSkill);
 
-        request('POST', '/set/approveskill', skillforapproval, function(){
+        request('POST', '/admin/approveskill', skillforapproval, function(){
             if(this.readyState == 4 && this.status == 200){
                 if(this.response !== undefined){
                     alert(this.response.message);
@@ -1607,7 +1607,7 @@ function approveTrainings () {
 
     btn.onclick = function () {
         var selectedTraining = select.options[select.selectedIndex]
-        request('POST', '/set/approvetraining', {
+        request('POST', '/admin/approvetraining', {
             name: selectedTraining.name,
             skillName: selectedTraining.skillName,
             username: selectedTraining.username

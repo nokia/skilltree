@@ -1277,20 +1277,48 @@ setRoute.post('/endorse', async function (req, res) {
 *   ADMIN
 */
 
-// check if admin
-setRoute.use(function(req, res, next) {
-    console.log(req.decoded);
-    if (req.decoded.admin) next();
-    else {
+
+var adminRoute = express.Router();
+app.use('/admin', adminRoute);
+
+adminRoute.use(function(req, res, next) {
+    var token = req.get('x-access-token');
+
+    // decode token
+    if (token) {
+        // verifies secret and checks exp
+        jwt.verify(token, app.get('superSecret'), function(err, decoded) {
+            if (err) {
+                return res.status(403).send({
+                    success: false,
+                    message: 'Failed to authenticate token.'
+                });
+            } else if (decoded.admin) {
+                req.decoded = decoded;
+                next();
+            } else {
+                return res.status(403).send({
+                    success: false,
+                    message: 'Not admin.'
+                });
+            }
+        });
+
+    } else {
+        // if there is no token
+        // return an error
         return res.status(403).send({
             success: false,
-            message: 'not admin'
+            message: 'No token provided.'
         });
+
     }
 });
 
+adminRoute.use(express.json());
+
 //Approve a skill thats sent in the body as skillforaproval to the api
-setRoute.post('/approveskill', async function (req, res)  {
+adminRoute.post('/approveskill', async function (req, res)  {
 
 	var skillforapproval = req.body;
 
@@ -1435,7 +1463,7 @@ setRoute.post('/approveskill', async function (req, res)  {
 
 });
 
-setRoute.post('/edittree', async function (req, res) {
+adminRoute.post('/edittree', async function (req, res) {
     var data = req.body;
 
     var globalTree = await Tree.findOne({
@@ -1469,7 +1497,7 @@ setRoute.post('/edittree', async function (req, res) {
 });
 
 // approves a tree.
-setRoute.post('/approvetree', async function (req, res) {
+adminRoute.post('/approvetree', async function (req, res) {
     var data = req.body;
 
     var globalTree = await Tree.findOne({
@@ -1502,7 +1530,7 @@ setRoute.post('/approvetree', async function (req, res) {
     }
 });
 
-setRoute.post('/approvetraining', async function (req, res) {
+adminRoute.post('/approvetraining', async function (req, res) {
 	var data = req.body;
 
     var globalSkill = await Skill.findOne({
@@ -1562,7 +1590,7 @@ setRoute.post('/approvetraining', async function (req, res) {
 });
 
 //drops the offers from global skills. Needed if we delete users
-setRoute.post('/dropoffers', async function (req, res) {
+adminRoute.post('/dropoffers', async function (req, res) {
 	Skill.find({} , (err, skills) => {
         if(err) console.log("error");
 
@@ -1577,7 +1605,9 @@ setRoute.post('/dropoffers', async function (req, res) {
 });
 
 
-
+/*
+*   END OF ADMIN
+*/
 
 
 
