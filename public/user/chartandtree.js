@@ -436,9 +436,9 @@ function submit(){
     });
 }
 
-window.setInterval(function(){
+/*window.setInterval(function(){
     submit();
-}, 5000);
+}, 5000);*/
 
 // logout.
 function logout(){
