@@ -1,8 +1,14 @@
 var expect = require("chai").expect;
-var tools = require("../../pbkdf2");
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-var api = require("../../app");
+var should = require("should");
+var request = require("request");
+var baseUrl = "https://skilltree.benis.hu";
+var util = require("util");
 
+var tools = require("../../pbkdf2");
+//var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+
+
+/*
 describe("hashPassword() and verifyPassword()", function(){
     it("Should hash the password and decode it correctly", function(){
 
@@ -11,27 +17,18 @@ describe("hashPassword() and verifyPassword()", function(){
 
         expect(result).to.equal(true);
     });
-} )
+} )*/
 
-describe("asd", function(){
-    it("should do smth", function(){
-        var result = undefined;
-
-        request('GET', '/apitest', undefined , function () {
-            if (this.readyState == 4 && this.status == 200) {
-                result = this.response.succes;
-
-                expect(result).to.equal(false);
-            }
-        });
-
-        
-
-        
+describe("API TEST", function(){
+    it("Should return true", function(done){
+        request.get({ url: 'https://skilltree.benis.hu/apitest' },
+            function(error, response, body) {
+                    expect(response.succes).to.equal(true);
+                   // console.log(body);
+                done();
+            });
     });
-
-})
-
+});
 
 
 
@@ -42,6 +39,7 @@ describe("asd", function(){
 
 
 
+/*
 function request (type, url, sendData, callback) {
     var req = new XMLHttpRequest();
     req.open(type, "https://skilltree.benis.hu/" + url, true);
@@ -54,4 +52,4 @@ function request (type, url, sendData, callback) {
         req.send(JSON.stringify(sendData));
     else
         req.send();
-}
+}*/
