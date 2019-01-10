@@ -397,7 +397,7 @@ function switchSearch(type){
   }
   else if (type === "Tree") {
     document.getElementById('cardSearchBar').onkeyup = function() {
-      searchTreesByName(document.getElementById('cardSearchBar').value, true);
+      searchTreesByName(document.getElementById('cardSearchBar'), true);
     };
     document.getElementById('cardSearchBar').setAttribute('list', "TreeSearchResult");
     document.getElementById('cardSearch').onclick = getPublicTreeData;
