@@ -1689,4 +1689,3 @@ function request (type, url, sendData, callback) {
 }
 
 
-exports.request = request;

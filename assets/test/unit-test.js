@@ -6,7 +6,7 @@ var util = require("util");
 
 var pbkdf2 = require("../../pbkdf2");
 //var chartandtree = require("../../public/user/chartandtree");
-//var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 
 
@@ -19,11 +19,13 @@ describe("hashPassword() and verifyPassword()", function(){
         expect(result).to.equal(true);
     });
 });
-/*
+
+
+
 describe("API test", function(){
     it("?", function(){
 
-        chartandtree.request("GET", "/apitest", undefined, function(){
+        request("GET", "/apitest", undefined, function(){
             if (this.readyState == 4 && this.status == 200){
                 console.log(this.response);
             }
@@ -33,9 +35,11 @@ describe("API test", function(){
         
     });
 });
-*/
 
 
+
+//NPM REQUEST
+/* 
 describe("API TEST", function(){
     it("Should return true", function(done){
         
@@ -52,6 +56,7 @@ describe("API TEST", function(){
             
     });
 });
+*/
 
 
 
@@ -62,7 +67,6 @@ describe("API TEST", function(){
 
 
 
-/*
 function request (type, url, sendData, callback) {
     var req = new XMLHttpRequest();
     req.open(type, "https://skilltree.benis.hu/" + url, true);
@@ -75,4 +79,4 @@ function request (type, url, sendData, callback) {
         req.send(JSON.stringify(sendData));
     else
         req.send();
-}*/
+}
