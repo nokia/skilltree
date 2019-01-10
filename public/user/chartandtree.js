@@ -5,7 +5,7 @@ initData();
 // get data from server
 function initData(){
   var dataRequest = new XMLHttpRequest();
-  dataRequest.open('GET', '/get/userdata', true);
+  dataRequest.open('GET', '/protected/userdata', true);
   dataRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
   dataRequest.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
   dataRequest.responseType = "json";
@@ -90,7 +90,7 @@ function checkFirstLogin() {
                     location: location
             };
 
-            request('POST', '/set/firstlogindata', firstLoginData, function() {
+            request('POST', '/protected/firstlogindata', firstLoginData, function() {
                 if(this.readyState == 4 && this.status == 200) {
                   window.open("/user/", "_self");
                 }
@@ -150,7 +150,7 @@ function searchUsersByName(){
   var UserSearchResult = document.getElementById('UserSearchResult');
 
   if (userToSearch !== "") {
-    request('POST', '/set/searchUsersByName', userToSearch, function() {
+    request('POST', '/protected/searchUsersByName', userToSearch, function() {
         if(this.readyState == 4 && this.status == 200) {
           UserSearchResult.innerHTML = "";
           for (var i = 0; i < this.response.length; i++) {
@@ -168,7 +168,7 @@ function searchSkillsByName(element, global){
     var skillToSearch = {value: element.value};
     var skillSearchResult = document.getElementById('skillSearchResult');
     if (global) {
-        request('POST', '/set/searchSkillsByName', skillToSearch, function () {
+        request('POST', '/protected/searchSkillsByName', skillToSearch, function () {
             if (this.readyState == 4 && this.status == 200) {
                 skillSearchResult.innerText = "";
                 for (var i = 0; i < this.response.length; i++) {
@@ -193,7 +193,7 @@ function searchSkillsByName(element, global){
 function searchUserSkillsByName(element){
     var skillToSearch = {value: element.value};
     var skillSearchResult = document.getElementById('skillSearchResult');
-    request('POST', '/set/searchUserSkillsByName', skillToSearch, function () {
+    request('POST', '/protected/searchUserSkillsByName', skillToSearch, function () {
         if (this.readyState == 4 && this.status == 200) {
             skillSearchResult.innerText = "";
             for (var i = 0; i < this.response.length; i++) {
@@ -211,7 +211,7 @@ function searchTreesByName (element, global) {
     var TreeSearchResult = document.getElementById('TreeSearchResult');
 
     if (global) {
-        request('POST', '/set/searchTreesByName', treeToSearch, function() {
+        request('POST', '/protected/searchTreesByName', treeToSearch, function() {
             if(this.readyState == 4 && this.status == 200) {
                 TreeSearchResult.innerHTML = "";
                 for (var i = 0; i < this.response.length; ++i) {
@@ -235,7 +235,7 @@ function searchTreesByName (element, global) {
 // gets the username, trees, skills and maintree of the user.
 function getPublicUserData(){
   var userToSearch = {value: document.getElementById('cardSearchBar').value};
-  request('POST', '/set/getPublicUserData', userToSearch, function() {
+  request('POST', '/protected/getPublicUserData', userToSearch, function() {
       if(this.readyState == 4 && this.status == 200) {
         var modal = document.getElementById('searchModal');
         var searchModalBody = document.getElementById('searchModalBody');
@@ -276,7 +276,7 @@ function getPublicUserData(){
               row.innerHTML += "<th>" + this.data.skills[i].endorsement.length + "</th>";
               var sv = {skillName: this.data.skills[i].name, username: this.data.username};
               row.onclick = function(){
-                request('POST', '/set/endorse', sv, function() {
+                request('POST', '/protected/endorse', sv, function() {
                     if(this.readyState == 4 && this.status == 200) {
                       alert(this.response.message);
                     }
@@ -299,7 +299,7 @@ function getPublicUserData(){
 // gets the name, skillnames, focusarea of a tree.
 function getPublicTreeData(){
   var treeToSearch = {value: document.getElementById('cardSearchBar').value};
-  request('POST', '/set/getPublicTreeData', treeToSearch, function() {
+  request('POST', '/protected/getPublicTreeData', treeToSearch, function() {
       if(this.readyState == 4 && this.status == 200) {
         var modal = document.getElementById('searchModal');
         var searchModalBody = document.getElementById('searchModalBody');
@@ -329,7 +329,7 @@ function getPublicTreeData(){
 // gets the name, caterory, desc, relations and training data of a skill.
 function getPublicSkillData(){
   var skillToSearch = {value: document.getElementById('cardSearchBar').value};
-  request('POST', '/set/getPublicSkillData', skillToSearch, function() {
+  request('POST', '/protected/getPublicSkillData', skillToSearch, function() {
       if(this.readyState == 4 && this.status == 200) {
         var modal = document.getElementById('searchModal');
         var searchModalBody = document.getElementById('searchModalBody');
@@ -417,7 +417,7 @@ function switchSearch(type){
 
 // adds a public tree to the user
 function addTreeToUser(treeToAdd){
-  request('POST', '/set/addTreeToUser', treeToAdd, function() {
+  request('POST', '/protected/addTreeToUser', treeToAdd, function() {
       if (this.readyState == 4 && this.status == 200) {
         if (this.response.success){
           var forest = document.getElementById("treeList");
@@ -440,7 +440,7 @@ function submit(){
     for (var i = 0; i < submitData.length; ++i) {
         delete submitData[i].itemcontainer;
     }
-    request('POST', '/set/submitall', submitData, function() {
+    request('POST', '/protected/submitall', submitData, function() {
         if(this.readyState == 4 && this.status == 200) {
           //initData();
           initUI(true, data); // not working opening another users tree
@@ -738,7 +738,7 @@ function addTraining () {
             forApprove: true
         };
 
-        request('POST', '/set/newtraining', trainingData, function () {
+        request('POST', '/protected/newtraining', trainingData, function () {
             if (this.readyState == 4 && this.status == 200) {
                 if (this.response.success) {
                 //reset table
@@ -852,7 +852,7 @@ function createSkill () {
             forApprove: true
         };
 
-        request('POST', '/set/newskill', skillData, function () {
+        request('POST', '/protected/newskill', skillData, function () {
             if (this.readyState == 4 && this.status == 200) {
                 if (this.response.success) {
                     modal.style.display = "none";
@@ -896,7 +896,7 @@ function editMySkill () {
             name: skillname
         }
 
-        request('POST', '/set/searchUserSkillByName', skillData , function () {
+        request('POST', '/protected/searchUserSkillByName', skillData , function () {
         if (this.readyState == 4 && this.status == 200) {
             if(this.response !== undefined)
             {
@@ -938,7 +938,7 @@ function editMySkill () {
 
                 var parents = this.response.parents;
                 var skillname = this.response.name;
-                request('POST', '/set/parentTableData', {name: skillname, parents: [parents] } , function(){
+                request('POST', '/protected/parentTableData', {name: skillname, parents: [parents] } , function(){
                     if (this.readyState == 4 && this.status == 200) {
                         if(this.response !== undefined)
                         {
@@ -957,7 +957,7 @@ function editMySkill () {
                     }
                 });
 
-                request('POST', '/set/trainingTableData', {skillname: skillname} , function(){
+                request('POST', '/protected/trainingTableData', {skillname: skillname} , function(){
                     if (this.readyState == 4 && this.status == 200) {
                         if(this.response !== undefined)
                         {
@@ -1069,7 +1069,7 @@ function editMySkill () {
             forApprove: true
         };
 
-        request('POST', '/set/newskill', skillData, function () {
+        request('POST', '/protected/newskill', skillData, function () {
             if (this.readyState == 4 && this.status == 200) {
                 if (this.response.success) {
                     modal.style.display = "none";
@@ -1104,7 +1104,7 @@ function createTree () {
     addBtn.onclick = function () {
         var skill = {value: document.getElementById('skillSearchTree').value};
 
-        request('POST', '/set/getskill', skill, function() {
+        request('POST', '/protected/getskill', skill, function() {
             if(this.readyState == 4 && this.status == 200) {
                 if (this.response.success) {
                     if (skillsToAdd.find(obj => obj.name == this.response.skill.name) == undefined) {
@@ -1182,7 +1182,7 @@ function createTree () {
                     skills: skillsToAdd
                 };
 
-                request('POST', '/set/newtree', treeData, function () {
+                request('POST', '/protected/newtree', treeData, function () {
                     if (this.readyState == 4 && this.status == 200) {
                         if (this.response.success) window.open("/user/", "_self");
                         else if (this.response.message == "treeexists") alert("There is already a tree with this name");
@@ -1263,7 +1263,7 @@ function editMyTree () {
     addBtn.onclick = function () {
         var skill = {value: document.getElementById('skillSearchTree').value};
 
-        request('POST', '/set/getskill', skill, function() {
+        request('POST', '/protected/getskill', skill, function() {
             if(this.readyState == 4 && this.status == 200) {
                 if (this.response.success) {
                     if (skillsToAdd.find(obj => obj.name == this.response.skill.name) == undefined) {
@@ -1341,7 +1341,7 @@ function editMyTree () {
                     skills: skillsToAdd
                 };
 
-                request('POST', '/set/editmytree', treeData, function () {
+                request('POST', '/protected/editmytree', treeData, function () {
                     if (this.readyState == 4 && this.status == 200) {
                         if (this.response.success) window.open("/user/", "_self");
                     }
@@ -1376,7 +1376,7 @@ function editTree () {
         skillsToAdd = [];
         skillList.innerHTML = "";
 
-        request('POST', '/set/gettree', {name: document.getElementById("treeName").value}, function() {
+        request('POST', '/protected/gettree', {name: document.getElementById("treeName").value}, function() {
             if(this.readyState == 4 && this.status == 200) {
                 TreeSearchResult.innerHTML = "";
                 document.getElementById("focusarea").value = this.response.focusArea;
@@ -1394,7 +1394,7 @@ function editTree () {
     addBtn.onclick = function () {
         var skill = {value: document.getElementById('skillSearchTree').value};
 
-        request('POST', '/set/getskill', skill, function() {
+        request('POST', '/protected/getskill', skill, function() {
             if(this.readyState == 4 && this.status == 200) {
                 if (this.response.success) {
                     if (skillsToAdd.find(obj => obj.name == this.response.skill.name) == undefined) {
@@ -1541,7 +1541,7 @@ function approveSkills() {
     var approveSkillsSelect = document.getElementById('apprSkillSel');
     var skillsforapproval = undefined;
 
-    request('GET', '/get/skillsforapproval', undefined, function() {
+    request('GET', '/protected/skillsforapproval', undefined, function() {
         if (this.readyState == 4 && this.status == 200) {
             if (this.response !== undefined) {
                 approveSkillsSelect.innerHTML = "";
@@ -1636,7 +1636,7 @@ function addCheckBox(id, boxText, parent){
 
 // drops all offers from all users (used for dev)
 function dropoffers() {
-    request('POST', '/set/dropoffers', {} , function () {
+    request('POST', '/admin/dropoffers', {} , function () {
         if (this.readyState == 4 && this.status == 200) {
             window.open("/user/", "_self");
         }

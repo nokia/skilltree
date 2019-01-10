@@ -142,42 +142,32 @@ app.post('/auth', function(req, res) {
 
 
 //Creating a getRoute thats protected with token, API calls are under /get/...
-var getRoute = express.Router();
-app.use('/get', getRoute);
+var protectedRoute = express.Router();
+app.use('/protected', protectedRoute);
 
-getRoute.use(function(req, res, next) {
-  var token = req.get('x-access-token');
+protectedRoute.use(function(req, res, next) {
+    var token = req.get('x-access-token');
 
-  // decode token
-  if (token) {
-    // verifies secret and checks exp
-    jwt.verify(token, app.get('superSecret'), function(err, decoded) {
-      if (err) {
-        return res.sendFile('login.html', { root: path.join(__dirname, './public') })
-        /*return res.json({
-        success: false,
-        message: 'Failed to authenticate token.'
-      });*/
+    // decode token
+    if (token) {
+        // verifies secret and checks exp
+        jwt.verify(token, app.get('superSecret'), function(err, decoded) {
+            if (err) {
+                return res.sendFile('login.html', { root: path.join(__dirname, './public') });
+            } else {
+                req.decoded = decoded;
+                next();
+            }
+        });
+
     } else {
-      req.decoded = decoded;
-      next();
+        return res.sendFile('login.html', { root: path.join(__dirname, './public') });
     }
-  });
-
-} else {
-  // if there is no token
-  // return an error
-  /*
-  return res.status(403).send({
-  success: false,
-  message: 'No token provided.'
-});*/
-return res.sendFile('login.html', { root: path.join(__dirname, './public') });
-
-}
 });
 
-getRoute.get('/userdata', function (req, res) {
+protectedRoute.use(express.json());
+
+protectedRoute.get('/userdata', function (req, res) {
     User.findOne({
         username: req.decoded.username
     }, async function(err, userdata) {
@@ -225,10 +215,8 @@ getRoute.get('/userdata', function (req, res) {
     });
 });
 
-
-
 // getting the skilldata of a skillname (used for offers)
-getRoute.get('/offers', function(req, res) {
+protectedRoute.get('/offers', function(req, res) {
 	Skill.findOne({
 		name: req.body.name
 	}, async function(err, skilldata) {
@@ -248,7 +236,7 @@ getRoute.get('/offers', function(req, res) {
 });
 
 // getting the skilldata of a skillname (used for offers)
-getRoute.get('/skillsforapproval', function(req, res) {
+protectedRoute.get('/skillsforapproval', function(req, res) {
 	ApprovableSkill.find({} , async function(err, skillsforapproval) {
 		if(err) throw err;
 
@@ -263,44 +251,8 @@ getRoute.get('/skillsforapproval', function(req, res) {
 	});
 });
 
-
-
-// Creating a setRoute, thats protected with Token. API calls are under /set/...
-var setRoute = express.Router();
-app.use('/set', setRoute);
-
-setRoute.use(function(req, res, next) {
-    var token = req.get('x-access-token');
-
-    // decode token
-    if (token) {
-        // verifies secret and checks exp
-        jwt.verify(token, app.get('superSecret'), function(err, decoded) {
-            if (err) {
-                return res.json({
-                    success: false,
-                    message: 'Failed to authenticate token.'
-                });
-            } else {
-                req.decoded = decoded;
-                next();
-            }
-        });
-
-    } else {
-        // if there is no token
-        // return an error
-        return res.status(403).send({
-            success: false,
-            message: 'No token provided.'
-        });
-
-    }
-});
-setRoute.use(express.json());
-
 // Search for users to view by name
-setRoute.post('/searchUsersByName', async function (req, res) {
+protectedRoute.post('/searchUsersByName', async function (req, res) {
 		var data = req.body;
 		var foundUsers = await User.find({
 					"username": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
@@ -316,7 +268,7 @@ setRoute.post('/searchUsersByName', async function (req, res) {
 });
 
 // searchkes a skill for editor
-setRoute.post('/searchSkillsByName', async function (req, res) {
+protectedRoute.post('/searchSkillsByName', async function (req, res) {
 		var data = req.body;
 
         var user = await User.findOne({
@@ -347,7 +299,7 @@ setRoute.post('/searchSkillsByName', async function (req, res) {
 });
 
 // searchkes a skill for editor
-setRoute.post('/searchUserSkillsByName', async function (req, res) {
+protectedRoute.post('/searchUserSkillsByName', async function (req, res) {
 		var data = req.body;
 
         var user = await User.findOne({
@@ -369,7 +321,7 @@ setRoute.post('/searchUserSkillsByName', async function (req, res) {
 });
 
 // Search for trees to add while typing
-setRoute.post('/searchTreesByName', async function (req, res) {
+protectedRoute.post('/searchTreesByName', async function (req, res) {
 		var data = req.body;
 		var foundTrees = await Tree.find({
 					"name": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
@@ -386,7 +338,7 @@ setRoute.post('/searchTreesByName', async function (req, res) {
 
 
 // Getting the name, willingToTeach, teachingDay, teachingTime, location, focusArea, skills and maintree of a user.
-setRoute.post('/getPublicUserData', async function (req, res) {
+protectedRoute.post('/getPublicUserData', async function (req, res) {
 		var data = req.body;
     var foundUsers = await User.find({
 					"username": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
@@ -398,7 +350,7 @@ setRoute.post('/getPublicUserData', async function (req, res) {
 });
 
 // Getting the name, skillnames, focusarea of a tree.
-setRoute.post('/getPublicTreeData', async function (req, res) {
+protectedRoute.post('/getPublicTreeData', async function (req, res) {
 		var data = req.body;
     var foundTrees = await Tree.find({
 					"name": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
@@ -410,7 +362,7 @@ setRoute.post('/getPublicTreeData', async function (req, res) {
 });
 
 // Getting the name, caterory, descs of a skill.
-setRoute.post('/getPublicSkillData', async function (req, res) {
+protectedRoute.post('/getPublicSkillData', async function (req, res) {
     var data = req.body;
     var foundSkills = await Skill.find({
 				"name": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
@@ -422,7 +374,7 @@ setRoute.post('/getPublicSkillData', async function (req, res) {
 });
 
 // Adds a public tree to the current user.
-setRoute.post('/addTreeToUser', async function (req, res){
+protectedRoute.post('/addTreeToUser', async function (req, res){
 	var data = req.body;
 	var user = await User.findOne({
 			username: req.decoded.username
@@ -472,7 +424,7 @@ setRoute.post('/addTreeToUser', async function (req, res){
 });
 
 // gets a skill and all it's dependencies by name.
-setRoute.post('/getskill', async function (req, res) {
+protectedRoute.post('/getskill', async function (req, res) {
 	var data = req.body;
 
     var user = await User.findOne({
@@ -643,7 +595,7 @@ async function sortTree(skillArray){
 	return skillArray;
 }
 
-setRoute.post('/newtraining', async function(req, res) {
+protectedRoute.post('/newtraining', async function(req, res) {
     var data = req.body;
 
     var user = await User.findOne({
@@ -703,7 +655,7 @@ setRoute.post('/newtraining', async function(req, res) {
 });
 
 // Creates a skill from the data the user added.
-setRoute.post('/newskill', async function(req, res) {
+protectedRoute.post('/newskill', async function(req, res) {
     var data = req.body;
 
     var user = await User.findOne({
@@ -798,7 +750,7 @@ setRoute.post('/newskill', async function(req, res) {
 });
 
 // creates a new tree only for the user.
-setRoute.post('/newtree', async function (req, res) {
+protectedRoute.post('/newtree', async function (req, res) {
 	var data = req.body;
     var user = await User.findOne({
         username: req.decoded.username
@@ -856,7 +808,7 @@ setRoute.post('/newtree', async function (req, res) {
 });
 
 // creates a new tree only for the user.
-setRoute.post('/editmytree', async function (req, res) {
+protectedRoute.post('/editmytree', async function (req, res) {
     var data = req.body;
     var user = await User.findOne({
         username: req.decoded.username
@@ -897,7 +849,7 @@ setRoute.post('/editmytree', async function (req, res) {
 });
 
 // Search for trees to add while typing
-setRoute.post('/gettree', async function (req, res) {
+protectedRoute.post('/gettree', async function (req, res) {
 		var data = req.body;
 		var foundTree = await Tree.findOne({
 					"name": data.name
@@ -909,7 +861,7 @@ setRoute.post('/gettree', async function (req, res) {
 });
 
 // add skill to user tree
-setRoute.post('/addskilltotree', async function(req, res) {
+protectedRoute.post('/addskilltotree', async function(req, res) {
     var data = req.body;
 
     var user = await User.findOne({
@@ -931,7 +883,7 @@ setRoute.post('/addskilltotree', async function(req, res) {
 });
 
 // gets the skilldata of a skillname
-setRoute.post('/skilldata', function(req, res) {
+protectedRoute.post('/skilldata', function(req, res) {
 	Skill.findOne({
 		name: req.body.name
 	}, async function(err, skilldata) {
@@ -951,7 +903,7 @@ setRoute.post('/skilldata', function(req, res) {
 });
 
 // sets the user data aquired from the first login
-setRoute.post('/firstlogindata', async function (req, res) {
+protectedRoute.post('/firstlogindata', async function (req, res) {
 	var data = req.body;
 
     var user = await User.findOne({
@@ -1003,7 +955,7 @@ setRoute.post('/firstlogindata', async function (req, res) {
 });
 
 // submits all changes made by the user to the skills.
-setRoute.post('/submitall', async function (req, res) {
+protectedRoute.post('/submitall', async function (req, res) {
 	var data = req.body;
 
     var user = await User.findOne({
@@ -1062,7 +1014,7 @@ setRoute.post('/submitall', async function (req, res) {
 });
 
 // searches a userskill
-setRoute.post('/searchUserSkillByName', async function (req, res) {
+protectedRoute.post('/searchUserSkillByName', async function (req, res) {
 
 	var user = await User.findOne({
 		username: req.decoded.username
@@ -1076,7 +1028,7 @@ setRoute.post('/searchUserSkillByName', async function (req, res) {
 	res.json(skill);
 });
 
-setRoute.post('/parentTableData', async function (req, res) {
+protectedRoute.post('/parentTableData', async function (req, res) {
 
 	var user = await User.findOne({
 		username: req.decoded.username
@@ -1110,7 +1062,7 @@ setRoute.post('/parentTableData', async function (req, res) {
 	res.json(parents);
 });
 
-setRoute.post('/trainingTableData', async function (req, res) {
+protectedRoute.post('/trainingTableData', async function (req, res) {
 
 	var user = await User.findOne({
 		username: req.decoded.username
@@ -1127,7 +1079,7 @@ setRoute.post('/trainingTableData', async function (req, res) {
 });
 
 //API call for request onclick
-setRoute.post('/request', async function (req, res){
+protectedRoute.post('/request', async function (req, res){
 
 	var user = await User.findOne({username: req.decoded.username}, function(err, user) {
 		if (err) throw err;
@@ -1244,7 +1196,7 @@ setRoute.post('/request', async function (req, res){
 
 });
 
-setRoute.post('/endorse', async function (req, res) {
+protectedRoute.post('/endorse', async function (req, res) {
   var data = req.body;
   var user = await User.findOne({
     username: data.username//req.decoded.username
