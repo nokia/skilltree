@@ -123,6 +123,7 @@ app.post('/auth', function(req, res) {
                     username: req.body.username,
                     admin: user.admin
                 };
+                console.log(payload);
                 var token = jwt.sign(payload, app.get('superSecret'), {
                     expiresIn: '60m' // expires in 1 hour
                 });
