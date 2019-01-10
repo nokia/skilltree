@@ -1,5 +1,5 @@
 
-var request = require("request");
+//var request = require("request");
 var expect = require("chai").expect;
 var baseUrl = "https://skilltree.benis.hu";
 var util = require("util");
@@ -25,7 +25,7 @@ describe("hashPassword() and verifyPassword()", function(){
 describe("API test", function(){
     it("?", function(){
 
-        request("GET", "/apitest", undefined, function(){
+        request('GET', "/apitest", undefined, function(){
             if (this.readyState == 4 && this.status == 200){
                 console.log(this.response);
             }
