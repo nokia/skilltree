@@ -46,12 +46,9 @@ describe("API TEST", function(){
         
         request.get({ url: "https://anapioficeandfire.com/api/characters/583" },
             function(error, response, body) {
-                    var json = JSON.parse(response.body);
-                    console.log(json);
+                    console.log(response);
                 done();
             });
-
-            
     });
 });
 
