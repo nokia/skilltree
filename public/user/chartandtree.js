@@ -1531,14 +1531,13 @@ function approveSkills() {
     var skillsforapproval = undefined;
 
     request('GET', '/get/skillsforapproval', undefined, function() {
-        if(this.readyState == 4 && this.status == 200){
-            if(this.response !== undefined){
+        if (this.readyState == 4 && this.status == 200) {
+            if (this.response !== undefined) {
                 approveSkillsSelect.innerHTML = "";
 
                 skillsforapproval = this.response;
-                for(var i=0; i < skillsforapproval.length; i++)
-                {
-                    var text = skillsforapproval[i].name/* + " (" + skillsforapproval[i].username + ")"*/;
+                for (var i = 0; i < skillsforapproval.length; i++) {
+                    var text = skillsforapproval[i].name + " (" + skillsforapproval[i].username + ")";
                     var option = document.createElement('option');
                     option.value = skillsforapproval[i];
                     option.text = text;
