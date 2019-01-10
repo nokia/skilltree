@@ -44,7 +44,7 @@ describe("API test", function(){
 describe("API TEST", function(){
     it("Should return true", function(done){
         
-        request.get({ url: "https://anapioficeandfire.com/api/characters/583" },
+        request.get({ url: "https://skilltree.benis.hu/apitest" },
             function(error, response, body) {
                     console.log(response);
                 done();
