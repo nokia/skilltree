@@ -164,19 +164,29 @@ function searchUsersByName(){
 }
 
 // searches skills by provided name
-function searchSkillsByName(element){
+function searchSkillsByName(element, global){
     var skillToSearch = {value: element.value};
     var skillSearchResult = document.getElementById('skillSearchResult');
-    request('POST', '/set/searchSkillsByName', skillToSearch, function () {
-        if (this.readyState == 4 && this.status == 200) {
-            skillSearchResult.innerText = "";
-            for (var i = 0; i < this.response.length; i++) {
-                var mya = document.createElement('option');
-                mya.value = this.response[i].name;
-                skillSearchResult.appendChild(mya);
+    if (global) {
+        request('POST', '/set/searchSkillsByName', skillToSearch, function () {
+            if (this.readyState == 4 && this.status == 200) {
+                skillSearchResult.innerText = "";
+                for (var i = 0; i < this.response.length; i++) {
+                    var mya = document.createElement('option');
+                    mya.value = this.response[i].name;
+                    skillSearchResult.appendChild(mya);
+                }
             }
+        });
+    } else {
+        skillSearchResult.innerHTML = "";
+        var res = data.skills.filter(obj => (new RegExp(".*" + skillToSearch + ".*", "i")).test(obj.name));
+        for (var i = 0; i < res.length; ++i) {
+            var mya = document.createElement('option');
+            mya.value = res[i].name;
+            skillSearchResult.appendChild(mya);
         }
-    });
+    }
 }
 
 // searches skills by provided name
@@ -377,7 +387,7 @@ function switchSearch(type){
   document.getElementById('advSearchDetails').innerHTML = "";
   if (type === "Skill") {
     document.getElementById('cardSearchBar').onkeyup = function(){
-      searchSkillsByName(this);
+      searchSkillsByName(this, true);
     };
     document.getElementById('cardSearchBar').setAttribute('list', "skillSearchResult");
     document.getElementById('cardSearch').onclick = getPublicSkillData;
@@ -872,7 +882,7 @@ function editMySkill () {
 
     var skillName = document.getElementById("newSkillName");
     skillName.setAttribute('list', 'skillSearchResult');
-    skillName.onkeyup = function() {searchSkillsByName(this)};
+    skillName.onkeyup = function() {searchSkillsByName(this, false)};
 
     var loadSkill = document.getElementById("loadSkill");
     //TODO fill data with requested data
