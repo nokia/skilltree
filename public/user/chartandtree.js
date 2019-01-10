@@ -775,9 +775,7 @@ function createSkill () {
         }
     }
 
-
-
-
+    document.getElementById("loadSkill").style.display = "none";
 
     var catSelect = document.getElementById("newSkillCat");
     catSelect.innerHTML = "";
