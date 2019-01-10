@@ -1,10 +1,10 @@
-var should = require("should");
+
 var request = require("request");
 var expect = require("chai").expect;
 var baseUrl = "https://skilltree.benis.hu";
 var util = require("util");
 
-//var tools = require("../../pbkdf2");
+var tools = require("../../pbkdf2");
 //var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 
