@@ -140,6 +140,10 @@ a {
    box-shadow: inset 0 0 10px #000000;
 }
 
+.nav-link{
+  display: inline-block;
+}
+
 #creator .card {
     width: 400px;
     margin-left: auto;
