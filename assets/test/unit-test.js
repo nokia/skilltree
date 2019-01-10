@@ -19,7 +19,7 @@ describe("hashPassword() and verifyPassword()", function(){
         expect(result).to.equal(true);
     });
 });
-
+/*
 describe("API test", function(){
     it("?", function(){
 
@@ -33,9 +33,9 @@ describe("API test", function(){
         
     });
 });
+*/
 
 
-/*
 describe("API TEST", function(){
     it("Should return true", function(done){
         
@@ -52,7 +52,7 @@ describe("API TEST", function(){
             
     });
 });
-*/
+
 
 
 
