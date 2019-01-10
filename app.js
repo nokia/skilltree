@@ -123,7 +123,6 @@ app.post('/auth', function(req, res) {
                     username: req.body.username,
                     admin: user.admin
                 };
-                console.log(payload);
                 var token = jwt.sign(payload, app.get('superSecret'), {
                     expiresIn: '60m' // expires in 1 hour
                 });
@@ -1278,6 +1277,7 @@ setRoute.post('/endorse', async function (req, res) {
 *   ADMIN
 */
 
+// check if admin
 setRoute.use(function(req, res, next) {
     console.log(req.decoded);
     if (req.decoded.admin) next();
