@@ -16,13 +16,13 @@ describe("asd", function(){
     it("should do smth", function(){
         request('POST', '/set/dropoffers', undefined , function () {
             if (this.readyState == 4 && this.status == 200) {
-                
+                expect(this.response.succes).to.equal(true);
             }
         });
 
 
 
-        expect().to.equal();
+        
     });
 
 })
