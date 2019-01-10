@@ -46,11 +46,8 @@ describe("API TEST", function(){
         
         request.get({ url: "https://skilltree.benis.hu/apitest/" },
             function(error, response, body) {
+                    console.log(response);
                     
-                    expect(response.statusCode).to.equal(200);
-                    console.log(body);
-
-
                 done();
             });
 
