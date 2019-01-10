@@ -8,7 +8,7 @@ var util = require("util");
 //var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 
-/*
+
 describe("hashPassword() and verifyPassword()", function(){
     it("Should hash the password and decode it correctly", function(){
 
@@ -17,8 +17,8 @@ describe("hashPassword() and verifyPassword()", function(){
 
         expect(result).to.equal(true);
     });
-} )*/
-
+} )
+/*
 describe("API TEST", function(){
     it("Should return true", function(done){
         
@@ -35,7 +35,7 @@ describe("API TEST", function(){
             
     });
 });
-
+*/
 
 
 

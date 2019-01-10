@@ -1687,3 +1687,6 @@ function request (type, url, sendData, callback) {
     else
         req.send();
 }
+
+
+exports.request = request;
