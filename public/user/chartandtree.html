@@ -8,6 +8,8 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
+  <!-- font awesome CSS -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
   <script src = "pixi/pixi.min.js"></script>
   <script src = "pixi/pixi-extra-filters.js"></script>
   <script src = "pixi/pixi-layers.js"></script>
@@ -42,7 +44,7 @@
 
   <!-- navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#userCard" data-toggle="collapse" role="button"data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="initCard()"><img class="logo" src="pictures/logo_32x32.png">SKILLTREE</a>
+    <a class="navbar-brand" href="#" data-toggle="collapse" role="button"data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="initCard()"><img class="logo" src="pictures/logo_32x32.png">SKILLTREE</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -92,19 +94,22 @@
         <li class="nav-item">
           <a class="nav-link" onclick="submit()">Submit Changes</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" onclick="logout()">Logout</a>
-        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" onclick="logout()"><i class="fas fa-power-off"></i></a>
+        </li> -->
       </ul>
+      
+      
     </div>
 
     <a class="nav-link" href="#advSearch" data-toggle="collapse" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Search
     </a>
 
-    <a class="nav-link" href="#userprofile" data-toggle="collapse" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <!-- <a class="nav-link" href="#userprofile" data-toggle="collapse" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <img src="./pictures/profile.png">
-    </a>
+    </a> -->
+      <a class="nav-link" role="button" data-toggle="collapse" data-toggle="dropdown" onclick="logout()"><i class="fas fa-power-off"></i></a>
   </nav>
   <!-- end of navbar -->
 
@@ -139,15 +144,16 @@
   <!-- end of advanced search -->
 
   <!-- user card  -->
-  <div class="collapse float-left show" id="userCard">
+  <div class="float-left" id="userCard">
     <div class="card">
       <div class="card-body">
         <img class="img-thumbnail float-left d-inline w-25 m-1 mr-3" src="./pictures/profile_img.jpg" alt="Card image cap">
         <h6 class="card-title d-inline" id="cardUserName"></h6>
-        <h6 class="card-subtitle mb-2 small font-italic" id="cardMainTree"></h6>
+        <h6 class="card-subtitle my-2 font-italic" id="cardMainTree"></h6>
+        <a class="btn btn-primary btn-sm" data-toggle="collapse" role="button" data-toggle="dropdown" href="#userprofile">Personal info</a>
       </div>
 
-      <div class="card-body">
+      <div class="card-body mt-3">
         <span class="badge badge-green w-30" id="treeCount"></span>
         <span class="badge badge-green w-30" id="skillCount"></span>
         <span class="badge badge-green w-30" id="pointCount"></span>
@@ -160,17 +166,17 @@
 
   <div id="userprofile" class="collapse float-right">
     <div class="card text-white bg-lightgreen mb-3">
-      <div class="card-header" id="card_username"></div>
+      <!-- <div class="card-header" id="card_username"></div> -->
       <div class="card-body">
 
         <!-- card nav -->
 
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" id="personal-tab" data-toggle="tab" href="#personal" role="tab" aria-controls="personal" aria-selected="true">Options</a>
+            <a class="nav-link active" id="personal-tab" data-toggle="tab" href="#personal" role="tab" aria-controls="personal" aria-selected="true">Personal</a>
           </li>
           <li>
-            <a class="nav-link" id="access-tab" data-toggle="tab" href="#access" role="tab" aria-controls="access" aria-selected="true">Access</a>
+            <a class="nav-link" id="access-tab" data-toggle="tab" href="#trainings" role="tab" aria-controls="trainings" aria-selected="true">My trainings</a>
           </li>
         </ul>
         <!-- end of card nav -->
@@ -193,20 +199,9 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label for="inputhelp" class="col-sm-3 col-form-label">Want To Help(public)</label>
-                <div class="col-sm-9">
-                  <input type="checkbox" id="inputhelp">
-                </div>
-              </div>
-            </form>
-          </div>
-          <!-- end of access-tab content -->
-          <div class="tab-panel fade" id="access" role="tabpanel" aria-labelledby="access-tab">
-            <form class="pt-4">
-              <div class="form-group row">
                 <label for="place" class="col-sm-3 col-form-label">Place</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control" id="place" aria-describedby="placeHelp" placeholder="Place">
+                  <input type="text" class="form-control" id="place" aria-describedby="placeHelp" placeholder="WhereAreYou link">
                 </div>
               </div>
               <div class="form-group row">
@@ -215,6 +210,41 @@
                   <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="user677@nokia.com">
                 </div>
               </div>
+              <div class="form-group row">
+                <label for="exampleInputEmail1" class="col-sm-3 col-form-label">Photo</label>
+                <div class="col-sm-9">
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Upload profile photo">
+                </div>
+              </div>
+              
+            </form>
+          </div>
+          <!-- end of personal-tab content -->
+          <div class="tab-panel fade" id="trainings" role="tabpanel" aria-labelledby="training-tab">
+            <form>
+                <h3>My requested trainings</h3>
+                 <p>I signed up for these trainings:</p>
+                <h3>My trainings</h3>
+                 <p>I will hold these trainings:</p>
+                <h3>Offering trainings</h3>
+                  <div class="form-group row">
+                    <label for="inputhelp" class="col-sm-3 col-form-label">Javascript</label>
+                    <div class="col-sm-9">
+                      <input type="checkbox" id="inputhelp" checked>
+                    </div>
+                  </div>
+                   <div class="form-group row">
+                    <label for="inputhelp" class="col-sm-3 col-form-label">HTML</label>
+                    <div class="col-sm-9">
+                      <input type="checkbox" id="inputhelp">
+                    </div>
+                  </div>
+                   <div class="form-group row">
+                    <label for="inputhelp" class="col-sm-3 col-form-label">CSS</label>
+                    <div class="col-sm-9">
+                      <input type="checkbox" id="inputhelp" checked>
+                    </div>
+                  </div>
             </form>
           </div>
         </div>
