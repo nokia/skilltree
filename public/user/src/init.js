@@ -24,11 +24,13 @@ function initData(){
 // initializes the data of the card on the top-right corner of the page.
 function initUI(self, _data){
   var card_username = document.getElementById('card_username');
-  if (self) {
-    card_username.innerHTML = "Welcome " + _data.username + "!";
-  }
-  else {
-    card_username.innerHTML = "You're now viewing " + _data.username + "'s data.";
+  if (card_username) {
+    if (self) {
+      card_username.innerHTML = "Welcome " + _data.username + "!";
+    }
+    else {
+      card_username.innerHTML = "You're now viewing " + _data.username + "'s data.";
+    }
   }
   initCard();
   switchSearch("User");
