@@ -898,6 +898,7 @@ protectedRoute.post('/skilldata', function(req, res) {
 
 		if(!skilldata){
 			escape.json({
+        // FIXME
 				succes: false,
 				message: 'Skill not found.'
 			});
