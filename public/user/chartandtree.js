@@ -217,10 +217,7 @@ function addTraining () {
     };
 }
 
-// opens skill creation, and manages it.
-
-// searches skills by provided name
-
+// opens skill creation modal and saves the new skill to the database (user and for approval)
 function createSkill () {
     $('.clear').find('input:text').val('');
     $('.clear').find('textarea').val('');
@@ -317,6 +314,7 @@ function createSkill () {
     };
 }
 
+// opens skill editor, user can edit (only) her/his own skills
 function editMySkill () {
     $('.clear').find('input:text').val('');
     $('.clear').find('textarea').val('');
@@ -541,7 +539,7 @@ function editMySkill () {
     };
 }
 
-// opens tree creator and manages it.
+// opens tree creator and manages it, saving for the user and for approval
 function createTree () {
     $('.clear').find('input:text').val('');
     $('.clear').find('textarea').val('');
@@ -680,15 +678,7 @@ function addRow(table) {
   x.appendChild(new_row);
 }
 
-/*
-*   TREE CREATOR END
-*/
-
-/*
-*   Approve menu for admins
-*/
-
-// opens tree creator and manages it.
+// opens tree creator, user can edit her/his own trees
 function editMyTree () {
     $('.clear').find('input:text').val('');
     $('.clear').find('textarea').val('');
@@ -821,7 +811,7 @@ function editMyTree () {
     };
 }
 
-// global (for admins)
+// admins can edit any tree, it will be changed for every user
 function editTree () {
     $('.clear').find('input:text').val('');
     $('.clear').find('textarea').val('');
@@ -1060,6 +1050,7 @@ function approveSkills() {
 
 }
 
+// makes trainings for skills globally available
 function approveTrainings () {
     hideMenus();
 
@@ -1115,10 +1106,7 @@ function dropoffers() {
     });
 }
 
-/*
-*   Approve menu for admins end
-*/
-
+// hides skill, tree creator, editor menu
 function hideMenus () {
     var elements = document.getElementsByClassName("hide");
 
