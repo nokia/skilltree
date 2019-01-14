@@ -543,6 +543,8 @@ function editMySkill () {
 
 // opens tree creator and manages it.
 function createTree () {
+    $('.clear').find('input:text').val('');
+    $('.clear').find('textarea').val('');
     var skillList = document.getElementById("skillList");
     skillList.innerHTML = "";
     hideMenus();
