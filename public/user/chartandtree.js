@@ -388,6 +388,19 @@ function editMySkill () {
                 trainingsTable.rows[1].cells[5].children[0].value = "";
                 trainingsTable.rows[1].cells[6].children[0].value = "";
 
+                for (var i = 0; i < this.response.trainings.length; ++i) {
+                    addRow("trainingsTable");
+
+                    trainingsTable.rows[i+1].cells[0].children[0].value = this.response.trainings[i].name;
+                    trainingsTable.rows[i+1].cells[1].children[0].value = this.response.trainings[i].level;
+                    trainingsTable.rows[i+1].cells[2].children[0].value = this.response.trainings[i].shortDescription;
+                    trainingsTable.rows[i+1].cells[3].children[0].value = this.response.trainings[i].URL;
+                    trainingsTable.rows[i+1].cells[4].children[0].value = this.response.trainings[i].goal;
+                    trainingsTable.rows[i+1].cells[5].children[0].value = this.response.trainings[i].length;
+                    trainingsTable.rows[i+1].cells[6].children[0].value = this.response.trainings[i].language;
+                }
+
+
 
                 /*var parents = this.response.parents;
                 var skillname = this.response.name;
@@ -409,27 +422,6 @@ function editMySkill () {
                         }
                     }
                 });*/
-
-                request('POST', '/protected/trainingTableData', {skillname: skillname} , function(){
-                    if (this.readyState == 4 && this.status == 200) {
-                        if(this.response !== undefined)
-                        {
-                            if(this.response!=null)
-                            for(var i=0;i<this.response.length;i++)
-                            {
-                                addRow("trainingsTable");
-
-                                trainingsTable.rows[i+1].cells[0].children[0].value = this.response[i].name;
-                                trainingsTable.rows[i+1].cells[1].children[0].value = this.response[i].level;
-                                trainingsTable.rows[i+1].cells[2].children[0].value = this.response[i].shortDescription;
-                                trainingsTable.rows[i+1].cells[3].children[0].value = this.response[i].URL;
-                                trainingsTable.rows[i+1].cells[4].children[0].value = this.response[i].goal;
-                                trainingsTable.rows[i+1].cells[5].children[0].value = this.response[i].length;
-                                trainingsTable.rows[i+1].cells[6].children[0].value = this.response[i].language;
-                            }
-                        }
-                    }
-                });
             }
         }
 
