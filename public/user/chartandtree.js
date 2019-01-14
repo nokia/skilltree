@@ -693,6 +693,7 @@ function editMyTree () {
         if (tree == undefined) alert("Tree is not found");
         else {
             document.getElementById("focusarea").value = tree.focusArea;
+            document.getElementById("treeDesc").value = tree.description;
             for (var i = 0; i < tree.skillNames.length; ++i) {
                 skillsToAdd.push(data.skills.find(obj => obj.name == tree.skillNames[i]));
                 var option = document.createElement("option");
@@ -781,6 +782,7 @@ function editMyTree () {
                 var treeData = {
                     name: document.getElementById('treeName').value,
                     focusArea: document.getElementById('focusarea').value,
+                    description: document.getElementById('treeDesc').value,
                     skills: skillsToAdd
                 };
 
@@ -823,6 +825,7 @@ function editTree () {
             if(this.readyState == 4 && this.status == 200) {
                 TreeSearchResult.innerHTML = "";
                 document.getElementById("focusarea").value = this.response.focusArea;
+                document.getElementById("treeDesc").value = this.response.description;
                 for (var i = 0; i < this.response.skillNames.length; ++i) {
                     skillsToAdd.push(data.skills.find(obj => obj.name == this.response.skillNames[i]));
                     var option = document.createElement("option");
@@ -912,6 +915,7 @@ function editTree () {
                 var treeData = {
                     name: document.getElementById('treeName').value,
                     focusArea: document.getElementById('focusarea').value,
+                    description: document.getElementById('treeDesc').value,
                     skills: skillsToAdd
                 };
 
