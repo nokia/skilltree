@@ -831,13 +831,13 @@ protectedRoute.post('/editmytree', async function (req, res) {
         if (err) throw err;
         return user;
     });
+
     if (!user) {
         res.json({
             success: false,
             message: 'User not found.'
         });
-    }
-    else if (user.trees.find(obj => obj.name == data.name) != undefined) {
+    } else if (user.trees.find(obj => obj.name == data.name) != undefined) {
         var sn = await sortTree(data.skills);
         user.trees = user.trees.filter(obj => obj.name != data.name);
         user.trees.push({
@@ -859,13 +859,52 @@ protectedRoute.post('/editmytree', async function (req, res) {
         res.json({
             success: true
         });
-    }
-    else {
+    } else {
         res.json({
             success: false,
-            message: 'treenotexists'
+            message: 'tree not exists'
         });
     }
+});
+
+protectedRoute.post('/editmyskill', async function (req, res) {
+	var data = req.body;
+    var user = await User.findOne({
+        username: req.decoded.username
+    }, function(err, user) {
+        if (err) throw err;
+        return user;
+    });
+
+    if (!user) {
+        res.json({
+            success: false,
+            message: 'User not found.'
+        });
+    } else if (user.skills.find(obj => obj.name == data.name) != undefined) {
+		user.skills.find(obj => obj.name == data.name).name = data.name;
+        user.skills.find(obj => obj.name == data.name).description = data.description;
+		user.skills.find(obj => obj.name == data.name).descriptionWikipediaURL = data.descriptionWikipediaURL;
+        user.skills.find(obj => obj.name == data.name).skillIcon = data.skillIcon;
+        user.skills.find(obj => obj.name == data.name).categoryName = data.categoryName;
+        user.skills.find(obj => obj.name == data.name).maxPoint = data.maxPoint;
+        user.skills.find(obj => obj.name == data.name).pointDescription = data.pointDescription;
+        user.skills.find(obj => obj.name == data.name).parents = parentNames;
+        user.skills.find(obj => obj.name == data.name).trainings = data.trainings;
+
+		if (data.maxPoint < user.skills.find(obj => obj.name == data.name).achievedPoint) user.skills.find(obj => obj.name == data.name).achievedPoint = data.maxPoint;
+
+		user.save(function (err) {if (err) throw err;});
+
+        res.json({
+            success: true
+        });
+	} else {
+		res.json({
+            success: false,
+            message: 'skill not exists'
+        });
+	}
 });
 
 // Search for trees to add while typing

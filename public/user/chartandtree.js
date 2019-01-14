@@ -481,27 +481,6 @@ function editMySkill () {
         var pointDescription = [];
         for (i = 1; i < pointsNum + 1; ++i) pointDescription.push(pointsTable.rows[i].cells[1].children[0].value);
 
-        var parentsTable = document.getElementById('parentsTable');
-        var parents = [];
-        for (i = 1; i < parentsTable.rows.length; ++i) {
-            parents.push({
-                name: parentsTable.rows[i].cells[0].children[0].value,
-                minPoint: parentsTable.rows[i].cells[1].children[0].value,
-                recommended: !parentsTable.rows[i].cells[2].children[0].checked
-            });
-        }
-
-        /*var childrenTable = document.getElementById('childrenTable');
-        var children = [];
-        for (i = 1; i < childrenTable.rows.length; ++i) {
-            children.push({
-                name: childrenTable.rows[i].cells[0].children[0].value,
-                minPoint: childrenTable.rows[i].cells[1].children[0].value,
-                recommended: !childrenTable.rows[i].cells[2].children[0].checked
-            });
-        }*/
-
-
         var trainingsTable = document.getElementById('trainingsTable');
         var trainings = [];
         for (i = 1; i < trainingsTable.rows.length; ++i) {
@@ -520,16 +499,15 @@ function editMySkill () {
             name: document.getElementById('newSkillName').value,
             description: document.getElementById('newSkillDesc').value,
             skillIcon: document.getElementById('newSkillIcon').value,
+            descriptionWikipediaURL: document.getElementById('newSkillWiki').value,
             categoryName: catSelect.value,
             maxPoint: pointsNum,
             pointDescription: pointDescription,
-            parents: parents,
-            //children: children,
             trainings: trainings,
             forApprove: true
         };
 
-        request('POST', '/protected/newskill', skillData, function () {
+        request('POST', '/protected/editmyskill', skillData, function () {
             if (this.readyState == 4 && this.status == 200) {
                 if (this.response.success) {
                     modal.style.display = "none";
