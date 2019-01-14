@@ -222,6 +222,9 @@ function addTraining () {
 // searches skills by provided name
 
 function createSkill () {
+    $('.clear').find('input:text').val('');
+    $('.clear').find('textarea').val('');
+
     var modal = document.getElementById("newSkillModal");
     modal.style.display = "block";
 
@@ -315,6 +318,9 @@ function createSkill () {
 }
 
 function editMySkill () {
+    $('.clear').find('input:text').val('');
+    $('.clear').find('textarea').val('');
+
     var modal = document.getElementById("newSkillModal");
     modal.style.display = "block";
 
@@ -680,6 +686,8 @@ function addRow(table) {
 
 // opens tree creator and manages it.
 function editMyTree () {
+    $('.clear').find('input:text').val('');
+    $('.clear').find('textarea').val('');
     hideMenus();
 
     var treeName = document.getElementById("treeName");
@@ -810,6 +818,8 @@ function editMyTree () {
 
 // global (for admins)
 function editTree () {
+    $('.clear').find('input:text').val('');
+    $('.clear').find('textarea').val('');
     hideMenus();
 
     var treeName = document.getElementById("treeName");
@@ -1105,8 +1115,6 @@ function dropoffers() {
 */
 
 function hideMenus () {
-    $('.clear').find('input:text').val('');
-
     var elements = document.getElementsByClassName("hide");
 
     for (var i = 0; i < elements.length; ++i) {
