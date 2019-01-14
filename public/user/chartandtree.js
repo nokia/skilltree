@@ -360,7 +360,7 @@ function editMySkill () {
 
 
 
-                //Dropping data from parentsTable
+                /*//Dropping data from parentsTable
                 var parentsTable = document.getElementById('parentsTable');
                 var i=parentsTable.rows.length-1;
                 while(i>1)
@@ -370,7 +370,7 @@ function editMySkill () {
                 }
                 parentsTable.rows[1].cells[0].children[0].value = "";
                 parentsTable.rows[1].cells[1].children[0].value = "";
-                parentsTable.rows[1].cells[2].children[0].checked = false;
+                parentsTable.rows[1].cells[2].children[0].checked = false;*/
 
                 //Dropping data from trainingsTable
                 var trainingsTable = document.getElementById('trainingsTable');
@@ -389,7 +389,7 @@ function editMySkill () {
                 trainingsTable.rows[1].cells[6].children[0].value = "";
 
 
-                var parents = this.response.parents;
+                /*var parents = this.response.parents;
                 var skillname = this.response.name;
                 request('POST', '/protected/parentTableData', {name: skillname, parents: [parents] } , function(){
                     if (this.readyState == 4 && this.status == 200) {
@@ -408,7 +408,7 @@ function editMySkill () {
 
                         }
                     }
-                });
+                });*/
 
                 request('POST', '/protected/trainingTableData', {skillname: skillname} , function(){
                     if (this.readyState == 4 && this.status == 200) {
