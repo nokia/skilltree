@@ -1105,6 +1105,8 @@ function dropoffers() {
 */
 
 function hideMenus () {
+    $('.clear').find('input:text').val('');
+
     var elements = document.getElementsByClassName("hide");
 
     for (var i = 0; i < elements.length; ++i) {
