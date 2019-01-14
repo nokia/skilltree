@@ -1083,22 +1083,6 @@ protectedRoute.post('/parentTableData', async function (req, res) {
 	res.json(parents);
 });
 
-protectedRoute.post('/trainingTableData', async function (req, res) {
-
-	var user = await User.findOne({
-		username: req.decoded.username
-	}, function(err, user) {
-		if (err) throw err;
-		return user;
-	});
-
-	var skill = user.skills.find(obj => obj.name == req.body.skillname);
-
-	var trainings = skill.trainings;
-
-	res.json(trainings);
-});
-
 //API call for request onclick
 protectedRoute.post('/request', async function (req, res){
 
