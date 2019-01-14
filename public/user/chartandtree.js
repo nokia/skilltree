@@ -1098,8 +1098,7 @@ function hideCards (event) {
     var except = ".float-left *, .float-right *";
 
     if (!event.target.matches(except)) {
-        $(".float-left").collapse("hide");
-        $(".float-right").collapse("hide");
+        $(".collapse").collapse("hide");
     }
 }
 
