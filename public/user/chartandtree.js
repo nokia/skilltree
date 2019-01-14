@@ -335,6 +335,15 @@ function editMySkill () {
         }
     }
 
+    var catSelect = document.getElementById("newSkillCat");
+    catSelect.innerHTML = "";
+    for (var i = 0; i < data.categories.length; ++i) {
+        var option = document.createElement("option");
+        option.text = data.categories[i].name;
+        option.value = data.categories[i].name;
+        catSelect.add(option);
+    }
+
     var skillName = document.getElementById("newSkillName");
     skillName.setAttribute('list', 'skillSearchResult');
     skillName.onkeyup = function() {searchSkillsByName(this, false)};
@@ -345,11 +354,7 @@ function editMySkill () {
         //request for the skill to load data from
         var skillname = document.getElementById('newSkillName').value;
 
-        skillData = {
-            name: skillname
-        }
-
-        request('POST', '/protected/searchUserSkillByName', skillData , function () {
+        request('POST', '/protected/searchUserSkillByName', {name: skillname}, function () {
         if (this.readyState == 4 && this.status == 200) {
             if(this.response !== undefined)
             {
