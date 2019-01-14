@@ -61,6 +61,7 @@ module.exports = mongoose.model('User', new Schema({
         {
             name: String,
             skillNames: [String],
+            description: String,
             focusArea: String
         }
     ]

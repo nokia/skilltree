@@ -622,6 +622,7 @@ function createTree () {
                 var treeData = {
                     name: document.getElementById('treeName').value,
                     focusArea: document.getElementById('focusarea').value,
+                    description: document.getElementById('treeDesc').value,
                     forApprove: true,
                     skills: skillsToAdd
                 };

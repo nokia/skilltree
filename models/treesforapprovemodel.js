@@ -7,5 +7,6 @@ module.exports = mongoose.model('ApprovableTree', new Schema({
     name: String,
     username: String,
     skillNames: [String],
+    description: String,
     focusArea: String
 }));

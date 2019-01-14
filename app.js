@@ -734,6 +734,7 @@ protectedRoute.post('/newskill', async function(req, res) {
                 username: user.username,
                 name: data.name,
                 description: data.description,
+				descriptionWikipediaURL: data.descriptionWikipediaURL
                 skillIcon: data.skillIcon,
                 categoryName: data.categoryName,
                 maxPoint: data.maxPoint,
@@ -774,7 +775,12 @@ protectedRoute.post('/newtree', async function (req, res) {
 	}
 	else if (user.trees.find(obj => obj.name == data.name) == undefined) {
 		var sn = await sortTree(data.skills);
-		user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: sn});
+		user.trees.push({
+				name: data.name,
+				focusArea: data.focusArea,
+				description: data.description,
+				skillNames: sn
+			});
 
         await data.skills.forEach(async function (skill) {
             /*var skill = await Skill.findOne({
@@ -797,6 +803,7 @@ protectedRoute.post('/newtree', async function (req, res) {
                 name: data.name,
                 username: user.username,
                 focusArea: data.focusArea,
+				description: data.description
                 skillNames: sn
             });
 
@@ -833,7 +840,12 @@ protectedRoute.post('/editmytree', async function (req, res) {
     else if (user.trees.find(obj => obj.name == data.name) != undefined) {
         var sn = await sortTree(data.skills);
         user.trees = user.trees.filter(obj => obj.name != data.name);
-        user.trees.push({name: data.name, focusArea: data.focusArea, skillNames: sn});
+        user.trees.push({
+			name: data.name,
+			focusArea: data.focusArea,
+			description: data.description,
+			skillNames: sn
+		});
 
         await data.skills.forEach(async function (skill) {
         	if (skill.achievedPoint == undefined) skill.achievedPoint = 0;
@@ -1313,6 +1325,7 @@ adminRoute.post('/approveskill', async function (req, res)  {
 			categoryName: skillforapproval.categoryName,
 			skillIcon: skillforapproval.skillIcon,
 			description: skillforapproval.description,
+			descriptionWikipediaURL: skillforapproval.descriptionWikipediaURL,
 			pointDescription: skillforapproval.pointDescription,
 			maxPoint: skillforapproval.maxPoint,
 			parents: skillforapproval.parent,
@@ -1436,6 +1449,7 @@ adminRoute.post('/edittree', async function (req, res) {
 
     var sn = await sortTree(data.skills);
     globalTree.focusArea = data.focusArea;
+	globalTree.description = data.description;
     globalTree.skillNames = sn;
     globalTree.save(function (err) {if (err) throw err;});
 
@@ -1445,6 +1459,7 @@ adminRoute.post('/edittree', async function (req, res) {
         users.map(user => {
             if (user.trees.find(obj => obj.name == data.name) != undefined) {
                 user.trees.find(obj => obj.name == data.name).focusArea = data.focusArea;
+				user.trees.find(obj => obj.name == data.name).description = data.description;
                 user.trees.find(obj => obj.name == data.name).skillNames = sn;
 
                 user.save(function (err) {if (err) throw err;});
@@ -1480,6 +1495,7 @@ adminRoute.post('/approvetree', async function (req, res) {
         var newTree = new Tree({
             name: tree.name,
             focusArea: tree.focusArea,
+			description: tree.description,
             skillNames: tree.skillNames
         });
 
