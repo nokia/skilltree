@@ -238,6 +238,7 @@ function createSkill () {
     }
 
     document.getElementById("loadSkill").style.display = "none";
+    document.getElementById("parentsDiv").style.display = "block";
 
     var catSelect = document.getElementById("newSkillCat");
     catSelect.innerHTML = "";
