@@ -325,6 +325,7 @@ function editMySkill () {
 
     document.getElementById("loadSkill").style.display = "block";
     document.getElementById("newSkillModalTitle").innerText = "Edit your skill";
+    document.getElementById("parentsDiv").style.display = "none";
 
     window.onclick = function(event) {
         if (event.target == modal) {
