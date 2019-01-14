@@ -360,9 +360,11 @@ function editMySkill () {
 
                 var pointsTable = document.getElementById('pointsTable');
 
-                for (var i = pointsTable.rows.length-1; i > 1; --i) pointsTable.deleteRow(i);
+                for (var i = pointsTable.rows.length-1; i > 0; --i) pointsTable.deleteRow(i);
 
-                trainingsTable.rows[1].cells[0].children[0].value = "";
+                pointsTable.rows[1].cells[1].children[0].value = "";
+
+                
 
 
                 /*//Dropping data from parentsTable
