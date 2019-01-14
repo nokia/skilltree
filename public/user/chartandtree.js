@@ -362,9 +362,9 @@ function editMySkill () {
 
                 for (var i = pointsTable.rows.length-1; i > 0; --i) pointsTable.deleteRow(i);
 
-                pointsTable.rows[1].cells[1].children[0].value = "";
+                //pointsTable.rows[1].cells[1].children[0].value = "";
 
-                
+
 
 
                 /*//Dropping data from parentsTable
