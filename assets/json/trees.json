@@ -21,9 +21,9 @@
       "Go",
       "Java",
       "Python",
-      "TDD",
+      "Test-driven development",
       "Scrum",
-      "SAFe"
+      "Scaled Agile Framework"
     ]
   },
   {
@@ -33,7 +33,7 @@
     "skillNames": [
       "Robot Framework",
       "Python",
-      "TDD"
+      "Test-driven development"
     ]
   },
   {
@@ -72,7 +72,7 @@
     ]
   },
   {
-    "name": "Front-end Developer",
+    "name": "Frontend Developer",
     "description": "Individual whose responsability relies on the conversion of data to a graphical interface for the user to view and interact with through digital interaction using HTML, CSS and JavaScript.",
     "focusArea": "Engineering",
     "skillNames": [
@@ -86,7 +86,7 @@
     ]
   },
   {
-    "name": "Back-end Developer",
+    "name": "Backend Developer",
     "description": "Individual whose responsability relies on the conversion of data to a graphical interface for the user to view and interact with through digital interaction using HTML, CSS and JavaScript.",
     "focusArea": "Engineering",
     "skillNames": [
