@@ -356,6 +356,7 @@ function editMySkill () {
                 document.getElementById('newSkillName').value = this.response.name;
                 document.getElementById('newSkillDesc').value = this.response.description;
                 document.getElementById('newSkillIcon').value = this.response.skillIcon;
+                document.getElementById('newSkillWiki').value = this.response.descriptionWikipediaURL;
                 document.getElementById("newSkillCat").value = this.response.categoryName;
 
                 var pointsTable = document.getElementById('pointsTable');
