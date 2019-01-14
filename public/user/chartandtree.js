@@ -543,6 +543,8 @@ function editMySkill () {
 
 // opens tree creator and manages it.
 function createTree () {
+    var skillList = document.getElementById("skillList");
+    skillList.innerHTML = "";
     hideMenus();
 
     var treeName = document.getElementById("treeName");
@@ -688,6 +690,8 @@ function addRow(table) {
 function editMyTree () {
     $('.clear').find('input:text').val('');
     $('.clear').find('textarea').val('');
+    var skillList = document.getElementById("skillList");
+    skillList.innerHTML = "";
     hideMenus();
 
     var treeName = document.getElementById("treeName");
@@ -705,7 +709,6 @@ function editMyTree () {
     creator.style.width = canvas.style.width;
     creator.style.height = canvas.style.height;
 
-    var skillList = document.getElementById("skillList");
     var skillsToAdd = [];
     loadTree.onclick = function () {
         var tree = data.trees.find(obj => obj.name == document.getElementById("treeName").value);
