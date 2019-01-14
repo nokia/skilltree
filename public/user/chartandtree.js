@@ -524,7 +524,7 @@ function editMySkill () {
 
 // opens tree creator and manages it.
 function createTree () {
-    hideAll();
+    hideMenus();
 
     var treeName = document.getElementById("treeName");
     treeName.setAttribute('list', '');
@@ -666,7 +666,7 @@ function addRow(table) {
 
 // opens tree creator and manages it.
 function editMyTree () {
-    hideAll();
+    hideMenus();
 
     var treeName = document.getElementById("treeName");
     treeName.setAttribute('list', 'TreeSearchResult');
@@ -794,7 +794,7 @@ function editMyTree () {
 
 // global (for admins)
 function editTree () {
-    hideAll();
+    hideMenus();
 
     var treeName = document.getElementById("treeName");
     treeName.setAttribute('list', 'TreeSearchResult');
@@ -941,7 +941,7 @@ function getChildren (skills, skill, children) {
 
 // make trees globally available
 function approveTrees() {
-    hideAll();
+    hideMenus();
 
     var approveTrees = document.getElementById("approveTrees");
     approveTrees.style.display = "block";
@@ -973,7 +973,7 @@ function approveTrees() {
 
 // make skills globally available
 function approveSkills() {
-    hideAll();
+    hideMenus();
 
     var approveSkills = document.getElementById("approveSkills");
 
@@ -1028,7 +1028,7 @@ function approveSkills() {
 }
 
 function approveTrainings () {
-    hideAll();
+    hideMenus();
 
     var approveTrees = document.getElementById("approveTrainings");
     approveTrees.style.display = "block";
@@ -1086,7 +1086,7 @@ function dropoffers() {
 *   Approve menu for admins end
 */
 
-function hideAll () {
+function hideMenus () {
     var elements = document.getElementsByClassName("hide");
 
     for (var i = 0; i < elements.length; ++i) {
@@ -1101,6 +1101,8 @@ function hideCards (event) {
         alert("s");
     }
 }
+
+document.body.addEventListener('click', hideCards);
 
 // helper functions
 
