@@ -292,6 +292,7 @@ function createSkill () {
         var skillData = {
             name: document.getElementById('newSkillName').value,
             description: document.getElementById('newSkillDesc').value,
+            descriptionWikipediaURL: document.getElementById('newSkillWiki').value,
             skillIcon: document.getElementById('newSkillIcon').value,
             categoryName: catSelect.value,
             maxPoint: pointsNum,
