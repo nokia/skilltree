@@ -1049,7 +1049,7 @@ protectedRoute.post('/searchUserSkillByName', async function (req, res) {
 	res.json(skill);
 });
 
-protectedRoute.post('/parentTableData', async function (req, res) {
+/*protectedRoute.post('/parentTableData', async function (req, res) {
 
 	var user = await User.findOne({
 		username: req.decoded.username
@@ -1081,7 +1081,7 @@ protectedRoute.post('/parentTableData', async function (req, res) {
 	});
 
 	res.json(parents);
-});
+});*/
 
 //API call for request onclick
 protectedRoute.post('/request', async function (req, res){
