@@ -257,7 +257,7 @@
 <canvas id = "pixiCanvas" style = "visibility: hidden;" class = "hide"></canvas>
 
 <!-- creator -->
-<div id = "creator" style = "display: none;" class = "hide">
+<div id = "creator" style = "display: none;" class = "hide clear">
   <div class = "card">
     <h1>1.</h1>
     <center><h5>The name of the tree</h5></center>
@@ -272,7 +272,7 @@
       <option value = "Support functions">Support functions</option>
     </select></p>
     <center><h5>Description:</h5></center>
-    <p><textarea id = "treeDesc" required></textarea></p>
+    <p><textarea id = "treeDesc"></textarea></p>
   </div>
   <div class = "card">
     <h1>2.</h1>
@@ -316,7 +316,7 @@
 <!-- end of modal -->
 
   <!-- start of modal -->
-  <div id = "newSkillModal" class = "modal">
+  <div id = "newSkillModal" class = "modal clear">
     <div class = "modal-content">
       <div class="modal-header">
         <span class="modalClose" id = "closeSkillModal">&times;</span>
@@ -325,14 +325,14 @@
       <div class="modal-body">
         <form onsubmit = "return false">
           <h5>Name:</h5>
-          <input type = "text" id = "newSkillName" required><br>
+          <input type = "text" id = "newSkillName"><br>
           <input type = "button" id = "loadSkill" class = "btn btn-outline-secondary" style = "display: none" value = "Load Skill"/>
           <h5>Description:</h5>
-          <textarea id = "newSkillDesc" required></textarea><br>
+          <textarea id = "newSkillDesc"></textarea><br>
           <h5>Icon:</h5>
-          <input type = "text" id = "newSkillIcon" value = "pictures/icons/.png" required><br>
+          <input type = "text" id = "newSkillIcon" value = "pictures/icons/.png"><br>
           <h5>Wikipedia URL:</h5>
-          <input type = "text" id = "newSkillWiki" required><br>
+          <input type = "text" id = "newSkillWiki"><br>
           <h5>Category:</h5>
           <select id = "newSkillCat"></select><br>
           <h5>Points:</h5>
@@ -344,27 +344,27 @@
             </tr>
             <tr>
               <td>1</td>
-              <td><input size=50 type="text" id = "pointDesc1" required></td>
+              <td><input size=50 type="text" id = "pointDesc1"></td>
               <td><input type="button" value="Delete" onclick="deleteRow('pointsTable', this)"></td>
             </tr>
             <tr>
               <td>2</td>
-              <td><input size=50 type="text" id = "pointDesc2" required></td>
+              <td><input size=50 type="text" id = "pointDesc2"></td>
               <td><input type="button" value="Delete" onclick="deleteRow('pointsTable', this)"></td>
             </tr>
             <tr>
               <td>3</td>
-              <td><input size=50 type="text" id = "pointDesc3" required></td>
+              <td><input size=50 type="text" id = "pointDesc3"></td>
               <td><input type="button" value="Delete" onclick="deleteRow('pointsTable', this)"></td>
             </tr>
             <tr>
               <td>4</td>
-              <td><input size=50 type="text" id = "pointDesc4" required></td>
+              <td><input size=50 type="text" id = "pointDesc4"></td>
               <td><input type="button" value="Delete" onclick="deleteRow('pointsTable', this)"></td>
             </tr>
             <tr>
               <td>5</td>
-              <td><input size=50 type="text" id = "pointDesc5" required></td>
+              <td><input size=50 type="text" id = "pointDesc5"></td>
               <td><input type="button" value="Delete" onclick="deleteRow('pointsTable', this)"></td>
             </tr>
           </table>
@@ -379,8 +379,8 @@
                       <td>Delete</td>
                   </tr>
                   <tr>
-                      <td><input size=30 type="text" id = "parent" list = "skillSearchResult" onkeyup="searchSkillsByName(this)" required></td>
-                      <td><input size=10 type="text" id = "minPoint" required></td>
+                      <td><input size=30 type="text" id = "parent" list = "skillSearchResult" onkeyup="searchSkillsByName(this)"></td>
+                      <td><input size=10 type="text" id = "minPoint"></td>
                       <td><input size=50 type="checkbox" id = "required"></td>
                       <td><input type="button" value="Delete" onclick="deleteRow('parentsTable', this)"></td>
                   </tr>
@@ -435,7 +435,7 @@
   <!-- end of modal -->
 
   <!-- start of modal -->
-  <div id = "addTrainingModal" class = "modal">
+  <div id = "addTrainingModal" class = "modal clear">
     <div class = "modal-content">
       <div class="modal-header">
         <span class="modalClose" id = "closeTrainingModal">&times;</span>
@@ -444,7 +444,7 @@
       <div class="modal-body">
         <form onsubmit = "return false">
           <h5>Skill:</h5>
-          <input type = "text" id = "trainingSkillName" list = "skillSearchResult" onkeyup="searchUserSkillsByName(this)" required><br>
+          <input type = "text" id = "trainingSkillName" list = "skillSearchResult" onkeyup="searchUserSkillsByName(this)"><br>
           <h5>New Training(s):</h5>
           <table id = "addTrainingsTable" border = "1">
               <tr>

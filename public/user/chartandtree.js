@@ -222,6 +222,9 @@ function addTraining () {
 // searches skills by provided name
 
 function createSkill () {
+    $('.clear').find('input:text').val('');
+    $('.clear').find('textarea').val('');
+
     var modal = document.getElementById("newSkillModal");
     modal.style.display = "block";
 
@@ -315,6 +318,9 @@ function createSkill () {
 }
 
 function editMySkill () {
+    $('.clear').find('input:text').val('');
+    $('.clear').find('textarea').val('');
+
     var modal = document.getElementById("newSkillModal");
     modal.style.display = "block";
 
@@ -335,6 +341,15 @@ function editMySkill () {
         }
     }
 
+    var catSelect = document.getElementById("newSkillCat");
+    catSelect.innerHTML = "";
+    for (var i = 0; i < data.categories.length; ++i) {
+        var option = document.createElement("option");
+        option.text = data.categories[i].name;
+        option.value = data.categories[i].name;
+        catSelect.add(option);
+    }
+
     var skillName = document.getElementById("newSkillName");
     skillName.setAttribute('list', 'skillSearchResult');
     skillName.onkeyup = function() {searchSkillsByName(this, false)};
@@ -345,11 +360,7 @@ function editMySkill () {
         //request for the skill to load data from
         var skillname = document.getElementById('newSkillName').value;
 
-        skillData = {
-            name: skillname
-        }
-
-        request('POST', '/protected/searchUserSkillByName', skillData , function () {
+        request('POST', '/protected/searchUserSkillByName', {name: skillname}, function () {
         if (this.readyState == 4 && this.status == 200) {
             if(this.response !== undefined)
             {
@@ -532,6 +543,10 @@ function editMySkill () {
 
 // opens tree creator and manages it.
 function createTree () {
+    $('.clear').find('input:text').val('');
+    $('.clear').find('textarea').val('');
+    var skillList = document.getElementById("skillList");
+    skillList.innerHTML = "";
     hideMenus();
 
     var treeName = document.getElementById("treeName");
@@ -675,6 +690,10 @@ function addRow(table) {
 
 // opens tree creator and manages it.
 function editMyTree () {
+    $('.clear').find('input:text').val('');
+    $('.clear').find('textarea').val('');
+    var skillList = document.getElementById("skillList");
+    skillList.innerHTML = "";
     hideMenus();
 
     var treeName = document.getElementById("treeName");
@@ -692,7 +711,6 @@ function editMyTree () {
     creator.style.width = canvas.style.width;
     creator.style.height = canvas.style.height;
 
-    var skillList = document.getElementById("skillList");
     var skillsToAdd = [];
     loadTree.onclick = function () {
         var tree = data.trees.find(obj => obj.name == document.getElementById("treeName").value);
@@ -805,6 +823,8 @@ function editMyTree () {
 
 // global (for admins)
 function editTree () {
+    $('.clear').find('input:text').val('');
+    $('.clear').find('textarea').val('');
     hideMenus();
 
     var treeName = document.getElementById("treeName");
