@@ -889,7 +889,6 @@ protectedRoute.post('/editmyskill', async function (req, res) {
         user.skills.find(obj => obj.name == data.name).categoryName = data.categoryName;
         user.skills.find(obj => obj.name == data.name).maxPoint = data.maxPoint;
         user.skills.find(obj => obj.name == data.name).pointDescription = data.pointDescription;
-        user.skills.find(obj => obj.name == data.name).parents = parentNames;
         user.skills.find(obj => obj.name == data.name).trainings = data.trainings;
 
 		if (data.maxPoint < user.skills.find(obj => obj.name == data.name).achievedPoint) user.skills.find(obj => obj.name == data.name).achievedPoint = data.maxPoint;
