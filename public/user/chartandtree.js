@@ -365,7 +365,7 @@ function editMySkill () {
                 pointsTable.rows[1].cells[1].children[0].value = "";
 
                 for (var i = 0; i < this.response.pointDescription.length; ++i) {
-                    addRow("pointsTable");
+                    if (i < this.response.pointDescription.length - 1) addRow("pointsTable");
 
                     pointsTable.rows[i + 1].cells[1].children[0].value = this.response.pointDescription[i];
                 }
