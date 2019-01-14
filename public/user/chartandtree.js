@@ -1094,6 +1094,14 @@ function hideAll () {
     }
 }
 
+function hideCards (event) {
+    var except = ".float-left *, .float-right *";
+
+    if (!event.target.matches(except)) {
+        alert("s");
+    }
+}
+
 // helper functions
 
 function parseJwt (token) {
