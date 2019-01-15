@@ -152,6 +152,7 @@ app.post('/auth', function(req, res) {
 var protectedRoute = express.Router();
 app.use('/protected', protectedRoute);
 
+
 protectedRoute.use(function(req, res, next) {
     var token = req.get('x-access-token');
 
@@ -1317,6 +1318,7 @@ protectedRoute.post('/endorse', async function (req, res) {
 var adminRoute = express.Router();
 app.use('/admin', adminRoute);
 
+
 adminRoute.use(function(req, res, next) {
     var token = req.get('x-access-token');
 
@@ -1648,6 +1650,20 @@ adminRoute.post('/dropoffers', async function (req, res) {
 /*
 *   END OF ADMIN
 */
+
+//DELETE FUNCTIONS, to be separated in a delete.js file or smth
+
+adminRoute.post('/deleteUser', async function (req,res){
+	User.deleteOne( {name: request.body.name }  , function (err) {
+		if (err) throw err;
+		else res.json({
+			succes: true,
+			message: "User deleted"
+		})
+	
+	});
+
+});
 
 
 
