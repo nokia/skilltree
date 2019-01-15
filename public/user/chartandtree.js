@@ -102,7 +102,7 @@ function addTreeToUser(treeToAdd){
 function submit(){
     var submitData = data.skills;
     var itemcontainers = [];
-    for (var i = 0; i < data.skills.length; ++i) itemcontainers.push(data.skills[i].itemcontainer);
+    for (var i = 0; i < data.skills.length; ++i) itemcontainers.push(new Clone(data.skills[i].itemcontainer));
     console.log(data.skills[0].itemcontainer);
     for (var i = 0; i < submitData.length; ++i) {
         delete submitData[i].itemcontainer;
@@ -1140,4 +1140,9 @@ function request (type, url, sendData, callback) {
         req.send(JSON.stringify(sendData));
     else
         req.send();
+}
+
+function Clone(x) {
+   for(p in x)
+   this[p] = (typeof(x[p]) == 'object')? new Clone(x[p]) : x[p];
 }
