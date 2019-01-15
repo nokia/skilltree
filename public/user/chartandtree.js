@@ -104,6 +104,7 @@ function submit(){
     for (var i = 0; i < submitData.length; ++i) {
         delete submitData[i].itemcontainer;
     }
+    console.log(data.skills);
     request('POST', '/protected/submitall', submitData, function() {
         if(this.readyState == 4 && this.status == 200) {
           initCard();
