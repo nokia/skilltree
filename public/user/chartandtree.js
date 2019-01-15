@@ -354,7 +354,7 @@ function editMySkill () {
     var loadSkill = document.getElementById("loadSkill");
     loadSkill.onclick = function(){
         //request for the skill to load data from
-        var skillname = document.getElementById('newSkillName').value;
+        skillname = document.getElementById('newSkillName').value;
 
         console.log(skillName);
         console.log(data.skills);
