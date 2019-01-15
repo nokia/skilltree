@@ -803,7 +803,7 @@ protectedRoute.post('/newtree', async function (req, res) {
                 name: data.name,
                 username: user.username,
                 focusArea: data.focusArea,
-				description: data.description
+				description: data.description,
                 skillNames: sn
             });
 
