@@ -61,21 +61,21 @@ describe("Adding user", function(){
     it("Should fail", function(done){
         this.timeout(10000);
 
-        var bodyData = JSON.stringify({
-            username: "testuser", 
-            email: "test@test.test",
-            password: "a"
-        });
+        var bodyData = 
 
         request.post(
             {   
                 url: baseUrl + "/registration", 
-                body: bodyData
+                body: JSON.stringify({
+                    username: "testuser", 
+                    email: "test@test.test",
+                    password: "a"
+                })
             
             },
             function(error, response, body) {
-                /*
-                var body = JSON.parse(response.body);
+                
+                /*var body = JSON.parse(response.body);
                 
                 expect(body.success).to.equal(true);*/
 
