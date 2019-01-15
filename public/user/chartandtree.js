@@ -433,8 +433,6 @@ function editMySkill () {
             trainingsTable.rows[1].cells[5].children[0].value = "";
             trainingsTable.rows[1].cells[6].children[0].value = "";
 
-            console.log(skill.trainings);
-
             for (var i = 0; i < skill.trainings.length; ++i) {
                 if (i < skill.trainings.length - 1) addRow("trainingsTable");
 
