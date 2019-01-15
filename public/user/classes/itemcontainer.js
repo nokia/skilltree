@@ -11,7 +11,7 @@ class ItemContainer {
         this.skillborder = new PIXI.Sprite(PIXI.loader.resources["pictures/skillborder.png"].texture); //116x116
         this.tick = new PIXI.Sprite(PIXI.loader.resources["pictures/tick.png"].texture);
 
-        //protectedting border variables
+        //setting border variables
         this.skillborder.levelinfo = new PIXI.Text(this.skill.achievedPoint + "/" + this.skill.maxPoint);
         this.skillborder.levelinfo.scale.set(.5);
 
@@ -211,7 +211,7 @@ class ItemContainer {
         if (this.skill.endorsement != undefined && this.skill.endorsement.length > 0) this.container.addChild(this.skillborder.endorsement);
         this.container.zOrder = 3;
 
-        //protectedting size, position of objects in container
+        //setting size, position of objects in container
         this.skillicon.anchor.set(0.5, 0.5);
         this.skillborder.anchor.set(0.5, 0.5);
         this.skillborder.levelinfo.anchor.set(0.5, 0.5);
