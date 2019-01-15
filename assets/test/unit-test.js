@@ -26,13 +26,13 @@ describe("hashPassword() and verifyPassword()", function(){
 //NPM REQUEST
 
 describe("API TEST", function(){
-    it("Should return true", function(done){
+    it("Should return {success:true}", function(done){
         
         request.get({ url: baseUrl + "/apitest" },
             function(error, response, body) {
                 var body = JSON.parse(response.body);
-                console.log(body.success);
-                //expect(response.body.success).to.equal(true);
+                
+                expect(body.success).to.equal(true);
                 done();
             });
     });
