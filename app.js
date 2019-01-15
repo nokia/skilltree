@@ -1072,7 +1072,7 @@ protectedRoute.post('/submitall', async function (req, res) {
 			message: 'User not found.'
 		});
 	} else {
-		user.skills = data;
+		for (var i = 0; i < data.length; ++i) user.skills[i].achievedPoint = data[i].achievedPoint;
 
 		if (user.willingToTeach) {
 			var globalSkills = await Skill.find({}, function(err, skills) {

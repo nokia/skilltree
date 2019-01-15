@@ -99,13 +99,17 @@ function addTreeToUser(treeToAdd){
 }
 
 // confirm the changes made to skill levels.
-function submit(){
-    var submitData = Object.create(data.skills);
-    console.log(data.skills[0].itemcontainer);
-    for (var i = 0; i < submitData.length; ++i) {
-        delete submitData[i].itemcontainer;
+function submit() {
+    var submitData = [];
+    for (var i = 0; i < data.skills.length; ++i) {
+        var temp = {
+            name: data.skills[i].name,
+            achievedPoint: data.skills[i].achievedPoint
+        };
+
+        submitData.push(temp);
     }
-    console.log(data.skills[0].itemcontainer);
+
     request('POST', '/protected/submitall', submitData, function() {
         if(this.readyState == 4 && this.status == 200) {
           initCard();
@@ -1137,9 +1141,4 @@ function request (type, url, sendData, callback) {
         req.send(JSON.stringify(sendData));
     else
         req.send();
-}
-
-function Clone(x) {
-   for(p in x)
-   this[p] = (typeof(x[p]) == 'object')? new Clone(x[p]) : x[p];
 }
