@@ -32,9 +32,9 @@ describe("API TEST", function(){
         
         request.get({ url: baseUrl + "/admin/testAdmin", headers: { 'x-access-token': adminToken, 'Content-type': 'application/json' } },
             function(error, response, body) {
-                //var body = JSON.parse(response.body);
-                console.log(response.body);
-                //expect(body.success).to.equal(true);
+                var body = JSON.parse(response.body);
+                
+                expect(body.success).to.equal(true);
                 done();
             });
     });
