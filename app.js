@@ -1667,7 +1667,7 @@ adminRoute.post('/deleteUser', async function (req,res){
 
 adminRoute.get('/testAdmin', async function (req,res){
 	res.json({
-		succes: true
+		success: true
 	});
 
 });
