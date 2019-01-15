@@ -330,7 +330,7 @@ function editMySkill () {
 
     document.getElementById("loadSkill").style.display = "block";
     document.getElementById("newSkillModalTitle").innerText = "Edit your skill";
-    document.getElementById("parentsDiv").style.display = "block";
+    document.getElementById("childrenDiv").style.display = "block";
 
     window.onclick = function(event) {
         if (event.target == modal) {
