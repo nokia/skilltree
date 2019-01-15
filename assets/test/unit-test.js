@@ -66,7 +66,7 @@ describe("Adding user", function(){
                 body: 
                 {
                     username: "testuser", 
-                    email: "test@test.test",
+                    email: "test@test.test"
                 }, 
                 headers: 
                 {
