@@ -106,15 +106,14 @@ function submit(){
     }
     request('POST', '/protected/submitall', submitData, function() {
         if(this.readyState == 4 && this.status == 200) {
-          //initData();
-          initUI(true, data); // not working opening another users tree
+          initCard();
         }
     });
 }
 
-/*window.setInterval(function(){
+window.setInterval(function(){
     submit();
-}, 5000);*/
+}, 5000);
 
 // logout.
 function logout(){
