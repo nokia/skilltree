@@ -184,8 +184,7 @@ function addTraining () {
 
         var trainingData = {
             skillName: document.getElementById('trainingSkillName').value,
-            trainings: trainings,
-            forApprove: true
+            trainings: trainings
         };
 
         request('POST', '/protected/newtraining', trainingData, function () {
@@ -300,8 +299,7 @@ function createSkill () {
             pointDescription: pointDescription,
             parents: parents,
             //children: children,
-            trainings: trainings,
-            forApprove: true
+            trainings: trainings
         };
 
         request('POST', '/protected/newskill', skillData, function () {
@@ -437,7 +435,7 @@ function editMySkill () {
             trainingsTable.rows[1].cells[6].children[0].value = "";
 
             for (var i = 0; i < skill.trainings.length; ++i) {
-                addRow("trainingsTable");
+                addRow("trainingsTable"); // ??????????
 
                 trainingsTable.rows[i + 1].cells[0].children[0].value = skill.trainings[i].name;
                 trainingsTable.rows[i + 1].cells[1].children[0].value = skill.trainings[i].level;
@@ -448,20 +446,6 @@ function editMySkill () {
                 trainingsTable.rows[i + 1].cells[6].children[0].value = skill.trainings[i].language;
             }
         }
-
-        /*
-        var skillData = {
-            name: document.getElementById('newSkillName').value,
-            description: document.getElementById('newSkillDesc').value,
-            skillIcon: document.getElementById('newSkillIcon').value,
-            categoryName: catSelect.value,
-            maxPoint: pointsNum,
-            pointDescription: pointDescription,
-            parents: parents,
-            //children: children,
-            trainings: trainings,
-            forApprove: document.getElementById('forApprove').checked
-        };*/
     }
 
     var catSelect = document.getElementById("newSkillCat");
@@ -480,6 +464,26 @@ function editMySkill () {
         var pointsNum = pointsTable.rows.length - 1;
         var pointDescription = [];
         for (i = 1; i < pointsNum + 1; ++i) pointDescription.push(pointsTable.rows[i].cells[1].children[0].value);
+
+        var parentsTable = document.getElementById('parentsTable');
+        var parents = [];
+        for (i = 1; i < parentsTable.rows.length; ++i) {
+            parents.push({
+                name: parentsTable.rows[i].cells[0].children[0].value,
+                minPoint: parentsTable.rows[i].cells[1].children[0].value,
+                recommended: parentsTable.rows[i].cells[2].children[0].value
+            });
+        }
+
+        var childrenTable = document.getElementById('childrenTable');
+        var children = [];
+        for (i = 1; i < childrenTable.rows.length; ++i) {
+            children.push({
+                name: childrenTable.rows[i].cells[0].children[0].value,
+                minPoint: childrenTable.rows[i].cells[1].children[0].value,
+                recommended: childrenTable.rows[i].cells[2].children[0].value
+            });
+        }
 
         var trainingsTable = document.getElementById('trainingsTable');
         var trainings = [];
@@ -503,8 +507,9 @@ function editMySkill () {
             categoryName: catSelect.value,
             maxPoint: pointsNum,
             pointDescription: pointDescription,
-            trainings: trainings,
-            forApprove: true
+            parents: parents,
+            children: children,
+            trainings: trainings
         };
 
         request('POST', '/protected/editmyskill', skillData, function () {
@@ -621,7 +626,6 @@ function createTree () {
                     name: document.getElementById('treeName').value,
                     focusArea: document.getElementById('focusarea').value,
                     description: document.getElementById('treeDesc').value,
-                    forApprove: true,
                     skills: skillsToAdd
                 };
 
@@ -644,7 +648,6 @@ function deleteRow(table, row) {
 
 // adds a row to a table
 function addRow(table) {
-    console.log(table);
   var x = document.getElementById(table);
   var new_row = x.rows[1].cloneNode(true);
   var len = x.rows.length;
