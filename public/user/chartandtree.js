@@ -953,7 +953,8 @@ function approveTrees() {
     for (var i = 0; i < data.apprTrees.length; ++i) {
         var text = data.apprTrees[i].name + " (" + data.apprTrees[i].username + ")";
         var option = document.createElement('option');
-        option.value = option.text = text;
+        option.value = "ss";
+        /*option.value = */option.text = text;
         option.name = data.apprTrees[i].name;
         option.username = data.apprTrees[i].username;
         select.add(option);
