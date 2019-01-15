@@ -100,7 +100,7 @@ function addTreeToUser(treeToAdd){
 
 // confirm the changes made to skill levels.
 function submit(){
-    var submitData = data.skills.clone(false);
+    var submitData = jQuery.extend({}, data.skills);
     console.log(data.skills[0].itemcontainer);
     for (var i = 0; i < submitData.length; ++i) {
         delete submitData[i].itemcontainer;
@@ -1138,18 +1138,3 @@ function request (type, url, sendData, callback) {
     else
         req.send();
 }
-
-Object.prototype.clone = function(deep) {
-    var newObj = [];
-
-    for (i in this) {
-        if (i == 'clone') continue;
-        if (deep && typeof this[i] == "object") {
-            newObj[i] = this[i].clone();
-        } else {
-            newObj[i] = this[i];
-        }
-    }
-
-    return newObj;
-};
