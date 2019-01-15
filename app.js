@@ -631,25 +631,23 @@ protectedRoute.post('/newtraining', async function(req, res) {
             });
         }
 
-        user.save(function (err) {if (err) throw err;});
+		user.save(function (err) {if (err) throw err;});
 
-        if (data.forApprove) {
-            for (var i = 0; i < data.trainings.length; ++i) {
-                var apprTraining = new ApprovableTraining({
-                    username: user.username,
-                    skillName: data.skillName,
-                    name: data.trainings[i].name,
-                    level: data.trainings[i].level,
-                    shortDescription: data.trainings[i].shortDescription,
-                    URL: data.trainings[i].URL,
-                    goal: data.trainings[i].goal,
-                    length: data.trainings[i].length,
-                    language: data.trainings[i].language
-                });
+		for (var i = 0; i < data.trainings.length; ++i) {
+			var apprTraining = new ApprovableTraining({
+				username: user.username,
+				skillName: data.skillName,
+				name: data.trainings[i].name,
+				level: data.trainings[i].level,
+				shortDescription: data.trainings[i].shortDescription,
+				URL: data.trainings[i].URL,
+				goal: data.trainings[i].goal,
+				length: data.trainings[i].length,
+				language: data.trainings[i].language
+			});
 
-                apprTraining.save(function (err) {if (err) throw err;});
-            }
-        }
+			apprTraining.save(function (err) {if (err) throw err;});
+		}
 
 		res.json({
 			success: true
@@ -716,37 +714,35 @@ protectedRoute.post('/newskill', async function(req, res) {
 
         user.save(function (err) {if (err) throw err;});
 
-        if (data.forApprove) {
-            for (var i = 0; i < data.parents.length; ++i) {
-                var apprParent = await ApprovableSkill.find({
-                    name: data.parents[i].name
-                }, function (err, skill) {
-        	        if (err) throw err;
-        			return skill;
-        	    });
+		for (var i = 0; i < data.parents.length; ++i) {
+			var apprParent = await ApprovableSkill.find({
+				name: data.parents[i].name
+			}, function (err, skill) {
+				if (err) throw err;
+				return skill;
+			});
 
-                if (apprParent != undefined) {
-                    apprParent.children.push({name: data.name, minPoint: data.parents[i].minPoint, recommended: data.parents[i].recommended});
-                    apprParent.save(function (err) {if (err) throw err;});
-                }
-            }
+			if (apprParent != undefined) {
+				apprParent.children.push({name: data.name, minPoint: data.parents[i].minPoint, recommended: data.parents[i].recommended});
+				apprParent.save(function (err) {if (err) throw err;});
+			}
+		}
 
-            var apprSkill = new ApprovableSkill({
-                username: user.username,
-                name: data.name,
-                description: data.description,
-				descriptionWikipediaURL: data.descriptionWikipediaURL,
-                skillIcon: data.skillIcon,
-                categoryName: data.categoryName,
-                maxPoint: data.maxPoint,
-                pointDescription: data.pointDescription,
-                parents: parentNames,
-                children: data.children,
-                trainings: data.trainings
-            });
+		var apprSkill = new ApprovableSkill({
+			username: user.username,
+			name: data.name,
+			description: data.description,
+			descriptionWikipediaURL: data.descriptionWikipediaURL,
+			skillIcon: data.skillIcon,
+			categoryName: data.categoryName,
+			maxPoint: data.maxPoint,
+			pointDescription: data.pointDescription,
+			parents: parentNames,
+			children: data.children,
+			trainings: data.trainings
+		});
 
-            apprSkill.save(function (err) {if (err) throw err;});
-        }
+		apprSkill.save(function (err) {if (err) throw err;});
 
 		res.json({
 			success: true
@@ -799,17 +795,15 @@ protectedRoute.post('/newtree', async function (req, res) {
 
 		user.save(function (err) {if (err) throw err;});
 
-        if (data.forApprove) {
-            var tree = new ApprovableTree({
-                name: data.name,
-                username: user.username,
-                focusArea: data.focusArea,
-				description: data.description,
-                skillNames: sn
-            });
+		var tree = new ApprovableTree({
+			name: data.name,
+			username: user.username,
+			focusArea: data.focusArea,
+			description: data.description,
+			skillNames: sn
+		});
 
-            tree.save(function (err) {if (err) throw err;});
-        }
+		tree.save(function (err) {if (err) throw err;});
 
 		res.json({
 			success: true
@@ -883,17 +877,64 @@ protectedRoute.post('/editmyskill', async function (req, res) {
             message: 'User not found.'
         });
     } else if (user.skills.find(obj => obj.name == data.name) != undefined) {
-		user.skills.find(obj => obj.name == data.name).name = data.name;
-        user.skills.find(obj => obj.name == data.name).description = data.description;
-		user.skills.find(obj => obj.name == data.name).descriptionWikipediaURL = data.descriptionWikipediaURL;
-        user.skills.find(obj => obj.name == data.name).skillIcon = data.skillIcon;
-        user.skills.find(obj => obj.name == data.name).categoryName = data.categoryName;
-        user.skills.find(obj => obj.name == data.name).maxPoint = data.maxPoint;
-        user.skills.find(obj => obj.name == data.name).pointDescription = data.pointDescription;
-        user.skills.find(obj => obj.name == data.name).trainings = data.trainings;
+		var skill = (user.skills.find(obj => obj.name == data.name);
 
-		if (data.maxPoint < user.skills.find(obj => obj.name == data.name).achievedPoint) user.skills.find(obj => obj.name == data.name).achievedPoint = data.maxPoint;
+		for (var i = 0; i < skill.parents.length; ++i) user.skill.find(obj => obj.name == skill.parents[i]).children = user.skill.find(obj => obj.name == skill.parents[i]).children.filter(obj => obj.name != skill.name);
+		for (var i = 0; i < skill.children.length; ++i) user.skill.find(obj => obj.name == skill.children[i].name).parents = user.skill.find(obj => obj == skill.children[i].name).parents.filter(obj => obj != skill.name);
 
+		var parentNames = [];
+        for (var i = 0; i < data.parents.length; ++i) {
+            if (user.skills.find(obj => obj.name == data.parents[i].name) == undefined) { // add parent skill to user if not already there
+                var parent = await Skill.findOne({
+						name: data.parents[i].name
+				}, function(err, skill) {
+						if (err) throw err;
+						return skill;
+				});
+                user.skills.push(parent);
+            }
+            // add new skill as child of parent skill
+            user.skills.find(obj => obj.name == data.parents[i].name).children.push({name: data.name, minPoint: data.parents[i].minPoint, recommended: data.parents[i].recommended});
+            // when we save the new skill we only need the name of the parents (no minPoint and recommended)
+            parentNames.push(data.parents[i].name);
+        }
+
+		for (var i = 0; i < data.children.length; ++i) {
+            if (user.skills.find(obj => obj.name == data.children[i].name) == undefined) { // add parent skill to user if not already there
+                var child = await Skill.findOne({
+						name: data.child[i].name
+				}, function(err, skill) {
+						if (err) throw err;
+						return skill;
+				});
+                user.skills.push(child);
+            }
+            // add new skill as child of parent skill
+            user.skills.find(obj => obj.name == data.children[i].name).parents.push(data.name);
+
+			var trees = user.trees.filter(obj => obj.skillNames.find(obj => obj == data.children[i].name) != undefined);
+			for (var j = 0; j < trees.length; ++j) {
+				var skillList = trees[j].skillNames;
+				skillList.push(data.name);
+				var sn = await sortTree(skillList);
+				user.trees.find(obj => obj.name == trees[i].name).skillNames = sn;
+			}
+        }
+
+		skill.name = data.name;
+        skill.description = data.description;
+		skill.descriptionWikipediaURL = data.descriptionWikipediaURL;
+        skill.skillIcon = data.skillIcon;
+        skill.categoryName = data.categoryName;
+        skill.maxPoint = data.maxPoint;
+        skill.pointDescription = data.pointDescription;
+		skill.parents = parentNames;
+		skill.children = data.children;
+        skill.trainings = data.trainings;
+
+		if (data.maxPoint < skill.achievedPoint) skill.achievedPoint = data.maxPoint;
+
+		user.skills.find(obj => obj.name == data.name) = skill;
 		user.save(function (err) {if (err) throw err;});
 
         res.json({
