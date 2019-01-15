@@ -698,7 +698,7 @@ protectedRoute.post('/newskill', async function(req, res) {
 		user.skills.push({
             name: data.name,
             description: data.description,
-			descriptionWikipediaURL: data.descriptionWikipediaURL
+			descriptionWikipediaURL: data.descriptionWikipediaURL,
             skillIcon: data.skillIcon,
             categoryName: data.categoryName,
             achievedPoint: 0,
