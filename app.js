@@ -152,6 +152,7 @@ app.post('/auth', function(req, res) {
 var protectedRoute = express.Router();
 app.use('/protected', protectedRoute);
 
+
 protectedRoute.use(function(req, res, next) {
     var token = req.get('x-access-token');
 
@@ -1275,6 +1276,7 @@ protectedRoute.post('/endorse', async function (req, res) {
 
 var adminRoute = express.Router();
 app.use('/admin', adminRoute);
+
 
 adminRoute.use(function(req, res, next) {
     var token = req.get('x-access-token');
