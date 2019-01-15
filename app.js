@@ -992,6 +992,7 @@ protectedRoute.post('/firstlogindata', async function (req, res) {
 			return tree;
 		});
 
+		console.log(mainTree);
 		user.trees.push(mainTree);
 
 		var skills = await Skill.find({
