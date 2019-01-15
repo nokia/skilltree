@@ -30,7 +30,7 @@ describe("API TEST", function(){
         
         request.get({ url: baseUrl + "/apitest" },
             function(error, response, body) {
-                console.log(response.body);
+                console.log(response.body.success);
                 //expect(response.body.success).to.equal(true);
                 done();
             });
