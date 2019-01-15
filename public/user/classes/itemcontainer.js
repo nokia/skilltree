@@ -11,7 +11,7 @@ class ItemContainer {
         this.skillborder = new PIXI.Sprite(PIXI.loader.resources["pictures/skillborder.png"].texture); //116x116
         this.tick = new PIXI.Sprite(PIXI.loader.resources["pictures/tick.png"].texture);
 
-        //Setting border variables
+        //setting border variables
         this.skillborder.levelinfo = new PIXI.Text(this.skill.achievedPoint + "/" + this.skill.maxPoint);
         this.skillborder.levelinfo.scale.set(.5);
 
@@ -211,7 +211,7 @@ class ItemContainer {
         if (this.skill.endorsement != undefined && this.skill.endorsement.length > 0) this.container.addChild(this.skillborder.endorsement);
         this.container.zOrder = 3;
 
-        //Setting size, position of objects in container
+        //setting size, position of objects in container
         this.skillicon.anchor.set(0.5, 0.5);
         this.skillborder.anchor.set(0.5, 0.5);
         this.skillborder.levelinfo.anchor.set(0.5, 0.5);
@@ -404,7 +404,7 @@ class ItemContainer {
 
         //HTTP Request for offer data
         var offerHttpRequest = new XMLHttpRequest();
-            offerHttpRequest.open('POST', '/set/skilldata', true);
+            offerHttpRequest.open('POST', '/protected/skilldata', true);
             offerHttpRequest.setRequestHeader('Content-type', 'application/json');
             offerHttpRequest.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
             offerHttpRequest.responseType = "json";
@@ -458,7 +458,7 @@ class ItemContainer {
                             addBeginnerRequest.onclick = function() {
                                 //request for requests
                                 var requestforrequests = new XMLHttpRequest();
-                                    requestforrequests.open('POST', '/set/request', true);
+                                    requestforrequests.open('POST', '/protected/request', true);
                                     requestforrequests.setRequestHeader('Content-type', 'application/json');
                                     requestforrequests.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
                                     requestforrequests.responseType = "json";
@@ -488,7 +488,7 @@ class ItemContainer {
                             addIntermediateRequest.onclick = function() {
                                 //request for requests
                                 var requestforrequests = new XMLHttpRequest();
-                                    requestforrequests.open('POST', '/set/request', true);
+                                    requestforrequests.open('POST', '/protected/request', true);
                                     requestforrequests.setRequestHeader('Content-type', 'application/json');
                                     requestforrequests.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
                                     requestforrequests.responseType = "json";
@@ -518,7 +518,7 @@ class ItemContainer {
                             addAdvancedRequest.onclick = function() {
                                 //request for requests
                                 var requestforrequests = new XMLHttpRequest();
-                                    requestforrequests.open('POST', '/set/request', true);
+                                    requestforrequests.open('POST', '/protected/request', true);
                                     requestforrequests.setRequestHeader('Content-type', 'application/json');
                                     requestforrequests.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
                                     requestforrequests.responseType = "json";
@@ -719,7 +719,7 @@ class ItemContainer {
         //console.log(this.parentObj.skill.name);
         //console.log(this.parentObj.username);
         var req = new XMLHttpRequest();
-        req.open('POST', '/set/endorse', true);
+        req.open('POST', '/protected/endorse', true);
         req.setRequestHeader('Content-type', 'application/json');
         req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
         req.responseType = "json";

@@ -3,8 +3,10 @@ var request = require("request");
 var expect = require("chai").expect;
 var baseUrl = "https://skilltree.benis.hu";
 var util = require("util");
-
 var pbkdf2 = require("../../pbkdf2");
+
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
+
 //var chartandtree = require("../../public/user/chartandtree");
 //var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
@@ -21,32 +23,16 @@ describe("hashPassword() and verifyPassword()", function(){
 });
 
 
-/*
-describe("API test", function(){
-    it("?", function(){
-
-        request('GET', "/apitest", undefined, function(){
-            if (this.readyState == 4 && this.status == 200){
-                
-                expect(this.body.succes).to.equal(false);
-            }
-            
-            
-        });
-        
-    });
-});*/
-
-
-
 //NPM REQUEST
 
 describe("API TEST", function(){
-    it("Should return true", function(done){
+    it("Should return {success:true}", function(done){
         
-        request.get({ url: "https://skilltree.benis.hu/apitest" },
+        request.get({ url: baseUrl + "/apitest" },
             function(error, response, body) {
-                    console.log(response);
+                var body = JSON.parse(response.body);
+                
+                expect(body.success).to.equal(true);
                 done();
             });
     });
@@ -61,17 +47,3 @@ describe("API TEST", function(){
 
 
 
-
-function request (type, url, sendData, callback) {
-    var req = new XMLHttpRequest();
-    req.open(type, "https://skilltree.benis.hu/" + url, true);
-    req.setRequestHeader('Content-type', 'application/json');
-    req.setRequestHeader('x-access-token', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBhdHJpazEiLCJhZG1pbiI6InRydWUiLCJpYXQiOjE1MTYyMzkwMjJ9.DpR8IB4Ir3YLI7nfcpHRf3L64lEcmv2ixnSh8H1xVaI");
-    req.responseType = "json";
-    req.onreadystatechange = callback;
-
-    if (sendData !== undefined)
-        req.send(JSON.stringify(sendData));
-    else
-        req.send();
-}

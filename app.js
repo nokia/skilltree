@@ -36,7 +36,7 @@ app.get('/user', (req, res) => res.sendFile('chartandtree.html', { root: path.jo
 
 app.get('/apitest', async function(req,res) {
 	res.json({
-		succes: true
+		success: true
 	});
 });
 
