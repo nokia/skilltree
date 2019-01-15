@@ -389,7 +389,7 @@ function editMySkill () {
             parentsTable.rows[1].cells[2].children[0].checked = false;
 
             for (var i = 0; i < skill.parents.length; ++i) {
-                addRow("parentsTable");
+                if (i < skill.parents.length - 1) addRow("parentsTable");
 
                 var parent = data.skills.find(obj => obj.name == skill.parents[i]);
                 var skillAtParent = parent.children.find(obj => obj.name == skill.name);
@@ -411,7 +411,7 @@ function editMySkill () {
             childrenTable.rows[1].cells[2].children[0].checked = false;
 
             for (var i = 0; i < skill.children.length; ++i) {
-                addRow("childrenTable");
+                if (i < skill.children.length - 1) addRow("childrenTable");
 
                 childrenTable.rows[i + 1].cells[0].children[0].value = skill.children[i].name;
                 childrenTable.rows[i + 1].cells[1].children[0].value = skill.children[i].minPoint;
