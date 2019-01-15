@@ -394,9 +394,9 @@ function editMySkill () {
                 var parent = data.skills.find(obj => obj.name == skill.parents[i]);
                 var skillAtParent = parent.children.find(obj => obj.name == skill.name);
 
-                parentsTable.rows[i+1].cells[0].children[0].value = parent.name;
-                parentsTable.rows[i+1].cells[1].children[0].value = skillAtParent.minPoint;
-                parentsTable.rows[i+1].cells[2].children[0].checked = !skillAtParent.recommended;
+                parentsTable.rows[i + 1].cells[0].children[0].value = parent.name;
+                parentsTable.rows[i + 1].cells[1].children[0].value = skillAtParent.minPoint;
+                parentsTable.rows[i + 1].cells[2].children[0].checked = !skillAtParent.recommended;
 
             }
 
@@ -413,12 +413,9 @@ function editMySkill () {
             for (var i = 0; i < skill.children.length; ++i) {
                 addRow("childrenTable");
 
-                var parent = data.skills.find(obj => obj.name == skill.parents[i]);
-                var skillAtParent = parent.children.find(obj => obj.name == skill.name);
-
-                parentsTable.rows[i+1].cells[0].children[0].value = parent.name;
-                parentsTable.rows[i+1].cells[1].children[0].value = skillAtParent.minPoint;
-                parentsTable.rows[i+1].cells[2].children[0].checked = !skillAtParent.recommended;
+                parentsTable.rows[i + 1].cells[0].children[0].value = skill.children[i].name;
+                parentsTable.rows[i + 1].cells[1].children[0].value = skill.children[i].minPoint;
+                parentsTable.rows[i + 1].cells[2].children[0].checked = !skill.children[i].recommended;
 
             }
 
