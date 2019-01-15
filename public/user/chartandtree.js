@@ -356,98 +356,101 @@ function editMySkill () {
         //request for the skill to load data from
         var skillname = document.getElementById('newSkillName').value;
 
-        request('POST', '/protected/searchUserSkillByName', {name: skillname}, function () {
-        if (this.readyState == 4 && this.status == 200) {
-            if(this.response !== undefined)
-            {
-                document.getElementById('newSkillName').value = this.response.name;
-                document.getElementById('newSkillDesc').value = this.response.description;
-                document.getElementById('newSkillIcon').value = this.response.skillIcon;
-                document.getElementById('newSkillWiki').value = this.response.descriptionWikipediaURL;
-                document.getElementById("newSkillCat").value = this.response.categoryName;
+        if (data.skills.find(obj => obj.name == skillName) !== undefined) {
+            var skill = data.skills.find(obj => obj.name == skillName);
+            document.getElementById('newSkillName').value = skill.name;
+            document.getElementById('newSkillDesc').value = skill.description;
+            document.getElementById('newSkillIcon').value = skill.skillIcon;
+            document.getElementById('newSkillWiki').value = skill.descriptionWikipediaURL;
+            document.getElementById("newSkillCat").value = skill.categoryName;
+
+            var pointsTable = document.getElementById('pointsTable');
+
+            for (var i = pointsTable.rows.length - 1; i > 1; --i) pointsTable.deleteRow(i);
+
+            pointsTable.rows[1].cells[1].children[0].value = "";
+
+            for (var i = 0; i < skill.pointDescription.length; ++i) {
+                if (i < skill.pointDescription.length - 1) addRow("pointsTable");
+
+                pointsTable.rows[i + 1].cells[1].children[0].value = skill.pointDescription[i];
+            }
 
 
+            //Dropping data from parentsTable
+            var parentsTable = document.getElementById('parentsTable');
+            var i = parentsTable.rows.length - 1;
+            while (i > 1) {
+                parentsTable.deleteRow(i);
+                --i;
+            }
+            parentsTable.rows[1].cells[0].children[0].value = "";
+            parentsTable.rows[1].cells[1].children[0].value = "";
+            parentsTable.rows[1].cells[2].children[0].checked = false;
 
-                var pointsTable = document.getElementById('pointsTable');
+            for (var i = 0; i < skill.parents.length; ++i) {
+                addRow("parentsTable");
 
-                for (var i = pointsTable.rows.length - 1; i > 1; --i) pointsTable.deleteRow(i);
+                var parent = data.skills.find(obj => obj.name == skill.parents[i]);
+                var skillAtParent = parent.children.find(obj => obj.name == skill.name);
 
-                pointsTable.rows[1].cells[1].children[0].value = "";
+                parentsTable.rows[i+1].cells[0].children[0].value = parent.name;
+                parentsTable.rows[i+1].cells[1].children[0].value = skillAtParent.minPoint;
+                parentsTable.rows[i+1].cells[2].children[0].checked = !skillAtParent.recommended;
 
-                for (var i = 0; i < this.response.pointDescription.length; ++i) {
-                    if (i < this.response.pointDescription.length - 1) addRow("pointsTable");
+            }
 
-                    pointsTable.rows[i + 1].cells[1].children[0].value = this.response.pointDescription[i];
-                }
+            var childrenTable = document.getElementById('childrenTable');
+            var i = childrenTable.rows.length - 1;
+            while(i > 1) {
+                childrenTable.deleteRow(i);
+                --i;
+            }
+            childrenTable.rows[1].cells[0].children[0].value = "";
+            childrenTable.rows[1].cells[1].children[0].value = "";
+            childrenTable.rows[1].cells[2].children[0].checked = false;
 
+            for (var i = 0; i < skill.children.length; ++i) {
+                addRow("childrenTable");
 
-                /*//Dropping data from parentsTable
-                var parentsTable = document.getElementById('parentsTable');
-                var i=parentsTable.rows.length-1;
-                while(i>1)
-                {
-                    parentsTable.deleteRow(i);
-                    i--;
-                }
-                parentsTable.rows[1].cells[0].children[0].value = "";
-                parentsTable.rows[1].cells[1].children[0].value = "";
-                parentsTable.rows[1].cells[2].children[0].checked = false;*/
+                var parent = data.skills.find(obj => obj.name == skill.parents[i]);
+                var skillAtParent = parent.children.find(obj => obj.name == skill.name);
 
-                //Dropping data from trainingsTable
-                var trainingsTable = document.getElementById('trainingsTable');
-                var i=trainingsTable.rows.length-1;
+                parentsTable.rows[i+1].cells[0].children[0].value = parent.name;
+                parentsTable.rows[i+1].cells[1].children[0].value = skillAtParent.minPoint;
+                parentsTable.rows[i+1].cells[2].children[0].checked = !skillAtParent.recommended;
 
-                while(i>1) {
-                    trainingsTable.deleteRow(i);
-                    i--;
-                }
+            }
 
-                trainingsTable.rows[1].cells[0].children[0].value = "";
-                trainingsTable.rows[1].cells[1].children[0].value = "";
-                trainingsTable.rows[1].cells[2].children[0].value = "";
-                trainingsTable.rows[1].cells[3].children[0].value = "";
-                trainingsTable.rows[1].cells[4].children[0].value = "";
-                trainingsTable.rows[1].cells[5].children[0].value = "";
-                trainingsTable.rows[1].cells[6].children[0].value = "";
+            //Dropping data from trainingsTable
+            var trainingsTable = document.getElementById('trainingsTable');
+            var i=trainingsTable.rows.length-1;
 
-                for (var i = 0; i < this.response.trainings.length; ++i) {
-                    addRow("trainingsTable");
+            while(i>1) {
+                trainingsTable.deleteRow(i);
+                i--;
+            }
 
-                    trainingsTable.rows[i + 1].cells[0].children[0].value = this.response.trainings[i].name;
-                    trainingsTable.rows[i + 1].cells[1].children[0].value = this.response.trainings[i].level;
-                    trainingsTable.rows[i + 1].cells[2].children[0].value = this.response.trainings[i].shortDescription;
-                    trainingsTable.rows[i + 1].cells[3].children[0].value = this.response.trainings[i].URL;
-                    trainingsTable.rows[i + 1].cells[4].children[0].value = this.response.trainings[i].goal;
-                    trainingsTable.rows[i + 1].cells[5].children[0].value = this.response.trainings[i].length;
-                    trainingsTable.rows[i + 1].cells[6].children[0].value = this.response.trainings[i].language;
-                }
+            trainingsTable.rows[1].cells[0].children[0].value = "";
+            trainingsTable.rows[1].cells[1].children[0].value = "";
+            trainingsTable.rows[1].cells[2].children[0].value = "";
+            trainingsTable.rows[1].cells[3].children[0].value = "";
+            trainingsTable.rows[1].cells[4].children[0].value = "";
+            trainingsTable.rows[1].cells[5].children[0].value = "";
+            trainingsTable.rows[1].cells[6].children[0].value = "";
 
+            for (var i = 0; i < skill.trainings.length; ++i) {
+                addRow("trainingsTable");
 
-
-                /*var parents = this.response.parents;
-                var skillname = this.response.name;
-                request('POST', '/protected/parentTableData', {name: skillname, parents: [parents] } , function(){
-                    if (this.readyState == 4 && this.status == 200) {
-                        if(this.response !== undefined)
-                        {
-                            if(this.response!=null)
-                            for(var i=0;i<this.response.length;i++)
-                            {
-                                addRow("parentsTable");
-
-                                parentsTable.rows[i+1].cells[0].children[0].value = this.response[i].name;
-                                parentsTable.rows[i+1].cells[1].children[0].value = this.response[i].minPoint;
-                                parentsTable.rows[i+1].cells[2].children[0].checked = !this.response[i].recommended;
-
-                            }
-
-                        }
-                    }
-                });*/
+                trainingsTable.rows[i + 1].cells[0].children[0].value = skill.trainings[i].name;
+                trainingsTable.rows[i + 1].cells[1].children[0].value = skill.trainings[i].level;
+                trainingsTable.rows[i + 1].cells[2].children[0].value = skill.trainings[i].shortDescription;
+                trainingsTable.rows[i + 1].cells[3].children[0].value = skill.trainings[i].URL;
+                trainingsTable.rows[i + 1].cells[4].children[0].value = skill.trainings[i].goal;
+                trainingsTable.rows[i + 1].cells[5].children[0].value = skill.trainings[i].length;
+                trainingsTable.rows[i + 1].cells[6].children[0].value = skill.trainings[i].language;
             }
         }
-
-        });
 
         /*
         var skillData = {
