@@ -101,6 +101,7 @@ function addTreeToUser(treeToAdd){
 // confirm the changes made to skill levels.
 function submit(){
     var submitData = data.skills;
+    console.log(data.skills);
     for (var i = 0; i < submitData.length; ++i) {
         delete submitData[i].itemcontainer;
     }
