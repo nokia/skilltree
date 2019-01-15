@@ -436,7 +436,7 @@ function editMySkill () {
             console.log(skill.trainings);
 
             for (var i = 0; i < skill.trainings.length; ++i) {
-                addRow("trainingsTable"); // ??????????
+                if (i < skill.trainings.length - 1) addRow("trainingsTable");
 
                 trainingsTable.rows[i + 1].cells[0].children[0].value = skill.trainings[i].name;
                 trainingsTable.rows[i + 1].cells[1].children[0].value = skill.trainings[i].level;
