@@ -356,6 +356,8 @@ function editMySkill () {
         //request for the skill to load data from
         var skillname = document.getElementById('newSkillName').value;
 
+        console.log(skillName);
+        console.log(data.skills);
         if (data.skills.find(obj => obj.name == skillName) !== undefined) {
             var skill = data.skills.find(obj => obj.name == skillName);
             document.getElementById('newSkillName').value = skill.name;
