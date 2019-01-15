@@ -100,7 +100,7 @@ function addTreeToUser(treeToAdd){
 
 // confirm the changes made to skill levels.
 function submit(){
-    var submitData = jQuery.extend({}, data.skills);
+    var submitData = jQuery.extend(true, {}, data.skills);
     console.log(data.skills[0].itemcontainer);
     for (var i = 0; i < submitData.length; ++i) {
         delete submitData[i].itemcontainer;
