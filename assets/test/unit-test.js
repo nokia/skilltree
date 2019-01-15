@@ -60,14 +60,17 @@ describe("API ADMIN TEST WITHOUT ADMIN TOKEN", function(){
 describe("Adding user", function(){
     it("Should fail", function(done){
         this.timeout(10000);
+
+        var bodyData = JSON.stringify({
+            username: "testuser", 
+            email: "test@test.test",
+            password: "a"
+        });
+
         request.post(
             {   
                 url: baseUrl + "/registration", 
-                form: 
-                {
-                    username: "testuser", 
-                    email: "test@test.test"
-                }, 
+                body: bodyData,
                 headers: 
                 {
                 }
