@@ -1140,7 +1140,7 @@ function request (type, url, sendData, callback) {
 }
 
 Object.prototype.clone = function(deep) {
-    var newObj;
+    var newObj = [];
 
     for (i in this) {
         if (i == 'clone') continue;
