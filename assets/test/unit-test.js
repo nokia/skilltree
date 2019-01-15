@@ -62,7 +62,7 @@ describe("Adding user", function(){
         
         request.post(
             {   
-                url: baseUrl + "/admin/testAdmin", 
+                url: baseUrl + "/registration", 
                 body: 
                 {
                     username: "testuser", 
@@ -70,7 +70,7 @@ describe("Adding user", function(){
                 }, 
                 headers: 
                 {
-                },
+                }
             
             },
             function(error, response, body) {
