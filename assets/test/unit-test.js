@@ -79,7 +79,7 @@ describe("Adding user", function(){
                 
                 expect(body.success).to.equal(true);*/
 
-                console.log(response.body);
+                console.log(response);
                 
                 done();
             });
