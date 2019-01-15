@@ -343,8 +343,7 @@ function editMySkill () {
     catSelect.innerHTML = "";
     for (var i = 0; i < data.categories.length; ++i) {
         var option = document.createElement("option");
-        option.text = data.categories[i].name;
-        option.value = data.categories[i].name;
+        option.text = option.value = data.categories[i].name;
         catSelect.add(option);
     }
 
@@ -353,7 +352,6 @@ function editMySkill () {
     skillName.onkeyup = function() {searchSkillsByName(this, false)};
 
     var loadSkill = document.getElementById("loadSkill");
-    //TODO fill data with requested data
     loadSkill.onclick = function(){
         //request for the skill to load data from
         var skillname = document.getElementById('newSkillName').value;
@@ -367,6 +365,8 @@ function editMySkill () {
                 document.getElementById('newSkillIcon').value = this.response.skillIcon;
                 document.getElementById('newSkillWiki').value = this.response.descriptionWikipediaURL;
                 document.getElementById("newSkillCat").value = this.response.categoryName;
+
+
 
                 var pointsTable = document.getElementById('pointsTable');
 
