@@ -63,7 +63,7 @@ describe("Adding user", function(){
         request.post(
             {   
                 url: baseUrl + "/registration", 
-                body: 
+                form: 
                 {
                     username: "testuser", 
                     email: "test@test.test"
