@@ -49,6 +49,7 @@ describe("API ADMIN TEST WITHOUT ADMIN TOKEN", function(){
                 var body = JSON.parse(response.body);
                 
                 expect(body.success).to.equal(false);
+
                 done();
             });
     });
@@ -56,7 +57,32 @@ describe("API ADMIN TEST WITHOUT ADMIN TOKEN", function(){
 
 
 
+describe("Adding user", function(){
+    it("Should fail", function(done){
+        
+        request.post(
+            {   
+                url: baseUrl + "/admin/testAdmin", 
+                body: 
+                {
+                    username: "testuser", 
+                    email: "test@test.test",
+                }, 
+                headers: 
+                {
+                },
+            
+            },
+            function(error, response, body) {
 
+                var body = JSON.parse(response.body);
+                
+                expect(body.success).to.equal(true);
+                
+                done();
+            });
+    });
+});
 
 
 
