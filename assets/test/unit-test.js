@@ -59,7 +59,7 @@ describe("API ADMIN TEST WITHOUT ADMIN TOKEN", function(){
 
 describe("Adding user", function(){
     it("Should fail", function(done){
-        
+        this.timeout(10000);
         request.post(
             {   
                 url: baseUrl + "/registration", 
