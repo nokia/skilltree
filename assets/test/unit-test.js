@@ -4,6 +4,8 @@ var expect = require("chai").expect;
 var baseUrl = "https://skilltree.benis.hu";
 var util = require("util");
 var pbkdf2 = require("../../pbkdf2");
+var adminToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiYWRtaW4iOiJ0cnVlIn0.sxF3V-G_wcsoY9dYphBwn4MgJx3gQANp2EgftqbVNwk";  //username: admin <- need to exist in order to work
+
 
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 
@@ -28,7 +30,7 @@ describe("hashPassword() and verifyPassword()", function(){
 describe("API TEST", function(){
     it("Should return {success:true}", function(done){
         
-        request.get({ url: baseUrl + "/apitest" },
+        request.get({ url: baseUrl + "/admin/testAdmin", headers: { 'x-access-token': adminToken, 'Content-type': 'application/json' } },
             function(error, response, body) {
                 var body = JSON.parse(response.body);
                 
