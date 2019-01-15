@@ -1142,21 +1142,14 @@ function request (type, url, sendData, callback) {
 Object.prototype.clone = function(deep) {
     var newObj;
 
-    if (this instanceof Date) {
-        newObj = new Date(this);
-    }
-    else if (!deep && this instanceof Array) {
-        newObj = this.slice(0);
-    }
-    else {
-        for (i in this) {
-            if (i == 'clone') continue;
-            if (deep && typeof this[i] == "object") {
-                newObj[i] = this[i].clone();
-            } else {
-                newObj[i] = this[i];
-            }
+    for (i in this) {
+        if (i == 'clone') continue;
+        if (deep && typeof this[i] == "object") {
+            newObj[i] = this[i].clone();
+        } else {
+            newObj[i] = this[i];
         }
     }
+
     return newObj;
 };
