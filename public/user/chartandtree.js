@@ -356,8 +356,6 @@ function editMySkill () {
         //request for the skill to load data from
         skillName = document.getElementById('newSkillName').value;
 
-        console.log(skillName);
-        console.log(data.skills);
         if (data.skills.find(obj => obj.name == skillName) !== undefined) {
             var skill = data.skills.find(obj => obj.name == skillName);
             document.getElementById('newSkillName').value = skill.name;
@@ -415,19 +413,19 @@ function editMySkill () {
             for (var i = 0; i < skill.children.length; ++i) {
                 addRow("childrenTable");
 
-                parentsTable.rows[i + 1].cells[0].children[0].value = skill.children[i].name;
-                parentsTable.rows[i + 1].cells[1].children[0].value = skill.children[i].minPoint;
-                parentsTable.rows[i + 1].cells[2].children[0].checked = !skill.children[i].recommended;
+                childrenTable.rows[i + 1].cells[0].children[0].value = skill.children[i].name;
+                childrenTable.rows[i + 1].cells[1].children[0].value = skill.children[i].minPoint;
+                childrenTable.rows[i + 1].cells[2].children[0].checked = !skill.children[i].recommended;
 
             }
 
             //Dropping data from trainingsTable
             var trainingsTable = document.getElementById('trainingsTable');
-            var i=trainingsTable.rows.length-1;
+            var i = trainingsTable.rows.length - 1;
 
-            while(i>1) {
+            while (i > 1) {
                 trainingsTable.deleteRow(i);
-                i--;
+                --i;
             }
 
             trainingsTable.rows[1].cells[0].children[0].value = "";
