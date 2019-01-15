@@ -70,10 +70,7 @@ describe("Adding user", function(){
         request.post(
             {   
                 url: baseUrl + "/registration", 
-                body: bodyData,
-                headers: 
-                {
-                }
+                body: bodyData
             
             },
             function(error, response, body) {
