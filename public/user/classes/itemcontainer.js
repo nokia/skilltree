@@ -253,6 +253,7 @@ class ItemContainer {
 
     onClick(event) {
         if (!event.drag) {
+            change = true;
             if (this.parentObj.self) {
                 var children = this.parentObj.skill.children;
 
@@ -264,15 +265,10 @@ class ItemContainer {
                         this.parentObj.tick.alpha = 1;
                         this.parentObj.skillborder.filters = null;
                     }
-
-                    //save level change (kell?)
-                    //this.parentObj.skills.find(obj => obj.name == this.parentObj.skill.name).achievedPoint++;
                 }
 
                 this.parentObj.app.renderer.render(this.parentObj.app.stage);
                 this.parentObj.refreshAvaliability();
-            } else {
-
             }
         }
     }

@@ -1,4 +1,5 @@
 var data = undefined;
+var change = false;
 initData();
 
 // creates the pixi app
@@ -117,7 +118,8 @@ function submit() {
     });
 }
 
-window.setInterval(function(){
+window.setInterval(function () {
+    console.log(change);
     submit();
 }, 5000);
 
