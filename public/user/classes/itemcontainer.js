@@ -251,7 +251,7 @@ class ItemContainer {
     }
 
 
-
+    // Increases skill level, if it hits max skill level, it resets the filter, and adds green glow to it (filter)
     onClick(event) {
         if (!event.drag) {
             if (this.parentObj.self) {
@@ -277,6 +277,7 @@ class ItemContainer {
         }
     }
 
+    // Decreases skill level
     onRightClick() {
         if (this.parentObj.self) {
             var children = this.parentObj.skill.children;
@@ -304,7 +305,7 @@ class ItemContainer {
         }
     }
 
-    // TODO comments
+    // Refreshes the clickable property of all the tree except for the root level, and sets the resets the filter to null (this blocks the functionality of the green filter on 5/5 skills for now on every level except the root, fix will be needed)
     refreshAvaliability(){
         for (var i = 0; i < this.skills.length; i++) {
             for (var j = 0; j < this.skills[i].parents.length; j++) {
@@ -335,6 +336,7 @@ class ItemContainer {
         }
     }
 
+    // Adds hover animation to the skill, and shows the details box
     onButtonOver() {
         var skillborder = this.parentObj.skillborder;
         var details = this.parentObj.details;
@@ -355,6 +357,7 @@ class ItemContainer {
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
     }
 
+    // removes filters (this wrechs the green filter too) of the skill and removes the details box.
     onButtonOut() {
         var skillborder = this.parentObj.skillborder;
         var details = this.parentObj.details;
@@ -371,7 +374,7 @@ class ItemContainer {
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
     }
 
-
+    // enables the access to this skill (click and hover)
     enable () {
         this.skillborder.filters = null;
         this.skillicon.filters = null;
@@ -384,6 +387,7 @@ class ItemContainer {
         this.app.renderer.render(this.app.stage);
     }
 
+    // disables the access to this skill (click and hover)
     disable () {
         var colorMatrixFilter = new PIXI.filters.ColorMatrixFilter;
         colorMatrixFilter.brightness(0.4);
@@ -397,6 +401,7 @@ class ItemContainer {
         this.app.renderer.render(this.app.stage);
     }
 
+    // this is the toggler for the details box
     toggleSkillDetailsPage(){
         var modal = document.getElementById('skillpage');
         var header = document.getElementById('skillnameHeader');
@@ -646,6 +651,7 @@ class ItemContainer {
 
     }
 
+    // this is the toggler for the infomodal, this runs on "info" click.
     toggleSkillInfoPage () {
         var modal = document.getElementById('skillinfopage');
         var header = document.getElementById('infoSkillnameHeader');
@@ -715,10 +721,12 @@ class ItemContainer {
         modal.style.display = "block";
     }
 
+
     addBeginnerRequest() {
         //console.log("clicked");
     }
 
+    // endorses the skill of an other user. this runs on the "endorse" click.
     endorse () {
         var req = new XMLHttpRequest();
         req.open('POST', '/protected/endorse', true);
