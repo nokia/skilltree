@@ -894,6 +894,7 @@ protectedRoute.post('/editmyskill', async function (req, res) {
                 user.skills.push(parent);
             }
             // add new skill as child of parent skill
+			console.log(data.parents[i].recommended);
             user.skills.find(obj => obj.name == data.parents[i].name).children.push({name: data.name, minPoint: data.parents[i].minPoint, recommended: data.parents[i].recommended});
             // when we save the new skill we only need the name of the parents (no minPoint and recommended)
             parentNames.push(data.parents[i].name);
