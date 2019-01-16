@@ -200,9 +200,11 @@ function getPublicSkillData(){
 function switchSearch(type){
   document.getElementById('advSearchDetails').innerHTML = "";
   if (type === "Skill") {
-    document.getElementById('cardSearchBar').onkeyup = function(){
-      searchSkillsByName(this, true);
-    };
+    if (!document.getElementById('skillSearchResult').includes(document.getElementById('cardSearchBar').value)) {
+      document.getElementById('cardSearchBar').onkeyup = function(){
+        searchSkillsByName(this, true);
+      };
+    }
     document.getElementById('cardSearchBar').setAttribute('list', "skillSearchResult");
     document.getElementById('cardSearch').onclick = getPublicSkillData;
     /*addCheckBox("1", "Skill Option 1", 'advSearchDetails');
