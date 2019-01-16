@@ -261,7 +261,7 @@ class ItemContainer {
             if (this.parentObj.self) {
                 var children = this.parentObj.skill.children;
 
-                if (this.parentObj.skill.achievedPoint > 0) {
+                if (this.parentObj.skill.achievedPoint > 0 && this.parentObj.skill.achievedPoint < this.parentObj.skill.maxPoint) {
                 this.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xCCAA00, 1)];
                 }
 
@@ -334,9 +334,10 @@ class ItemContainer {
 
                         if(this.skills[i].achievedPoint == this.skills[i].maxPoint) {
                           this.skills[i].itemcontainer.skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0x007F0E, 1)];
-                        }
-                        if (this.skills[i].achievedPoint > 0) {
-                          this.skills[i].itemcontainer.skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xCCAA00, 1)];
+                        } else {
+                          if (this.skills[i].achievedPoint > 0) {
+                            this.skills[i].itemcontainer.skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xCCAA00, 1)];
+                          }
                         }
                     }
                     else {
@@ -350,10 +351,11 @@ class ItemContainer {
 
                         if(this.skills[i].achievedPoint == this.skills[i].maxPoint) {
                           this.skills[i].itemcontainer.skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0x007F0E, 1)];
-                        }
-                        if (this.skills[i].achievedPoint > 0) {
+                        } else {
+                          if (this.skills[i].achievedPoint > 0) {
                           this.skills[i].itemcontainer.skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xCCAA00, 1)];
                         }
+                      }
                     }
                 }
             }
