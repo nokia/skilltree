@@ -596,8 +596,9 @@ function loadSkillToEditor (skill, global) {
             req.send(JSON.stringify({value: skill.parents[i]}));
 
             if (req.readyState == 4 && req.status == 200) {
-                var parent = req.response.skill;
-                console.log(req.response.skill);
+                var response = JSON.parse(req.response);
+                var parent = response.skill;
+                console.log(response.skill);
                 var skillAtParent = parent.children.find(obj => obj.name == skill.name);
                 parentsTable.rows[i + 1].cells[0].children[0].value = parent.name;
                 parentsTable.rows[i + 1].cells[1].children[0].value = skillAtParent.minPoint;
