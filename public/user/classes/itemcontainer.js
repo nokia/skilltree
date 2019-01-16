@@ -331,6 +331,9 @@ class ItemContainer {
                         this.skills[i].itemcontainer.skillborder.interactive = true;
                         this.skills[i].itemcontainer.skillborder.buttonMode = true;
                     }
+                    if(this.skills[i].name).achievedPoint == (this.skills[i].name).maxPoint {
+                      this.skills[i].itemcontainer.skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0x007F0E, 1)];
+                    }
                 }
             }
         }
