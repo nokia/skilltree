@@ -103,6 +103,10 @@ a {
     width: 400px;
 }
 
+#submitBtn{
+  min-width: 45px;
+}
+
 #advSearchDetails{
   margin: 2% 4%;
   padding: 2px;

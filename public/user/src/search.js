@@ -81,6 +81,7 @@ function getPublicUserData(){
         document.getElementById('closeSearchModal').onclick = function() {
           modal.style.display = "none";
         };
+        closeModal(modal);
         searchModalHeader.innerHTML = '<th scope="col">#</th><th scope="col">Name</th><th scope="col">MainTree</th><th scope="col">Willing to help</th>';
         searchModalBody.innerHTML = "";
         for (var i = 0; i < this.response.length; i++) {
@@ -145,6 +146,7 @@ function getPublicTreeData(){
         document.getElementById('closeSearchModal').onclick = function() {
           modal.style.display = "none";
         };
+        closeModal(modal);
         searchModalHeader.innerHTML = '<th scope="col">#</th><th scope="col">Name</th><th scope="col">Focus Area</th>';
         searchModalBody.innerHTML = "";
         for (var i = 0; i < this.response.length; i++) {
@@ -175,6 +177,7 @@ function getPublicSkillData(){
         document.getElementById('closeSearchModal').onclick = function() {
           modal.style.display = "none";
         };
+        closeModal(modal);
         searchModalHeader.innerHTML = '<th scope="col">#</th><th scope="col">Name</th><th scope="col">Category</th><th scope="col">Description</th>';
         searchModalBody.innerHTML = "";
         for (var i = 0; i < this.response.length; i++) {
@@ -218,4 +221,12 @@ function getPublicSkillData(){
         modal.style.display = "block";
       }
   });
+}
+
+function closeModal(modal){
+  window.onclick = function(event) {
+      if (event.target == modal) {
+          modal.style.display = "none";
+      }
+  }
 }
