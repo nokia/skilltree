@@ -118,7 +118,8 @@ function submit() {
     });
 }
 
-window.setInterval(function(){
+window.setInterval(function () {
+    console.log(change);
     submit();
 }, 5000);
 
