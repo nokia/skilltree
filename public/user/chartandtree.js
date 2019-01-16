@@ -812,10 +812,21 @@ function editTree () {
                 document.getElementById("focusarea").value = this.response.focusArea;
                 document.getElementById("treeDesc").value = this.response.description;
                 for (var i = 0; i < this.response.skillNames.length; ++i) {
-                    skillsToAdd.push(data.skills.find(obj => obj.name == this.response.skillNames[i]));
-                    var option = document.createElement("option");
-                    option.text = this.response.skillNames[i];
-                    skillList.add(option);
+                    var req = new XMLHttpRequest();
+                    req.open('POST', '/protected/getskill', false);
+                    req.setRequestHeader('Content-type', 'application/json');
+                    req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+                    //req.responseType = "json";
+                    req.send(JSON.stringify({value: this.response.skillNames[i]}));
+
+                    if (req.readyState == 4 && req.status == 200) {
+                        var response = JSON.parse(req.response);
+
+                        skillsToAdd.push(response.skill);
+                        var option = document.createElement("option");
+                        option.text = this.response.skillNames[i];
+                        skillList.add(option);
+                    }
                 }
             }
         });
