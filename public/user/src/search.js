@@ -213,7 +213,7 @@ function switchSearch(type){
   }
   else if (type === "Tree") {
     document.getElementById('cardSearchBar').onkeyup = function() {
-      if (Array.from(document.getElementById('treeSearchResult').options).find(obj => obj.value == document.getElementById('cardSearchBar').value) == undefined) {
+      if (Array.from(document.getElementById('TreeSearchResult').options).find(obj => obj.value == document.getElementById('cardSearchBar').value) == undefined) {
         searchTreesByName(document.getElementById('cardSearchBar'), true);
       }
     };
@@ -225,7 +225,7 @@ function switchSearch(type){
   }
   else if (type === "User"){
     document.getElementById('cardSearchBar').onkeyup = function() {
-      if (Array.from(document.getElementById('userSearchResult').options).find(obj => obj.value == document.getElementById('cardSearchBar').value) == undefined) {
+      if (Array.from(document.getElementById('UserSearchResult').options).find(obj => obj.value == document.getElementById('cardSearchBar').value) == undefined) {
         searchUsersByName();
       }
     };
