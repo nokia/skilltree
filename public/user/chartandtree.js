@@ -478,7 +478,7 @@ function editSkill () {
     var loadSkill = document.getElementById("loadSkill");
     loadSkill.onclick = function(){
         //request for the skill to load data from
-        request('POST', '/protected/getskill', {name: document.getElementById("newSkillName").value}, function() {
+        request('POST', '/protected/getskill', {value: document.getElementById("newSkillName").value}, function() {
             if(this.readyState == 4 && this.status == 200) {
                 skillSearchResult.innerHTML = "";
 
