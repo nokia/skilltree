@@ -205,8 +205,8 @@ class ItemContainer {
         this.container = new PIXI.Container();
         this.container.addChild(this.skillicon);
 
-        this.container.addChild(this.tick);
         this.container.addChild(this.skillborder);
+        this.container.addChild(this.tick);
         this.container.addChild(this.skillborder.levelinfo);
         if (this.skill.endorsement != undefined && this.skill.endorsement.length > 0) this.container.addChild(this.skillborder.endorsement);
         this.container.zOrder = 3;
