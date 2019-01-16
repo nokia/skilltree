@@ -321,6 +321,10 @@ class ItemContainer {
                         if (this.skills[i].itemcontainer.skillborder.endorsement != undefined) this.skills[i].itemcontainer.skillborder.endorsement.filters = [colorMatrixFilter];
                         this.skills[i].itemcontainer.skillborder.interactive = false;
                         this.skills[i].itemcontainer.skillborder.buttonMode = false;
+                        
+                        if(this.skills[i].name).achievedPoint == (this.skills[i].name).maxPoint {
+                          this.skills[i].itemcontainer.skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0x007F0E, 1)];
+                        }
                     }
                     else {
                         this.skills[i].itemcontainer.skillborder.filters = null;
@@ -330,9 +334,6 @@ class ItemContainer {
                         this.skills[i].itemcontainer.container.interactive = true;
                         this.skills[i].itemcontainer.skillborder.interactive = true;
                         this.skills[i].itemcontainer.skillborder.buttonMode = true;
-                    }
-                    if(this.skills[i].name).achievedPoint == (this.skills[i].name).maxPoint {
-                      this.skills[i].itemcontainer.skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0x007F0E, 1)];
                     }
                 }
             }
