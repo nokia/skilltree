@@ -718,8 +718,6 @@ class ItemContainer {
     }
 
     endorse () {
-        //console.log(this.parentObj.skill.name);
-        //console.log(this.parentObj.username);
         var req = new XMLHttpRequest();
         req.open('POST', '/protected/endorse', true);
         req.setRequestHeader('Content-type', 'application/json');
@@ -727,7 +725,7 @@ class ItemContainer {
         req.responseType = "json";
         req.onreadystatechange = function () {
             if(this.readyState == 4 && this.status == 200) {
-                //console.log("nnn");
+                console.log(this.response.success);
             }
         };
 
@@ -735,8 +733,6 @@ class ItemContainer {
             skillName: this.parentObj.skill.name,
             username: this.parentObj.username
         };
-
-        //console.log(JSON.stringify(data));
 
         req.send(JSON.stringify(data));
     }

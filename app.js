@@ -1287,6 +1287,7 @@ protectedRoute.post('/request', async function (req, res){
 
 protectedRoute.post('/endorse', async function (req, res) {
   var data = req.body;
+	console.log(data);
   var user = await User.findOne({
     username: data.username//req.decoded.username
   }, function(err, user) {

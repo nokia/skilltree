@@ -187,6 +187,7 @@ function getPublicSkillData(){
             closer.onclick = function(){
               foundmodal.style.display = "none";
             }
+            closeModal(foundmodal);
           }
           searchModalBody.appendChild(row);
         }
