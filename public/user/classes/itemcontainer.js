@@ -321,8 +321,8 @@ class ItemContainer {
                         if (this.skills[i].itemcontainer.skillborder.endorsement != undefined) this.skills[i].itemcontainer.skillborder.endorsement.filters = [colorMatrixFilter];
                         this.skills[i].itemcontainer.skillborder.interactive = false;
                         this.skills[i].itemcontainer.skillborder.buttonMode = false;
-                        
-                        if(this.skills[i].name).achievedPoint == (this.skills[i].name).maxPoint {
+
+                        if(this.skills[i].achievedPoint == this.skills[i].maxPoint) {
                           this.skills[i].itemcontainer.skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0x007F0E, 1)];
                         }
                     }
