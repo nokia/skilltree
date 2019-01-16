@@ -588,8 +588,7 @@ function loadSkillToEditor (skill, global) {
         if (i < skill.parents.length - 1) addRow("parentsTable");
 
         if (global) {
-            console.log(skill.parents[i].name);
-            request('POST', '/protected/getskill', {value: skill.parents[i].name}, function() { // !!!!!!!
+            request('POST', '/protected/getskill', {value: skill.parents[i]}, function() { // !!!!!!!
                 if (this.readyState == 4 && this.status == 200) {
                     var parent = this.response.skill;
                     console.log(this.response);
