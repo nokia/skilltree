@@ -33,7 +33,7 @@ function initUI(self, _data){
     }
   }
   initCard();
-  switchSearch("User");
+  switchSearch("Skill");
 }
 
 // initalizes the card on the top left corner of the screen
