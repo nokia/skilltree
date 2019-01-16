@@ -553,7 +553,7 @@ function createTree () {
     var skillList = document.getElementById("skillList");
     var skillsToAdd = [];
     addBtn.onclick = function () {
-
+        addSkillToList(skillsToAdd);
     };
 
     var createSkillBtn = document.getElementById("createSkill");
@@ -671,7 +671,6 @@ function editMyTree () {
 
     var addBtn = document.getElementById("addToTree");
     addBtn.onclick = function () {
-        alert("s");
         addSkillToList(skillsToAdd);
     };
 
