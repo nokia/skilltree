@@ -830,6 +830,7 @@ function editTree () {
 }
 
 function addSkillToList (skillsToAdd) {
+    console.log(skillsToAdd);
     var skill = {value: document.getElementById('skillSearchTree').value};
     var skillList = document.getElementById("skillList");
 
