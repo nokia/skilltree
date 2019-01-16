@@ -587,6 +587,7 @@ function loadSkillToEditor (skill, global) {
     for (var i = 0; i < skill.parents.length; ++i) {
         if (i < skill.parents.length - 1) addRow("parentsTable");
 
+        var parent = undefined;
         if (global) {
             var req = new XMLHttpRequest();
             req.open('POST', '/protected/getskill', false);
@@ -597,20 +598,16 @@ function loadSkillToEditor (skill, global) {
 
             if (req.readyState == 4 && req.status == 200) {
                 var response = JSON.parse(req.response);
-                var parent = response.skill;
-                console.log(response.skill);
-                var skillAtParent = parent.children.find(obj => obj.name == skill.name);
-                parentsTable.rows[i + 1].cells[0].children[0].value = parent.name;
-                parentsTable.rows[i + 1].cells[1].children[0].value = skillAtParent.minPoint;
-                parentsTable.rows[i + 1].cells[2].children[0].checked = !skillAtParent.recommended;
+                parent = response.skill;
             }
         } else {
-            var parent = data.skills.find(obj => obj.name == skill.parents[i]);
-            var skillAtParent = parent.children.find(obj => obj.name == skill.name);
-            parentsTable.rows[i + 1].cells[0].children[0].value = parent.name;
-            parentsTable.rows[i + 1].cells[1].children[0].value = skillAtParent.minPoint;
-            parentsTable.rows[i + 1].cells[2].children[0].checked = !skillAtParent.recommended;
+            parent = data.skills.find(obj => obj.name == skill.parents[i]);
         }
+
+        var skillAtParent = parent.children.find(obj => obj.name == skill.name);
+        parentsTable.rows[i + 1].cells[0].children[0].value = parent.name;
+        parentsTable.rows[i + 1].cells[1].children[0].value = skillAtParent.minPoint;
+        parentsTable.rows[i + 1].cells[2].children[0].checked = !skillAtParent.recommended;
     }
 
     var childrenTable = document.getElementById('childrenTable');
