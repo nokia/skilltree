@@ -9,15 +9,15 @@ class ItemContainer {
         //Creating images
         this.skillicon = new PIXI.Sprite(PIXI.loader.resources[this.skill.skillIcon].texture); //100x100
         this.skillborder = new PIXI.Sprite(PIXI.loader.resources["pictures/skillborder.png"].texture); //116x116
-        this.skillborder_maxpoint = new PIXI.Sprite(PIXI.loader.resources["pictures/skillborder_maxpoint.png"].texture); //116x116
+//      this.skillborder_maxpoint = new PIXI.Sprite(PIXI.loader.resources["pictures/skillborder_maxpoint.png"].texture); //116x116
         this.tick = new PIXI.Sprite(PIXI.loader.resources["pictures/tick.png"].texture);
 
         //setting border variables
         this.skillborder.levelinfo = new PIXI.Text(this.skill.achievedPoint + "/" + this.skill.maxPoint);
         this.skillborder.levelinfo.scale.set(.5);
 
-        this.skillborder_maxpoint.levelinfo = new PIXI.Text(this.skill.achievedPoint + "/" + this.skill.maxPoint);
-        this.skillborder_maxpoint.levelinfo.scale.set(.5);
+//      this.skillborder_maxpoint.levelinfo = new PIXI.Text(this.skill.achievedPoint + "/" + this.skill.maxPoint);
+//      this.skillborder_maxpoint.levelinfo.scale.set(.5);
 
         if (this.skill.endorsement != undefined && this.skill.endorsement.length > 0) {
             this.skillborder.endorsement = new PIXI.Text("+" + this.skill.endorsement.length);
