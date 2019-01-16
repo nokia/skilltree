@@ -131,7 +131,8 @@ function loadAddedTrees(){
     ithtree.innerHTML = tn;
     ithtree.className = "dropdown-item";
     ithtree.onclick = function() {
-      showTree(this.innerHTML, data, true); // bator?
+        document.getElementById('submitBtn').style.display = "block";
+        showTree(this.innerHTML, data, true); // bator?
     }
     treeList.appendChild(ithtree);
   }
