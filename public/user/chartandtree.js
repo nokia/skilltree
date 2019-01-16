@@ -473,14 +473,14 @@ function editSkill () {
 
     var skillName = document.getElementById("newSkillName");
     skillName.setAttribute('list', 'skillSearchResult');
-    skillName.onkeyup = function() {searchSkillsByName(this, false)};
+    skillName.onkeyup = function() {searchSkillsByName(this, true)};
 
     var loadSkill = document.getElementById("loadSkill");
     loadSkill.onclick = function(){
         //request for the skill to load data from
         request('POST', '/protected/getskill', {name: document.getElementById("newSkillName").value}, function() {
             if(this.readyState == 4 && this.status == 200) {
-                SkillSearchResult.innerHTML = "";
+                skillSearchResult.innerHTML = "";
 
                 loadSkillToEditor(this.response.skill);
             }
