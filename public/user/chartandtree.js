@@ -845,7 +845,6 @@ function editTree () {
     createBtn.onclick = function () {
         if (document.getElementById('treeName').value.length > 0) {
             if (skillsToAdd.length > 0) {
-                console.log(skillsToAdd);
                 for (var i = 0; i < skillsToAdd.length; ++i) {
                     delete skillsToAdd[i].itemcontainer;
                 }
