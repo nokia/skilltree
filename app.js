@@ -1594,7 +1594,7 @@ adminRoute.get('/testAdmin', async function (req,res){
 
 });
 
-async function await findUser(unm) {
+async function findUser(unm) {
 	var user = await User.findOne({
 			username: unm,
 	}, function (err, user) {
