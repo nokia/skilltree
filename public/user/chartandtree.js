@@ -125,7 +125,7 @@ window.setInterval(function () {
         document.getElementById('submitBtn').innerText = "Saved";
         document.getElementById('submitBtn').removeAttribute('href');
     }
-}, 5000);
+}, 10000);
 
 // logout.
 function logout(){
