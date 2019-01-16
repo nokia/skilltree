@@ -831,6 +831,7 @@ function editTree () {
 
 function addSkillToList (skillsToAdd) {
     var skill = {value: document.getElementById('skillSearchTree').value};
+    var skillList = document.getElementById("skillList");
 
     request('POST', '/protected/getskill', skill, function() {
         if(this.readyState == 4 && this.status == 200) {
