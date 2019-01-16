@@ -742,6 +742,9 @@ function editMyTree () {
                 option.text = tree.skillNames[i];
                 skillList.add(option);
             }
+
+            if (skillList.length > 1) skillList.size = skillList.length;
+            else skillList.size = 2;
         }
     };
 
@@ -828,6 +831,9 @@ function editTree () {
                         skillList.add(option);
                     }
                 }
+
+                if (skillList.length > 1) skillList.size = skillList.length;
+                else skillList.size = 2;
             }
         });
     };
