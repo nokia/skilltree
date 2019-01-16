@@ -589,7 +589,7 @@ async function loadSkillToEditor (skill, global) {
 
         var parent = undefined;
         if (global) {
-            await request('POST', '/protected/getskill', {value: skill.parents[i].name}, function() { // !!!!!!!
+            await request('POST', '/protected/getskill', {value: skill.parents[i].name}, await function() { // !!!!!!!
                 if (this.readyState == 4 && this.status == 200) {
                     parent = this.response.skill;
                 }
