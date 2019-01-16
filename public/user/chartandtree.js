@@ -592,7 +592,7 @@ function loadSkillToEditor (skill, global) {
             req.open('POST', '/protected/getskill', false);
             req.setRequestHeader('Content-type', 'application/json');
             req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-            req.responseType = "json";
+            //req.responseType = "json";
             req.send(JSON.stringify({value: skill.parents[i]}));
 
             if (req.readyState == 4 && req.status == 200) {
