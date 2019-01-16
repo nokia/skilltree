@@ -614,6 +614,8 @@ function addRow(table) {
   x.appendChild(new_row);
 }
 
+var skillsToAdd = [];
+
 // opens tree creator, user can edit her/his own trees
 function editMyTree () {
     $('.clear').find('input:text').val('');
@@ -637,7 +639,7 @@ function editMyTree () {
     creator.style.width = canvas.style.width;
     creator.style.height = canvas.style.height;
 
-    var skillsToAdd = [];
+    skillsToAdd = [];
     loadTree.onclick = function () {
         var tree = data.trees.find(obj => obj.name == document.getElementById("treeName").value);
 
@@ -657,7 +659,7 @@ function editMyTree () {
     var addBtn = document.getElementById("addToTree");
     addBtn.onclick = function () {
         console.log(skillsToAdd);
-        addSkillToList(skillsToAdd);
+        addSkillToList();
     };
 
     var createSkillBtn = document.getElementById("createSkill");
@@ -665,7 +667,7 @@ function editMyTree () {
 
     var deleteBtn = document.getElementById("deleteFromList");
     deleteBtn.onclick = function () {
-        deleteSkillFromList(skillsToAdd);
+        deleteSkillFromList();
         console.log(skillsToAdd);
     };
 
@@ -774,7 +776,7 @@ function editTree () {
     };
 }
 
-function addSkillToList (skillsToAdd) {
+function addSkillToList () {
     var skill = {value: document.getElementById('skillSearchTree').value};
     var skillList = document.getElementById("skillList");
 
@@ -815,7 +817,7 @@ function addSkillToList (skillsToAdd) {
     });
 }
 
-function deleteSkillFromList (skillsToAdd) {
+function deleteSkillFromList () {
     var skillList = document.getElementById("skillList");
     var children = [];
     getChildren(skillsToAdd, skillsToAdd.find(obj => obj.name == skillList.options[skillList.selectedIndex].text), children);
