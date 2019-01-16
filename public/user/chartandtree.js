@@ -837,10 +837,10 @@ function deleteSkillFromList (skillsToAdd) {
                 }
             }
         }
-
-        console.log(skillsToAdd);
-        //skillList.size = skillList.length;
     }
+
+    console.log(skillsToAdd);
+    //skillList.size = skillList.length;
 }
 
 function getChildren (skills, skill, children) {
