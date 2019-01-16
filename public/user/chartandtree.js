@@ -797,6 +797,7 @@ function addSkillToList () {
                     }
 
                     if (skillList.length > 1) skillList.size = skillList.length;
+                    else skillList.size = 2;
                 } else alert("You have already added this skill");
             } else alert("Skill is not found");
         }
@@ -829,6 +830,7 @@ function deleteSkillFromList () {
     }
 
     if (skillList.length > 1) skillList.size = skillList.length;
+    else skillList.size = 2;
 }
 
 function getChildren (skills, skill, children) {
