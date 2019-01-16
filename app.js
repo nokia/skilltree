@@ -916,6 +916,7 @@ protectedRoute.post('/editmyskill', async function (req, res) {
 			for (var j = 0; j < trees.length; ++j) {
 				var skillList = trees[j].skillNames;
 				skillList.push(data.name);
+				console.log(skillList);
 				var sn = await sortTree(skillList);
 				user.trees.find(obj => obj.name == trees[i].name).skillNames = sn;
 			}
