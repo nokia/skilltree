@@ -93,8 +93,12 @@ function getPublicUserData(){
           row.innerHTML += "<td>" + this.response[i].willingToTeach + "</td>";
           row.data = this.response[i];
           row.onclick = function(){
-            showTree(this.data.mainTree, this.data, false);
-            modal.style.display = "none";
+            try {
+              showTree(this.data.mainTree, this.data, false);
+              modal.style.display = "none";
+            } catch (e) {
+              alert("The user has not yet set his/her maintree, or his/her maintree is wrong.");
+            }
           }
           searchModalBody.appendChild(row);
         }
