@@ -591,6 +591,7 @@ function loadSkillToEditor (skill, global) {
             request('POST', '/protected/getskill', {value: skill.parents[i].name}, function() { // !!!!!!!
                 if (this.readyState == 4 && this.status == 200) {
                     var parent = this.response.skill;
+                    console.log(this.response);
                     var skillAtParent = parent.children.find(obj => obj.name == skill.name);
                     parentsTable.rows[i + 1].cells[0].children[0].value = parent.name;
                     parentsTable.rows[i + 1].cells[1].children[0].value = skillAtParent.minPoint;
