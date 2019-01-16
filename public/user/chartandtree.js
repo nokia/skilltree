@@ -806,7 +806,7 @@ function addSkillToList (skillsToAdd) {
                         skillList.add(option);
                     }
 
-                    //console.log(skillsToAdd);
+                    console.log(skillsToAdd);
                     //skillList.size = skillList.length;
                 } else alert("You have already added this skill");
             } else alert("Skill is not found");
@@ -838,7 +838,7 @@ function deleteSkillFromList (skillsToAdd) {
             }
         }
 
-        //console.log(skillsToAdd);
+        console.log(skillsToAdd);
         //skillList.size = skillList.length;
     }
 }
