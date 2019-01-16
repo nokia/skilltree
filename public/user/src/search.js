@@ -81,6 +81,7 @@ function getPublicUserData(){
         document.getElementById('closeSearchModal').onclick = function() {
           modal.style.display = "none";
         };
+        closeModal(modal);
         searchModalHeader.innerHTML = '<th scope="col">#</th><th scope="col">Name</th><th scope="col">MainTree</th><th scope="col">Willing to help</th>';
         searchModalBody.innerHTML = "";
         for (var i = 0; i < this.response.length; i++) {
@@ -92,40 +93,8 @@ function getPublicUserData(){
           row.innerHTML += "<td>" + this.response[i].willingToTeach + "</td>";
           row.data = this.response[i];
           row.onclick = function(){
-            var searchedUserModal = document.getElementById('searchedUserModal');
-            var closeSearchedUserModal = document.getElementById('closeSearchedUserModal');
-            var searchedUserModalHeader = document.getElementById('searchedUserModalHeader');
-            var searchedUserlModalInfo = document.getElementById('searchedUserlModalInfo');
-            var searchedUserlModalAdress = document.getElementById('searchedUserlModalAdress');
-            var userSkillsModalHeader = document.getElementById('userSkillsModalHeader');
-            var userSkillsModalBody = document.getElementById('userSkillsModalBody');
-
-            searchedUserModalHeader.innerHTML = this.data.username;
-            searchedUserlModalInfo.innerHTML = this.data.username + " focus area is " + this.data.focusArea.name + " and main Tree is " + this.data.mainTree + ". ";
-            searchedUserlModalAdress.innerHTML = "<h2>Availability</h2><br><b>Preferred day(s)</b>: " + this.data.teachingDay + " " + this.data.teachingTime + "<br><b>Place</b>: <a href=" + this.data.location + ">" + this.data.location + "</a><br>";
-            userSkillsModalHeader.innerHTML = '<th scope="col">#</th><th scope="col">Name</th><th scope="col">Level</th><th scope="col">Endorsement</th>';
-            userSkillsModalBody.innerHTML = "";
-            for (var i = 0; i < this.data.skills.length; i++) {
-              var row = document.createElement('tr');
-              row.className = "foundElementRow";
-              row.innerHTML += "<th>" + (i+1) + "</th>";
-              row.innerHTML += "<th>" + this.data.skills[i].name + "</th>";
-              row.innerHTML += "<th>" + this.data.skills[i].achievedPoint + "</th>";
-              row.innerHTML += "<th>" + this.data.skills[i].endorsement.length + "</th>";
-              var sv = {skillName: this.data.skills[i].name, username: this.data.username};
-              row.onclick = function(){
-                request('POST', '/protected/endorse', sv, function() {
-                    if(this.readyState == 4 && this.status == 200) {
-                      alert(this.response.message);
-                    }
-                });
-              }
-              userSkillsModalBody.appendChild(row);
-            }
-            closeSearchedUserModal.onclick = function(){
-              searchedUserModal.style.display = "none";
-            }
-            searchedUserModal.style.display = "block";
+            showTree(this.data.mainTree, this.data, false);
+            modal.style.display = "none";
           }
           searchModalBody.appendChild(row);
         }
@@ -145,6 +114,7 @@ function getPublicTreeData(){
         document.getElementById('closeSearchModal').onclick = function() {
           modal.style.display = "none";
         };
+        closeModal(modal);
         searchModalHeader.innerHTML = '<th scope="col">#</th><th scope="col">Name</th><th scope="col">Focus Area</th>';
         searchModalBody.innerHTML = "";
         for (var i = 0; i < this.response.length; i++) {
@@ -175,6 +145,7 @@ function getPublicSkillData(){
         document.getElementById('closeSearchModal').onclick = function() {
           modal.style.display = "none";
         };
+        closeModal(modal);
         searchModalHeader.innerHTML = '<th scope="col">#</th><th scope="col">Name</th><th scope="col">Category</th><th scope="col">Description</th>';
         searchModalBody.innerHTML = "";
         for (var i = 0; i < this.response.length; i++) {
@@ -218,4 +189,37 @@ function getPublicSkillData(){
         modal.style.display = "block";
       }
   });
+}
+
+// switches the advanced search card to the requested type
+function switchSearch(type){
+  document.getElementById('advSearchDetails').innerHTML = "";
+  if (type === "Skill") {
+    document.getElementById('cardSearchBar').onkeyup = function(){
+      searchSkillsByName(this, true);
+    };
+    document.getElementById('cardSearchBar').setAttribute('list', "skillSearchResult");
+    document.getElementById('cardSearch').onclick = getPublicSkillData;
+    /*addCheckBox("1", "Skill Option 1", 'advSearchDetails');
+    addCheckBox("2", "Skill Option 2", 'advSearchDetails');
+    addCheckBox("3", "Skill Option 3", 'advSearchDetails');*/
+  }
+  else if (type === "Tree") {
+    document.getElementById('cardSearchBar').onkeyup = function() {
+      searchTreesByName(document.getElementById('cardSearchBar'), true);
+    };
+    document.getElementById('cardSearchBar').setAttribute('list', "TreeSearchResult");
+    document.getElementById('cardSearch').onclick = getPublicTreeData;
+    /*addCheckBox("1", "Tree Option 1", 'advSearchDetails');
+    addCheckBox("2", "Tree Option 2", 'advSearchDetails');
+    addCheckBox("3", "Tree Option 3", 'advSearchDetails');*/
+  }
+  else if (type === "User"){
+    document.getElementById('cardSearchBar').onkeyup = searchUsersByName;
+    document.getElementById('cardSearchBar').setAttribute('list', "UserSearchResult");
+    document.getElementById('cardSearch').onclick = getPublicUserData;
+    /*addCheckBox("1", "User Option 1", 'advSearchDetails');
+    addCheckBox("2", "User Option 2", 'advSearchDetails');
+    addCheckBox("3", "User Option 3", 'advSearchDetails');*/ // checkboxes disabled for now, for no good use.
+  }
 }

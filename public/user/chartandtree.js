@@ -47,39 +47,6 @@ function searchUserSkillsByName(element){
     });
 }
 
-// switches the advanced search card to the requested type
-function switchSearch(type){
-  document.getElementById('advSearchDetails').innerHTML = "";
-  if (type === "Skill") {
-    document.getElementById('cardSearchBar').onkeyup = function(){
-      searchSkillsByName(this, true);
-    };
-    document.getElementById('cardSearchBar').setAttribute('list', "skillSearchResult");
-    document.getElementById('cardSearch').onclick = getPublicSkillData;
-    /*addCheckBox("1", "Skill Option 1", 'advSearchDetails');
-    addCheckBox("2", "Skill Option 2", 'advSearchDetails');
-    addCheckBox("3", "Skill Option 3", 'advSearchDetails');*/
-  }
-  else if (type === "Tree") {
-    document.getElementById('cardSearchBar').onkeyup = function() {
-      searchTreesByName(document.getElementById('cardSearchBar'), true);
-    };
-    document.getElementById('cardSearchBar').setAttribute('list', "TreeSearchResult");
-    document.getElementById('cardSearch').onclick = getPublicTreeData;
-    /*addCheckBox("1", "Tree Option 1", 'advSearchDetails');
-    addCheckBox("2", "Tree Option 2", 'advSearchDetails');
-    addCheckBox("3", "Tree Option 3", 'advSearchDetails');*/
-  }
-  else if (type === "User"){
-    document.getElementById('cardSearchBar').onkeyup = searchUsersByName;
-    document.getElementById('cardSearchBar').setAttribute('list', "UserSearchResult");
-    document.getElementById('cardSearch').onclick = getPublicUserData;
-    /*addCheckBox("1", "User Option 1", 'advSearchDetails');
-    addCheckBox("2", "User Option 2", 'advSearchDetails');
-    addCheckBox("3", "User Option 3", 'advSearchDetails');*/ // checkboxes disabled for now, for no good use.
-  }
-}
-
 // adds a public tree to the user
 function addTreeToUser(treeToAdd){
   request('POST', '/protected/addTreeToUser', treeToAdd, function() {
@@ -97,6 +64,14 @@ function addTreeToUser(treeToAdd){
         else if (this.response.message == "notfound") alert("The tree is not found.");
       }
   });
+}
+
+function closeModal(modal){
+  window.onclick = function(event) {
+      if (event.target == modal) {
+          modal.style.display = "none";
+      }
+  }
 }
 
 // confirm the changes made to skill levels.
@@ -171,11 +146,7 @@ function addTraining () {
         modal.style.display = "none";
     }
 
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
+    closeModal(modal);
 
     var save = document.getElementById("saveTrainingsBtn");
     save.onclick = function () {
@@ -241,11 +212,7 @@ function createSkill () {
         modal.style.display = "none";
     }
 
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
+    closeModal(modal);
 
     document.getElementById("loadSkill").style.display = "none";
     document.getElementById("childrenDiv").style.display = "none";
