@@ -261,6 +261,10 @@ class ItemContainer {
             if (this.parentObj.self) {
                 var children = this.parentObj.skill.children;
 
+                if (this.parentObj.skill.achievedPoint > 0) {
+                this.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xCCAA00, 1)];
+                }
+
                 // Increase skill level
                 if (this.parentObj.skill.achievedPoint < this.parentObj.skill.maxPoint) {
                     change = true;
@@ -268,6 +272,8 @@ class ItemContainer {
                     document.getElementById('submitBtn').href = "";
                     this.parentObj.skill.achievedPoint++;
                     this.levelinfo.text = (this.parentObj.skill.achievedPoint + "/" + this.parentObj.skill.maxPoint);
+
+                    // SKILL with max points
                     if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint) {
                         this.parentObj.tick.alpha = 1;
                         this.parentObj.skillborder.filters = null;
@@ -329,6 +335,9 @@ class ItemContainer {
                         if(this.skills[i].achievedPoint == this.skills[i].maxPoint) {
                           this.skills[i].itemcontainer.skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0x007F0E, 1)];
                         }
+                        if (this.parentObj.skill.achievedPoint > 0) {
+                        this.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xCCAA00, 1)];
+                        }
                     }
                     else {
                         this.skills[i].itemcontainer.skillborder.filters = null;
@@ -341,6 +350,9 @@ class ItemContainer {
 
                         if(this.skills[i].achievedPoint == this.skills[i].maxPoint) {
                           this.skills[i].itemcontainer.skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0x007F0E, 1)];
+                        }
+                        if (this.parentObj.skill.achievedPoint > 0) {
+                        this.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xCCAA00, 1)];
                         }
                     }
                 }
