@@ -400,7 +400,6 @@ function editMySkill () {
                 parentsTable.rows[i + 1].cells[0].children[0].value = parent.name;
                 parentsTable.rows[i + 1].cells[1].children[0].value = skillAtParent.minPoint;
                 parentsTable.rows[i + 1].cells[2].children[0].checked = !skillAtParent.recommended;
-
             }
 
             var childrenTable = document.getElementById('childrenTable');
@@ -475,7 +474,7 @@ function editMySkill () {
             parents.push({
                 name: parentsTable.rows[i].cells[0].children[0].value,
                 minPoint: parentsTable.rows[i].cells[1].children[0].value,
-                recommended: parentsTable.rows[i].cells[2].children[0].value
+                recommended: !parentsTable.rows[i].cells[2].children[0].checked
             });
         }
 
@@ -485,7 +484,7 @@ function editMySkill () {
             children.push({
                 name: childrenTable.rows[i].cells[0].children[0].value,
                 minPoint: childrenTable.rows[i].cells[1].children[0].value,
-                recommended: childrenTable.rows[i].cells[2].children[0].value
+                recommended: !childrenTable.rows[i].cells[2].children[0].checked
             });
         }
 

@@ -937,8 +937,6 @@ protectedRoute.post('/editmyskill', async function (req, res) {
 
 		if (data.maxPoint < skill.achievedPoint) skill.achievedPoint = data.maxPoint;
 
-		console.log(user.skills.find(obj => obj.name == data.name));
-		console.log(skill);
 		//user.skills.find(obj => obj.name == data.name) = skill;
 		user.save(function (err) {if (err) throw err;});
 
