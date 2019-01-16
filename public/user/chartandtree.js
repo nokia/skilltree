@@ -799,6 +799,7 @@ function addSkillToList (skillsToAdd) {
                                 }
                             }
 
+                            console.log(skillsToAdd);
                             skillList.size = skillList.length;
                         }
                     } else {
@@ -836,6 +837,7 @@ function deleteSkillFromList (skillsToAdd) {
                 }
             }
 
+            console.log(skillsToAdd);
             skillList.size = skillList.length;
         }
     }
