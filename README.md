@@ -2,15 +2,25 @@
 
 Skill tree is a web app to visualize skills, motivating people for self-development and supporting the culture of cooperation and knowledge sharing.
 
-Main features:
-
+**Main features:**
   - Record your current skills and their levels in a visual form
   - Immediately see the self-development options ahead of you (increase awareness of skills, available help & trainings)
   - Inspire people to think about their future & create a personal learning plan with time-framed steps
   - Find people fast with a specific skill & willingness to share their knowledge (enhance collaboration)
   - Making it easy to offer/request training for a specific skill and a specific skill level (build p2p training culture)
 
+##### Planned features [[See on Waffle.io]](https://waffle.io/sicambria/skilltree)
+
+  [![Waffle.io - Columns and their card count](https://badge.waffle.io/sicambria/skilltree.svg?columns=inbox,backlog,in%20progress)](https://waffle.io/sicambria/skilltree)
+
 ## Tech
+
+##### Code quality
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/0315c0b0650106013493/maintainability)](https://codeclimate.com/github/sicambria/skilltree/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/0315c0b0650106013493/test_coverage)](https://codeclimate.com/github/sicambria/skilltree/test_coverage)
+
+
 
 Skill Tree needs the following components to operate:
 
