@@ -368,7 +368,7 @@ function editMySkill () {
         if (data.skills.find(obj => obj.name == skillName) !== undefined) {
             var skill = data.skills.find(obj => obj.name == skillName);
 
-            loadSkill(skill);
+            loadSkillToEditor(skill);
         }
     }
 
@@ -483,7 +483,7 @@ function editSkill () {
         if (data.skills.find(obj => obj.name == skillName) !== undefined) {
             var skill = data.skills.find(obj => obj.name == skillName);
 
-            loadSkill(skill);
+            loadSkillToEditor(skill);
         }
     }
 
@@ -553,7 +553,7 @@ function editSkill () {
     };
 }
 
-function loadSkill (skill) {
+function loadSkillToEditor (skill) {
     document.getElementById('newSkillName').value = skill.name;
     document.getElementById('newSkillDesc').value = skill.description;
     document.getElementById('newSkillIcon').value = skill.skillIcon;
