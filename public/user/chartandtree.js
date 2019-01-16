@@ -553,7 +553,7 @@ function editSkill () {
     };
 }
 
-async function loadSkillToEditor (skill, global) {
+function loadSkillToEditor (skill, global) {
     document.getElementById('newSkillName').value = skill.name;
     document.getElementById('newSkillDesc').value = skill.description;
     document.getElementById('newSkillIcon').value = skill.skillIcon;
@@ -587,21 +587,23 @@ async function loadSkillToEditor (skill, global) {
     for (var i = 0; i < skill.parents.length; ++i) {
         if (i < skill.parents.length - 1) addRow("parentsTable");
 
-        var parent = undefined;
         if (global) {
-            await request('POST', '/protected/getskill', {value: skill.parents[i].name}, await function() { // !!!!!!!
+            request('POST', '/protected/getskill', {value: skill.parents[i].name}, function() { // !!!!!!!
                 if (this.readyState == 4 && this.status == 200) {
-                    parent = this.response.skill;
+                    var parent = this.response.skill;
+                    var skillAtParent = parent.children.find(obj => obj.name == skill.name);
+                    parentsTable.rows[i + 1].cells[0].children[0].value = parent.name;
+                    parentsTable.rows[i + 1].cells[1].children[0].value = skillAtParent.minPoint;
+                    parentsTable.rows[i + 1].cells[2].children[0].checked = !skillAtParent.recommended;
                 }
             });
         } else {
-            parent = data.skills.find(obj => obj.name == skill.parents[i]);
+            var parent = data.skills.find(obj => obj.name == skill.parents[i]);
+            var skillAtParent = parent.children.find(obj => obj.name == skill.name);
+            parentsTable.rows[i + 1].cells[0].children[0].value = parent.name;
+            parentsTable.rows[i + 1].cells[1].children[0].value = skillAtParent.minPoint;
+            parentsTable.rows[i + 1].cells[2].children[0].checked = !skillAtParent.recommended;
         }
-
-        var skillAtParent = parent.children.find(obj => obj.name == skill.name);
-        parentsTable.rows[i + 1].cells[0].children[0].value = parent.name;
-        parentsTable.rows[i + 1].cells[1].children[0].value = skillAtParent.minPoint;
-        parentsTable.rows[i + 1].cells[2].children[0].checked = !skillAtParent.recommended;
     }
 
     var childrenTable = document.getElementById('childrenTable');
