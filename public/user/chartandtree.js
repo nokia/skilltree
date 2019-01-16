@@ -482,6 +482,7 @@ function editSkill () {
             if(this.readyState == 4 && this.status == 200) {
                 skillSearchResult.innerHTML = "";
 
+                console.log(this.response);
                 loadSkillToEditor(this.response.skill);
             }
         });
