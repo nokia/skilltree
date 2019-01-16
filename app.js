@@ -359,6 +359,7 @@ protectedRoute.post('/getPublicUserData', async function (req, res) {
 
 // Getting the name, skillnames, focusarea of a tree.
 protectedRoute.post('/getPublicTreeData', async function (req, res) {
+		console.log(req.body);
 		var data = req.body;
     var foundTrees = await Tree.find({
 					"name": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
@@ -366,6 +367,7 @@ protectedRoute.post('/getPublicTreeData', async function (req, res) {
 					if (err) throw err;
 			return tree;
 		});
+		console.log(foundTrees);
     res.json(foundTrees);
 });
 
