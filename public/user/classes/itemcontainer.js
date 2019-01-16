@@ -260,6 +260,7 @@ class ItemContainer {
                 if (this.parentObj.skill.achievedPoint < this.parentObj.skill.maxPoint) {
                     change = true;
                     document.getElementById('submitBtn').innerText = "Save";
+                    document.getElementById('submitBtn').href = "";
                     this.parentObj.skill.achievedPoint++;
                     this.levelinfo.text = (this.parentObj.skill.achievedPoint + "/" + this.parentObj.skill.maxPoint);
                     if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint) {
@@ -284,6 +285,7 @@ class ItemContainer {
             {
                 change = true;
                 document.getElementById('submitBtn').innerText = "Save";
+                document.getElementById('submitBtn').href = "";
                 this.parentObj.skill.achievedPoint--;
                 this.levelinfo.text = (this.parentObj.skill.achievedPoint + "/" + this.parentObj.skill.maxPoint);
 

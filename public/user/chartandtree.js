@@ -123,7 +123,7 @@ window.setInterval(function () {
         submit();
         change = false;
         document.getElementById('submitBtn').innerText = "Saved";
-
+        document.getElementById('submitBtn').removeAttribute('href');
     }
 }, 5000);
 
