@@ -200,7 +200,7 @@ function getPublicSkillData(){
 function switchSearch(type){
   document.getElementById('advSearchDetails').innerHTML = "";
   if (type === "Skill") {
-    if (!document.getElementById('skillSearchResult').includes(document.getElementById('cardSearchBar').value)) {
+    if (Array.from(document.getElementById('skillSearchResult').options).find(obj => obj.value == document.getElementById('cardSearchBar').value) != undefined) {
       document.getElementById('cardSearchBar').onkeyup = function(){
         searchSkillsByName(this, true);
       };
