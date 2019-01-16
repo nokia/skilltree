@@ -478,13 +478,13 @@ function editSkill () {
     var loadSkill = document.getElementById("loadSkill");
     loadSkill.onclick = function(){
         //request for the skill to load data from
-        skillName = document.getElementById('newSkillName').value;
+        request('POST', '/protected/getskill', {name: document.getElementById("newSkillName").value}, function() {
+            if(this.readyState == 4 && this.status == 200) {
+                SkillSearchResult.innerHTML = "";
 
-        if (data.skills.find(obj => obj.name == skillName) !== undefined) {
-            var skill = data.skills.find(obj => obj.name == skillName);
-
-            loadSkillToEditor(skill);
-        }
+                loadSkillToEditor(this.response.skill);
+            }
+        });
     }
 
     //get the save skill button, write the onclick function
