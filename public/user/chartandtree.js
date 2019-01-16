@@ -367,104 +367,10 @@ function editMySkill () {
 
         if (data.skills.find(obj => obj.name == skillName) !== undefined) {
             var skill = data.skills.find(obj => obj.name == skillName);
-            document.getElementById('newSkillName').value = skill.name;
-            document.getElementById('newSkillDesc').value = skill.description;
-            document.getElementById('newSkillIcon').value = skill.skillIcon;
-            document.getElementById('newSkillWiki').value = skill.descriptionWikipediaURL;
-            document.getElementById("newSkillCat").value = skill.categoryName;
 
-            var pointsTable = document.getElementById('pointsTable');
-
-            for (var i = pointsTable.rows.length - 1; i > 1; --i) pointsTable.deleteRow(i);
-
-            pointsTable.rows[1].cells[1].children[0].value = "";
-
-            for (var i = 0; i < skill.pointDescription.length; ++i) {
-                if (i < skill.pointDescription.length - 1) addRow("pointsTable");
-
-                pointsTable.rows[i + 1].cells[1].children[0].value = skill.pointDescription[i];
-            }
-
-
-            //Dropping data from parentsTable
-            var parentsTable = document.getElementById('parentsTable');
-            var i = parentsTable.rows.length - 1;
-            while (i > 1) {
-                parentsTable.deleteRow(i);
-                --i;
-            }
-            parentsTable.rows[1].cells[0].children[0].value = "";
-            parentsTable.rows[1].cells[1].children[0].value = "";
-            parentsTable.rows[1].cells[2].children[0].checked = false;
-
-            for (var i = 0; i < skill.parents.length; ++i) {
-                if (i < skill.parents.length - 1) addRow("parentsTable");
-
-                var parent = data.skills.find(obj => obj.name == skill.parents[i]);
-                var skillAtParent = parent.children.find(obj => obj.name == skill.name);
-
-                parentsTable.rows[i + 1].cells[0].children[0].value = parent.name;
-                parentsTable.rows[i + 1].cells[1].children[0].value = skillAtParent.minPoint;
-                parentsTable.rows[i + 1].cells[2].children[0].checked = !skillAtParent.recommended;
-            }
-
-            var childrenTable = document.getElementById('childrenTable');
-            var i = childrenTable.rows.length - 1;
-            while(i > 1) {
-                childrenTable.deleteRow(i);
-                --i;
-            }
-            childrenTable.rows[1].cells[0].children[0].value = "";
-            childrenTable.rows[1].cells[1].children[0].value = "";
-            childrenTable.rows[1].cells[2].children[0].checked = false;
-
-            for (var i = 0; i < skill.children.length; ++i) {
-                if (i < skill.children.length - 1) addRow("childrenTable");
-
-                childrenTable.rows[i + 1].cells[0].children[0].value = skill.children[i].name;
-                childrenTable.rows[i + 1].cells[1].children[0].value = skill.children[i].minPoint;
-                childrenTable.rows[i + 1].cells[2].children[0].checked = !skill.children[i].recommended;
-            }
-
-            //Dropping data from trainingsTable
-            var trainingsTable = document.getElementById('trainingsTable');
-            var i = trainingsTable.rows.length - 1;
-
-            while (i > 1) {
-                trainingsTable.deleteRow(i);
-                --i;
-            }
-
-            trainingsTable.rows[1].cells[0].children[0].value = "";
-            trainingsTable.rows[1].cells[1].children[0].value = "";
-            trainingsTable.rows[1].cells[2].children[0].value = "";
-            trainingsTable.rows[1].cells[3].children[0].value = "";
-            trainingsTable.rows[1].cells[4].children[0].value = "";
-            trainingsTable.rows[1].cells[5].children[0].value = "";
-            trainingsTable.rows[1].cells[6].children[0].value = "";
-
-            for (var i = 0; i < skill.trainings.length; ++i) {
-                if (i < skill.trainings.length - 1) addRow("trainingsTable");
-
-                trainingsTable.rows[i + 1].cells[0].children[0].value = skill.trainings[i].name;
-                trainingsTable.rows[i + 1].cells[1].children[0].value = skill.trainings[i].level;
-                trainingsTable.rows[i + 1].cells[2].children[0].value = skill.trainings[i].shortDescription;
-                trainingsTable.rows[i + 1].cells[3].children[0].value = skill.trainings[i].URL;
-                trainingsTable.rows[i + 1].cells[4].children[0].value = skill.trainings[i].goal;
-                trainingsTable.rows[i + 1].cells[5].children[0].value = skill.trainings[i].length;
-                trainingsTable.rows[i + 1].cells[6].children[0].value = skill.trainings[i].language;
-            }
+            loadSkill(skill);
         }
     }
-
-    var catSelect = document.getElementById("newSkillCat");
-    catSelect.innerHTML = "";
-    for (var i = 0; i < data.categories.length; ++i) {
-        var option = document.createElement("option");
-        option.text = data.categories[i].name;
-        catSelect.add(option);
-    }
-
 
     //get the save skill button, write the onclick function
     var save = document.getElementById("saveSkillBtn");
@@ -530,6 +436,211 @@ function editMySkill () {
             }
         });
     };
+}
+
+// opens skill editor, user can edit (only) her/his own skills
+function editSkill () {
+    $('.clear').find('input:text').val('');
+    $('.clear').find('textarea').val('');
+
+    var modal = document.getElementById("newSkillModal");
+    modal.style.display = "block";
+
+    var span = document.getElementById("closeSkillModal");
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    document.getElementById("loadSkill").style.display = "block";
+    document.getElementById("newSkillModalTitle").innerText = "Edit skill";
+    document.getElementById("childrenDiv").style.display = "block";
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+            document.getElementById("newSkillModalTitle").innerText = "Create your own skill";
+        }
+    }
+
+    var catSelect = document.getElementById("newSkillCat");
+    catSelect.innerHTML = "";
+    for (var i = 0; i < data.categories.length; ++i) {
+        var option = document.createElement("option");
+        option.text = option.value = data.categories[i].name;
+        catSelect.add(option);
+    }
+
+    var skillName = document.getElementById("newSkillName");
+    skillName.setAttribute('list', 'skillSearchResult');
+    skillName.onkeyup = function() {searchSkillsByName(this, false)};
+
+    var loadSkill = document.getElementById("loadSkill");
+    loadSkill.onclick = function(){
+        //request for the skill to load data from
+        skillName = document.getElementById('newSkillName').value;
+
+        if (data.skills.find(obj => obj.name == skillName) !== undefined) {
+            var skill = data.skills.find(obj => obj.name == skillName);
+
+            loadSkill(skill);
+        }
+    }
+
+    //get the save skill button, write the onclick function
+    var save = document.getElementById("saveSkillBtn");
+    save.onclick = function () {
+        var pointsTable = document.getElementById('pointsTable');
+        var pointsNum = pointsTable.rows.length - 1;
+        var pointDescription = [];
+        for (i = 1; i < pointsNum + 1; ++i) pointDescription.push(pointsTable.rows[i].cells[1].children[0].value);
+
+        var parentsTable = document.getElementById('parentsTable');
+        var parents = [];
+        for (i = 1; i < parentsTable.rows.length; ++i) {
+            parents.push({
+                name: parentsTable.rows[i].cells[0].children[0].value,
+                minPoint: parentsTable.rows[i].cells[1].children[0].value,
+                recommended: !parentsTable.rows[i].cells[2].children[0].checked
+            });
+        }
+
+        var childrenTable = document.getElementById('childrenTable');
+        var children = [];
+        for (i = 1; i < childrenTable.rows.length; ++i) {
+            children.push({
+                name: childrenTable.rows[i].cells[0].children[0].value,
+                minPoint: childrenTable.rows[i].cells[1].children[0].value,
+                recommended: !childrenTable.rows[i].cells[2].children[0].checked
+            });
+        }
+
+        var trainingsTable = document.getElementById('trainingsTable');
+        var trainings = [];
+        for (i = 1; i < trainingsTable.rows.length; ++i) {
+            trainings.push({
+                name: trainingsTable.rows[i].cells[0].children[0].value,
+                level: trainingsTable.rows[i].cells[1].children[0].value,
+                shortDescription: trainingsTable.rows[i].cells[2].children[0].value,
+                URL: trainingsTable.rows[i].cells[3].children[0].value,
+                goal: trainingsTable.rows[i].cells[4].children[0].value,
+                length: trainingsTable.rows[i].cells[5].children[0].value,
+                language: trainingsTable.rows[i].cells[6].children[0].value
+            });
+        }
+
+        var skillData = {
+            name: document.getElementById('newSkillName').value,
+            description: document.getElementById('newSkillDesc').value,
+            skillIcon: document.getElementById('newSkillIcon').value,
+            descriptionWikipediaURL: document.getElementById('newSkillWiki').value,
+            categoryName: catSelect.value,
+            maxPoint: pointsNum,
+            pointDescription: pointDescription,
+            parents: parents,
+            children: children,
+            trainings: trainings
+        };
+
+        request('POST', '/protected/editmyskill', skillData, function () {
+            if (this.readyState == 4 && this.status == 200) {
+                if (this.response.success) {
+                    modal.style.display = "none";
+                    window.open("/user/", "_self");
+                }
+            }
+        });
+    };
+}
+
+function loadSkill (skill) {
+    document.getElementById('newSkillName').value = skill.name;
+    document.getElementById('newSkillDesc').value = skill.description;
+    document.getElementById('newSkillIcon').value = skill.skillIcon;
+    document.getElementById('newSkillWiki').value = skill.descriptionWikipediaURL;
+    document.getElementById("newSkillCat").value = skill.categoryName;
+
+    var pointsTable = document.getElementById('pointsTable');
+
+    for (var i = pointsTable.rows.length - 1; i > 1; --i) pointsTable.deleteRow(i);
+
+    pointsTable.rows[1].cells[1].children[0].value = "";
+
+    for (var i = 0; i < skill.pointDescription.length; ++i) {
+        if (i < skill.pointDescription.length - 1) addRow("pointsTable");
+
+        pointsTable.rows[i + 1].cells[1].children[0].value = skill.pointDescription[i];
+    }
+
+
+    //Dropping data from parentsTable
+    var parentsTable = document.getElementById('parentsTable');
+    var i = parentsTable.rows.length - 1;
+    while (i > 1) {
+        parentsTable.deleteRow(i);
+        --i;
+    }
+    parentsTable.rows[1].cells[0].children[0].value = "";
+    parentsTable.rows[1].cells[1].children[0].value = "";
+    parentsTable.rows[1].cells[2].children[0].checked = false;
+
+    for (var i = 0; i < skill.parents.length; ++i) {
+        if (i < skill.parents.length - 1) addRow("parentsTable");
+
+        var parent = data.skills.find(obj => obj.name == skill.parents[i]);
+        var skillAtParent = parent.children.find(obj => obj.name == skill.name);
+
+        parentsTable.rows[i + 1].cells[0].children[0].value = parent.name;
+        parentsTable.rows[i + 1].cells[1].children[0].value = skillAtParent.minPoint;
+        parentsTable.rows[i + 1].cells[2].children[0].checked = !skillAtParent.recommended;
+    }
+
+    var childrenTable = document.getElementById('childrenTable');
+    var i = childrenTable.rows.length - 1;
+    while(i > 1) {
+        childrenTable.deleteRow(i);
+        --i;
+    }
+    childrenTable.rows[1].cells[0].children[0].value = "";
+    childrenTable.rows[1].cells[1].children[0].value = "";
+    childrenTable.rows[1].cells[2].children[0].checked = false;
+
+    for (var i = 0; i < skill.children.length; ++i) {
+        if (i < skill.children.length - 1) addRow("childrenTable");
+
+        childrenTable.rows[i + 1].cells[0].children[0].value = skill.children[i].name;
+        childrenTable.rows[i + 1].cells[1].children[0].value = skill.children[i].minPoint;
+        childrenTable.rows[i + 1].cells[2].children[0].checked = !skill.children[i].recommended;
+    }
+
+    //Dropping data from trainingsTable
+    var trainingsTable = document.getElementById('trainingsTable');
+    var i = trainingsTable.rows.length - 1;
+
+    while (i > 1) {
+        trainingsTable.deleteRow(i);
+        --i;
+    }
+
+    trainingsTable.rows[1].cells[0].children[0].value = "";
+    trainingsTable.rows[1].cells[1].children[0].value = "";
+    trainingsTable.rows[1].cells[2].children[0].value = "";
+    trainingsTable.rows[1].cells[3].children[0].value = "";
+    trainingsTable.rows[1].cells[4].children[0].value = "";
+    trainingsTable.rows[1].cells[5].children[0].value = "";
+    trainingsTable.rows[1].cells[6].children[0].value = "";
+
+    for (var i = 0; i < skill.trainings.length; ++i) {
+        if (i < skill.trainings.length - 1) addRow("trainingsTable");
+
+        trainingsTable.rows[i + 1].cells[0].children[0].value = skill.trainings[i].name;
+        trainingsTable.rows[i + 1].cells[1].children[0].value = skill.trainings[i].level;
+        trainingsTable.rows[i + 1].cells[2].children[0].value = skill.trainings[i].shortDescription;
+        trainingsTable.rows[i + 1].cells[3].children[0].value = skill.trainings[i].URL;
+        trainingsTable.rows[i + 1].cells[4].children[0].value = skill.trainings[i].goal;
+        trainingsTable.rows[i + 1].cells[5].children[0].value = skill.trainings[i].length;
+        trainingsTable.rows[i + 1].cells[6].children[0].value = skill.trainings[i].language;
+    }
 }
 
 var skillsToAdd = [];
