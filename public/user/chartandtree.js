@@ -553,41 +553,7 @@ function createTree () {
     var skillList = document.getElementById("skillList");
     var skillsToAdd = [];
     addBtn.onclick = function () {
-        var skill = {value: document.getElementById('skillSearchTree').value};
 
-        request('POST', '/protected/getskill', skill, function() {
-            if(this.readyState == 4 && this.status == 200) {
-                if (this.response.success) {
-                    if (skillsToAdd.find(obj => obj.name == this.response.skill.name) == undefined) {
-                        if (this.response.dependency.length > 0) {
-                            var text = "The selected skill depends on the following skills. Do you want to add these?\n";
-                            for (var i = 0; i < this.response.dependency.length; ++i) {
-                                text += this.response.dependency[i].name + "\n";
-                            }
-                            if (confirm(text)) {
-                                skillsToAdd.push(this.response.skill);
-                                var option = document.createElement("option");
-                                option.text = this.response.skill.name;
-                                skillList.add(option);
-                                for (var i = 0; i < this.response.dependency.length; ++i) {
-                                    if (skillsToAdd.find(obj => obj.name == this.response.dependency[i].name) == undefined) {
-                                        skillsToAdd.push(this.response.dependency[i]);
-                                        var option = document.createElement("option");
-                                        option.text = this.response.dependency[i].name;
-                                        skillList.add(option);
-                                    }
-                                }
-                            }
-                        } else {
-                            skillsToAdd.push(this.response.skill);
-                            var option = document.createElement("option");
-                            option.text = this.response.skill.name;
-                            skillList.add(option);
-                        }
-                    } else alert("You have already added this skill");
-                } else alert("Skill is not found");
-            }
-        });
     };
 
     var createSkillBtn = document.getElementById("createSkill");
@@ -705,41 +671,7 @@ function editMyTree () {
 
     var addBtn = document.getElementById("addToTree");
     addBtn.onclick = function () {
-        var skill = {value: document.getElementById('skillSearchTree').value};
-
-        request('POST', '/protected/getskill', skill, function() {
-            if(this.readyState == 4 && this.status == 200) {
-                if (this.response.success) {
-                    if (skillsToAdd.find(obj => obj.name == this.response.skill.name) == undefined) {
-                        if (this.response.dependency.length > 0) {
-                            var text = "The selected skill depends on the following skills. Do you want to add these?\n";
-                            for (var i = 0; i < this.response.dependency.length; ++i) {
-                                text += this.response.dependency[i].name + "\n";
-                            }
-                            if (confirm(text)) {
-                                skillsToAdd.push(this.response.skill);
-                                var option = document.createElement("option");
-                                option.text = this.response.skill.name;
-                                skillList.add(option);
-                                for (var i = 0; i < this.response.dependency.length; ++i) {
-                                    if (skillsToAdd.find(obj => obj.name == this.response.dependency[i].name) == undefined) {
-                                        skillsToAdd.push(this.response.dependency[i]);
-                                        var option = document.createElement("option");
-                                        option.text = this.response.dependency[i].name;
-                                        skillList.add(option);
-                                    }
-                                }
-                            }
-                        } else {
-                            skillsToAdd.push(this.response.skill);
-                            var option = document.createElement("option");
-                            option.text = this.response.skill.name;
-                            skillList.add(option);
-                        }
-                    } else alert("You have already added this skill");
-                } else alert("Skill is not found");
-            }
-        });
+        addSkillToList(skillsToAdd);
     };
 
     var createSkillBtn = document.getElementById("createSkill");
@@ -840,41 +772,7 @@ function editTree () {
 
     var addBtn = document.getElementById("addToTree");
     addBtn.onclick = function () {
-        var skill = {value: document.getElementById('skillSearchTree').value};
-
-        request('POST', '/protected/getskill', skill, function() {
-            if(this.readyState == 4 && this.status == 200) {
-                if (this.response.success) {
-                    if (skillsToAdd.find(obj => obj.name == this.response.skill.name) == undefined) {
-                        if (this.response.dependency.length > 0) {
-                            var text = "The selected skill depends on the following skills. Do you want to add these?\n";
-                            for (var i = 0; i < this.response.dependency.length; ++i) {
-                                text += this.response.dependency[i].name + "\n";
-                            }
-                            if (confirm(text)) {
-                                skillsToAdd.push(this.response.skill);
-                                var option = document.createElement("option");
-                                option.text = this.response.skill.name;
-                                skillList.add(option);
-                                for (var i = 0; i < this.response.dependency.length; ++i) {
-                                    if (skillsToAdd.find(obj => obj.name == this.response.dependency[i].name) == undefined) {
-                                        skillsToAdd.push(this.response.dependency[i]);
-                                        var option = document.createElement("option");
-                                        option.text = this.response.dependency[i].name;
-                                        skillList.add(option);
-                                    }
-                                }
-                            }
-                        } else {
-                            skillsToAdd.push(this.response.skill);
-                            var option = document.createElement("option");
-                            option.text = this.response.skill.name;
-                            skillList.add(option);
-                        }
-                    } else alert("You have already added this skill");
-                } else alert("Skill is not found");
-            }
-        });
+        addSkillToList(skillsToAdd);
     };
 
     var createSkillBtn = document.getElementById("createSkill");
@@ -929,6 +827,44 @@ function editTree () {
             } else alert("Please add at least one skill to the tree");
         } else alert("Please provide a name to the tree");
     };
+}
+
+function addSkillToList (skillsToAdd) {
+    var skill = {value: document.getElementById('skillSearchTree').value};
+
+    request('POST', '/protected/getskill', skill, function() {
+        if(this.readyState == 4 && this.status == 200) {
+            if (this.response.success) {
+                if (skillsToAdd.find(obj => obj.name == this.response.skill.name) == undefined) {
+                    if (this.response.dependency.length > 0) {
+                        var text = "The selected skill depends on the following skills. Do you want to add these?\n";
+                        for (var i = 0; i < this.response.dependency.length; ++i) {
+                            text += this.response.dependency[i].name + "\n";
+                        }
+                        if (confirm(text)) {
+                            skillsToAdd.push(this.response.skill);
+                            var option = document.createElement("option");
+                            option.text = this.response.skill.name;
+                            skillList.add(option);
+                            for (var i = 0; i < this.response.dependency.length; ++i) {
+                                if (skillsToAdd.find(obj => obj.name == this.response.dependency[i].name) == undefined) {
+                                    skillsToAdd.push(this.response.dependency[i]);
+                                    var option = document.createElement("option");
+                                    option.text = this.response.dependency[i].name;
+                                    skillList.add(option);
+                                }
+                            }
+                        }
+                    } else {
+                        skillsToAdd.push(this.response.skill);
+                        var option = document.createElement("option");
+                        option.text = this.response.skill.name;
+                        skillList.add(option);
+                    }
+                } else alert("You have already added this skill");
+            } else alert("Skill is not found");
+        }
+    });
 }
 
 function getChildren (skills, skill, children) {
