@@ -171,7 +171,11 @@ function addTraining () {
         modal.style.display = "none";
     }
 
-    closeModal(modal);
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 
     var save = document.getElementById("saveTrainingsBtn");
     save.onclick = function () {
@@ -237,7 +241,11 @@ function createSkill () {
         modal.style.display = "none";
     }
 
-    closeModal(modal);
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 
     document.getElementById("loadSkill").style.display = "none";
     document.getElementById("childrenDiv").style.display = "none";
