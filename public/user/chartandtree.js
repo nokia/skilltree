@@ -736,6 +736,7 @@ function editTree () {
 
     var addBtn = document.getElementById("addToTree");
     addBtn.onclick = function () {
+        console.log(skillsToAdd);
         addSkillToList(skillsToAdd);
     };
 
@@ -745,6 +746,7 @@ function editTree () {
     var deleteBtn = document.getElementById("deleteFromList");
     deleteBtn.onclick = function () {
         deleteSkillFromList(skillsToAdd);
+        console.log(skillsToAdd);
     };
 
     var createBtn = document.getElementById("createTree");
@@ -779,7 +781,6 @@ function addSkillToList (skillsToAdd) {
     request('POST', '/protected/getskill', skill, function() {
         if(this.readyState == 4 && this.status == 200) {
             if (this.response.success) {
-                console.log(skillsToAdd);
                 if (skillsToAdd.find(obj => obj.name == this.response.skill.name) == undefined) {
                     if (this.response.dependency.length > 0) {
                         var text = "The selected skill depends on the following skills. Do you want to add these?\n";
@@ -807,7 +808,6 @@ function addSkillToList (skillsToAdd) {
                         skillList.add(option);
                     }
 
-                    console.log(skillsToAdd);
                     //skillList.size = skillList.length;
                 } else alert("You have already added this skill");
             } else alert("Skill is not found");
@@ -840,7 +840,6 @@ function deleteSkillFromList (skillsToAdd) {
         }
     }
 
-    console.log(skillsToAdd);
     //skillList.size = skillList.length;
 }
 
