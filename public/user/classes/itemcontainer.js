@@ -662,6 +662,7 @@ class ItemContainer {
 
         desc.innerText = this.skill.description;
         wikiURL.href = this.skill.descriptionWikipediaURL;
+        wikiURL.target = '_blank';
         categ.innerText = this.skill.categoryName;
         maxP.innerText = this.skill.maxPoint;
 
@@ -693,7 +694,7 @@ class ItemContainer {
         var trainingNames = '';
         for (var i = 0; i < this.skill.trainings.length; ++i) {
             if (this.skill.trainings[i].URL == undefined) trainingNames += this.skill.trainings[i].name + ', ';
-            else trainingNames += "<a href = '" + this.skill.trainings[i].URL + "'>" + this.skill.trainings[i].name + '</a>, ';
+            else trainingNames += "<a target='_blank' href = '" + this.skill.trainings[i].URL + "'>" + this.skill.trainings[i].name + '</a>, ';
         }
         if (trainingNames != '') {
             trainingNames = trainingNames.substring(0, trainingNames.length - 2);
