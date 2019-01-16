@@ -603,14 +603,10 @@ function loadSkillToEditor (skill, global) {
         trainingsTable.deleteRow(i);
         --i;
     }
+    for (var j = 0; j < 7; j++) {
+      trainingsTable.rows[1].cells[j].children[0].value = "";
+    }
 
-    trainingsTable.rows[1].cells[0].children[0].value = "";
-    trainingsTable.rows[1].cells[1].children[0].value = "";
-    trainingsTable.rows[1].cells[2].children[0].value = "";
-    trainingsTable.rows[1].cells[3].children[0].value = "";
-    trainingsTable.rows[1].cells[4].children[0].value = "";
-    trainingsTable.rows[1].cells[5].children[0].value = "";
-    trainingsTable.rows[1].cells[6].children[0].value = "";
 
     for (var i = 0; i < skill.trainings.length; ++i) {
         if (i < skill.trainings.length - 1) addRow("trainingsTable");

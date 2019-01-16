@@ -43,12 +43,7 @@ app.get('/apitest', async function(req,res) {
 
 app.post('/registration', async function(req, res) {
 	// search for username in db
-    var user = await User.findOne({
-        username: req.body.username,
-    }, function (err, user) {
-        if (err) throw err;
-		return user;
-    });
+    var user = findUser(req.body.username);
 
 	if (!user) { // if new user
 		var hashData = pbkdf2.hashPassword(req.body.password);
@@ -279,12 +274,7 @@ protectedRoute.post('/searchUsersByName', async function (req, res) {
 protectedRoute.post('/searchSkillsByName', async function (req, res) {
 		var data = req.body;
 
-        var user = await User.findOne({
-            username: req.decoded.username
-        }, function(err, user) {
-            if (err) throw err;
-    		return user;
-        });
+        var user = findUser(req.decoded.username);
 
         user = user.toObject();
         var foundUserSkills = user.skills.filter(obj => obj.name.match(new RegExp(".*" + data.value + ".*", "i")) != null);
@@ -310,12 +300,7 @@ protectedRoute.post('/searchSkillsByName', async function (req, res) {
 protectedRoute.post('/searchUserSkillsByName', async function (req, res) {
 		var data = req.body;
 
-        var user = await User.findOne({
-            username: req.decoded.username
-        }, function(err, user) {
-            if (err) throw err;
-    		return user;
-        });
+        var user = findUser(req.decoded.username);
 
         user = user.toObject();
         var foundUserSkills = user.skills.filter(obj => obj.name.match(new RegExp(".*" + data.value + ".*", "i")) != null);
@@ -386,12 +371,7 @@ protectedRoute.post('/getPublicSkillData', async function (req, res) {
 // Adds a public tree to the current user.
 protectedRoute.post('/addTreeToUser', async function (req, res){
 	var data = req.body;
-	var user = await User.findOne({
-			username: req.decoded.username
-	}, function(err, user) {
-			if (err) throw err;
-	return user;
-	});
+	var user = findUser(req.decoded.username);
 	var tree = await Tree.findOne({"name": data.value},  function (err, tree) {
 		if (err) throw err;
 		return tree;
@@ -437,12 +417,7 @@ protectedRoute.post('/addTreeToUser', async function (req, res){
 protectedRoute.post('/getskill', async function (req, res) {
 	var data = req.body;
 
-    var user = await User.findOne({
-        username: req.decoded.username
-    }, function(err, user) {
-        if (err) throw err;
-		return user;
-    });
+    var user = findUser(req.decoded.username);
 
 	if (!user) {
 		res.json({
@@ -608,12 +583,7 @@ async function sortTree(skillArray){
 protectedRoute.post('/newtraining', async function(req, res) {
     var data = req.body;
 
-    var user = await User.findOne({
-        username: req.decoded.username
-    }, function(err, user) {
-        if (err) throw err;
-		return user;
-    });
+    var user = findUser(req.decoded.username);
 
 	if (!user) {
 		res.json({
@@ -666,12 +636,7 @@ protectedRoute.post('/newtraining', async function(req, res) {
 protectedRoute.post('/newskill', async function(req, res) {
     var data = req.body;
 
-    var user = await User.findOne({
-        username: req.decoded.username
-    }, function(err, user) {
-        if (err) throw err;
-		return user;
-    });
+    var user = findUser(req.decoded.username);
 
 	if (!user) {
 		res.json({
@@ -760,12 +725,7 @@ protectedRoute.post('/newskill', async function(req, res) {
 // creates a new tree only for the user.
 protectedRoute.post('/newtree', async function (req, res) {
 	var data = req.body;
-    var user = await User.findOne({
-        username: req.decoded.username
-    }, function(err, user) {
-        if (err) throw err;
-		return user;
-    });
+    var user = findUser(req.decoded.username);
 	if (!user) {
 		res.json({
 			success: false,
@@ -822,12 +782,7 @@ protectedRoute.post('/newtree', async function (req, res) {
 // creates a new tree only for the user.
 protectedRoute.post('/editmytree', async function (req, res) {
     var data = req.body;
-    var user = await User.findOne({
-        username: req.decoded.username
-    }, function(err, user) {
-        if (err) throw err;
-        return user;
-    });
+    var user = findUser(req.decoded.username);
 
     if (!user) {
         res.json({
@@ -866,12 +821,7 @@ protectedRoute.post('/editmytree', async function (req, res) {
 
 protectedRoute.post('/editmyskill', async function (req, res) {
 	var data = req.body;
-    var user = await User.findOne({
-        username: req.decoded.username
-    }, function(err, user) {
-        if (err) throw err;
-        return user;
-    });
+    var user = findUser(req.decoded.username);
 
     if (!user) {
         res.json({
@@ -968,12 +918,7 @@ protectedRoute.post('/gettree', async function (req, res) {
 protectedRoute.post('/addskilltotree', async function(req, res) {
     var data = req.body;
 
-    var user = await User.findOne({
-        username: req.decoded.username
-    }, function(err, user) {
-        if (err) throw err;
-		return user;
-    });
+    var user = findUser(req.decoded.username);
 
 	if (!user) {
 		res.json({
@@ -1011,12 +956,7 @@ protectedRoute.post('/skilldata', function(req, res) {
 protectedRoute.post('/firstlogindata', async function (req, res) {
 	var data = req.body;
 
-    var user = await User.findOne({
-        username: req.decoded.username
-    }, function(err, user) {
-        if (err) throw err;
-		return user;
-    });
+    var user = findUser(req.decoded.username);
 
 	if (!user) {
 		res.json({
@@ -1063,12 +1003,7 @@ protectedRoute.post('/firstlogindata', async function (req, res) {
 protectedRoute.post('/submitall', async function (req, res) {
 	var data = req.body;
 
-    var user = await User.findOne({
-        username: req.decoded.username
-    }, function(err, user) {
-        if (err) throw err;
-		return user;
-    });
+    var user = findUser(req.decoded.username);
 
 	if (!user) {
 		res.json({
@@ -1121,12 +1056,7 @@ protectedRoute.post('/submitall', async function (req, res) {
 // searches a userskill
 protectedRoute.post('/searchUserSkillByName', async function (req, res) {
 
-	var user = await User.findOne({
-		username: req.decoded.username
-	}, function(err, user) {
-		if (err) throw err;
-		return user;
-	});
+	var user = findUser(req.decoded.username);
 
 	var skill = user.skills.find(obj => obj.name == req.body.name);
 
@@ -1135,12 +1065,7 @@ protectedRoute.post('/searchUserSkillByName', async function (req, res) {
 
 /*protectedRoute.post('/parentTableData', async function (req, res) {
 
-	var user = await User.findOne({
-		username: req.decoded.username
-	}, function(err, user) {
-		if (err) throw err;
-		return user;
-	});
+	var user = findUser(req.decoded.username);
 
 
 	var parents = [];
@@ -1170,10 +1095,7 @@ protectedRoute.post('/searchUserSkillByName', async function (req, res) {
 //API call for request onclick
 protectedRoute.post('/request', async function (req, res){
 
-	var user = await User.findOne({username: req.decoded.username}, function(err, user) {
-		if (err) throw err;
-		return user;
-	});
+	var user = await findUser(req.decoded.username);
 
 	var skill = await Skill.findOne({name: req.body.name},  function (err, skill) {
 		if (err) throw err;
@@ -1287,12 +1209,7 @@ protectedRoute.post('/request', async function (req, res){
 
 protectedRoute.post('/endorse', async function (req, res) {
   var data = req.body;
-  var user = await User.findOne({
-    username: data.username
-  }, function(err, user) {
-    if (err) throw err;
-    return user;
-  });
+  var user = findUser(data.username);
   if (!user) {
     res.json({
       success: false,
@@ -1677,7 +1594,15 @@ adminRoute.get('/testAdmin', async function (req,res){
 
 });
 
-
+function findUser(unm) {
+	var user = await User.findOne({
+			username: unm,
+	}, function (err, user) {
+			if (err) throw err;
+	return user;
+	});
+	return user;
+}
 
 module.exports = app;
 
