@@ -798,6 +798,8 @@ function addSkillToList (skillsToAdd) {
                                     skillList.add(option);
                                 }
                             }
+
+                            skillList.size = skillList.length;
                         }
                     } else {
                         skillsToAdd.push(this.response.skill);
@@ -833,6 +835,8 @@ function deleteSkillFromList (skillsToAdd) {
                     if (skillList.options[j].text == children[i].name) skillList.remove(j);
                 }
             }
+
+            skillList.size = skillList.length;
         }
     }
 }
