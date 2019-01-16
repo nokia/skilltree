@@ -368,7 +368,7 @@ function editMySkill () {
         if (data.skills.find(obj => obj.name == skillName) !== undefined) {
             var skill = data.skills.find(obj => obj.name == skillName);
 
-            loadSkillToEditor(skill);
+            loadSkillToEditor(skill, false);
         }
     }
 
@@ -482,8 +482,7 @@ function editSkill () {
             if(this.readyState == 4 && this.status == 200) {
                 skillSearchResult.innerHTML = "";
 
-                console.log(this.response);
-                loadSkillToEditor(this.response.skill);
+                loadSkillToEditor(this.response.skill, true);
             }
         });
     }
@@ -554,7 +553,7 @@ function editSkill () {
     };
 }
 
-function loadSkillToEditor (skill) {
+async function loadSkillToEditor (skill, global) {
     document.getElementById('newSkillName').value = skill.name;
     document.getElementById('newSkillDesc').value = skill.description;
     document.getElementById('newSkillIcon').value = skill.skillIcon;
@@ -588,9 +587,18 @@ function loadSkillToEditor (skill) {
     for (var i = 0; i < skill.parents.length; ++i) {
         if (i < skill.parents.length - 1) addRow("parentsTable");
 
-        var parent = data.skills.find(obj => obj.name == skill.parents[i]);
-        var skillAtParent = parent.children.find(obj => obj.name == skill.name);
+        var parent = undefined;
+        if (global) {
+            await request('POST', '/protected/getskill', {value: skill.parents[i].name}, function() { // !!!!!!!
+                if (this.readyState == 4 && this.status == 200) {
+                    parent = this.response.skill;
+                }
+            });
+        } else {
+            parent = data.skills.find(obj => obj.name == skill.parents[i]);
+        }
 
+        var skillAtParent = parent.children.find(obj => obj.name == skill.name);
         parentsTable.rows[i + 1].cells[0].children[0].value = parent.name;
         parentsTable.rows[i + 1].cells[1].children[0].value = skillAtParent.minPoint;
         parentsTable.rows[i + 1].cells[2].children[0].checked = !skillAtParent.recommended;
