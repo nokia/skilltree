@@ -228,6 +228,7 @@ class ItemContainer {
         if (this.skill.achievedPoint == this.skill.maxPoint) {
             //this.skillborder.filters = [new PIXI.filters.GlowFilter(10, 4, 4, 0xFF4000, 1)];
             this.tick.alpha = 1;
+            skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0x007F0E, 1)];
         } else this.tick.alpha = 0;
 
 
@@ -266,6 +267,7 @@ class ItemContainer {
                     if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint) {
                         this.parentObj.tick.alpha = 1;
                         this.parentObj.skillborder.filters = null;
+                        skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0x007F0E, 1)];
                     }
                 }
 
@@ -725,7 +727,7 @@ class ItemContainer {
         req.responseType = "json";
         req.onreadystatechange = function () {
             if(this.readyState == 4 && this.status == 200) {
-                
+
             }
         };
 
