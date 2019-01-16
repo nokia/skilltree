@@ -336,7 +336,7 @@ class ItemContainer {
                           this.skills[i].itemcontainer.skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0x007F0E, 1)];
                         }
                         if (this.parentObj.skill.achievedPoint > 0) {
-                        this.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xCCAA00, 1)];
+                          this.skills[i].itemcontainer.skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xCCAA00, 1)];
                         }
                     }
                     else {
@@ -352,7 +352,7 @@ class ItemContainer {
                           this.skills[i].itemcontainer.skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0x007F0E, 1)];
                         }
                         if (this.parentObj.skill.achievedPoint > 0) {
-                        this.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xCCAA00, 1)];
+                          this.skills[i].itemcontainer.skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xCCAA00, 1)];
                         }
                     }
                 }
