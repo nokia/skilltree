@@ -94,7 +94,6 @@ function submit() {
 }
 
 window.setInterval(function () {
-    console.log('s');
     if (change) {
         submit();
         change = false;
