@@ -119,8 +119,12 @@ function submit() {
 }
 
 window.setInterval(function () {
-    console.log(change);
-    submit();
+    if (change) {
+        submit();
+        change = false;
+        document.getElementById('submitBtn').innerText = "Saved";
+        document.getElementById('submitBtn').removeAttribute('href');
+    }
 }, 5000);
 
 // logout.

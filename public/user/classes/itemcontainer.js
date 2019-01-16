@@ -253,12 +253,14 @@ class ItemContainer {
 
     onClick(event) {
         if (!event.drag) {
-            change = true;
             if (this.parentObj.self) {
                 var children = this.parentObj.skill.children;
 
                 // Increase skill level
                 if (this.parentObj.skill.achievedPoint < this.parentObj.skill.maxPoint) {
+                    change = true;
+                    document.getElementById('submitBtn').innerText = "Save";
+                    document.getElementById('submitBtn').href = "";
                     this.parentObj.skill.achievedPoint++;
                     this.levelinfo.text = (this.parentObj.skill.achievedPoint + "/" + this.parentObj.skill.maxPoint);
                     if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint) {
@@ -281,6 +283,9 @@ class ItemContainer {
             // Decrease skill level
             if(this.parentObj.skill.achievedPoint > 0)
             {
+                change = true;
+                document.getElementById('submitBtn').innerText = "Save";
+                document.getElementById('submitBtn').href = "";
                 this.parentObj.skill.achievedPoint--;
                 this.levelinfo.text = (this.parentObj.skill.achievedPoint + "/" + this.parentObj.skill.maxPoint);
 
