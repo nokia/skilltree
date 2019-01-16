@@ -38,16 +38,6 @@ function showTree (treeName, _data, self) {
     app.renderer.render(app.stage);
     document.getElementById("pixiCanvas").style.visibility = "visible";
     app.start();
-
-    // fading animation, disabled for now.
-    /*var fadein = function (delta) {
-        tree.treeContainer.alpha += .05;
-        if (tree.treeContainer.alpha == 1) {
-            app.ticker.remove(fadein);
-            app.stop();
-        }
-    };
-    app.ticker.add(fadein);*/
 }
 
 // hides tree, shows chart.

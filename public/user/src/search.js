@@ -93,41 +93,8 @@ function getPublicUserData(){
           row.innerHTML += "<td>" + this.response[i].willingToTeach + "</td>";
           row.data = this.response[i];
           row.onclick = function(){
-            var searchedUserModal = document.getElementById('searchedUserModal');
-            var closeSearchedUserModal = document.getElementById('closeSearchedUserModal');
-            var searchedUserModalHeader = document.getElementById('searchedUserModalHeader');
-            var searchedUserlModalInfo = document.getElementById('searchedUserlModalInfo');
-            var searchedUserlModalAdress = document.getElementById('searchedUserlModalAdress');
-            var userSkillsModalHeader = document.getElementById('userSkillsModalHeader');
-            var userSkillsModalBody = document.getElementById('userSkillsModalBody');
-
-            searchedUserModalHeader.innerHTML = this.data.username;
-            searchedUserlModalInfo.innerHTML = this.data.username + " focus area is " + this.data.focusArea.name + " and main Tree is " + this.data.mainTree + ". ";
-            searchedUserlModalAdress.innerHTML = "<h2>Availability</h2><br><b>Preferred day(s)</b>: " + this.data.teachingDay + " " + this.data.teachingTime + "<br><b>Place</b>: <a href=" + this.data.location + ">" + this.data.location + "</a><br>";
-            userSkillsModalHeader.innerHTML = '<th scope="col">#</th><th scope="col">Name</th><th scope="col">Level</th><th scope="col">Endorsement</th>';
-            userSkillsModalBody.innerHTML = "";
-            for (var i = 0; i < this.data.skills.length; i++) {
-              var row = document.createElement('tr');
-              row.className = "foundElementRow";
-              row.innerHTML += "<th>" + (i+1) + "</th>";
-              row.innerHTML += "<th>" + this.data.skills[i].name + "</th>";
-              row.innerHTML += "<th>" + this.data.skills[i].achievedPoint + "</th>";
-              row.innerHTML += "<th>" + this.data.skills[i].endorsement.length + "</th>";
-              var sv = {skillName: this.data.skills[i].name, username: this.data.username};
-              row.onclick = function(){
-                request('POST', '/protected/endorse', sv, function() {
-                    if(this.readyState == 4 && this.status == 200) {
-                      alert(this.response.message);
-                    }
-                });
-              }
-              userSkillsModalBody.appendChild(row);
-            }
-            closeSearchedUserModal.onclick = function(){
-              searchedUserModal.style.display = "none";
-            }
-            searchedUserModal.style.display = "block";
-          }
+            showTree(this.data.mainTree, this.data, false);
+            closeModal(modal);
           searchModalBody.appendChild(row);
         }
         modal.style.display = "block";

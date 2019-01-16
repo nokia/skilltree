@@ -350,7 +350,7 @@ protectedRoute.post('/getPublicUserData', async function (req, res) {
 		var data = req.body;
     var foundUsers = await User.find({
 					"username": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
-			}, 'username mainTree willingToTeach teachingDay teachingTime location focusArea skills', function (err, user) {
+			}, 'username mainTree willingToTeach teachingDay teachingTime location focusArea skills trees', function (err, user) {
 					if (err) throw err;
 			return user;
 		});
