@@ -51,7 +51,7 @@ a {
     border-color: #346134;
 }
 
-.btn .btn-secondary:active{
+.btn .btn-secondary .active{
   background-color: #346134;
 }
 
