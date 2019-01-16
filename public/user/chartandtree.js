@@ -656,6 +656,7 @@ function editMyTree () {
 
     var addBtn = document.getElementById("addToTree");
     addBtn.onclick = function () {
+        console.log(skillsToAdd);
         addSkillToList(skillsToAdd);
     };
 
@@ -665,6 +666,7 @@ function editMyTree () {
     var deleteBtn = document.getElementById("deleteFromList");
     deleteBtn.onclick = function () {
         deleteSkillFromList(skillsToAdd);
+        console.log(skillsToAdd);
     };
 
     var createBtn = document.getElementById("createTree");
@@ -736,7 +738,6 @@ function editTree () {
 
     var addBtn = document.getElementById("addToTree");
     addBtn.onclick = function () {
-        console.log(skillsToAdd);
         addSkillToList(skillsToAdd);
     };
 
@@ -746,7 +747,6 @@ function editTree () {
     var deleteBtn = document.getElementById("deleteFromList");
     deleteBtn.onclick = function () {
         deleteSkillFromList(skillsToAdd);
-        console.log(skillsToAdd);
     };
 
     var createBtn = document.getElementById("createTree");
