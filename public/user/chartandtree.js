@@ -554,6 +554,7 @@ function loadSkillToEditor (skill, global) {
     for (var i = 0; i < skill.parents.length; ++i) {
         if (i < skill.parents.length - 1) addRow("parentsTable");
 
+        var parent = undefined;
         if (global) {
             var req = new XMLHttpRequest();
             req.open('POST', '/protected/getskill', false);
@@ -564,20 +565,16 @@ function loadSkillToEditor (skill, global) {
 
             if (req.readyState == 4 && req.status == 200) {
                 var response = JSON.parse(req.response);
-                var parent = response.skill;
-                console.log(response.skill);
-                var skillAtParent = parent.children.find(obj => obj.name == skill.name);
-                parentsTable.rows[i + 1].cells[0].children[0].value = parent.name;
-                parentsTable.rows[i + 1].cells[1].children[0].value = skillAtParent.minPoint;
-                parentsTable.rows[i + 1].cells[2].children[0].checked = !skillAtParent.recommended;
+                parent = response.skill;
             }
         } else {
-            var parent = data.skills.find(obj => obj.name == skill.parents[i]);
-            var skillAtParent = parent.children.find(obj => obj.name == skill.name);
-            parentsTable.rows[i + 1].cells[0].children[0].value = parent.name;
-            parentsTable.rows[i + 1].cells[1].children[0].value = skillAtParent.minPoint;
-            parentsTable.rows[i + 1].cells[2].children[0].checked = !skillAtParent.recommended;
+            parent = data.skills.find(obj => obj.name == skill.parents[i]);
         }
+
+        var skillAtParent = parent.children.find(obj => obj.name == skill.name);
+        parentsTable.rows[i + 1].cells[0].children[0].value = parent.name;
+        parentsTable.rows[i + 1].cells[1].children[0].value = skillAtParent.minPoint;
+        parentsTable.rows[i + 1].cells[2].children[0].checked = !skillAtParent.recommended;
     }
 
     var childrenTable = document.getElementById('childrenTable');
@@ -815,10 +812,21 @@ function editTree () {
                 document.getElementById("focusarea").value = this.response.focusArea;
                 document.getElementById("treeDesc").value = this.response.description;
                 for (var i = 0; i < this.response.skillNames.length; ++i) {
-                    skillsToAdd.push(data.skills.find(obj => obj.name == this.response.skillNames[i]));
-                    var option = document.createElement("option");
-                    option.text = this.response.skillNames[i];
-                    skillList.add(option);
+                    var req = new XMLHttpRequest();
+                    req.open('POST', '/protected/getskill', false);
+                    req.setRequestHeader('Content-type', 'application/json');
+                    req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+                    //req.responseType = "json";
+                    req.send(JSON.stringify({value: this.response.skillNames[i]}));
+
+                    if (req.readyState == 4 && req.status == 200) {
+                        var response = JSON.parse(req.response);
+
+                        skillsToAdd.push(response.skill);
+                        var option = document.createElement("option");
+                        option.text = this.response.skillNames[i];
+                        skillList.add(option);
+                    }
                 }
             }
         });
