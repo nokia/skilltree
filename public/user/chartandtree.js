@@ -671,6 +671,7 @@ function editMyTree () {
 
     var addBtn = document.getElementById("addToTree");
     addBtn.onclick = function () {
+        alert("s");
         addSkillToList(skillsToAdd);
     };
 
