@@ -588,16 +588,21 @@ function loadSkillToEditor (skill, global) {
         if (i < skill.parents.length - 1) addRow("parentsTable");
 
         if (global) {
-            request('POST', '/protected/getskill', {value: skill.parents[i]}, function() { // !!!!!!!
-                if (this.readyState == 4 && this.status == 200) {
-                    var parent = this.response.skill;
-                    console.log(this.response);
-                    var skillAtParent = parent.children.find(obj => obj.name == skill.name);
-                    parentsTable.rows[i + 1].cells[0].children[0].value = parent.name;
-                    parentsTable.rows[i + 1].cells[1].children[0].value = skillAtParent.minPoint;
-                    parentsTable.rows[i + 1].cells[2].children[0].checked = !skillAtParent.recommended;
-                }
-            });
+            var req = new XMLHttpRequest();
+            req.open('POST', '/protected/getskill', false);
+            req.setRequestHeader('Content-type', 'application/json');
+            req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+            req.responseType = "json";
+            req.send(JSON.stringify({value: skill.parents[i]}));
+
+            if (req.readyState == 4 && req.status == 200) {
+                var parent = req.response.skill;
+                console.log(req.response);
+                var skillAtParent = parent.children.find(obj => obj.name == skill.name);
+                parentsTable.rows[i + 1].cells[0].children[0].value = parent.name;
+                parentsTable.rows[i + 1].cells[1].children[0].value = skillAtParent.minPoint;
+                parentsTable.rows[i + 1].cells[2].children[0].checked = !skillAtParent.recommended;
+            }
         } else {
             var parent = data.skills.find(obj => obj.name == skill.parents[i]);
             var skillAtParent = parent.children.find(obj => obj.name == skill.name);
