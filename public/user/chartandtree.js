@@ -798,9 +798,6 @@ function addSkillToList (skillsToAdd) {
                                     skillList.add(option);
                                 }
                             }
-
-                            console.log(skillsToAdd);
-                            skillList.size = skillList.length;
                         }
                     } else {
                         skillsToAdd.push(this.response.skill);
@@ -808,6 +805,9 @@ function addSkillToList (skillsToAdd) {
                         option.text = this.response.skill.name;
                         skillList.add(option);
                     }
+
+                    console.log(skillsToAdd);
+                    skillList.size = skillList.length;
                 } else alert("You have already added this skill");
             } else alert("Skill is not found");
         }
@@ -836,10 +836,10 @@ function deleteSkillFromList (skillsToAdd) {
                     if (skillList.options[j].text == children[i].name) skillList.remove(j);
                 }
             }
-
-            console.log(skillsToAdd);
-            skillList.size = skillList.length;
         }
+
+        console.log(skillsToAdd);
+        skillList.size = skillList.length;
     }
 }
 
