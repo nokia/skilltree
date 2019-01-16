@@ -916,7 +916,8 @@ protectedRoute.post('/editmyskill', async function (req, res) {
 			for (var j = 0; j < trees.length; ++j) {
 				var skillList = trees[j].skillNames;
 				if (skillList.find(obj => obj == data.name) == undefined) skillList.push(data.name);
-				console.log(skillList);
+				var skillsToSort = [];
+				for (var k = 0; k < skillList.length; ++k) skillsToSort = user.skills.filter(obj => skillList.find(obj2 => obj2 == obj.name) != undefined);
 				var sn = await sortTree(skillList);
 				user.trees.find(obj => obj.name == trees[i].name).skillNames = sn;
 			}
