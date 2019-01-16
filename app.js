@@ -879,8 +879,8 @@ protectedRoute.post('/editmyskill', async function (req, res) {
     } else if (user.skills.find(obj => obj.name == data.name) != undefined) {
 		var skill = (user.skills.find(obj => obj.name == data.name));
 
-		for (var i = 0; i < skill.parents.length; ++i) user.skill.find(obj => obj.name == skill.parents[i]).children = user.skill.find(obj => obj.name == skill.parents[i]).children.filter(obj => obj.name != skill.name);
-		for (var i = 0; i < skill.children.length; ++i) user.skill.find(obj => obj.name == skill.children[i].name).parents = user.skill.find(obj => obj == skill.children[i].name).parents.filter(obj => obj != skill.name);
+		for (var i = 0; i < skill.parents.length; ++i) user.skills.find(obj => obj.name == skill.parents[i]).children = user.skills.find(obj => obj.name == skill.parents[i]).children.filter(obj => obj.name != skill.name);
+		for (var i = 0; i < skill.children.length; ++i) user.skills.find(obj => obj.name == skill.children[i].name).parents = user.skills.find(obj => obj == skill.children[i].name).parents.filter(obj => obj != skill.name);
 
 		var parentNames = [];
         for (var i = 0; i < data.parents.length; ++i) {
