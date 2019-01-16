@@ -1287,13 +1287,13 @@ protectedRoute.post('/request', async function (req, res){
 
 protectedRoute.post('/endorse', async function (req, res) {
   var data = req.body;
-	console.log(data);
   var user = await User.findOne({
-    username: data.username//req.decoded.username
+    username: data.username
   }, function(err, user) {
     if (err) throw err;
     return user;
   });
+	console.log(user.skills.find(obj => obj.name == data.skillName).endorsement);
   if (!user) {
     res.json({
       success: false,
@@ -1303,8 +1303,8 @@ protectedRoute.post('/endorse', async function (req, res) {
     if (user.skills.find(obj => obj.name == data.skillName).endorsement == undefined) user.skills.find(obj => obj.name == data.skillName).endorsement = [];
     if (user.skills.find(obj => obj.name == data.skillName).endorsement.find(obj => obj == req.decoded.username) == undefined) {
       user.skills.find(obj => obj.name == data.skillName).endorsement.push(req.decoded.username);
-			
 			user.save(function (err) {if (err) throw err;});
+			console.log(user.skills.find(obj => obj.name == data.skillName).endorsement);
       res.json({
   			success: true,
   			message: "Lmao Yeet"
