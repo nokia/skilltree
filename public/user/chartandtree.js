@@ -996,6 +996,8 @@ function dropoffers() {
 
 // hides skill, tree creator, editor menu
 function hideMenus () {
+    document.getElementById('submitBtn').style.display = "none";
+
     var elements = document.getElementsByClassName("hide");
 
     for (var i = 0; i < elements.length; ++i) {
