@@ -519,6 +519,7 @@ function editMySkill () {
             if (this.readyState == 4 && this.status == 200) {
                 if (this.response.success) {
                     modal.style.display = "none";
+                    window.open("/user/", "_self");
                 }
             }
         });
