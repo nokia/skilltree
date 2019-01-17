@@ -1,3 +1,13 @@
+  // a quick note on filters: filters will have 2 element, the 0th element is
+  // reserved for hover animations, the 1st element is reserved for more permanent
+  // effect, eg. green glowfilters for maxed out skills. Keep in mind that .filters
+  // should NEVER be nulled, only modified. If you want to empty a slot, apply
+  // nullFilter there, it does nothing, it's kind of a placeholder filter.
+  var nullFilter = new PIXI.filters.AlphaFilter(1);
+  var maxPointFilter = new PIXI.filters.GlowFilter(10,4,4, 0x007F0E, 1);
+  var notNullPointFilter;
+  var hoverFilter;
+
 class ItemContainer {
     constructor(app, skills, skillName, owner) {
         this.app = app;
@@ -10,7 +20,6 @@ class ItemContainer {
         this.skillicon = new PIXI.Sprite(PIXI.loader.resources[this.skill.skillIcon].texture); //100x100
         this.skillborder = new PIXI.Sprite(PIXI.loader.resources["pictures/skillborder.png"].texture); //116x116
 //      this.skillborder_maxpoint = new PIXI.Sprite(PIXI.loader.resources["pictures/skillborder_maxpoint.png"].texture); //116x116
-        this.tick = new PIXI.Sprite(PIXI.loader.resources["pictures/tick.png"].texture);
 
         //setting border variables
         this.skillborder.levelinfo = new PIXI.Text(this.skill.achievedPoint + "/" + this.skill.maxPoint);
@@ -209,7 +218,6 @@ class ItemContainer {
         this.container = new PIXI.Container();
         this.container.addChild(this.skillicon);
 
-        this.container.addChild(this.tick);
         this.container.addChild(this.skillborder);
         this.container.addChild(this.skillborder.levelinfo);
         if (this.skill.endorsement != undefined && this.skill.endorsement.length > 0) this.container.addChild(this.skillborder.endorsement);
@@ -228,16 +236,13 @@ class ItemContainer {
 
         this.details.position.set(74, 0);
 
-        // if it's already maxed out add the tick
         if (this.skill.achievedPoint == this.skill.maxPoint) {
-            //this.skillborder.filters = [new PIXI.filters.GlowFilter(10, 4, 4, 0xFF4000, 1)];
-            this.tick.alpha = 1;
-            this.skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0x007F0E, 1)];
-        } else this.tick.alpha = 0;
-
-
-        this.tick.anchor.set(0.5, 0.5);
-        this.tick.position.set(38.5, 38.5);
+          this.setFilter(this.skillborder, nullFilter, maxPointFilter);
+        } else if (this.skill.achievedPoint > 0){
+          this.setFilter(this.skillborder, nullFilter, notNullPointFilter);
+        } else{
+          this.setFilter(this.skillborder, nullFilter, nullFilter);
+        }
 
         //Adding events
         this.skillborder.interactive = true;
@@ -254,6 +259,24 @@ class ItemContainer {
             .on('pointerout', this.onButtonOut);
     }
 
+    // sets the filters
+    setFilter(target, filter1, filter2){
+      if(target.achievedPoint == target.maxPoint) {
+        target.filters = [filter1, filter2];
+      } else if (target.achievedPoint > 0){
+        target.filters = [filter1, filter2];
+      }
+    }
+
+    checkPoints(target){
+      if (target.parentObj.skill.achievedPoint == target.parentObj.skill.maxPoint) {
+        target.setFilter(target, target.filters[0], maxPointFilter);
+      } else if (this.parentObj.skill.achievedPoint > 0) {
+        target.setFilter(target, target.filters[0], notNullPointFilter);
+      } else{
+        target.setFilter(target, target.filters[0], nullFilter);
+      }
+    }
 
     // Increases skill level, if it hits max skill level, it resets the filter, and adds green glow to it (filter)
     onClick(event) {
@@ -261,9 +284,7 @@ class ItemContainer {
             if (this.parentObj.self) {
                 var children = this.parentObj.skill.children;
 
-                if (this.parentObj.skill.achievedPoint > 0 && this.parentObj.skill.achievedPoint < this.parentObj.skill.maxPoint) {
-                this.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xCCAA00, 1)];
-                }
+                this.checkPoints(this);
 
                 // Increase skill level
                 if (this.parentObj.skill.achievedPoint < this.parentObj.skill.maxPoint) {
@@ -275,7 +296,6 @@ class ItemContainer {
 
                     // SKILL with max points
                     if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint) {
-                        this.parentObj.tick.alpha = 1;
                         this.parentObj.skillborder.filters = null;
                         this.parentObj.skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0x007F0E, 1)];
                     }
@@ -305,7 +325,6 @@ class ItemContainer {
                 //save level change (kell?)
                 //this.parentObj.skills.find(obj => obj.name == this.parentObj.skill.name).achievedPoint--;
             } else return;
-            this.parentObj.tick.alpha = 0;
             this.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFFBF00, 1)];
 
             this.parentObj.app.renderer.render(this.parentObj.app.stage);
@@ -313,15 +332,6 @@ class ItemContainer {
         } else {
 
         }
-    }
-
-    // sets the filters, used in 'refreshAvaliability'
-    setFilter(skill){
-      if(skill.achievedPoint == skill.maxPoint) {
-        skill.itemcontainer.skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0x007F0E, 1)];
-      } else  if (skill.achievedPoint > 0){
-        skill.itemcontainer.skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xCCAA00, 1)];
-      }
     }
 
     // Refreshes the clickable property of all the tree except for the root level, and sets the resets the filter to null (this blocks the functionality of the green filter on 5/5 skills for now on every level except the root, fix will be needed)
