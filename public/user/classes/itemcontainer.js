@@ -4,9 +4,9 @@
   // should NEVER be nulled, only modified. If you want to empty a slot, apply
   // nullFilter there, it does nothing, it's kind of a placeholder filter.
   var nullFilter = new PIXI.filters.AlphaFilter(1);
-  var maxPointFilter = new PIXI.filters.GlowFilter(6,2,4, 0x007F0E, 1);
-  var notNullPointFilter = new PIXI.filters.GlowFilter(6,2,4, 0xCCAA00, 1);
-  var hoverFilter = new PIXI.filters.GlowFilter(6,2,4, 0xFFBF00, 1);
+  var maxPointFilter = new PIXI.filters.GlowFilter(8,4,2, 0x007F0E, 1);
+  var notNullPointFilter = new PIXI.filters.GlowFilter(8,4,2, 0xCCAA00, 1);
+  var hoverFilter = new PIXI.filters.GlowFilter(8,4,2, 0xFFBF00, 1);
 
 class ItemContainer {
     constructor(app, skills, skillName, owner) {
