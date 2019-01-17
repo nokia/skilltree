@@ -284,7 +284,7 @@ class ItemContainer {
             if (this.parentObj.self) {
                 var children = this.parentObj.skill.children;
 
-                this.checkPoints(this);
+                this.parentObj.checkPoints(this.parentObj);
 
                 // Increase skill level
                 if (this.parentObj.skill.achievedPoint < this.parentObj.skill.maxPoint) {
