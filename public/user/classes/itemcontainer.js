@@ -237,11 +237,11 @@ class ItemContainer {
         this.details.position.set(74, 0);
 
         if (this.skill.achievedPoint == this.skill.maxPoint) {
-          this.setFilter(this.skillborder, nullFilter, maxPointFilter);
+          setFilter(this.skillborder, nullFilter, maxPointFilter);
         } else if (this.skill.achievedPoint > 0){
-          this.setFilter(this.skillborder, nullFilter, notNullPointFilter);
+          setFilter(this.skillborder, nullFilter, notNullPointFilter);
         } else{
-          this.setFilter(this.skillborder, nullFilter, nullFilter);
+          setFilter(this.skillborder, nullFilter, nullFilter);
         }
 
         //Adding events
@@ -351,7 +351,7 @@ class ItemContainer {
                         this.skills[i].itemcontainer.skillborder.interactive = false;
                         this.skills[i].itemcontainer.skillborder.buttonMode = false;
 
-                        this.setFilter(this.skills[i]);
+                        this.setFilter(this.skills[i], nullFilter, maxPointFilter);
                     }
                     else {
                         this.skills[i].itemcontainer.skillborder.filters = null;
@@ -362,7 +362,7 @@ class ItemContainer {
                         this.skills[i].itemcontainer.skillborder.interactive = true;
                         this.skills[i].itemcontainer.skillborder.buttonMode = true;
 
-                        this.setFilter(this.skills[i]);
+                        this.setFilter(this.skills[i], nullFilter, notNullPointFilter);
                     }
                 }
             }
