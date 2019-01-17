@@ -73,6 +73,10 @@ a {
   margin: 2% 4%;
 }
 
+.fas .fa-power-off{
+  cursor: pointer;
+}
+
 #buttonGroup{
   margin: 2% 6%;
   width: 92%;
