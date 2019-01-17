@@ -383,7 +383,7 @@ class ItemContainer {
 
     // enables the access to this skill (click and hover)
     enable () {
-        this.skillborder.filters = null;
+        this.skillborder.filters = [nullFilter, this.skillborder.filters[1]];
         this.skillicon.filters = null;
         this.skillborder.levelinfo.filters = null;
         if (this.skillborder.endorsement != undefined) this.skillborder.endorsement.filters = null;
@@ -398,7 +398,7 @@ class ItemContainer {
     disable () {
         var colorMatrixFilter = new PIXI.filters.ColorMatrixFilter;
         colorMatrixFilter.brightness(0.4);
-        this.skillborder.filters = [colorMatrixFilter];
+        this.skillborder.filters = [colorMatrixFilter, this.skillborder.filters[1]];
         this.skillicon.filters = [colorMatrixFilter];
         this.skillborder.levelinfo.filters = [colorMatrixFilter];
         if (this.skillborder.endorsement != undefined) this.skillborder.endorsement.filters = [colorMatrixFilter];
