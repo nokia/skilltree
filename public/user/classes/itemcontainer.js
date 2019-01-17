@@ -261,11 +261,7 @@ class ItemContainer {
 
     // sets the filters
     setFilter(target, filter1, filter2){
-      if(target.skill.achievedPoint == target.skill.maxPoint) {
-        target.skillborder.filters = [filter1, filter2];
-      } else if (target.skill.achievedPoint > 0){
-        target.skillborder.filters = [filter1, filter2];
-      }
+      target.skillborder.filters = [filter1, filter2];
     }
 
     checkPoints(target){
@@ -335,7 +331,6 @@ class ItemContainer {
                         if (this.skills[i].itemcontainer.skillborder.endorsement != undefined) this.skills[i].itemcontainer.skillborder.endorsement.filters = [colorMatrixFilter];
                         this.skills[i].itemcontainer.skillborder.interactive = false;
                         this.skills[i].itemcontainer.skillborder.buttonMode = false;
-                        this.setFilter(this, nullFilter, maxPointFilter);
                     }
                     else {
                         this.skills[i].itemcontainer.skillicon.filters = null;
@@ -344,7 +339,6 @@ class ItemContainer {
                         this.skills[i].itemcontainer.container.interactive = true;
                         this.skills[i].itemcontainer.skillborder.interactive = true;
                         this.skills[i].itemcontainer.skillborder.buttonMode = true;
-                        this.setFilter(this, nullFilter, notNullPointFilter);
                     }
                 }
             }
