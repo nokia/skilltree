@@ -152,12 +152,8 @@ a {
   display: inline-block;
 }
 
-.tab-panel .fade{
+.fade:not(.show){
   display: none;
-}
-
-.tab-panel .fade:active{
-  display: block;
 }
 
 #creator .card {
