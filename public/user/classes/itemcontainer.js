@@ -262,9 +262,9 @@ class ItemContainer {
     // sets the filters
     setFilter(target, filter1, filter2){
       if(target.skill.achievedPoint == target.skill.maxPoint) {
-        target.filters = [filter1, filter2];
+        target.skillborder.filters = [filter1, filter2];
       } else if (target.skill.achievedPoint > 0){
-        target.filters = [filter1, filter2];
+        target.skillborder.filters = [filter1, filter2];
       }
     }
 
