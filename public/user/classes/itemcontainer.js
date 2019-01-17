@@ -261,7 +261,6 @@ class ItemContainer {
 
     // sets the filters
     setFilter(target, filter1, filter2){
-      console.log(target);
       if(target.skill.achievedPoint == target.skill.maxPoint) {
         target.filters = [filter1, filter2];
       } else if (target.skill.achievedPoint > 0){
@@ -269,15 +268,15 @@ class ItemContainer {
       }
     }
 
-    /*checkPoints(target){
-      if (target.parentObj.skill.achievedPoint == target.parentObj.skill.maxPoint) {
+    checkPoints(target){
+      if (target.skill.achievedPoint == target.skill.maxPoint) {
         target.setFilter(target, target.filters[0], maxPointFilter);
-      } else if (this.parentObj.skill.achievedPoint > 0) {
+      } else if (this.skill.achievedPoint > 0) {
         target.setFilter(target, target.filters[0], notNullPointFilter);
       } else{
         target.setFilter(target, target.filters[0], nullFilter);
       }
-    }*/
+    }
 
     // Increases skill level, if it hits max skill level, it resets the filter, and adds green glow to it (filter)
     onClick(event) {
@@ -285,7 +284,7 @@ class ItemContainer {
             if (this.parentObj.self) {
                 var children = this.parentObj.skill.children;
 
-                //this.checkPoints(this);
+                this.checkPoints(this);
 
                 // Increase skill level
                 if (this.parentObj.skill.achievedPoint < this.parentObj.skill.maxPoint) {
@@ -352,7 +351,7 @@ class ItemContainer {
                         this.skills[i].itemcontainer.skillborder.interactive = false;
                         this.skills[i].itemcontainer.skillborder.buttonMode = false;
 
-                        //this.setFilter(this.skills[i], nullFilter, maxPointFilter);
+                        this.setFilter(this, nullFilter, maxPointFilter);
                     }
                     else {
                         this.skills[i].itemcontainer.skillborder.filters = null;
@@ -363,7 +362,7 @@ class ItemContainer {
                         this.skills[i].itemcontainer.skillborder.interactive = true;
                         this.skills[i].itemcontainer.skillborder.buttonMode = true;
 
-                        //this.setFilter(this.skills[i], nullFilter, notNullPointFilter);
+                        this.setFilter(this, nullFilter, notNullPointFilter);
                     }
                 }
             }
