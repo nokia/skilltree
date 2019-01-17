@@ -266,7 +266,7 @@ class ItemContainer {
 
     checkPoints(target){
       if (target.skill.achievedPoint == target.skill.maxPoint) {
-        target.setFilter(target, target.skillborder.filters[0], maxPointFilter);
+        target.setFilter(target, nullFilter, maxPointFilter);
       } else if (this.skill.achievedPoint > 0) {
         target.setFilter(target, target.skillborder.filters[0], notNullPointFilter);
       } else{
