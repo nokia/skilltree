@@ -237,11 +237,11 @@ class ItemContainer {
         this.details.position.set(74, 0);
 
         if (this.skill.achievedPoint == this.skill.maxPoint) {
-          this.setFilter(this.skillborder, nullFilter, maxPointFilter);
+          this.setFilter(this, nullFilter, maxPointFilter);
         } else if (this.skill.achievedPoint > 0){
-          this.setFilter(this.skillborder, nullFilter, notNullPointFilter);
+          this.setFilter(this, nullFilter, notNullPointFilter);
         } else{
-          this.setFilter(this.skillborder, nullFilter, nullFilter);
+          this.setFilter(this, nullFilter, nullFilter);
         }
 
         //Adding events
@@ -261,9 +261,10 @@ class ItemContainer {
 
     // sets the filters
     setFilter(target, filter1, filter2){
-      if(target.achievedPoint == target.maxPoint) {
+      console.log(target);
+      if(target.skill.achievedPoint == target.skill.maxPoint) {
         target.filters = [filter1, filter2];
-      } else if (target.achievedPoint > 0){
+      } else if (target.skill.achievedPoint > 0){
         target.filters = [filter1, filter2];
       }
     }
@@ -351,7 +352,7 @@ class ItemContainer {
                         this.skills[i].itemcontainer.skillborder.interactive = false;
                         this.skills[i].itemcontainer.skillborder.buttonMode = false;
 
-                        this.setFilter(this.skills[i], nullFilter, maxPointFilter);
+                        //this.setFilter(this.skills[i], nullFilter, maxPointFilter);
                     }
                     else {
                         this.skills[i].itemcontainer.skillborder.filters = null;
@@ -362,7 +363,7 @@ class ItemContainer {
                         this.skills[i].itemcontainer.skillborder.interactive = true;
                         this.skills[i].itemcontainer.skillborder.buttonMode = true;
 
-                        this.setFilter(this.skills[i], nullFilter, notNullPointFilter);
+                        //this.setFilter(this.skills[i], nullFilter, notNullPointFilter);
                     }
                 }
             }
