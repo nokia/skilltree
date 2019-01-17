@@ -268,7 +268,7 @@ class ItemContainer {
       }
     }
 
-    checkPoints(target){
+    /*checkPoints(target){
       if (target.parentObj.skill.achievedPoint == target.parentObj.skill.maxPoint) {
         target.setFilter(target, target.filters[0], maxPointFilter);
       } else if (this.parentObj.skill.achievedPoint > 0) {
@@ -276,7 +276,7 @@ class ItemContainer {
       } else{
         target.setFilter(target, target.filters[0], nullFilter);
       }
-    }
+    }*/
 
     // Increases skill level, if it hits max skill level, it resets the filter, and adds green glow to it (filter)
     onClick(event) {
