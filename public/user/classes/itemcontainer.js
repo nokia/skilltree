@@ -341,7 +341,7 @@ class ItemContainer {
                         this.skills[i].itemcontainer.skillborder.interactive = false;
                         this.skills[i].itemcontainer.skillborder.buttonMode = false;
 
-                        this.parentObj.setFilter(this.skills[i]);
+                        this.setFilter(this.skills[i]);
                     }
                     else {
                         this.skills[i].itemcontainer.skillborder.filters = null;
@@ -352,7 +352,7 @@ class ItemContainer {
                         this.skills[i].itemcontainer.skillborder.interactive = true;
                         this.skills[i].itemcontainer.skillborder.buttonMode = true;
 
-                        this.parentObj.setFilter(this.skills[i]);
+                        this.setFilter(this.skills[i]);
                     }
                 }
             }
