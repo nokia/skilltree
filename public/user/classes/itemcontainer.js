@@ -349,7 +349,7 @@ class ItemContainer {
                 }
             }
         }
-        this.parentObj.checkPoints(this.parentObj);
+        this.checkPoints(this);
     }
 
     // Adds hover animation to the skill, and shows the details box
