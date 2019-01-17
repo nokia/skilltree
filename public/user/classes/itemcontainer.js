@@ -365,7 +365,7 @@ class ItemContainer {
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
 
         if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint) return;
-        setFilter(this, hoverFilter, this.filters[1]);
+        this.setFilter(this, hoverFilter, this.filters[1]);
 
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
     }
@@ -382,7 +382,7 @@ class ItemContainer {
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
 
         if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint || this.parentObj.disabled) return;
-        setFilter(this, nullFilter, this.filters[1]);
+        this.setFilter(this, nullFilter, this.filters[1]);
 
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
     }
