@@ -237,11 +237,11 @@ class ItemContainer {
         this.details.position.set(74, 0);
 
         if (this.skill.achievedPoint == this.skill.maxPoint) {
-          setFilter(this.skillborder, nullFilter, maxPointFilter);
+          this.setFilter(this.skillborder, nullFilter, maxPointFilter);
         } else if (this.skill.achievedPoint > 0){
-          setFilter(this.skillborder, nullFilter, notNullPointFilter);
+          this.setFilter(this.skillborder, nullFilter, notNullPointFilter);
         } else{
-          setFilter(this.skillborder, nullFilter, nullFilter);
+          this.setFilter(this.skillborder, nullFilter, nullFilter);
         }
 
         //Adding events
