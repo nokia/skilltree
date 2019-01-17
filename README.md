@@ -34,7 +34,7 @@ Skill Tree needs the following components to operate:
 
 You will need a domain name to install (HTTPS will be configured by default via [Let's Encrypt].)
 
-#### Debian 9
+#### Option 1 - Install script on Debian 9
 
 If you are not familiar with server setup, we recommend to read through the following tutorials:
 * Preferred - using Nginx: [How To Secure Nginx with Let's Encrypt on Debian 9]
@@ -81,6 +81,24 @@ If you are not familiar with server setup, we recommend to read through the foll
           listen [::]:80 default_server;
           return 301 https://$host$request_uri;
   }
+  ```
+
+#### Option 2 - Docker (beta)
+
+##### Build Docker images
+
+  ```sh
+  docker build --no-cache -t localhost/skilltree-mongodb:latest ./docker-build/mongodb/
+  docker build --no-cache -t localhost/skilltree-nginx:latest ./docker-build/nginx/
+  docker build --no-cache -t localhost/skilltree-nodejs:latest ./docker-build/nodejs/
+  ```
+
+##### Run Docker containers (in this order!)
+
+  ```sh
+  docker run -d -p <IPADDRESS>:27017:27017 localhost/skilltree-mongodb
+  docker run -d -p <IPADDRESS>:3000:3000 -e DBADDRESS=<IPADDRESS> localhost/skilltree-nodejs
+  docker run -d -e BACKEND=<IPADDRESS> -p 0.0.0.0:80:80 localhost/skilltree-nginx
   ```
 
 
