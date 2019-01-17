@@ -270,11 +270,11 @@ class ItemContainer {
 
     checkPoints(target){
       if (target.skill.achievedPoint == target.skill.maxPoint) {
-        target.setFilter(target, target.filters[0], maxPointFilter);
+        target.setFilter(target, target.skillborder.filters[0], maxPointFilter);
       } else if (this.skill.achievedPoint > 0) {
-        target.setFilter(target, target.filters[0], notNullPointFilter);
+        target.setFilter(target, target.skillborder.filters[0], notNullPointFilter);
       } else{
-        target.setFilter(target, target.filters[0], nullFilter);
+        target.setFilter(target, target.skillborder.filters[0], nullFilter);
       }
     }
 
@@ -330,7 +330,6 @@ class ItemContainer {
                     if(par.children.find(obj => obj.name == this.skills[i].name).minPoint > par.achievedPoint || par.itemcontainer.container.interactive == false){
                         var colorMatrixFilter = new PIXI.filters.ColorMatrixFilter;
                         colorMatrixFilter.brightness(0.4);
-                        this.skills[i].itemcontainer.skillborder.filters = [colorMatrixFilter];
                         this.skills[i].itemcontainer.skillicon.filters = [colorMatrixFilter];
                         this.skills[i].itemcontainer.skillborder.levelinfo.filters = [colorMatrixFilter];
                         if (this.skills[i].itemcontainer.skillborder.endorsement != undefined) this.skills[i].itemcontainer.skillborder.endorsement.filters = [colorMatrixFilter];
@@ -339,7 +338,6 @@ class ItemContainer {
                         this.setFilter(this, nullFilter, maxPointFilter);
                     }
                     else {
-                        this.skills[i].itemcontainer.skillborder.filters = null;
                         this.skills[i].itemcontainer.skillicon.filters = null;
                         this.skills[i].itemcontainer.skillborder.levelinfo.filters = null;
                         if (this.skills[i].itemcontainer.skillborder.endorsement != undefined) this.skills[i].itemcontainer.skillborder.endorsement.filters = null;
