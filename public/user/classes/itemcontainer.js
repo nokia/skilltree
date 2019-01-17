@@ -293,12 +293,6 @@ class ItemContainer {
                     document.getElementById('submitBtn').href = "";
                     this.parentObj.skill.achievedPoint++;
                     this.levelinfo.text = (this.parentObj.skill.achievedPoint + "/" + this.parentObj.skill.maxPoint);
-
-                    // SKILL with max points
-                    if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint) {
-                        this.parentObj.skillborder.filters = null;
-                        this.parentObj.skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0x007F0E, 1)];
-                    }
                 }
 
                 this.parentObj.app.renderer.render(this.parentObj.app.stage);
@@ -312,6 +306,7 @@ class ItemContainer {
         if (this.parentObj.self) {
             var children = this.parentObj.skill.children;
 
+            this.parentObj.checkPoints(this.parentObj);
 
             // Decrease skill level
             if(this.parentObj.skill.achievedPoint > 0)
@@ -324,8 +319,7 @@ class ItemContainer {
 
                 //save level change (kell?)
                 //this.parentObj.skills.find(obj => obj.name == this.parentObj.skill.name).achievedPoint--;
-            } else return;
-            this.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFFBF00, 1)];
+            }
 
             this.parentObj.app.renderer.render(this.parentObj.app.stage);
             this.parentObj.refreshAvaliability();
