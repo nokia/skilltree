@@ -152,6 +152,14 @@ a {
   display: inline-block;
 }
 
+.tab-panel .fade{
+  display: none;
+}
+
+.tab-panel .fade:active{
+  display: block;
+}
+
 #creator .card {
     width: 400px;
     margin-left: auto;
