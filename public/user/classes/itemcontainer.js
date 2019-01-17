@@ -315,6 +315,15 @@ class ItemContainer {
         }
     }
 
+    // sets the filters, used in 'refreshAvaliability'
+    setFilter(skill){
+      if(skill.achievedPoint == skill.maxPoint) {
+        skill.itemcontainer.skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0x007F0E, 1)];
+      } else  if (skill.achievedPoint > 0){
+        skill.itemcontainer.skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xCCAA00, 1)];
+      }
+    }
+
     // Refreshes the clickable property of all the tree except for the root level, and sets the resets the filter to null (this blocks the functionality of the green filter on 5/5 skills for now on every level except the root, fix will be needed)
     refreshAvaliability(){
         for (var i = 0; i < this.skills.length; i++) {
@@ -332,13 +341,7 @@ class ItemContainer {
                         this.skills[i].itemcontainer.skillborder.interactive = false;
                         this.skills[i].itemcontainer.skillborder.buttonMode = false;
 
-                        if(this.skills[i].achievedPoint == this.skills[i].maxPoint) {
-                          this.skills[i].itemcontainer.skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0x007F0E, 1)];
-                        } else {
-                          if (this.skills[i].achievedPoint > 0) {
-                            this.skills[i].itemcontainer.skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xCCAA00, 1)];
-                          }
-                        }
+                        setFilter(this.skills[i]);
                     }
                     else {
                         this.skills[i].itemcontainer.skillborder.filters = null;
@@ -349,13 +352,7 @@ class ItemContainer {
                         this.skills[i].itemcontainer.skillborder.interactive = true;
                         this.skills[i].itemcontainer.skillborder.buttonMode = true;
 
-                        if(this.skills[i].achievedPoint == this.skills[i].maxPoint) {
-                          this.skills[i].itemcontainer.skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0x007F0E, 1)];
-                        } else {
-                          if (this.skills[i].achievedPoint > 0) {
-                          this.skills[i].itemcontainer.skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xCCAA00, 1)];
-                        }
-                      }
+                        setFilter(this.skills[i]);
                     }
                 }
             }
