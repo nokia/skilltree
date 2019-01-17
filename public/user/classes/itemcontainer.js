@@ -336,6 +336,7 @@ class ItemContainer {
                         if (this.skills[i].itemcontainer.skillborder.endorsement != undefined) this.skills[i].itemcontainer.skillborder.endorsement.filters = [colorMatrixFilter];
                         this.skills[i].itemcontainer.skillborder.interactive = false;
                         this.skills[i].itemcontainer.skillborder.buttonMode = false;
+                        this.setFilter(this, nullFilter, maxPointFilter);
                     }
                     else {
                         this.skills[i].itemcontainer.skillborder.filters = null;
@@ -345,6 +346,7 @@ class ItemContainer {
                         this.skills[i].itemcontainer.container.interactive = true;
                         this.skills[i].itemcontainer.skillborder.interactive = true;
                         this.skills[i].itemcontainer.skillborder.buttonMode = true;
+                        this.setFilter(this, nullFilter, notNullPointFilter);
                     }
                 }
             }
