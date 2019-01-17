@@ -5,8 +5,8 @@
   // nullFilter there, it does nothing, it's kind of a placeholder filter.
   var nullFilter = new PIXI.filters.AlphaFilter(1);
   var maxPointFilter = new PIXI.filters.GlowFilter(10,4,4, 0x007F0E, 1);
-  var notNullPointFilter;
-  var hoverFilter;
+  var notNullPointFilter = new PIXI.filters.GlowFilter(10,4,4, 0xCCAA00, 1);
+  var hoverFilter = new PIXI.filters.GlowFilter(10,4,4, 0xFFBF00, 1);
 
 class ItemContainer {
     constructor(app, skills, skillName, owner) {
@@ -284,8 +284,6 @@ class ItemContainer {
             if (this.parentObj.self) {
                 var children = this.parentObj.skill.children;
 
-                this.parentObj.checkPoints(this.parentObj);
-
                 // Increase skill level
                 if (this.parentObj.skill.achievedPoint < this.parentObj.skill.maxPoint) {
                     change = true;
@@ -294,7 +292,6 @@ class ItemContainer {
                     this.parentObj.skill.achievedPoint++;
                     this.levelinfo.text = (this.parentObj.skill.achievedPoint + "/" + this.parentObj.skill.maxPoint);
                 }
-
                 this.parentObj.app.renderer.render(this.parentObj.app.stage);
                 this.parentObj.refreshAvaliability();
             }
@@ -305,8 +302,6 @@ class ItemContainer {
     onRightClick() {
         if (this.parentObj.self) {
             var children = this.parentObj.skill.children;
-
-            this.parentObj.checkPoints(this.parentObj);
 
             // Decrease skill level
             if(this.parentObj.skill.achievedPoint > 0)
@@ -320,11 +315,8 @@ class ItemContainer {
                 //save level change (kell?)
                 //this.parentObj.skills.find(obj => obj.name == this.parentObj.skill.name).achievedPoint--;
             }
-
             this.parentObj.app.renderer.render(this.parentObj.app.stage);
             this.parentObj.refreshAvaliability();
-        } else {
-
         }
     }
 
@@ -344,8 +336,6 @@ class ItemContainer {
                         if (this.skills[i].itemcontainer.skillborder.endorsement != undefined) this.skills[i].itemcontainer.skillborder.endorsement.filters = [colorMatrixFilter];
                         this.skills[i].itemcontainer.skillborder.interactive = false;
                         this.skills[i].itemcontainer.skillborder.buttonMode = false;
-
-                        this.setFilter(this, nullFilter, maxPointFilter);
                     }
                     else {
                         this.skills[i].itemcontainer.skillborder.filters = null;
@@ -355,12 +345,11 @@ class ItemContainer {
                         this.skills[i].itemcontainer.container.interactive = true;
                         this.skills[i].itemcontainer.skillborder.interactive = true;
                         this.skills[i].itemcontainer.skillborder.buttonMode = true;
-
-                        this.setFilter(this, nullFilter, notNullPointFilter);
                     }
                 }
             }
         }
+        this.parentObj.checkPoints(this.parentObj);
     }
 
     // Adds hover animation to the skill, and shows the details box
@@ -376,10 +365,7 @@ class ItemContainer {
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
 
         if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint) return;
-        if (skillborder.filters == null) {
-            this.parentObj.disabled = false;
-            skillborder.filters = [new PIXI.filters.GlowFilter(10,4,4, 0xFFBF00, 1)];
-        } else this.parentObj.disabled = true;
+        setFilter(this, hoverFilter, this.filters[1]);
 
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
     }
@@ -396,7 +382,7 @@ class ItemContainer {
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
 
         if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint || this.parentObj.disabled) return;
-        skillborder.filters = null;
+        setFilter(this, nullFilter, this.filters[1]);
 
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
     }
