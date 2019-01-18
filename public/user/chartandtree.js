@@ -1112,7 +1112,7 @@ function hideMenus () {
 }
 
 function hideCards (event) {
-    var except = ".float-right *";
+    var except = ".float-left, .float-right *";
 
     if (!event.target.matches(except)) {
         $(".collapse").collapse("hide");
