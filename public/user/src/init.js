@@ -15,7 +15,7 @@ function initData(){
           document.getElementById("home").onclick = function () {
               document.getElementById('submitBtn').style.display = "block";
               showTree(data.mainTree, data, true);
-              initUI(true, data)
+              initUI(true, data);
           };
       }
   }
