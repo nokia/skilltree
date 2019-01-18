@@ -332,7 +332,7 @@ class ItemContainer {
                     else {
                         this.skills[i].itemcontainer.skillicon.filters = null;
                         this.skills[i].itemcontainer.skillborder.levelinfo.filters = null;
-                        setFilter(this.skills[i].itemcontainer, nullFilter, this.skills.itemcontainer.skillborder.filters[1]);
+                        this.setFilter(this.skills[i].itemcontainer, nullFilter, this.skills.itemcontainer.skillborder.filters[1]);
                         if (this.skills[i].itemcontainer.skillborder.endorsement != undefined) this.skills[i].itemcontainer.skillborder.endorsement.filters = null;
                         this.skills[i].itemcontainer.container.interactive = true;
                         this.skills[i].itemcontainer.skillborder.interactive = true;
