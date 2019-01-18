@@ -189,6 +189,7 @@ a {
     display: none;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 300px;
 }
 
 #newSkillModal input, select, table, textarea {

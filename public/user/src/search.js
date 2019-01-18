@@ -132,7 +132,7 @@ function getPublicTreeData(){
             addTreeToUser({value: this.treeName});
           }
           searchModalBody.appendChild(row);
-        }
+        } 
         modal.style.display = "block";
       }
   });
