@@ -32,6 +32,9 @@
 
 }
 
+#home{
+  cursor: pointer;
+}
 
 .w-35 {
     width: 35%!important;
@@ -186,6 +189,7 @@ a {
     display: none;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 155px;
 }
 
 #newSkillModal input, select, table, textarea {
