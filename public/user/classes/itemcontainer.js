@@ -307,9 +307,6 @@ class ItemContainer {
                 document.getElementById('submitBtn').href = "";
                 this.parentObj.skill.achievedPoint--;
                 this.levelinfo.text = (this.parentObj.skill.achievedPoint + "/" + this.parentObj.skill.maxPoint);
-
-                //save level change (kell?)
-                //this.parentObj.skills.find(obj => obj.name == this.parentObj.skill.name).achievedPoint--;
             }
             this.parentObj.app.renderer.render(this.parentObj.app.stage);
             this.parentObj.refreshAvaliability();
@@ -335,6 +332,7 @@ class ItemContainer {
                     else {
                         this.skills[i].itemcontainer.skillicon.filters = null;
                         this.skills[i].itemcontainer.skillborder.levelinfo.filters = null;
+                        setFilter(this.skills[i].itemcontainer, nullFilter, this.skills.itemcontainer.skillborder.filters[1]);
                         if (this.skills[i].itemcontainer.skillborder.endorsement != undefined) this.skills[i].itemcontainer.skillborder.endorsement.filters = null;
                         this.skills[i].itemcontainer.container.interactive = true;
                         this.skills[i].itemcontainer.skillborder.interactive = true;
