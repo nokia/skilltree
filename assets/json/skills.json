@@ -160,7 +160,13 @@
     "parents": [
       "HTML"
     ],
-    "children": ["React"],
+    "children": [
+      {
+      "name": "JavaFX",
+      "minPoint": 1,
+      "recommended": false
+      }
+    ],
     "trainings": [
       {
         "name": "HTML Basics",
