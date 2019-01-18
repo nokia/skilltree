@@ -2,7 +2,7 @@
 function searchUsersByName(){
   var userToSearch = {value: document.getElementById('cardSearchBar').value};
   var UserSearchResult = document.getElementById('UserSearchResult');
-
+  document.getElementById("searchModalTitle").innerHTML = "Click on a user, to view his/her main tree!";
   if (userToSearch !== "") {
     request('POST', '/protected/searchUsersByName', userToSearch, function() {
         if(this.readyState == 4 && this.status == 200) {
@@ -21,7 +21,7 @@ function searchUsersByName(){
 function searchTreesByName (element, global) {
     var treeToSearch = {value: element.value};
     var TreeSearchResult = document.getElementById('TreeSearchResult');
-
+    document.getElementById("searchModalTitle").innerHTML = "Click on a tree, to add it to your trees!";
     if (global) {
         request('POST', '/protected/searchTreesByName', treeToSearch, function() {
             if(this.readyState == 4 && this.status == 200) {
@@ -48,6 +48,7 @@ function searchTreesByName (element, global) {
 function searchSkillsByName(element, global){
     var skillToSearch = {value: element.value};
     var skillSearchResult = document.getElementById('skillSearchResult');
+    document.getElementById("searchModalTitle").innerHTML = "Click on a skill, to view its details!";
     if (global) {
         request('POST', '/protected/searchSkillsByName', skillToSearch, function () {
             if (this.readyState == 4 && this.status == 200) {
