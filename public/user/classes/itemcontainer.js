@@ -325,6 +325,7 @@ class ItemContainer {
                         colorMatrixFilter.brightness(0.4);
                         this.skills[i].itemcontainer.skillicon.filters = [colorMatrixFilter];
                         this.skills[i].itemcontainer.skillborder.levelinfo.filters = [colorMatrixFilter];
+                        this.setFilter(this.skills[i].itemcontainer, colorMatrixFilter, this.skills[i].itemcontainer.skillborder.filters[1]);
                         if (this.skills[i].itemcontainer.skillborder.endorsement != undefined) this.skills[i].itemcontainer.skillborder.endorsement.filters = [colorMatrixFilter];
                         this.skills[i].itemcontainer.skillborder.interactive = false;
                         this.skills[i].itemcontainer.skillborder.buttonMode = false;
@@ -332,7 +333,7 @@ class ItemContainer {
                     else {
                         this.skills[i].itemcontainer.skillicon.filters = null;
                         this.skills[i].itemcontainer.skillborder.levelinfo.filters = null;
-                        this.setFilter(this.skills[i].itemcontainer, nullFilter, this.skills.itemcontainer.skillborder.filters[1]);
+                        this.setFilter(this.skills[i].itemcontainer, nullFilter, this.skills[i].itemcontainer.skillborder.filters[1]);
                         if (this.skills[i].itemcontainer.skillborder.endorsement != undefined) this.skills[i].itemcontainer.skillborder.endorsement.filters = null;
                         this.skills[i].itemcontainer.container.interactive = true;
                         this.skills[i].itemcontainer.skillborder.interactive = true;
