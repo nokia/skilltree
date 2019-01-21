@@ -1502,7 +1502,8 @@ adminRoute.post('/editskill', async function (req, res) {
 	skill.categoryName = data.categoryName;
 	skill.maxPoint = data.maxPoint;
 	skill.pointDescription = data.pointDescription;
-	skill.parents = parentNames;
+	console.log(data.parents.map(obj => obj.name));
+	skill.parents = data.parents.map(obj => obj.name);
 	skill.children = data.children;
 	skill.trainings = data.trainings;
 
