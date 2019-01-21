@@ -1111,15 +1111,15 @@ function hideMenus () {
     }
 }
 
-/*function hideCards (event) {
-    var except = "#newSkillModal *, #userCard, .float-right *";
+function hideCards (event) {
+    var except = ".tab-panel, #userCard, .float-right *";
 
     if (!event.target.matches(except)) {
         $(".collapse").collapse("hide");
     }
 }
 
-document.body.addEventListener('click', hideCards);*/
+document.body.addEventListener('click', hideCards);
 
 // helper functions
 
