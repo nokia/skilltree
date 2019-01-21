@@ -509,7 +509,7 @@ function editSkill () {
             trainings: trainings
         };
 
-        request('POST', '/protected/editskill', skillData, function () {
+        request('POST', '/admin/editskill', skillData, function () {
             if (this.readyState == 4 && this.status == 200) {
                 if (this.response.success) {
                     modal.style.display = "none";
