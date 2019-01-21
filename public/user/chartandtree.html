@@ -436,6 +436,25 @@
                                           </table>
                                           <input type="button" value="Add parent" onclick="addRow('parentsTable')" class="btn btn-outline-success">
                                       </div>
+
+                                      <div id = "childrenDiv" style = "display: none">
+                                          <h5>Children:</h5>
+                                          <table id = "childrenTable" border = "1">
+                                              <tr>
+                                                  <td>Child</td>
+                                                  <td>Min point</td>
+                                                  <td>Required</td>
+                                                  <td>Delete</td>
+                                              </tr>
+                                              <tr>
+                                                  <td><input size=30 type="text" id = "child" list = "skillSearchResult" onkeypress="searchSkillByName()"></td>
+                                                  <td><input size=10 type="text" id = "minPointc"></td>
+                                                  <td><input size=50 type="checkbox" id = "requiredc"></td>
+                                                  <td><input type="button" value="Delete" onclick="deleteRow('childrenTable', this)"></td>
+                                              </tr>
+                                          </table>
+                                          <input type="button" value="Add child" onclick="addRow('childrenTable')"><br>
+                                      </div>
                                   </div>
                               </div>
                           </div>
