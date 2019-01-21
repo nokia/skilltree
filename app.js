@@ -1580,10 +1580,6 @@ adminRoute.post('/editskill', async function (req, res) {
 
 				//user.skills.find(obj => obj.name == data.name) = skill;
 				user.save(function (err) {if (err) throw err;});
-
-		        res.json({
-		            success: true
-		        });
 			}
         })
     })
