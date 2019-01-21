@@ -1544,7 +1544,7 @@ adminRoute.post('/editskill', async function (req, res) {
 				for (var i = 0; i < data.children.length; ++i) {
 		            if (user.skills.find(obj => obj.name == data.children[i].name) == undefined) { // add parent skill to user if not already there
 		                var child = await Skill.findOne({
-								name: data.child[i].name
+								name: data.children[i].name
 						}, function(err, child) {
 								if (err) throw err;
 								return child;
