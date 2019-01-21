@@ -1112,11 +1112,10 @@ function hideMenus () {
 }
 
 function hideCards (event) {
-    var except = ".tab-panel, #userCard, .float-right *";
+    var except = "#userCard, .float-right *";
 
     if (!event.target.matches(except)) {
-        $(".collapse").collapse("hide");
-        $(".tab-panel").collapse("show");
+        $(".hide-on-click").collapse("hide");
     }
 }
 
