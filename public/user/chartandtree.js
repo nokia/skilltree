@@ -1121,9 +1121,9 @@ function hideMenus () {
 
 document.body.addEventListener('click', hideCards);*/
 
-function nextTab () {
-    $('#mytabs a[href="#newSkillPhase2"]').tab('show');
-}
+$('.nextSkillEditPage').click(function(){
+  $('#skillEditTabs > .active').next('li').find('a').trigger('click');
+});
 
 // helper functions
 
