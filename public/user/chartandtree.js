@@ -1121,9 +1121,9 @@ function hideMenus () {
 
 document.body.addEventListener('click', hideCards);*/
 
-$('#nextTab').click(function(){
+function nextTab () {
   $('#skillEditTabs > .active').next('li').find('a').trigger('click');
-});
+}
 
 // helper functions
 
