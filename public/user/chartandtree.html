@@ -437,7 +437,7 @@
                                               <tr>
                                                   <td><input class="m-0 form-control" size=30 type="text" id = "parent" list = "skillSearchResult" onkeyup="searchSkillsByName(this)" required></td>
                                                   <td><input class="m-0 form-control" size=10 type="text" id = "minPoint" required></td>
-                                                  <td><input size=50 type="checkbox" id = "required" class = "form-control"></td>
+                                                  <td><input size=50 type="checkbox" id = "required"></td>
                                                   <td><input class="btn btn-outline-success" type="button" value="Delete" onclick="deleteRow('parentsTable', this)"></td>
                                               </tr>
                                           </table>
@@ -446,18 +446,17 @@
 
                                       <div id = "childrenDiv" style = "display: none">
                                           <h5>Children:</h5>
-                                          <table id = "childrenTable" border = "1">
+                                          <table id = "childrenTable">
                                               <tr>
                                                   <td>Child</td>
                                                   <td>Min point</td>
                                                   <td>Required</td>
-                                                  <td>Delete</td>
                                               </tr>
                                               <tr>
-                                                  <td><input size=30 type="text" id = "child" list = "skillSearchResult" onkeypress="searchSkillByName()"></td>
-                                                  <td><input size=10 type="text" id = "minPointc"></td>
+                                                  <td><input class="m-0 form-control" size=30 type="text" id = "child" list = "skillSearchResult" onkeypress="searchSkillByName()"></td>
+                                                  <td><input class="m-0 form-control" size=10 type="text" id = "minPointc"></td>
                                                   <td><input size=50 type="checkbox" id = "requiredc"></td>
-                                                  <td><input type="button" value="Delete" onclick="deleteRow('childrenTable', this)"></td>
+                                                  <td><input class="btn btn-outline-success" type="button" value="Delete" onclick="deleteRow('childrenTable', this)"></td>
                                               </tr>
                                           </table>
                                           <input type="button" value="Add child" onclick="addRow('childrenTable')"><br>
