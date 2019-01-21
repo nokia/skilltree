@@ -1111,7 +1111,7 @@ function hideMenus () {
     }
 }
 
-/*function hideCards (event) {
+function hideCards (event) {
     var except = "#newSkillModal *, #userCard, .float-right *";
 
     if (!event.target.matches(except)) {
@@ -1119,7 +1119,7 @@ function hideMenus () {
     }
 }
 
-document.body.addEventListener('click', hideCards);*/
+document.body.addEventListener('click', hideCards);
 
 // helper functions
 
