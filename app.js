@@ -832,7 +832,9 @@ protectedRoute.post('/editmyskill', async function (req, res) {
 		var skill = (user.skills.find(obj => obj.name == data.name));
 
 		for (var i = 0; i < skill.parents.length; ++i) user.skills.find(obj => obj.name == skill.parents[i]).children = user.skills.find(obj => obj.name == skill.parents[i]).children.filter(obj => obj.name != skill.name);
-		for (var i = 0; i < skill.children.length; ++i) user.skills.find(obj => obj.name == skill.children[i].name).parents = user.skills.find(obj => obj.name == skill.children[i].name).parents.filter(obj => obj != skill.name);
+		for (var i = 0; i < skill.children.length; ++i) {
+			if (user.skills.find(obj => obj.name == userSkill.children[i].name) != undefined) user.skills.find(obj => obj.name == skill.children[i].name).parents = user.skills.find(obj => obj.name == skill.children[i].name).parents.filter(obj => obj != skill.name);
+		}
 
 		var parentNames = [];
         for (var i = 0; i < data.parents.length; ++i) {
@@ -1502,7 +1504,6 @@ adminRoute.post('/editskill', async function (req, res) {
 	skill.categoryName = data.categoryName;
 	skill.maxPoint = data.maxPoint;
 	skill.pointDescription = data.pointDescription;
-	console.log(data.parents.map(obj => obj.name));
 	skill.parents = data.parents.map(obj => obj.name);
 	skill.children = data.children;
 	skill.trainings = data.trainings;
@@ -1519,7 +1520,9 @@ adminRoute.post('/editskill', async function (req, res) {
 				var userSkill = (user.skills.find(obj => obj.name == data.name));
 
 				for (var i = 0; i < userSkill.parents.length; ++i) user.skills.find(obj => obj.name == userSkill.parents[i]).children = user.skills.find(obj => obj.name == userSkill.parents[i]).children.filter(obj => obj.name != userSkill.name);
-				for (var i = 0; i < userSkill.children.length; ++i) user.skills.find(obj => obj.name == userSkill.children[i].name).parents = user.skills.find(obj => obj.name == userSkill.children[i].name).parents.filter(obj => obj != userSkill.name);
+				for (var i = 0; i < userSkill.children.length; ++i) {
+					if (user.skills.find(obj => obj.name == userSkill.children[i].name) != undefined) user.skills.find(obj => obj.name == userSkill.children[i].name).parents = user.skills.find(obj => obj.name == userSkill.children[i].name).parents.filter(obj => obj != userSkill.name);
+				}
 
 				var parentNames = [];
 		        for (var i = 0; i < data.parents.length; ++i) {
