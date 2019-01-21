@@ -1513,7 +1513,7 @@ adminRoute.post('/editskill', async function (req, res) {
 	User.find({} , async function (err, users) {
         if (err) throw err;
 
-        users.map(user => {
+        users.map(async function (user)  {
 			if (user.skills.find(obj => obj.name == data.name) != undefined) {
 				var userSkill = (user.skills.find(obj => obj.name == data.name));
 
