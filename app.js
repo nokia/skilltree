@@ -902,6 +902,91 @@ protectedRoute.post('/editmyskill', async function (req, res) {
 	}
 });
 
+protectedRoute.post('/editmyskill', async function (req, res) {
+	var data = req.body;
+    var user = await findUser(req.decoded.username);
+
+    if (!user) {
+        res.json({
+            success: false,
+            message: 'User not found.'
+        });
+    } else if (user.skills.find(obj => obj.name == data.name) != undefined) {
+		/*var skill = (user.skills.find(obj => obj.name == data.name));
+
+		for (var i = 0; i < skill.parents.length; ++i) user.skills.find(obj => obj.name == skill.parents[i]).children = user.skills.find(obj => obj.name == skill.parents[i]).children.filter(obj => obj.name != skill.name);
+		for (var i = 0; i < skill.children.length; ++i) user.skills.find(obj => obj.name == skill.children[i].name).parents = user.skills.find(obj => obj.name == skill.children[i].name).parents.filter(obj => obj != skill.name);
+
+		var parentNames = [];
+        for (var i = 0; i < data.parents.length; ++i) {
+            if (user.skills.find(obj => obj.name == data.parents[i].name) == undefined) { // add parent skill to user if not already there
+                var parent = await Skill.findOne({
+						name: data.parents[i].name
+				}, function(err, skill) {
+						if (err) throw err;
+						return skill;
+				});
+                user.skills.push(parent);
+            }
+            // add new skill as child of parent skill
+            user.skills.find(obj => obj.name == data.parents[i].name).children.push({name: data.name, minPoint: data.parents[i].minPoint, recommended: data.parents[i].recommended});
+            // when we save the new skill we only need the name of the parents (no minPoint and recommended)
+            parentNames.push(data.parents[i].name);
+        }
+
+		for (var i = 0; i < data.children.length; ++i) {
+            if (user.skills.find(obj => obj.name == data.children[i].name) == undefined) { // add parent skill to user if not already there
+                var child = await Skill.findOne({
+						name: data.child[i].name
+				}, function(err, skill) {
+						if (err) throw err;
+						return skill;
+				});
+                user.skills.push(child);
+            }
+            // add new skill as child of parent skill
+            user.skills.find(obj => obj.name == data.children[i].name).parents.push(data.name);
+
+			var trees = user.trees.filter(obj => obj.skillNames.find(obj => obj == data.children[i].name) != undefined);
+			for (var j = 0; j < trees.length; ++j) {
+				var skillList = trees[j].skillNames;
+				if (skillList.find(obj => obj == data.name) == undefined) skillList.push(data.name);
+				var skillsToSort = [];
+				for (var k = 0; k < skillList.length; ++k) skillsToSort = user.skills.filter(obj => skillList.find(obj2 => obj2 == obj.name) != undefined);
+				var sn = await sortTree(skillsToSort);
+				user.trees.find(obj => obj.name == trees[j].name).skillNames = sn;
+			}
+        }
+
+		skill.name = data.name;
+        skill.description = data.description;
+		skill.descriptionWikipediaURL = data.descriptionWikipediaURL;
+        skill.skillIcon = data.skillIcon;
+        skill.categoryName = data.categoryName;
+        skill.maxPoint = data.maxPoint;
+        skill.pointDescription = data.pointDescription;
+		skill.parents = parentNames;
+		skill.children = data.children;
+        skill.trainings = data.trainings;
+
+		if (data.maxPoint < skill.achievedPoint) skill.achievedPoint = data.maxPoint;
+
+		//user.skills.find(obj => obj.name == data.name) = skill;
+		user.save(function (err) {if (err) throw err;});
+
+        res.json({
+            success: true
+        });*/
+
+		console.log(data);
+	} else {
+		res.json({
+            success: false,
+            message: 'skill not exists'
+        });
+	}
+});
+
 // Search for trees to add while typing
 protectedRoute.post('/gettree', async function (req, res) {
 		var data = req.body;
