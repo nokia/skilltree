@@ -1510,7 +1510,7 @@ adminRoute.post('/editskill', async function (req, res) {
 
 	skill.save(function (err) {if (err) throw err;});
 
-	User.find({} , (err, users) => {
+	User.find({} , async function (err, users) {
         if (err) throw err;
 
         users.map(user => {
