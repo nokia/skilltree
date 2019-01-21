@@ -902,7 +902,7 @@ protectedRoute.post('/editmyskill', async function (req, res) {
 	}
 });
 
-protectedRoute.post('/editmyskill', async function (req, res) {
+protectedRoute.post('/editskill', async function (req, res) {
 	var data = req.body;
     var user = await findUser(req.decoded.username);
 
