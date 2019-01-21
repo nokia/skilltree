@@ -1121,12 +1121,6 @@ function hideMenus () {
 
 document.body.addEventListener('click', hideCards);*/
 
-function nextTab () {
-    console.log("a");
-    console.log($('#newSkillPhase2-tab'));
-  $('#newSkillPhase2-tab').trigger('click');
-}
-
 // helper functions
 
 function parseJwt (token) {
