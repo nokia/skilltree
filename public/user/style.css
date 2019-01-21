@@ -345,3 +345,7 @@ a {
 #cardMainTree {
     font-size: 1rem;
 }
+
+.custom-file-input {
+    width: 50%;
+}
