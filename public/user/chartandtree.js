@@ -1122,7 +1122,7 @@ function hideMenus () {
 document.body.addEventListener('click', hideCards);*/
 
 function nextTab () {
-  $('#skillEditTabs > .nav-item').next('li').find('a').trigger('click');
+  $('newSkillPhase2-tab').trigger('click');
 }
 
 // helper functions
