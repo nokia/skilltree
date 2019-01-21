@@ -1122,7 +1122,7 @@ function hideMenus () {
 document.body.addEventListener('click', hideCards);*/
 
 function nextTab () {
-  $('#skillEditTabs > .active').next('li').find('a').trigger('click');
+  $('#skillEditTabs > .nav-item').next('li').find('a').trigger('click');
 }
 
 // helper functions
