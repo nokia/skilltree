@@ -1112,7 +1112,7 @@ function hideMenus () {
 }
 
 function hideCards (event) {
-    var except = ".tab-panel, #userCard, .float-right *";
+    var except = "#newSkillPhase1, #userCard, .float-right *";
 
     if (!event.target.matches(except)) {
         $(".collapse").collapse("hide");
