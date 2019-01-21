@@ -523,7 +523,7 @@ function editSkill () {
 function loadSkillToEditor (skill, global) {
     document.getElementById('newSkillName').value = skill.name;
     document.getElementById('newSkillDesc').value = skill.description;
-    document.getElementById('newSkillIcon').value = skill.skillIcon;
+    //document.getElementById('newSkillIcon').value = skill.skillIcon;
     document.getElementById('newSkillWiki').value = skill.descriptionWikipediaURL;
     document.getElementById("newSkillCat").value = skill.categoryName;
 
