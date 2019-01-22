@@ -357,7 +357,7 @@ class ItemContainer {
 
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
 
-        if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint) return;
+        if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint  || this.parentObj.disabled) return;
         this.parentObj.setFilter(this.parentObj, hoverFilter, this.parentObj.skillborder.filters[1]);
 
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
