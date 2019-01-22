@@ -86,7 +86,7 @@ describe("Deleting user", function(){
 
              
              request.post({ 
-                 url: baseUrl + '/admin/testAdmin', 
+                 url: baseUrl + "/admin/testAdmin", 
                  headers: { 'x-access-token': adminToken, 'Content-type': 'application/json' }, 
                  body: JSON.stringify({username: 'testuser'})
                 },
