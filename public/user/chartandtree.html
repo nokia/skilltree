@@ -316,7 +316,7 @@
         <h2 id = "newSkillModalTitle">Create your own skill</h2>
       </div>
       <div class="modal-body">
-          <form class = "needs-validation" onsubmit = "return false" novalidate>
+          <form id = "newSkillForm" class = "needs-validation" onsubmit = "return false" novalidate>
               <div class="card">
                   <!-- card nav -->
                   <div class="card-header d-flex justify-content-center">
@@ -549,7 +549,7 @@
         <h2>Add training to a skill</h2>
       </div>
       <div class="modal-body">
-        <form onsubmit = "return false" class = "needs-validation" novalidate>
+        <form id = "addTrainingForm" onsubmit = "return false" class = "needs-validation" novalidate>
           <h5>Skill:</h5>
           <input type = "text" id = "trainingSkillName" class = "form-control" list = "skillSearchResult" style = "width: 300px;" onkeyup="searchUserSkillsByName(this)" required><br>
           <h5>New Training(s):</h5>
