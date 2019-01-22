@@ -90,32 +90,23 @@ describe("API ADMIN TEST WITHOUT ADMIN TOKEN", function(){
     });
 });*/
 
-/*
+
 // fixing delete user, not testing add untill then
 describe("Adding user", function(){
     it("Should add", function(done){
 
-            const formData = {
-                username:     'testuser2', 
-                email: 'test@test.com', 
-                password:          'Test123'
-             };
-             
-             request.post(
-               {
-                 url: baseUrl + "/registration",
-                 form: formData
-               },
-               function (err, httpResponse, body) {
-                 console.log(err, body);
+        request.get({
+            url: baseUrl + "/registration", 
+            json: true, 
+            body: { username: "testuser", email: "test@test.com", password: "Abc123"} , 
+            headers: {'x-access-token': adminToken }   }, function (error, response, body) { 
+                console.log(error, body);
 
-                 expect(JSON.parse(body).success).to.equal(true);
-                 done();
-               }
-             );
+                done();
+            });
     });
 });
-*/
+
 
 
 /*
