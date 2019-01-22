@@ -29,13 +29,13 @@ function validate() {
 	);
 }
 
-function hideAlert (event) {
-    /*if (!event.target.matches("#createTree"))*/ $(".alert").hide();
-}
-
-document.body.addEventListener('click', hideAlert);
-
 function showBottomAlert(msg) {
 	document.getElementById('bottomAlertMsg').innerText = msg;
 	$('#bottomAlert').show();
 }
+
+function hideAlert (event) {
+    $(".alert").hide();
+}
+
+document.body.addEventListener('click', hideAlert);
