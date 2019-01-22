@@ -74,6 +74,7 @@ describe("Adding user", function(){
                function (err, httpResponse, body) {
                  console.log(err, body);
 
+                 expect(body.success).to.equal(true);
                  done();
                }
              );
@@ -83,7 +84,7 @@ describe("Adding user", function(){
 
 describe("Deleting user", function(){
     it("Should delete", function(done){
-        this.timeout(10000);
+        //this.timeout(10000);
             const formData = {
                 username:     'testuser', 
                 
