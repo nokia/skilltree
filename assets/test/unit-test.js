@@ -58,32 +58,7 @@ describe("API ADMIN TEST WITHOUT ADMIN TOKEN", function(){
 
 
 describe("Adding user", function(){
-    it("Should fail", function(done){
-        this.timeout(10000);
-
-        /*
-        var bodyData = 
-
-        request.post(
-            {   
-                url: baseUrl + "/registration", 
-                body: JSON.stringify({
-                    username: "testuser", 
-                    email: "test@test.test",
-                    password: "a"
-                })
-            
-            },
-            function(error, response, body) {
-                
-                var body = JSON.parse(response.body);
-                
-                expect(body.success).to.equal(true);
-
-                console.log(response.body);
-                
-                done();
-            });*/
+    it("Should add", function(done){
 
             const formData = {
                 username:     'testuser', 
@@ -94,6 +69,29 @@ describe("Adding user", function(){
              request.post(
                {
                  url: baseUrl + "/registration",
+                 form: formData
+               },
+               function (err, httpResponse, body) {
+                 console.log(err, body);
+
+                 done();
+               }
+             );
+    });
+});
+
+
+describe("Deleting user", function(){
+    it("Should delete", function(done){
+
+            const formData = {
+                username:     'testuser', 
+                
+             };
+             
+             request.post(
+               {
+                 url: baseUrl + "/deleteUser",
                  form: formData
                },
                function (err, httpResponse, body) {
