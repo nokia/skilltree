@@ -95,6 +95,7 @@ describe("Deleting user", function(){
 
         var data = {
             method: 'post',
+            header: headerData,
             body: bodyData,
             json: true,
             url: url
