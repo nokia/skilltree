@@ -553,6 +553,7 @@ async function sortTree(skillArray){
 	}
 	sortedArray = await assembleTree(skillMatrix);
 	skillArray = await extractNames(sortedArray);
+	console.log(skillMatrix);
 	return skillArray;
 }
 
