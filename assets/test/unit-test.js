@@ -95,13 +95,14 @@ describe("Deleting user", function(){
 
         var data = {
             method: 'post',
+            header: headerData,
             body: bodyData,
             json: true,
             url: url
         }
 
         request(data, function(error, response, body){
-            console.log(err, body);
+            console.log(error, body);
 
 
             done();
