@@ -530,7 +530,7 @@ async function assembleTree(skillMatrix){
 			assembledTree = assembledTree.concat(skillMatrix[component][j]);
 			console.log("comp:");
 			console.log(skillMatrix[component][j]);
-			l = true;
+			//l = true;
 		}
 		j++;
 	}
