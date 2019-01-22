@@ -201,6 +201,7 @@ function addTraining () {
 // opens skill creation modal and saves the new skill to the database (user and for approval)
 function createSkill () {
     $('#newSkillForm').reset();
+    $('#newSkillForm').data('bootstrapValidator').resetForm();
 
     var modal = document.getElementById("newSkillModal");
     modal.style.display = "block";
