@@ -93,7 +93,7 @@ describe("Adding user", function(){
              
              request.post(
                {
-                 url: 'https://todoist.com/oauth/access_token',
+                 url: baseUrl + "/registration",
                  form: formData
                },
                function (err, httpResponse, body) {
