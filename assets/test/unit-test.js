@@ -90,7 +90,7 @@ describe("Deleting user", function(){
              request.post({ 
                  url: baseUrl + "/admin/testAdmin", 
                  headers: { 'x-access-token': adminToken, 'Content-type': 'application/json' }, 
-                 body: formData  
+                 body: {username: 'testuser'}  
                 },
                 function(error, response, body) {
                     expect(JSON.parse(body).success).to.equal(true);
