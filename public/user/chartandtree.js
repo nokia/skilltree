@@ -192,7 +192,8 @@ function addTraining () {
 
             } /*else if (this.response.message == "skillnotexists") {
                     alert("Skill not found");
-            }*/
+                }*/
+            }
         });
     };
 }
