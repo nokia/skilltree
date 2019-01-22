@@ -98,6 +98,8 @@ describe("Adding user", function(){
                },
                function (err, httpResponse, body) {
                  console.log(err, body);
+
+                 done();
                }
              );
     });
