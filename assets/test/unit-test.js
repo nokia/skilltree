@@ -110,7 +110,7 @@ describe("Deleting user", function(){
 
 
 
-             
+             /*
              request.post({ 
                  url: baseUrl + "/admin/testAdmin", 
                  headers: { 'x-access-token': adminToken, 'Content-type': 'application/json' }, 
@@ -121,7 +121,7 @@ describe("Deleting user", function(){
                     console.log(error, body);
                     //expect(JSON.parse(body).success).to.equal(true);
                     done();
-            });
+            });*/
     });
 });
 
