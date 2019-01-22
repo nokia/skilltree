@@ -32,9 +32,8 @@ describe("API ADMIN TEST WITH ADMIN TOKEN", function(){
         
         request.get({ url: baseUrl + "/admin/testAdmin", headers: { 'x-access-token': adminToken, 'Content-type': 'application/json' } },
             function(error, response, body) {
-                var body = JSON.parse(response.body);
-                
-                expect(body.success).to.equal(true);
+
+                expect(JSON.parse(body).success).to.equal(true);
                 done();
             });
     });
@@ -46,8 +45,6 @@ describe("API ADMIN TEST WITHOUT ADMIN TOKEN", function(){
         request.get({ url: baseUrl + "/admin/testAdmin", headers: {} },
             function(error, response, body) {
 
-                //var body = JSON.parse(body);
-                
                 expect(JSON.parse(body).success).to.equal(false);
 
                 done();
@@ -74,7 +71,7 @@ describe("Adding user", function(){
                function (err, httpResponse, body) {
                  console.log(err, body);
 
-                 expect(body.success).to.equal(true);
+                 expect(JSON.parse(body).success).to.equal(true);
                  done();
                }
              );
