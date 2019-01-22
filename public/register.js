@@ -34,9 +34,9 @@ function validate() {
 						willingToTeach: willingToTeach.checked
 					})
 				);
-			} else alert("The password is not valid! It has to contain at least one digit, one lowercase and one uppercase character. The minimum password length is 8 characters.");
-		} else alert("The email address is not valid!");
-	} else alert("Incorrect credentials! Passwords don't match!");
+			} else showBottomAlert("The password is not valid! It has to contain at least one digit, one lowercase and one uppercase character. The minimum password length is 8 characters.");
+		} else showBottomAlert("The email address is not valid!");
+	} else showBottomAlert("Incorrect credentials! Passwords don't match!");
 }
 
 function validateEmail (email) {
@@ -53,12 +53,7 @@ function checkPassword (pw) {
 	return false;
 }
 
-function showToast() {
-	var toast = document.getElementById("toast");
-
-	toast.className = "show";
-
-	setTimeout(function(){
-		toast.className = ""
-	}, 3000);
+function showBottomAlert(msg) {
+	document.getElementById('bottomAlertMsg').innerText = msg;
+	$('#bottomAlert').show();
 }
