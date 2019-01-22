@@ -251,40 +251,42 @@
 
 <!-- creator -->
 <div id = "creator" style = "display: none;" class = "hide clear">
-  <div class = "card">
-    <h1>1.</h1>
-    <center><h5>The name of the tree</h5></center>
-    <p><input type = "text" id = "treeName" class = "form-control"></p>
-    <input type = "button" id = "loadTree" class = "btn btn-outline-secondary" style = "display: none" value = "Load Tree"/>
-    <center><h5>Focus area of the tree</h5></center>
-    <p><select id = "focusarea" class = "form-control">
-      <option value = "People">People</option>
-      <option value = "Engineering">Engineering</option>
-      <option value = "Business">Business</option>
-      <option value = "Communication">Communication</option>
-      <option value = "Support functions">Support functions</option>
-    </select></p>
-    <center><h5>Description:</h5></center>
-    <p><textarea id = "treeDesc" class = "form-control"></textarea></p>
-  </div>
-  <div class = "card">
-    <h1>2.</h1>
-    <center><h5>Search for a skill</h5></center>
-    <p><input type = "text" id = "skillSearchTree" class = "form-control" list = "skillSearchResult" onkeyup="searchSkillsByName(this)"></p>
-    <p><input type = "button" id = "addToTree" class="btn btn-outline-secondary" value = "Add skill to tree"></p>
-    <center><h5>OR</h5></center>
-    <p><input type = "button" id = "createSkill" class="btn btn-outline-secondary" value = "Create skill"></p>
-  </div>
-  <div class = "card">
-    <h1>3.</h1>
-    <p><select id = "skillList" size = "2" class="form-control"></select></p>
-    <p><input type = "button" id = "deleteFromList" class="btn btn-outline-secondary" value = "Delete selected"></p>
-  </div>
-  <div class = "card">
-    <h1>4.</h1>
-    <p><input type = "button" id = "createTree" class="btn btn-outline-secondary" value = "Save"></p>
-    </div>
-  </div>
+    <form id = "newTreeForm" class = "needs-validation" onsubmit = "return false" novalidate>
+        <div class = "card">
+            <h1>1.</h1>
+            <center><h5>The name of the tree</h5></center>
+            <p><input type = "text" id = "treeName" class = "form-control"></p>
+            <input type = "button" id = "loadTree" class = "btn btn-outline-secondary" style = "display: none" value = "Load Tree"/>
+            <center><h5>Focus area of the tree</h5></center>
+            <p><select id = "focusarea" class = "form-control">
+                <option value = "People">People</option>
+                <option value = "Engineering">Engineering</option>
+                <option value = "Business">Business</option>
+                <option value = "Communication">Communication</option>
+                <option value = "Support functions">Support functions</option>
+            </select></p>
+            <center><h5>Description:</h5></center>
+            <p><textarea id = "treeDesc" class = "form-control"></textarea></p>
+        </div>
+        <div class = "card">
+            <h1>2.</h1>
+            <center><h5>Search for a skill</h5></center>
+            <p><input type = "text" id = "skillSearchTree" class = "form-control" list = "skillSearchResult" onkeyup="searchSkillsByName(this)"></p>
+            <p><input type = "button" id = "addToTree" class="btn btn-outline-secondary" value = "Add skill to tree"></p>
+            <center><h5>OR</h5></center>
+            <p><input type = "button" id = "createSkill" class="btn btn-outline-secondary" value = "Create skill"></p>
+        </div>
+        <div class = "card">
+            <h1>3.</h1>
+            <p><select id = "skillList" size = "2" class="form-control"></select></p>
+            <p><input type = "button" id = "deleteFromList" class="btn btn-outline-secondary" value = "Delete selected"></p>
+        </div>
+        <div class = "card">
+            <h1>4.</h1>
+            <p><input type = "button" id = "createTree" class="btn btn-outline-secondary" value = "Save"></p>
+        </div>
+    </form>
+</div>
 <!-- end of creator -->
 
 <!-- start of modal -->
@@ -771,6 +773,13 @@
       <select id = "apprTrainingSel">
       </select>
       <input type="button" value="Approve" id="approveTrainingsBtn">
+    </div>
+
+    <div id = "bottomAlertDiv">
+        <div id = "bottomAlert" class="alert alert-danger alert-dismissible" style = "display: none;">
+            <a href="#" class="close" onclick = "$('#bottomAlert').hide()">&times;</a>
+            <strong id = "bottomAlertMsg">Please check your inputs!</strong>
+        </div>
     </div>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
