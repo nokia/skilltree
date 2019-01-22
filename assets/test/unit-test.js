@@ -29,7 +29,7 @@ describe("hashPassword() and verifyPassword()", function(){
 
 describe("API ADMIN TEST WITH ADMIN TOKEN", function () {
     it("Should return {success:true}", function (done) {
-
+        /*
         const bodyData = {
             username: 'testuser',
         }
@@ -60,6 +60,18 @@ describe("API ADMIN TEST WITH ADMIN TOKEN", function () {
 
             done();
         });
+        */
+
+        request.get({
+            url: baseUrl + "/admin/testAdmin", 
+            json: true, 
+            body: { username: "testuser"} , 
+            headers: {'x-access-token': adminToken }   }, function (error, response, body) { 
+                console.log(err, body);
+
+                done();
+            });
+
     });
 });
 /*
