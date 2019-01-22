@@ -29,8 +29,8 @@ describe("hashPassword() and verifyPassword()", function(){
 
 describe("API ADMIN TEST WITH ADMIN TOKEN", function () {
     it("Should return {success:true}", function (done) {
-
-        var bodyData = {
+        /*
+        const bodyData = {
             username: 'testuser',
         }
 
@@ -42,7 +42,7 @@ describe("API ADMIN TEST WITH ADMIN TOKEN", function () {
 
         var options = {
             method: 'get',
-            body: bodyData,
+            form: bodyData,
             headers: headerData,
             json: true,
             url: url
@@ -60,6 +60,18 @@ describe("API ADMIN TEST WITH ADMIN TOKEN", function () {
 
             done();
         });
+        */
+
+        request.get({
+            url: baseUrl + "/admin/testAdmin", 
+            json: true, 
+            body: { username: "testuser"} , 
+            headers: {'x-access-token': adminToken }   }, function (error, response, body) { 
+                console.log(error, body);
+
+                done();
+            });
+
     });
 });
 /*
@@ -83,24 +95,15 @@ describe("API ADMIN TEST WITHOUT ADMIN TOKEN", function(){
 describe("Adding user", function(){
     it("Should add", function(done){
 
-            const formData = {
-                username:     'testuser2', 
-                email: 'test@test.com', 
-                password:          'Test123'
-             };
-             
-             request.post(
-               {
-                 url: baseUrl + "/registration",
-                 form: formData
-               },
-               function (err, httpResponse, body) {
-                 console.log(err, body);
+        request.get({
+            url: baseUrl + "/registration", 
+            json: true, 
+            body: { username: "testuser", email: "test@test.com", password: "Abc123"} , 
+            headers: {'x-access-token': adminToken }   }, function (error, response, body) { 
+                console.log(error, body);
 
-                 expect(JSON.parse(body).success).to.equal(true);
-                 done();
-               }
-             );
+                done();
+            });
     });
 });
 
