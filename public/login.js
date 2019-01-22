@@ -16,7 +16,7 @@ function validate() {
 					localStorage.setItem("loginToken", httpRequest.response.token);
 					window.open('/user','_self');
 				} else {
-                    showToast();
+                    showBottomAlert("Wrong username or password!");
                 }
 			}
 	};
@@ -29,12 +29,7 @@ function validate() {
 	 );
 	}
 
-function showToast() {
-	var toast = document.getElementById("toast");
-
-	toast.className = "show";
-
-	setTimeout(function(){
-		toast.className = ""
-	}, 3000);
+function showBottomAlert(msg) {
+	document.getElementById('bottomAlertMsg').innerText = msg;
+	$('#bottomAlert').show();
 }
