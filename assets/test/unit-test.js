@@ -45,7 +45,7 @@ describe("API ADMIN TEST WITH ADMIN TOKEN", function () {
         var options = {
             method: 'get',
             body: bodyData,
-            header: headerData,
+            headers: headerData,
             json: true,
             url: url
         }
