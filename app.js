@@ -481,7 +481,7 @@ async function insertSkill(skillToInsert, skillMatrix) {
 	for (var component = 0; component < skillMatrix.length; component++) {
 		for (var child = 0; child < skillToInsert.children.length; child++) {
 			for (var row = 0; row < skillMatrix[component].length; row++) {
-				if (skillMatrix[component].[row].includes(skillToInsert.children[child])) {
+				if (skillMatrix[component][row].includes(skillToInsert.children[child])) {
 					if (row == 0) {
 						await addRowToComponent(skillMatrix, component);
 						skillMatrix[component][0].push(skillToInsert);
