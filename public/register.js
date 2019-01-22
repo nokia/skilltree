@@ -50,7 +50,7 @@ function showBottomAlert(msg) {
 }
 
 function hideAlert (event) {
-    $(".alert").hide();
+    if (!event.target.matches("#submit")) $(".alert").hide();
 }
 
 document.body.addEventListener('click', hideAlert);
