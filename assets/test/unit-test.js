@@ -95,7 +95,7 @@ describe("API ADMIN TEST WITHOUT ADMIN TOKEN", function(){
 describe("Adding user", function(){
     it("Should add", function(done){
 
-        request.get({
+        request.post({
             url: baseUrl + "/registration", 
             json: true, 
             body: { username: "testuser", email: "test@test.com", password: "Abc123"} , 
