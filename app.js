@@ -535,7 +535,7 @@ async function assembleTree(skillMatrix){
 		j++;
 	}
 	console.log("tree:");
-	console.log(assembleTree);
+	console.log(assembledTree);
 	return assembledTree;
 }
 
