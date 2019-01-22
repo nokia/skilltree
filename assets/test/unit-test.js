@@ -84,7 +84,7 @@ describe("Adding user", function(){
     it("Should add", function(done){
 
             const formData = {
-                username:     'testuser', 
+                username:     'testuser2', 
                 email: 'test@test.com', 
                 password:          'Test123'
              };
