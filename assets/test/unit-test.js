@@ -27,15 +27,39 @@ describe("hashPassword() and verifyPassword()", function(){
 
 //NPM REQUEST
 
-describe("API ADMIN TEST WITH ADMIN TOKEN", function(){
-    it("Should return {success:true}", function(done){
-        
-        request.get({ url: baseUrl + "/admin/testAdmin", headers: { 'x-access-token': adminToken } },
-            function(error, response, body) {
-                console.log(error, body);
-                //expect(JSON.parse(body).success).to.equal(true);
-                done();
-            });
+describe("API ADMIN TEST WITH ADMIN TOKEN", function () {
+    it("Should return {success:true}", function (done) {
+
+        var bodyData = {
+            username: 'testuser',
+        }
+
+        var headerData = {
+            'x-access-token': adminToken
+        }
+
+        var url = baseUrl + '/admin/testAdmin';
+
+        var options = {
+            method: 'get',
+            body: bodyData,
+            headers: headerData,
+            json: true,
+            url: url
+        }
+        request(options, function (err, res, body) {
+            if (err) {
+                console.error('error posting json: ', err)
+                throw err;
+            }
+            var headers = res.headers;
+            var statusCode = res.statusCode;
+            console.log('headers: ', headers);
+            console.log('statusCode: ', statusCode);
+            console.log('body: ', body);
+
+            done();
+        });
     });
 });
 /*
@@ -55,12 +79,12 @@ describe("API ADMIN TEST WITHOUT ADMIN TOKEN", function(){
 });*/
 
 
-/* fixing delete user, not testing add untill then
+// fixing delete user, not testing add untill then
 describe("Adding user", function(){
     it("Should add", function(done){
 
             const formData = {
-                username:     'testuser', 
+                username:     'testuser2', 
                 email: 'test@test.com', 
                 password:          'Test123'
              };
@@ -79,54 +103,46 @@ describe("Adding user", function(){
              );
     });
 });
-*/
 
+
+
+/*
 describe("Deleting user", function(){
     it("Should delete", function(done){
         //this.timeout(10000);
 
-        /*
         var bodyData = {
-            username: 'testuser'
+            username: 'testuser',
         }
 
         var headerData = {
-            'x-acces-token': adminToken,
-            'Content-type': 'application/json'
+            'x-access-token': adminToken
         }
 
-        var url = baseUrl + "/admin/deleteUser";
+        var url = baseUrl + '/admin/deleteUser';
 
-        var data = {
+        var options = {
             method: 'post',
-            header: headerData,
             body: bodyData,
+            headers: headerData,
             json: true,
             url: url
         }
-
-        request(data, function(error, response, body){
-            console.log(error, body);
-
+        request(options, function (err, res, body) {
+            if (err) {
+                console.error('error posting json: ', err)
+                throw err;
+            }
+            var headers = res.headers;
+            var statusCode = res.statusCode;
+            console.log('headers: ', headers);
+            console.log('statusCode: ', statusCode);
+            console.log('body: ', body);
 
             done();
         });
-*/
-
-
-             
-             request.post({ 
-                 url: baseUrl + "/admin/deleteUser", 
-                 headers: { 'x-access-token': adminToken }, 
-                 body: JSON.stringify({username: 'testuser'})
-                },
-                function(error, response, body) {
-                    console.log(error, body);
-                    //expect(JSON.parse(body).success).to.equal(true);
-                    done();
-            });
     });
-});
+});*/
 
 
 
