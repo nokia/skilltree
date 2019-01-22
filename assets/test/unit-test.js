@@ -84,15 +84,18 @@ describe("Deleting user", function(){
         //this.timeout(10000);
             const formData = {
                 username:     'testuser', 
-                
              };
+
+             const headersData = {
+                'x-access-token': adminToken, 
+                'Content-type': 'application/json'
+             }
              
              request.post(
                {
                  url: baseUrl + "/admin/deleteUser",
-                 headers: { 'x-access-token': adminToken, 'Content-type': 'application/json' },
+                 headers: headersData,
                  form: formData
-                 
                },
                function (err, httpResponse, body) {
                  console.log(err, body);
