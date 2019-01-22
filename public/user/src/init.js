@@ -136,7 +136,7 @@ window.addEventListener('load', function() {
                 event.preventDefault();
                 event.stopPropagation();
                 $('.invalid-alert').show();
-                //form.getElementsByClassName('alert-danger')[0].style.display = 'block';
+
             } else $('.invalid-alert').hide();
             form.classList.add('was-validated');
         }, false);

@@ -58,3 +58,14 @@ p.bolded {
 .unsupportedBrowserAlertDIV {
   display: contents;
 }
+
+#bottomAlertDiv {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+#bottomAlert {
+    margin: 10px;
+}

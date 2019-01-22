@@ -11,14 +11,14 @@ function validate() {
 
 	//Listener, if response comes, it runs.
 	httpRequest.onreadystatechange = function() {
-			if(httpRequest.readyState == 4 && httpRequest.status == 200) {
-				if(httpRequest.response.success){
-					localStorage.setItem("loginToken", httpRequest.response.token);
-					window.open('/user','_self');
-				} else {
-                    showToast();
-                }
+		if(httpRequest.readyState == 4 && httpRequest.status == 200) {
+			if(httpRequest.response.success){
+				localStorage.setItem("loginToken", httpRequest.response.token);
+				window.open('/user','_self');
+			} else {
+				showBottomAlert("Wrong username or password!");
 			}
+		}
 	};
 
 	httpRequest.send(
@@ -26,15 +26,16 @@ function validate() {
 			username: username.value,
 			password: password.value
 		})
-	 );
-	}
-
-function showToast() {
-	var toast = document.getElementById("toast");
-
-	toast.className = "show";
-
-	setTimeout(function(){
-		toast.className = ""
-	}, 3000);
+	);
 }
+
+function showBottomAlert(msg) {
+	document.getElementById('bottomAlertMsg').innerText = msg;
+	$('#bottomAlert').show();
+}
+
+function hideAlert (event) {
+    $(".alert").hide();
+}
+
+document.body.addEventListener('click', hideAlert);

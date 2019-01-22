@@ -8,7 +8,6 @@ function validate() {
 	var willingToTeach = document.getElementById("teach");
 
 	if (password1.value == password2.value) {
-		if (validateEmail(email.value)) {
 			if (checkPassword(password1.value)) {
 				var httpRequest = new XMLHttpRequest();
 				httpRequest.open('POST', '/registration', true);
@@ -21,7 +20,7 @@ function validate() {
 						if (httpRequest.response.success) {
 							localStorage.setItem("loginToken", httpRequest.response.token);
 							window.open("/user", "_self");
-						} else alert("Incorrect credentials! Username already taken.");
+						} else showBottomAlert("Incorrect credentials! Username already taken.");
 					}
 				}
 
@@ -34,16 +33,8 @@ function validate() {
 						willingToTeach: willingToTeach.checked
 					})
 				);
-			} else alert("The password is not valid! It has to contain at least one digit, one lowercase and one uppercase character. The minimum password length is 8 characters.");
-		} else alert("The email address is not valid!");
-	} else alert("Incorrect credentials! Passwords don't match!");
-}
-
-function validateEmail (email) {
-	var expr = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
-	if (expr.test(email)) return true;
-	return false;
+			} else showBottomAlert("The password is not valid! It has to contain at least one digit, one lowercase and one uppercase character. The minimum password length is 8 characters.");
+	} else showBottomAlert("Incorrect credentials! Passwords don't match!");
 }
 
 function checkPassword (pw) {
@@ -53,12 +44,29 @@ function checkPassword (pw) {
 	return false;
 }
 
-function showToast() {
-	var toast = document.getElementById("toast");
-
-	toast.className = "show";
-
-	setTimeout(function(){
-		toast.className = ""
-	}, 3000);
+function showBottomAlert(msg) {
+	document.getElementById('bottomAlertMsg').innerText = msg;
+	$('#bottomAlert').show();
 }
+
+function hideAlert (event) {
+    if (!event.target.matches("#submit")) $(".alert").hide();
+}
+
+document.body.addEventListener('click', hideAlert);
+
+window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+            if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+                showBottomAlert("Incorrect credentials!");
+            } //else $('.invalid-alert').hide();
+            form.classList.add('was-validated');
+        }, false);
+    });
+}, false);

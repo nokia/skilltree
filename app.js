@@ -1682,7 +1682,7 @@ adminRoute.post('/dropoffers', async function (req, res) {
 //DELETE FUNCTIONS, to be separated in a delete.js file or smth
 
 adminRoute.post('/deleteUser', async function (req,res){
-	User.deleteOne( {name: request.body.name }  , function (err) {
+	User.deleteOne( {username: request.body.username }  , function (err) {
 		if (err) throw err;
 		else res.json({
 			succes: true,
@@ -1699,6 +1699,8 @@ adminRoute.get('/testAdmin', async function (req,res){
 	});
 
 });
+
+///////////////// END of DELETE SECTION
 
 async function findUser(unm) {
 	var user = await User.findOne({

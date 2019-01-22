@@ -137,6 +137,8 @@ window.onresize = function () {
 // PIXI.loader is global, it loads the back button, skillborder, tree,...
 
 function addTraining () {
+    document.getElementById('addTrainingForm').reset();
+
     var modal = document.getElementById("addTrainingModal");
     modal.style.display = "block";
 
@@ -190,9 +192,9 @@ function addTraining () {
 
                 alert("Succes");
 
-                } else if (this.response.message == "skillnotexists") {
+            } /*else if (this.response.message == "skillnotexists") {
                     alert("Skill not found");
-                }
+                }*/
             }
         });
     };
@@ -200,8 +202,8 @@ function addTraining () {
 
 // opens skill creation modal and saves the new skill to the database (user and for approval)
 function createSkill () {
-    $('.clear').find('input:text').val('');
-    $('.clear').find('textarea').val('');
+    //$('#newSkillForm').reset();
+    document.getElementById('newSkillForm').reset();
 
     var modal = document.getElementById("newSkillModal");
     modal.style.display = "block";
@@ -292,8 +294,7 @@ function createSkill () {
 
 // opens skill editor, user can edit (only) her/his own skills
 function editMySkill () {
-    $('.clear').find('input:text').val('');
-    $('.clear').find('textarea').val('');
+    document.getElementById('newSkillForm').reset();
 
     var modal = document.getElementById("newSkillModal");
     modal.style.display = "block";
@@ -407,8 +408,7 @@ function editMySkill () {
 
 // opens skill editor, user can edit (only) her/his own skills
 function editSkill () {
-    $('.clear').find('input:text').val('');
-    $('.clear').find('textarea').val('');
+    document.getElementById('newSkillForm').reset();
 
     var modal = document.getElementById("newSkillModal");
     modal.style.display = "block";
@@ -677,8 +677,8 @@ function createTree () {
                         else if (this.response.message == "treeexists") alert("There is already a tree with this name");
                     }
                 });
-            } else alert("Please add at least one skill to the tree");
-        } else alert("Please provide a name to the tree");
+            } else showBottomAlert("Please add at least one skill to the tree");
+        } else showBottomAlert("Please provide a name to the tree");
     };
 }
 
@@ -1111,15 +1111,13 @@ function hideMenus () {
     }
 }
 
-function hideCards (event) {
-    var except = "#userCard, .float-right *";
+function hideCardsAndAlerts (event) {
+    if (!event.target.matches("#userCard, .float-right *")) $(".hide-on-click").collapse("hide");
 
-    if (!event.target.matches(except)) {
-        $(".hide-on-click").collapse("hide");
-    }
+    if (!event.target.matches("#createTree")) $(".alert").hide();
 }
 
-document.body.addEventListener('click', hideCards);
+document.body.addEventListener('click', hideCardsAndAlerts);
 
 // helper functions
 
@@ -1137,6 +1135,11 @@ Array.prototype.sum = function (prop) {
     }
 
     return total;
+}
+
+function showBottomAlert(msg) {
+	document.getElementById('bottomAlertMsg').innerText = msg;
+	$('#bottomAlert').show();
 }
 
 function request (type, url, sendData, callback) {

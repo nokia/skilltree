@@ -27,7 +27,6 @@
       }
     }, false);
     </script>
-    <script src="register.js"></script>
   </head>
   <body id="body">
     <div id="unsupportedBrowserAlert">
@@ -47,22 +46,22 @@
          </div>
           <p class="lead">Already have an account? <a href="login.html">Login</a></p>
           <hr class="my-4">
-          <form onsubmit = "return false">
+          <form onsubmit = "return false" class = "needs-validation" novalidate>
               <div class="form-group">
                 <!-- <label for="exampleInputEmail1">Email address</label> -->
-                <input type="text" class="form-control" id = "username" aria-describedby="emailHelp" placeholder="Username">
+                <input type="text" class="form-control" id = "username" aria-describedby="emailHelp" placeholder="Username" required>
               </div>
               <div class="form-group">
                 <!-- <label for="exampleInputPassword1">Password</label> -->
-                <input type="password" class="form-control" id = "password1" placeholder="Password">
+                <input type="password" class="form-control" id = "password1" placeholder="Password" required>
               </div>
               <div class="form-group">
                 <!-- <label for="exampleInputPassword1">Password</label> -->
-                <input type="password" class="form-control" id="password2" placeholder="Confirm Password">
+                <input type="password" class="form-control" id="password2" placeholder="Confirm Password" required>
               </div>
               <div class="form-group">
                 <!-- <label for="exampleInputEmail1">Email address</label> -->
-                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email">
+                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email" required>
               </div>
               <p class="bolded">Select a focus area:
                   <select id = "focusarea" class = "form-control">
@@ -81,10 +80,18 @@
         </div>
     </div>
 
+    <div id = "bottomAlertDiv">
+        <div id = "bottomAlert" class="alert alert-danger alert-dismissible" style = "display: none;">
+            <a href="#" class="close" onclick = "$('#bottomAlert').hide()">&times;</a>
+            <strong id = "bottomAlertMsg"></strong>
+        </div>
+    </div>
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="register.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   </body>

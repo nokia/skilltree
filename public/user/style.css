@@ -349,3 +349,22 @@ a {
 #loadSkill {
     margin-top: 5px;
 }
+
+#bottomAlertDiv {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+#bottomAlert {
+    margin: 10px;
+}
+
+#saveSkillBtn {
+    box-shadow: none;
+}
+
+#saveTrainingsBtn {
+    box-shadow: none;
+}
