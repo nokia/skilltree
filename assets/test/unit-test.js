@@ -52,13 +52,15 @@ describe("API ADMIN TEST WITH ADMIN TOKEN", function () {
         request(options, function (err, res, body) {
             if (err) {
                 console.error('error posting json: ', err)
-                throw err
+                throw err;
             }
-            var headers = res.headers
-            var statusCode = res.statusCode
-            console.log('headers: ', headers)
-            console.log('statusCode: ', statusCode)
-            console.log('body: ', body)
+            var headers = res.headers;
+            var statusCode = res.statusCode;
+            console.log('headers: ', headers);
+            console.log('statusCode: ', statusCode);
+            console.log('body: ', body);
+
+            done();
         });
 
 
