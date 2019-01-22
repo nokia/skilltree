@@ -551,9 +551,9 @@
       <div class="modal-body">
         <form onsubmit = "return false">
           <h5>Skill:</h5>
-          <input type = "text" id = "trainingSkillName" list = "skillSearchResult" onkeyup="searchUserSkillsByName(this)"><br>
+          <input type = "text" id = "trainingSkillName" class = "form-control" list = "skillSearchResult" onkeyup="searchUserSkillsByName(this)"><br>
           <h5>New Training(s):</h5>
-          <table id = "addTrainingsTable" border = "1">
+          <table id = "addTrainingsTable">
               <tr>
                 <td>Name</td>
                 <td>Level</td>
@@ -562,21 +562,20 @@
                 <td>Goal</td>
                 <td>Length</td>
                 <td>Language</td>
-                <td>Delete</td>
               </tr>
               <tr>
-                <td><input size=15 type="text"></td>
-                <td><input size=5 type="text"></td>
-                <td><input size=20 type="text"></td>
-                <td><input size=15 type="text"></td>
-                <td><input size=15 type="text"></td>
-                <td><input size=5 type="text"></td>
-                <td><input size=5 type="text"></td>
-                <td><input type="button" value="Delete" onclick="deleteRow('addTrainingsTable', this)"></td>
+                <td><input size=15 type="text" class = "form-control"></td>
+                <td><input size=5 type="text" class = "form-control"></td>
+                <td><input size=20 type="text" class = "form-control"></td>
+                <td><input size=15 type="text" class = "form-control"></td>
+                <td><input size=15 type="text" class = "form-control"></td>
+                <td><input size=5 type="text" class = "form-control"></td>
+                <td><input size=5 type="text" class = "form-control"></td>
+                <td><input type="button" class = "btn" value="Delete" onclick="deleteRow('addTrainingsTable', this)"></td>
               </tr>
           </table>
-          <input type="button" value="Add training" onclick="addRow('addTrainingsTable')"><br><br>
-          <input type = "submit" value = "Save" id = "saveTrainingsBtn">
+          <input type="button" class = "btn btn-success" value="Add training" onclick="addRow('addTrainingsTable')"><br><br>
+          <input type = "submit" value = "Save" id = "saveTrainingsBtn" class = "btn btn-success float-right">
         </form>
       </div>
     </div>
