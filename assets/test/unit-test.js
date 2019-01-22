@@ -83,7 +83,7 @@ describe("Adding user", function(){
 
 describe("Deleting user", function(){
     it("Should delete", function(done){
-
+        this.timeout(10000);
             const formData = {
                 username:     'testuser', 
                 
@@ -91,7 +91,7 @@ describe("Deleting user", function(){
              
              request.post(
                {
-                 url: baseUrl + "/deleteUser",
+                 url: baseUrl + "/admin/deleteUser",
                  form: formData,
                  headers: { 'x-access-token': adminToken, 'Content-type': 'application/json' }
                },
