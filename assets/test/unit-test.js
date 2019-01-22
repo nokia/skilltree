@@ -84,7 +84,7 @@ describe("Adding user", function(){
     it("Should add", function(done){
 
             const formData = {
-                username:     'testuser2', 
+                username:     'testuser3', 
                 email: 'test@test.com', 
                 password:          'Test123'
              };
@@ -92,7 +92,7 @@ describe("Adding user", function(){
              request.post(
                {
                  url: baseUrl + "/registration",
-                 form: formData
+                 body: formData
                },
                function (err, httpResponse, body) {
                  console.log(err, body);
