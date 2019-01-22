@@ -135,8 +135,9 @@ window.addEventListener('load', function() {
             if (form.checkValidity() === false) {
                 event.preventDefault();
                 event.stopPropagation();
-                showBottomAlert("Please check your data!");
-            } else $('#bottomAlert').hide();
+                $('.invalid-alert').show();
+
+            } else $('.invalid-alert').hide();
             form.classList.add('was-validated');
         }, false);
     });
