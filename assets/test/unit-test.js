@@ -119,7 +119,7 @@ describe("Deleting user", function(){
             'x-access-token': adminToken
         }
 
-        var url = baseUrl + '/admin/testAdmin';
+        var url = baseUrl + '/admin/deleteUser';
 
         var options = {
             method: 'post',
