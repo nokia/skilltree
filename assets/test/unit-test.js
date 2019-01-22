@@ -82,13 +82,14 @@ describe("Adding user", function(){
 describe("Deleting user", function(){
     it("Should delete", function(done){
         //this.timeout(10000);
-/*
+
         var bodyData = {
             username: 'testuser'
         }
 
         var headerData = {
-            'x-acces-token': adminToken
+            'x-acces-token': adminToken,
+            'Content-type': 'application/json'
         }
 
         var url = baseUrl + "/admin/deleteUser";
@@ -106,11 +107,11 @@ describe("Deleting user", function(){
 
 
             done();
-        });*/
+        });
 
 
 
-             
+             /*
              request.post({ 
                  url: baseUrl + "/admin/testAdmin", 
                  headers: { 'x-access-token': adminToken, 'Content-type': 'application/json' }, 
@@ -120,7 +121,7 @@ describe("Deleting user", function(){
                     console.log(error, body);
                     //expect(JSON.parse(body).success).to.equal(true);
                     done();
-            });
+            });*/
     });
 });
 
