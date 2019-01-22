@@ -61,6 +61,7 @@ describe("Adding user", function(){
     it("Should fail", function(done){
         this.timeout(10000);
 
+        /*
         var bodyData = 
 
         request.post(
@@ -75,14 +76,30 @@ describe("Adding user", function(){
             },
             function(error, response, body) {
                 
-                /*var body = JSON.parse(response.body);
+                var body = JSON.parse(response.body);
                 
-                expect(body.success).to.equal(true);*/
+                expect(body.success).to.equal(true);
 
                 console.log(response.body);
                 
                 done();
-            });
+            });*/
+
+            const formData = {
+                username:     'testuser', 
+                email: 'test@test.com', 
+                password:          'Test123'
+             };
+             
+             request.post(
+               {
+                 url: 'https://todoist.com/oauth/access_token',
+                 form: formData
+               },
+               function (err, httpResponse, body) {
+                 console.log(err, body);
+               }
+             );
     });
 });
 
