@@ -98,7 +98,7 @@ describe("Adding user", function(){
         request.post({
             url: baseUrl + "/registration", 
             json: true, 
-            body: { username: "testuser4", email: "test@test.com", password: "Abc123"} , 
+            body: { username: "testuser", email: "test@test.com", password: "Abc123"} , 
             headers: {'x-access-token': adminToken }   }, function (error, response, body) { 
                 console.log(error, body);
 
@@ -109,43 +109,22 @@ describe("Adding user", function(){
 
 
 
-/*
+
 describe("Deleting user", function(){
     it("Should delete", function(done){
-        //this.timeout(10000);
+        request.post({
+            url: baseUrl + "/admin/deleteUser", 
+            json: true, 
+            body: { username: "testuser"} , 
+            headers: {'x-access-token': adminToken }   }, function (error, response, body) { 
+                console.log(error, body);
 
-        var bodyData = {
-            username: 'testuser',
-        }
-
-        var headerData = {
-            'x-access-token': adminToken
-        }
-
-        var url = baseUrl + '/admin/deleteUser';
-
-        var options = {
-            method: 'post',
-            body: bodyData,
-            headers: headerData,
-            json: true,
-            url: url
-        }
-        request(options, function (err, res, body) {
-            if (err) {
-                console.error('error posting json: ', err)
-                throw err;
-            }
-            var headers = res.headers;
-            var statusCode = res.statusCode;
-            console.log('headers: ', headers);
-            console.log('statusCode: ', statusCode);
-            console.log('body: ', body);
-
-            done();
+                done();
         });
+
     });
-});*/
+});
+
 
 
 
