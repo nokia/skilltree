@@ -546,14 +546,16 @@ async function extractNames(skillArray){
 
 // creates an ordered tree from an array of skills.
 async function sortTree(skillArray){
-	skillMatrix = [[[]]];
 	var sortedArray = [];
 	for (var i = 0; i < skillArray.length; i++) {
 		await insertSkill(skillArray[i], skillMatrix);
 	}
 	sortedArray = await assembleTree(skillMatrix);
 	skillArray = await extractNames(sortedArray);
+	console.log("skillMatrix");
 	console.log(skillMatrix);
+	console.log("skillarray");
+	console.log(skillArray);
 	return skillArray;
 }
 
