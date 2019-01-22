@@ -147,9 +147,9 @@ window.addEventListener('load', function() {
             if (form.checkValidity() === false) {
                 event.preventDefault();
                 event.stopPropagation();
-                $('.invalid-alert').show()
+                $('.invalid-alert').show();
                 //form.getElementsByClassName('alert-danger')[0].style.display = 'block';
-            }
+            } else $('.invalid-alert').hide();
             form.classList.add('was-validated');
         }, false);
     });
