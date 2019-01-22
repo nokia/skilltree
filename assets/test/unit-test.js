@@ -58,31 +58,49 @@ describe("API ADMIN TEST WITHOUT ADMIN TOKEN", function(){
 
 
 describe("Adding user", function(){
-    it("Should fail", function(done){
-        this.timeout(10000);
+    it("Should add", function(done){
 
-        var bodyData = 
+            const formData = {
+                username:     'testuser', 
+                email: 'test@test.com', 
+                password:          'Test123'
+             };
+             
+             request.post(
+               {
+                 url: baseUrl + "/registration",
+                 form: formData
+               },
+               function (err, httpResponse, body) {
+                 console.log(err, body);
 
-        request.post(
-            {   
-                url: baseUrl + "/registration", 
-                body: JSON.stringify({
-                    username: "testuser", 
-                    email: "test@test.test",
-                    password: "a"
-                })
-            
-            },
-            function(error, response, body) {
-                
-                /*var body = JSON.parse(response.body);
-                
-                expect(body.success).to.equal(true);*/
+                 done();
+               }
+             );
+    });
+});
 
-                console.log(response.body);
+
+describe("Deleting user", function(){
+    it("Should delete", function(done){
+
+            const formData = {
+                username:     'testuser', 
                 
-                done();
-            });
+             };
+             
+             request.post(
+               {
+                 url: baseUrl + "/deleteUser",
+                 form: formData,
+                 headers: { 'x-access-token': adminToken, 'Content-type': 'application/json' }
+               },
+               function (err, httpResponse, body) {
+                 console.log(err, body);
+
+                 done();
+               }
+             );
     });
 });
 
