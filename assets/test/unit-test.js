@@ -87,18 +87,15 @@ describe("Deleting user", function(){
              };
 
              
-             request.post(
-               {
-                 url: baseUrl + "/admin/deleteUser",
-                 headers: { 'x-access-token': adminToken, 'Content-type': 'application/json' },
-                 form: formData
-               },
-               function (err, httpResponse, body) {
-                 console.log(err, body);
-
-                 done();
-               }
-             );
+             request.post({ 
+                 url: baseUrl + "/admin/testAdmin", 
+                 headers: { 'x-access-token': adminToken, 'Content-type': 'application/json' }, 
+                 body: formData  
+                },
+                function(error, response, body) {
+                    expect(JSON.parse(body).success).to.equal(true);
+                    done();
+            });
     });
 });
 
