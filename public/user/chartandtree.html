@@ -498,8 +498,8 @@
                                           <input type="button" value="Add training" onclick="addRow('trainingsTable')" class="btn btn-outline-success">
                                       </div>
                                       <input type = "submit" value = "Add new skill" id = "saveSkillBtn" class="btn btn-success float-right">
-                                      <div class="alert alert-danger alert-dismissible" style = "display: none;">
-                                          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                      <div class="alert alert-danger alert-dismissible invalid-alert" style = "display: none;">
+                                          <a href="#" class="close" onclick = "$('.invalid-alert').hide()">&times;</a>
                                           <strong>Please check your inputs!</strong>
                                       </div>
                                   </div>
