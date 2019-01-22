@@ -475,7 +475,7 @@ async function getDependency (userSkills, skill, dependency) {
 
 
 // variable used for insertSkill
-var skillMatrix; // 3d array, represents the components, the rows, and the elements of rows in the graph.
+
 
 async function insertSkill(skillToInsert, skillMatrix) {
 	for (var component = 0; component < skillMatrix.length; component++) {
@@ -522,7 +522,7 @@ async function addRowToComponent(skillMatrix, component){
 
 async function assembleTree(skillMatrix){
 	var assembledTree = [];
-	var l;
+	var l = true;
 	var j = 0;
 	while (l) {
 		l = false;
@@ -546,14 +546,13 @@ async function extractNames(skillArray){
 
 // creates an ordered tree from an array of skills.
 async function sortTree(skillArray){
-	skillMatrix = [[[]]];
-	var sortedArray = [];
+	var sortedArray = []; // output array
+	var skillMatrix = []; // 3d array, represents the components, the rows, and the elements of rows in the graph.
 	for (var i = 0; i < skillArray.length; i++) {
 		await insertSkill(skillArray[i], skillMatrix);
 	}
 	sortedArray = await assembleTree(skillMatrix);
 	skillArray = await extractNames(sortedArray);
-	console.log(skillMatrix);
 	return skillArray;
 }
 
