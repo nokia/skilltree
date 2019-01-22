@@ -8,7 +8,6 @@ function validate() {
 	var willingToTeach = document.getElementById("teach");
 
 	if (password1.value == password2.value) {
-		if (validateEmail(email.value)) {
 			if (checkPassword(password1.value)) {
 				var httpRequest = new XMLHttpRequest();
 				httpRequest.open('POST', '/registration', true);
@@ -21,7 +20,7 @@ function validate() {
 						if (httpRequest.response.success) {
 							localStorage.setItem("loginToken", httpRequest.response.token);
 							window.open("/user", "_self");
-						} else alert("Incorrect credentials! Username already taken.");
+						} else showBottomAlert("Incorrect credentials! Username already taken.");
 					}
 				}
 
@@ -35,15 +34,7 @@ function validate() {
 					})
 				);
 			} else showBottomAlert("The password is not valid! It has to contain at least one digit, one lowercase and one uppercase character. The minimum password length is 8 characters.");
-		} else showBottomAlert("The email address is not valid!");
 	} else showBottomAlert("Incorrect credentials! Passwords don't match!");
-}
-
-function validateEmail (email) {
-	var expr = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
-	if (expr.test(email)) return true;
-	return false;
 }
 
 function checkPassword (pw) {
@@ -67,7 +58,7 @@ window.addEventListener('load', function() {
             if (form.checkValidity() === false) {
                 event.preventDefault();
                 event.stopPropagation();
-                showBottomAlert("b");
+                showBottomAlert("Incorrect credentials!");
             } //else $('.invalid-alert').hide();
             form.classList.add('was-validated');
         }, false);
