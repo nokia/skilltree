@@ -147,6 +147,7 @@ window.addEventListener('load', function() {
             if (form.checkValidity() === false) {
                 event.preventDefault();
                 event.stopPropagation();
+                form.getElementsByClassName('alert-danger')[0].style.display = 'block';
             }
             form.classList.add('was-validated');
         }, false);
