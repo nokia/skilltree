@@ -1112,13 +1112,9 @@ function hideMenus () {
 }
 
 function hideCardsAndAlerts (event) {
-    var except = "#userCard, .float-right *";
+    if (!event.target.matches("#userCard, .float-right *")) $(".hide-on-click").collapse("hide");
 
-    if (!event.target.matches(except)) {
-        $(".hide-on-click").collapse("hide");
-    }
-
-    $(".alert").hide();
+    if (!event.target.matches("#createTree")) $(".alert").hide();
 }
 
 document.body.addEventListener('click', hideCardsAndAlerts);
