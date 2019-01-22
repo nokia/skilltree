@@ -83,22 +83,19 @@ describe("Deleting user", function(){
     it("Should delete", function(done){
         //this.timeout(10000);
             const formData = {
-                username:     'testuser', 
+                username:     'testuser' 
              };
 
              
-             request.post(
-               {
-                 url: baseUrl + "/admin/deleteUser",
-                 headers: { 'x-access-token': adminToken, 'Content-type': 'application/json' },
-                 form: formData
-               },
-               function (err, httpResponse, body) {
-                 console.log(err, body);
-
-                 done();
-               }
-             );
+             request.post({ 
+                 url: baseUrl + "/admin/testAdmin", 
+                 headers: { 'x-access-token': adminToken, 'Content-type': 'application/json' }, 
+                 body: {username: 'testuser'}  
+                },
+                function(error, response, body) {
+                    expect(JSON.parse(body).success).to.equal(true);
+                    done();
+            });
     });
 });
 
