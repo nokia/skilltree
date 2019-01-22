@@ -85,6 +85,7 @@ describe("Deleting user", function(){
     it("Should delete", function(done){
         //this.timeout(10000);
 
+        /*
         var bodyData = {
             username: 'testuser'
         }
@@ -110,20 +111,21 @@ describe("Deleting user", function(){
 
             done();
         });
+*/
 
 
-
-             /*
+             
              request.post({ 
                  url: baseUrl + "/admin/testAdmin", 
-                 headers: { 'x-access-token': adminToken, 'Content-type': 'application/json' }, 
-                 body: JSON.stringify({username: 'testuser'})
+                 json: true,
+                 headers: { 'x-access-token': adminToken}, 
+                 body: {username: 'testuser'}
                 },
                 function(error, response, body) {
                     console.log(error, body);
                     //expect(JSON.parse(body).success).to.equal(true);
                     done();
-            });*/
+            });
     });
 });
 
