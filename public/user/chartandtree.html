@@ -316,7 +316,7 @@
         <h2 id = "newSkillModalTitle">Create your own skill</h2>
       </div>
       <div class="modal-body">
-          <form onsubmit = "return false">
+          <form class = "needs-validation" onsubmit = "return false" novalidate>
               <div class="card">
                   <!-- card nav -->
                   <div class="card-header d-flex justify-content-center">
@@ -346,16 +346,16 @@
                                       <h5 class="card-title">What is your new skill?</h5>
                                       <div class="form-group">
                                           <label for="newSkillName" class="form-label">Name</label>
-                                          <input type = "text" id = "newSkillName" class="form-control w-75">
+                                          <input type = "text" id = "newSkillName" class="form-control w-75" required>
                                           <input type = "button" id = "loadSkill" class = "btn btn-outline-secondary" style = "display: none" value = "Load Skill"/>
                                       </div>
                                       <div class="form-group">
                                           <label for="newSkillDesc" class="form-label">Description</label>
-                                          <textarea id = "newSkillDesc" class="form-control w-75"></textarea>
+                                          <textarea id = "newSkillDesc" class="form-control w-75" required></textarea>
                                       </div>
                                       <div class="form-group w-75">
                                           <label for="newSkillIcon" class="form-label">Skill icon</label><br>
-                                          <input type = "text" id = "newSkillIcon" class = "form-control" value = "pictures/icons/.png">
+                                          <input type = "text" id = "newSkillIcon" class = "form-control" placeholder = "pictures/icons/.png" required>
                                           <center><span class = "w-75">OR</span><br></center>
                                           <div class = "custom-file">
                                               <!-- <input type = "text" id = "newSkillIcon" value = "pictures/icons/.png" required> -->
@@ -365,7 +365,7 @@
                                       </div>
                                       <div class = "form-group">
                                           <label for = "newSkillWiki" class = "form-label">Wikipedia URL</label><br>
-                                          <input type = "text" id = "newSkillWiki" class = "form-control w-75">
+                                          <input type = "text" id = "newSkillWiki" class = "form-control w-75" required>
                                       </div>
                                       <div class="form-group">
                                           <label for="newSkillCat" class="form-label">Category</label>
@@ -390,27 +390,27 @@
                                               </tr>
                                               <tr>
                                                   <td>1</td>
-                                                  <td><input size=50 type="text" id = "pointDesc1" class = "form-control"></td>
+                                                  <td><input size=50 type="text" id = "pointDesc1" class = "form-control" required></td>
                                                   <td><input type="button" value="Delete" onclick="deleteRow('pointsTable', this)" class="btn btn-outline-success"></td>
                                               </tr>
                                               <tr>
                                                   <td>2</td>
-                                                  <td><input size=50 type="text" id = "pointDesc2" class = "form-control"></td>
+                                                  <td><input size=50 type="text" id = "pointDesc2" class = "form-control" required></td>
                                                   <td><input type="button" value="Delete" onclick="deleteRow('pointsTable', this)" class="btn btn-outline-success"></td>
                                               </tr>
                                               <tr>
                                                   <td>3</td>
-                                                  <td><input size=50 type="text" id = "pointDesc3" class = "form-control"></td>
+                                                  <td><input size=50 type="text" id = "pointDesc3" class = "form-control" required></td>
                                                   <td><input type="button" value="Delete" onclick="deleteRow('pointsTable', this)" class="btn btn-outline-success"></td>
                                               </tr>
                                               <tr>
                                                   <td>4</td>
-                                                  <td><input size=50 type="text" id = "pointDesc4" class = "form-control"></td>
+                                                  <td><input size=50 type="text" id = "pointDesc4" class = "form-control" required></td>
                                                   <td><input type="button" value="Delete" onclick="deleteRow('pointsTable', this)" class="btn btn-outline-success"></td>
                                               </tr>
                                               <tr>
                                                   <td>5</td>
-                                                  <td><input size=50 type="text" id = "pointDesc5" class = "form-control"></td>
+                                                  <td><input size=50 type="text" id = "pointDesc5" class = "form-control" required></td>
                                                   <td><input type="button" value="Delete" onclick="deleteRow('pointsTable', this)" class="btn btn-outline-success"></td>
                                               </tr>
                                           </table><br>
@@ -436,8 +436,8 @@
                                                   <!-- <td class="pl-4">Delete</td> -->
                                               </tr>
                                               <tr>
-                                                  <td><input class="m-0 form-control" size=30 type="text" id = "parent" list = "skillSearchResult" onkeyup="searchSkillsByName(this)"></td>
-                                                  <td><input class="m-0 form-control" size=10 type="text" id = "minPoint"></td>
+                                                  <td><input class="m-0 form-control" size=30 type="text" id = "parent" list = "skillSearchResult" onkeyup="searchSkillsByName(this)" required></td>
+                                                  <td><input class="m-0 form-control" size=10 type="text" id = "minPoint" required></td>
                                                   <td><center><input size=50 type="checkbox" id = "required"></center></td>
                                                   <td><input class="btn btn-outline-success" type="button" value="Delete" onclick="deleteRow('parentsTable', this)"></td>
                                               </tr>
@@ -454,8 +454,8 @@
                                                   <td>Required</td>
                                               </tr>
                                               <tr>
-                                                  <td><input class="m-0 form-control" size=30 type="text" id = "child" list = "skillSearchResult" onkeypress="searchSkillByName()"></td>
-                                                  <td><input class="m-0 form-control" size=10 type="text" id = "minPointc"></td>
+                                                  <td><input class="m-0 form-control" size=30 type="text" id = "child" list = "skillSearchResult" onkeypress="searchSkillByName()" required></td>
+                                                  <td><input class="m-0 form-control" size=10 type="text" id = "minPointc" required></td>
                                                   <td><center><input size=50 type="checkbox" id = "requiredc"></center></td>
                                                   <td><input class="btn btn-outline-success" type="button" value="Delete" onclick="deleteRow('childrenTable', this)"></td>
                                               </tr>
@@ -485,13 +485,13 @@
                                                   <!-- <td>Delete</td> -->
                                               </tr>
                                               <tr>
-                                                  <td><input size=15 type="text" class = "form-control"></td>
-                                                  <td><input size=5 type="text" class = "form-control"></td>
-                                                  <td><input size=20 type="text" class = "form-control"></td>
-                                                  <td><input size=15 type="text" class = "form-control"></td>
-                                                  <td><input size=15 type="text" class = "form-control"></td>
-                                                  <td><input size=5 type="text" class = "form-control"></td>
-                                                  <td><input size=5 type="text" class = "form-control"></td>
+                                                  <td><input size=15 type="text" class = "form-control" required></td>
+                                                  <td><input size=5 type="text" class = "form-control" required></td>
+                                                  <td><input size=20 type="text" class = "form-control" required></td>
+                                                  <td><input size=15 type="text" class = "form-control" required></td>
+                                                  <td><input size=15 type="text" class = "form-control" required></td>
+                                                  <td><input size=5 type="text" class = "form-control" required></td>
+                                                  <td><input size=5 type="text" class = "form-control" required></td>
                                                   <td><input type="button" value="Delete" onclick="deleteRow('trainingsTable', this)" class="btn btn-outline-success"></td>
                                               </tr>
                                           </table><br>
