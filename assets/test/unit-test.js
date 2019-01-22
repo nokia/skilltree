@@ -79,7 +79,7 @@ describe("API ADMIN TEST WITHOUT ADMIN TOKEN", function(){
 });*/
 
 
-/* fixing delete user, not testing add untill then
+// fixing delete user, not testing add untill then
 describe("Adding user", function(){
     it("Should add", function(done){
 
@@ -103,10 +103,10 @@ describe("Adding user", function(){
              );
     });
 });
-*/
 
 
 
+/*
 describe("Deleting user", function(){
     it("Should delete", function(done){
         //this.timeout(10000);
@@ -142,7 +142,7 @@ describe("Deleting user", function(){
             done();
         });
     });
-});
+});*/
 
 
 
