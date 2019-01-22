@@ -500,7 +500,7 @@ async function insertSkill(skillToInsert, skillMatrix) {
 		for (var par = 0; par < skillToInsert.parents.length; par++) {
 			for (var row = 0; row < skillMatrix[component].length; row++) {
 				if (skillMatrix[component][row].includes(skillToInsert.parents[par])) {
-					skillMatrix[component].[row + 1].push(skillToInsert);
+					skillMatrix[component][row + 1].push(skillToInsert);
 					// this checks if the skill has any parents in any row in any component,
 					// if yes, then it inserts the skill to the row below.
 					return;
