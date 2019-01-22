@@ -1111,15 +1111,17 @@ function hideMenus () {
     }
 }
 
-function hideCards (event) {
+function hideCardsAndAlerts (event) {
     var except = "#userCard, .float-right *";
 
     if (!event.target.matches(except)) {
         $(".hide-on-click").collapse("hide");
     }
+
+    $(".alert").hide();
 }
 
-document.body.addEventListener('click', hideCards);
+document.body.addEventListener('click', hideCardsAndAlerts);
 
 // helper functions
 
