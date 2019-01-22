@@ -46,9 +46,9 @@ describe("API ADMIN TEST WITHOUT ADMIN TOKEN", function(){
         request.get({ url: baseUrl + "/admin/testAdmin", headers: {} },
             function(error, response, body) {
 
-                var body = JSON.parse(body);
+                //var body = JSON.parse(body);
                 
-                expect(body.success).to.equal(false);
+                expect(JSON.parse(body).success).to.equal(false);
 
                 done();
             });
