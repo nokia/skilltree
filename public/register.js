@@ -58,7 +58,7 @@ window.addEventListener('load', function() {
             if (form.checkValidity() === false) {
                 event.preventDefault();
                 event.stopPropagation();
-                showBottomAlert("b");
+                showBottomAlert("Incorrect credentials!");
             } //else $('.invalid-alert').hide();
             form.classList.add('was-validated');
         }, false);
