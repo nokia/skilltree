@@ -597,7 +597,7 @@
           <div class="modal-body">
               <form id = "firstLoginForm" class = "needs-validation" onsubmit = "return false" novalidate>
                   <h4>Please select your main skill tree!</h4>
-                  <select id = "maintree" class = "form-control" style = "width: 200px;"></select>
+                  <select id = "maintree" class = "form-control" style = "width: 200px;" required></select>
                   <div id = "teachingSettings">
                       <br>
                       <h4>Please specify your availability for teaching!</h4>
@@ -612,7 +612,7 @@
                       Timeslot when you are willing to teach on this day:
                       <input type = "time" id = "timeStart" class = "form-control" style = "width: 120px;" required> - <input type = "time" id = "timeEnd" class = "form-control" style = "width: 120px;" required><br>
                       Where can people find you?
-                      <input type = "text" id = "location" class = "form-control" placeholder = "http://whereareyou.eecloud.dynamic.nsn-net.net/user/" style = "width: 400px;" required><br>
+                      <input type = "text" id = "location" class = "form-control" placeholder = "http://whereareyou.eecloud.dynamic.nsn-net.net/user/" style = "width: 500px;" required><br>
                   </div>
                   <input type = "button" value = "Save" id = "savebtn" class = "btn btn-success float-right">
                   <div class="alert alert-danger alert-dismissible invalid-alert" style = "display: none;">
