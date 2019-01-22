@@ -83,6 +83,7 @@ describe("Adding user", function(){
 
 describe("Deleting user", function(){
     it("Should delete", function(done){
+        var request = require("request");
         request.post({
             url: baseUrl + "/admin/deleteUser", 
             json: true, 
