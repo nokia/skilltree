@@ -190,10 +190,9 @@ function addTraining () {
 
                 alert("Succes");
 
-                } else if (this.response.message == "skillnotexists") {
+            } /*else if (this.response.message == "skillnotexists") {
                     alert("Skill not found");
-                }
-            }
+            }*/
         });
     };
 }
