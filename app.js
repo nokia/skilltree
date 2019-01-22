@@ -522,7 +522,7 @@ async function addRowToComponent(skillMatrix, component){
 
 async function assembleTree(skillMatrix){
 	var assembledTree = [];
-	var l;
+	var l = true;
 	var j = 0;
 	while (l) {
 		l = false;
@@ -553,10 +553,6 @@ async function sortTree(skillArray){
 	}
 	sortedArray = await assembleTree(skillMatrix);
 	skillArray = await extractNames(sortedArray);
-	console.log("skillMatrix");
-	console.log(skillMatrix[0][0][0]);
-	console.log("skillarray");
-	console.log(skillArray);
 	return skillArray;
 }
 
