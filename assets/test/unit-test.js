@@ -26,41 +26,10 @@ describe("hashPassword() and verifyPassword()", function(){
 
 
 //NPM REQUEST
-
+/*
 describe("API ADMIN TEST WITH ADMIN TOKEN", function () {
     it("Should return {success:true}", function (done) {
-        /*
-        const bodyData = {
-            username: 'testuser',
-        }
-
-        var headerData = {
-            'x-access-token': adminToken
-        }
-
-        var url = baseUrl + '/admin/testAdmin';
-
-        var options = {
-            method: 'get',
-            form: bodyData,
-            headers: headerData,
-            json: true,
-            url: url
-        }
-        request(options, function (err, res, body) {
-            if (err) {
-                console.error('error posting json: ', err)
-                throw err;
-            }
-            var headers = res.headers;
-            var statusCode = res.statusCode;
-            console.log('headers: ', headers);
-            console.log('statusCode: ', statusCode);
-            console.log('body: ', body);
-
-            done();
-        });
-        */
+        
 
         request.get({
             url: baseUrl + "/admin/testAdmin", 
@@ -74,6 +43,8 @@ describe("API ADMIN TEST WITH ADMIN TOKEN", function () {
 
     });
 });
+*/
+
 /*
 describe("API ADMIN TEST WITHOUT ADMIN TOKEN", function(){
     it("Should fail", function(done){
