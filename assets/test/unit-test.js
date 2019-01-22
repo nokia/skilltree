@@ -83,11 +83,11 @@ describe("API ADMIN TEST WITHOUT ADMIN TOKEN", function(){
 describe("Adding user", function(){
     it("Should add", function(done){
 
-            const formData = {
+            const formData = JSON.stringify({
                 username:     'testuser3', 
                 email: 'test@test.com', 
                 password:          'Test123'
-             };
+             });
              
              request.post(
                {
