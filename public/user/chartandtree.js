@@ -677,8 +677,8 @@ function createTree () {
                         else if (this.response.message == "treeexists") alert("There is already a tree with this name");
                     }
                 });
-            } else alert("Please add at least one skill to the tree");
-        } else alert("Please provide a name to the tree");
+            } else showBottomAlert("Please add at least one skill to the tree");
+        } else showBottomAlert("Please provide a name to the tree");
     };
 }
 
@@ -1137,6 +1137,11 @@ Array.prototype.sum = function (prop) {
     }
 
     return total;
+}
+
+function showBottomAlert(msg) {
+	document.getElementById('bottomAlertMsg').innerText = msg;
+	$('#bottomAlert').show();
 }
 
 function request (type, url, sendData, callback) {
