@@ -360,3 +360,7 @@ a {
 #bottomAlert {
     margin: 10px;
 }
+
+.no-shadow {
+    box-shadow: none;
+}
