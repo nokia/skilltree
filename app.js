@@ -527,7 +527,6 @@ async function assembleTree(skillMatrix){
 	while (l) {
 		l = false;
 		for (var component = 0; component < skillMatrix.length; component++) {
-			assembledTree.push(...skillMatrix[component][j]);
 			assembleTree = assembleTree.concat(skillMatrix[component][j]);
 			console.log("comp:");
 			console.log(skillMatrix[component][j]);
