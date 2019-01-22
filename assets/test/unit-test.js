@@ -30,7 +30,7 @@ describe("hashPassword() and verifyPassword()", function(){
 describe("API ADMIN TEST WITH ADMIN TOKEN", function(){
     it("Should return {success:true}", function(done){
         
-        request.get({ url: baseUrl + "/admin/testAdmin", headers: { 'x-access-token': adminToken, 'Content-type': 'application/json' } },
+        request.get({ url: baseUrl + "/admin/testAdmin", headers: { 'x-access-token': adminToken /*, 'Content-type': 'application/json'*/ } },
             function(error, response, body) {
 
                 expect(JSON.parse(body).success).to.equal(true);
@@ -88,7 +88,8 @@ describe("Deleting user", function(){
              request.post({ 
                  url: baseUrl + "/admin/testAdmin", 
                  headers: { 'x-access-token': adminToken, 'Content-type': 'application/json' }, 
-                 //body: {username: 'testuser'}
+                 'Content-type': 'application/json',
+                 body: JSON.stringify({username: 'testuser'})
                 },
                 function(error, response, body) {
                     console.log(error, body);
