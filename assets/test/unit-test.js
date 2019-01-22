@@ -82,18 +82,16 @@ describe("Adding user", function(){
 describe("Deleting user", function(){
     it("Should delete", function(done){
         //this.timeout(10000);
-            const formData = {
-                username:     'testuser' 
-             };
+
 
              
              request.post({ 
-                 url: baseUrl + "/admin/testAdmin", 
+                 url: baseUrl + '/admin/testAdmin', 
                  headers: { 'x-access-token': adminToken, 'Content-type': 'application/json' }, 
                  body: {username: 'testuser'}  
                 },
                 function(error, response, body) {
-                    console.log(error, response);
+                    console.log(error, body);
                     //expect(JSON.parse(body).success).to.equal(true);
                     done();
             });
