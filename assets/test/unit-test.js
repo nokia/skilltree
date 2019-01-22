@@ -98,7 +98,7 @@ describe("Adding user", function(){
         request.post({
             url: baseUrl + "/registration", 
             json: true, 
-            body: { username: "testuser", email: "test@test.com", password: "Abc123"} , 
+            body: { username: "testuser4", email: "test@test.com", password: "Abc123"} , 
             headers: {'x-access-token': adminToken }   }, function (error, response, body) { 
                 console.log(error, body);
 
