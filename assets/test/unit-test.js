@@ -79,12 +79,12 @@ describe("API ADMIN TEST WITHOUT ADMIN TOKEN", function(){
 });*/
 
 
-/* fixing delete user, not testing add untill then
+// fixing delete user, not testing add untill then
 describe("Adding user", function(){
     it("Should add", function(done){
 
             const formData = {
-                username:     'testuser', 
+                username:     'testuser3', 
                 email: 'test@test.com', 
                 password:          'Test123'
              };
@@ -92,7 +92,7 @@ describe("Adding user", function(){
              request.post(
                {
                  url: baseUrl + "/registration",
-                 form: formData
+                 body: formData
                },
                function (err, httpResponse, body) {
                  console.log(err, body);
@@ -103,10 +103,10 @@ describe("Adding user", function(){
              );
     });
 });
-*/
 
 
 
+/*
 describe("Deleting user", function(){
     it("Should delete", function(done){
         //this.timeout(10000);
@@ -142,7 +142,7 @@ describe("Deleting user", function(){
             done();
         });
     });
-});
+});*/
 
 
 
