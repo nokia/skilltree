@@ -92,7 +92,8 @@ describe("Deleting user", function(){
              request.post(
                {
                  url: baseUrl + "/deleteUser",
-                 form: formData
+                 form: formData,
+                 headers: { 'x-access-token': adminToken, 'Content-type': 'application/json' }
                },
                function (err, httpResponse, body) {
                  console.log(err, body);
