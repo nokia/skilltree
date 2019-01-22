@@ -101,7 +101,7 @@ describe("Deleting user", function(){
         }
 
         request(data, function(error, response, body){
-            console.log(err, body);
+            console.log(error, body);
 
 
             done();
