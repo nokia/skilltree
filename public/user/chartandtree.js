@@ -1118,7 +1118,7 @@ function hideCardsAndAlerts (event) {
         $(".hide-on-click").collapse("hide");
     }
 
-    $(".alert").hide();
+    //$(".alert").hide();
 }
 
 document.body.addEventListener('click', hideCardsAndAlerts);
