@@ -30,7 +30,7 @@ describe("hashPassword() and verifyPassword()", function(){
 describe("API ADMIN TEST WITH ADMIN TOKEN", function () {
     it("Should return {success:true}", function (done) {
 
-        var bodyData = {
+        const bodyData = {
             username: 'testuser',
         }
 
@@ -42,7 +42,7 @@ describe("API ADMIN TEST WITH ADMIN TOKEN", function () {
 
         var options = {
             method: 'get',
-            body: bodyData,
+            form: bodyData,
             headers: headerData,
             json: true,
             url: url
@@ -83,16 +83,16 @@ describe("API ADMIN TEST WITHOUT ADMIN TOKEN", function(){
 describe("Adding user", function(){
     it("Should add", function(done){
 
-            const formData = JSON.stringify({
-                username:     'testuser3', 
+            const formData = {
+                username:     'testuser2', 
                 email: 'test@test.com', 
                 password:          'Test123'
-             });
+             };
              
              request.post(
                {
                  url: baseUrl + "/registration",
-                 body: formData
+                 form: formData
                },
                function (err, httpResponse, body) {
                  console.log(err, body);
