@@ -83,7 +83,7 @@ describe("Deleting user", function(){
     it("Should delete", function(done){
         //this.timeout(10000);
             const formData = {
-                username:     'testuser', 
+                username:     'testuser' 
              };
 
              
