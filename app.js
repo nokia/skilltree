@@ -475,89 +475,64 @@ async function getDependency (userSkills, skill, dependency) {
 
 
 // variable used for insertSkill
-var rootlevel = 0;
+var skillMatrix; // 3d array, represents the components, the rows, and the elements of rows in the graph.
 
-// inserts a skill to a tree.
-async function insertSkill(skillToInsert, skillArray) {
-	if (!skillArray.includes(skillToInsert)) {
-		if (skillArray.length === 0) {
-			skillToInsert.level = rootlevel;
-			skillArray.push(skillToInsert);
-			return;
+async function insertSkill(skillToInsert, skillMatrix) {
+	for (var component = 0; component < skillMatrix.length; component++) {
+		for (var child = 0; child < skillToInsert.children.length; child++) {
+			for (var row = 0; row < skillMatrix[component].length; row++) {
+				if (skillMatrix[component].[row].includes(skillToInsert.children[child])) {
+					if (row == 0) {
+						await addRowToComponent(skillMatrix, component);
+						skillMatrix[component][0].push(skillToInsert);
+						// this checks if the row found was the root level.
+						// if yes, it adds another row to the top, and inserts the skill there.
+						return;
+					}
+					else {
+						skillMatrix[component][row - 1].push(skillToInsert);
+						// if no, it inserts the skill to the row above.
+						return;
+					}
+				}
+			}
 		}
-		else {
-			for (var i = 0; i < skillToInsert.parents.length; i++) {
-				var ithParent = await Skill.findOne({
-						name: skillToInsert.parents[i]
-				}, function(err, skill) {
-						if (err) throw err;
-						return skill;
-				});
-				if (skillArray.find(obj => obj.name == ithParent.name) !== undefined) {
-					ithParent = skillArray.find(obj => obj.name == ithParent.name);
-					for (var j = 0; j < ithParent.children.length; j++) {
-						var ithChild = await Skill.findOne({
-								name: ithParent.children[j].name
-						}, function(err, skill) {
-								if (err) throw err;
-						return skill;
-						});
-						if (skillArray.find(obj => obj.name == ithChild.name) !== undefined) {
-							ithChild = skillArray.find(obj => obj.name == ithChild.name);
-							var svc = 0;
-							while (ithChild.name !== skillArray[svc].name) {
-								svc++;
-							}
-							skillToInsert.level = ithChild.level;
-							skillArray.splice(svc, 0, skillToInsert);
-							return;
-						}
-					}
-					var svp = 0;
-					while (skillArray[svp] !== undefined && skillArray[svp].level <= ithParent.level) {
-						svp++;
-					}
-					skillToInsert.level = ithParent.level + 1;
-					skillArray.splice(svp, 0, skillToInsert);
+		for (var par = 0; par < skillToInsert.parents.length; par++) {
+			for (var row = 0; row < skillMatrix[component].length; row++) {
+				if (skillMatrix[component][row].includes(skillToInsert.parents[par])) {
+					skillMatrix[component].[row + 1].push(skillToInsert);
+					// this checks if the skill has any parents in any row in any component,
+					// if yes, then it inserts the skill to the row below.
 					return;
 				}
 			}
-
-			for (var i = 0; i < skillToInsert.children.length; i++) {
-
-                var ithChild = user.skills.find(obj => obj.name == skillToInsert.children[i].name);
-
-                if (ithChild == undefined) {
-                    ithChild = await Skill.findOne({
-    						name: skillToInsert.children[i].name
-    				}, function(err, skill) {
-    						if (err) throw err;
-    				        return skill;
-    				});
-                }
-
-				if (skillArray.find(obj => obj.name == ithChild.name) !== undefined) {
-					ithChild = skillArray.find(obj => obj.name == ithChild.name);
-					var c = 0;
-					while (skillArray[c] !== undefined && [c].level < ithChild.level) {
-						c++;
-					}
-					skillToInsert.level = ithChild.level - 1;
-					skillArray.splice(c, 0, skillToInsert);
-					if (skillToInsert.level < rootlevel) rootlevel = skillToInsert.level;
-					return;
-				}
-			}
-
-			var sn = 0;
-			while (skillArray[sn] !== undefined && skillArray[sn].level === rootlevel) {
-				sn++;
-			}
-			skillToInsert.level = rootlevel;
-			skillArray.splice(sn, 0, skillToInsert);
-			return;
 		}
 	}
+	skillMatrix.push([[skillToInsert]]);
+	// this inits the first element of every component
+	return;
+}
+
+async function addRowToComponent(skillMatrix, component){
+	for (var i = skillMatrix[component].length - 1; i <= 0; i--) {
+		skillMatrix[component][i + 1] = skillMatrix[component][i];
+	}
+	skillMatrix[component][0] = [];
+}
+
+async function assembleTree(skillMatrix){
+	var assembledTree = [];
+	var l;
+	var j = 0;
+	while (l) {
+		l = false;
+		for (var component = 0; component < skillMatrix.length; component++) {
+			assembledTree.push(...skillMatrix[component][j]);
+			l = true;
+		}
+		j++;
+	}
+	return assembledTree;
 }
 
 // gets the skillnames of a skillarray.
@@ -571,11 +546,12 @@ async function extractNames(skillArray){
 
 // creates an ordered tree from an array of skills.
 async function sortTree(skillArray){
-	rootlevel = 0;
+	skillMatrix = [[[]]];
 	var sortedArray = [];
 	for (var i = 0; i < skillArray.length; i++) {
-		await insertSkill(skillArray[i], sortedArray);
+		await insertSkill(skillArray[i], skillMatrix);
 	}
+	sortedArray = await assembleTree(skillMatrix);
 	skillArray = await extractNames(sortedArray);
 	return skillArray;
 }
