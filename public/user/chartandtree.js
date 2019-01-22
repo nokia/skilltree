@@ -137,6 +137,8 @@ window.onresize = function () {
 // PIXI.loader is global, it loads the back button, skillborder, tree,...
 
 function addTraining () {
+    document.getElementById('addTrainingForm').reset();
+
     var modal = document.getElementById("addTrainingModal");
     modal.style.display = "block";
 
@@ -201,7 +203,6 @@ function addTraining () {
 // opens skill creation modal and saves the new skill to the database (user and for approval)
 function createSkill () {
     //$('#newSkillForm').reset();
-    $('#newSkillForm')[0].data('bootstrapValidator').resetForm();
     document.getElementById('newSkillForm').reset();
 
     var modal = document.getElementById("newSkillModal");
@@ -293,8 +294,7 @@ function createSkill () {
 
 // opens skill editor, user can edit (only) her/his own skills
 function editMySkill () {
-    $('.clear').find('input:text').val('');
-    $('.clear').find('textarea').val('');
+    document.getElementById('newSkillForm').reset();
 
     var modal = document.getElementById("newSkillModal");
     modal.style.display = "block";
@@ -408,8 +408,7 @@ function editMySkill () {
 
 // opens skill editor, user can edit (only) her/his own skills
 function editSkill () {
-    $('.clear').find('input:text').val('');
-    $('.clear').find('textarea').val('');
+    document.getElementById('newSkillForm').reset();
 
     var modal = document.getElementById("newSkillModal");
     modal.style.display = "block";
