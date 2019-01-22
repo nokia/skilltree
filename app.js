@@ -1686,7 +1686,7 @@ adminRoute.post('/deleteUser', async function (req,res){
 	User.deleteOne( {username: request.body.username }  , function (err) {
 		if (err) throw err;
 		else res.json({
-			succes: true,
+			success: true,
 			message: "User deleted"
 		})
 
