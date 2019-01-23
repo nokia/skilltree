@@ -18,12 +18,12 @@
       {
         "name": "CSS",
         "minPoint": 1,
-        "recommended": false
+        "recommended": true
       },
       {
         "name": "JavaScript",
         "minPoint": 1,
-        "recommended": false
+        "recommended": true
       }
     ],
     "trainings": [
@@ -161,8 +161,16 @@
       "HTML"
     ],
     "children": [
-      "NodeJS",
-      "React"
+      {
+        "name": "NodeJS",
+        "minPoint": 1,
+        "recommended": false
+      },
+      {
+        "name": "React",
+        "minPoint": 1,
+        "recommended": false
+      }
     ],
     "trainings": [
       {
@@ -384,7 +392,13 @@
     ],
     "maxPoint": 5,
     "parents": [],
-    "children": [],
+    "children": [
+      {
+        "name": "Scaled Agile Framework",
+        "minPoint": 2,
+        "recommended": false
+      }
+    ],
     "trainings": [
       {
         "name": "Scrum Basics",
@@ -546,10 +560,10 @@
       {
         "name": "SEO For Beginners - How to Rank High In Google?",
         "level": 1,
-        "shortDescription": "SEO (Search Engine Optimization) tutorial for beginners. In this video, you will learn all the necessary SEO techniques to rank your websites high in Google search engine. All the training is provided in a step-by-step newbie friendly way.",
+        "shortDescription": "Search Engine Optimization (SEO) step-by-step tutorial for beginners.",
         "URL": "https://youtu.be/y_AAO7QfsiI",
         "URLlastAccessed": "2018-12-11",
-        "goal": "",
+        "goal": "In this video, you will learn all the necessary SEO techniques to rank your websites high in Google search engine.",
         "length": 0,
         "language": "en"
       }
@@ -783,6 +797,16 @@
         "shortDescription": "An overview to the Scaled Agile Framework - SAFe in 7 minutes.",
         "URL": "https://youtu.be/RXzurBazN-I",
         "URLlastAccessed": "2018-12-15",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      },
+      {
+        "name": "SAFe homepage",
+        "level": 1,
+        "shortDescription": "An overview to the Scaled Agile Framework - SAFe in 7 minutes.",
+        "URL": "http://scaledagileframework.com/",
+        "URLlastAccessed": "2019-01-23",
         "goal": "",
         "length": 0,
         "language": "en"
