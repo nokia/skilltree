@@ -107,55 +107,13 @@ If you are not familiar with server setup, we recommend to read through the foll
 
 ## Development
 
-Want to contribute? Awesome! **Please read [the contribution guidelines](docs/contribute/CONTRIBUTING.md)**.
+Want to contribute? Awesome!
 
-You need an IDE of your choice, we recommend [Atom] or [Visual Studio Code].
+  * You can help us extending the [list of skills](https://github.com/nokia/skilltree/blob/master/assets/json/skills.json) and [trees](https://github.com/nokia/skilltree/blob/master/assets/json/trees.json)
+  * You can help improving code quality, test coverage and creating new features
+  * You can let more people know what SkillTree is & attract more contributors  
 
-For Atom, installing some plugins are helpful:
-
-```sh
-apm install emmet todo minimap pigments minimap-pigments linter file-icons git-diff atom-beautify ask-stack highlight-selected
-```
-
-On the server, give it a try:
-
-```sh
-cd skilltree
-node app.js
-```
-
-Alternatively, to keep up with changes automatically, install & use PM2 (recommended):
-```sh
-cd skilltree
-pm2 create skilltree
-```
-To run:
-```sh
-pm2 start skilltree --watch
-```
-To query the status:
-```sh
-pm2 list
-```
-
-### Testing
-
-Youtube tutorial for testing using [Mocha and Chai](https://www.youtube.com/watch?v=NhlpFD5EL_Q).
-
-
-Install mocha and chai (already installed in this project):
-```sh
-npm install mocha
-npm install chai --save-dev
-```
-
-To run tests:
-```sh
-cd assets
-mocha
-```
-
-Edit tests in assets/test folder. Create new JavaScript file or use the existing unit-test.js and add functions.
+**Please read [the contribution guidelines](docs/contribute/CONTRIBUTING.md)**.
 
 
 ### License
