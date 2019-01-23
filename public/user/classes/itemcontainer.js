@@ -690,9 +690,9 @@ class ItemContainer {
         maxP.innerText = this.skill.maxPoint;
 
         var pointDesc = '';
-        for (var i = 0; i < this.skill.pointDescription.length; ++i) pointDesc += this.skill.pointDescription[i] + ', ';
-        pointDesc = pointDesc.substring(0, pointDesc.length - 2);
-        points.innerText = pointDesc;
+        for (var i = 0; i < this.skill.pointDescription.length; ++i) pointDesc += this.skill.pointDescription[i] + "<br>";
+        //pointDesc = pointDesc.substring(0, pointDesc.length - 2);
+        points.innerHTML = pointDesc;
 
         var parentNames = '';
         for (var i = 0; i < this.skill.parents.length; ++i) parentNames += this.skill.parents[i] + ', ';
