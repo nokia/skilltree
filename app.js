@@ -82,7 +82,7 @@ app.post('/registration', async function(req, res) {
 				username: req.body.username,
 			};
 			var token = jwt.sign(payload, app.get('superSecret'), {
-				expiresIn: '60m' // expires in 1 hour
+				expiresIn: '1d' // expires in 1 hour
 			});
 
 			// return the information including token as JSON
