@@ -60,6 +60,7 @@ function checkFirstLogin() {
         var btn = document.getElementById('savebtn');
         var mainTree = document.getElementById('maintree');
 
+        console.log("b");
         btn.onclick = function() {
             var location = document.getElementById('location').value;
             var teachingDay = document.getElementById('day').value;
@@ -72,9 +73,6 @@ function checkFirstLogin() {
                     teachingTime: teachingTime,
                     location: location
             };
-
-            console.log("s");
-            console.log(event);
 
             /*request('POST', '/protected/firstlogindata', firstLoginData, function() {
                 if(this.readyState == 4 && this.status == 200) {
@@ -130,12 +128,12 @@ function loadAddedTrees(){
 }
 
 window.addEventListener('load', function() {
+    console.log("a");
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
     var forms = document.getElementsByClassName('needs-validation');
     // Loop over them and prevent submission
     var validation = Array.prototype.filter.call(forms, function(form) {
         form.addEventListener('submit', function(event) {
-            console.log(event);
             if (form.checkValidity() === false) {
                 event.preventDefault();
                 event.stopPropagation();
