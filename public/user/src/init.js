@@ -134,9 +134,9 @@ window.addEventListener('load', function() {
         form.addEventListener('submit', function(event) {
             if (form.checkValidity() === false) {
                 event.preventDefault();
+                event.stopImmediatePropagation();
                 event.stopPropagation();
                 $('.invalid-alert').show();
-
             } else $('.invalid-alert').hide();
             form.classList.add('was-validated');
         }, false);
