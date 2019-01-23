@@ -74,11 +74,11 @@ function checkFirstLogin() {
                     location: location
             };
 
-            /*request('POST', '/protected/firstlogindata', firstLoginData, function() {
+            request('POST', '/protected/firstlogindata', firstLoginData, function() {
                 if(this.readyState == 4 && this.status == 200) {
                   window.open("/user/", "_self");
                 }
-            });*/
+            });
         }
 
         for (var i = 0; i < data.focusArea.treeNames.length; ++i) {
