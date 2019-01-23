@@ -73,11 +73,13 @@ function checkFirstLogin() {
                     location: location
             };
 
-            request('POST', '/protected/firstlogindata', firstLoginData, function() {
+            console.log("s");
+
+            /*request('POST', '/protected/firstlogindata', firstLoginData, function() {
                 if(this.readyState == 4 && this.status == 200) {
                   window.open("/user/", "_self");
                 }
-            });
+            });*/
         }
 
         for (var i = 0; i < data.focusArea.treeNames.length; ++i) {
@@ -132,9 +134,9 @@ window.addEventListener('load', function() {
     // Loop over them and prevent submission
     var validation = Array.prototype.filter.call(forms, function(form) {
         form.addEventListener('submit', function(event) {
+            console.log(event);
             if (form.checkValidity() === false) {
                 event.preventDefault();
-                event.stopImmediatePropagation();
                 event.stopPropagation();
                 $('.invalid-alert').show();
             } else $('.invalid-alert').hide();
