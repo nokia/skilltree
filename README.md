@@ -107,7 +107,7 @@ If you are not familiar with server setup, we recommend to read through the foll
 
 ## Development
 
-Want to contribute? Great! **Please read [the contribution guidelines](CONTRIBUTING.md)**.
+Want to contribute? Awesome! **Please read [the contribution guidelines](docs/CONTRIBUTING.md)**.
 
 You need an IDE of your choice, we recommend [Atom] or [Visual Studio Code].
 
