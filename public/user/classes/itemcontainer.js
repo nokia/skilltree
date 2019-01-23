@@ -331,6 +331,8 @@ class ItemContainer {
                         if (this.skills[i].itemcontainer.skillborder.endorsement != undefined) this.skills[i].itemcontainer.skillborder.endorsement.filters = [colorMatrixFilter];
                         this.skills[i].itemcontainer.skillborder.interactive = false;
                         this.skills[i].itemcontainer.skillborder.buttonMode = false;
+
+                        this.skills[i].disabled = true;
                     }
                     else {
                         this.skills[i].itemcontainer.skillicon.filters = null;
@@ -340,6 +342,8 @@ class ItemContainer {
                         this.skills[i].itemcontainer.container.interactive = true;
                         this.skills[i].itemcontainer.skillborder.interactive = true;
                         this.skills[i].itemcontainer.skillborder.buttonMode = true;
+
+                        this.skills[i].disabled = false;
                     }
                 }
             }
@@ -359,7 +363,7 @@ class ItemContainer {
 
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
 
-        if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint  || this.parentObj.disabled) return;
+        if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint  || this.parentObj.skill.disabled) return;
 
         this.parentObj.setFilter(this.parentObj, hoverFilter, this.parentObj.skillborder.filters[1]);
 
@@ -377,7 +381,7 @@ class ItemContainer {
 
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
 
-        if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint || this.parentObj.disabled) return;
+        if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint || this.parentObj.skill.disabled) return;
 
         this.parentObj.setFilter(this.parentObj, nullFilter, this.parentObj.skillborder.filters[1]);
 
