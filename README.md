@@ -13,12 +13,7 @@ Skill tree is a web app to visualize skills, motivating people for self-developm
 
 See the [Projects](https://github.com/nokia/skilltree/projects) tab.
 
-## Tech
-
-##### Code quality
-
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/nokia/skilltree.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/nokia/skilltree/alerts/)
-
+## Development
 
 Skill Tree needs the following components to operate:
 
@@ -27,6 +22,20 @@ Skill Tree needs the following components to operate:
 * [MongoDB] - A free and open-source cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with schemata.
 * [Nginx] - A web server which can also be used as a reverse proxy, load balancer, mail proxy and HTTP cache.
 * A GNU/Linux distribution, e.g. [Debian] or [Ubuntu].
+
+**Do you want to contribute? Awesome!**
+
+  * You can help us extending the [list of skills](https://github.com/nokia/skilltree/blob/master/assets/json/skills.json) and [trees](https://github.com/nokia/skilltree/blob/master/assets/json/trees.json)
+  * You can help improving code quality, test coverage and creating new features
+  * You can let more people know what SkillTree is & attract more contributors  
+
+**Please read [the contribution guidelines](docs/contribute/CONTRIBUTING.md)**.
+
+
+##### Code quality
+
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/nokia/skilltree.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/nokia/skilltree/alerts/)
+
 
 ## Installation
 
@@ -104,16 +113,6 @@ If you are not familiar with server setup, we recommend to read through the foll
   * Domain name required, you can register a [free domain with Freenom](https://www.freenom.com)
   * Modify config.js "secret" to be a long and random key
   * Update mongoDB connection. If you want, you can use a [cloud-hosted MongoDB](https://cloud.mongodb.com/) with a GUI editor
-
-## Development
-
-Want to contribute? Awesome!
-
-  * You can help us extending the [list of skills](https://github.com/nokia/skilltree/blob/master/assets/json/skills.json) and [trees](https://github.com/nokia/skilltree/blob/master/assets/json/trees.json)
-  * You can help improving code quality, test coverage and creating new features
-  * You can let more people know what SkillTree is & attract more contributors  
-
-**Please read [the contribution guidelines](docs/contribute/CONTRIBUTING.md)**.
 
 
 ### License
