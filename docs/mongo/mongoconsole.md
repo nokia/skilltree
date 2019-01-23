@@ -9,6 +9,7 @@ mongo
 List all values from the "users" collection:
 ```sh
 use <dbasename>
+db.users.find()
 ```
 
 ## List skills in a nice list
