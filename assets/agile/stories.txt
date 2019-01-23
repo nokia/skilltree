@@ -1,0 +1,11 @@
+Employee	Record my skill progress	Track my self-development and see what's next
+Employee	Search for specific skills	Find people fast to get help or collaborate with
+Employee	Show that I'm willing to train others	Help others to benefit from my knowledge, the organization can save time
+Employee	Give others endorsement	Express gratitude and promote the culture of knowledge sharing
+Employee	Show interest to learn specific skills	Get trainings (directly from peers or indirectly by giving input to Competence Development managers)
+Employee	Submit learning resource for a specific skill	Help others find relevant trainings
+Employee	Submit a new skill request	Extend the Skill Tree if necessary
+Ecosystem Manager	Connect external and internal people based on skills	Develop feature components with external organizations or participants jointly
+Employee	Get recommendations what to learn	Find connections between skills/competencies that strenghten each other & the learning process itself
+Employee	Get email notification to set quarterly learning goals	To stay motivated and break down learning goals to manageable steps
+Employee	Get email notification about a training that is marked as a learning goal	Notify people if a training has been added

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+
+    <title>SkillTree</title>
+    <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+      var isIE = /*@cc_on!@*/false || !!document.documentMode;
+      var isEdge = !isIE && !!window.StyleMedia;
+      if(isIE || isEdge){
+        var block_to_insert ;
+        var container_block ;
+
+        block_to_insert = document.createElement( 'div' );
+        block_to_insert.innerHTML = '<div class="unsupportedBrowserAlertDIV alert alert-danger" role="alert"><p style="text-align:center;"<a href="#" class="alert-link">You are using an unsupported browser. Please use Mozilla Firefox or Google Chrome.</a></p></div>' ;
+
+        container_block = document.getElementById( 'unsupportedBrowserAlert' );
+        container_block.appendChild( block_to_insert );
+      }
+    }, false);
+    </script>
+  </head>
+  <body id="body">
+    <div id="unsupportedBrowserAlert">
+    <div class="container jumbocontainer p-3">
+        <div class="jumbotron p-3">
+         <div class="row">
+            <div class="col-12 col-xl-8">
+              <h1 class="display-4 d-none d-lg-block">Register to SkillTree</h1>
+              <h5 class="d-block d-lg-none">Register to SkillTree</h5>
+            </div>
+            <div class="col-12 col-xl-4 d-flex align-items-xl-center justify-content-xl-end order-first order-xl-last">
+                <img class="logo d-xl-none" alt="Logo" src="img/logo_64.png">
+                <!-- <img class="logo d-none d-xl-block" alt="Logo" src="img/logo_90.png"> -->
+                <img class="logo d-none d-xl-block" alt="Logo" src="img/logo_128.png">
+            </div>
+
+         </div>
+          <p class="lead">Already have an account? <a href="login.html">Login</a></p>
+          <hr class="my-4">
+          <form onsubmit = "return false" class = "needs-validation" novalidate>
+              <div class="form-group">
+                <!-- <label for="exampleInputEmail1">Email address</label> -->
+                <input type="text" class="form-control" id = "username" aria-describedby="emailHelp" placeholder="Username" required>
+              </div>
+              <div class="form-group">
+                <!-- <label for="exampleInputPassword1">Password</label> -->
+                <input type="password" class="form-control" id = "password1" placeholder="Password" required>
+              </div>
+              <div class="form-group">
+                <!-- <label for="exampleInputPassword1">Password</label> -->
+                <input type="password" class="form-control" id="password2" placeholder="Confirm Password" required>
+              </div>
+              <div class="form-group">
+                <!-- <label for="exampleInputEmail1">Email address</label> -->
+                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email" required>
+              </div>
+              <p class="bolded">Select a focus area:
+                  <select id = "focusarea" class = "form-control">
+                      <option value = "People">People</option>
+                      <option value = "Engineering">Engineering</option>
+                      <option value = "Business">Business</option>
+                      <option value = "Communication">Communication</option>
+                      <option value = "Support functions">Support functions</option>
+                  </select>
+              </p>
+              <b>I want to help others by sharing my knowledge: <input type = "checkbox" id = "teach"></b>
+              <p>&nbsp;</p>
+
+              <button type="submit" id = "submit" value = "Register" class="btn btn-primary btn-lg" onclick = "validate()">Register</button>
+          </form>
+        </div>
+    </div>
+
+    <div id = "bottomAlertDiv">
+        <div id = "bottomAlert" class="alert alert-danger alert-dismissible" style = "display: none;">
+            <a href="#" class="close" onclick = "$('#bottomAlert').hide()">&times;</a>
+            <strong id = "bottomAlertMsg"></strong>
+        </div>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="register.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>
