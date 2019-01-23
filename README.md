@@ -9,17 +9,15 @@ Skill tree is a web app to visualize skills, motivating people for self-developm
   - Find people fast with a specific skill & willingness to share their knowledge (enhance collaboration)
   - Making it easy to offer/request training for a specific skill and a specific skill level (build p2p training culture)
 
-##### Planned features [[See on Waffle.io]](https://waffle.io/sicambria/skilltree)
+##### Planned features
 
-  [![Waffle.io - Columns and their card count](https://badge.waffle.io/sicambria/skilltree.svg?columns=inbox,backlog,in%20progress)](https://waffle.io/sicambria/skilltree)
+See the [Projects](https://github.com/nokia/skilltree/projects) tab.
 
 ## Tech
 
 ##### Code quality
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/0315c0b0650106013493/maintainability)](https://codeclimate.com/github/sicambria/skilltree/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/0315c0b0650106013493/test_coverage)](https://codeclimate.com/github/sicambria/skilltree/test_coverage)
-
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/nokia/skilltree.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/nokia/skilltree/alerts/)
 
 
 Skill Tree needs the following components to operate:
