@@ -132,7 +132,7 @@ function getPublicTreeData(){
             addTreeToUser({value: this.treeName});
           }
           searchModalBody.appendChild(row);
-        } 
+        }
         modal.style.display = "block";
       }
   });
@@ -177,7 +177,7 @@ function getPublicSkillData(){
             var closer = document.getElementById('closeSearchedSkillModal');
             header.innerHTML = this.data.name;
             category.innerHTML = "<b>Category</b>: " + this.data.categoryName;
-            pdesc.innerHTML = "<b>Description by points</b>: <br> 1: " + this.data.pointDescription[0] + "<br>" +
+            pdesc.innerHTML = "<b>Description by levels</b>: <br> 1: " + this.data.pointDescription[0] + "<br>" +
                                                           "2: " + this.data.pointDescription[1] + "<br>" +
                                                           "3: " + this.data.pointDescription[2] + "<br>" +
                                                           "4: " + this.data.pointDescription[3] + "<br>" +
