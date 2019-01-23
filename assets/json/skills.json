@@ -1487,37 +1487,6 @@
     ]
   },
   {
-    "name": "Coaching",
-    "categoryName": "Soft skills (& civic competence)",
-    "skillIcon": "pictures/icons/qwe.png",
-    "description": "Creates safe, trusting and confidential environment for employees; Demonstrates active listening; Asks focused and open ended questions to help employee identify their own focus or objectives; Patiently asks questions to help them explore their assumptions and alternative ways of thinking; Helps employees develop own action plan, with timeline and follow up.",
-    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Coaching",
-    "pointDescription": [
-      "Insert Level 1 (Initial) Skill Description Here",
-      "Insert Level 2 (Basic) Skill Description Here",
-      "Insert Level 3 (Intermediate) Skill Description Here",
-      "Insert Level 4 (Advanced) Skill Description Here",
-      "Insert Level 5 (World Class) Skill Description Here"
-    ],
-    "maxPoint": 5,
-    "parents": [
-      "Soft Skills"
-    ],
-    "children": [],
-    "trainings": [
-      {
-        "name": "Introduction To PostgreSQL",
-        "level": 1,
-        "shortDescription": "Introduce yourself to PostgreSQL , and learn about its features and usage.",
-        "URL": "https://youtu.be/jNq5EAb2biY",
-        "URLlastAccessed": "2018-12-15",
-        "goal": "",
-        "length": 0,
-        "language": "en"
-      }
-    ]
-  },
-  {
     "name": "Consulting",
     "categoryName": "Soft skills (& civic competence)",
     "skillIcon": "pictures/icons/qwe.png",
