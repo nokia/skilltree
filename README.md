@@ -101,6 +101,11 @@ If you are not familiar with server setup, we recommend to read through the foll
   docker run -d -e BACKEND=<IPADDRESS> -p 0.0.0.0:80:80 localhost/skilltree-nginx
   ```
 
+## Production use
+
+  * Domain name required, you can register a [free domain with Freenom](https://www.freenom.com)
+  * Modify config.js "secret" to be a long and random key
+  * Update mongoDB connection. If you want, you can use a [cloud-hosted MongoDB](https://cloud.mongodb.com/) with a GUI editor
 
 ## Development
 
@@ -136,8 +141,8 @@ pm2 list
 
 ### Testing
 
-Youtube tutorial for testing using Mocha and Chai:
-https://www.youtube.com/watch?v=NhlpFD5EL_Q
+Youtube tutorial for testing using [Mocha and Chai](https://www.youtube.com/watch?v=NhlpFD5EL_Q).
+
 
 Install mocha and chai (already installed in this project):
 ```sh
