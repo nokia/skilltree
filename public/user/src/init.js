@@ -128,7 +128,6 @@ function loadAddedTrees(){
 }
 
 window.addEventListener('load', function() {
-    console.log("a");
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
     var forms = document.getElementsByClassName('needs-validation');
     // Loop over them and prevent submission
@@ -142,4 +141,6 @@ window.addEventListener('load', function() {
             form.classList.add('was-validated');
         }, false);
     });
+
+    initData();
 }, false);

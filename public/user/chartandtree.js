@@ -1,6 +1,5 @@
 var data = undefined;
 var change = false;
-initData();
 
 // creates the pixi app
 var app = new PIXI.Application({
