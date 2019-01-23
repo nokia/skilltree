@@ -20,7 +20,7 @@ The following is a set of guidelines for contributing to SkillTree and its packa
 
 ## Code of Conduct
 
-This project and everyone participating in it is governed by the [SkillTree Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.
+This project and everyone participating in it is governed by the [SkillTree Code of Conduct](https://github.com/nokia/skilltree/blob/master/CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.
 
 ## How Can I Contribute?
 
