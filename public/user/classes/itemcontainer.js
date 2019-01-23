@@ -315,6 +315,7 @@ class ItemContainer {
 
     // Refreshes the clickable property of all the tree except for the root level, and sets the resets the filter to null (this blocks the functionality of the green filter on 5/5 skills for now on every level except the root, fix will be needed)
     refreshAvaliability(){
+        console.log()
         for (var i = 0; i < this.skills.length; i++) {
             for (var j = 0; j < this.skills[i].parents.length; j++) {
 
