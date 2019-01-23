@@ -1,152 +1,175 @@
 # Skill Tree
 
-## Getting started on SSH: Clone this repository
+Skill tree is a web app to visualize skills, motivating people for self-development and supporting the culture of cooperation and knowledge sharing.
+
+**Main features:**
+  - Record your current skills and their levels in a visual form
+  - Immediately see the self-development options ahead of you (increase awareness of skills, available help & trainings)
+  - Inspire people to think about their future & create a personal learning plan with time-framed steps
+  - Find people fast with a specific skill & willingness to share their knowledge (enhance collaboration)
+  - Making it easy to offer/request training for a specific skill and a specific skill level (build p2p training culture)
+
+##### Planned features [[See on Waffle.io]](https://waffle.io/sicambria/skilltree)
+
+  [![Waffle.io - Columns and their card count](https://badge.waffle.io/sicambria/skilltree.svg?columns=inbox,backlog,in%20progress)](https://waffle.io/sicambria/skilltree)
+
+## Tech
+
+##### Code quality
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/0315c0b0650106013493/maintainability)](https://codeclimate.com/github/sicambria/skilltree/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/0315c0b0650106013493/test_coverage)](https://codeclimate.com/github/sicambria/skilltree/test_coverage)
+
+
+
+Skill Tree needs the following components to operate:
+
+* [node.js] - An open-source, cross-platform JavaScript run-time environment that executes JavaScript code outside of a browser.
+* [Express] - A web framework for Node.js
+* [MongoDB] - A free and open-source cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with schemata.
+* [Nginx] - A web server which can also be used as a reverse proxy, load balancer, mail proxy and HTTP cache.
+* A GNU/Linux distribution, e.g. [Debian] or [Ubuntu].
+
+## Installation
+
+You will need a domain name to install (HTTPS will be configured by default via [Let's Encrypt].)
+
+#### Option 1 - Install script on Debian 9
+
+If you are not familiar with server setup, we recommend to read through the following tutorials:
+* Preferred - using Nginx: [How To Secure Nginx with Let's Encrypt on Debian 9]
+
+
+  * Or if you want to use Apache:
+    * [How To Secure Apache with Let's Encrypt on Debian 9]
+    * [How To Install the Apache Web Server on Debian 9]
+
+
+##### Install script (MongoDB, Let's Encrypt, SkillTree & dependencies)
+  ```sh
+  cd
+  mkdir skilltree
+  cd skilltree
+  wget https://raw.githubusercontent.com/sicambria/skilltree/master/install/skilltree_install_debian9.sh ; chmod +x skilltree_install_debian9.sh ; nano skilltree_install_debian9.sh
+  ```
+
+
+  After running the install script, finalize server configuration.
+
+  For Nginx, edit "sites-available/default" (or your domain specific config file) after the installation. Replace YOUR_DOMAIN.ORG to you own domain name.
+
+  ```sh
+  nano /etc/nginx/sites-available/default
+  ```
+
+
+  ```sh
+  server {
+          listen 443 ssl default_server;
+          listen [::]:443 ssl default_server;
+
+          ssl_certificate     /etc/letsencrypt/live/YOUR_DOMAIN.ORG/cert.pem;
+          ssl_certificate_key /etc/letsencrypt/live/YOUR_DOMAIN.ORG/privkey.pem;
+
+          location / {
+                  proxy_pass http://localhost:3000/;
+          }
+  }
+
+  server {
+          listen 80 default_server;
+          listen [::]:80 default_server;
+          return 301 https://$host$request_uri;
+  }
+  ```
+
+#### Option 2 - Docker (beta)
+
+##### Build Docker images
+
+  ```sh
+  docker build --no-cache -t localhost/skilltree-mongodb:latest ./docker-build/mongodb/
+  docker build --no-cache -t localhost/skilltree-nginx:latest ./docker-build/nginx/
+  docker build --no-cache -t localhost/skilltree-nodejs:latest ./docker-build/nodejs/
+  ```
+
+##### Run Docker containers (in this order!)
+
+  ```sh
+  docker run -d -p <IPADDRESS>:27017:27017 localhost/skilltree-mongodb
+  docker run -d -p <IPADDRESS>:3000:3000 -e DBADDRESS=<IPADDRESS> localhost/skilltree-nodejs
+  docker run -d -e BACKEND=<IPADDRESS> -p 0.0.0.0:80:80 localhost/skilltree-nginx
+  ```
+
+
+## Development
+
+Want to contribute? Great!
+You need an IDE of your choice, we recommend [Atom] or [Visual Studio Code].
+
+For Atom, installing some plugins are helpful:
 
 ```sh
-git clone git@gitlabe1.ext.net.nokia.com:OTAS_TDT/SkillTree.git
+apm install emmet todo minimap pigments minimap-pigments linter file-icons git-diff atom-beautify ask-stack highlight-selected
 ```
 
-## Getting started on HTTPS: Clone this repository
+On the server, give it a try:
 
 ```sh
-git clone https://gitlabe1.ext.net.nokia.com/OTAS_TDT/SkillTree.git
+cd skilltree
+node app.js
 ```
 
-## Configure the project
-
-### Fields
-
-* **ORM** : This one is the all ORM configuartion, in default we use SQLite 3 database, you find more info right [here](https://github.com/typeorm/typeorm/blob/master/docs/using-ormconfig.md)
-
-* **local** : This one is our authentication system configuration, you find more info right [here](https://github.com/jaredhanson/passport-local#parameters)
-
-* **webserver** : This one is just contain our webserver's port
-
-* **test** : This one is for the tests, so this is optional, for production and developemtn build, only required for test build.
-
-* **sessionstore** : This one is our session storage settings, in default we use in-memory database, but you can find more options [here](https://github.com/adrai/sessionstore)
-
-## Before you build the project, you need SSL key and SSL Cert
-
-### If you not have SSL Key and Cert and you not have a public domain for this system
-
+Alternatively, to keep up with changes automatically, install & use PM2 (recommended):
 ```sh
-./genkey.sh
+cd skilltree
+pm2 create skilltree
 ```
-
-### If you not have SSL Key and Cert but you have a public domain for this system
-
-[Generate a key with Let's Encrypt](https://letsencrypt.org/getting-started)
-
-### If you have SSL Key and Cert
-
+To run:
 ```sh
-cp {originalKeyPath} ${PWD}/ssl.key
-cp {originalCertPath} ${PWD}/ssl.crt
+pm2 start skilltree --watch
 ```
-
-## Before you build any code, you have to install all the packages with yarn or npm
-
+To query the status:
 ```sh
-yarn
+pm2 list
 ```
 
-OR
+### Testing
 
+Youtube tutorial for testing using Mocha and Chai:
+https://www.youtube.com/watch?v=NhlpFD5EL_Q
+
+Install mocha and chai (already installed in this project):
 ```sh
-npm install
+npm install mocha
+npm install chai --save-dev
 ```
 
-## Build project [DEVELOPMENT]
-
-### 1. Step: Compile TSX code (skill tree drawer code)
-
+To run tests:
 ```sh
-yarn bundle:debug
+cd assets
+mocha
 ```
 
-OR
+Edit tests in assets/test folder. Create new JavaScript file or use the existing unit-test.js and add functions.
 
-```sh
-npm run bundle:debug
-```
 
-### 2. Step: Modify Profile content EJS to dev mod
+### License
 
-```html
-<div id="skilltree"></div>
-<!-- Production Dependencies -->
-<!-- <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script> -->
-<!-- <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script> -->
+BSD License 2.0
 
-<!-- Development Dependencies -->
-<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
 
-<!-- Main -->
-<script src="static/bundle.js"></script>
-```
+[//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - https://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
-### 3. Step: Compile Typescript to Javascript in debug mode
-
-```sh
-npm run build
-```
-
-### 4. Step: Open a new terminal or a new command prompt and run the debug/index.js
-
-```sh
-npm run debug
-```
-
-## Build project [TEST]
-
-### 1. Step: Host a selenium server for the test
-
-### If you use docker, but you should because this is the recommend way
-
-```sh
-sudo docker run -d -p 4444:4444 --net=host -h 127.0.0.1 --shm-size=2g selenium/standalone-chrome:3.12.0-cobalt
-```
-
-### If you not use docker, you can find the jar file [here](http://selenium-release.storage.googleapis.com/index.html), and also you have to install the chrome driver
-
-```sh
-java -jar selenium-server-standalone-x.x.x.jar
-```
-
-### 2. Step: Modify Profile content EJS to dev mod
-
-```html
-<div id="skilltree"></div>
-<!-- Production Dependencies -->
-<!-- <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script> -->
-<!-- <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script> -->
-
-<!-- Development Dependencies -->
-<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-
-<!-- Main -->
-<script src="static/bundle.js"></script>
-```
-
-### 3. Step: Open a new terminal or a new command prompt and run tests
-
-```sh
-npm test
-```
-
-## Build project [PRODUCTION]
-
-### 1. Step: Build docker image
-
-```sh
-docker build -t skilltree_image_v103 .
-```
-
-### 2. Step: Run docker image with exposed port
-
-```sh
-docker run -d -p 443:443 -p 80:80 -v ${PWD}/db:/usr/src/app/db --name skilltree_container_v103 skilltree_image_v103
-```
+   [node.js]: <https://nodejs.org>
+   [MongoDB]: <https://www.mongodb.com/>
+   [Express]: <https://expressjs.com/>
+   [Nginx]: <https://www.nginx.com/>
+   [Visual Studio Code]: <https://code.visualstudio.com/>
+   [Atom]: <https://github.com/atom/atom>
+   [Debian]: <https://www.debian.org/>
+   [Ubuntu]: <https://www.ubuntu.com/>
+   [Let's Encrypt]: <https://letsencrypt.org/>
+   [How To Secure Nginx with Let's Encrypt on Debian 9]: <https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-debian-9>
+   [How To Secure Apache with Let's Encrypt on Debian 9]: <https://www.digitalocean.com/community/tutorials/how-to-secure-apache-with-let-s-encrypt-on-debian-9>
+   [How To Install the Apache Web Server on Debian 9]: <https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-debian-9>

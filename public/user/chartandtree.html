@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang = "en" oncontextmenu = "return false;">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, maximum-scale=1.0, user-scalable=no">
+  <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <!-- font awesome CSS -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <script src = "pixi/pixi.min.js"></script>
+  <script src = "pixi/pixi-extra-filters.js"></script>
+  <script src = "pixi/pixi-layers.js"></script>
+  <script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+    var isIE = /*@cc_on!@*/false || !!document.documentMode;
+    var isEdge = !isIE && !!window.StyleMedia;
+    if(isIE || isEdge){
+      var block_to_insert ;
+      var container_block ;
+
+      block_to_insert = document.createElement( 'div' );
+      block_to_insert.innerHTML = '<div class="unsupportedBrowserAlertDIV alert alert-danger" role="alert"><p style="text-align:center;"<a href="#" class="alert-link">You are using an unsupported browser. Please use Mozilla Firefox or Google Chrome.</a></p></div>' ;
+
+      container_block = document.getElementById( 'unsupportedBrowserAlert' );
+      container_block.appendChild( block_to_insert );
+    }
+  }, false);
+  </script>
+
+  <title>User Profile</title>
+</head>
+<body class = "ctbody">
+  <div id="unsupportedBrowserAlert">
+  <!-- Datalists required for searching -->
+
+  <datalist id="UserSearchResult"></datalist>
+  <datalist id="TreeSearchResult"></datalist>
+  <datalist id="skillSearchResult"></datalist>
+
+  <!-- End of datalists -->
+
+  <!-- navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a id = "home" class="navbar-brand" role="button" aria-haspopup="true" aria-expanded="false"><img class="logo" src="pictures/logo_32x32.png">SKILLTREE</a>
+    <!-- <a class="navbar-brand" href="#" role="button"><img class="logo" src="pictures/logo_32x32.png">SKILLTREE</a> -->
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse hide-on-click" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" id="openchart">Overview <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            My SkillTrees
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="treeList">
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Editor
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" onclick = "createSkill()">Create Skill</a>
+            <a class="dropdown-item" onclick = "editMySkill()">Edit My Skills</a>
+            <a class="dropdown-item" onclick = "addTraining()">Add Training Link</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" onclick = "createTree()" id = "openCreator">Create SkillTree</a>
+            <a class="dropdown-item" onclick = "editMyTree()">Edit My SkillTrees</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown" id = "openAdminMenu" style = "display: none;">
+          <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" onclick = "editSkill()">Edit Skill</a>
+              <a class="dropdown-item" onclick = "editTree()">Edit SkillTree</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" onclick = "approveTrees()">Approve SkillTrees</a>
+              <a class="dropdown-item" onclick = "approveSkills()">Approve Skills</a>
+              <a class="dropdown-item" onclick = "approveTrainings()">Approve Trainings</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" onclick = "dropoffers()">Drop Offers</a>
+          </div>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" onclick="logout()"><i class="fas fa-power-off"></i></a>
+        </li> -->
+      </ul>
+
+
+    </div>
+
+    <a class="nav-link" href="#advSearch" data-toggle="collapse" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Search
+    </a>
+    <a id = "submitBtn" class = "nav-link" role = "button" onclick = "submit()">
+      Saved
+    </a>
+
+    <a class="nav-link" href="#userprofile" data-toggle="collapse" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <img src="./pictures/profile.png">
+    </a>
+      <a class="nav-link" role="button" data-toggle="collapse" data-toggle="dropdown" onclick="logout()"><i class="fas fa-power-off"></i></a>
+  </nav>
+  <!-- end of navbar -->
+
+  <!-- start of advanced search -->
+  <div class="collapse float-right hide-on-click" id="advSearch">
+    <div class="card">
+      <div class="card-body">
+        <!-- card content -->
+        <div class="tab-content" id="mySearchTabContent">
+          <div class="btn-group btn-group-toggle" data-toggle="buttons" id="buttonGroup">
+            <label class="btn btn-secondary" onclick="switchSearch('User')">
+              <input type="radio" name="options" id="option1" autocomplete="off" checked> User Search
+            </label>
+            <label class="btn btn-secondary" onclick="switchSearch('Tree')">
+              <input type="radio" name="options" id="option2" autocomplete="off"> Tree Search
+            </label>
+            <label class="btn btn-secondary active" onclick="switchSearch('Skill')">
+              <input type="radio" name="options" id="option3" autocomplete="off"> Skill Search
+            </label>
+          </div>
+          <div class="card" id="innerCard">
+            <input class="form-control mr-sm-2" type="search" placeholder="Press Search to see all items" aria-label="Search" id="cardSearchBar">
+            <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search" id="cardSearch">
+            <div class="card-body" id="advSearchDetails">
+            </div>
+          </div>
+        </div>
+        <!-- end of card content -->
+      </div>
+    </div>
+  </div>
+  <!-- end of advanced search -->
+
+  <!-- user card  -->
+  <div class="collapse float-left active show hide-on-click" id="userCard">
+    <div class="card">
+      <div class="card-body">
+        <img class="img-thumbnail float-left d-inline w-25 m-1 mr-3" src="./pictures/profile_img.png" alt="Card image cap">
+        <h6 class="card-title d-inline" id="cardUserName"></h6>
+        <h6 class="card-subtitle my-2 font-italic" id="cardMainTree"></h6>
+      </div>
+
+      <div class="card-body mt-3">
+        <span class="badge badge-green w-30" id="treeCount"></span>
+        <span class="badge badge-green w-30" id="skillCount"></span>
+        <span class="badge badge-green w-30" id="pointCount"></span>
+      </div>
+    </div>
+  </div>
+  <!-- end of user cards -->
+
+  <!-- user profile details card -->
+
+  <div id="userprofile" class="collapse float-right hide-on-click">
+    <div class="card text-white bg-lightgreen mb-3">
+      <!-- <div class="card-header" id="card_username"></div> -->
+      <div class="card-body">
+
+        <!-- card nav -->
+
+        <div class="nav nav-tabs" id="myTab" role="tablist">
+          <a class="nav-item nav-link active" id="personal-tab" data-toggle="tab" href="#personal" role="tab" aria-controls="personal" aria-selected="true">Personal</a>
+          <a class="nav-item nav-link" id="access-tab" data-toggle="tab" href="#trainings" role="tab" aria-controls="trainings" aria-selected="true">My trainings</a>
+        </div>
+        <!-- end of card nav -->
+
+        <!-- tab contents -->
+        <div class="tab-content" id="myTabContent">
+          <!-- personal-tab content -->
+          <div class="tab-panel fade show active" id="personal" role="tabpanel" aria-labelledby="personal-tab">
+            <form class="pt-4">
+              <div class="form-group row">
+                <label for="username" class="col-sm-3 col-form-label">User name</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="username" aria-describedby="emailHelp" placeholder="User name">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputPassword" class="col-sm-3 col-form-label">Password</label>
+                <div class="col-sm-9">
+                  <input type="password" class="form-control" id="inputPassword" placeholder="****">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="place" class="col-sm-3 col-form-label">Place</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="place" aria-describedby="placeHelp" placeholder="WhereAreYou link">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="exampleInputEmail1" class="col-sm-3 col-form-label">Email</label>
+                <div class="col-sm-9">
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="user@domain.com">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="exampleInputEmail1" class="col-sm-3 col-form-label">Photo</label>
+                <div class="col-sm-9">
+                  <input type="email" class="form-control" id="uploadprofilephoto" aria-describedby="uploadprofilephoto" placeholder="Upload profile photo">
+                </div>
+              </div>
+
+            </form>
+          </div>
+          <!-- end of personal-tab content -->
+          <div class="tab-panel fade" id="trainings" role="tabpanel" aria-labelledby="training-tab">
+            <form>
+                <h3>My requested trainings</h3>
+                 <p>I signed up for these trainings:</p>
+                <h3>My trainings</h3>
+                 <p>I will hold these trainings:</p>
+                <h3>Offering trainings</h3>
+                  <div class="form-group row">
+                    <label for="inputhelpjs" class="col-sm-3 col-form-label">Javascript</label>
+                    <div class="col-sm-9">
+                      <input type="checkbox" id="inputhelpjs" checked>
+                    </div>
+                  </div>
+                   <div class="form-group row">
+                    <label for="inputhelphtml" class="col-sm-3 col-form-label">HTML</label>
+                    <div class="col-sm-9">
+                      <input type="checkbox" id="inputhelphtml">
+                    </div>
+                  </div>
+                   <div class="form-group row">
+                    <label for="inputhelpcss" class="col-sm-3 col-form-label">CSS</label>
+                    <div class="col-sm-9">
+                      <input type="checkbox" id="inputhelpcss" checked>
+                    </div>
+                  </div>
+            </form>
+          </div>
+        </div>
+        <!-- end of tab contents -->
+      </div>
+    </div>
+  </div>
+
+<canvas id = "pixiCanvas" style = "visibility: hidden;" class = "hide"></canvas>
+
+<!-- creator -->
+<div id = "creator" style = "display: none;" class = "hide clear">
+    <form id = "newTreeForm" class = "needs-validation" onsubmit = "return false" novalidate>
+        <div class = "card">
+            <h1>1.</h1>
+            <center><h5>The name of the tree</h5></center>
+            <p><input type = "text" id = "treeName" class = "form-control"></p>
+            <input type = "button" id = "loadTree" class = "btn btn-outline-secondary" style = "display: none" value = "Load Tree"/>
+            <center><h5>Focus area of the tree</h5></center>
+            <p><select id = "focusarea" class = "form-control">
+                <option value = "People">People</option>
+                <option value = "Engineering">Engineering</option>
+                <option value = "Business">Business</option>
+                <option value = "Communication">Communication</option>
+                <option value = "Support functions">Support functions</option>
+            </select></p>
+            <center><h5>Description:</h5></center>
+            <p><textarea id = "treeDesc" class = "form-control"></textarea></p>
+        </div>
+        <div class = "card">
+            <h1>2.</h1>
+            <center><h5>Search for a skill</h5></center>
+            <p><input type = "text" id = "skillSearchTree" class = "form-control" list = "skillSearchResult" onkeyup="searchSkillsByName(this)"></p>
+            <p><input type = "button" id = "addToTree" class="btn btn-outline-secondary" value = "Add skill to tree"></p>
+            <center><h5>OR</h5></center>
+            <p><input type = "button" id = "createSkill" class="btn btn-outline-secondary" value = "Create skill"></p>
+        </div>
+        <div class = "card">
+            <h1>3.</h1>
+            <p><select id = "skillList" size = "2" class="form-control"></select></p>
+            <p><input type = "button" id = "deleteFromList" class="btn btn-outline-secondary" value = "Delete selected"></p>
+        </div>
+        <div class = "card">
+            <h1>4.</h1>
+            <p><input type = "button" id = "createTree" class="btn btn-outline-secondary" value = "Save"></p>
+        </div>
+    </form>
+</div>
+<!-- end of creator -->
+
+<!-- start of modal -->
+<div class="modal" id="searchModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="modalClose" id="closeSearchModal">&times;</span>
+      <h2 id = "searchModalTitle">Search Results</h2>
+    </div>
+    <div class="modal-body">
+      <table class="table table-striped table-light">
+        <thead>
+          <tr id = "searchModalHeader">
+          </tr>
+        </thead>
+        <tbody id="searchModalBody">
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- end of modal -->
+
+  <!-- start of modal -->
+  <div id = "newSkillModal" class = "modal clear" class="pt-4">
+    <div class = "modal-content">
+      <div class="modal-header">
+        <span class="modalClose" id = "closeSkillModal">&times;</span>
+        <h2 id = "newSkillModalTitle">Create your own skill</h2>
+      </div>
+      <div class="modal-body">
+          <form id = "newSkillForm" class = "needs-validation" onsubmit = "return false" novalidate>
+              <div class="card">
+                  <!-- card nav -->
+                  <div class="card-header d-flex justify-content-center">
+                      <ul class="nav nav-tabs card-header-tabs" id = "skillEditTabs">
+                          <li class="nav-item">
+                              <a class="nav-link active" href="#newSkillPhase1" id="newSkillPhase1-tab" data-toggle="tab" data-toggle="collapse" role="tab" aria-controls="newSkillPhase1" aria-selected="true">1</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="#newSkillPhase2" id="newSkillPhase2-tab" data-toggle="tab" data-toggle="collapse" role="tab" aria-controls="newSkillPhase2" aria-selected="false">2</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="#newSkillPhase3" id="newSkillPhase3-tab" data-toggle="tab" data-toggle="collapse" role="tab" aria-controls="newSkillPhase3" aria-selected="false">3</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="#newSkillPhase4" id="newSkillPhase4-tab" data-toggle="tab" data-toggle="collapse" role="tab" aria-controls="newSkillPhase4" aria-selected="false">4</a>
+                          </li>
+                      </ul>
+                  </div>
+                  <!-- end of card nav -->
+                  <div class="card-body">
+                      <!-- tab contents -->
+                      <div class="tab-content" id="newSkillCreating">
+                          <!-- 1-tab content -->
+                          <div class="tab-panel fade show active collapse" id="newSkillPhase1" role="tabpanel" aria-labelledby="newSkillPhase1-tab">
+                              <div class="card">
+                                  <div class="card-body">
+                                      <h5 class="card-title">What is your new skill?</h5>
+                                      <div class="form-group">
+                                          <label for="newSkillName" class="form-label">Name</label>
+                                          <input type = "text" id = "newSkillName" class="form-control w-75" required>
+                                          <input type = "button" id = "loadSkill" class = "btn btn-outline-secondary" style = "display: none" value = "Load Skill"/>
+                                      </div>
+                                      <div class="form-group">
+                                          <label for="newSkillDesc" class="form-label">Description</label>
+                                          <textarea id = "newSkillDesc" class="form-control w-75" required></textarea>
+                                      </div>
+                                      <div class="form-group w-75">
+                                          <label for="newSkillIcon" class="form-label">Skill icon</label><br>
+                                          <input type = "text" id = "newSkillIcon" class = "form-control" placeholder = "pictures/icons/.png" required>
+                                          <center><span class = "w-75">OR</span><br></center>
+                                          <div class = "custom-file">
+                                              <!-- <input type = "text" id = "newSkillIcon" value = "pictures/icons/.png" required> -->
+                                              <input type = "file" id = "newSkillIconFile" class = "custom-file-input">
+                                              <label class="custom-file-label" for="customFile">Choose file</label>
+                                          </div>
+                                      </div>
+                                      <div class = "form-group">
+                                          <label for = "newSkillWiki" class = "form-label">Wikipedia URL</label><br>
+                                          <input type = "text" id = "newSkillWiki" class = "form-control w-75" required>
+                                      </div>
+                                      <div class="form-group">
+                                          <label for="newSkillCat" class="form-label">Category</label>
+                                          <select id = "newSkillCat" class="form-control w-75"></select>
+                                      </div>
+                                      <input type = "button" value = "Next" class="btn btn-success float-right" onclick = "$('#newSkillPhase2-tab').trigger('click')">
+                                  </div>
+                              </div>
+                          </div>
+                          <!-- end of 1-tab -->
+                          <!-- 2-tab content -->
+                          <div class="tab-panel fade collapse" id="newSkillPhase2" role="tabpanel" aria-labelledby="newSkillPhase2-tab newSkillPhase2-next">
+                              <div class="card">
+                                  <div class="card-body">
+                                      <h5 class="card-title">Levels of the skill</h5>
+                                      <div class="form-group">
+                                          <table id = "pointsTable">
+                                              <tr>
+                                                  <td>Level</td>
+                                                  <td class="pl-4">Description</td>
+                                                  <!-- <td>Delete</td> -->
+                                              </tr>
+                                              <tr>
+                                                  <td>1</td>
+                                                  <td><input size=50 type="text" id = "pointDesc1" class = "form-control" required></td>
+                                                  <td><input type="button" value="Delete" onclick="deleteRow('pointsTable', this)" class="btn btn-outline-success"></td>
+                                              </tr>
+                                              <tr>
+                                                  <td>2</td>
+                                                  <td><input size=50 type="text" id = "pointDesc2" class = "form-control" required></td>
+                                                  <td><input type="button" value="Delete" onclick="deleteRow('pointsTable', this)" class="btn btn-outline-success"></td>
+                                              </tr>
+                                              <tr>
+                                                  <td>3</td>
+                                                  <td><input size=50 type="text" id = "pointDesc3" class = "form-control" required></td>
+                                                  <td><input type="button" value="Delete" onclick="deleteRow('pointsTable', this)" class="btn btn-outline-success"></td>
+                                              </tr>
+                                              <tr>
+                                                  <td>4</td>
+                                                  <td><input size=50 type="text" id = "pointDesc4" class = "form-control" required></td>
+                                                  <td><input type="button" value="Delete" onclick="deleteRow('pointsTable', this)" class="btn btn-outline-success"></td>
+                                              </tr>
+                                              <tr>
+                                                  <td>5</td>
+                                                  <td><input size=50 type="text" id = "pointDesc5" class = "form-control" required></td>
+                                                  <td><input type="button" value="Delete" onclick="deleteRow('pointsTable', this)" class="btn btn-outline-success"></td>
+                                              </tr>
+                                          </table><br>
+                                          <input type="button" value="Add point" onclick="addRow('pointsTable')" class="btn btn-outline-success"><br>
+                                          <input type = "button" value = "Next" class="btn btn-success float-right" onclick = "$('#newSkillPhase3-tab').trigger('click')">
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <!-- end of 2-tab -->
+                          <!-- 3-tab content -->
+                          <div class="tab-panel fade collapse" id="newSkillPhase3" role="tabpanel" aria-labelledby="newSkillPhase3-tab">
+                              <div class="card">
+                                  <div class="card-body">
+                                      <h5 class="card-title">Parents of the skill</h5>
+                                      <div class="form-group">
+                                          <!-- <label for="parentsTable" class="col-form-label col-1">Parents:</label> -->
+                                          <table id = "parentsTable">
+                                              <tr>
+                                                  <td>Parent</td>
+                                                  <td>Min point</td>
+                                                  <td>Required</td>
+                                                  <!-- <td class="pl-4">Delete</td> -->
+                                              </tr>
+                                              <tr>
+                                                  <td><input class="m-0 form-control" size=30 type="text" id = "parent" list = "skillSearchResult" onkeyup="searchSkillsByName(this)" required></td>
+                                                  <td><input class="m-0 form-control" size=10 type="text" id = "minPoint" required></td>
+                                                  <td><center><input size=50 type="checkbox" id = "required"></center></td>
+                                                  <td><input class="btn btn-outline-success" type="button" value="Delete" onclick="deleteRow('parentsTable', this)"></td>
+                                              </tr>
+                                          </table><br>
+                                          <input type="button" value="Add parent" onclick="addRow('parentsTable')" class = "btn btn-outline-success">
+                                      </div>
+
+                                      <div id = "childrenDiv" style = "display: none">
+                                          <h5>Children:</h5>
+                                          <table id = "childrenTable">
+                                              <tr>
+                                                  <td>Child</td>
+                                                  <td>Min point</td>
+                                                  <td>Required</td>
+                                              </tr>
+                                              <tr>
+                                                  <td><input class="m-0 form-control" size=30 type="text" id = "child" list = "skillSearchResult" onkeypress="searchSkillByName()" required></td>
+                                                  <td><input class="m-0 form-control" size=10 type="text" id = "minPointc" required></td>
+                                                  <td><center><input size=50 type="checkbox" id = "requiredc"></center></td>
+                                                  <td><input class="btn btn-outline-success" type="button" value="Delete" onclick="deleteRow('childrenTable', this)"></td>
+                                              </tr>
+                                          </table><br>
+                                          <input type="button" value="Add child" onclick="addRow('childrenTable')" class = "btn btn-outline-success">
+                                          <input type = "button" value = "Next" class="btn btn-success float-right" onclick = "$('#newSkillPhase4-tab').trigger('click')">
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <!-- end of 3-tab -->
+                          <!-- 4-tab content -->
+                          <div class="tab-panel fade collapse" id="newSkillPhase4" role="tabpanel" aria-labelledby="newSkillPhase4-tab">
+                              <div class="card">
+                                  <div class="card-body">
+                                      <h5 class="card-title">Trainings for the skill</h5>
+                                      <div class="form-group">
+                                          <table id = "trainingsTable">
+                                              <tr>
+                                                  <td>Name</td>
+                                                  <td>Level</td>
+                                                  <td>Description</td>
+                                                  <td>URL</td>
+                                                  <td>Goal</td>
+                                                  <td>Length</td>
+                                                  <td>Language</td>
+                                                  <!-- <td>Delete</td> -->
+                                              </tr>
+                                              <tr>
+                                                  <td><input size=15 type="text" class = "form-control" required></td>
+                                                  <td><input size=5 type="text" class = "form-control" required></td>
+                                                  <td><input size=20 type="text" class = "form-control" required></td>
+                                                  <td><input size=15 type="text" class = "form-control" required></td>
+                                                  <td><input size=15 type="text" class = "form-control" required></td>
+                                                  <td><input size=5 type="text" class = "form-control" required></td>
+                                                  <td><input size=5 type="text" class = "form-control" required></td>
+                                                  <td><input type="button" value="Delete" onclick="deleteRow('trainingsTable', this)" class="btn btn-outline-success"></td>
+                                              </tr>
+                                          </table><br>
+                                          <input type="button" value="Add training" onclick="addRow('trainingsTable')" class="btn btn-outline-success">
+                                      </div>
+                                      <input type = "submit" value = "Save" id = "saveSkillBtn" class="btn btn-success float-right">
+                                      <div class="alert alert-danger alert-dismissible invalid-alert" style = "display: none;">
+                                          <a href="#" class="close" onclick = "$('.invalid-alert').hide()">&times;</a>
+                                          <strong>Please check your data!</strong>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+
+                          <!-- end of 4-tab -->
+
+
+
+
+
+                      </div>
+                  </div>
+              </div>
+
+              <!--<h5>Children:</h5>
+              <table id = "childrenTable" border = "1">
+              <tr>
+              <td>Child</td>
+              <td>Min point</td>
+              <td>Required</td>
+              <td>Delete</td>
+          </tr>
+          <tr>
+          <td><input size=30 type="text" id = "child" list = "skillSearchResult" onkeypress="searchSkillByName()" required></td>
+          <td><input size=10 type="text" id = "minPoint" required></td>
+          <td><input size=50 type="checkbox" id = "required"></td>
+          <td><input type="button" value="Delete" onclick="deleteRow('childrenTable', this)"></td>
+      </tr>
+  </table>
+  <input type="button" value="Add child" onclick="addRow('childrenTable')"><br>-->
+
+
+
+</form>
+</div>
+    </div>
+  </div>
+  <!-- end of modal -->
+
+  <!-- start of modal -->
+  <div id = "addTrainingModal" class = "modal clear">
+    <div class = "modal-content">
+      <div class="modal-header">
+        <span class="modalClose" id = "closeTrainingModal">&times;</span>
+        <h2>Add training to a skill</h2>
+      </div>
+      <div class="modal-body">
+        <form id = "addTrainingForm" onsubmit = "return false" class = "needs-validation" novalidate>
+          <h5>Skill:</h5>
+          <input type = "text" id = "trainingSkillName" class = "form-control" list = "skillSearchResult" style = "width: 300px;" onkeyup="searchUserSkillsByName(this)" required><br>
+          <h5>New Training(s):</h5>
+          <table id = "addTrainingsTable">
+              <tr>
+                <td>Name</td>
+                <td>Level</td>
+                <td>Description</td>
+                <td>URL</td>
+                <td>Goal</td>
+                <td>Length</td>
+                <td>Language</td>
+              </tr>
+              <tr>
+                <td><input size=15 type="text" class = "form-control" required></td>
+                <td><input size=5 type="text" class = "form-control" required></td>
+                <td><input size=20 type="text" class = "form-control" required></td>
+                <td><input size=15 type="text" class = "form-control" required></td>
+                <td><input size=15 type="text" class = "form-control" required></td>
+                <td><input size=5 type="text" class = "form-control" required></td>
+                <td><input size=5 type="text" class = "form-control" required></td>
+                <td><input type="button" class = "btn btn-outline-success" value="Delete" onclick="deleteRow('addTrainingsTable', this)"></td>
+              </tr>
+          </table>
+          <input type="button" class = "btn btn-outline-success" value="Add training" onclick="addRow('addTrainingsTable')"><br><br>
+          <input type = "submit" value = "Save" id = "saveTrainingsBtn" class = "btn btn-success float-right">
+          <div class="alert alert-danger alert-dismissible invalid-alert" style = "display: none;">
+              <a href="#" class="close" onclick = "$('.invalid-alert').hide()">&times;</a>
+              <strong>Please check your data!</strong>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- end of modal -->
+
+  <!-- start of modal -->
+  <div id = "firstLogin" class = "modal">
+      <div class = "modal-content">
+          <div class="modal-header">
+              <h2>Set up your account</h2>
+          </div>
+          <div class="modal-body">
+              <form id = "firstLoginForm" onsubmit = "return false" novalidate>
+                  <h4>Please select your main skill tree!</h4>
+                  <select id = "maintree" class = "form-control" style = "width: 200px;" required></select>
+                  <div id = "teachingSettings">
+                      <br>
+                      <h4>Please specify your availability for knowledge sharing</h4>
+                      On which day are you available?
+                      <select id = "day" class = "form-control" style = "width: 150px;">
+                          <option value = "Monday">Monday</option>
+                          <option value = "Tuesday">Tuesday</option>
+                          <option value = "Wednesday">Wednesday</option>
+                          <option value = "Thursday">Thursday</option>
+                          <option value = "Friday">Friday</option>
+                      </select><br>
+                      Timeslot when you are willing to help others:
+                      <input type = "time" id = "timeStart" class = "form-control" style = "width: 120px;" required> - <input type = "time" id = "timeEnd" class = "form-control" style = "width: 120px;" required><br>
+                      Where can people find you?
+                      <input type = "text" id = "location" class = "form-control" placeholder = "http://whereareyou.eecloud.dynamic.nsn-net.net/user/" style = "width: 500px;" required><br>
+                  </div>
+                  <input type = "submit" value = "Save" id = "savebtn" class = "btn btn-success float-right">
+                  <div class="alert alert-danger alert-dismissible invalid-alert" style = "display: none;">
+                      <a href="#" class="close" onclick = "$('.invalid-alert').hide()">&times;</a>
+                      <strong>Please check your data!</strong>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+  <!-- end of modal -->
+
+  <!-- start of modal -->
+  <div id = "skillinfopage" class = "modal">
+      <div class = "modal-content">
+          <div class="modal-header">
+              <span class="modalClose" id = "closeInfoModal">&times;</span>
+              <h2 id="infoSkillnameHeader"></h2>
+          </div>
+          <div class="modal-body">
+              <p><span id = "imDesc"></span></p>
+              <p><a id = "imWiki">Wikipedia article</a></p>
+              <p><b>Category:</b> <span id = "imCateg"></span></p>
+              <b>Levels (maximum: <span id = "imMaxPoint"></span>):</b><br>
+              <ul type = "disc">
+                  <span id = "imPoints"></span>
+              </ul>
+              <p><b>Parents:</b> <span id = "imParents"></span></p>
+              <p><b>Children:</b> <span id = "imChildren"></span></p>
+              <p><b>Trainings:</b></p>
+              <span style = "margin-left: 20px" id = "imTrainings"></span>
+          </div>
+      </div>
+  </div>
+  <!-- end of modal -->
+
+  <!-- start of modal -->
+  <div id = "searchedSkillModal" class = "modal">
+      <div class = "modal-content">
+          <div class="modal-header">
+              <span class="modalClose" id = "closeSearchedSkillModal">&times;</span>
+              <h2 id="searchedSkillModalHeader"></h2>
+          </div>
+          <div class="modal-body">
+              <p><span id = "searchedSkillModalCategory"></span></p>
+              <p><span id = "searchedSkillModalDesc"></span></p>
+              <p><span id = "searchedSkillModalPDesc"></span></p>
+              <p><span id = "searchedSkillModalWiki"></span></p>
+          </div>
+      </div>
+  </div>
+  <!-- end of modal -->
+
+
+  <!-- start of modal -->
+
+  <div id = "searchedUserModal" class = "modal">
+      <div class = "modal-content">
+          <div class="modal-header">
+              <span class="modalClose" id = "closeSearchedUserModal">&times;</span>
+              <h2 id="searchedUserModalHeader"></h2>
+          </div>
+          <div class="modal-body">
+            <p><span id = "searchedUserlModalInfo"></span></p>
+            <p><span id = "searchedUserlModalAdress"></span></p>
+            <p><span><b>Skills: </b></span></p>
+            <table class="table table-striped table-light">
+              <thead>
+                <tr id = "userSkillsModalHeader">
+                </tr>
+              </thead>
+              <tbody id="userSkillsModalBody">
+              </tbody>
+            </table>
+          </div>
+      </div>
+  </div>
+
+  <!-- end of modal -->
+
+  <!-- start of modal -->
+  <div id = "skillpage" class = "modal">
+    <div class = "modal-content">
+      <div class="modal-header">
+        <span class="modalClose" id = "closeORModal">&times;</span>
+        <h2 id="skillnameHeader"></h2>
+      </div>
+      <div class="modal-body">
+
+
+        <div class = "divTable">
+          <div class= "divTableCaption"></div>
+          <div class="divTableBody" id = "trainingTableBody">
+            <div class="divTableRow">
+
+            </div>
+          </div>
+
+        </div>
+
+
+
+        <div class = "divTable">
+          <div class= "divTableCaption">Peer learning offers</div>
+          <div class="divTableBody" id = "offerTableBody">
+            <div class="divTableRow">
+              <div class="divTableHead"> Username </div>
+              <div class="divTableHead"> Location</div>
+              <div class="divTableHead"> Day </div>
+              <div class="divTableHead"> Time</div>
+              <div class="divTableHead"> Skill Level</div>
+            </div>
+          </div>
+
+        </div>
+
+
+
+        <div class = "divTable">
+          <div class= "divTableCaption">Request organized training</div>
+          <div class="divTableBody" id = requestTableBody>
+            <div class="divTableRow">
+              <div class="divTableHead"> Level </div>
+              <div class="divTableHead"> Request </div>
+              <div class="divTableHead"> Times requested </div>
+            </div>
+            <div class="divTableRow">
+              <div class="divTableHead"> Beginner </div>
+              <div class="divTableCell" id="addBeginnerCount"> Sign up </div>
+              <div class="divTableCell" id="beginnerCount"> People </div>
+
+            </div>
+            <div class="divTableRow">
+              <div class="divTableHead"> Intermediate </div>
+              <div class="divTableCell" id="addIntermediateCount"> Sign up </div>
+              <div class="divTableCell" id="intermediateCount"> People </div>
+
+            </div>
+            <div class="divTableRow">
+              <div class="divTableHead"> Advanced </div>
+              <div class="divTableCell" id="addAdvancedCount"> Sign up </div>
+              <div class="divTableCell" id="advancedCount"> People </div>
+
+            </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  </div>
+  <!-- end of modal -->
+
+
+  <div class = "approve hide" id = "approveTrees" >
+    <select id = "apprTreeSel">
+    </select>
+    <input type="button" value="Approve" id="approveTreesBtn">
+  </div>
+
+  <div class = "approve hide" id = "approveSkills">
+    <select id = "apprSkillSel">
+    </select>
+    <input type="button" value="Approve" id="approvebtn">
+  </div>
+
+    <div class = "approve hide" id = "approveTrainings">
+      <select id = "apprTrainingSel">
+      </select>
+      <input type="button" value="Approve" id="approveTrainingsBtn">
+    </div>
+
+    <div id = "bottomAlertDiv">
+        <div id = "bottomAlert" class="alert alert-danger alert-dismissible" style = "display: none;">
+            <a href="#" class="close" onclick = "$('#bottomAlert').hide()">&times;</a>
+            <strong id = "bottomAlertMsg"></strong>
+        </div>
+    </div>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+  <!-- Optional JavaScript -->
+
+  <script src = "classes/link.js"></script>
+  <script src = "classes/itemcontainer.js"></script>
+  <script src = "classes/tree.js"></script>
+  <script src = "src/search.js"></script>
+  <script src = "src/init.js"></script>
+  <script src = "src/display.js"></script>
+  <script src = "chartandtree.js"></script>
+</body>
+</html>

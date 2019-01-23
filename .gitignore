@@ -1,14 +1,2 @@
-debug
-node_modules
-production
-types
-tests/compiled
 
-config.json
-ldapconfig.json
-*.db
-*.lock
-*.log
-*.key
-*.crt
-*.png
+.vscode/settings.json

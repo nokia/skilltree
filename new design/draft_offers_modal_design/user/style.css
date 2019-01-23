@@ -1,0 +1,374 @@
+#body {
+    background-image: url(adventure-beautiful-boardwalk.jpg);
+    background-position: center; /* Center the image */
+    /* background-position: top; */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover;
+    /* background-attachment: fixed; */ /* fixed (will not scroll with the rest of the page) */
+}
+
+.ctbody {
+    /*background-image: url(pictures/tree_bg/landscape1920_CC0.jpg);*/
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover;
+}
+
+.jumbocontainer {
+    width: 35%;
+    /* margin-top: 5%; */
+    margin: 5% auto;
+    /* opacity: 0.6; */
+    /* filter: alpha(opacity=60); */ /* For IE8 and earlier */
+    background-color: rgba(163, 163, 163, 0.6);
+}
+
+.jumbotron {
+    width: 70%;
+    /* display: inline; */
+    /* background-color: rgba(163, 163, 163, 0.6); */
+    margin: 0 auto;
+    background-color: transparent;
+
+}
+
+#home{
+  cursor: pointer;
+}
+
+.w-35 {
+    width: 35%!important;
+}
+
+.w-30 {
+    width: 30%!important;
+}
+
+a {
+    color: #346134;
+    font-weight: bolder;
+}
+
+.btn-primary {
+    background-color: #346134;
+    border-color: #346134;
+}
+
+.btn-secondary:not(:disabled):not(.disabled).active{
+  background-color: #346134;
+}
+
+.card{
+  position: relative;
+}
+
+#innerCard{
+  width: 92%;
+  margin: 4% 4%;
+}
+
+.card-body {
+    padding: 0.5rem;
+}
+
+#cardSearch{
+  width: 92%;
+  margin: 2% 4%;
+}
+
+#buttonGroup{
+  margin: 2% 6%;
+  width: 92%;
+  display: block;
+}
+#cardSearchBar{
+  margin: 2% 4%;
+  width: 92%;
+  display: block;
+}
+
+#userprofile {
+    width: 35%!important;
+    z-index: 100;
+    position: relative;
+    margin-right: 10px;
+}
+
+#userCard {
+    z-index: 100;
+    position: absolute;
+}
+
+#advSearch {
+    z-index: 100;
+    position: relative;
+    margin-right: 10px;
+    width: 400px;
+}
+
+#submitBtn{
+  min-width: 77px;
+}
+
+#advSearchDetails{
+  margin: 2% 4%;
+  padding: 2px;
+  display: block;
+  width: auto;
+  position: relative;
+}
+
+.advSearchDetailsItem{
+  margin: 0px;
+  padding: 1px;
+  line-height: 16px;
+  font-size: 14px;
+}
+
+#pixiCanvas{
+  position: fixed;
+  z-index: 10;
+  background-image: url(pictures/tree_bg/landscape1920_CC0.jpg);
+}
+
+#treeList{
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.navbar{
+  line-height: 2.5;
+  padding: .0rem 1rem;
+}
+
+.nav-item{
+  cursor: pointer;
+}
+
+.nav-item:active{
+   -moz-box-shadow: inset 0 0 10px #000000;
+   -webkit-box-shadow: inset 0 0 10px #000000;
+   box-shadow: inset 0 0 10px #000000;
+}
+
+.nav-link{
+  display: inline-block;
+}
+
+.fade:not(.show){
+  display: none;
+}
+
+#creator .card {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    display: block;
+}
+
+#creator .card * {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+#creator .card h1 {
+    margin-left: 5px;
+}
+
+#creator .card .form-control {
+    width: 210px;
+}
+
+#creator .card .btn {
+    width: 150px;
+}
+
+.approve {
+    display: none;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 155px;
+}
+
+#newSkillModal input, select, table, textarea {
+    /*margin-left: 20px;*/
+}
+
+/*.creator-grid {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-column-gap: 20px;
+    min-height: 100% - 64px;
+    min-height: 100vh - 64px;
+    align-items: center;
+}
+
+.creator-column {
+    border: 3px solid black;
+    border-radius: 12px;
+    padding-left: 10px;
+}
+
+.creator-column p {
+    margin-left: 20px;
+}
+
+.creator-column h1 {
+    margin-left: 10px;
+}
+
+.creator-column input select {
+    margin: auto;
+    display: block;
+}*/
+
+/* MODAL STYLE */
+
+.modal {
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #8fc880;
+    color: white;
+}
+
+.modal-body {
+  padding: 2px 16px;
+  height: 100%;
+  overflow: auto;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 2% auto; /* 8% from the top and centered */
+    border: 1px solid #888;
+    width: 90%; /* Could be more or less, depending on screen size */
+    height: 90%;
+    overflow: auto;
+}
+
+.modalClose {
+    color: #ffffff;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.modalClose:hover,
+.modalClose:focus {
+    color: rgb(43, 43, 43);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/*Table style */
+
+.divTable{
+	display: table;
+	width: 100%;
+  margin-bottom: 30px;
+}
+
+.divTableCaption {
+  width: inherit;
+  display: table-caption;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+}
+
+.divTableRow {
+  display: table-row;
+  width: 100%;
+}
+
+.divTableCell {
+	border: 1px solid #999999;
+	display: table-cell;
+  padding: 3px 10px;
+  width: 25%;
+}
+.divTableHead {
+  border: 1px solid #000000;
+	display: table-cell;
+  padding: 3px 10px;
+  font-weight: bold;
+  text-align: center;
+  width: 25%;
+}
+
+.divTableBody {
+  display: table-row-group;
+  width: inherit;
+}
+
+.logo {
+    margin-right: 5px;
+}
+
+.badge-green {
+  color: #fff;
+  background-color: #58964ee6;
+}
+
+.bg-lightgreen{
+  background-color: #8fc880 !important;
+}
+
+.table-light{
+  margin: 2% 5%;
+  width: 90%;
+}
+
+.foundElementRow{
+  transition: all .2s ease-out;
+}
+
+.foundElementRow:hover{
+  cursor: pointer;
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+#cardUserName {
+    font-size: 1.5rem;
+}
+
+#cardMainTree {
+    font-size: 1rem;
+}
+
+#loadSkill {
+    margin-top: 5px;
+}
+
+#bottomAlertDiv {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+#bottomAlert {
+    margin: 10px;
+}
+
+#saveSkillBtn {
+    box-shadow: none;
+}
+
+#saveTrainingsBtn {
+    box-shadow: none;
+}
+
+#savebtn {
+    box-shadow: none;
+}

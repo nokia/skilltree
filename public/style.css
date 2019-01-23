@@ -1,0 +1,71 @@
+#body {
+    background-image: url(adventure-beautiful-boardwalk.jpg);
+    background-position: center center; /* Center the image */
+    /* background-position: top; */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover;
+    background-attachment: fixed;
+    /* background-attachment: fixed; */ /* fixed (will not scroll with the rest of the page), edit: needed, because of other screen rate than 16:9 */
+}
+
+.jumbocontainer {
+    width: 35%;
+    /* margin-top: 5%; */
+    margin: 5% auto;
+    /* opacity: 0.6; */
+    /* filter: alpha(opacity=60); */ /* For IE8 and earlier */
+    background-color: rgba(163, 163, 163, 0.6);
+}
+
+.jumbotron {
+    width: 70%;
+    /* display: inline; */
+    /* background-color: rgba(163, 163, 163, 0.6); */
+    margin: 0 auto;
+    background-color: transparent;
+
+}
+
+
+.w-35 {
+    width: 35%!important;
+}
+
+.w-30 {
+    width: 30%!important;
+}
+
+a {
+    color: #346134;
+    font-weight: bolder;
+}
+
+.btn-primary {
+    background-color: #346134;
+    border-color: #346134;
+}
+
+span{
+  font-size: 12px;
+  font-weight: bold;
+  float: right;
+}
+
+p.bolded {
+    font-weight: bolder;
+}
+
+.unsupportedBrowserAlertDIV {
+  display: contents;
+}
+
+#bottomAlertDiv {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+#bottomAlert {
+    margin: 10px;
+}
