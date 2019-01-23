@@ -19,6 +19,11 @@
         "name": "CSS",
         "minPoint": 1,
         "recommended": false
+      },
+      {
+        "name": "CSS",
+        "minPoint": 1,
+        "recommended": false
       }
     ],
     "trainings": [
@@ -83,11 +88,11 @@
     "description": "CSS tools and frameworks are meant to allow for easier, more standards-compliant web design using the Cascading Style Sheets language.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/CSS_framework",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
-      "L5"
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
     ],
     "maxPoint": 5,
     "parents": [
@@ -114,11 +119,11 @@
     "description": "...",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Photoshop",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
-      "L5"
+      "You understand what you see. Navigate through the menu items. Can use basic tools: rubber, brush, select tool",
+      "Understands layer management. You know what the tools are. What effect do you have on their use.",
+      "I use the colors, layers and basic tools confidently. I understand 3d design and vectors.",
+      "Knows the shortcuts. Understand the most of things. You made brochure, flyer, website.",
+      "Manages the functions on a professional level. Understands customer needsm ideas and make them better. "
     ],
     "maxPoint": 5,
     "parents": [
@@ -145,28 +150,17 @@
     "description": "JavaScript, often abbreviated as JS, is a high-level, interpreted programming language that conforms to the ECMAScript specification. It is a language which is also characterized as dynamic, weakly typed, prototype-based and multi-paradigm.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Javascript",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
-      "L5"
+      "Basic knowledge CSS and HTML. Saw a code once.",
+      "Intermediate knowledge of both HTML and CSS. Variables and how to declare them. Know operators, like +, -, etc.",
+      "Know the functions. What an API is. How to access and query the DOM.Understand loops. Create and render new elements on to the DOM.How and when JS renders on a web page. Know the events. How to listen for events and create your own.",
+      "Function and variable scopes, you should know what this is. Anonymous functions and Immediately Invoked Function Expression (IIFE). Browser support for new JS features and how to use polyfills to fill in support when needed",
+      "How to make an AJAX request. How to use promises and know when you get data. The differences in var, let, and const to declare variables. What closures are and how to utilize them. What Object-Oriented Programming, or OOP, is and how it can happen in Javascript. Optimization of logic for speed."
     ],
     "maxPoint": 5,
     "parents": [
       "HTML"
     ],
-    "children": [
-    {
-      "name": "JavaFX",
-      "minPoint": 1,
-      "recommended": true
-    },
-    {
-      "name": "NodeJS",
-      "minPoint": 1,
-      "recommended": true
-    }
-    ],
+    "children": [],
     "trainings": [
       {
         "name": "HTML Basics",
@@ -187,11 +181,11 @@
     "description": "...",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Java",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
-      "L5"
+      "Maybe you now what is Java Developer's Kit",
+      "Need to know object oriented programming concepts. Know some sort of source control like Git. Know how to complete basic coding tasks like the Fibonacci. ",
+      "Start to unnderstanding how every piece of code fits together in the big picture. This takes theoretical thinking.",
+      "Knowledge of the intricacies of SQL queries is another thing that great Java developers tend to have. Basic CRUD operations and things like joins, aggregations, and indexing are all big parts of it.",
+      "Java developer is skilled in the use of the technologies in the Java ecosystem: Struts, Spring, Maven, Gradle, Ant, JUnit, Spock, and Hibernate, among many others."
     ],
     "maxPoint": 5,
     "parents": [],
@@ -219,14 +213,14 @@
     "name": "JavaFX",
     "categoryName": "Maths, science and engineering",
     "skillIcon": "pictures/icons/JavaFX.png",
-    "description": "...",
+    "description": "JavaFX is a software platform for creating and delivering desktop applications, as well as rich Internet applications (RIAs) that can run across a wide variety of devices. ",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/JavaFX",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
-      "L5"
+      "First have to know is some basic about core Java like loops, method, interface, variables and Event handling.",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
     ],
     "maxPoint": 5,
     "parents": [
@@ -250,14 +244,14 @@
     "name": "NodeJS",
     "categoryName": "Maths, science and engineering",
     "skillIcon": "pictures/icons/NodeJS.png",
-    "description": "...",
+    "description": "Node.js is an open-source, cross-platform JavaScript run-time environment that executes JavaScript code outside of a browser. ",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Node.js",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
-      "L5"
+      "Solid knowledge about JavaScript, HTML CSS.",
+      "Understans API communication and OOPs concepts",
+      "Good knowledge of HTML, CSS, JQuery, MySQL, SQL Server, Git, JQuery UI, AJAX, JSO. Have a knowledge on NodeJS framework: Express.js, Koa.js, Hapi, and Total.js",
+      "Have experience in implementing Data Protection. Can able to develop Single Page Application with MVC architecture",
+      "Great knowledge of User Authentication and Authorization. Knowledge of integrating multiple data sources and databases into one system."
     ],
     "maxPoint": 5,
     "parents": [
@@ -285,11 +279,11 @@
     "description": "Go (often referred to as Golang) is a fully open-source programming language. It is statically typed, compiled, and syntactically similar to C, with the added benefits of memory safety, garbage collection, structural typing, and CSP-style concurrency.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Go_(programming_language)",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
-      "L5"
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
     ],
     "maxPoint": 5,
     "parents": [
@@ -316,11 +310,11 @@
     "description": "Python is an interpreted, high-level, general-purpose programming language. Created by Guido van Rossum and first released in 1991, Python has a design philosophy that emphasizes code readability, notably using significant whitespace.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Python_(programming_language)",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
-      "L5"
+      "Start understanding nested loops and how logic works in nested loops.",
+      "Basic knowledge of how statements work and conceptually how they work",
+      "Some basic JavaSript knowledge. Understanding of server-side templating languages such as Jinja 2, Mako.",
+      "Knowledge of at least one Python web frameworksuch as Django, Flask. Familiarity with some ORM (Object Relational Mapper) libraries. Able to integrate multiple data sources and databases into one system.",
+      "Can to complete all parts of the work, including documentation and testing. Able to create database schemas that represent and support business processes. Strong unit test and debugging skills."
     ],
     "maxPoint": 5,
     "parents": [],
@@ -351,11 +345,11 @@
     "description": "NumPy is the fundamental package for scientific computing with Python.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/NumPy",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
-      "L5"
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
     ],
     "maxPoint": 3,
     "parents": [
@@ -382,11 +376,11 @@
     "description": "Scrum is an agile framework for managing knowledge work, with an emphasis on software development. It is designed for teams of three to nine members, who break their work into actions that can be completed within timeboxed iterations, called 'sprints', no longer than one month and most commonly two weeks, then track progress and re-plan in 15-minute stand-up meetings, called daily scrums.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Scrum",
     "pointDescription": [
-      "L1Sprint Planning – The Team decides what to work on for the current period",
-      "L2Daily Scrum – The Development Team meets for 15 minutes (or less) every day of the Sprint to inspect progress toward the Sprint Goal.",
-      "L3Sprint Review – The Team collaborates about what was done and adapts the Backlog as needed",
-      "L4Sprint Retrospective – The Team discusses what went right, what went wrong, and how to improve",
-      "L5"
+      "You have to be able to organize an appointment. This means that you must perform administrative tasks. For example, creating tables and uploading data. This is an important step to complete your sprint.",
+      "Soft skills are important: decision making, ability to facilitate. Respect: team members accept what you say.",
+      "It is increasingly handling the problems better and better. Effectively relieves the team. Take care to the quality of code and documentation. Moderate during team meetings.",
+      "Continuously improve processes . Maintain a proper balance between project owner, scrum team, and management. Start work together the project owner.",
+      "Knowing the most of things what the project owner. Undertans the big picture. Dealing with difficult situations. Walk project owner through user stories."
     ],
     "maxPoint": 5,
     "parents": [],
@@ -418,14 +412,14 @@
     "name": "Coaching",
     "categoryName": "Soft",
     "skillIcon": "pictures/icons/Coaching.png",
-    "description": "...",
+    "description": "ICF defines coaching as partnering with clients in a thought-provoking and creative process that inspires them to maximize their personal and professional potential, which is particularly important in today's uncertain and complex environment.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Coaching",
     "pointDescription": [
       "Understanding concepts, values and beliefs; the use of facilitative behaviours such as active listening, paraphrasing, questioning, summarising, managing time; encouraging participation; keeping clear and accurate notes; using basic tools like problem solving and action planning.",
       "Mastering process tools; designing meetings; skilled at using the right decision making method, achieving consensus, and getting true closure; handling feedback activities and conducting process checks; using exit surveys; good at managing meetings in an effective manner; able to help a group set goals and objectives that are measurable; skilled at checking assumptions and challenging ideas.",
       "Skilled at managing conflict and making immediate interventions; able to deal with resistance and personal attacks; making design changes on the spot; sizing up a group and using the right strategies for its development stage; managing survey feedback exercises; able to design and conduct interviews and focus groups, design and implement surveys; consolidating ideas from a mass of information into coherent summaries.",
       "Design and implement process interventions in response to complex organisational issues; use tools to promote process improvement, customer intimacy, and overall organisational effectiveness; able to support teams in the various stages of team development.",
-      "L5"
+      "Insert Level 5 (World Class) Skill Description Here"
     ],
     "maxPoint": 5,
     "parents": [],
@@ -450,11 +444,11 @@
     "description": "Machine learning (ML) is a field of artificial intelligence that uses statistical techniques to give computer systems the ability to 'learn' (e.g., progressively improve performance on a specific task) from data, without being explicitly programmed.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Machine_learning",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
-      "L5"
+      "Understanding the entire ecosystem that you’re designing for. You know how to program like Python.",
+      "Understanding statistics, especially Bayesian probability, is essential for many machine learning algorithms",
+      "Machine learning is an exceptionally wide and interdisciplinary field that consolidates linear algebra, statistics, hacking skills, database skills, and distributed computing skills.",
+      "Knows distributed systems for large data: MPI, Grid Engine. ",
+      "Ununderstand how the different pieces work together, communicate with them (using library calls, REST APIs, database queries, etc.) and build appropriate interfaces."
     ],
     "maxPoint": 5,
     "parents": [],
@@ -479,11 +473,11 @@
     "description": "User experience design (UX, UXD, UED or XD) is the process of enhancing user satisfaction with a product by improving the usability, accessibility, and pleasure provided in the interaction with the product. User experience design encompasses traditional human–computer interaction (HCI) design, and extends it by addressing all aspects of a product or service as perceived by users.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/User_experience_design",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
-      "L5"
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
     ],
     "maxPoint": 5,
     "parents": [
@@ -510,11 +504,11 @@
     "description": "In computing, React (also known as React.js or ReactJS) is a JavaScript library for building user interfaces. It is maintained by Facebook and a community of individual developers and companies. React can be used as a base in the development of single-page or mobile applications. Complex React applications usually require the use of additional libraries for state management, routing, and interaction with an API.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/React_(JavaScript_library)",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
-      "L5"
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
     ],
     "maxPoint": 5,
     "parents": [
@@ -541,11 +535,11 @@
     "description": "Search engine optimization (SEO) is the process of affecting the online visibility of a website or a web page in a web search engine's unpaid results—often referred to as 'natural', 'organic', or 'earned' results. In general, the earlier (or higher ranked on the search results page), and more frequently a website appears in the search results list, the more visitors it will receive from the search engine's users; these visitors can then be converted into customers. SEO may target different kinds of search, including image search, video search, academic search, news search, and industry-specific vertical search engines. SEO differs from local search engine optimization in that the latter is focused on optimizing a business' online presence so that its web pages will be displayed by search engines when a user enters a local search for its products or services. The former instead is more focused on national or international searches.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Search_engine_optimization",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
-      "L5"
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
     ],
     "maxPoint": 5,
     "parents": [
@@ -572,11 +566,11 @@
     "description": "Administration that oversees the day-to-day operations of a particular project within an organization. ",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
-      "L5"
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
     ],
     "maxPoint": 5,
     "parents": [
@@ -603,11 +597,11 @@
     "description": "Stakeholder engagement is the process by which an organization involves people who may be affected by the decisions it makes or can influence the implementation of its decisions. They may support or oppose the decisions, be influential in the organization or within the community in which it operates, hold relevant official positions or be affected in the long term.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Stakeholder_engagement",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
-      "L5"
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
     ],
     "maxPoint": 5,
     "parents": [
@@ -634,11 +628,11 @@
     "description": "Microsoft Excel is a spreadsheet developed by Microsoft for Windows, macOS, Android and iOS. It features calculation, graphing tools, pivot tables, and a macro programming language called Visual Basic for Applications.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Microsoft_Excel",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
-      "L5"
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
     ],
     "maxPoint": 5,
     "parents": [
@@ -665,11 +659,11 @@
     "description": "Microsoft Outlook is a personal information manager from Microsoft, available as a part of the Microsoft Office suite. Although often used mainly as an email application, it also includes a calendar, task manager, contact manager, note taking, journal, and web browsing.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Microsoft_Outlook",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
-      "L5"
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
     ],
     "maxPoint": 5,
     "parents": [
@@ -696,11 +690,11 @@
     "description": "Microsoft Word (or simply Word) is a word processor developed by Microsoft.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Microsoft_Word",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
-      "L5"
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
     ],
     "maxPoint": 5,
     "parents": [
@@ -727,11 +721,11 @@
     "description": "Knowledge of how businesses make money, what customers want, and what problems there are in particular areas of business:",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
-      "L5"
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
     ],
     "maxPoint": 5,
     "parents": [
@@ -758,11 +752,11 @@
     "description": "The Robot Framework is a generic test automation framework for acceptance testing and acceptance test-driven development (ATDD). It is a keyword-driven testing framework that uses tabular test data syntax.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Robot_Framework",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
-      "L5"
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
     ],
     "maxPoint": 5,
     "parents": [
@@ -783,17 +777,17 @@
     ]
   },
   {
-    "name": "Scaled Agile Framework (SAFe)",
+    "name": "Scaled Agile Framework",
     "categoryName": "Maths, science and engineering",
     "skillIcon": "pictures/icons/SAFe.png",
     "description": "SAFe promotes alignment, collaboration, and delivery across large numbers of agile teams. It was developed by and for practitioners, by leveraging three primary bodies of knowledge: agile software development, lean product development, and systems thinking.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Scaled_agile_framework",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
-      "L5"
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
     ],
     "maxPoint": 5,
     "parents": [
@@ -820,11 +814,11 @@
     "description": "Test-driven development (TDD) is a software development process that relies on the repetition of a very short development cycle: requirements are turned into very specific test cases, then the software is improved to pass the new tests, only. This is opposed to software development that allows software to be added that is not proven to meet requirements.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Test-driven_development",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
-      "L5"
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
     ],
     "maxPoint": 5,
     "parents": [
@@ -855,7 +849,7 @@
       " Active listeningSeveral strategies help with distinguishing who has a problem with a behavior and who takes ownership. One of those strategies is active listening. Active listening is attending carefully to all aspects of what a student says and attempting to understand or empathize as much as one can (Seifert & Sutton). Active listening consists of continually asking questions in order to test your understanding. It also requires giving encouragement to the student by letting them tell their story, and paraphrasing what the student says so you can form an unbiased conclusion. It is key not to move too quickly at solving the problem by just giving advice, instructions, or scolding. Responding too soon with solutions can shut down the student’s communication and leave you with inaccurate impressions of the source or nature of the problem (Seifert & Sutton)",
       " After getting each party’s viewpoint on the conflict, the next step is to get each to identify how the situation could be changed. Again, question the parties to solicit their ideas: “How can you make things better between you?” ",
       " Identify solutions both disputants can support. You are listening for the most acceptable course of action. Point out the merits of various ideas, not only from each other’s perspective, but in terms of the benefits to the organization.",
-      "L5"
+      "Insert Level 5 (World Class) Skill Description Here"
     ],
     "maxPoint": 5,
     "parents": [
@@ -885,8 +879,8 @@
       "At the basic level, the negotiator has learned and developed an organized or systematic framework for preparing for and conducting negotiations.  Generally, basic level negotiators have limited experience and skill in applying a limited set of tools.  ",
       "At the intermediate level, the negotiator has mastered basic negotiating tools and has begun adding additional tools to his or her negotiation tool kit.  More importantly, the negotiator uses the tools to prepare for, conduct and review each negotiation.  The negotiator explicitly uses the tools across a range of experiences so that he or she develops a great deal of experience and confidence in applying these tools. ",
       "The advanced negotiation skill level is reached when the negotiator has not only accumulated a wide range of negotiation tools, frameworks and processes, through study, practice and experience but has also developed awareness of his or her own negotiation strengths and weaknesses and consciously uses that knowledge to manage him or herself so that negotiation strengths are maximized and negotiation weaknesses don’t impede the negotiations.  A negotiator who has reached the advanced stage also has strong skills in negotiation process design(designing how the parties will negotiate, not just that about which they will negotiate) and has developed the discretion as to when to use which tools and processes and can execute the selected tools with skill.   ",
-      "L4",
-      "L5"
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
     ],
     "maxPoint": 5,
     "parents": [
@@ -913,11 +907,11 @@
     "description": "Series of policies country-, business- and company-dependant which shape contractual relationships.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
-      "L5"
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
     ],
     "maxPoint": 5,
     "parents": [
@@ -938,17 +932,17 @@
     ]
   },
   {
-    "name": "Spring",
+    "name": "Spring framework",
     "categoryName": "Maths, science and engineering",
     "skillIcon": "pictures/icons/Spring_Framework.png",
     "description": "The Spring Framework is an application framework and inversion of control container for the Java platform. The framework's core features can be used by any Java application, but there are extensions for building web applications on top of the Java EE (Enterprise Edition) platform. Although the framework does not impose any specific programming model, it has become popular in the Java community as an addition to, or even replacement for the Enterprise JavaBeans (EJB) model. The Spring Framework is open source.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Spring_Framework",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
-      "L5"
+      "Understand the fundamentals of the Java Spring framework. Understand What the Spring framework is for",
+      "Develop Java Applications, the Spring way.",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
     ],
     "maxPoint": 5,
     "parents": [
@@ -975,11 +969,11 @@
     "description": "Git is a version-control system for tracking changes in computer files and coordinating work on those files among multiple people. It is primarily used for source-code management in software development, but it can be used to keep track of changes in any set of files. As a distributed revision-control system, it is aimed at speed, data integrity, and support for distributed, non-linear workflows.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Git",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
-      "L5"
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
     ],
     "maxPoint": 5,
     "parents": [
@@ -1016,11 +1010,11 @@
     "description": "Docker is a computer program that performs operating-system-level virtualization, also known as 'containerization'.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Docker_(software)",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
-      "L5"
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
     ],
     "maxPoint": 5,
     "parents": [
@@ -1057,11 +1051,11 @@
     "description": "Redis is an open-source in-memory data structure project implementing a distributed, in-memory key-value database with optional durability. Redis supports different kinds of abstract data structures, such as strings, lists, maps, sets, sorted sets, hyperloglogs, bitmaps, streams and spatial indexes.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Redis",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
-      "L5"
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
     ],
     "maxPoint": 5,
     "parents": [
@@ -1088,11 +1082,11 @@
     "description": "Jira is a proprietary issue tracking product developed by Atlassian which allows bug tracking and agile project management.",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Jira_(software)",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
-      "L5"
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
     ],
     "maxPoint": 5,
     "parents": [
@@ -1119,15 +1113,480 @@
     "description": "PostgreSQL, often simply Postgres, is an object-relational database management system (ORDBMS) with an emphasis on extensibility and standards compliance. It can handle workloads ranging from small single-machine applications to large Internet-facing applications (or for data warehousing) with many concurrent users; on macOS Server, PostgreSQL is the default database; and it is also available for Microsoft Windows and Linux (supplied in most distributions).",
     "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/PostgreSQL",
     "pointDescription": [
-      "L1",
-      "L2",
-      "L3",
-      "L4",
-      "L5"
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
     ],
     "maxPoint": 5,
     "parents": [
       "HTML"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "Introduction To PostgreSQL",
+        "level": 1,
+        "shortDescription": "Introduce yourself to PostgreSQL , and learn about its features and usage.",
+        "URL": "https://youtu.be/jNq5EAb2biY",
+        "URLlastAccessed": "2018-12-15",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "Facilitation",
+    "categoryName": "People skills",
+    "skillIcon": "pictures/icons/Facilitation.png",
+    "description": "A process where an individual who is agreed upon and acceptable to all of a group's members intervenes to assist the group in solving problems and making decisions to improve productivity and efficiency but who has no authority to make decisions.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Facilitation_(business)",
+    "pointDescription": [
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "Soft Skills"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "Introduction To PostgreSQL",
+        "level": 1,
+        "shortDescription": "Introduce yourself to PostgreSQL , and learn about its features and usage.",
+        "URL": "https://youtu.be/jNq5EAb2biY",
+        "URLlastAccessed": "2018-12-15",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "Building Trust",
+    "categoryName": "People skills",
+    "skillIcon": "http://plumseattle.com/wp-content/uploads/2013/11/badge-hr-consulting.png",
+    "description": "Trust is one of the keyfactors to be considered. Trust forms the basis of all relationships and interactions. It is just as important in professional relationships as it is in personal ones. Without each party trusting one another the ability to come to an agreement or consensus on an issue is always going to be compromised. Some benefits of trust: Increased productivity amonst staff Improved morale amongst employees and staff The ability to work more effectively as a team, rather than individuals Reduce the time to make and discuss key issues as each individual trusts in the judgement and expertise of their colleagues.",
+    "descriptionWikipediaURL": "https://www.forbes.com/sites/forbescoachescouncil/2018/01/04/five-simple-tips-for-building-trust-as-a-leader/#6e209e3459bb",
+    "pointDescription": [
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "Soft Skills"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "Introduction To PostgreSQL",
+        "level": 1,
+        "shortDescription": "Introduce yourself to PostgreSQL , and learn about its features and usage.",
+        "URL": "https://youtu.be/jNq5EAb2biY",
+        "URLlastAccessed": "2018-12-15",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "Professional Networking",
+    "categoryName": "People skills",
+    "skillIcon": "pictures/icons/qwe.png",
+    "description": "Creating external partnerships (not only internal) that benefit the company. Human resources is often seen as an ‘internal’ part of business but doesn’t mean outside world is not important. Strike up new relationships that benefit to the workforce and to the company’s goals. It’s a great way of gaining external credibility.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Business_networking",
+    "pointDescription": [
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "Soft Skills"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "Introduction To PostgreSQL",
+        "level": 1,
+        "shortDescription": "Introduce yourself to PostgreSQL , and learn about its features and usage.",
+        "URL": "https://youtu.be/jNq5EAb2biY",
+        "URLlastAccessed": "2018-12-15",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "Identifying External Influences",
+    "categoryName": "People skills",
+    "skillIcon": "pictures/icons/qwe.png",
+    "description": "How you identify and handle external threats and opportunities that might affect the companie’s human capital. Examples of external threats and opportunities that an HR business partner should know to look out for might include:– Changes to employment legislation – New job openings from close competitors – Mass redundancies within your industry",
+    "descriptionWikipediaURL": "https://sites.google.com/a/my.shu.ac.uk/hr-group-8/external-influences",
+    "pointDescription": [
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "Soft Skills"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "Introduction To PostgreSQL",
+        "level": 1,
+        "shortDescription": "Introduce yourself to PostgreSQL , and learn about its features and usage.",
+        "URL": "https://youtu.be/jNq5EAb2biY",
+        "URLlastAccessed": "2018-12-15",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "Managing Talent",
+    "categoryName": "People skills",
+    "skillIcon": "pictures/icons/qwe.png",
+    "description": "A keen eye for the kind of talent a company really needs; the ability to find and attract that talent; and a great talent retention strategy to ensure business continuity.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Talent_management",
+    "pointDescription": [
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "Soft Skills"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "Introduction To PostgreSQL",
+        "level": 1,
+        "shortDescription": "Introduce yourself to PostgreSQL , and learn about its features and usage.",
+        "URL": "https://youtu.be/jNq5EAb2biY",
+        "URLlastAccessed": "2018-12-15",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "Creating Company Culture",
+    "categoryName": "Soft Skills",
+    "skillIcon": "pictures/icons/qwe.png",
+    "description": "Creating a strong organisational culture is vital for an HR Consultant. The company culture will narrate the direction of your organisation, as it will heavily influence how the people behave and perform. Aspects of creating a great company culture include:– Understanding and meeting the needs of employees – Implementing professional development plans that increase skillsets while helping your people feel valued – Helping to the people to really feel connected with your company’s values and goals",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Organizational_culture",
+    "pointDescription": [
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "Soft Skills"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "Introduction To PostgreSQL",
+        "level": 1,
+        "shortDescription": "Introduce yourself to PostgreSQL , and learn about its features and usage.",
+        "URL": "https://youtu.be/jNq5EAb2biY",
+        "URLlastAccessed": "2018-12-15",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "Effective Listening",
+    "categoryName": "People skills",
+    "skillIcon": "pictures/icons/qwe.png",
+    "description": "Listening is an essential part of spoken communication. Speaking and listening go together and oral communication cannot be effective without proper listening. Poor listening defeats the very purpose of spoken words. Listening is a deliberate effort and is much more than hearing. It requires getting the full meaning of what is being said. Listening effectively takes skill, self-motivation, and practice. Effective listening means concentrating on what the speaker says rather than on how it is said. Lack of attention and respectful listening can be costly - leading to mistakes, poor service, misaligned goals, wasted time and lack of teamwork.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Active_listening",
+    "pointDescription": [
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "Soft Skills"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "Introduction To PostgreSQL",
+        "level": 1,
+        "shortDescription": "Introduce yourself to PostgreSQL , and learn about its features and usage.",
+        "URL": "https://youtu.be/jNq5EAb2biY",
+        "URLlastAccessed": "2018-12-15",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "Being Approachable & Accessible",
+    "categoryName": "People skills",
+    "skillIcon": "pictures/icons/qwe.png",
+    "description": "Keeping yourself actively involved in your company’s day-to-day affairs. Making yourself accessible and approachable to the people you’re representing will give you a level of company knowledge that cannot be found on monthly performance reports or attendance sheets.",
+    "descriptionWikipediaURL": "https://www.lollydaskal.com/leadership/leadership-be-approachable/",
+    "pointDescription": [
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "Soft Skills"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "Introduction To PostgreSQL",
+        "level": 1,
+        "shortDescription": "Introduce yourself to PostgreSQL , and learn about its features and usage.",
+        "URL": "https://youtu.be/jNq5EAb2biY",
+        "URLlastAccessed": "2018-12-15",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "Change Management",
+    "categoryName": "People skills",
+    "skillIcon": "pictures/icons/qwe.png",
+    "description": "Manages change in a systematic approach both from an organizational and an individual level. Ability to create the structure to execute and sustain change through clear design, aligned roles  relationships and governance. Applies structured approaches to shift individuals, teams, and organizations from a current state to a desired state.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Change_management",
+    "pointDescription": [
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "Soft Skills"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "Introduction To PostgreSQL",
+        "level": 1,
+        "shortDescription": "Introduce yourself to PostgreSQL , and learn about its features and usage.",
+        "URL": "https://youtu.be/jNq5EAb2biY",
+        "URLlastAccessed": "2018-12-15",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "Persuasion",
+    "categoryName": "People skills",
+    "skillIcon": "pictures/icons/qwe.png",
+    "description": "Uses persuasion and negotiation to gain agreement and buy-in. Promotes idea, agenda or direction on behalf of self or others. Seeks support from communities to ensure that persuasion is effective. Stands up and speaks the mind up, escalates when  needed.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Persuasion",
+    "pointDescription": [
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "Soft Skills"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "Introduction To PostgreSQL",
+        "level": 1,
+        "shortDescription": "Introduce yourself to PostgreSQL , and learn about its features and usage.",
+        "URL": "https://youtu.be/jNq5EAb2biY",
+        "URLlastAccessed": "2018-12-15",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "Negotiating",
+    "categoryName": "People skills",
+    "skillIcon": "pictures/icons/qwe.png",
+    "description": "Can negotiate skillfully in tough situations with both internal and external groups; can settle differences with minimum noise; can win concessions without damaging relationships; can be both direct and forceful as well as diplomatic; gains trust quickly of other parties to the negotiations; has a good sense of timing. Understands that all interaction can be considered as negotiation, e.g. finding positions and motives. Prepares for the commercial and/or technical sales negotiations with the appropriate team involved. Makes negotiation strategy that enhances the long term relationship and executes it with confidence and persuasion following company policies. Influences on negotiation process and negotiators to gain the deal that does not compromise the pre set targets. Never agrees terms which are detrimental to profitability in the long run across the solution/product lifecycle.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Negotiation",
+    "pointDescription": [
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "Soft Skills"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "Introduction To PostgreSQL",
+        "level": 1,
+        "shortDescription": "Introduce yourself to PostgreSQL , and learn about its features and usage.",
+        "URL": "https://youtu.be/jNq5EAb2biY",
+        "URLlastAccessed": "2018-12-15",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "Problem-Solving",
+    "categoryName": "People skills",
+    "skillIcon": "pictures/icons/qwe.png",
+    "description": "Uses rigorous logic and methods to solve difficult problems with effective solutions; probes all fruitful sources for answers; can see hidden problems; looks beyond the obvious and doesn't stop at the first answers.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Problem_solving",
+    "pointDescription": [
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "Soft Skills"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "Introduction To PostgreSQL",
+        "level": 1,
+        "shortDescription": "Introduce yourself to PostgreSQL , and learn about its features and usage.",
+        "URL": "https://youtu.be/jNq5EAb2biY",
+        "URLlastAccessed": "2018-12-15",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "Training",
+    "categoryName": "People skills",
+    "skillIcon": "pictures/icons/qwe.png",
+    "description": "Knowledge and skills in training techniques for both the occasional (L1, L2) and professional trainer (L3, L4, L5). Use of instructional styles adequate to the target group and training objectives, apply presentation and communication skills using various delivery methods and tools. Based on the level, including learning technologies needed in a modern (virtual) learning environment.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Training",
+    "pointDescription": [
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "Soft Skills"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "Introduction To PostgreSQL",
+        "level": 1,
+        "shortDescription": "Introduce yourself to PostgreSQL , and learn about its features and usage.",
+        "URL": "https://youtu.be/jNq5EAb2biY",
+        "URLlastAccessed": "2018-12-15",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "Coaching",
+    "categoryName": "People skills",
+    "skillIcon": "pictures/icons/qwe.png",
+    "description": "Creates safe, trusting and confidential environment for employees; Demonstrates active listening; Asks focused and open ended questions to help employee identify their own focus or objectives; Patiently asks questions to help them explore their assumptions and alternative ways of thinking; Helps employees develop own action plan, with timeline and follow up.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Coaching",
+    "pointDescription": [
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "Soft Skills"
+    ],
+    "children": [],
+    "trainings": [
+      {
+        "name": "Introduction To PostgreSQL",
+        "level": 1,
+        "shortDescription": "Introduce yourself to PostgreSQL , and learn about its features and usage.",
+        "URL": "https://youtu.be/jNq5EAb2biY",
+        "URLlastAccessed": "2018-12-15",
+        "goal": "",
+        "length": 0,
+        "language": "en"
+      }
+    ]
+  },
+  {
+    "name": "Consulting",
+    "categoryName": "People skills",
+    "skillIcon": "pictures/icons/qwe.png",
+    "description": "Using knowledge of the Nokia business model and processes, the external operating environment and domain expertise to improve human capital and business outcomes. Asking the  right developmental questions.",
+    "descriptionWikipediaURL": "https://en.wikipedia.org/wiki/Consultant",
+    "pointDescription": [
+      "Insert Level 1 (Initial) Skill Description Here",
+      "Insert Level 2 (Basic) Skill Description Here",
+      "Insert Level 3 (Intermediate) Skill Description Here",
+      "Insert Level 4 (Advanced) Skill Description Here",
+      "Insert Level 5 (World Class) Skill Description Here"
+    ],
+    "maxPoint": 5,
+    "parents": [
+      "Soft Skills"
     ],
     "children": [],
     "trainings": [
