@@ -1100,26 +1100,6 @@ function dropoffers() {
     });
 }
 
-function setAdmin () {
-    hideMenus();
-
-    var approveTrees = document.getElementById("setAdmin");
-    approveTrees.style.display = "block";
-
-    var btn = document.getElementById('setAdminBtn');
-    btn.onclick = function () {
-        var username = document.getElementById('newAdminUser').value;
-
-        request('POST', '/admin/setadmin', {
-            username: selectedTraining.username
-        }, function () {
-            if (this.readyState == 4 && this.status == 200) {
-                window.open("/user/", "_self");
-            }
-        });
-    };
-}
-
 // hides skill, tree creator, editor menu
 function hideMenus () {
     document.getElementById('submitBtn').style.display = "none";
