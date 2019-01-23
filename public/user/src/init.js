@@ -74,6 +74,7 @@ function checkFirstLogin() {
             };
 
             console.log("s");
+            console.log(event);
 
             /*request('POST', '/protected/firstlogindata', firstLoginData, function() {
                 if(this.readyState == 4 && this.status == 200) {
