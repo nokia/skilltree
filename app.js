@@ -514,7 +514,8 @@ async function insertSkill(skillToInsert, skillMatrix) {
 }
 
 async function addRowToComponent(skillMatrix, component){
-	for (var i = skillMatrix[component].length - 1; i <= 0; i--) {
+	skillMatrix[component].push([]);
+	for (var i = skillMatrix[component].length - 2; i >= 0; i--) {
 		skillMatrix[component][i + 1] = skillMatrix[component][i];
 	}
 	skillMatrix[component][0] = [];
