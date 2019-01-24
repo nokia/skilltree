@@ -481,12 +481,14 @@ async function insertSkill(skillToInsert, skillMatrix) {
 					if (row == 0) {
 						await addRowToComponent(skillMatrix, component);
 						skillMatrix[component][0].push(skillToInsert);
+						console.log(skillToInsert.name + " added to root(skills child found in tree)");
 						// this checks if the row found was the root level.
 						// if yes, it adds another row to the top, and inserts the skill there.
 						return;
 					}
 					else {
 						skillMatrix[component][row - 1].push(skillToInsert);
+						console.log(skillToInsert.name + " added to the row above(skills child found in tree)");
 						// if no, it inserts the skill to the row above.
 						return;
 					}
@@ -497,6 +499,7 @@ async function insertSkill(skillToInsert, skillMatrix) {
 			for (var row = 0; row < skillMatrix[component].length; row++) {
 				if (skillMatrix[component][row].includes(skillToInsert.parents[par])) {
 					skillMatrix[component][row + 1].push(skillToInsert);
+					console.log(skillToInsert.name + " added to the row below(skills parent found in tree.)");
 					// this checks if the skill has any parents in any row in any component,
 					// if yes, then it inserts the skill to the row below.
 					return;
@@ -505,6 +508,7 @@ async function insertSkill(skillToInsert, skillMatrix) {
 		}
 	}
 	skillMatrix.push([[skillToInsert]]);
+	console.log(skillToInsert.name + " added to a new component.");
 	// this inits the first element of every component
 	return;
 }
