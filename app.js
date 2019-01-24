@@ -526,7 +526,7 @@ async function assembleTree(skillMatrix){
 			assembledTree = assembledTree.concat(skillMatrix[component][j]);
 			console.log("comp:");
 			console.log(skillMatrix[component][j]);
-			if (skillMatrix[component][i] != undefined) {
+			if (skillMatrix[component][j] != undefined) {
 				l = true;
 			}
 		}
