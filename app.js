@@ -535,11 +535,7 @@ async function assembleTree(skillMatrix){
 
 // gets the skillnames of a skillarray.
 async function extractNames(skillArray){
-	var exctractedArray = [];
-	for (var i = 0; i < skillArray.length - 1; i++) {
-		exctractedArray[i] = skillArray[i].name;
-	}
-	return exctractedArray;
+	return skillArray.map(obj => obj.name);
 }
 
 // creates an ordered tree from an array of skills.
