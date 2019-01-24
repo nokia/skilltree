@@ -481,14 +481,14 @@ async function insertSkill(skillToInsert, skillMatrix) {
 					if (row == 0) {
 						await addRowToComponent(skillMatrix, component);
 						skillMatrix[component][0].push(skillToInsert);
-						console.log(skillToInsert.name + " added to root(skills child found in tree)");
+						// console.log(skillToInsert.name + " added to root(skills child found in tree)"); // for debugging reasons
 						// this checks if the row found was the root level.
 						// if yes, it adds another row to the top, and inserts the skill there.
 						return;
 					}
 					else {
 						skillMatrix[component][row - 1].push(skillToInsert);
-						console.log(skillToInsert.name + " added to the row above(skills child found in tree)");
+						// console.log(skillToInsert.name + " added to the row above(skills child found in tree)"); // for debugging reasons
 						// if no, it inserts the skill to the row above.
 						return;
 					}
@@ -498,8 +498,9 @@ async function insertSkill(skillToInsert, skillMatrix) {
 		for (var par = 0; par < skillToInsert.parents.length; par++) {
 			for (var row = 0; row < skillMatrix[component].length; row++) {
 				if ((skillMatrix[component][row].map(obj => obj.name)).includes(skillToInsert.parents[par])) {
+					if (skillMatrix[component][row + 1] == undefined) skillMatrix[component].push([]);
 					skillMatrix[component][row + 1].push(skillToInsert);
-					console.log(skillToInsert.name + " added to the row below(skills parent found in tree.)");
+					// console.log(skillToInsert.name + " added to the row below(skills parent found in tree.)"); // for debugging reasons
 					// this checks if the skill has any parents in any row in any component,
 					// if yes, then it inserts the skill to the row below.
 					return;
@@ -508,7 +509,7 @@ async function insertSkill(skillToInsert, skillMatrix) {
 		}
 	}
 	skillMatrix.push([[skillToInsert]]);
-	console.log(skillToInsert.name + " added to a new component.");
+	// console.log(skillToInsert.name + " added to a new component."); // for debugging reasons
 	// this inits the first element of every component
 	return;
 }
