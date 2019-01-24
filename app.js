@@ -472,7 +472,7 @@ async function getDependency (userSkills, skill, dependency) {
 		await getDependency(userSkills, parents[i], dependency);
 	}
 }
-/*
+
 async function insertSkill(skillToInsert, skillMatrix) {
 	for (var component = 0; component < skillMatrix.length; component++) {
 		for (var child = 0; child < skillToInsert.children.length; child++) {
@@ -526,7 +526,9 @@ async function assembleTree(skillMatrix){
 			assembledTree = assembledTree.concat(skillMatrix[component][j]);
 			console.log("comp:");
 			console.log(skillMatrix[component][j]);
-			//l = true;
+			if (skillMatrix[component][i] != undefined) {
+				l = true;
+			}
 		}
 		j++;
 	}
@@ -554,8 +556,8 @@ async function sortTree(skillArray){
 	sortedArray = await assembleTree(skillMatrix);
 	skillArray = await extractNames(sortedArray);
 	return skillArray;
-}*/
-
+}
+/*
 // variable used for insertSkill
 var rootlevel = 0;
 
@@ -660,7 +662,7 @@ async function sortTree(skillArray){
 	}
 	skillArray = await extractNames(sortedArray);
 	return skillArray;
-}
+}*/
 
 protectedRoute.post('/newtraining', async function(req, res) {
     var data = req.body;
