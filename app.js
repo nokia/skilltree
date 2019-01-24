@@ -524,16 +524,16 @@ async function assembleTree(skillMatrix){
 		l = false;
 		for (var component = 0; component < skillMatrix.length; component++) {
 			assembledTree = assembledTree.concat(skillMatrix[component][j]);
-			console.log("comp:");
-			console.log(skillMatrix[component][j]);
+			//console.log("comp:");
+			//console.log(skillMatrix[component][j]);
 			if (skillMatrix[component][j] != undefined) {
 				l = true;
 			}
 		}
 		j++;
 	}
-	console.log("tree:");
-	console.log(assembledTree);
+	//console.log("tree:");
+	//console.log(assembledTree);
 	return assembledTree;
 }
 
@@ -548,6 +548,8 @@ async function extractNames(skillArray){
 
 // creates an ordered tree from an array of skills.
 async function sortTree(skillArray){
+	console.log("skillArray");
+	console.log(skillArray);
 	var sortedArray = []; // output array
 	var skillMatrix = []; // 3d array, represents the components, the rows, and the elements of rows in the graph.
 	for (var i = 0; i < skillArray.length; i++) {
