@@ -1093,8 +1093,6 @@ protectedRoute.post('/request', async function (req, res){
 
 				skill.save(function (err) {if (err) throw err;});
 
-
-
 				res.json({
 					succes: true,
 					message: 'Added request.',
@@ -1103,8 +1101,6 @@ protectedRoute.post('/request', async function (req, res){
 			}
 			else
 			{
-
-
 				res.json({
 					succes: false,
 					message: 'Already requested.',
@@ -1123,8 +1119,6 @@ protectedRoute.post('/request', async function (req, res){
 
 				skill.save(function (err) {if (err) throw err;});
 
-
-
 				res.json({
 					succes: true,
 					message: 'Added request.',
@@ -1133,8 +1127,6 @@ protectedRoute.post('/request', async function (req, res){
 			}
 			else
 			{
-
-
 				res.json({
 					succes: false,
 					message: 'Already requested.',
