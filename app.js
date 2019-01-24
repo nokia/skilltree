@@ -540,9 +540,11 @@ async function assembleTree(skillMatrix){
 // gets the skillnames of a skillarray.
 async function extractNames(skillArray){
 	var exctractedArray = [];
+	console.log("length");
+	console.log(skillArray.length);
 	for (var i = 0; i < skillArray.length; i++) {
 		console.log(i);
-		console.log(skillArray[i]);
+		console.log(skillArray[i].name);
 		exctractedArray[i] = skillArray[i].name;
 	}
 	return exctractedArray;
