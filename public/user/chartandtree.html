@@ -374,39 +374,76 @@
 <!-- creator -->
 <div id = "creator" style = "display: none;" class = "hide clear">
     <form id = "newTreeForm" class = "needs-validation" onsubmit = "return false" novalidate>
-        <div class = "card">
-            <h1>1.</h1>
-            <center><h5>The name of the tree</h5></center>
-            <p><input type = "text" id = "treeName" class = "form-control"></p>
-            <input type = "button" id = "loadTree" class = "btn btn-outline-secondary" style = "display: none" value = "Load Tree"/>
-            <center><h5>Focus area of the tree</h5></center>
-            <p><select id = "focusarea" class = "form-control">
-                <option value = "People">People</option>
-                <option value = "Engineering">Engineering</option>
-                <option value = "Business">Business</option>
-                <option value = "Communication">Communication</option>
-                <option value = "Support functions">Support functions</option>
-            </select></p>
-            <center><h5>Description:</h5></center>
-            <p><textarea id = "treeDesc" class = "form-control"></textarea></p>
+      <div class="card">
+        <!-- card nav -->
+                  <div class="card-header d-flex justify-content-center">
+                      <ul class="nav nav-tabs card-header-tabs" id = "skilltreeEditTabs">
+                          <li class="nav-item">
+                              <a class="nav-link active" href="#newSkillTreePhase1" id="newSkillTreePhase1-tab" data-toggle="tab" data-toggle="collapse" role="tab" aria-controls="newSkillTreePhase1" aria-selected="true">1</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="#newSkillTreePhase2" id="newSkillTreePhase2-tab" data-toggle="tab" data-toggle="collapse" role="tab" aria-controls="newSkillTreePhase2" aria-selected="false">2</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="#newSkillTreePhase3" id="newSkillTreePhase3-tab" data-toggle="tab" data-toggle="collapse" role="tab" aria-controls="newSkillTreePhase3" aria-selected="false">3</a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="#newSkillTreePhase4" id="newSkillTreePhase4-tab" data-toggle="tab" data-toggle="collapse" role="tab" aria-controls="newSkillTreePhase4" aria-selected="false">4</a>
+                          </li>
+                      </ul>
+                  </div>
+        <!-- end of card nav -->
+        <!-- tab contents -->
+                  <div class="tab-content" id="newSkillTreeCreating">
+                          <!-- 1-tab content -->
+                          <div class="tab-panel fade show active collapse" id="newSkillTreePhase1" role="tabpanel" aria-labelledby="newSkilTreePhase1-tab">
+                            <div class = "card">
+                                <h1>1.</h1>
+                                <center><h5>The name of the tree</h5></center>
+                                <p><input type = "text" id = "treeName" class = "form-control"></p>
+                                <input type = "button" id = "loadTree" class = "btn btn-outline-secondary" style = "display: none" value = "Load Tree"/>
+                                <center><h5>Focus area of the tree</h5></center>
+                                <p><select id = "focusarea" class = "form-control">
+                                    <option value = "People">People</option>
+                                    <option value = "Engineering">Engineering</option>
+                                    <option value = "Business">Business</option>
+                                    <option value = "Communication">Communication</option>
+                                    <option value = "Support functions">Support functions</option>
+                                </select></p>
+                                <center><h5>Description:</h5></center>
+                                <p><textarea id = "treeDesc" class = "form-control"></textarea></p>
+                            </div>
+                          </div>
+                          <!-- end of 1-tab content -->
+                          <!-- 2-tab -->
+                          <div class="tab-panel fade collapse" id="newSkillTreePhase2" role="tabpanel" aria-labelledby="newSkilTreePhase2-tab">
+                            <div class = "card">
+                              <h1>2.</h1>
+                              <center><h5>Search for a skill</h5></center>
+                              <p><input type = "text" id = "skillSearchTree" class = "form-control" list = "skillSearchResult" onkeyup="searchSkillsByName(this)"></p>
+                              <p><input type = "button" id = "addToTree" class="btn btn-outline-secondary" value = "Add skill to tree"></p>
+                              <center><h5>OR</h5></center>
+                              <p><input type = "button" id = "createSkill" class="btn btn-outline-secondary" value = "Create skill"></p>
+                            </div>
+                          </div>
+                          <!-- end of 2-tab content -->
+                          <!-- 3-tab -->
+                          <div class="tab-panel fade collapse" id="newSkillTreePhase3" role="tabpanel" aria-labelledby="newSkilTreePhase3-tab">
+                            <div class = "card">
+                              <h1>3.</h1>
+                              <p><select id = "skillList" size = "2" class="form-control"></select></p>
+                              <p><input type = "button" id = "deleteFromList" class="btn btn-outline-secondary" value = "Delete selected"></p>
+                            </div>
+                            <div class = "card">
+                              <h1>4.</h1>
+                              <p><input type = "button" id = "createTree" class="btn btn-outline-secondary" value = "Save"></p>
+                            </div>
+                          </div>
+                          <!-- end of 3-tab content -->
+                  </div>
+        
         </div>
-        <div class = "card">
-            <h1>2.</h1>
-            <center><h5>Search for a skill</h5></center>
-            <p><input type = "text" id = "skillSearchTree" class = "form-control" list = "skillSearchResult" onkeyup="searchSkillsByName(this)"></p>
-            <p><input type = "button" id = "addToTree" class="btn btn-outline-secondary" value = "Add skill to tree"></p>
-            <center><h5>OR</h5></center>
-            <p><input type = "button" id = "createSkill" class="btn btn-outline-secondary" value = "Create skill"></p>
-        </div>
-        <div class = "card">
-            <h1>3.</h1>
-            <p><select id = "skillList" size = "2" class="form-control"></select></p>
-            <p><input type = "button" id = "deleteFromList" class="btn btn-outline-secondary" value = "Delete selected"></p>
-        </div>
-        <div class = "card">
-            <h1>4.</h1>
-            <p><input type = "button" id = "createTree" class="btn btn-outline-secondary" value = "Save"></p>
-        </div>
+        
     </form>
 </div>
 <!-- end of creator -->
