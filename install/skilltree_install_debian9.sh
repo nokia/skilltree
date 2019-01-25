@@ -25,7 +25,7 @@ sudo apt-get install -y nodejs
 
 cd
 cd skilltree
-git clone https://github.com/sicambria/skilltree.git
+git clone https://github.com/nokia/skilltree.git
 
 # mongose
 npm install mongoose
