@@ -372,7 +372,7 @@ protectedRoute.post('/getPublicSkillData', async function (req, res) {
 			});
 			for (var i = 0; i < foundUsers.length; i++) {
 				console.log(foundUsers[i].username + " - " + foundUsers[i].skills.map(obj => obj.name));
-				console.log("skillname to be included" + foundSkills[s].name);
+				console.log("skillname to be included - " + foundSkills[s].name);
 				if (foundUsers[i].skills.map(obj => obj.name).includes(foundSkills[s].name)) {
 					outUsers.push({username: foundUsers[i].username, skills: foundUsers[i].skills.find(obj => obj.name == foundSkills[s].name)});
 				}
@@ -381,6 +381,7 @@ protectedRoute.post('/getPublicSkillData', async function (req, res) {
 				}
 			}
 		}
+		console.log("outUsers - " + outUsers);
 		foundSkills.users = outUsers;
     res.json(foundSkills);
 });
