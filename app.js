@@ -367,6 +367,7 @@ protectedRoute.post('/getPublicSkillData', async function (req, res) {
 				return skill;
 		});
 		for (var s = 0; s < foundSkills.length; s++) {
+			foundSkills[s].users = [];
 			var foundUsers = await User.find({}, 'username skills', function(err, user) {
 				return user;
 			});
