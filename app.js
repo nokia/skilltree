@@ -378,7 +378,7 @@ protectedRoute.post('/getPublicSkillData', async function (req, res) {
 			}
 			foundSkills[s].users = outUsers;
 		}
-		console.log(foundSkills[0]);
+		console.log(foundSkills[0].users);
     res.json(foundSkills);
 });
 
