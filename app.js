@@ -367,22 +367,21 @@ protectedRoute.post('/getPublicSkillData', async function (req, res) {
 				return skill;
 		});
 		for (var s = 0; s < foundSkills.length; s++) {
+			foundSkills[s].users = [];
 			var foundUsers = await User.find({}, 'username skills', function(err, user) {
 				return user;
 			});
+			outUsers = [];
 			for (var i = 0; i < foundUsers.length; i++) {
-				console.log(foundUsers[i].username + " - " + foundUsers[i].skills.map(obj => obj.name));
-				console.log("skillname to be included - " + foundSkills[s].name);
 				if (foundUsers[i].skills.map(obj => obj.name).includes(foundSkills[s].name)) {
 					outUsers.push({username: foundUsers[i].username, skills: foundUsers[i].skills.find(obj => obj.name == foundSkills[s].name)});
 				}
-				else {
-					foundUsers.splice(i, 1);
-				}
 			}
+			foundSkills[s].users = outUsers;
 		}
-		console.log("outUsers - " + outUsers[0].username + outUsers[0].skills);
-		foundSkills.users = outUsers;
+		console.log(foundSkills[0]);
+		console.log("----------------------------------------");
+		console.log(foundSkills[0].users);
     res.json(foundSkills);
 });
 
