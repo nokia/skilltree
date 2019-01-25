@@ -370,6 +370,7 @@ protectedRoute.post('/getPublicSkillData', async function (req, res) {
 			var foundUsers = await User.find({}, 'username skills', function(err, user) {
 				return user;
 			});
+			outUsers = [];
 			for (var i = 0; i < foundUsers.length; i++) {
 				console.log(foundUsers[i].username + " - " + foundUsers[i].skills.map(obj => obj.name));
 				console.log("skillname to be included - " + foundSkills[s].name);
@@ -382,8 +383,6 @@ protectedRoute.post('/getPublicSkillData', async function (req, res) {
 			}
 			foundSkills[i].users = outUsers;
 		}
-		console.log("outUsers - " + outUsers[0].username + outUsers[0].skills);
-
     res.json(foundSkills);
 });
 
