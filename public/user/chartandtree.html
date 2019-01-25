@@ -163,15 +163,18 @@
   <!-- user profile details card -->
 
   <div id="userprofile" class="collapse float-right hide-on-click">
-    <div class="card text-white bg-lightgreen mb-3">
+    <div class="card bg-lightgreen mb-3">
       <!-- <div class="card-header" id="card_username"></div> -->
       <div class="card-body">
 
         <!-- card nav -->
 
         <div class="nav nav-tabs" id="myTab" role="tablist">
+          <!-- <a class="nav-item nav-link active" id="personal-tab" data-toggle="tab" href="#personal" role="tab" aria-controls="personal" aria-selected="true">Personal</a>
+          <a class="nav-item nav-link" id="access-tab" data-toggle="tab" href="#trainings" role="tab" aria-controls="trainings" aria-selected="true">My trainings</a> -->
           <a class="nav-item nav-link active" id="personal-tab" data-toggle="tab" href="#personal" role="tab" aria-controls="personal" aria-selected="true">Personal</a>
-          <a class="nav-item nav-link" id="access-tab" data-toggle="tab" href="#trainings" role="tab" aria-controls="trainings" aria-selected="true">My trainings</a>
+          <a class="nav-item nav-link" id="requests-offers-tab" data-toggle="tab" href="#requests-offers" role="tab" aria-controls="requests-offers" aria-selected="true">Requests, offers</a>
+          <a class="nav-item nav-link" id="peer-learning-tab" data-toggle="tab" href="#peer-learning" role="tab" aria-controls="peer-learning" aria-selected="true">Peer Learning</a>
         </div>
         <!-- end of card nav -->
 
@@ -214,14 +217,114 @@
             </form>
           </div>
           <!-- end of personal-tab content -->
-          <div class="tab-panel fade" id="trainings" role="tabpanel" aria-labelledby="training-tab">
+          <!-- requests-offers-tab content -->
+          <div class="tab-panel fade" id="requests-offers" role="tabpanel" aria-labelledby="requests-offers-tab">
             <form>
                 <h3>My requested trainings</h3>
+                 <p>I requested trainings for this skills:</p>
+                 <div class="row">
+                    <div class="col-sm-3">
+                      <div class="card border-warning" style="width: fit-content; border-width: 5px;">
+                        <a href="" role="button"><img src="pictures/icons/HTML.png"></a>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="card" style="width: fit-content;">
+                         <a href="" role="button"><img src="pictures/icons/Scrum.png" style="opacity: 0.2;"></a>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="card" style="width: fit-content;">
+                         <a href="" role="button"><img src="pictures/icons/JavaScript.png" style="opacity: 0.2;"></a>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="card border-warning" style="width: fit-content; border-width: 5px;">
+                         <a href="" role="button"><img src="pictures/icons/CSS.png"></a>
+                      </div>
+                    </div>  
+                 </div>
+                 <div class="row">
+                    <div class="col-sm-3">
+                      <div class="card border-warning" style="width: fit-content; border-width: 5px;">
+                        <a href="" role="button"><img src="pictures/icons/Photoshop.png"></a>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="card border-warning" style="width: fit-content; border-width: 5px;">
+                         <a href="" role="button"><img src="pictures/icons/CSS_tools.png"></a>
+                      </div>
+                    </div>
+                    <!-- <div class="col-sm-3">
+                      <div class="card disabled" style="width: fit-content;">
+                         <a href="" role="button"><img src="pictures/icons/HTML.png" style="opacity: 0.2;"></a>
+                      </div>
+                    </div> -->
+                    <!-- <div class="col-sm-3">
+                      <div class="card disabled" style="width: fit-content;">
+                         <a href="" role="button"><img src="pictures/icons/HTML.png" style="opacity: 0.2;"></a>
+                      </div>
+                    </div>  --> 
+                 </div>
+                <h3>Offering trainings</h3>
+                 <p>I offered trainings for this skills:</p>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <div class="card border-warning" style="width: fit-content; border-width: 5px;">
+                        <a href="" role="button"><img src="pictures/icons/HTML.png"></a>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="card" style="width: fit-content;">
+                         <a href="" role="button"><img src="pictures/icons/Scrum.png" style="opacity: 0.2;"></a>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="card" style="width: fit-content;">
+                         <a href="" role="button"><img src="pictures/icons/JavaScript.png" style="opacity: 0.2;"></a>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="card border-warning" style="width: fit-content; border-width: 5px;">
+                         <a href="" role="button"><img src="pictures/icons/CSS.png"></a>
+                      </div>
+                    </div>  
+                 </div>
+                 <div class="row">
+                    <div class="col-sm-3">
+                      <div class="card" style="width: fit-content;">
+                        <a href="" role="button"><img src="pictures/icons/Photoshop.png" style="opacity: 0.2;"></a>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="card" style="width: fit-content;">
+                         <a href="" role="button"><img src="pictures/icons/CSS_tools.png" style="opacity: 0.2;"></a>
+                      </div>
+                    </div>
+                    <!-- <div class="col-sm-3">
+                      <div class="card disabled" style="width: fit-content;">
+                         <a href="" role="button"><img src="pictures/icons/HTML.png" style="opacity: 0.2;"></a>
+                      </div>
+                    </div> -->
+                    <!-- <div class="col-sm-3">
+                      <div class="card disabled" style="width: fit-content;">
+                         <a href="" role="button"><img src="pictures/icons/HTML.png" style="opacity: 0.2;"></a>
+                      </div>
+                    </div>  --> 
+                 </div>
+            </form>
+          </div>
+          <!-- end of requests-offers-tab content -->
+          <!-- trainings-tab content -->
+          <div class="tab-panel fade" id="peer-learning" role="tabpanel" aria-labelledby="peer-learning-tab">
+            <form>
+                <h3>Signed up trainings</h3>
                  <p>I signed up for these trainings:</p>
+                 
                 <h3>My trainings</h3>
                  <p>I will hold these trainings:</p>
-                <h3>Offering trainings</h3>
-                  <div class="form-group row">
+                <!-- <h3>Offering trainings</h3> -->
+                  <!-- <div class="form-group row">
                     <label for="inputhelpjs" class="col-sm-3 col-form-label">Javascript</label>
                     <div class="col-sm-9">
                       <input type="checkbox" id="inputhelpjs" checked>
@@ -238,9 +341,11 @@
                     <div class="col-sm-9">
                       <input type="checkbox" id="inputhelpcss" checked>
                     </div>
-                  </div>
+                  </div> -->
             </form>
           </div>
+        </div>
+        <!-- end of training-tab content -->
         </div>
         <!-- end of tab contents -->
       </div>
