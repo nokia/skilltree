@@ -356,15 +356,26 @@ protectedRoute.post('/getPublicTreeData', async function (req, res) {
     res.json(foundTrees);
 });
 
-// Getting the name, caterory, descs of a skill.
+// Getting the name, caterory, descs of a skill, and give a list of the people, who have it.
 protectedRoute.post('/getPublicSkillData', async function (req, res) {
     var data = req.body;
     var foundSkills = await Skill.find({
 				"name": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
 		}, 'name categoryName description descriptionWikipediaURL pointDescription', function(err, skill) {
 				if (err) throw err;
-		return skill;
+				return skill;
 		});
+		var foundUsers = await User.find({}, 'username skills', function(err, user) {
+			return user;
+		});
+		for (var i = 0; i < foundUsers.length; i++) {
+			if (foundUsers[i].skills.map(obj => obj.name).includes(data.value)) {
+				foundUsers[i] = {username: foundUsers[i].username, skills: foundUsers[i].skills.find({name: data.value})};
+			}
+			else {
+				foundUsers.splice(i, 1);
+			}
+		}
     res.json(foundSkills);
 });
 
