@@ -380,9 +380,10 @@ protectedRoute.post('/getPublicSkillData', async function (req, res) {
 					foundUsers.splice(i, 1);
 				}
 			}
+			foundSkills[i].users = outUsers;
 		}
 		console.log("outUsers - " + outUsers[0].username + outUsers[0].skills);
-		foundSkills.users = outUsers;
+
     res.json(foundSkills);
 });
 
