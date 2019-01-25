@@ -1111,7 +1111,7 @@ function hideMenus () {
 }
 
 function hideCardsAndAlerts (event) {
-    if (!event.target.matches(".float-right *")) $(".hide-on-click").collapse("hide");
+    if (!event.target.matches("#userCard, .float-right *")) $(".hide-on-click").collapse("hide");
     if (!event.target.matches("#createTree")) $(".alert").hide();
 }
 
