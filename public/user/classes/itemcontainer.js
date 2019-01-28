@@ -341,6 +341,8 @@ class ItemContainer {
 
                 this.parentObj.nextlvlDesc.text = "Next level: " + this.parentObj.skill.pointDescription[this.parentObj.skill.achievedPoint];
                 if (this.parentObj.skill.achievedPoint == this.parentObj.maxPoint - 1) this.parentObj.nextlvlDesc.enabled = true;
+                console.log(this.parentObj.skill.achievedPoint);
+                console.log(this.parentObj.maxPoint - 1);
 
                 if (this.parentObj.curlvlDesc.enabled) this.parentObj.nextlvlDesc.position.y = this.parentObj.curlvlDesc.position.y + this.parentObj.curlvlDesc.height + 5;
                 else this.parentObj.nextlvlDesc.position.y = this.parentObj.curlvlDesc.position.y;
