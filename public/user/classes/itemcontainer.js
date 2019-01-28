@@ -72,9 +72,9 @@ class ItemContainer {
         else this.nextlvlDesc.position.set(this.detailsMargin, this.curlvlDesc.position.y + this.curlvlDesc.height + 5);
         this.detailsForeground.addChild(this.nextlvlDesc);
 
-        var btnPosY = description.position.y + description.height + 10;
-        if (this.nextlvlDesc.enabled) btnPosY = this.nextlvlDesc.position.y + this.nextlvlDesc.height + 15;
-        else if (this.curlvlDesc.enabled) btnPosY = this.curlvlDesc.position.y + this.curlvlDesc.height + 15;
+        this.btnPosY = description.position.y + description.height + 10;
+        if (this.nextlvlDesc.enabled) this.btnPosY = this.nextlvlDesc.position.y + this.nextlvlDesc.height + 15;
+        else if (this.curlvlDesc.enabled) this.btnPosY = this.curlvlDesc.position.y + this.curlvlDesc.height + 15;
 
         var btnG = new PIXI.Graphics();
         btnG.lineStyle(1, 0x888888);
@@ -105,13 +105,13 @@ class ItemContainer {
             txtEndorse.anchor.set(0.5, 0.5);
             txtEndorse.position.set(35,13);
 
-            var btnEndorseContainer = new PIXI.Container();
-            btnEndorseContainer.addChild(btnEndorse, txtEndorse);
-            btnEndorseContainer.position.set(detailsWidth - btnEndorseContainer.width - 10, btnPosY);
-            btnEndorseContainer.interactive = true;
-            btnEndorseContainer.buttonMode = true;
-            btnEndorseContainer.parentObj = this;
-            btnEndorseContainer
+            this.btnEndorseContainer = new PIXI.Container();
+            this.btnEndorseContainer.addChild(btnEndorse, txtEndorse);
+            this.btnEndorseContainer.position.set(detailsWidth - this.btnEndorseContainer.width - 10, this.btnPosY);
+            this.btnEndorseContainer.interactive = true;
+            this.btnEndorseContainer.buttonMode = true;
+            this.btnEndorseContainer.parentObj = this;
+            this.btnEndorseContainer
             .on('pointerover', function () {
                 btnEndorse.texture = btnGHover.generateTexture();
                 app.renderer.render(app.stage);
@@ -121,7 +121,7 @@ class ItemContainer {
                 app.renderer.render(app.stage);
             })
             .on('click', this.endorse);
-            this.detailsForeground.addChild(btnEndorseContainer);
+            this.detailsForeground.addChild(this.btnEndorseContainer);
         }
 
         var btnInfo = new PIXI.Sprite(btnG.generateTexture());
@@ -130,15 +130,15 @@ class ItemContainer {
         txtInfo.anchor.set(0.5, 0.5);
         txtInfo.position.set(35,13);
 
-        var btnInfoContainer = new PIXI.Container();
-        btnInfoContainer.addChild(btnInfo, txtInfo);
-        if (!showEndorseBtn) btnInfoPosX = (detailsWidth - btnInfoContainer.width) / 4;
+        this.btnInfoContainer = new PIXI.Container();
+        this.btnInfoContainer.addChild(btnInfo, txtInfo);
+        if (!showEndorseBtn) btnInfoPosX = (detailsWidth - this.btnInfoContainer.width) / 4;
         else btnInfoPosX = 10;
-        btnInfoContainer.position.set(btnInfoPosX, btnPosY);
-        btnInfoContainer.interactive = true;
-        btnInfoContainer.buttonMode = true;
-        btnInfoContainer.parentObj = this;
-        btnInfoContainer
+        this.btnInfoContainer.position.set(btnInfoPosX, this.btnPosY);
+        this.btnInfoContainer.interactive = true;
+        this.btnInfoContainer.buttonMode = true;
+        this.btnInfoContainer.parentObj = this;
+        this.btnInfoContainer
                 .on('pointerover', function () {
                         btnInfo.texture = btnGHover.generateTexture();
                         app.renderer.render(app.stage);
@@ -150,7 +150,7 @@ class ItemContainer {
                 .on('click', function () {
                         this.parentObj.toggleSkillInfoPage();
                         });
-        this.detailsForeground.addChild(btnInfoContainer);
+        this.detailsForeground.addChild(this.btnInfoContainer);
 
         var btn1 = new PIXI.Sprite(btnG.generateTexture());
 
@@ -158,15 +158,15 @@ class ItemContainer {
         txt1.anchor.set(0.5, 0.5);
         txt1.position.set(35,13);
 
-        var btn1Container = new PIXI.Container();
-        btn1Container.addChild(btn1, txt1);
-        if (this.self) btn1PosX = (detailsWidth - btn1Container.width) * .75;
-        else btn1PosX = (detailsWidth - btn1Container.width) / 2;
-        btn1Container.position.set(btn1PosX, btnPosY);
-        btn1Container.interactive = true;
-        btn1Container.buttonMode = true;
-        btn1Container.parentObj = this;
-        btn1Container
+        this.btn1Container = new PIXI.Container();
+        this.btn1Container.addChild(btn1, txt1);
+        if (this.self) btn1PosX = (detailsWidth - this.btn1Container.width) * .75;
+        else btn1PosX = (detailsWidth - this.btn1Container.width) / 2;
+        this.btn1Container.position.set(btn1PosX, this.btnPosY);
+        this.btn1Container.interactive = true;
+        this.btn1Container.buttonMode = true;
+        this.btn1Container.parentObj = this;
+        this.btn1Container
                 .on('pointerover', function () {
                         btn1.texture = btnGHover.generateTexture();
                         app.renderer.render(app.stage);
@@ -178,7 +178,7 @@ class ItemContainer {
                 .on('click', function () {
                         this.parentObj.toggleSkillDetailsPage();
                         });
-        this.detailsForeground.addChild(btn1Container);
+        this.detailsForeground.addChild(this.btn1Container);
 
         /*
         var btn2 = new PIXI.Sprite(btnG.generateTexture());
@@ -303,6 +303,14 @@ class ItemContainer {
 
                     this.parentObj.nextlvlDesc.position.y = this.parentObj.curlvlDesc.position.y + this.parentObj.curlvlDesc.height + 5;
 
+                    this.parentObj.btnPosY = description.position.y + description.height + 10;
+                    if (this.parentObj.nextlvlDesc.enabled) this.parentObj.btnPosY = this.parentObj.nextlvlDesc.position.y + this.parentObj.nextlvlDesc.height + 15;
+                    else if (this.parentObj.curlvlDesc.enabled) this.parentObj.btnPosY = this.parentObj.curlvlDesc.position.y + this.parentObj.curlvlDesc.height + 15;
+
+                    if (this.parentObj.btnEndorseContainer != undefined) this.parentObj.btnEndorseContainer.position.y = this.parentObj.btnPosY;
+                    this.parentObj.btnInfoContainer.position.y = this.parentObj.btnPosY;
+                    this.parentObj.btn1Container.position.y = this.parentObj.btnPosY;
+
                     this.parentObj.detailsBackground.height = this.parentObj.detailsForeground.height + this.parentObj.detailsMargin * 2;
                 }
                 this.parentObj.app.renderer.render(this.parentObj.app.stage);
@@ -336,6 +344,14 @@ class ItemContainer {
 
                 if (this.parentObj.curlvlDesc.enabled) this.parentObj.nextlvlDesc.position.y = this.parentObj.curlvlDesc.position.y + this.parentObj.curlvlDesc.height + 5;
                 else this.parentObj.nextlvlDesc.position.y = this.parentObj.curlvlDesc.position.y;
+
+                this.parentObj.btnPosY = description.position.y + description.height + 10;
+                if (this.parentObj.nextlvlDesc.enabled) this.parentObj.btnPosY = this.parentObj.nextlvlDesc.position.y + this.parentObj.nextlvlDesc.height + 15;
+                else if (this.parentObj.curlvlDesc.enabled) this.parentObj.btnPosY = this.parentObj.curlvlDesc.position.y + this.parentObj.curlvlDesc.height + 15;
+
+                if (this.parentObj.btnEndorseContainer != undefined) this.parentObj.btnEndorseContainer.position.y = this.parentObj.btnPosY;
+                this.parentObj.btnInfoContainer.position.y = this.parentObj.btnPosY;
+                this.parentObj.btn1Container.position.y = this.parentObj.btnPosY;
 
                 this.parentObj.detailsBackground.height = this.parentObj.detailsForeground.height + this.parentObj.detailsMargin * 2;
             }
