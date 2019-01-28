@@ -345,6 +345,8 @@ class ItemContainer {
                 if (this.parentObj.curlvlDesc.enabled) this.parentObj.nextlvlDesc.position.y = this.parentObj.curlvlDesc.position.y + this.parentObj.curlvlDesc.height + 5;
                 else this.parentObj.nextlvlDesc.position.y = this.parentObj.curlvlDesc.position.y;
 
+                console.log(this.parentObj.nextlvlDesc.enabled);
+
                 this.parentObj.btnPosY = this.parentObj.description.position.y + this.parentObj.description.height + 10;
                 if (this.parentObj.nextlvlDesc.enabled) this.parentObj.btnPosY = this.parentObj.nextlvlDesc.position.y + this.parentObj.nextlvlDesc.height + 15;
                 else if (this.parentObj.curlvlDesc.enabled) this.parentObj.btnPosY = this.parentObj.curlvlDesc.position.y + this.parentObj.curlvlDesc.height + 15;
