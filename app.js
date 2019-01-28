@@ -1209,8 +1209,7 @@ protectedRoute.post('/endorse', async function (req, res) {
 			user.save(function (err) {if (err) throw err;});
 
       res.json({
-  			success: true,
-  			message: "Lmao Yeet"
+  			success: true
   		});
     }
   }
