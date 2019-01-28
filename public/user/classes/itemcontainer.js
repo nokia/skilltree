@@ -59,6 +59,8 @@ class ItemContainer {
             curLvlDesc = new PIXI.Text("Current level: " + this.skill.pointDescription[this.skill.achievedPoint - 1], {fontSize: descriptionFontSize, fontStyle: 'italic', fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - detailsMargin * 2});
             curLvlDesc.position.set(detailsMargin, description.position.y + description.height + 10);
             detailsForeground.addChild(curLvlDesc);
+
+            curLvlDesc.text = "aa";
         }
 
         if (this.skill.achievedPoint < this.skill.maxPoint) {
