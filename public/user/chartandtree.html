@@ -242,7 +242,7 @@
                       <div class="card border-warning" style="width: fit-content; border-width: 5px;">
                          <a href="" role="button"><img src="pictures/icons/CSS.png"></a>
                       </div>
-                    </div>  
+                    </div>
                  </div>
                  <div class="row">
                     <div class="col-sm-3">
@@ -264,7 +264,7 @@
                       <div class="card disabled" style="width: fit-content;">
                          <a href="" role="button"><img src="pictures/icons/HTML.png" style="opacity: 0.2;"></a>
                       </div>
-                    </div>  --> 
+                    </div>  -->
                  </div>
                 <h3>Offering trainings</h3>
                  <p>I offered trainings for this skills:</p>
@@ -288,7 +288,7 @@
                       <div class="card border-warning" style="width: fit-content; border-width: 5px;">
                          <a href="" role="button"><img src="pictures/icons/CSS.png"></a>
                       </div>
-                    </div>  
+                    </div>
                  </div>
                  <div class="row">
                     <div class="col-sm-3">
@@ -310,7 +310,7 @@
                       <div class="card disabled" style="width: fit-content;">
                          <a href="" role="button"><img src="pictures/icons/HTML.png" style="opacity: 0.2;"></a>
                       </div>
-                    </div>  --> 
+                    </div>  -->
                  </div>
             </form>
           </div>
@@ -342,9 +342,9 @@
                               <a href="#" class="btn btn-danger btn-sm">Cancel</a>
                             </div>
                         </div>
-                      </div>                    
+                      </div>
                 </div>
-                 
+
                 <h3>My trainings</h3>
                  <p>I will hold these trainings:</p>
                 <div class="row">
@@ -357,7 +357,7 @@
                               <p class="card-text"><i class="fas fa-map-marker"></i> B.4.M05</p>
                               <a href="#" class="btn btn-danger btn-sm">Cancel</a>
                         </div>
-                      </div>                    
+                      </div>
                 </div>
             </form>
           </div>
@@ -387,9 +387,6 @@
                           <li class="nav-item">
                               <a class="nav-link" href="#newSkillTreePhase3" id="newSkillTreePhase3-tab" data-toggle="tab" data-toggle="collapse" role="tab" aria-controls="newSkillTreePhase3" aria-selected="false">3</a>
                           </li>
-                          <li class="nav-item">
-                              <a class="nav-link" href="#newSkillTreePhase4" id="newSkillTreePhase4-tab" data-toggle="tab" data-toggle="collapse" role="tab" aria-controls="newSkillTreePhase4" aria-selected="false">4</a>
-                          </li>
                       </ul>
                   </div>
         <!-- end of card nav -->
@@ -398,7 +395,6 @@
                           <!-- 1-tab content -->
                           <div class="tab-panel fade show active collapse" id="newSkillTreePhase1" role="tabpanel" aria-labelledby="newSkilTreePhase1-tab">
                             <div class = "card">
-                                <h1>1.</h1>
                                 <center><h5>The name of the tree</h5></center>
                                 <p><input type = "text" id = "treeName" class = "form-control"></p>
                                 <input type = "button" id = "loadTree" class = "btn btn-outline-secondary" style = "display: none" value = "Load Tree"/>
@@ -418,32 +414,29 @@
                           <!-- 2-tab -->
                           <div class="tab-panel fade collapse" id="newSkillTreePhase2" role="tabpanel" aria-labelledby="newSkilTreePhase2-tab">
                             <div class = "card">
-                              <h1>2.</h1>
                               <center><h5>Search for a skill</h5></center>
                               <p><input type = "text" id = "skillSearchTree" class = "form-control" list = "skillSearchResult" onkeyup="searchSkillsByName(this)"></p>
                               <p><input type = "button" id = "addToTree" class="btn btn-outline-secondary" value = "Add skill to tree"></p>
                               <center><h5>OR</h5></center>
                               <p><input type = "button" id = "createSkill" class="btn btn-outline-secondary" value = "Create skill"></p>
                             </div>
+                            <div class = "card">
+                              <p><select id = "skillList" size = "2" class="form-control"></select></p>
+                              <p><input type = "button" id = "deleteFromList" class="btn btn-outline-secondary" value = "Delete selected"></p>
+                            </div>
                           </div>
                           <!-- end of 2-tab content -->
                           <!-- 3-tab -->
                           <div class="tab-panel fade collapse" id="newSkillTreePhase3" role="tabpanel" aria-labelledby="newSkilTreePhase3-tab">
                             <div class = "card">
-                              <h1>3.</h1>
-                              <p><select id = "skillList" size = "2" class="form-control"></select></p>
-                              <p><input type = "button" id = "deleteFromList" class="btn btn-outline-secondary" value = "Delete selected"></p>
-                            </div>
-                            <div class = "card">
-                              <h1>4.</h1>
                               <p><input type = "button" id = "createTree" class="btn btn-outline-secondary" value = "Save"></p>
                             </div>
                           </div>
                           <!-- end of 3-tab content -->
                   </div>
-        
+
         </div>
-        
+
     </form>
 </div>
 <!-- end of creator -->
