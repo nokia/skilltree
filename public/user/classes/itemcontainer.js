@@ -36,7 +36,7 @@ class ItemContainer {
         }
 
         // Creating details page
-        var detailsWidth = 240;
+        var detailsWidth = 300;
         this.detailsMargin = 10;
         var nameFontSize = 20;
         var descriptionFontSize = 12;
