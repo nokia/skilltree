@@ -48,9 +48,9 @@ class ItemContainer {
         name.position.set(10, 10);
         this.detailsForeground.addChild(name);
 
-        var description = new PIXI.Text(this.skill.description, {fontSize: descriptionFontSize, fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - this.detailsMargin * 2 });
-        description.position.set(this.detailsMargin, this.detailsMargin * 2 + nameFontSize);
-        this.detailsForeground.addChild(description);
+        this.description = new PIXI.Text(this.skill.description, {fontSize: descriptionFontSize, fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - this.detailsMargin * 2 });
+        this.description.position.set(this.detailsMargin, this.detailsMargin * 2 + nameFontSize);
+        this.detailsForeground.addChild(this.description);
         this.detailsForeground.zOrder = 1;
 
         this.curlvlDesc = new PIXI.Text("", {fontSize: descriptionFontSize, fontStyle: 'italic', fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - this.detailsMargin * 2});
@@ -59,7 +59,7 @@ class ItemContainer {
             this.curlvlDesc.text = "Current level: " + this.skill.pointDescription[this.skill.achievedPoint - 1];
             this.curlvlDesc.enabled = true;
         }
-        this.curlvlDesc.position.set(this.detailsMargin, description.position.y + description.height + 10);
+        this.curlvlDesc.position.set(this.detailsMargin, this.description.position.y + this.description.height + 10);
         this.detailsForeground.addChild(this.curlvlDesc);
 
         this.nextlvlDesc = new PIXI.Text("", {fontSize: descriptionFontSize, fontStyle: 'italic', fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - this.detailsMargin * 2});
@@ -68,11 +68,11 @@ class ItemContainer {
             this.nextlvlDesc.text = "Next level: " + this.skill.pointDescription[this.skill.achievedPoint];
             this.nextlvlDesc.enabled = true;
         }
-        if (this.skill.achievedPoint == 0) this.nextlvlDesc.position.set(this.detailsMargin, description.position.y + description.height + 10);
+        if (this.skill.achievedPoint == 0) this.nextlvlDesc.position.set(this.detailsMargin, this.description.position.y + this.description.height + 10);
         else this.nextlvlDesc.position.set(this.detailsMargin, this.curlvlDesc.position.y + this.curlvlDesc.height + 5);
         this.detailsForeground.addChild(this.nextlvlDesc);
 
-        this.btnPosY = description.position.y + description.height + 10;
+        this.btnPosY = this.description.position.y + this.description.height + 10;
         if (this.nextlvlDesc.enabled) this.btnPosY = this.nextlvlDesc.position.y + this.nextlvlDesc.height + 15;
         else if (this.curlvlDesc.enabled) this.btnPosY = this.curlvlDesc.position.y + this.curlvlDesc.height + 15;
 
@@ -303,7 +303,7 @@ class ItemContainer {
 
                     this.parentObj.nextlvlDesc.position.y = this.parentObj.curlvlDesc.position.y + this.parentObj.curlvlDesc.height + 5;
 
-                    this.parentObj.btnPosY = description.position.y + description.height + 10;
+                    this.parentObj.btnPosY = this.parentObj.description.position.y + this.parentObj.description.height + 10;
                     if (this.parentObj.nextlvlDesc.enabled) this.parentObj.btnPosY = this.parentObj.nextlvlDesc.position.y + this.parentObj.nextlvlDesc.height + 15;
                     else if (this.parentObj.curlvlDesc.enabled) this.parentObj.btnPosY = this.parentObj.curlvlDesc.position.y + this.parentObj.curlvlDesc.height + 15;
 
@@ -345,7 +345,7 @@ class ItemContainer {
                 if (this.parentObj.curlvlDesc.enabled) this.parentObj.nextlvlDesc.position.y = this.parentObj.curlvlDesc.position.y + this.parentObj.curlvlDesc.height + 5;
                 else this.parentObj.nextlvlDesc.position.y = this.parentObj.curlvlDesc.position.y;
 
-                this.parentObj.btnPosY = description.position.y + description.height + 10;
+                this.parentObj.btnPosY = this.parentObj.description.position.y + this.parentObj.description.height + 10;
                 if (this.parentObj.nextlvlDesc.enabled) this.parentObj.btnPosY = this.parentObj.nextlvlDesc.position.y + this.parentObj.nextlvlDesc.height + 15;
                 else if (this.parentObj.curlvlDesc.enabled) this.parentObj.btnPosY = this.parentObj.curlvlDesc.position.y + this.parentObj.curlvlDesc.height + 15;
 
