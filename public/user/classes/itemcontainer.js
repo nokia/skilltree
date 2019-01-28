@@ -54,22 +54,27 @@ class ItemContainer {
         detailsForeground.zOrder = 1;
 
         this.curlvlDesc = new PIXI.Text("", {fontSize: descriptionFontSize, fontStyle: 'italic', fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - detailsMargin * 2});
-        if (this.skill.achievedPoint > 0) this.curlvlDesc.text = "Current level: " + this.skill.pointDescription[this.skill.achievedPoint - 1];
+        this.curlvlDesc.enabled = false;
+        if (this.skill.achievedPoint > 0) {
+            this.curlvlDesc.text = "Current level: " + this.skill.pointDescription[this.skill.achievedPoint - 1];
+            this.curlvlDesc.enabled = true;
+        }
         this.curlvlDesc.position.set(detailsMargin, description.position.y + description.height + 10);
         detailsForeground.addChild(this.curlvlDesc);
 
         this.nextlvlDesc = new PIXI.Text("", {fontSize: descriptionFontSize, fontStyle: 'italic', fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - detailsMargin * 2});
-        if (this.skill.achievedPoint < this.skill.maxPoint) this.nextlvlDesc.text = "Next level: " + this.skill.pointDescription[this.skill.achievedPoint];
+        this.nextlvlDesc.enabled = false;
+        if (this.skill.achievedPoint < this.skill.maxPoint) {
+            this.nextlvlDesc.text = "Next level: " + this.skill.pointDescription[this.skill.achievedPoint];
+            this.nextlvlDesc.enabled = true;
+        }
         if (this.skill.achievedPoint == 0) this.nextlvlDesc.position.set(detailsMargin, description.position.y + description.height + 10);
         else this.nextlvlDesc.position.set(detailsMargin, this.curlvlDesc.position.y + this.curlvlDesc.height + 5);
         detailsForeground.addChild(this.nextlvlDesc);
 
         var btnPosY = description.position.y + description.height + 10;
-        if (this.nextlvlDesc.text != " ") {
-            console.log(this.nextlvlDesc.text);
-            btnPosY = this.nextlvlDesc.position.y + this.nextlvlDesc.height + 15;
-        }
-        else if (this.curlvlDesc.text != " ") btnPosY = this.curlvlDesc.position.y + this.curlvlDesc.height + 15;
+        if (this.nextlvlDesc.enabled) btnPosY = this.nextlvlDesc.position.y + this.nextlvlDesc.height + 15;
+        else if (this.curlvlDesc.enabled) btnPosY = this.curlvlDesc.position.y + this.curlvlDesc.height + 15;
 
         var btnG = new PIXI.Graphics();
         btnG.lineStyle(1, 0x888888);
