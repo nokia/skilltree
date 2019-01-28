@@ -318,6 +318,13 @@ class ItemContainer {
                 document.getElementById('submitBtn').href = "";
                 this.parentObj.skill.achievedPoint--;
                 this.levelinfo.text = (this.parentObj.skill.achievedPoint + "/" + this.parentObj.skill.maxPoint);
+
+                if (this.parentObj.skill.achievedPoint > 0) this.parentObj.curlvlDesc.text = "Current level: " + this.parentObj.skill.pointDescription[this.parentObj.skill.achievedPoint - 1];
+                else this.parentObj.curlvlDesc.text = "";
+
+                this.parentObj.nextlvlDesc.text = "Next level: " + this.parentObj.skill.pointDescription[this.parentObj.skill.achievedPoint];
+
+                this.parentObj.nextlvlDesc.position.y = this.parentObj.curlvlDesc.position.y + this.parentObj.curlvlDesc.height + 5;
             }
             this.parentObj.app.renderer.render(this.parentObj.app.stage);
             this.parentObj.refreshAvaliability();
