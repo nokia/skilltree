@@ -37,40 +37,40 @@ class ItemContainer {
 
         // Creating details page
         var detailsWidth = 240;
-        var detailsMargin = 10;
+        this.detailsMargin = 10;
         var nameFontSize = 20;
         var descriptionFontSize = 12;
 
         this.details = new PIXI.Container();
 
-        var detailsForeground = new PIXI.Container();
+        this.detailsForeground = new PIXI.Container();
         var name = new PIXI.Text(this.skill.name, {fontSize: nameFontSize, fill: 0x000000});
         name.position.set(10, 10);
-        detailsForeground.addChild(name);
+        this.detailsForeground.addChild(name);
 
-        var description = new PIXI.Text(this.skill.description, {fontSize: descriptionFontSize, fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - detailsMargin * 2 });
-        description.position.set(detailsMargin, detailsMargin * 2 + nameFontSize);
-        detailsForeground.addChild(description);
-        detailsForeground.zOrder = 1;
+        var description = new PIXI.Text(this.skill.description, {fontSize: descriptionFontSize, fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - this.detailsMargin * 2 });
+        description.position.set(this.detailsMargin, this.detailsMargin * 2 + nameFontSize);
+        this.detailsForeground.addChild(description);
+        this.detailsForeground.zOrder = 1;
 
-        this.curlvlDesc = new PIXI.Text("", {fontSize: descriptionFontSize, fontStyle: 'italic', fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - detailsMargin * 2});
+        this.curlvlDesc = new PIXI.Text("", {fontSize: descriptionFontSize, fontStyle: 'italic', fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - this.detailsMargin * 2});
         this.curlvlDesc.enabled = false;
         if (this.skill.achievedPoint > 0) {
             this.curlvlDesc.text = "Current level: " + this.skill.pointDescription[this.skill.achievedPoint - 1];
             this.curlvlDesc.enabled = true;
         }
-        this.curlvlDesc.position.set(detailsMargin, description.position.y + description.height + 10);
-        detailsForeground.addChild(this.curlvlDesc);
+        this.curlvlDesc.position.set(this.detailsMargin, description.position.y + description.height + 10);
+        this.detailsForeground.addChild(this.curlvlDesc);
 
-        this.nextlvlDesc = new PIXI.Text("", {fontSize: descriptionFontSize, fontStyle: 'italic', fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - detailsMargin * 2});
+        this.nextlvlDesc = new PIXI.Text("", {fontSize: descriptionFontSize, fontStyle: 'italic', fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - this.detailsMargin * 2});
         this.nextlvlDesc.enabled = false;
         if (this.skill.achievedPoint < this.skill.maxPoint) {
             this.nextlvlDesc.text = "Next level: " + this.skill.pointDescription[this.skill.achievedPoint];
             this.nextlvlDesc.enabled = true;
         }
-        if (this.skill.achievedPoint == 0) this.nextlvlDesc.position.set(detailsMargin, description.position.y + description.height + 10);
-        else this.nextlvlDesc.position.set(detailsMargin, this.curlvlDesc.position.y + this.curlvlDesc.height + 5);
-        detailsForeground.addChild(this.nextlvlDesc);
+        if (this.skill.achievedPoint == 0) this.nextlvlDesc.position.set(this.detailsMargin, description.position.y + description.height + 10);
+        else this.nextlvlDesc.position.set(this.detailsMargin, this.curlvlDesc.position.y + this.curlvlDesc.height + 5);
+        this.detailsForeground.addChild(this.nextlvlDesc);
 
         var btnPosY = description.position.y + description.height + 10;
         if (this.nextlvlDesc.enabled) btnPosY = this.nextlvlDesc.position.y + this.nextlvlDesc.height + 15;
@@ -121,7 +121,7 @@ class ItemContainer {
                 app.renderer.render(app.stage);
             })
             .on('click', this.endorse);
-            detailsForeground.addChild(btnEndorseContainer);
+            this.detailsForeground.addChild(btnEndorseContainer);
         }
 
         var btnInfo = new PIXI.Sprite(btnG.generateTexture());
@@ -150,7 +150,7 @@ class ItemContainer {
                 .on('click', function () {
                         this.parentObj.toggleSkillInfoPage();
                         });
-        detailsForeground.addChild(btnInfoContainer);
+        this.detailsForeground.addChild(btnInfoContainer);
 
         var btn1 = new PIXI.Sprite(btnG.generateTexture());
 
@@ -178,7 +178,7 @@ class ItemContainer {
                 .on('click', function () {
                         this.parentObj.toggleSkillDetailsPage();
                         });
-        detailsForeground.addChild(btn1Container);
+        this.detailsForeground.addChild(btn1Container);
 
         /*
         var btn2 = new PIXI.Sprite(btnG.generateTexture());
@@ -210,13 +210,13 @@ class ItemContainer {
         }
         //*/
 
-        var detailsBackground = new PIXI.Graphics();
-        detailsBackground.beginFill(0xffffff);
-        detailsBackground.drawRoundedRect(0, 0, detailsWidth, detailsForeground.height + detailsMargin * 2, 4);
-        detailsBackground.endFill();
+        this.detailsBackground = new PIXI.Graphics();
+        this.detailsBackground.beginFill(0xffffff);
+        this.detailsBackground.drawRoundedRect(0, 0, detailsWidth, this.detailsForeground.height + this.detailsMargin * 2, 4);
+        this.detailsBackground.endFill();
 
-        this.details.addChild(detailsBackground);
-        this.details.addChild(detailsForeground);
+        this.details.addChild(this.detailsBackground);
+        this.details.addChild(this.detailsForeground);
 
         //Initilaizing container
         this.container = new PIXI.Container();
@@ -302,6 +302,8 @@ class ItemContainer {
                     }
 
                     this.parentObj.nextlvlDesc.position.y = this.parentObj.curlvlDesc.position.y + this.parentObj.curlvlDesc.height + 5;
+
+                    this.detailsBackground.height = this.detailsForeground.height + this.detailsMargin * 2;
                 }
                 this.parentObj.app.renderer.render(this.parentObj.app.stage);
                 this.parentObj.refreshAvaliability();
