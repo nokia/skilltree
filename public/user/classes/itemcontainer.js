@@ -292,7 +292,7 @@ class ItemContainer {
 
                     this.parentObj.nextlvlDesc.text = "Next level: " + this.parentObj.skill.pointDescription[this.parentObj.skill.achievedPoint];
 
-                    this.parentObj.nextlvlDesc.position.y = this.parentObj.curlvlDesc.position.y + this.parentObj.curlvlDesc.height + 5);
+                    this.parentObj.nextlvlDesc.position.y = this.parentObj.curlvlDesc.position.y + this.parentObj.curlvlDesc.height + 5;
                 }
                 this.parentObj.app.renderer.render(this.parentObj.app.stage);
                 this.parentObj.refreshAvaliability();
