@@ -53,20 +53,16 @@ class ItemContainer {
         detailsForeground.addChild(description);
         detailsForeground.zOrder = 1;
 
-        this.curLvlDesc = undefined;
-        this.nextLvlDesc = undefined;
-        if (this.skill.achievedPoint > 0) {
-            this.curlvlDesc = new PIXI.Text("Current level: " + this.skill.pointDescription[this.skill.achievedPoint - 1], {fontSize: descriptionFontSize, fontStyle: 'italic', fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - detailsMargin * 2});
-            this.curlvlDesc.position.set(detailsMargin, description.position.y + description.height + 10);
-            detailsForeground.addChild(this.curlvlDesc);
-        }
+        this.curlvlDesc = new PIXI.Text("", {fontSize: descriptionFontSize, fontStyle: 'italic', fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - detailsMargin * 2});
+        if (this.skill.achievedPoint > 0) this.curLvlDesc.text = "Current level: " + this.skill.pointDescription[this.skill.achievedPoint - 1];
+        this.curlvlDesc.position.set(detailsMargin, description.position.y + description.height + 10);
+        detailsForeground.addChild(this.curlvlDesc);
 
-        if (this.skill.achievedPoint < this.skill.maxPoint) {
-            this.nextlvlDesc = new PIXI.Text("Next level: " + this.skill.pointDescription[this.skill.achievedPoint], {fontSize: descriptionFontSize, fontStyle: 'italic', fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - detailsMargin * 2});
-            if (this.skill.achievedPoint == 0) this.nextlvlDesc.position.set(detailsMargin, description.position.y + description.height + 10);
-            else this.nextlvlDesc.position.set(detailsMargin, this.curlvlDesc.position.y + this.curlvlDesc.height + 5);
-            detailsForeground.addChild(this.nextlvlDesc);
-        }
+        this.nextlvlDesc = new PIXI.Text("", {fontSize: descriptionFontSize, fontStyle: 'italic', fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - detailsMargin * 2});
+        if (this.skill.achievedPoint < this.skill.maxPoint) this.nextlvlDesc.text = "Next level: " + this.skill.pointDescription[this.skill.achievedPoint];
+        if (this.skill.achievedPoint == 0) this.nextlvlDesc.position.set(detailsMargin, description.position.y + description.height + 10);
+        else this.nextlvlDesc.position.set(detailsMargin, this.curlvlDesc.position.y + this.curlvlDesc.height + 5);
+        detailsForeground.addChild(this.nextlvlDesc);
 
         var btnPosY = description.position.y + description.height + 10;
         if (this.nextlvlDesc != undefined) btnPosY = this.nextlvlDesc.position.y + this.nextlvlDesc.height + 15;
