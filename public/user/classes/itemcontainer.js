@@ -65,8 +65,8 @@ class ItemContainer {
         detailsForeground.addChild(this.nextlvlDesc);
 
         var btnPosY = description.position.y + description.height + 10;
-        if (this.nextlvlDesc != undefined) btnPosY = this.nextlvlDesc.position.y + this.nextlvlDesc.height + 15;
-        else if (this.curlvlDesc != undefined) btnPosY = this.curlvlDesc.position.y + this.curlvlDesc.height + 15;
+        if (this.nextlvlDesc.text != "") btnPosY = this.nextlvlDesc.position.y + this.nextlvlDesc.height + 15;
+        else if (this.curlvlDesc.text != "") btnPosY = this.curlvlDesc.position.y + this.curlvlDesc.height + 15;
 
         var btnG = new PIXI.Graphics();
         btnG.lineStyle(1, 0x888888);
