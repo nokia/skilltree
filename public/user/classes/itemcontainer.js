@@ -53,26 +53,24 @@ class ItemContainer {
         detailsForeground.addChild(description);
         detailsForeground.zOrder = 1;
 
-        var curLvlDesc = undefined;
-        var nextLvlDesc = undefined;
+        this.curLvlDesc = undefined;
+        this.nextLvlDesc = undefined;
         if (this.skill.achievedPoint > 0) {
-            curLvlDesc = new PIXI.Text("Current level: " + this.skill.pointDescription[this.skill.achievedPoint - 1], {fontSize: descriptionFontSize, fontStyle: 'italic', fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - detailsMargin * 2});
-            curLvlDesc.position.set(detailsMargin, description.position.y + description.height + 10);
-            detailsForeground.addChild(curLvlDesc);
-
-            curLvlDesc.text = "aa";
+            this.curlvlDesc = new PIXI.Text("Current level: " + this.skill.pointDescription[this.skill.achievedPoint - 1], {fontSize: descriptionFontSize, fontStyle: 'italic', fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - detailsMargin * 2});
+            this.curlvlDesc.position.set(detailsMargin, description.position.y + description.height + 10);
+            detailsForeground.addChild(this.curlvlDesc);
         }
 
         if (this.skill.achievedPoint < this.skill.maxPoint) {
-            var nextLvlDesc = new PIXI.Text("Next level: " + this.skill.pointDescription[this.skill.achievedPoint], {fontSize: descriptionFontSize, fontStyle: 'italic', fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - detailsMargin * 2});
-            if (this.skill.achievedPoint == 0) nextLvlDesc.position.set(detailsMargin, description.position.y + description.height + 10);
-            else nextLvlDesc.position.set(detailsMargin, curLvlDesc.position.y + curLvlDesc.height + 5);
-            detailsForeground.addChild(nextLvlDesc);
+            this.nextlvlDesc = new PIXI.Text("Next level: " + this.skill.pointDescription[this.skill.achievedPoint], {fontSize: descriptionFontSize, fontStyle: 'italic', fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - detailsMargin * 2});
+            if (this.skill.achievedPoint == 0) this.nextlvlDesc.position.set(detailsMargin, description.position.y + description.height + 10);
+            else this.nextlvlDesc.position.set(detailsMargin, this.curlvlDesc.position.y + this.curlvlDesc.height + 5);
+            detailsForeground.addChild(this.nextlvlDesc);
         }
 
         var btnPosY = description.position.y + description.height + 10;
-        if (nextLvlDesc != undefined) btnPosY = nextLvlDesc.position.y + nextLvlDesc.height + 15;
-        else if (curLvlDesc != undefined) btnPosY = curLvlDesc.position.y + curLvlDesc.height + 15;
+        if (this.nextlvlDesc != undefined) btnPosY = this.nextlvlDesc.position.y + this.nextlvlDesc.height + 15;
+        else if (this.curlvlDesc != undefined) btnPosY = this.curlvlDesc.position.y + this.curlvlDesc.height + 15;
 
         var btnG = new PIXI.Graphics();
         btnG.lineStyle(1, 0x888888);
@@ -289,6 +287,12 @@ class ItemContainer {
                     document.getElementById('submitBtn').href = "";
                     this.parentObj.skill.achievedPoint++;
                     this.levelinfo.text = (this.parentObj.skill.achievedPoint + "/" + this.parentObj.skill.maxPoint);
+
+                    this.parentObj.curlvlDesc.text = "Current level: " + this.parentObj.skill.pointDescription[this.parentObj.skill.achievedPoint - 1];
+
+                    this.parentObj.nextlvlDesc.text = "Next level: " + this.parentObj.skill.pointDescription[this.parentObj.skill.achievedPoint];
+
+                    this.parentObj.nextlvlDesc.position.y = this.parentObj.curlvlDesc.position.y + this.parentObj.curlvlDesc.height + 5);
                 }
                 this.parentObj.app.renderer.render(this.parentObj.app.stage);
                 this.parentObj.refreshAvaliability();
