@@ -286,7 +286,7 @@ class ItemContainer {
 
                     this.parentObj.curlvlDesc.text = "Current level: " + this.parentObj.skill.pointDescription[this.parentObj.skill.achievedPoint - 1];
 
-                    this.parentObj.nextlvlDesc.text = "Next level: " + this.parentObj.skill.pointDescription[this.parentObj.skill.achievedPoint];
+                    if (this.parentObj.skill.achievedPoint < this.parentObj.skill.maxPoint) this.parentObj.nextlvlDesc.text = "Next level: " + this.parentObj.skill.pointDescription[this.parentObj.skill.achievedPoint];
 
                     this.parentObj.nextlvlDesc.position.y = this.parentObj.curlvlDesc.position.y + this.parentObj.curlvlDesc.height + 5;
                 }
