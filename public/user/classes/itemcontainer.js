@@ -301,7 +301,7 @@ class ItemContainer {
                         this.parentObj.nextlvlDesc.enabled = false;
                     }
 
-                    if (this.parentObj.curlvlDesc.enabled) this.parentObj.nextlvlDesc.position.y = this.parentObj.curlvlDesc.position.y + this.parentObj.curlvlDesc.height + 5;
+                    this.parentObj.nextlvlDesc.position.y = this.parentObj.curlvlDesc.position.y + this.parentObj.curlvlDesc.height + 5;
                 }
                 this.parentObj.app.renderer.render(this.parentObj.app.stage);
                 this.parentObj.refreshAvaliability();
@@ -333,6 +333,7 @@ class ItemContainer {
                 if (this.parentObj.skill.achievedPoint == this.parentObj.maxPoint - 1) this.parentObj.nextlvlDesc.enabled = true;
 
                 if (this.parentObj.curlvlDesc.enabled) this.parentObj.nextlvlDesc.position.y = this.parentObj.curlvlDesc.position.y + this.parentObj.curlvlDesc.height + 5;
+                else this.parentObj.nextlvlDesc.position.y = this.parentObj.curlvlDesc.position.y;
             }
             this.parentObj.app.renderer.render(this.parentObj.app.stage);
             this.parentObj.refreshAvaliability();
