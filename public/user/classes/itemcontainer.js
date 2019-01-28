@@ -54,7 +54,7 @@ class ItemContainer {
         detailsForeground.zOrder = 1;
 
         this.curlvlDesc = new PIXI.Text("ggg", {fontSize: descriptionFontSize, fontStyle: 'italic', fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - detailsMargin * 2});
-        if (this.skill.achievedPoint > 0) this.curLvlDesc.text = "Current level: " + this.skill.pointDescription[this.skill.achievedPoint - 1];
+        if (this.skill.achievedPoint > 0) this.curlvlDesc.text = "Current level: " + this.skill.pointDescription[this.skill.achievedPoint - 1];
         this.curlvlDesc.position.set(detailsMargin, description.position.y + description.height + 10);
         detailsForeground.addChild(this.curlvlDesc);
 
