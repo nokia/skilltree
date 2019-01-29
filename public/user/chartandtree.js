@@ -56,11 +56,11 @@ function addTreeToUser(treeToAdd){
           nt.innerText = this.response.name;
           nt.className = "listedTree";
           forest.appendChild(nt);
-          alert("Selected tree successfully added.");
+          showBottomAlert('success', "Selected tree successfully added");
           initData();
           loadAddedTrees();
-        } else if (this.response.message == "existing") alert("Selected tree is already added.");
-        else if (this.response.message == "notfound") alert("The tree is not found.");
+      } else if (this.response.message == "existing") showBottomAlert('warning', "Selected tree is already added");
+        else if (this.response.message == "notfound") showBottomAlert('danger', "The tree is not found");
       }
   });
 }
