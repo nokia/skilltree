@@ -958,7 +958,7 @@ function delTree(element) {
     request('POST', '/protected/deletemytree', {name: element.parentElement.text}, function () {
         if (this.readyState == 4 && this.status == 200) {
             element.parentElement.outerHTML = '';
-            showBottomAlert('success', 'Tree successfully removed');
+            showBottomAlert('success', element.parentElement.text + ' successfully removed');
         }
     })
 }
@@ -1145,7 +1145,6 @@ Array.prototype.sum = function (prop) {
 }
 
 function showBottomAlert (type, msg) { // type: success, danger, warning, ...
-    console.log('ss');
     document.getElementById('bottomAlert').classList.add('alert-' + type);
 	document.getElementById('bottomAlertMsg').innerText = msg;
 
