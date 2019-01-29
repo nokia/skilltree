@@ -406,10 +406,11 @@ class ItemContainer {
         container.addChild(details);
         container.zOrder = 2;
 
-        console.log(details.getGlobalPosition());
-
         var bottomOfDetails = details.getGlobalPosition().y + details.height;
         if (bottomOfDetails > document.getElementById("pixiCanvas").height) details.position.y = -(bottomOfDetails - document.getElementById("pixiCanvas").height + 10);
+
+        var rightOfDetails = details.getGlobalPosition().x + details.width;
+        if (rightOfDetails > document.getElementById("pixiCanvas").width) details.position.x = -details.width;
 
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
 
