@@ -344,7 +344,6 @@ protectedRoute.post('/getPublicUserData', async function (req, res) {
 
 // Getting the name, skillnames, focusarea of a tree.
 protectedRoute.post('/getPublicTreeData', async function (req, res) {
-		console.log(req.body);
 		var data = req.body;
     var foundTrees = await Tree.find({
 					"name": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
@@ -352,7 +351,6 @@ protectedRoute.post('/getPublicTreeData', async function (req, res) {
 					if (err) throw err;
 			return tree;
 		});
-		console.log(foundTrees);
     res.json(foundTrees);
 });
 
@@ -380,14 +378,13 @@ protectedRoute.post('/getPublicSkillData', async function (req, res) {
 			}
 			outData.push({
 				name: foundSkills[s].name,
-				categoryName: foundSkills[s].cateroryName,
+				categoryName: foundSkills[s].categoryName,
 				description: foundSkills[s].description,
 				descriptionWikipediaURL: foundSkills[s].descriptionWikipediaURL,
 				pointDescription: foundSkills[s].pointDescription,
 				users: outUsers
 			});
 		}
-		console.log(outData[0]);
     res.json(outData);
 });
 
