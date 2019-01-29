@@ -195,7 +195,7 @@ function getPublicSkillData(){
               row2.className = "foundElementRow";
               row2.innerHTML += "<th>" + (j+1) + "</th>";
               row2.innerHTML += "<td>" + this.data.users[j].name + "</td>";
-              row2.innerHTML += "<td>" + this.data.users[j].skill[0].achievedPoint + "</td>";
+              row2.innerHTML += "<td>" + this.data.users[j].skill.achievedPoint + "</td>";
               tablebody.appendChild(row2);
             }
             foundmodal.style.display = "block";
