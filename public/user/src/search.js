@@ -165,7 +165,8 @@ function getPublicSkillData(){
             categoryName: this.response[i].categoryName,
             description: this.response[i].description,
             pointDescription: this.response[i].pointDescription,
-            descriptionWikipediaURL: this.response[i].descriptionWikipediaURL
+            descriptionWikipediaURL: this.response[i].descriptionWikipediaURL,
+            users: this.response[i].users
           }
           row.onclick = function(){
             var foundmodal = document.getElementById('searchedSkillModal');
@@ -175,6 +176,9 @@ function getPublicSkillData(){
             var desc = document.getElementById('searchedSkillModalDesc');
             var wiki = document.getElementById('searchedSkillModalWiki');
             var closer = document.getElementById('closeSearchedSkillModal');
+            var tableheader = document.getElementById('searchedSkillModalTableHeader');
+            var tablebody = document.getElementById('searchedSkillModalTableBody');
+
             header.innerHTML = this.data.name;
             category.innerHTML = "<b>Category</b>: " + this.data.categoryName;
             pdesc.innerHTML = "<b>Description by levels</b>: <br> 1: " + this.data.pointDescription[0] + "<br>" +
@@ -184,6 +188,16 @@ function getPublicSkillData(){
                                                           "5: " + this.data.pointDescription[4];
             desc.innerHTML = "<b>Description</b>: " + this.data.description;
             wiki.innerHTML = "<b>Wiki link</b>: <a href=" + this.data.descriptionWikipediaURL + ">" + this.data.descriptionWikipediaURL + "</a>";
+            tableheader.innerHTML = '<th scope="col">#</th><th scope="col">Name</th><th scope="col">Level</th>';
+            tablebody.innerHTML = "";
+            for (var j = 0; j < this.users.length; j++) {
+              var row2 = document.createElement('tr');
+              row2.className = "foundElementRow";
+              row2.innerHTML += "<th>" + (j+1) + "</th>";
+              row2.innerHTML += "<td>" + this.users[j].name + "</td>";
+              row2.innerHTML += "<td>" + this.users[j].skill[0].achievedPoint + "</td>";
+              tablebody.appendChild(row2);
+            }
             foundmodal.style.display = "block";
             closer.onclick = function(){
               foundmodal.style.display = "none";
