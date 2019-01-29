@@ -1145,7 +1145,7 @@ Array.prototype.sum = function (prop) {
 }
 
 function showBottomAlert (type, msg) { // type: success, danger, warning, ...
-    document.getElementById('bottomAlert').classList.add('alert-' + type);
+    document.getElementById('bottomAlert').className = 'alert alert-dismissible alert-' + type;
 	document.getElementById('bottomAlertMsg').innerText = msg;
 
 	$('#bottomAlert').show();
