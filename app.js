@@ -897,6 +897,31 @@ protectedRoute.post('/editmyskill', async function (req, res) {
 	}
 });
 
+protectedRoute.post('/deletemytree', async function (req, res) {
+    var treeName = req.body.name;
+    var user = await findUser(req.decoded.username);
+
+    if (!user) {
+        res.json({
+            success: false,
+            message: 'User not found.'
+        });
+    } else if (user.trees.find(obj => obj.name == data.name) != undefined) {
+        user.trees = user.trees.filter(obj => obj.name != data.name);
+
+        user.save(function (err) {if (err) throw err;});
+
+        res.json({
+            success: true
+        });
+    } else {
+        res.json({
+            success: false,
+            message: 'tree not exists'
+        });
+    }
+});
+
 // Search for trees to add while typing
 protectedRoute.post('/gettree', async function (req, res) {
 		var data = req.body;
