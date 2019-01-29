@@ -411,9 +411,10 @@ class ItemContainer {
         var bottomOfDetails = details.getGlobalPosition().y + details.height;
         if (bottomOfDetails > document.getElementById("pixiCanvas").height) {
             details.position.y = -(bottomOfDetails - document.getElementById("pixiCanvas").height + 10 - details.lastPos.y);
+            details.lastPos.y = details.position.y;
         } else details.position.y = 0;
 
-        details.lastPos.y = details.position.y;
+
 
 
 
