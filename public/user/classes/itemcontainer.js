@@ -407,7 +407,7 @@ class ItemContainer {
         container.zOrder = 2;
 
         var bottomOfDetails = details.getGlobalPosition().y + details.height;
-        if (bottomOfDetails > document.getElementById("pixiCanvas").height) details.position.y = -(bottomOfDetails - document.getElementById("pixiCanvas").height + 10);
+        if (bottomOfDetails > this.parentObj.app.height) details.position.y = -(bottomOfDetails - this.parentObj.app.height + 10);
 
         var rightOfDetails = details.getGlobalPosition().x + details.width;
         if (rightOfDetails > document.getElementById("pixiCanvas").width) details.position.x = -details.width;
