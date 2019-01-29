@@ -122,7 +122,7 @@ function loadAddedTrees(){
     else ithtree.innerHTML = '<i class = "fa fa-trash" id = "delTreeBtn" onclick = "delTree(this)"></i>' + tn;
     ithtree.className = "dropdown-item";
     ithtree.onclick = function (event) {
-        console.log(event.target);
+        console.log(event.target.id);
         document.getElementById('submitBtn').style.display = "block";
         showTree(this.text, data, true);
     }
