@@ -114,6 +114,7 @@ function startLoader () {
 function loadAddedTrees(){
   var treeList = document.getElementById('treeList');
   treeList.innerHTML = "";
+  console.log(data);
   for (var i = 0; i < data.trees.length; i++) {
     var tn = data.trees[i].name;
     var ithtree = document.createElement('a');
