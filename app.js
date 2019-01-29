@@ -375,7 +375,7 @@ protectedRoute.post('/getPublicSkillData', async function (req, res) {
 			outUsers = [];
 			for (var i = 0; i < foundUsers.length; i++) {
 				if (foundUsers[i].skills.map(obj => obj.name).includes(foundSkills[s].name)) {
-					outUsers.push({username: foundUsers[i].username, skills: foundUsers[i].skills.find(obj => obj.name == foundSkills[s].name)});
+					outUsers.push({username: foundUsers[i].username, skills: foundUsers[i].skills.findOne(obj => obj.name == foundSkills[s].name)});
 				}
 			}
 			outData.push({
