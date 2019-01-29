@@ -359,6 +359,7 @@ protectedRoute.post('/getPublicTreeData', async function (req, res) {
 // Getting the name, caterory, descs of a skill, and give a list of the people, who have it.
 protectedRoute.post('/getPublicSkillData', async function (req, res) {
     var data = req.body;
+		var outData = []; // this is required, because adding a new param to a queried mongo object bugs rn.
 		var outUsers = [];
     var foundSkills = await Skill.find({
 				"name": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
@@ -377,12 +378,17 @@ protectedRoute.post('/getPublicSkillData', async function (req, res) {
 					outUsers.push({username: foundUsers[i].username, skills: foundUsers[i].skills.find(obj => obj.name == foundSkills[s].name)});
 				}
 			}
-			foundSkills[s].users = outUsers;
+			outData.push({
+				name: foundSkills[s].name,
+				categoryName: foundSkills[s].cateroryName,
+				description: foundSkills[s].description,
+				descriptionWikipediaURL: foundSkills[s].descriptionWikipediaURL,
+				pointDescription: foundSkills[s].pointDescription,
+				users: outUsers
+			});
 		}
-		console.log(foundSkills[0]);
-		console.log("----------------------------------------");
-		console.log(foundSkills[0].users);
-    res.json(foundSkills);
+		console.log(outData[0]);
+    res.json(outData);
 });
 
 // Adds a public tree to the current user.
