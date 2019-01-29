@@ -898,7 +898,7 @@ protectedRoute.post('/editmyskill', async function (req, res) {
 });
 
 protectedRoute.post('/deletemytree', async function (req, res) {
-    var treeName = req.body.name;
+    var data = req.body;
     var user = await findUser(req.decoded.username);
 
     if (!user) {
