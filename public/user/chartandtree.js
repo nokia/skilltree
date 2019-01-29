@@ -955,7 +955,7 @@ function getChildren (skills, skill, children) {
 }
 
 function delTree(element) {
-    console.log(element.parentElement);
+    console.log(element.parentElement.text);
 }
 
 // make trees globally available
