@@ -402,11 +402,11 @@ class ItemContainer {
         var details = this.parentObj.details;
         var container = this;
 
-        console.log(details.getGlobalPosition());
-
         // Brings up hovered container
         container.addChild(details);
         container.zOrder = 2;
+
+        console.log(details.getGlobalPosition());
 
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
 
