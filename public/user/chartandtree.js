@@ -676,8 +676,8 @@ function createTree () {
                         else if (this.response.message == "treeexists") alert("There is already a tree with this name");
                     }
                 });
-            } else showBottomAlert("Please add at least one skill to the tree");
-        } else showBottomAlert("Please provide a name to the tree");
+            } else showBottomAlert("danger", "Please add at least one skill to the tree");
+        } else showBottomAlert("danger", "Please provide a name to the tree");
     };
 }
 
@@ -1143,7 +1143,8 @@ Array.prototype.sum = function (prop) {
     return total;
 }
 
-function showBottomAlert(msg) {
+function showBottomAlert(type, msg) { // type: success, danger, warning, ...
+    document.getElementById('bottomAlert').classList.add('alert-' + type);
 	document.getElementById('bottomAlertMsg').innerText = msg;
 	$('#bottomAlert').show();
 }
