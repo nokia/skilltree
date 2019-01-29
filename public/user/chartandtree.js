@@ -954,7 +954,7 @@ function getChildren (skills, skill, children) {
 	}
 }
 
-function delTree(element) {
+function delTree(element, event) {
     event.stopPropagation;
     console.log(element.parentElement.text);
 }
