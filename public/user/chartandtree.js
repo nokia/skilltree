@@ -954,6 +954,10 @@ function getChildren (skills, skill, children) {
 	}
 }
 
+function delTree(element) {
+    console.log(element.parentElement);
+}
+
 // make trees globally available
 function approveTrees() {
     hideMenus();
