@@ -190,12 +190,12 @@ function getPublicSkillData(){
             wiki.innerHTML = "<b>Wiki link</b>: <a href=" + this.data.descriptionWikipediaURL + ">" + this.data.descriptionWikipediaURL + "</a>";
             tableheader.innerHTML = '<th scope="col">#</th><th scope="col">Name</th><th scope="col">Level</th>';
             tablebody.innerHTML = "";
-            for (var j = 0; j < this.users.length; j++) {
+            for (var j = 0; j < this.data.users.length; j++) {
               var row2 = document.createElement('tr');
               row2.className = "foundElementRow";
               row2.innerHTML += "<th>" + (j+1) + "</th>";
-              row2.innerHTML += "<td>" + this.users[j].name + "</td>";
-              row2.innerHTML += "<td>" + this.users[j].skill[0].achievedPoint + "</td>";
+              row2.innerHTML += "<td>" + this.data.users[j].name + "</td>";
+              row2.innerHTML += "<td>" + this.data.users[j].skill[0].achievedPoint + "</td>";
               tablebody.appendChild(row2);
             }
             foundmodal.style.display = "block";
