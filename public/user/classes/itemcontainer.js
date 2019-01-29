@@ -240,7 +240,7 @@ class ItemContainer {
 
         this.details.position.set(74, 0);
 
-        console.log(this.details.getGlobalPosition());
+        console.log(this.details.toGlobal());
 
         if (this.skill.achievedPoint == this.skill.maxPoint) {
           this.setFilter(this, nullFilter, maxPointFilter);
