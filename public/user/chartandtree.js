@@ -955,11 +955,11 @@ function getChildren (skills, skill, children) {
 }
 
 function delTree(element) {
-    request('POST', '/protected/deletemytree', {name: element.parentElement.text}, function () {
+    /*request('POST', '/protected/deletemytree', {name: element.parentElement.text}, function () {
         if (this.readyState == 4 && this.status == 200) {
             window.open("/user/", "_self");
         }
-    })
+    })*/
 }
 
 // make trees globally available
