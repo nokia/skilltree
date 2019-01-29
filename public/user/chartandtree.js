@@ -1114,12 +1114,27 @@ function setAdmin () {
     var approveTrees = document.getElementById("setAdmin");
     approveTrees.style.display = "block";
 
-    var btn = document.getElementById('setAdminBtn');
-    btn.onclick = function () {
+    var giveBtn = document.getElementById('setAdminBtn');
+    giveBtn.onclick = function () {
         var username = document.getElementById('newAdminUser').value;
 
         request('POST', '/admin/setadmin', {
-            username: username
+            username: username,
+            give: true
+        }, function () {
+            if (this.readyState == 4 && this.status == 200) {
+                window.open("/user/", "_self");
+            }
+        });
+    };
+
+    var revokeBtn = document.getElementById('delAdminBtn');
+    revokeBtn.onclick = function () {
+        var username = document.getElementById('newAdminUser').value;
+
+        request('POST', '/admin/setadmin', {
+            username: username,
+            give: false
         }, function () {
             if (this.readyState == 4 && this.status == 200) {
                 window.open("/user/", "_self");
