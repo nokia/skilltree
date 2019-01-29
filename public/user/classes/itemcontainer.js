@@ -262,7 +262,7 @@ class ItemContainer {
             .on('pointerover', this.onButtonOver)
             .on('pointerout', this.onButtonOut);
 
-        console.log(this.details.getGlobalPosition().x);
+        console.log(this.container.getGlobalPosition().x);
     }
 
     // sets the filters
