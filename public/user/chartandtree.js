@@ -1144,7 +1144,8 @@ Array.prototype.sum = function (prop) {
     return total;
 }
 
-function showBottomAlert(type, msg) { // type: success, danger, warning, ...
+function showBottomAlert (type, msg) { // type: success, danger, warning, ...
+    console.log('ss');
     document.getElementById('bottomAlert').classList.add('alert-' + type);
 	document.getElementById('bottomAlertMsg').innerText = msg;
 
