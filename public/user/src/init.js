@@ -123,7 +123,7 @@ function loadAddedTrees(){
     ithtree.className = "dropdown-item";
     ithtree.onclick = function() {
         document.getElementById('submitBtn').style.display = "block";
-        showTree(this.innerHTML, data, true); // bator?
+        showTree(this.text, data, true);
     }
     treeList.appendChild(ithtree);
   }
