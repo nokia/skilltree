@@ -1730,6 +1730,7 @@ adminRoute.post('/setadmin', async function (req, res) {
 				success: true
 			});
 		}
+	});
 });
 
 /*
