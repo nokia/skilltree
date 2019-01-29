@@ -406,6 +406,8 @@ class ItemContainer {
         container.addChild(details);
         container.zOrder = 2;
 
+        console.log(details.getGlobalPosition());
+
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
 
         if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint  || this.parentObj.skill.disabled) return;
