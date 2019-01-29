@@ -240,8 +240,6 @@ class ItemContainer {
 
         this.details.position.set(74, 0);
 
-        console.log(this.details.toGlobal(new PIXI.Point(0, 0)));
-
         if (this.skill.achievedPoint == this.skill.maxPoint) {
           this.setFilter(this, nullFilter, maxPointFilter);
         } else if (this.skill.achievedPoint > 0){
@@ -263,6 +261,8 @@ class ItemContainer {
         this.container
             .on('pointerover', this.onButtonOver)
             .on('pointerout', this.onButtonOut);
+
+        console.log(this.details.getGlobalPosition().x);
     }
 
     // sets the filters
