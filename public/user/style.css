@@ -372,3 +372,8 @@ a {
     box-shadow: none;
     margin-bottom: 5px;
 }
+
+#delTreeBtn {
+    margin-left:auto;
+    margin-right:0;
+}
