@@ -408,6 +408,9 @@ class ItemContainer {
 
         console.log(details.getGlobalPosition());
 
+        var bottomOfDetails = details.getGlobalPosition().y + details.height;
+        if (bottomOfDetails > document.getElementById("pixiCanvas").height) details.position.y = -(bottomOfDetails - document.getElementById("pixiCanvas").height + 10);
+
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
 
         if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint  || this.parentObj.skill.disabled) return;
