@@ -407,7 +407,8 @@ class ItemContainer {
         container.zOrder = 2;
 
         var bottomOfDetails = details.getGlobalPosition().y + details.height;
-        if (bottomOfDetails > this.parentObj.app.height) details.position.y = Math.max(-(bottomOfDetails - this.parentObj.app.height + 10), 10);
+        if (bottomOfDetails > this.parentObj.app.height) details.position.y = -(bottomOfDetails - this.parentObj.app.height + 10);
+        if (details.getGlobalPosition().y < 10) details.position.y = 10;
 
         var rightOfDetails = details.getGlobalPosition().x + details.width;
         if (rightOfDetails > this.parentObj.app.width) details.position.x = -details.width;
