@@ -118,7 +118,7 @@ function loadAddedTrees(){
     var tn = data.trees[i].name;
     var ithtree = document.createElement('a');
     if (tn == data.mainTree) ithtree.innerHTML = tn;
-    else ithtree.innerHTML = '<button class = "btn btn-default fa fa-trash" id = "delTreeBtn" data-toggle="confirmation" ></button>' + tn;
+    else ithtree.innerHTML = '<i class = "fa fa-trash" id = "delTreeBtn" onclick = "delTree(this)"></i>' + tn;
     ithtree.className = "dropdown-item";
     ithtree.onclick = function (event) {
         if (event.target.id != 'delTreeBtn') {
