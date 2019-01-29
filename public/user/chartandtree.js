@@ -1119,7 +1119,7 @@ function setAdmin () {
         var username = document.getElementById('newAdminUser').value;
 
         request('POST', '/admin/setadmin', {
-            username: selectedTraining.username
+            username: username
         }, function () {
             if (this.readyState == 4 && this.status == 200) {
                 window.open("/user/", "_self");
