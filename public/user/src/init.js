@@ -117,7 +117,7 @@ function loadAddedTrees(){
   for (var i = 0; i < data.trees.length; i++) {
     var tn = data.trees[i].name;
     var ithtree = document.createElement('a');
-    ithtree.innerHTML = '<span onclick = "alert("a")">&times;</span>' + tn;
+    ithtree.innerHTML = '<span onclick = "alert()">&times;</span>' + tn;
     ithtree.className = "dropdown-item";
     ithtree.onclick = function() {
         document.getElementById('submitBtn').style.display = "block";
