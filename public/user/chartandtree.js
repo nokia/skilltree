@@ -1150,7 +1150,7 @@ function showBottomAlert(type, msg) { // type: success, danger, warning, ...
 
 	$('#bottomAlert').show();
 
-    if (type != 'danger') setTimeout($('#bottomAlert').hide(), 3000);
+    if (type != 'danger') setTimeout(function () {$('#bottomAlert').hide()}, 3000);
 }
 
 function request (type, url, sendData, callback) {
