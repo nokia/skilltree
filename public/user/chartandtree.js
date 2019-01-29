@@ -958,7 +958,7 @@ function delTree(element) {
     request('POST', '/protected/deletemytree', {name: element.parentElement.text}, function () {
         if (this.readyState == 4 && this.status == 200) {
             element.parentElement.outerHTML = '';
-            showBottomAlert('danger', element.parentElement.text + ' successfully removed');
+            showBottomAlert('success', 'Tree successfully removed');
         }
     })
 }
