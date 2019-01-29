@@ -1710,6 +1710,27 @@ adminRoute.post('/dropoffers', async function (req, res) {
 
 });
 
+adminRoute.post('/setadmin', async function (req, res) {
+	User.findOne({
+        username: req.body.username
+    }, function(err, user) {
+        if (err) throw err;
+
+        if (!user) {
+            res.json({
+                success: false,
+                message: 'User not found.'
+            });
+        } else if (user) {
+			user.admin = true;
+			console.log(user);
+			user.save(function (err) {if (err) throw err;});
+
+			res.json({
+				success: true
+			});
+		}
+});
 
 /*
 *   END OF ADMIN
