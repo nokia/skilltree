@@ -409,7 +409,11 @@ class ItemContainer {
         if (details.initPos == undefined) details.initPos = details.getGlobalPosition();
 
         var bottomOfDetails = details.getGlobalPosition().y + details.height;
-        if (bottomOfDetails > this.parentObj.app.height) details.position.y = (details.initPos.y - details.getGlobalPosition().y) - (bottomOfDetails - this.parentObj.app.height + 10);
+        if (bottomOfDetails > document.getElementById("pixiCanvas").height) details.position.y = -(bottomOfDetails - document.getElementById("pixiCanvas").height + 10);
+
+
+
+        //if (bottomOfDetails > height) details.position.y = (details.initPos.y - details.getGlobalPosition().y) - (bottomOfDetails - this.parentObj.app.height + 10);
         //if (details.getGlobalPosition().y < 10) details.position.y = 10;
 
         var rightOfDetails = details.getGlobalPosition().x + details.width;
