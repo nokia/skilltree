@@ -261,8 +261,6 @@ class ItemContainer {
         this.container
             .on('pointerover', this.onButtonOver)
             .on('pointerout', this.onButtonOut);
-
-        console.log(this.container.getGlobalPosition().x);
     }
 
     // sets the filters
@@ -403,6 +401,8 @@ class ItemContainer {
         var skillborder = this.parentObj.skillborder;
         var details = this.parentObj.details;
         var container = this;
+
+        console.log(details.getGlobalPosition());
 
         // Brings up hovered container
         container.addChild(details);
