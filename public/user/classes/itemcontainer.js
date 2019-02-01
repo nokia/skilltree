@@ -6,9 +6,7 @@
   var nullFilter = new PIXI.filters.AlphaFilter(1);
   var maxPointFilter = new PIXI.filters.GlowFilter(8,3,2, 0x007F0E, 1);
   var notNullPointFilter = new PIXI.filters.GlowFilter(8,3,2, 0xCCAA00, 1);
-  //var hoverFilter = new PIXI.filters.GlowFilter(8,3,2, 0xFFBF00, 1);
-  var hoverFilter = new PIXI.filters.ColorMatrixFilter();
-  hoverFilter.matrix = [100, 0, 0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 255, 0];
+  var hoverFilter = new PIXI.filters.GlowFilter(8,3,2, 0xFFBF00, 1);
 
 class ItemContainer {
     constructor(app, skills, skillName, owner) {
