@@ -8,7 +8,7 @@
   var notNullPointFilter = new PIXI.filters.GlowFilter(8,3,2, 0xCCAA00, 1);
   //var hoverFilter = new PIXI.filters.GlowFilter(8,3,2, 0xFFBF00, 1);
   var hoverFilter = new PIXI.filters.ColorMatrixFilter();
-  hoverFilter.matrix = [255, 0, 0, 0, 0, 0, 191, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 255, 0.5];
+  hoverFilter.matrix = [100, 0, 0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 255, 0];
 
 class ItemContainer {
     constructor(app, skills, skillName, owner) {
