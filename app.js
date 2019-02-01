@@ -191,7 +191,6 @@ protectedRoute.get('/userdata', function (req, res) {
 			if (user.mainTree != undefined) { // first login
 				delete user.focusArea;
 			}
-
             if (user.admin) {
                 var trees = await ApprovableTree.find({}, function(err, trees) {
     		        if (err) throw err;
@@ -207,12 +206,10 @@ protectedRoute.get('/userdata', function (req, res) {
     		        if (err) throw err;
     				return trainings;
     		    });
-
                 user.apprTrees = trees;
                 user.apprSkills = skills;
                 user.apprTrainings = trainings;
             }
-
       		return res.json(user);
       	}
     });
@@ -476,7 +473,6 @@ async function getDependency (userSkills, skill, dependency) {
 	var parents = [];
 	for (var i = 0; skill.parents != undefined && i < skill.parents.length; ++i) {
         var parent = userSkills.find(obj => obj.name == skill.parents[i]);
-
         if (parent == undefined) {
             parent = await Skill.findOne({name: skill.parents[i]} , function (err, skill) {
                 if (err) throw err;
@@ -911,7 +907,6 @@ protectedRoute.post('/deletemytree', async function (req, res) {
         });
     } else if (user.trees.find(obj => obj.name == data.name) != undefined) {
         user.trees = user.trees.filter(obj => obj.name != data.name);
-
         user.save(function (err) {if (err) throw err;});
 
         res.json({
@@ -1062,14 +1057,11 @@ protectedRoute.post('/submitall', async function (req, res) {
                     }
                 }
 			});
-
 			globalSkills.forEach(function (skill) {
 				skill.save(function (err) {if (err) throw err;});
 			});
 		}
-
 		user.save(function (err) {if (err) throw err;});
-
 		res.json({
 			success: true,
 		});
@@ -1187,11 +1179,7 @@ protectedRoute.post('/request', async function (req, res){
 				skill.advancedRequests.push({	username: user.username,
 										achievedPoint: userskill.achievedPoint,
 										email: user.email  });
-
 				skill.save(function (err) {if (err) throw err;});
-
-
-
 				res.json({
 					succes: true,
 					message: 'Added request.',
@@ -1200,8 +1188,6 @@ protectedRoute.post('/request', async function (req, res){
 			}
 			else
 			{
-
-
 				res.json({
 					succes: false,
 					message: 'Already requested.',
@@ -1209,8 +1195,6 @@ protectedRoute.post('/request', async function (req, res){
 				});
 			}
 		}
-
-
 	}
 	else
 	{
@@ -1242,18 +1226,11 @@ protectedRoute.post('/endorse', async function (req, res) {
     }
   }
 });
-
-
-
-
 /*
 *   ADMIN
 */
-
-
 var adminRoute = express.Router();
 app.use('/admin', adminRoute);
-
 
 adminRoute.use(function(req, res, next) {
     var token = req.get('x-access-token');
@@ -1285,7 +1262,6 @@ adminRoute.use(function(req, res, next) {
             success: false,
             message: 'No token provided.'
         });
-
     }
 });
 
@@ -1293,14 +1269,11 @@ adminRoute.use(express.json());
 
 //Approve a skill thats sent in the body as skillforaproval to the api
 adminRoute.post('/approveskill', async function (req, res)  {
-
 	var skillforapproval = req.body;
-
 	var approvecollection = await ApprovableSkill.find( {} , async function(err, approvecollection) {
 		if(err) throw err;
 		else return approvecollection;
 	});
-
 
 	//Look for the skill in the database, if already exists
 	var globalskill = undefined;
@@ -1313,12 +1286,12 @@ adminRoute.post('/approveskill', async function (req, res)  {
 
 	//Check if skill is already in the database or not
 	if(globalskill !== null )
-		{
-			res.json({
-				success: false,
-				message: "Skill already exists"
-			});
-		}
+	{
+		res.json({
+			success: false,
+			message: "Skill already exists"
+		});
+	}
 	else  //If its not, add to the database
 	{
 		newGlobalSkill = new Skill({
@@ -1339,103 +1312,94 @@ adminRoute.post('/approveskill', async function (req, res)  {
 			],
 			trainings: [
 				{
-                    name: skillforapproval.training.name,
-                    level: skillforapproval.training.level,
-                    shortDescription: skillforapproval.training.shortDescription,
-                    URL: skillforapproval.training.URL,
-                    goal: skillforapproval.training.goal,
-                    length: skillforapproval.traininglength,
-                    language: skillforapproval.training.language
+					name: skillforapproval.training.name,
+					level: skillforapproval.training.level,
+					shortDescription: skillforapproval.training.shortDescription,
+					URL: skillforapproval.training.URL,
+					goal: skillforapproval.training.goal,
+					length: skillforapproval.traininglength,
+					language: skillforapproval.training.language
 				}
 			]
+		});
+		newGlobalSkill.save();
+
+		console.log(approvecollection);
+		console.log("----------");
+		var dependency = [];
+		await getDependency(approvecollection, skillforapproval, dependency);
+
+		console.log(dependency);
+
+		var lastdependency = dependency[dependency.length-1];
+
+		for(var i=0;i<dependency.length;i++)
+		{
+			var globalskill = await Skill.findOne( { name : dependency[i].name } , async function(err, globalskill){
+				if(err) throw err;
+				else return globalskill;
 			});
-			newGlobalSkill.save();
-
-			console.log(approvecollection);
-			console.log("----------");
-			var dependency = [];
-			await getDependency(approvecollection, skillforapproval, dependency);
-
-			console.log(dependency);
-
-			var lastdependency = dependency[dependency.length-1];
-
-			for(var i=0;i<dependency.length;i++)
+			if(globalskill !== null)
 			{
-
-				var globalskill = await Skill.findOne( { name : dependency[i].name } , async function(err, globalskill){
-					if(err) throw err;
-					else return globalskill;
-				});
-
-
-				if(globalskill !== null)
-				{
-					res.json({
-						success: false,
-						message: "dependency " +i + " " + dependency[i].name + " is already in database"
-					});
-				}
-				else
-					{
-						newGlobalSkill = new Skill({
-							name: dependency[i].name,
-							categoryName: dependency[i].categoryName,
-							skillIcon: dependency[i].skillIcon,
-							description: dependency[i].description,
-							pointDescription: dependency[i].pointDescription,
-							maxPoint: dependency[i].maxPoint,
-							parents: dependency[i].parent,
-							children: [
-								{
-									name: dependency[i].name,
-									minPoint: dependency[i].minPoint,
-									recommended: dependency[i].recommended
-								}
-							],
-							trainings: [
-								{
-                                    name: dependency[i].training.name,
-                                    level: dependency[i].training.level,
-                                    shortDescription: dependency[i].training.shortDescription,
-                                    URL: dependency[i].training.URL,
-                                    goal: dependency[i].training.goal,
-                                    length: dependency[i].traininglength,
-                                    language: dependency[i].training.language
-								}
-							]
-							});
-							newGlobalSkill.save();
-
-					}
-
-
-			}
-
-			for(var i=0; i<lastdependency.parents.length; i++)
-			{
-				var lastdependencyParent =  await Skill.find( { name : lastdependency.parents[i] } , async function(err, lastdependencyParent){
-					if(err) throw err;
-					else return lastdependencyParent;
-				});
-
-				lastdependencyParent.children.push({
-						name: lastdependency.name,
-            			minPoint: 0, //TODO skillsforapproval model to be changed, got no real data to be read
-            			recommended: false // ^
-				});
-
-				lastdependencyParent.save();
-
 				res.json({
-					message: "Succes",
-					success: true
+					success: false,
+					message: "dependency " +i + " " + dependency[i].name + " is already in database"
 				});
-
 			}
+			else
+			{
+				newGlobalSkill = new Skill({
+					name: dependency[i].name,
+					categoryName: dependency[i].categoryName,
+					skillIcon: dependency[i].skillIcon,
+					description: dependency[i].description,
+					pointDescription: dependency[i].pointDescription,
+					maxPoint: dependency[i].maxPoint,
+					parents: dependency[i].parent,
+					children: [
+						{
+							name: dependency[i].name,
+							minPoint: dependency[i].minPoint,
+							recommended: dependency[i].recommended
+						}
+					],
+					trainings: [
+						{
+							name: dependency[i].training.name,
+							level: dependency[i].training.level,
+							shortDescription: dependency[i].training.shortDescription,
+							URL: dependency[i].training.URL,
+							goal: dependency[i].training.goal,
+							length: dependency[i].traininglength,
+							language: dependency[i].training.language
+						}
+					]
+				});
+				newGlobalSkill.save();
+			}
+		}
 
+		for(var i=0; i<lastdependency.parents.length; i++)
+		{
+			var lastdependencyParent =  await Skill.find( { name : lastdependency.parents[i] } , async function(err, lastdependencyParent){
+				if(err) throw err;
+				else return lastdependencyParent;
+			});
+
+			lastdependencyParent.children.push({
+				name: lastdependency.name,
+				minPoint: 0, //TODO skillsforapproval model to be changed, got no real data to be read
+				recommended: false // ^
+			});
+
+			lastdependencyParent.save();
+
+			res.json({
+				message: "Succes",
+				success: true
+			});
+		}
 	}
-
 });
 
 adminRoute.post('/edittree', async function (req, res) {
@@ -1467,7 +1431,6 @@ adminRoute.post('/edittree', async function (req, res) {
             }
         })
     });
-
     res.json({
         success: true
     });
@@ -1687,7 +1650,6 @@ adminRoute.post('/approvetraining', async function (req, res) {
                 }
             })
         });
-
         await ApprovableTraining.remove({ // delete ALL trainings for the skill from approve with this name
             skillName: data.skillName,
             name: data.name
@@ -1706,8 +1668,6 @@ adminRoute.post('/dropoffers', async function (req, res) {
 			skill.save(  function (err) {if (err) throw err;} );
         })
 	})
-
-
 });
 
 adminRoute.post('/setadmin', async function (req, res) {
@@ -1746,16 +1706,13 @@ adminRoute.post('/deleteUser', async function (req,res){
 			success: true,
 			message: "User deleted"
 		})
-
 	});
-
 });
 
 adminRoute.get('/testAdmin', async function (req,res){
 	res.json({
 		success: true
 	});
-
 });
 
 ///////////////// END of DELETE SECTION
