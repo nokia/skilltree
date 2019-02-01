@@ -136,9 +136,7 @@ app.post('/auth', function(req, res) {
                     message: "Authenticated.",
                 });
             }
-
         }
-
     });
 });
 
@@ -355,7 +353,7 @@ protectedRoute.post('/getPublicTreeData', async function (req, res) {
 protectedRoute.post('/getPublicSkillData', async function (req, res) {
     var data = req.body;
 		var outData = []; // this is required, because adding a new param to a queried mongo object bugs rn.
-		var outUsers = [];
+		var outUsers = []; // array of users that have the skill.
     var foundSkills = await Skill.find({
 				"name": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
 		}, 'name categoryName description descriptionWikipediaURL pointDescription', function(err, skill) {
@@ -399,15 +397,15 @@ protectedRoute.post('/addTreeToUser', async function (req, res){
 			user.trees.push(tree);
 
 			var skills = await Skill.find({
-	        	name: tree.skillNames,
-	    	}, function (err, skills) {
-	        	if (err) throw err;
+				name: tree.skillNames,
+			}, function (err, skills) {
+				if (err) throw err;
 				return skills;
-	    	});
+			});
 
 			await skills.forEach(function (skill) {
 				skill.achievedPoint = 0;
-                if (user.skills.find(obj => obj.name == skill.name) == undefined) user.skills.push(skill);
+				if (user.skills.find(obj => obj.name == skill.name) == undefined) user.skills.push(skill);
 			});
 
 			user.save(function (err) {if (err) throw err;});
