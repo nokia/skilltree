@@ -112,7 +112,6 @@ function showChart() {
 
         tempContainer.addChild(innerSlice);
 
-
         //Clickabke slices ----------------------------
         /*sliceContainer[i].buttonMode = true;
         sliceContainer[i].interactive = true;
