@@ -494,159 +494,144 @@ class ItemContainer {
 
 
 				//Listener, if response comes, it runs.
-				offerHttpRequest.onreadystatechange = function() {
-		    		if(offerHttpRequest.readyState == 4 && offerHttpRequest.status == 200) {
-						if (offerHttpRequest.response !== undefined) {
-                            //Got the offer data, fill the offers table
+        offerHttpRequest.onreadystatechange = function() {
+          if(offerHttpRequest.readyState == 4 && offerHttpRequest.status == 200) {
+            if (offerHttpRequest.response !== undefined) {
+              //Got the offer data, fill the offers table
 
-                            //Initialize table variables
-                            globalskill = offerHttpRequest.response;
-                            var offerTable = document.getElementById('offerTableBody');
-                            //initialize the request counts
-                            var beginnerCount = document.getElementById('beginnerCount');
-                            beginnerCount.innerHTML = globalskill.beginnerRequests.length;
-                            var intermediateCount = document.getElementById('intermediateCount');
-                            intermediateCount.innerHTML = globalskill.intermediateRequests.length;
-                            var advancedCount = document.getElementById('advancedCount');
-                            advancedCount.innerHTML = globalskill.advancedRequests.length;
+              //Initialize table variables
+              globalskill = offerHttpRequest.response;
+              var offerTable = document.getElementById('offerTableBody');
+              //initialize the request counts
+              var beginnerCount = document.getElementById('beginnerCount');
+              beginnerCount.innerHTML = globalskill.beginnerRequests.length;
+              var intermediateCount = document.getElementById('intermediateCount');
+              intermediateCount.innerHTML = globalskill.intermediateRequests.length;
+              var advancedCount = document.getElementById('advancedCount');
+              advancedCount.innerHTML = globalskill.advancedRequests.length;
 
+              //Empty the table
+              offerTable.innerHTML = "";
 
-                            //Empty the table
-                            offerTable.innerHTML = "";
-
-
-                            offerTable.appendChild( createTableRow( "Name",
-                                                                    "Location",
-                                                                    "Day",
-                                                                    "Time",
-                                                                    "Level",
-                                                                    "divTableHead") );
-
-
-                            //Filling the table
-                            for(var i=0; i<globalskill.offers.length; i++ )
-                                {
-                                if(true) //TODO, only higher level offers should appear
-                                    {
-                                    offerTable.appendChild( createTableRow( globalskill.offers[i].username,
-                                                                            globalskill.offers[i].location,
-                                                                            globalskill.offers[i].teachingDay,
-                                                                            globalskill.offers[i].teachingTime,
-                                                                            globalskill.offers[i].achievedPoint,
-                                                                            "divTableCell") );
-                                    }
-                                }
-
-                            var addBeginnerRequest = document.getElementById('addBeginnerCount');
-                            addBeginnerRequest.onclick = function() {
-                                //request for requests
-                                var requestforrequests = new XMLHttpRequest();
-                                    requestforrequests.open('POST', '/protected/request', true);
-                                    requestforrequests.setRequestHeader('Content-type', 'application/json');
-                                    requestforrequests.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-                                    requestforrequests.responseType = "json";
-
-                                //if it returns
-                                requestforrequests.onreadystatechange = function() {
-                                    if(requestforrequests.readyState == 4 && requestforrequests.status == 200) {
-                                        if(requestforrequests.response !== undefined)
-                                        {
-                                            alert(requestforrequests.response.message);
-
-                                            beginnerCount.innerHTML = (requestforrequests.response.sumRequest);
-
-                                        }
-                                    }
-                                }
-
-                                requestforrequests.send(
-                                    JSON.stringify({
-                                        name: skillname,
-                                        requestType: "beginner"
-                                    })
-                                );
-                            }
-
-                            var addIntermediateRequest = document.getElementById('addIntermediateCount');
-                            addIntermediateRequest.onclick = function() {
-                                //request for requests
-                                var requestforrequests = new XMLHttpRequest();
-                                    requestforrequests.open('POST', '/protected/request', true);
-                                    requestforrequests.setRequestHeader('Content-type', 'application/json');
-                                    requestforrequests.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-                                    requestforrequests.responseType = "json";
-
-                                //if it returns
-                                requestforrequests.onreadystatechange = function() {
-                                    if(requestforrequests.readyState == 4 && requestforrequests.status == 200) {
-                                        if(requestforrequests.response !== undefined)
-                                        {
-                                            alert(requestforrequests.response.message);
-                                            //console.log(requestforrequests.response);
-                                            intermediateCount.innerHTML = (requestforrequests.response.sumRequest);
-
-                                        }
-                                    }
-                                }
-
-                                requestforrequests.send(
-                                    JSON.stringify({
-                                        name: skillname,
-                                        requestType: "intermediate"
-                                    })
-                                );
-                            }
-
-                            var addAdvancedRequest = document.getElementById('addAdvancedCount');
-                            addAdvancedRequest.onclick = function() {
-                                //request for requests
-                                var requestforrequests = new XMLHttpRequest();
-                                    requestforrequests.open('POST', '/protected/request', true);
-                                    requestforrequests.setRequestHeader('Content-type', 'application/json');
-                                    requestforrequests.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
-                                    requestforrequests.responseType = "json";
-
-                                //if it returns
-                                requestforrequests.onreadystatechange = function() {
-                                    if(requestforrequests.readyState == 4 && requestforrequests.status == 200) {
-                                        if(requestforrequests.response !== undefined)
-                                        {
-                                            alert(requestforrequests.response.message);
-                                            //console.log(requestforrequests.response);
-                                            advancedCount.innerHTML = (requestforrequests.response.sumRequest);
-
-                                        }
-                                    }
-                                }
-
-                                requestforrequests.send(
-                                    JSON.stringify({
-                                        name: skillname,
-                                        requestType: "advanced"
-                                    })
-                                );
-                            }
-
-
-
-                            //Display the tables Window if all table has been loaded
-                            displayWindow();
-
-						}
-					}
+              offerTable.appendChild( createTableRow( "Name",
+              "Location",
+              "Day",
+              "Time",
+              "Level",
+              "divTableHead") );
+              //Filling the table
+              for(var i=0; i<globalskill.offers.length; i++ )
+              {
+                if(true) //TODO, only higher level offers should appear
+                {
+                  offerTable.appendChild( createTableRow( globalskill.offers[i].username,
+                    globalskill.offers[i].location,
+                    globalskill.offers[i].teachingDay,
+                    globalskill.offers[i].teachingTime,
+                    globalskill.offers[i].achievedPoint,
+                    "divTableCell") );
+                  }
                 }
 
+                var addBeginnerRequest = document.getElementById('addBeginnerCount');
+                addBeginnerRequest.onclick = function() {
+                  //request for requests
+                  var requestforrequests = new XMLHttpRequest();
+                  requestforrequests.open('POST', '/protected/request', true);
+                  requestforrequests.setRequestHeader('Content-type', 'application/json');
+                  requestforrequests.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+                  requestforrequests.responseType = "json";
+
+                  //if it returns
+                  requestforrequests.onreadystatechange = function() {
+                    if(requestforrequests.readyState == 4 && requestforrequests.status == 200) {
+                      if(requestforrequests.response !== undefined)
+                      {
+                        alert(requestforrequests.response.message);
+
+                        beginnerCount.innerHTML = (requestforrequests.response.sumRequest);
+
+                      }
+                    }
+                  }
+
+                  requestforrequests.send(
+                    JSON.stringify({
+                      name: skillname,
+                      requestType: "beginner"
+                    })
+                  );
+                }
+
+                var addIntermediateRequest = document.getElementById('addIntermediateCount');
+                addIntermediateRequest.onclick = function() {
+                  //request for requests
+                  var requestforrequests = new XMLHttpRequest();
+                  requestforrequests.open('POST', '/protected/request', true);
+                  requestforrequests.setRequestHeader('Content-type', 'application/json');
+                  requestforrequests.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+                  requestforrequests.responseType = "json";
+
+                  //if it returns
+                  requestforrequests.onreadystatechange = function() {
+                    if(requestforrequests.readyState == 4 && requestforrequests.status == 200) {
+                      if(requestforrequests.response !== undefined)
+                      {
+                        alert(requestforrequests.response.message);
+                        //console.log(requestforrequests.response);
+                        intermediateCount.innerHTML = (requestforrequests.response.sumRequest);
+
+                      }
+                    }
+                  }
+
+                  requestforrequests.send(
+                    JSON.stringify({
+                      name: skillname,
+                      requestType: "intermediate"
+                    })
+                  );
+                }
+
+                var addAdvancedRequest = document.getElementById('addAdvancedCount');
+                addAdvancedRequest.onclick = function() {
+                  //request for requests
+                  var requestforrequests = new XMLHttpRequest();
+                  requestforrequests.open('POST', '/protected/request', true);
+                  requestforrequests.setRequestHeader('Content-type', 'application/json');
+                  requestforrequests.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
+                  requestforrequests.responseType = "json";
+
+                  //if it returns
+                  requestforrequests.onreadystatechange = function() {
+                    if(requestforrequests.readyState == 4 && requestforrequests.status == 200) {
+                      if(requestforrequests.response !== undefined)
+                      {
+                        alert(requestforrequests.response.message);
+                        //console.log(requestforrequests.response);
+                        advancedCount.innerHTML = (requestforrequests.response.sumRequest);
+
+                      }
+                    }
+                  }
+                  requestforrequests.send(
+                    JSON.stringify({
+                      name: skillname,
+                      requestType: "advanced"
+                    })
+                  );
+                }
+                //Display the tables Window if all table has been loaded
+                displayWindow();
+
+              }
+            }
+          }
 				offerHttpRequest.send(
 					JSON.stringify({
 						name: skillname
 					})
 				);
-
-
-
-
-
-
         //Adding trainings to table
         var trainingTable = document.getElementById('trainingTableBody');
         var requestTable = document.getElementById('requestTableBody');
@@ -704,26 +689,18 @@ class ItemContainer {
 
         header.innerText = this.skill.name;
 
-
-
-
         span.onclick = function() {
             modal.style.display = "none";
         }
-
         //  When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
         }
-
         function displayWindow(){
             modal.style.display = "block";
         }
-
-
-
     }
 
     // this is the toggler for the infomodal, this runs on "info" click.
@@ -795,7 +772,6 @@ class ItemContainer {
 
         modal.style.display = "block";
     }
-
 
     addBeginnerRequest() {
         //console.log("clicked");

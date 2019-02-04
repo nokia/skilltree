@@ -23,13 +23,6 @@ app.stage.group.enableSort = true;
 document.getElementById("openchart").onclick = showChart;
 var chartContainer = new PIXI.Container();
 
-/*function toggleSkillDetailsPage() {
-    var modal = document.getElementById('skillpage');
-
-    modal.style.display = "block";
-
-}*/
-
 // searches skills by provided name
 function searchUserSkillsByName(element){
     var skillToSearch = {value: element.value};
