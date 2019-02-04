@@ -4,8 +4,8 @@ function validate() {
 	var password1 = document.getElementById("password1");
 	var password2 = document.getElementById("password2");
 	var email = document.getElementById("email");
-	var focusarea = document.getElementById("focusarea");
-	var willingToTeach = document.getElementById("teach");
+	//var focusarea = document.getElementById("focusarea");
+	//var willingToTeach = document.getElementById("teach");
 
 	if (password1.value == password2.value) {
 			if (checkPassword(password1.value)) {
@@ -28,9 +28,9 @@ function validate() {
 					JSON.stringify({
 						username: username.value,
 						password: password1.value,
-						email: email.value,
-						focusArea: focusarea.value,
-						willingToTeach: willingToTeach.checked
+						email: email.value//,
+						//focusArea: focusarea.value,
+						//willingToTeach: willingToTeach.checked
 					})
 				);
 			} else showBottomAlert("The password is not valid! It has to contain at least one digit, one lowercase and one uppercase character. The minimum password length is 8 characters.");
