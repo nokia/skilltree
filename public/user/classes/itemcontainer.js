@@ -240,8 +240,6 @@ class ItemContainer {
 
         this.details.position.set(74, 0);
 
-        this.details.lastPos = {x: 0, y: 0};
-
         if (this.skill.achievedPoint == this.skill.maxPoint) {
           this.setFilter(this, nullFilter, maxPointFilter);
         } else if (this.skill.achievedPoint > 0){
@@ -408,15 +406,20 @@ class ItemContainer {
         container.addChild(details);
         container.zOrder = 2;
 
-        if (details.lastPos.y != 0) details.position.y = details.lastPos.y;
+        if (details.savedPos != undefined) details.position.y = details.savedPos.y;
 
-        var bottomOfDetails = details.getGlobalPosition().y + details.height;
-        if (details.lastPos.y != 0) details.position.y = details.lastPos.y;
-        else if (bottomOfDetails > document.getElementById("pixiCanvas").height ) {
-            details.position.y = -(bottomOfDetails - document.getElementById("pixiCanvas").height + 10);
-            if (details.getGlobalPosition().y < 10) details.position.y += 10 - details.getGlobalPosition().y;
-            details.lastPos.y = details.position.y;
+        if (details.savedPos == undefined || details.canvas.h != document.getElementById("pixiCanvas").height) {
+            details.canvas.h = document.getElementById("pixiCanvas").height;
+
+            var bottomOfDetails = details.getGlobalPosition().y + details.height;
+
+            if (bottomOfDetails > document.getElementById("pixiCanvas").height) {
+                details.position.y = -(bottomOfDetails - document.getElementById("pixiCanvas").height + 10);
+                if (details.getGlobalPosition().y < 10) details.position.y += 10 - details.getGlobalPosition().y;
+                details.savedPos.y = details.position.y;
+            }
         }
+
 
         //if (bottomOfDetails > height) details.position.y = (details.initPos.y - details.getGlobalPosition().y) - (bottomOfDetails - this.parentObj.app.height + 10);
         //if (details.getGlobalPosition().y < 10) details.position.y = 10;
