@@ -408,6 +408,8 @@ class ItemContainer {
 
         if (details.savedPos != undefined) details.position.y = details.savedPos.y;
 
+        console.log(details.canvas.h);
+        console.log(document.getElementById("pixiCanvas").height);
         if (details.savedPos == undefined || details.canvas.h != document.getElementById("pixiCanvas").height) {
             details.canvas.h = document.getElementById("pixiCanvas").height;
 
