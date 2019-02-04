@@ -89,7 +89,7 @@ function selectMainTree () {
     var mainTree = document.getElementById('maintree');
     var focusArea = document.getElementById('focusarea');
 
-    console.log(focusArea.options[focusArea.selectedIndex].value);
+    console.log(focusArea.selectedIndex);
     var focusAreaTrees = data.allTreeNames.filter(obj => obj.focusArea == focusArea.options[focusArea.selectedIndex].value);
 
     mainTree.innerHTML = '';
