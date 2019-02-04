@@ -62,6 +62,7 @@ function checkFirstLogin() {
         var mainTree = document.getElementById('maintree');
 
         focusArea.onchange = function () {
+            console.log("ss");
             document.getElementById('maintreediv').style.display = "block";
         }
 
