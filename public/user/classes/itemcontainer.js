@@ -408,13 +408,13 @@ class ItemContainer {
         container.addChild(details);
         container.zOrder = 2;
 
-        console.log(details.position.y);
-
         var bottomOfDetails = details.getGlobalPosition().y + details.height;
         if (bottomOfDetails > document.getElementById("pixiCanvas").height) {
-            details.position.y = -(bottomOfDetails - document.getElementById("pixiCanvas").height + 10 - details.lastPos.y);
+            details.position.y = -(bottomOfDetails - document.getElementById("pixiCanvas").height + 10);
             details.lastPos.y = details.position.y;
-        } else details.position.y = 0;
+        }
+
+        if (details.lastPos.y != 0) details.position.y = details.lastPos.y;
 
         //if (bottomOfDetails > height) details.position.y = (details.initPos.y - details.getGlobalPosition().y) - (bottomOfDetails - this.parentObj.app.height + 10);
         //if (details.getGlobalPosition().y < 10) details.position.y = 10;
