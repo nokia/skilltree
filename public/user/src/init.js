@@ -60,7 +60,6 @@ function checkFirstLogin() {
         var btn = document.getElementById('savebtn');
         var mainTree = document.getElementById('maintree');
 
-        console.log("b");
         btn.onclick = function() {
             var location = document.getElementById('location').value;
             var teachingDay = document.getElementById('day').value;
@@ -68,10 +67,8 @@ function checkFirstLogin() {
 
 
             var firstLoginData = {
+                    focusArea:
                     mainTree: mainTree.value,
-                    teachingDay: teachingDay,
-                    teachingTime: teachingTime,
-                    location: location
             };
 
             request('POST', '/protected/firstlogindata', firstLoginData, function() {
@@ -86,8 +83,6 @@ function checkFirstLogin() {
             option.value = option.text = data.focusArea.treeNames[i];
             mainTree.add(option);
         }
-
-        if (!data.willingToTeach) document.getElementById('teachingSettings').style.display = 'none';
 
         modal.style.display = "block";
     }

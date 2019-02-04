@@ -68,11 +68,11 @@ app.post('/registration', async function(req, res) {
 			email: req.body.email,
 			hashData: hashData,
 			categories: categories,
-			focusArea: {
+			/*focusArea: {
 					name: req.body.focusArea,
 					treeNames: focusAreaTrees,
 				},
-			willingToTeach: req.body.willingToTeach
+			willingToTeach: req.body.willingToTeach*/
 		});
 
 		newUser.save(function(err) {
