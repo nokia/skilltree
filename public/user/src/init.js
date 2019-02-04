@@ -67,8 +67,8 @@ function checkFirstLogin() {
 
 
             var firstLoginData = {
-                    focusArea:
-                    mainTree: mainTree.value,
+                    focusArea: document.getElementById('focusarea').value,
+                    mainTree: mainTree.value
             };
 
             request('POST', '/protected/firstlogindata', firstLoginData, function() {
