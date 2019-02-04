@@ -58,7 +58,7 @@ function checkFirstLogin() {
     else {
         var modal = document.getElementById('firstLogin');
         var btn = document.getElementById('savebtn');
-        var focusArea = document.getElementById('focusarea');
+        var focusArea = document.getElementById('focusareasel');
         var mainTree = document.getElementById('maintree');
 
 
@@ -87,7 +87,7 @@ function checkFirstLogin() {
 
 function selectMainTree () {
     var mainTree = document.getElementById('maintree');
-    var focusArea = document.getElementById('focusarea');
+    var focusArea = document.getElementById('focusareasel');
 
     console.log(focusArea.selectedIndex);
     var focusAreaTrees = data.allTreeNames.filter(obj => obj.focusArea == focusArea.options[focusArea.selectedIndex].value);
