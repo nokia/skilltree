@@ -406,7 +406,7 @@ class ItemContainer {
         container.addChild(details);
         container.zOrder = 2;
 
-        if (details.savedPosY != undefined) details.position.y = details.savedPosY;
+        /*if (details.savedPosY != undefined) details.position.y = details.savedPosY;
 
         if (details.canvas != undefined) console.log(details.canvas.h);
         console.log(document.getElementById("pixiCanvas").height);
@@ -427,7 +427,7 @@ class ItemContainer {
         //if (details.getGlobalPosition().y < 10) details.position.y = 10;
 
         var rightOfDetails = details.getGlobalPosition().x + details.width;
-        if (rightOfDetails > this.parentObj.app.width) details.position.x = -details.width;
+        if (rightOfDetails > this.parentObj.app.width) details.position.x = -details.width;*/
 
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
 
