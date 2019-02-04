@@ -187,7 +187,7 @@ protectedRoute.get('/userdata', function (req, res) {
 			delete user.hashData;
 
 			if (user.mainTree == undefined) { // first login
-				var trees = await Tree.find({}, {_id: 0, name: 1}, function (err, trees) {
+				var trees = await Tree.find({}, function (err, trees) {
 									if (err) throw err;
 									return trees;
 								});
