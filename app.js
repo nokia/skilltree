@@ -186,9 +186,19 @@ protectedRoute.get('/userdata', function (req, res) {
 			delete user.email;
 			delete user.hashData;
 
-			if (user.mainTree != undefined) { // first login
-				delete user.focusArea;
+			if (user.mainTree == undefined) { // first login
+				var trees = await Tree.find({}, {_id: 0, name: 1}, function (err, trees) {
+									if (err) throw err;
+									return trees;
+								});
+
+				for (var i = 0; i < trees.length; ++i) {
+					trees[i] = trees[i].name;
+				}
+
+				user.allTreeNames = trees;
 			}
+
             if (user.admin) {
                 var trees = await ApprovableTree.find({}, function(err, trees) {
     		        if (err) throw err;

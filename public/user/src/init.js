@@ -61,7 +61,7 @@ function checkFirstLogin() {
         var focusArea = document.getElementById('focusarea');
         var mainTree = document.getElementById('maintree');
 
-        
+
 
         btn.onclick = function() {
             var location = document.getElementById('location').value;
@@ -89,6 +89,10 @@ function checkFirstLogin() {
 
         modal.style.display = "block";
     }
+}
+
+function selectMainTree () {
+    document.getElementById('maintreediv').style.display = 'block';
 }
 
 // loads the needed pics for the tree, then loads the tree.
