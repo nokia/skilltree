@@ -61,10 +61,7 @@ function checkFirstLogin() {
         var focusArea = document.getElementById('focusarea');
         var mainTree = document.getElementById('maintree');
 
-        document.addEventListener('DOMContentLoaded',function() {focusArea.onchange = function () {
-            console.log("ss");
-            document.getElementById('maintreediv').style.display = "block";
-        }},false);
+        
 
         btn.onclick = function() {
             var location = document.getElementById('location').value;
