@@ -58,7 +58,12 @@ function checkFirstLogin() {
     else {
         var modal = document.getElementById('firstLogin');
         var btn = document.getElementById('savebtn');
+        var focusArea = document.getElementById('focusarea');
         var mainTree = document.getElementById('maintree');
+
+        focusArea.onchange = function () {
+            document.getElementById('maintreediv').style.display = "block";
+        }
 
         btn.onclick = function() {
             var location = document.getElementById('location').value;
@@ -67,7 +72,7 @@ function checkFirstLogin() {
 
 
             var firstLoginData = {
-                    focusArea: document.getElementById('focusarea').value,
+                    focusArea: focusArea.value,
                     mainTree: mainTree.value
             };
 

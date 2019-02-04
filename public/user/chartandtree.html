@@ -758,9 +758,11 @@
                       <option value = "Communication">Communication</option>
                       <option value = "Support functions">Support functions</option>
                   </select>
-                  <h4>Please select your main skill tree!</h4>
-                  <select id = "maintree" class = "form-control" style = "width: 200px;" required></select>
-                  <input type = "submit" value = "Save" id = "savebtn" class = "btn btn-success float-right">
+                  <div id = "maintreediv" style = "display: none;">
+                      <h4>Please select your main skill tree!</h4>
+                      <select id = "maintree" class = "form-control" style = "width: 200px;" required></select>
+                      <input type = "submit" value = "Save" id = "savebtn" class = "btn btn-success float-right">
+                  </div>
                   <div class="alert alert-danger alert-dismissible invalid-alert" style = "display: none;">
                       <a href="#" class="close" onclick = "$('.invalid-alert').hide()">&times;</a>
                       <strong>Please check your data!</strong>
