@@ -410,8 +410,8 @@ class ItemContainer {
 
         if (details.canvas != undefined) console.log(details.canvas.h);
         console.log(document.getElementById("pixiCanvas").height);
-        if (details.savedPos == undefined || details.canvas.h != document.getElementById("pixiCanvas").height) {
-            details.canvas.h = document.getElementById("pixiCanvas").height;
+        if (details.savedPos == undefined || details.canvasHeight != document.getElementById("pixiCanvas").height) {
+            details.canvasHeight = document.getElementById("pixiCanvas").height;
 
             var bottomOfDetails = details.getGlobalPosition().y + details.height;
 
