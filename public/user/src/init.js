@@ -81,17 +81,23 @@ function checkFirstLogin() {
             });
         }
 
-        for (var i = 0; i < data.focusArea.treeNames.length; ++i) {
-            var option = document.createElement('option');
-            option.value = option.text = data.focusArea.treeNames[i];
-            mainTree.add(option);
-        }
-
         modal.style.display = "block";
     }
 }
 
 function selectMainTree () {
+    var mainTree = document.getElementById('maintree');
+    var focusArea = document.getElementById('focusarea');
+
+    var focusAreaTrees = data.allTreeNames.filter(obj => obj.focusArea == focusArea.value);
+
+    mainTree.innerHTML = '';
+    for (var i = 0; i < focusAreaTrees.length; ++i) {
+        var option = document.createElement('option');
+        option.value = option.text = focusAreaTrees[i];
+        mainTree.add(option);
+    }
+
     document.getElementById('maintreediv').style.display = 'block';
 }
 
