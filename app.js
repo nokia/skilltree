@@ -986,12 +986,8 @@ protectedRoute.post('/firstlogindata', async function (req, res) {
 			message: 'User not found.'
 		});
 	} else {
+		user.focusArea.name = data.focusArea;
 		user.mainTree = data.mainTree;
-		if (user.willingToTeach) {
-			user.teachingDay = data.teachingDay;
-			user.teachingTime = data.teachingTime;
-			user.location = data.location;
-		}
 
 		var mainTree = await Tree.findOne({
 	        name: user.mainTree,

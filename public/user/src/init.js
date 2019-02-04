@@ -62,11 +62,6 @@ function checkFirstLogin() {
         var mainTree = document.getElementById('maintree');
 
         btn.onclick = function() {
-            var location = document.getElementById('location').value;
-            var teachingDay = document.getElementById('day').value;
-            var teachingTime = document.getElementById('timeStart').value + ' - ' + document.getElementById('timeEnd').value;
-
-
             var firstLoginData = {
                     focusArea: focusArea.value,
                     mainTree: mainTree.value
