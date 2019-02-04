@@ -192,10 +192,6 @@ protectedRoute.get('/userdata', function (req, res) {
 									return trees;
 								});
 
-				for (var i = 0; i < trees.length; ++i) {
-					trees[i] = trees[i].name;
-				}
-
 				user.allTreeNames = trees;
 			}
 

@@ -96,7 +96,7 @@ function selectMainTree () {
     mainTree.innerHTML = '';
     for (var i = 0; i < focusAreaTrees.length; ++i) {
         var option = document.createElement('option');
-        option.value = option.text = focusAreaTrees[i];
+        option.value = option.text = focusAreaTrees[i].name;
         mainTree.add(option);
     }
 
