@@ -406,11 +406,11 @@ class ItemContainer {
         container.addChild(details);
         container.zOrder = 2;
 
-        if (details.savedPos != undefined) details.position.y = details.savedPos.y;
+        if (details.savedPosY != undefined) details.position.y = details.savedPosY;
 
         if (details.canvas != undefined) console.log(details.canvas.h);
         console.log(document.getElementById("pixiCanvas").height);
-        if (details.savedPos == undefined || details.canvasHeight != document.getElementById("pixiCanvas").height) {
+        if (details.savedPosY == undefined || details.canvasHeight != document.getElementById("pixiCanvas").height) {
             details.canvasHeight = document.getElementById("pixiCanvas").height;
 
             var bottomOfDetails = details.getGlobalPosition().y + details.height;
@@ -418,7 +418,7 @@ class ItemContainer {
             if (bottomOfDetails > document.getElementById("pixiCanvas").height) {
                 details.position.y = -(bottomOfDetails - document.getElementById("pixiCanvas").height + 10);
                 if (details.getGlobalPosition().y < 10) details.position.y += 10 - details.getGlobalPosition().y;
-                details.savedPos.y = details.position.y;
+                details.savedPosY = details.position.y;
             }
         }
 
