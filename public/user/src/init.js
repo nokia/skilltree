@@ -61,8 +61,6 @@ function checkFirstLogin() {
         var focusArea = document.getElementById('focusareasel');
         var mainTree = document.getElementById('maintree');
 
-
-
         btn.onclick = function() {
             var location = document.getElementById('location').value;
             var teachingDay = document.getElementById('day').value;
@@ -89,8 +87,7 @@ function selectMainTree () {
     var mainTree = document.getElementById('maintree');
     var focusArea = document.getElementById('focusareasel');
 
-    console.log(focusArea.selectedIndex);
-    var focusAreaTrees = data.allTreeNames.filter(obj => obj.focusArea == focusArea.options[focusArea.selectedIndex].value);
+    var focusAreaTrees = data.allTreeNames.filter(obj => obj.focusArea == focusArea.value);
 
     mainTree.innerHTML = '';
     for (var i = 0; i < focusAreaTrees.length; ++i) {
