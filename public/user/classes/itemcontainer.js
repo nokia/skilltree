@@ -56,7 +56,7 @@ class ItemContainer {
         this.curlvlDesc = new PIXI.Text("", {fontSize: descriptionFontSize, fontStyle: 'italic', fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - this.detailsMargin * 2});
         this.curlvlDesc.enabled = false;
         if (this.skill.achievedPoint > 0) {
-            this.curlvlDesc.text = "Current level: " + this.skill.pointDescription[this.skill.achievedPoint - 1];
+            this.curlvlDesc.text = "Current level: " + this.readMoreSplit(this.skill.pointDescription[this.skill.achievedPoint - 1]);
             this.curlvlDesc.enabled = true;
         }
         this.curlvlDesc.position.set(this.detailsMargin, this.description.position.y + this.description.height + 10);
@@ -803,5 +803,14 @@ class ItemContainer {
         };
 
         req.send(JSON.stringify(data));
+    }
+
+    readMoreSplit (text) {
+        if (text.split(" ", 15) != undefined) {
+            var index = text.split(" ", 15).join(" ").length;
+            text = text.substring(0, index) + "...";
+        }
+
+        return text;
     }
 }
