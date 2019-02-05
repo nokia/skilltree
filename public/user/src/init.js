@@ -56,8 +56,8 @@ function initCard(){
   var email = document.getElementById('email');
 
   username.placeholder = data.username;
-  place.placeholder = data.location;
-  email.placeholder = data.email;
+  place.innerText = data.location;
+  email.innerText = data.email;
 }
 
 // checks if the login is 1st time and shows first login modal if yes
