@@ -400,27 +400,7 @@ protectedRoute.post('/addTreeToUser', async function (req, res){
 
 	if (tree != undefined) {
 		if (user.trees.find(obj => obj.name == tree.name) == undefined){
-			var skills = await Skill.find({
-				name: tree.skillNames,
-			}, function (err, skills) {
-				if (err) throw err;
-				return skills;
-			});
-
-			var sn = await sortTree(skills);
-			user.trees.push({
-				name: tree.name,
-				focusArea: tree.focusArea,
-				description: tree.description,
-				skillNames: sn
-			});
-
-			await skills.forEach(function (skill) {
-				skill.achievedPoint = 0;
-				if (user.skills.find(obj => obj.name == skill.name) == undefined) user.skills.push(skill);
-			});
-
-			user.save(function (err) {if (err) throw err;});
+			await sortAndAddTreeToUser(tree, user);
 
 			res.json({
 				success: true,
@@ -580,6 +560,31 @@ async function sortTree(skillArray){
 	sortedArray = await assembleTree(skillMatrix);
 	skillArray = await extractNames(sortedArray);
 	return skillArray;
+}
+
+async function sortAndAddTreeToUser(treeToSort, user){
+	var skills = await Skill.find({
+		name: treeToSort.skillNames,
+	}, function (err, skills) {
+		if (err) throw err;
+		return skills;
+	});
+
+	var sn = await sortTree(skills);
+	user.trees.push({
+		name: treeToSort.name,
+		focusArea: treeToSort.focusArea,
+		description: treeToSort.description,
+		skillNames: sn
+	});
+
+	await skills.forEach(function (skill) {
+		skill.achievedPoint = 0;
+		if (user.skills.find(obj => obj.name == skill.name) == undefined){
+			user.skills.push(skill);
+		}});
+
+	user.save(function (err) {if (err) throw err;});
 }
 
 protectedRoute.post('/newtraining', async function(req, res) {
@@ -984,7 +989,7 @@ protectedRoute.post('/skilldata', function(req, res) {
 protectedRoute.post('/firstlogindata', async function (req, res) {
 	var data = req.body;
 
-    var user = await findUser(req.decoded.username);
+	var user = await findUser(req.decoded.username);
 
 	if (!user) {
 		res.json({
@@ -996,27 +1001,14 @@ protectedRoute.post('/firstlogindata', async function (req, res) {
 		user.mainTree = data.mainTree;
 
 		var mainTree = await Tree.findOne({
-	        name: user.mainTree,
-	    }, function (err, tree) {
-	        if (err) throw err;
+			name: user.mainTree,
+		}, function (err, tree) {
+			if (err) throw err;
 			return tree;
 		});
 
-		user.trees.push(mainTree);
+		sortAndAddTreeToUser(mainTree, user);
 
-		var skills = await Skill.find({
-	        name: mainTree.skillNames,
-	    }, function (err, skills) {
-	        if (err) throw err;
-			return skills;
-	    });
-
-		await skills.forEach(function (skill) {
-			skill.achievedPoint = 0;
-			user.skills.push(skill);
-		});
-
-		user.save(function (err) {if (err) throw err;});
 		res.json({
 			success: true,
 		});
