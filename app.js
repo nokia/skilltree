@@ -1235,6 +1235,7 @@ protectedRoute.post('/newpassword', async function (req, res) {
       message: 'User not found.'
     });
   } else {
+	  console.log(data);
 	  if (!pbkdf2.verifyPassword(data.oldPassword, user.hashData)) {
 		  res.json({
 			  success: false,
