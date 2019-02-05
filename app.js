@@ -585,6 +585,7 @@ async function sortAndAddTreeToUser(treeToSort, user){
 		}});
 
 	user.save(function (err) {if (err) throw err;});
+	return;
 }
 
 protectedRoute.post('/newtraining', async function(req, res) {
@@ -1007,7 +1008,7 @@ protectedRoute.post('/firstlogindata', async function (req, res) {
 			return tree;
 		});
 
-		sortAndAddTreeToUser(mainTree, user);
+		await sortAndAddTreeToUser(mainTree, user);
 
 		res.json({
 			success: true,
