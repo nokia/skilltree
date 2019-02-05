@@ -400,13 +400,19 @@ protectedRoute.post('/addTreeToUser', async function (req, res){
 
 	if (tree != undefined) {
 		if (user.trees.find(obj => obj.name == tree.name) == undefined){
-			user.trees.push(tree);
-
 			var skills = await Skill.find({
 				name: tree.skillNames,
 			}, function (err, skills) {
 				if (err) throw err;
 				return skills;
+			});
+
+			var sn = await sortTree(skills);
+			user.trees.push({
+				name: tree.name,
+				focusArea: tree.focusArea,
+				description: tree.description,
+				skillNames: sn
 			});
 
 			await skills.forEach(function (skill) {
