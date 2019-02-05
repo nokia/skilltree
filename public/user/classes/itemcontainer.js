@@ -734,7 +734,10 @@ class ItemContainer {
         maxP.innerText = this.skill.maxPoint;
 
         var pointDesc = '';
-        for (var i = 0; i < this.skill.pointDescription.length; ++i) pointDesc += "<li>" + this.skill.pointDescription[i] + "</li>";
+        for (var i = 0; i < this.skill.pointDescription.length; ++i) {
+            if (i + 1 == this.skill.achievedPoint) pointDesc += "<li><i>" + this.skill.pointDescription[i] + " (current)</i></li>";
+            else pointDesc += "<li>" + this.skill.pointDescription[i] + "</li>";
+        }
         //pointDesc = pointDesc.substring(0, pointDesc.length - 2);
         points.innerHTML = pointDesc;
 
