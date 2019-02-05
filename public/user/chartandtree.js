@@ -1162,10 +1162,10 @@ function validateNewPwd() {
     if (password1.value == password2.value) {
         console.log('a');
         if (checkPassword(password1.value)) {
-            request('POST', '/protected/newpassword', JSON.stringify({
+            request('POST', '/protected/newpassword', {
                 oldPassword: oldPassword.value,
                 newPassword: password1.value
-            }), function () {
+            }, function () {
                 if (this.readyState == 4 && this.status == 200) {
                     if (this.response.success) showBottomAlert('success', "Password successfully changed");
                     else showBottomAlert("danger", "Wrong password!");
