@@ -50,6 +50,12 @@ function initCard(){
   pointCount.innerHTML = data.skills.sum("achievedPoint") + "<br>points";
   cardUserName.innerHTML = data.username;
   cardMainTree.innerHTML = data.mainTree;
+
+  var place = document.getElementById('place');
+  var email = document.getElementById('email');
+
+  place.placeholder = data.location;
+  email.placeholder = data.email;
 }
 
 // checks if the login is 1st time and shows first login modal if yes
