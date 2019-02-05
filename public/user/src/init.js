@@ -51,9 +51,11 @@ function initCard(){
   cardUserName.innerHTML = data.username;
   cardMainTree.innerHTML = data.mainTree;
 
+  var username = document.getElementById('username');
   var place = document.getElementById('place');
   var email = document.getElementById('email');
 
+  username.placeholder = data.username;
   place.placeholder = data.location;
   email.placeholder = data.email;
 }
