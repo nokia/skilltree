@@ -1228,14 +1228,13 @@ protectedRoute.post('/endorse', async function (req, res) {
 
 protectedRoute.post('/newpassword', async function (req, res) {
   var data = req.body;
-  var user = await findUser(data.username);
+  var user = await findUser(req.decoded.username);
   if (!user) {
     res.json({
       success: false,
       message: 'User not found.'
     });
   } else {
-	  console.log(data);
 	  if (!pbkdf2.verifyPassword(data.oldPassword, user.hashData)) {
 		  res.json({
 			  success: false,
