@@ -183,7 +183,7 @@ protectedRoute.get('/userdata', function (req, res) {
 			user = userdata.toObject();
 			delete user.__v;
 			delete user._id;
-			delete user.email;
+			//delete user.email;
 			delete user.hashData;
 
 			if (user.mainTree == undefined) { // first login
