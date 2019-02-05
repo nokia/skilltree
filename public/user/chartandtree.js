@@ -1154,6 +1154,33 @@ function hideCardsAndAlerts (event) {
 
 document.body.addEventListener('click', hideCardsAndAlerts);
 
+function validateNewPwd() {
+	var oldPassword = document.getElementById("curPassword");
+	var password1 = document.getElementById("newPassword1");
+	var password2 = document.getElementById("newPassword2");
+
+    if (password1.value == password2.value) {
+        if (checkPassword(password1.value)) {
+            request('POST', '/protected/newpassword', JSON.stringify({
+                oldPassword: oldPassword.value,
+                newPassword: password1.value
+            }), function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    if (this.response.success) showBottomAlert('success', "Password successfully changed");
+                    else showBottomAlert("danger", "Wrong password!");
+                }
+            });
+    } else showBottomAlert("danger", "The new password is not valid! It has to contain at least one digit, one lowercase and one uppercase character. The minimum password length is 8 characters.");
+} else showBottomAlert("danger", "Incorrect credentials! Passwords don't match!");
+}
+
+function checkPassword (pw) {
+	var expr = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+
+	if (expr.test(pw)) return true;
+	return false;
+}
+
 // helper functions
 
 function parseJwt (token) {

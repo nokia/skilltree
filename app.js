@@ -126,7 +126,7 @@ app.post('/auth', function(req, res) {
                     admin: user.admin
                 };
                 var token = jwt.sign(payload, app.get('superSecret'), {
-                    expiresIn: '60m' // expires in 1 hour
+                    expiresIn: '1d' // expires in 1 hour
                 });
 
                 // return the information including token as JSON
@@ -1225,6 +1225,32 @@ protectedRoute.post('/endorse', async function (req, res) {
     }
   }
 });
+
+protectedRoute.post('/newpassword', async function (req, res) {
+  var data = req.body;
+  var user = await findUser(data.username);
+  if (!user) {
+    res.json({
+      success: false,
+      message: 'User not found.'
+    });
+  } else {
+	  if (!pbkdf2.verifyPassword(data.oldPassword, user.hashData)) {
+		  res.json({
+			  success: false,
+			  message: 'wrong password'
+		  });
+	  } else {
+		  user.hashData = pbkdf2.hashPassword(data.newPassword);
+		  user.save(function (err) {if (err) throw err;});
+
+		  res.json({
+			  success: true
+		  });
+	  }
+  }
+});
+
 /*
 *   ADMIN
 */
