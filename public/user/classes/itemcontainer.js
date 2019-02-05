@@ -811,7 +811,7 @@ class ItemContainer {
     readMoreSplit (text) {
         if (text.split(" ", 15) != undefined) {
             var index = text.split(" ", 15).join(" ").length;
-            text = text.substring(0, index) + "...";
+            text = text.substring(0, index) + "... more";
         }
 
         return text;
