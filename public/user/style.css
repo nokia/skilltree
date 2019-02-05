@@ -377,3 +377,7 @@ a {
 #delTreeBtn {
     margin-right: 10px;
 }
+
+#changePwdFrom * {
+    margin-bottom: 5px;
+}
