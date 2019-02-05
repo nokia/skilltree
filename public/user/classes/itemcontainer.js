@@ -292,10 +292,10 @@ class ItemContainer {
                     this.parentObj.skill.achievedPoint++;
                     this.levelinfo.text = (this.parentObj.skill.achievedPoint + "/" + this.parentObj.skill.maxPoint);
 
-                    this.parentObj.curlvlDesc.text = "Current level: " + this.readMoreSplit(this.parentObj.skill.pointDescription[this.parentObj.skill.achievedPoint - 1]);
+                    this.parentObj.curlvlDesc.text = "Current level: " + this.parentObj.readMoreSplit(this.parentObj.skill.pointDescription[this.parentObj.skill.achievedPoint - 1]);
                     if (this.parentObj.skill.achievedPoint == 1) this.parentObj.curlvlDesc.enabled = true;
 
-                    if (this.parentObj.skill.achievedPoint < this.parentObj.skill.maxPoint) this.parentObj.nextlvlDesc.text = "Next level: " + this.readMoreSplit(this.parentObj.skill.pointDescription[this.parentObj.skill.achievedPoint]);
+                    if (this.parentObj.skill.achievedPoint < this.parentObj.skill.maxPoint) this.parentObj.nextlvlDesc.text = "Next level: " + this.parentObj.readMoreSplit(this.parentObj.skill.pointDescription[this.parentObj.skill.achievedPoint]);
                     else  {
                         this.parentObj.nextlvlDesc.text = "";
                         this.parentObj.nextlvlDesc.enabled = false;
@@ -333,13 +333,13 @@ class ItemContainer {
                 this.parentObj.skill.achievedPoint--;
                 this.levelinfo.text = (this.parentObj.skill.achievedPoint + "/" + this.parentObj.skill.maxPoint);
 
-                if (this.parentObj.skill.achievedPoint > 0) this.parentObj.curlvlDesc.text = "Current level: " + this.readMoreSplit(this.parentObj.skill.pointDescription[this.parentObj.skill.achievedPoint - 1]);
+                if (this.parentObj.skill.achievedPoint > 0) this.parentObj.curlvlDesc.text = "Current level: " + this.parentObj.readMoreSplit(this.parentObj.skill.pointDescription[this.parentObj.skill.achievedPoint - 1]);
                 else {
                     this.parentObj.curlvlDesc.text = "";
                     this.parentObj.curlvlDesc.enabled = false;
                 }
 
-                this.parentObj.nextlvlDesc.text = "Next level: " + this.readMoreSplit(this.parentObj.skill.pointDescription[this.parentObj.skill.achievedPoint]);
+                this.parentObj.nextlvlDesc.text = "Next level: " + this.parentObj.readMoreSplit(this.parentObj.skill.pointDescription[this.parentObj.skill.achievedPoint]);
                 if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint - 1) this.parentObj.nextlvlDesc.enabled = true;
 
                 if (this.parentObj.curlvlDesc.enabled) this.parentObj.nextlvlDesc.position.y = this.parentObj.curlvlDesc.position.y + this.parentObj.curlvlDesc.height + 5;
