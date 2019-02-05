@@ -1155,6 +1155,7 @@ function hideCardsAndAlerts (event) {
 document.body.addEventListener('click', hideCardsAndAlerts);
 
 function validateNewPwd() {
+    console.log('a');
 	var oldPassword = document.getElementById("curPassword");
 	var password1 = document.getElementById("newPassword1");
 	var password2 = document.getElementById("newPassword2");
