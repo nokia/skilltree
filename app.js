@@ -737,19 +737,19 @@ protectedRoute.post('/newtree', async function (req, res) {
 				skillNames: sn
 			});
 
-        await data.skills.forEach(async function (skill) {
-            /*var skill = await Skill.findOne({
-                name: skillName,
-            }, function (err, skill) {
-                if (err) throw err;
-                return skill;
-            });*/
+		await data.skills.forEach(async function (skill) {
+			/*var skill = await Skill.findOne({
+				name: skillName,
+			}, function (err, skill) {
+			if (err) throw err;
+			return skill;
+			});*/
 
-            skill.achievedPoint = 0;
-            if (user.skills.find(obj => obj.name == skill.name) == undefined) {
-                user.skills.push(skill);
-            }
-        });
+		skill.achievedPoint = 0;
+		if (user.skills.find(obj => obj.name == skill.name) == undefined) {
+			user.skills.push(skill);
+		}
+		});
 
 		user.save(function (err) {if (err) throw err;});
 
