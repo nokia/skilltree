@@ -1171,8 +1171,8 @@ function validateNewPwd() {
                     else showBottomAlert("danger", "Wrong password!");
                 }
             });
-    } else showBottomAlert("danger", "The new password is not valid! It has to contain at least one digit, one lowercase and one uppercase character. The minimum password length is 8 characters.");
-} else showBottomAlert("danger", "Incorrect credentials! Passwords don't match!");
+    } else showBottomAlert('danger', "The new password is not valid! It has to contain at least one digit, one lowercase and one uppercase character. The minimum password length is 8 characters.");
+} else showBottomAlert('danger', "Incorrect credentials! Passwords don't match!");
 }
 
 function checkPassword (pw) {
