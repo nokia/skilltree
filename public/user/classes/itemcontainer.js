@@ -60,6 +60,7 @@ class ItemContainer {
             this.curlvlDesc.enabled = true;
         }
         this.curlvlDesc.position.set(this.detailsMargin, this.description.position.y + this.description.height + 10);
+        this.curlvlDesc.click = toggleSkillInfoPage;
         this.detailsForeground.addChild(this.curlvlDesc);
 
         this.nextlvlDesc = new PIXI.Text("", {fontSize: descriptionFontSize, fontStyle: 'italic', fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - this.detailsMargin * 2});
