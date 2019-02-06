@@ -381,3 +381,7 @@ a {
 #passwdChangeDiv * {
     margin-top: 5px;
 }
+
+.hide-me [aria-expanded = "true"] {
+    display: none;
+}
