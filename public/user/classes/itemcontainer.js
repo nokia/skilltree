@@ -62,7 +62,8 @@ class ItemContainer {
         this.curlvlDesc.position.set(this.detailsMargin, this.description.position.y + this.description.height + 10);
         this.curlvlDesc.interactive = true;
         this.curlvlDesc.buttonMode = true;
-        this.curlvlDesc.click = this.toggleSkillDetailsPage;
+        this.curlvlDesc.parentObj = this;
+        this.curlvlDesc.click = function () {this.parentObj.toggleSkillDetailsPage()};
         this.detailsForeground.addChild(this.curlvlDesc);
 
         this.nextlvlDesc = new PIXI.Text("", {fontSize: descriptionFontSize, fontStyle: 'italic', fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - this.detailsMargin * 2});
