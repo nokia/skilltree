@@ -63,7 +63,7 @@ class ItemContainer {
         this.curlvlDesc.interactive = true;
         this.curlvlDesc.buttonMode = true;
         this.curlvlDesc.parentObj = this;
-        this.curlvlDesc.click = function () {this.parentObj.toggleSkillDetailsPage()};
+        this.curlvlDesc.click = function () {this.parentObj.toggleSkillInfoPage()};
         this.detailsForeground.addChild(this.curlvlDesc);
 
         this.nextlvlDesc = new PIXI.Text("", {fontSize: descriptionFontSize, fontStyle: 'italic', fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - this.detailsMargin * 2});
@@ -74,6 +74,10 @@ class ItemContainer {
         }
         if (this.skill.achievedPoint == 0) this.nextlvlDesc.position.set(this.detailsMargin, this.description.position.y + this.description.height + 10);
         else this.nextlvlDesc.position.set(this.detailsMargin, this.curlvlDesc.position.y + this.curlvlDesc.height + 5);
+        this.nextlvlDesc.interactive = true;
+        this.nextlvlDesc.buttonMode = true;
+        this.nextlvlDesc.parentObj = this;
+        this.nextlvlDesc.click = function () {this.parentObj.toggleSkillInfoPage()};
         this.detailsForeground.addChild(this.nextlvlDesc);
 
         this.btnPosY = this.description.position.y + this.description.height + 10;
