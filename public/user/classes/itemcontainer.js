@@ -60,6 +60,7 @@ class ItemContainer {
             this.curlvlDesc.enabled = true;
         }
         this.curlvlDesc.position.set(this.detailsMargin, this.description.position.y + this.description.height + 10);
+        this.curlvlDesc.interactive = true;
         this.curlvlDesc.click = function () {console.log("a");};
         this.detailsForeground.addChild(this.curlvlDesc);
 
