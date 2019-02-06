@@ -55,7 +55,7 @@ function initCard(){
   var place = document.getElementById('place');
   var email = document.getElementById('email');
 
-  username.placeholder = data.username;
+  username.innerText = data.username;
   place.value = data.location;
   email.value = data.email;
 }
