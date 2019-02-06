@@ -382,6 +382,6 @@ a {
     margin-top: 5px;
 }
 
-.hide-on-expand  {
+.hide-on-expand[aria-expanded=true]  {
     display: none;
 }
