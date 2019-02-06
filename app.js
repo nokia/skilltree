@@ -1260,7 +1260,7 @@ protectedRoute.post('/newplace', async function (req, res) {
       message: 'User not found.'
     });
   } else {
-	  user.place = data.place;
+	  user.location = data.place;
 	  user.save(function (err) {if (err) throw err;});
 
 	  res.json({
