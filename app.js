@@ -1251,6 +1251,43 @@ protectedRoute.post('/newpassword', async function (req, res) {
   }
 });
 
+protectedRoute.post('/newplace', async function (req, res) {
+  var data = req.body;
+  var user = await findUser(req.decoded.username);
+  if (!user) {
+    res.json({
+      success: false,
+      message: 'User not found.'
+    });
+  } else {
+	  user.place = data.place;
+	  user.save(function (err) {if (err) throw err;});
+
+	  res.json({
+	  	success: true
+	  });
+  }
+});
+
+
+protectedRoute.post('/newemail', async function (req, res) {
+  var data = req.body;
+  var user = await findUser(req.decoded.username);
+  if (!user) {
+    res.json({
+      success: false,
+      message: 'User not found.'
+    });
+  } else {
+	  user.email = data.email;
+	  user.save(function (err) {if (err) throw err;});
+
+	  res.json({
+	  	success: true
+	  });
+  }
+});
+
 /*
 *   ADMIN
 */

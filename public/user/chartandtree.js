@@ -1159,20 +1159,52 @@ function validateNewPwd() {
 	var password1 = document.getElementById("newPassword1");
 	var password2 = document.getElementById("newPassword2");
 
-    if (password1.value == password2.value) {
-        if (checkPassword(password1.value)) {
-            request('POST', '/protected/newpassword', {
-                oldPassword: oldPassword.value,
-                newPassword: password1.value
-            }, function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    if (this.response.success) showBottomAlert('success', "Password changed successfully!");
-                    else showBottomAlert("danger", "Wrong password!");
-                }
-            });
-    } else showBottomAlert('danger', "The new password is not valid! It has to contain at least one digit, one lowercase and one uppercase character. The minimum password length is 8 characters.");
-} else showBottomAlert('danger', "Incorrect credentials! Passwords don't match!");
+    if (oldPassword.value != "" && password1.value != "" && password2.value != "") {
+        if (password1.value == password2.value) {
+            if (checkPassword(password1.value)) {
+                request('POST', '/protected/newpassword', {
+                    oldPassword: oldPassword.value,
+                    newPassword: password1.value
+                }, function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        if (this.response.success) showBottomAlert('success', "Password changed successfully!");
+                        else showBottomAlert("danger", "Wrong password!");
+                    }
+                });
+            } else showBottomAlert('danger', "The new password is not valid! It has to contain at least one digit, one lowercase and one uppercase character. The minimum password length is 8 characters.");
+        } else showBottomAlert('danger', "Incorrect credentials! Passwords don't match!");
+    } else showBottomAlert('danger', "Incorrect credentials!");
 }
+
+function savePlace () {
+    var place = document.getElementById("place");
+
+    if (place.value != '') {
+        request('POST', '/protected/newplace', {
+            location: place.value,
+        }, function () {
+            if (this.readyState == 4 && this.status == 200) {
+                if (this.response.success) showBottomAlert('success', "Place changed successfully!");
+            }
+        });
+    } else showBottomAlert('danger', "Incorrect data!");
+}
+
+function saveEmail () {
+    var email = document.getElementById("email");
+
+    if (email.value != '') {
+        request('POST', '/protected/newemail', {
+            email: email.value,
+        }, function () {
+            if (this.readyState == 4 && this.status == 200) {
+                if (this.response.success) showBottomAlert('success', "Email changed successfully!");
+            }
+        });
+    } else showBottomAlert('danger', "Incorrect data!");
+}
+
+// helper functions
 
 function checkPassword (pw) {
 	var expr = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
@@ -1180,8 +1212,6 @@ function checkPassword (pw) {
 	if (expr.test(pw)) return true;
 	return false;
 }
-
-// helper functions
 
 function parseJwt (token) {
     var base64Url = token.split('.')[1];
