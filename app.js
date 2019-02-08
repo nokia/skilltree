@@ -435,11 +435,7 @@ protectedRoute.post('/getskill', async function (req, res) {
         var skill = user.skills.find(obj => obj.name == data.value);
 
         if (skill == undefined) {
-            var skill = await Skill.findOne({name: data.value} , function (err, skill) {
-        				if (err) throw err;
-        				return skill;
-        	});
-
+          var skill = await findSkillByName(data.value);
         	if (!skill) {
         		res.json({
         			success: false
@@ -464,10 +460,7 @@ async function getDependency (userSkills, skill, dependency) {
 	for (var i = 0; skill.parents != undefined && i < skill.parents.length; ++i) {
         var parent = userSkills.find(obj => obj.name == skill.parents[i]);
         if (parent == undefined) {
-            parent = await Skill.findOne({name: skill.parents[i]} , function (err, skill) {
-                if (err) throw err;
-                return skill;
-            });
+            parent = await findSkillByName(skill.parents[i]);
         }
 
 		parents.push(parent);
@@ -655,12 +648,7 @@ protectedRoute.post('/newskill', async function(req, res) {
         var parentNames = [];
         for (var i = 0; i < data.parents.length; ++i) {
             if (user.skills.find(obj => obj.name == data.parents[i].name) == undefined) { // add parent skill to user if not already there
-                var parent = await Skill.findOne({
-						name: data.parents[i].name
-				}, function(err, skill) {
-						if (err) throw err;
-						return skill;
-				});
+                var parent = await findSkillByName(data.parents[i].name);
                 user.skills.push(parent);
             }
             // add new skill as child of parent skill
@@ -750,12 +738,6 @@ protectedRoute.post('/newtree', async function (req, res) {
 			});
 
 		await data.skills.forEach(async function (skill) {
-			/*var skill = await Skill.findOne({
-				name: skillName,
-			}, function (err, skill) {
-			if (err) throw err;
-			return skill;
-			});*/
 
 		skill.achievedPoint = 0;
 		if (user.skills.find(obj => obj.name == skill.name) == undefined) {
@@ -847,12 +829,7 @@ protectedRoute.post('/editmyskill', async function (req, res) {
 		var parentNames = [];
         for (var i = 0; i < data.parents.length; ++i) {
             if (user.skills.find(obj => obj.name == data.parents[i].name) == undefined) { // add parent skill to user if not already there
-                var parent = await Skill.findOne({
-						name: data.parents[i].name
-				}, function(err, skill) {
-						if (err) throw err;
-						return skill;
-				});
+                var parent = await findSkillByName(data.parents[i].name);
                 user.skills.push(parent);
             }
             // add new skill as child of parent skill
@@ -863,12 +840,7 @@ protectedRoute.post('/editmyskill', async function (req, res) {
 
 		for (var i = 0; i < data.children.length; ++i) {
             if (user.skills.find(obj => obj.name == data.children[i].name) == undefined) { // add parent skill to user if not already there
-                var child = await Skill.findOne({
-						name: data.child[i].name
-				}, function(err, skill) {
-						if (err) throw err;
-						return skill;
-				});
+                var child = await findSkillByName(data.child[i].name);
                 user.skills.push(child);
             }
             // add new skill as child of parent skill
@@ -1111,10 +1083,7 @@ protectedRoute.post('/request', async function (req, res){
 
 	var user = await await findUser(req.decoded.username);
 
-	var skill = await Skill.findOne({name: req.body.name},  function (err, skill) {
-		if (err) throw err;
-		return skill;
-	});
+	var skill = await findSkillByName(req.body.name);
 
 	if (skill !== undefined) {
 		var userskill = user.skills.find(obj => obj.name == skill.name);
@@ -1251,6 +1220,8 @@ protectedRoute.post('/newpassword', async function (req, res) {
   }
 });
 
+
+
 protectedRoute.post('/newplace', async function (req, res) {
   var data = req.body;
   var user = await findUser(req.decoded.username);
@@ -1339,12 +1310,7 @@ adminRoute.post('/approveskill', async function (req, res)  {
 
 	//Look for the skill in the database, if already exists
 	var globalskill = undefined;
-	globalskill = await Skill.findOne( { name : skillforapproval.name } , async function(err, globalskill){
-		if(err) throw err;
-		else return globalskill;
-	});
-
-	console.log(globalskill);
+	globalskill = await findSkillByName(skillforaproval.name);
 
 	//Check if skill is already in the database or not
 	if(globalskill !== null )
@@ -1397,10 +1363,7 @@ adminRoute.post('/approveskill', async function (req, res)  {
 
 		for(var i=0;i<dependency.length;i++)
 		{
-			var globalskill = await Skill.findOne( { name : dependency[i].name } , async function(err, globalskill){
-				if(err) throw err;
-				else return globalskill;
-			});
+			var globalskill = await findSkillByName(dependency[i].name);
 			if(globalskill !== null)
 			{
 				res.json({
@@ -1501,20 +1464,10 @@ adminRoute.post('/edittree', async function (req, res) {
 adminRoute.post('/editskill', async function (req, res) {
 	var data = req.body;
 
-	var skill = await Skill.findOne({
-		"name": data.name
-	}, function (err, tree) {
-		if (err) throw err;
-		return tree;
-	});
+	var skill = await findSkillByName(data.name);
 
 	for (var i = 0; i < skill.parents.length; ++i) {
-		var parent = await Skill.findOne({
-			"name": skill.parents[i]
-		}, function (err, parent) {
-			if (err) throw err;
-			return parent;
-		});
+		var parent = await findSkillByName(skill.parents[i]);
 
 		parent.children = parent.children.filter(obj => obj.name != skill.name);
 
@@ -1522,12 +1475,7 @@ adminRoute.post('/editskill', async function (req, res) {
 	}
 
 	for (var i = 0; i < skill.children.length; ++i) {
-		var child = await Skill.findOne({
-			"name": skill.children[i].name
-		}, function (err, child) {
-			if (err) throw err;
-			return child;
-		});
+		var child = await findSkillByName(skill.children[i].name);
 
 		child.parents = child.parents.filter(obj => obj != skill.name);
 
@@ -1564,12 +1512,7 @@ adminRoute.post('/editskill', async function (req, res) {
 				var parentNames = [];
 		        for (var i = 0; i < data.parents.length; ++i) {
 		            if (user.skills.find(obj => obj.name == data.parents[i].name) == undefined) { // add parent skill to user if not already there
-		                var parent = await Skill.findOne({
-								name: data.parents[i].name
-						}, function(err, parent) {
-								if (err) throw err;
-								return parent;
-						});
+		                var parent = await findSkillByName(data.parents[i].name);
 		                user.skills.push(parent);
 		            }
 		            // add new skill as child of parent skill
@@ -1580,12 +1523,7 @@ adminRoute.post('/editskill', async function (req, res) {
 
 				for (var i = 0; i < data.children.length; ++i) {
 		            if (user.skills.find(obj => obj.name == data.children[i].name) == undefined) { // add parent skill to user if not already there
-		                var child = await Skill.findOne({
-								name: data.children[i].name
-						}, function(err, child) {
-								if (err) throw err;
-								return child;
-						});
+		                var child = await findSkillByName(data.children[i].name);
 		                user.skills.push(child);
 		            }
 		            // add new skill as child of parent skill
@@ -1664,12 +1602,7 @@ adminRoute.post('/approvetree', async function (req, res) {
 adminRoute.post('/approvetraining', async function (req, res) {
 	var data = req.body;
 
-    var globalSkill = await Skill.findOne({
-        name: data.skillName
-    }, function(err, skill) {
-        if (err) throw err;
-		return skill;
-    });
+    var globalSkill = await findSkillByName(data.skillName);
 
     if (globalSkill.trainings.find(obj => obj.name == data.name) == undefined) {
         var training = await ApprovableTraining.findOne({
@@ -1787,6 +1720,20 @@ async function findUser(unm) {
 	return user;
 	});
 	return user;
+}
+
+async function findSkillByName(qname){
+	var skillToReturn await Skill.findOne({
+		"name": qname
+	}, function (err, parent) {
+		if (err) throw err;
+		return skillToReturn;
+	});
+	return skillToReturn;
+}
+
+async function findSkillsByName(qname) {
+
 }
 
 module.exports = app;
