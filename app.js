@@ -657,19 +657,19 @@ protectedRoute.post('/newskill', async function(req, res) {
             parentNames.push(data.parents[i].name);
         }
 
-		user.skills.push({
-            name: data.name,
-            description: data.description,
-			descriptionWikipediaURL: data.descriptionWikipediaURL,
-            skillIcon: data.skillIcon,
-            categoryName: data.categoryName,
-            achievedPoint: 0,
-            maxPoint: data.maxPoint,
-            pointDescription: data.pointDescription,
-            parents: parentNames,
-            //children: data.children,
-            trainings: data.trainings
-        });
+				user.skills.push({
+	      	name: data.name,
+	      	description: data.description,
+					descriptionWikipediaURL: data.descriptionWikipediaURL,
+	      	skillIcon: data.skillIcon,
+	      	categoryName: data.categoryName,
+	      	achievedPoint: 0,
+	      	maxPoint: data.maxPoint,
+	      	pointDescription: data.pointDescription,
+	      	parents: parentNames,
+	      	//children: data.children,
+	      	trainings: data.trainings
+	      });
 
         /*for (var i = 0; i < data.children.length; ++i) {
             user.skills.find(obj => obj.name == data.children[i].name).parents.push(data.name);
