@@ -1541,15 +1541,15 @@ adminRoute.post('/editskill', async function (req, res) {
 		        }
 
 				userSkill.name = data.name;
-		        userSkill.description = data.description;
+		    userSkill.description = data.description;
 				userSkill.descriptionWikipediaURL = data.descriptionWikipediaURL;
-		        userSkill.skillIcon = data.skillIcon;
-		        userSkill.categoryName = data.categoryName;
-		        userSkill.maxPoint = data.maxPoint;
-		        userSkill.pointDescription = data.pointDescription;
+		    userSkill.skillIcon = data.skillIcon;
+		    userSkill.categoryName = data.categoryName;
+		    userSkill.maxPoint = data.maxPoint;
+		    userSkill.pointDescription = data.pointDescription;
 				userSkill.parents = parentNames;
 				userSkill.children = data.children;
-		        userSkill.trainings = data.trainings;
+		    userSkill.trainings = data.trainings;
 
 				if (data.maxPoint < userSkill.achievedPoint) userSkill.achievedPoint = data.maxPoint;
 
