@@ -1712,6 +1712,7 @@ adminRoute.get('/testAdmin', async function (req,res){
 
 ///////////////// END of DELETE SECTION
 
+// returns the user data of the username provided
 async function findUser(unm) {
 	var user = await User.findOne({
 			username: unm,
@@ -1722,6 +1723,7 @@ async function findUser(unm) {
 	return user;
 }
 
+// returns the skill data of the skillname provided
 async function findSkillByName(qname){
 	var skillToReturn = await Skill.findOne({
 		"name": qname
