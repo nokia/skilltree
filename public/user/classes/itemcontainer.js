@@ -48,7 +48,9 @@ class ItemContainer {
         name.position.set(10, 10);
         this.detailsForeground.addChild(name);
 
-        this.description = new PIXI.Text(this.skill.description, {fontSize: descriptionFontSize, fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - this.detailsMargin * 2 });
+        var skillDescShortened = this.skill.description;
+        if(skillDescShortened.length >= 200) skillDescShortened = skillDescShortened.substring(0, 200) + "...";
+        this.description = new PIXI.Text(skillDescShortened, {fontSize: descriptionFontSize, fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - this.detailsMargin * 2 });
         this.description.position.set(this.detailsMargin, this.detailsMargin * 2 + nameFontSize);
         this.detailsForeground.addChild(this.description);
         this.detailsForeground.zOrder = 1;
