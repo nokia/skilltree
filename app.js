@@ -857,16 +857,16 @@ protectedRoute.post('/editmyskill', async function (req, res) {
 			}
         }
 
-		skill.name = data.name;
-        skill.description = data.description;
-		skill.descriptionWikipediaURL = data.descriptionWikipediaURL;
-        skill.skillIcon = data.skillIcon;
-        skill.categoryName = data.categoryName;
-        skill.maxPoint = data.maxPoint;
-        skill.pointDescription = data.pointDescription;
-		skill.parents = parentNames;
-		skill.children = data.children;
-        skill.trainings = data.trainings;
+				skill.name = data.name;
+				skill.description = data.description;
+				skill.descriptionWikipediaURL = data.descriptionWikipediaURL;
+				skill.skillIcon = data.skillIcon;
+				skill.categoryName = data.categoryName;
+				skill.maxPoint = data.maxPoint;
+				skill.pointDescription = data.pointDescription;
+				skill.parents = parentNames;
+				skill.children = data.children;
+				skill.trainings = data.trainings;
 
 		if (data.maxPoint < skill.achievedPoint) skill.achievedPoint = data.maxPoint;
 
