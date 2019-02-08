@@ -1723,17 +1723,13 @@ async function findUser(unm) {
 }
 
 async function findSkillByName(qname){
-	var skillToReturn await Skill.findOne({
+	var skillToReturn = await Skill.findOne({
 		"name": qname
 	}, function (err, parent) {
 		if (err) throw err;
 		return skillToReturn;
 	});
 	return skillToReturn;
-}
-
-async function findSkillsByName(qname) {
-
 }
 
 module.exports = app;
