@@ -1655,13 +1655,11 @@ adminRoute.post('/approvetraining', async function (req, res) {
 //drops the offers from global skills. Needed if we delete users
 adminRoute.post('/dropoffers', async function (req, res) {
 	Skill.find({} , (err, skills) => {
-        if(err) console.log("error");
-
-        skills.map(skill => {
+		if(err) console.log("error");
+		skills.map(skill => {
 			skill.offers = [];
-
 			skill.save(  function (err) {if (err) throw err;} );
-        })
+		})
 	})
 });
 
