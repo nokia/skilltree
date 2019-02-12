@@ -1,9 +1,9 @@
 function validate() {
-	var loginBox = document.getElementById("loginBox");
-	var username = document.getElementById("username");
-	var password = document.getElementById("password");
+	let loginBox = document.getElementById("loginBox");
+	let username = document.getElementById("username");
+	let password = document.getElementById("password");
 
-	var httpRequest = new XMLHttpRequest();
+	let httpRequest = new XMLHttpRequest();
 
 	httpRequest.open('POST', '/auth', true);
 	httpRequest.setRequestHeader('Content-type', 'application/json');

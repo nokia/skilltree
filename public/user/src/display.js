@@ -11,10 +11,10 @@ function showTree (treeName, _data, self) {
     }
     selectedTreeName = treeName;
 
-    var skills = new Array();
+    let skills = new Array();
     for (var j = 0; j < _data.trees.find(obj => obj.name == treeName).skillNames.length; ++j) {
-        var skillName = _data.trees.find(obj => obj.name == treeName).skillNames[j];
-        var skill = _data.skills.find(obj => obj.name == skillName);
+        let skillName = _data.trees.find(obj => obj.name == treeName).skillNames[j];
+        let skill = _data.skills.find(obj => obj.name == skillName);
 
         skills.push(skill);
     }
@@ -27,7 +27,7 @@ function showTree (treeName, _data, self) {
     document.getElementById("openchart").value = "Open Chart";
     document.getElementById("openchart").onclick = showChart;
 
-    var owner = {self: self, username: _data.username};
+    let owner = {self: self, username: _data.username};
     tree = new Tree(app, skills, owner);
     app.stage.addChild(tree.treeContainer);
     tree.treeContainer.pivot.set(tree.treeContainer.width / 2, tree.treeContainer.height / 2);
@@ -66,29 +66,29 @@ function showChart() {
 
     chartContainer = new PIXI.Container();
 
-    var sliceCount = data.categories.length;
+    let sliceCount = data.categories.length;
 
     //initialize chart variables
-    var x = 0;
-    var y = 0;
-    var width = 240;
-    var h1 = 60;
-    var h2 = h1 + width;
+    let x = 0;
+    let y = 0;
+    let width = 240;
+    let h1 = 60;
+    let h2 = h1 + width;
 
     for (var i = 0; i < sliceCount; i++) {
-        var tempContainer = new PIXI.Container();
+        let tempContainer = new PIXI.Container();
 
-        var skills = data.skills.filter(obj => obj.categoryName == data.categories[i].name);
-        var sumAP = skills.sum("achievedPoint");
-        var sumMP = skills.sum("maxPoint");
-        var percent = 0;
+        let skills = data.skills.filter(obj => obj.categoryName == data.categories[i].name);
+        let sumAP = skills.sum("achievedPoint");
+        let sumMP = skills.sum("maxPoint");
+        let percent = 0;
         if (sumMP != 0) percent = sumAP / sumMP;
 
         h2 = h1 + width;
-        var s = (i * (360 / sliceCount) * Math.PI) / 180;
-        var e = ((i + 1) * (360 / sliceCount) * Math.PI) / 180;
+        let s = (i * (360 / sliceCount) * Math.PI) / 180;
+        let e = ((i + 1) * (360 / sliceCount) * Math.PI) / 180;
 
-        var slice = new PIXI.Graphics();
+        let slice = new PIXI.Graphics();
         slice.lineStyle(3, 0x000000);
 
         slice.moveTo(x + Math.cos(e) * h1, y + Math.sin(e) * h1);
@@ -101,7 +101,7 @@ function showChart() {
         tempContainer.addChild(slice);
 
         h2 = h1 + (width * percent);
-        var innerSlice = new PIXI.Graphics();
+        let innerSlice = new PIXI.Graphics();
         innerSlice.lineStyle(3, 0x000000);
         innerSlice.moveTo(x + Math.cos(e) * h1, y + Math.sin(e) * h1);
         innerSlice.beginFill(0x5cb85c);
@@ -134,25 +134,25 @@ function showChart() {
         //var text = new PIXI.Text(treeData.find(obj => obj.treeID == userData[i].treeID).treeName, {fill: '#ffffff', wordWrap: true, wordWrapWidth: 200, align: 'center'});
 
         //Write category names
-        var text = new PIXI.Text(data.categories[i].name, {fill: '#000000', wordWrap: true, wordWrapWidth: 200, align: 'center'});
-        var points = [];
-        var radius = 320 + (text.height / 29 - 1) * 15;
-        var pointsCount = 20;
+        let text = new PIXI.Text(data.categories[i].name, {fill: '#000000', wordWrap: true, wordWrapWidth: 200, align: 'center'});
+        let points = [];
+        let radius = 320 + (text.height / 29 - 1) * 15;
+        let pointsCount = 20;
         if (Math.floor(sliceCount / 2) <= i) {
             for (var j = 0; j < pointsCount; j++) {
-                var px = radius * Math.cos(j * Math.PI * 2 * text.width / (250 * 8 / sliceCount) / pointsCount / sliceCount + s);
-                var py = radius * Math.sin(j * Math.PI * 2 * text.width / (250 * 8 / sliceCount) / pointsCount / sliceCount + s);
+                let px = radius * Math.cos(j * Math.PI * 2 * text.width / (250 * 8 / sliceCount) / pointsCount / sliceCount + s);
+                let py = radius * Math.sin(j * Math.PI * 2 * text.width / (250 * 8 / sliceCount) / pointsCount / sliceCount + s);
                 points.push(new PIXI.Point(px, py));
             }
         } else {
             for (var j = pointsCount - 1; j > 0; --j) {
-                var px = radius * Math.cos(j * Math.PI * 2 * text.width / (250 * 8 / sliceCount) / pointsCount / sliceCount + s);
-                var py = radius * Math.sin(j * Math.PI * 2 * text.width / (250 * 8 / sliceCount) / pointsCount / sliceCount + s);
+                let px = radius * Math.cos(j * Math.PI * 2 * text.width / (250 * 8 / sliceCount) / pointsCount / sliceCount + s);
+                let py = radius * Math.sin(j * Math.PI * 2 * text.width / (250 * 8 / sliceCount) / pointsCount / sliceCount + s);
                 points.push(new PIXI.Point(px, py));
             }
         }
 
-        var rope = new PIXI.mesh.Rope(text.texture, points);
+        let rope = new PIXI.mesh.Rope(text.texture, points);
         rope.rotation = (Math.PI * 2 / sliceCount - text.width / (240 * 8 / sliceCount) * Math.PI * 2 / sliceCount * 0.95) / 2;
         tempContainer.addChild(rope);
 
@@ -170,7 +170,7 @@ function showChart() {
     app.stage.addChild(chartContainer);
 
     // scale chart
-    var ratio = chartContainer.width / chartContainer.height;
+    let ratio = chartContainer.width / chartContainer.height;
     if (window.innerWidth < window.innerHeight - 90) {
         chartContainer.width = window.innerWidth - 40;
         chartContainer.height = (window.innerWidth - 40) / ratio;

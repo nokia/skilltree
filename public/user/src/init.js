@@ -1,6 +1,6 @@
 // get data from server
 function initData(){
-  var dataRequest = new XMLHttpRequest();
+  let dataRequest = new XMLHttpRequest();
   dataRequest.open('GET', '/protected/userdata', true);
   dataRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
   dataRequest.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
@@ -24,7 +24,7 @@ function initData(){
 
 // initializes the data of the card on the top-right corner of the page.
 function initUI(self, _data){
-  var card_username = document.getElementById('card_username');
+  let card_username = document.getElementById('card_username');
   if (card_username) {
     if (self) {
       card_username.innerHTML = "Welcome " + _data.username + "!";
@@ -39,11 +39,11 @@ function initUI(self, _data){
 
 // initalizes the card on the top left corner of the screen
 function initCard(){
-  var treeCount = document.getElementById('treeCount');
-  var skillCount = document.getElementById('skillCount');
-  var pointCount = document.getElementById('pointCount');
-  var cardUserName = document.getElementById('cardUserName');
-  var cardMainTree = document.getElementById('cardMainTree');
+  let treeCount = document.getElementById('treeCount');
+  let skillCount = document.getElementById('skillCount');
+  let pointCount = document.getElementById('pointCount');
+  let cardUserName = document.getElementById('cardUserName');
+  let cardMainTree = document.getElementById('cardMainTree');
 
   treeCount.innerHTML = data.trees.length + "<br>trees";
   skillCount.innerHTML = data.skills.length + "<br>skills";
@@ -51,9 +51,9 @@ function initCard(){
   cardUserName.innerHTML = data.username;
   cardMainTree.innerHTML = data.mainTree;
 
-  var username = document.getElementById('username');
-  var place = document.getElementById('place');
-  var email = document.getElementById('email');
+  let username = document.getElementById('username');
+  let place = document.getElementById('place');
+  let email = document.getElementById('email');
 
   username.innerText = data.username;
   place.value = data.location;
@@ -64,13 +64,13 @@ function initCard(){
 function checkFirstLogin() {
     if (data.mainTree != undefined) startLoader();
     else {
-        var modal = document.getElementById('firstLogin');
-        var btn = document.getElementById('savebtn');
-        var focusArea = document.getElementById('focusareasel');
-        var mainTree = document.getElementById('maintree');
+        let modal = document.getElementById('firstLogin');
+        let btn = document.getElementById('savebtn');
+        let focusArea = document.getElementById('focusareasel');
+        let mainTree = document.getElementById('maintree');
 
         btn.onclick = function() {
-            var firstLoginData = {
+            let firstLoginData = {
                     focusArea: focusArea.value,
                     mainTree: mainTree.value
             };
@@ -87,14 +87,14 @@ function checkFirstLogin() {
 }
 
 function selectMainTree () {
-    var mainTree = document.getElementById('maintree');
-    var focusArea = document.getElementById('focusareasel');
+    let mainTree = document.getElementById('maintree');
+    let focusArea = document.getElementById('focusareasel');
 
-    var focusAreaTrees = data.allTreeNames.filter(obj => obj.focusArea == focusArea.value);
+    let focusAreaTrees = data.allTreeNames.filter(obj => obj.focusArea == focusArea.value);
 
     mainTree.innerHTML = '';
     for (var i = 0; i < focusAreaTrees.length; ++i) {
-        var option = document.createElement('option');
+        let option = document.createElement('option');
         option.value = option.text = focusAreaTrees[i].name;
         mainTree.add(option);
     }
@@ -121,11 +121,11 @@ function startLoader () {
 
 // loads the user's public and private trees.
 function loadAddedTrees(){
-  var treeList = document.getElementById('treeList');
+  let treeList = document.getElementById('treeList');
   treeList.innerHTML = "";
   for (var i = 0; i < data.trees.length; i++) {
-    var tn = data.trees[i].name;
-    var ithtree = document.createElement('a');
+    let tn = data.trees[i].name;
+    let ithtree = document.createElement('a');
     if (tn == data.mainTree) ithtree.innerHTML = tn;
     else ithtree.innerHTML = '<i class = "fa fa-trash" id = "delTreeBtn" onclick = "delTree(this)"></i>' + tn;
     ithtree.className = "dropdown-item";
@@ -141,9 +141,9 @@ function loadAddedTrees(){
 
 window.addEventListener('load', function() {
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.getElementsByClassName('needs-validation');
+    let forms = document.getElementsByClassName('needs-validation');
     // Loop over them and prevent submission
-    var validation = Array.prototype.filter.call(forms, function(form) {
+    let validation = Array.prototype.filter.call(forms, function(form) {
         form.addEventListener('submit', function(event) {
             if (form.checkValidity() === false) {
                 event.preventDefault();

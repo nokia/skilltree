@@ -8,14 +8,14 @@ function checkPassword (pw) {
 
 // converts encoded token to usable data
 function parseJwt (token) {
-    var base64Url = token.split('.')[1];
-    var base64 = base64Url.replace('-', '+').replace('_', '/');
+    let base64Url = token.split('.')[1];
+    let base64 = base64Url.replace('-', '+').replace('_', '/');
     return JSON.parse(window.atob(base64));
 }
 
 // sums one elements values in an object array
 Array.prototype.sum = function (prop) {
-    var total = 0;
+    let total = 0;
 
     for (var i = 0; i < this.length; ++i) {
         total += this[i][prop];
@@ -34,9 +34,9 @@ function showBottomAlert (type, msg) { // type: success, danger, warning, ...
     if (type != 'danger') setTimeout(function () {$('#bottomAlert').hide();}, 3000);
 }
 
-// function for simplifying api requests 
+// function for simplifying api requests
 function request (type, url, sendData, callback) {
-    var req = new XMLHttpRequest();
+    let req = new XMLHttpRequest();
     req.open(type, url, true);
     req.setRequestHeader('Content-type', 'application/json');
     req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
