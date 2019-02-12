@@ -3,10 +3,10 @@
   // effect, eg. green glowfilters for maxed out skills. Keep in mind that .filters
   // should NEVER be nulled, only modified. If you want to empty a slot, apply
   // nullFilter there, it does nothing, it's kind of a placeholder filter.
-  let nullFilter = new PIXI.filters.AlphaFilter(1);
-  let maxPointFilter = new PIXI.filters.GlowFilter(8,3,2, 0x007F0E, 1);
-  let notNullPointFilter = new PIXI.filters.GlowFilter(8,3,2, 0xCCAA00, 1);
-  let hoverFilter = new PIXI.filters.GlowFilter(8,3,2, 0xFFBF00, 1);
+  var nullFilter = new PIXI.filters.AlphaFilter(1);
+  var maxPointFilter = new PIXI.filters.GlowFilter(8,3,2, 0x007F0E, 1);
+  var notNullPointFilter = new PIXI.filters.GlowFilter(8,3,2, 0xCCAA00, 1);
+  var hoverFilter = new PIXI.filters.GlowFilter(8,3,2, 0xFFBF00, 1);
 
 class ItemContainer {
     constructor(app, skills, skillName, owner) {
@@ -36,19 +36,19 @@ class ItemContainer {
         }
 
         // Creating details page
-        let detailsWidth = 300;
+        var detailsWidth = 300;
         this.detailsMargin = 10;
-        let nameFontSize = 20;
-        let descriptionFontSize = 12;
+        var nameFontSize = 20;
+        var descriptionFontSize = 12;
 
         this.details = new PIXI.Container();
 
         this.detailsForeground = new PIXI.Container();
-        let name = new PIXI.Text(this.skill.name, {fontSize: nameFontSize, fill: 0x000000});
+        var name = new PIXI.Text(this.skill.name, {fontSize: nameFontSize, fill: 0x000000});
         name.position.set(10, 10);
         this.detailsForeground.addChild(name);
 
-        let skillDescShortened = this.skill.description;
+        var skillDescShortened = this.skill.description;
         if(skillDescShortened.length >= 200) skillDescShortened = skillDescShortened.substring(0, 200) + "...";
         this.description = new PIXI.Text(skillDescShortened, {fontSize: descriptionFontSize, fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - this.detailsMargin * 2 });
         this.description.position.set(this.detailsMargin, this.detailsMargin * 2 + nameFontSize);
@@ -86,32 +86,32 @@ class ItemContainer {
         if (this.nextlvlDesc.enabled) this.btnPosY = this.nextlvlDesc.position.y + this.nextlvlDesc.height + 15;
         else if (this.curlvlDesc.enabled) this.btnPosY = this.curlvlDesc.position.y + this.curlvlDesc.height + 15;
 
-        let btnG = new PIXI.Graphics();
+        var btnG = new PIXI.Graphics();
         btnG.lineStyle(1, 0x888888);
         btnG.beginFill(0x44cc44);
         btnG.drawRect(0, 0, 70, 26);
         btnG.endFill();
 
-        let btnGHover = new PIXI.Graphics();
+        var btnGHover = new PIXI.Graphics();
         btnGHover.lineStyle(1, 0x888888);
         btnGHover.beginFill(0x217821);
         btnGHover.drawRect(0, 0, 70, 26);
         btnGHover.endFill();
 
         // check if need to show endorse button
-        let base64Url = localStorage.getItem("loginToken").split('.')[1];
-        let base64 = base64Url.replace('-', '+').replace('_', '/');
-        let payload = JSON.parse(window.atob(base64));
+        var base64Url = localStorage.getItem("loginToken").split('.')[1];
+        var base64 = base64Url.replace('-', '+').replace('_', '/');
+        var payload = JSON.parse(window.atob(base64));
 
-        let showEndorseBtn = false;
+        var showEndorseBtn = false;
         if (!this.self && this.skill.endorsement.find(obj => obj == payload.username) == undefined) showEndorseBtn = true;
 
-        let btnInfoPosX = 0;
-        let btn1PosX = 0;
+        var btnInfoPosX = 0;
+        var btn1PosX = 0;
         if (showEndorseBtn) {
-            let btnEndorse = new PIXI.Sprite(btnG.generateTexture());
+            var btnEndorse = new PIXI.Sprite(btnG.generateTexture());
 
-            let txtEndorse = new PIXI.Text("ENDORSE", {fontSize: 14, fill: 0x000000});
+            var txtEndorse = new PIXI.Text("ENDORSE", {fontSize: 14, fill: 0x000000});
             txtEndorse.anchor.set(0.5, 0.5);
             txtEndorse.position.set(35,13);
 
@@ -134,9 +134,9 @@ class ItemContainer {
             this.detailsForeground.addChild(this.btnEndorseContainer);
         }
 
-        let btnInfo = new PIXI.Sprite(btnG.generateTexture());
+        var btnInfo = new PIXI.Sprite(btnG.generateTexture());
 
-        let txtInfo = new PIXI.Text("INFO", {fontSize: 14, fill: 0x000000});
+        var txtInfo = new PIXI.Text("INFO", {fontSize: 14, fill: 0x000000});
         txtInfo.anchor.set(0.5, 0.5);
         txtInfo.position.set(35,13);
 
@@ -162,9 +162,9 @@ class ItemContainer {
                         });
         this.detailsForeground.addChild(this.btnInfoContainer);
 
-        let btn1 = new PIXI.Sprite(btnG.generateTexture());
+        var btn1 = new PIXI.Sprite(btnG.generateTexture());
 
-        let txt1 = new PIXI.Text("OFFERS", {fontSize: 14, fill: 0x000000});
+        var txt1 = new PIXI.Text("OFFERS", {fontSize: 14, fill: 0x000000});
         txt1.anchor.set(0.5, 0.5);
         txt1.position.set(35,13);
 
@@ -191,13 +191,13 @@ class ItemContainer {
         this.detailsForeground.addChild(this.btn1Container);
 
         /*
-        let btn2 = new PIXI.Sprite(btnG.generateTexture());
+        var btn2 = new PIXI.Sprite(btnG.generateTexture());
 
-        let txt2 = new PIXI.Text("REQUEST", {fontSize: 14, fill: 0x000000});
+        var txt2 = new PIXI.Text("REQUEST", {fontSize: 14, fill: 0x000000});
         txt2.anchor.set(0.5, 0.5);
         txt2.position.set(35, 13);
 
-        let btn2Container = new PIXI.Container();
+        var btn2Container = new PIXI.Container();
         btn2Container.addChild(btn2, txt2);
         btn2Container.position.set(detailsWidth - detailsMargin - 20 - btn2Container.width, description.position.y + description.height + 10);
         btn2Container.interactive = true;
@@ -214,7 +214,7 @@ class ItemContainer {
         */
         /*// Temporary link
         if (skillName == 0) {
-            let link = new Link("Nokia website", "https://nokia.com", {fontSize: 12, fill: 0x0000ff}, true);
+            var link = new Link("Nokia website", "https://nokia.com", {fontSize: 12, fill: 0x0000ff}, true);
             link.position.set(detailsMargin, btn1Container.position.y + btn1Container.height + 7);
             detailsForeground.addChild(link);
         }
@@ -292,7 +292,7 @@ class ItemContainer {
     onClick(event) {
         if (!event.drag) {
             if (this.parentObj.self) {
-                let children = this.parentObj.skill.children;
+                var children = this.parentObj.skill.children;
 
                 // Increase skill level
                 if (this.parentObj.skill.achievedPoint < this.parentObj.skill.maxPoint) {
@@ -332,7 +332,7 @@ class ItemContainer {
     // Decreases skill level
     onRightClick() {
         if (this.parentObj.self) {
-            let children = this.parentObj.skill.children;
+            var children = this.parentObj.skill.children;
 
             // Decrease skill level
             if(this.parentObj.skill.achievedPoint > 0)
@@ -372,13 +372,13 @@ class ItemContainer {
 
     // Refreshes the clickable property of all the tree except for the root level, and sets the resets the filter to null (this blocks the functionality of the green filter on 5/5 skills for now on every level except the root, fix will be needed)
     refreshAvaliability(){
-        for (let i = 0; i < this.skills.length; i++) {
-            for (let j = 0; j < this.skills[i].parents.length; j++) {
+        for (var i = 0; i < this.skills.length; i++) {
+            for (var j = 0; j < this.skills[i].parents.length; j++) {
 
-                let par = this.skills.find(obj => obj.name == this.skills[i].parents[j]);
+                var par = this.skills.find(obj => obj.name == this.skills[i].parents[j]);
                 if(par !== undefined) {
                     if(par.children.find(obj => obj.name == this.skills[i].name).minPoint > par.achievedPoint || par.itemcontainer.container.interactive == false){
-                        let colorMatrixFilter = new PIXI.filters.ColorMatrixFilter;
+                        var colorMatrixFilter = new PIXI.filters.ColorMatrixFilter;
                         colorMatrixFilter.brightness(0.4);
                         this.skills[i].itemcontainer.skillicon.filters = [colorMatrixFilter];
                         this.skills[i].itemcontainer.skillborder.levelinfo.filters = [colorMatrixFilter];
@@ -408,9 +408,9 @@ class ItemContainer {
 
     // Adds hover animation to the skill, and shows the details box
     onButtonOver() {
-        let skillborder = this.parentObj.skillborder;
-        let details = this.parentObj.details;
-        let container = this;
+        var skillborder = this.parentObj.skillborder;
+        var details = this.parentObj.details;
+        var container = this;
 
         // Brings up hovered container
         container.addChild(details);
@@ -423,7 +423,7 @@ class ItemContainer {
         if (details.savedPosY == undefined || details.canvasHeight != document.getElementById("pixiCanvas").height) {
             details.canvasHeight = document.getElementById("pixiCanvas").height;
 
-            let bottomOfDetails = details.getGlobalPosition().y + details.height;
+            var bottomOfDetails = details.getGlobalPosition().y + details.height;
 
             if (bottomOfDetails > document.getElementById("pixiCanvas").height) {
                 details.position.y = -(bottomOfDetails - document.getElementById("pixiCanvas").height + 10);
@@ -436,7 +436,7 @@ class ItemContainer {
         //if (bottomOfDetails > height) details.position.y = (details.initPos.y - details.getGlobalPosition().y) - (bottomOfDetails - this.parentObj.app.height + 10);
         //if (details.getGlobalPosition().y < 10) details.position.y = 10;
 
-        let rightOfDetails = details.getGlobalPosition().x + details.width;
+        var rightOfDetails = details.getGlobalPosition().x + details.width;
         if (rightOfDetails > this.parentObj.app.width) details.position.x = -details.width;*/
 
         this.parentObj.app.renderer.render(this.parentObj.app.stage);
@@ -450,9 +450,9 @@ class ItemContainer {
 
     // removes filters (this wrechs the green filter too) of the skill and removes the details box.
     onButtonOut() {
-        let skillborder = this.parentObj.skillborder;
-        let details = this.parentObj.details;
-        let container = this;
+        var skillborder = this.parentObj.skillborder;
+        var details = this.parentObj.details;
+        var container = this;
 
         container.removeChild(details);
         container.zOrder = 4;
@@ -481,7 +481,7 @@ class ItemContainer {
 
     // disables the access to this skill (click and hover)
     disable () {
-        let colorMatrixFilter = new PIXI.filters.ColorMatrixFilter;
+        var colorMatrixFilter = new PIXI.filters.ColorMatrixFilter;
         colorMatrixFilter.brightness(0.4);
         this.skillborder.filters = [colorMatrixFilter, this.skillborder.filters[1]];
         this.skillicon.filters = [colorMatrixFilter];
@@ -495,15 +495,15 @@ class ItemContainer {
 
     // this is the toggler for the details box
     toggleSkillDetailsPage(){
-        let modal = document.getElementById('skillpage');
-        let header = document.getElementById('skillnameHeader');
-        let span = document.getElementById("closeORModal");
-        let globalskill = undefined;
+        var modal = document.getElementById('skillpage');
+        var header = document.getElementById('skillnameHeader');
+        var span = document.getElementById("closeORModal");
+        var globalskill = undefined;
 
-        let skillname = this.skill.name;
+        var skillname = this.skill.name;
 
         //HTTP Request for offer data
-        let offerHttpRequest = new XMLHttpRequest();
+        var offerHttpRequest = new XMLHttpRequest();
             offerHttpRequest.open('POST', '/protected/skilldata', true);
             offerHttpRequest.setRequestHeader('Content-type', 'application/json');
             offerHttpRequest.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
@@ -518,13 +518,13 @@ class ItemContainer {
 
               //Initialize table variables
               globalskill = offerHttpRequest.response;
-              let offerTable = document.getElementById('offerTableBody');
+              var offerTable = document.getElementById('offerTableBody');
               //initialize the request counts
-              let beginnerCount = document.getElementById('beginnerCount');
+              var beginnerCount = document.getElementById('beginnerCount');
               beginnerCount.innerHTML = globalskill.beginnerRequests.length;
-              let intermediateCount = document.getElementById('intermediateCount');
+              var intermediateCount = document.getElementById('intermediateCount');
               intermediateCount.innerHTML = globalskill.intermediateRequests.length;
-              let advancedCount = document.getElementById('advancedCount');
+              var advancedCount = document.getElementById('advancedCount');
               advancedCount.innerHTML = globalskill.advancedRequests.length;
 
               //Empty the table
@@ -537,7 +537,7 @@ class ItemContainer {
               "Level",
               "divTableHead") );
               //Filling the table
-              for(let i=0; i<globalskill.offers.length; i++ )
+              for(var i=0; i<globalskill.offers.length; i++ )
               {
                 if(true) //TODO, only higher level offers should appear
                 {
@@ -550,10 +550,10 @@ class ItemContainer {
                   }
                 }
 
-                let addBeginnerRequest = document.getElementById('addBeginnerCount');
+                var addBeginnerRequest = document.getElementById('addBeginnerCount');
                 addBeginnerRequest.onclick = function() {
                   //request for requests
-                  let requestforrequests = new XMLHttpRequest();
+                  var requestforrequests = new XMLHttpRequest();
                   requestforrequests.open('POST', '/protected/request', true);
                   requestforrequests.setRequestHeader('Content-type', 'application/json');
                   requestforrequests.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
@@ -580,10 +580,10 @@ class ItemContainer {
                   );
                 }
 
-                let addIntermediateRequest = document.getElementById('addIntermediateCount');
+                var addIntermediateRequest = document.getElementById('addIntermediateCount');
                 addIntermediateRequest.onclick = function() {
                   //request for requests
-                  let requestforrequests = new XMLHttpRequest();
+                  var requestforrequests = new XMLHttpRequest();
                   requestforrequests.open('POST', '/protected/request', true);
                   requestforrequests.setRequestHeader('Content-type', 'application/json');
                   requestforrequests.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
@@ -610,10 +610,10 @@ class ItemContainer {
                   );
                 }
 
-                let addAdvancedRequest = document.getElementById('addAdvancedCount');
+                var addAdvancedRequest = document.getElementById('addAdvancedCount');
                 addAdvancedRequest.onclick = function() {
                   //request for requests
-                  let requestforrequests = new XMLHttpRequest();
+                  var requestforrequests = new XMLHttpRequest();
                   requestforrequests.open('POST', '/protected/request', true);
                   requestforrequests.setRequestHeader('Content-type', 'application/json');
                   requestforrequests.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
@@ -650,20 +650,20 @@ class ItemContainer {
 					})
 				);
         //Adding trainings to table
-        let trainingTable = document.getElementById('trainingTableBody');
-        let requestTable = document.getElementById('requestTableBody');
+        var trainingTable = document.getElementById('trainingTableBody');
+        var requestTable = document.getElementById('requestTableBody');
 
 
         function createTableRow( data1, data2, data3, data4, data5, classname )
         {
             //Creating an offer tablerow
-            let Row = document.createElement('div');
+            var Row = document.createElement('div');
             Row.className = "divTableRow";
 
 
             if(data1 !== undefined)
             {
-            let Column1 = document.createElement('div');
+            var Column1 = document.createElement('div');
             Column1.className = classname;
             Column1.innerHTML = data1;
             Row.appendChild(Column1);
@@ -671,7 +671,7 @@ class ItemContainer {
 
             if(data2 !== undefined)
             {
-            let Column2 = document.createElement('div');
+            var Column2 = document.createElement('div');
             Column2.className = classname;
             Column2.innerHTML = data2;
             Row.appendChild(Column2);
@@ -679,7 +679,7 @@ class ItemContainer {
 
             if(data3 !== undefined)
             {
-            let Column3 = document.createElement('div');
+            var Column3 = document.createElement('div');
             Column3.className = classname;
             Column3.innerHTML = data3;
             Row.appendChild(Column3);
@@ -687,7 +687,7 @@ class ItemContainer {
 
             if(data4 !== undefined)
             {
-            let Column4 = document.createElement('div');
+            var Column4 = document.createElement('div');
             Column4.className = classname;
             Column4.innerHTML = data4;
             Row.appendChild(Column4);
@@ -695,7 +695,7 @@ class ItemContainer {
 
             if(data5 !== undefined)
             {
-            let Column5 = document.createElement('div');
+            var Column5 = document.createElement('div');
             Column5.className = classname;
             Column5.innerHTML = data5;
             Row.appendChild(Column5);
@@ -722,19 +722,19 @@ class ItemContainer {
 
     // this is the toggler for the infomodal, this runs on "info" click.
     toggleSkillInfoPage () {
-        let modal = document.getElementById('skillinfopage');
-        let header = document.getElementById('infoSkillnameHeader');
-        let span = document.getElementById("closeInfoModal");
-        let desc = document.getElementById("imDesc");
-        let wikiURL = document.getElementById("imWiki");
-        let categ = document.getElementById("imCateg");
-        let maxP = document.getElementById("imMaxPoint");
-        let points = document.getElementById("imPoints");
-        let parents = document.getElementById("imParents");
-        let children = document.getElementById("imChildren");
-        let trainings = document.getElementById("imTrainings");
+        var modal = document.getElementById('skillinfopage');
+        var header = document.getElementById('infoSkillnameHeader');
+        var span = document.getElementById("closeInfoModal");
+        var desc = document.getElementById("imDesc");
+        var wikiURL = document.getElementById("imWiki");
+        var categ = document.getElementById("imCateg");
+        var maxP = document.getElementById("imMaxPoint");
+        var points = document.getElementById("imPoints");
+        var parents = document.getElementById("imParents");
+        var children = document.getElementById("imChildren");
+        var trainings = document.getElementById("imTrainings");
 
-        let skillname = this.skill.name;
+        var skillname = this.skill.name;
         header.innerText = this.skill.name;
 
         desc.innerText = this.skill.description;
@@ -743,16 +743,16 @@ class ItemContainer {
         categ.innerText = this.skill.categoryName;
         maxP.innerText = this.skill.maxPoint;
 
-        let pointDesc = '';
-        for (let i = 0; i < this.skill.pointDescription.length; ++i) {
+        var pointDesc = '';
+        for (var i = 0; i < this.skill.pointDescription.length; ++i) {
             if (i + 1 == this.skill.achievedPoint) pointDesc += "<li><i>" + this.skill.pointDescription[i] + " (current)</i></li>";
             else pointDesc += "<li>" + this.skill.pointDescription[i] + "</li>";
         }
         //pointDesc = pointDesc.substring(0, pointDesc.length - 2);
         points.innerHTML = pointDesc;
 
-        let parentNames = '';
-        for (let i = 0; i < this.skill.parents.length; ++i) parentNames += this.skill.parents[i] + ', ';
+        var parentNames = '';
+        for (var i = 0; i < this.skill.parents.length; ++i) parentNames += this.skill.parents[i] + ', ';
         if (parentNames != '') {
             parentNames = parentNames.substring(0, parentNames.length - 2);
             parents.innerText = parentNames;
@@ -760,8 +760,8 @@ class ItemContainer {
             parents.innerText = '-';
         }
 
-        let childNames = '';
-        for (let i = 0; i < this.skill.children.length; ++i) {
+        var childNames = '';
+        for (var i = 0; i < this.skill.children.length; ++i) {
             childNames += this.skill.children[i].name + ' (minimum point: ' + this.skill.children[i].minPoint;
             if (!this.skill.children[i].recommended) childNames += ', required), ';
             else childNames += '), ';
@@ -771,8 +771,8 @@ class ItemContainer {
             children.innerText = childNames;
         } else children.innerText = '-';
 
-        let trainingNames = '';
-        for (let i = 0; i < this.skill.trainings.length; ++i) {
+        var trainingNames = '';
+        for (var i = 0; i < this.skill.trainings.length; ++i) {
             if (this.skill.trainings[i].URL == undefined) trainingNames += this.skill.trainings[i].name + ', ';
             else trainingNames += "<a target='_blank' href = '" + this.skill.trainings[i].URL + "'>" + this.skill.trainings[i].name + '</a>, ';
         }
@@ -799,7 +799,7 @@ class ItemContainer {
 
     // endorses the skill of an other user. this runs on the "endorse" click.
     endorse () {
-        let req = new XMLHttpRequest();
+        var req = new XMLHttpRequest();
         req.open('POST', '/protected/endorse', true);
         req.setRequestHeader('Content-type', 'application/json');
         req.setRequestHeader('x-access-token', localStorage.getItem("loginToken"));
@@ -810,7 +810,7 @@ class ItemContainer {
             }
         };
 
-        let data = {
+        var data = {
             skillName: this.parentObj.skill.name,
             username: this.parentObj.username
         };
@@ -820,7 +820,7 @@ class ItemContainer {
 
     readMoreSplit (text) {
         if (text.split(" ", 15) != undefined) {
-            let index = text.split(" ", 15).join(" ").length;
+            var index = text.split(" ", 15).join(" ").length;
             text = text.substring(0, index) + "...";
         }
 

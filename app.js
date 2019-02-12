@@ -7,15 +7,15 @@ const morgan      = require('morgan');
 const mongoose    = require('mongoose');
 const jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
 
-let config = require('./config'); // get our config file
-let Category   = require('./models/categorymodel');
-let User   = require('./models/usermodel'); // get our mongoose model
-let Tree = require('./models/treemodel');
-let ApprovableTree = require('./models/treesforapprovemodel')
-let Skill = require('./models/skillmodel');
-let ApprovableSkill = require('./models/skillsforapprovemodel');
-let ApprovableTraining = require('./models/trainingsforapprovemodel');
-let pbkdf2 = require('./pbkdf2'); // get hash generator and pw checker
+var config = require('./config'); // get our config file
+var Category   = require('./models/categorymodel');
+var User   = require('./models/usermodel'); // get our mongoose model
+var Tree = require('./models/treemodel');
+var ApprovableTree = require('./models/treesforapprovemodel')
+var Skill = require('./models/skillmodel');
+var ApprovableSkill = require('./models/skillsforapprovemodel');
+var ApprovableTraining = require('./models/trainingsforapprovemodel');
+var pbkdf2 = require('./pbkdf2'); // get hash generator and pw checker
 
 const app = express();
 
@@ -43,27 +43,27 @@ app.get('/apitest', async function(req,res) {
 
 app.post('/registration', async function(req, res) {
 	// search for username in db
-    let user = await findUser(req.body.username);
+    var user = await findUser(req.body.username);
 
 	if (!user) { // if new user
-		let hashData = pbkdf2.hashPassword(req.body.password);
+		var hashData = pbkdf2.hashPassword(req.body.password);
 
-		let focusAreaTrees = await Tree.find({focusArea: req.body.focusArea}, {_id: 0, name: 1}, function (err, trees) {
+		var focusAreaTrees = await Tree.find({focusArea: req.body.focusArea}, {_id: 0, name: 1}, function (err, trees) {
 							if (err) throw err;
 							return trees;
 						});
 
-		for (let i = 0; i < focusAreaTrees.length; ++i) {
+		for (var i = 0; i < focusAreaTrees.length; ++i) {
 			focusAreaTrees[i] = focusAreaTrees[i].name; //	lehet enelkul?
 		}
 
 		// get all categories from db
-		let categories = await Category.find({}, function (err, categories) {
+		var categories = await Category.find({}, function (err, categories) {
 							if (err) throw err;
 							return categories;
 						});
 
-		let newUser = new User({
+		var newUser = new User({
 			username: req.body.username,
 			email: req.body.email,
 			hashData: hashData,
@@ -81,7 +81,7 @@ app.post('/registration', async function(req, res) {
 			const payload = {
 				username: req.body.username,
 			};
-			let token = jwt.sign(payload, app.get('superSecret'), {
+			var token = jwt.sign(payload, app.get('superSecret'), {
 				expiresIn: '1d' // expires in 1 hour
 			});
 
@@ -125,7 +125,7 @@ app.post('/auth', function(req, res) {
                     username: req.body.username,
                     admin: user.admin
                 };
-                let token = jwt.sign(payload, app.get('superSecret'), {
+                var token = jwt.sign(payload, app.get('superSecret'), {
                     expiresIn: '1d' // expires in 1 hour
                 });
 
@@ -142,12 +142,12 @@ app.post('/auth', function(req, res) {
 
 
 //Creating a getRoute thats protected with token, API calls are under /get/...
-let protectedRoute = express.Router();
+var protectedRoute = express.Router();
 app.use('/protected', protectedRoute);
 
 
 protectedRoute.use(function(req, res, next) {
-    let token = req.get('x-access-token');
+    var token = req.get('x-access-token');
 
     // decode token
     if (token) {
@@ -187,7 +187,7 @@ protectedRoute.get('/userdata', function (req, res) {
 			delete user.hashData;
 
 			if (user.mainTree == undefined) { // first login
-				let trees = await Tree.find({}, function (err, trees) {
+				var trees = await Tree.find({}, function (err, trees) {
 									if (err) throw err;
 									return trees;
 								});
@@ -196,17 +196,17 @@ protectedRoute.get('/userdata', function (req, res) {
 			}
 
             if (user.admin) {
-                let trees = await ApprovableTree.find({}, function(err, trees) {
+                var trees = await ApprovableTree.find({}, function(err, trees) {
     		        if (err) throw err;
     				return trees;
     		    });
 
-                let skills = await ApprovableSkill.find({}, function(err, skills) {
+                var skills = await ApprovableSkill.find({}, function(err, skills) {
     		        if (err) throw err;
     				return skills;
     		    });
 
-                let trainings = await ApprovableTraining.find({}, function(err, trainings) {
+                var trainings = await ApprovableTraining.find({}, function(err, trainings) {
     		        if (err) throw err;
     				return trainings;
     		    });
@@ -257,15 +257,15 @@ protectedRoute.get('/skillsforapproval', function(req, res) {
 
 // Search for users to view by name
 protectedRoute.post('/searchUsersByName', async function (req, res) {
-		let data = req.body;
-		let foundUsers = await User.find({
+		var data = req.body;
+		var foundUsers = await User.find({
 					"username": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
 			}, function (err, user) {
 					if (err) throw err;
 			return user;
 		});
-		let resUsers = [];
-		for (let i = 0; i < foundUsers.length; i++) {
+		var resUsers = [];
+		for (var i = 0; i < foundUsers.length; i++) {
 			resUsers[i] = {name: foundUsers[i].username};
 		}
 		res.json(resUsers);
@@ -273,25 +273,25 @@ protectedRoute.post('/searchUsersByName', async function (req, res) {
 
 // searchkes a skill for editor
 protectedRoute.post('/searchSkillsByName', async function (req, res) {
-		let data = req.body;
+		var data = req.body;
 
-        let user = await findUser(req.decoded.username);
+        var user = await findUser(req.decoded.username);
 
         user = user.toObject();
-        let foundUserSkills = user.skills.filter(obj => obj.name.match(new RegExp(".*" + data.value + ".*", "i")) != null);
+        var foundUserSkills = user.skills.filter(obj => obj.name.match(new RegExp(".*" + data.value + ".*", "i")) != null);
 
-        let foundGlobalSkills = await Skill.find({
+        var foundGlobalSkills = await Skill.find({
             "name": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
         }, function (err, skills) {
             if (err) throw err;
             return skills;
         });
 
-        let resSkills = [];
-        for (let i = 0; foundUserSkills != undefined && i < foundUserSkills.length; i++) {
+        var resSkills = [];
+        for (var i = 0; foundUserSkills != undefined && i < foundUserSkills.length; i++) {
             resSkills.push({name: foundUserSkills[i].name});
         }
-        for (let i = 0; i < foundGlobalSkills.length; i++) {
+        for (var i = 0; i < foundGlobalSkills.length; i++) {
             if (resSkills.find(obj => obj == foundGlobalSkills[i].name) == undefined) resSkills[i] = {name: foundGlobalSkills[i].name};
         }
         res.json(resSkills);
@@ -299,15 +299,15 @@ protectedRoute.post('/searchSkillsByName', async function (req, res) {
 
 // searchkes a skill for editor
 protectedRoute.post('/searchUserSkillsByName', async function (req, res) {
-		let data = req.body;
+		var data = req.body;
 
-        let user = await findUser(req.decoded.username);
+        var user = await findUser(req.decoded.username);
 
         user = user.toObject();
-        let foundUserSkills = user.skills.filter(obj => obj.name.match(new RegExp(".*" + data.value + ".*", "i")) != null);
+        var foundUserSkills = user.skills.filter(obj => obj.name.match(new RegExp(".*" + data.value + ".*", "i")) != null);
 
-        let resSkills = [];
-        for (let i = 0; foundUserSkills != undefined && i < foundUserSkills.length; i++) {
+        var resSkills = [];
+        for (var i = 0; foundUserSkills != undefined && i < foundUserSkills.length; i++) {
             resSkills.push({name: foundUserSkills[i].name});
         }
 
@@ -316,15 +316,15 @@ protectedRoute.post('/searchUserSkillsByName', async function (req, res) {
 
 // Search for trees to add while typing
 protectedRoute.post('/searchTreesByName', async function (req, res) {
-		let data = req.body;
-		let foundTrees = await Tree.find({
+		var data = req.body;
+		var foundTrees = await Tree.find({
 					"name": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
 			}, function (err, tree) {
 					if (err) throw err;
 			return tree;
 		});
-		let resTrees = [];
-		for (let i = 0; i < foundTrees.length; i++) {
+		var resTrees = [];
+		for (var i = 0; i < foundTrees.length; i++) {
 			resTrees[i] = {name: foundTrees[i].name};
 		}
 		res.json(resTrees);
@@ -333,8 +333,8 @@ protectedRoute.post('/searchTreesByName', async function (req, res) {
 
 // Getting the name, willingToTeach, teachingDay, teachingTime, location, focusArea, skills and maintree of a user.
 protectedRoute.post('/getPublicUserData', async function (req, res) {
-		let data = req.body;
-    let foundUsers = await User.find({
+		var data = req.body;
+    var foundUsers = await User.find({
 					"username": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
 			}, 'username mainTree willingToTeach teachingDay teachingTime location focusArea skills trees', function (err, user) {
 					if (err) throw err;
@@ -345,8 +345,8 @@ protectedRoute.post('/getPublicUserData', async function (req, res) {
 
 // Getting the name, skillnames, focusarea of a tree.
 protectedRoute.post('/getPublicTreeData', async function (req, res) {
-		let data = req.body;
-    let foundTrees = await Tree.find({
+		var data = req.body;
+    var foundTrees = await Tree.find({
 					"name": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
 			}, function (err, tree) {
 					if (err) throw err;
@@ -357,22 +357,22 @@ protectedRoute.post('/getPublicTreeData', async function (req, res) {
 
 // Getting the name, caterory, descs of a skill, and give a list of the people, who have it.
 protectedRoute.post('/getPublicSkillData', async function (req, res) {
-    let data = req.body;
-		let outData = []; // this is required, because adding a new param to a queried mongo object bugs rn.
-		let outUsers = []; // array of users that have the skill.
-    let foundSkills = await Skill.find({
+    var data = req.body;
+		var outData = []; // this is required, because adding a new param to a queried mongo object bugs rn.
+		var outUsers = []; // array of users that have the skill.
+    var foundSkills = await Skill.find({
 				"name": {$regex : ".*" + data.value + ".*", '$options' : 'i'}
 		}, 'name categoryName description descriptionWikipediaURL pointDescription', function(err, skill) {
 				if (err) throw err;
 				return skill;
 		});
-		for (let s = 0; s < foundSkills.length; s++) {
+		for (var s = 0; s < foundSkills.length; s++) {
 			foundSkills[s].users = [];
-			let foundUsers = await User.find({}, 'username skills', function(err, user) {
+			var foundUsers = await User.find({}, 'username skills', function(err, user) {
 				return user;
 			});
 			outUsers = [];
-			for (let i = 0; i < foundUsers.length; i++) {
+			for (var i = 0; i < foundUsers.length; i++) {
 				if (foundUsers[i].skills.map(obj => obj.name).includes(foundSkills[s].name)) {
 					outUsers.push({username: foundUsers[i].username, skill: foundUsers[i].skills.find(obj => obj.name == foundSkills[s].name)});
 				}
@@ -391,9 +391,9 @@ protectedRoute.post('/getPublicSkillData', async function (req, res) {
 
 // Adds a public tree to the current user.
 protectedRoute.post('/addTreeToUser', async function (req, res){
-	let data = req.body;
-	let user = await findUser(req.decoded.username);
-	let tree = await Tree.findOne({"name": data.value},  function (err, tree) {
+	var data = req.body;
+	var user = await findUser(req.decoded.username);
+	var tree = await Tree.findOne({"name": data.value},  function (err, tree) {
 		if (err) throw err;
 		return tree;
 	});
@@ -422,9 +422,9 @@ protectedRoute.post('/addTreeToUser', async function (req, res){
 
 // gets a skill and all it's dependencies by name.
 protectedRoute.post('/getskill', async function (req, res) {
-	let data = req.body;
+	var data = req.body;
 
-    let user = await findUser(req.decoded.username);
+    var user = await findUser(req.decoded.username);
 
 	if (!user) {
 		res.json({
@@ -432,10 +432,10 @@ protectedRoute.post('/getskill', async function (req, res) {
 			message: 'User not found.'
 		});
 	} else {
-        let skill = user.skills.find(obj => obj.name == data.value);
+        var skill = user.skills.find(obj => obj.name == data.value);
 
         if (skill == undefined) {
-          let skill = await findSkillByName(data.value);
+          var skill = await findSkillByName(data.value);
         	if (!skill) {
         		res.json({
         			success: false
@@ -443,7 +443,7 @@ protectedRoute.post('/getskill', async function (req, res) {
         	}
         }
 
-    	let dependency = [];
+    	var dependency = [];
     	await getDependency(user.skills, skill, dependency);
 
     	res.json({
@@ -456,9 +456,9 @@ protectedRoute.post('/getskill', async function (req, res) {
 
 // recursive function for dependency determinating
 async function getDependency (userSkills, skill, dependency) {
-	let parents = [];
-	for (let i = 0; skill.parents != undefined && i < skill.parents.length; ++i) {
-        let parent = userSkills.find(obj => obj.name == skill.parents[i]);
+	var parents = [];
+	for (var i = 0; skill.parents != undefined && i < skill.parents.length; ++i) {
+        var parent = userSkills.find(obj => obj.name == skill.parents[i]);
         if (parent == undefined) {
             parent = await findSkillByName(skill.parents[i]);
         }
@@ -467,15 +467,15 @@ async function getDependency (userSkills, skill, dependency) {
 		dependency.push(parent);
 	}
 
-	for (let i = 0; i < parents.length; ++i) {
+	for (var i = 0; i < parents.length; ++i) {
 		await getDependency(userSkills, parents[i], dependency);
 	}
 }
 
 async function insertSkill(skillToInsert, skillMatrix) {
-	for (let component = 0; component < skillMatrix.length; component++) {
-		for (let child = 0; child < skillToInsert.children.length; child++) {
-			for (let row = 0; row < skillMatrix[component].length; row++) {
+	for (var component = 0; component < skillMatrix.length; component++) {
+		for (var child = 0; child < skillToInsert.children.length; child++) {
+			for (var row = 0; row < skillMatrix[component].length; row++) {
 				if ((skillMatrix[component][row].map(obj => obj.name)).includes(skillToInsert.children[child].name)) {
 					if (row == 0) {
 						await addRowToComponent(skillMatrix, component);
@@ -494,8 +494,8 @@ async function insertSkill(skillToInsert, skillMatrix) {
 				}
 			}
 		}
-		for (let par = 0; par < skillToInsert.parents.length; par++) {
-			for (let row = 0; row < skillMatrix[component].length; row++) {
+		for (var par = 0; par < skillToInsert.parents.length; par++) {
+			for (var row = 0; row < skillMatrix[component].length; row++) {
 				if ((skillMatrix[component][row].map(obj => obj.name)).includes(skillToInsert.parents[par])) {
 					if (skillMatrix[component][row + 1] == undefined) skillMatrix[component].push([]);
 					skillMatrix[component][row + 1].push(skillToInsert);
@@ -515,19 +515,19 @@ async function insertSkill(skillToInsert, skillMatrix) {
 
 async function addRowToComponent(skillMatrix, component){
 	skillMatrix[component].push([]);
-	for (let i = skillMatrix[component].length - 2; i >= 0; i--) {
+	for (var i = skillMatrix[component].length - 2; i >= 0; i--) {
 		skillMatrix[component][i + 1] = skillMatrix[component][i];
 	}
 	skillMatrix[component][0] = [];
 }
 
 async function assembleTree(skillMatrix){
-	let assembledTree = [];
-	let l = true;
-	let j = 0;
+	var assembledTree = [];
+	var l = true;
+	var j = 0;
 	while (l) {
 		l = false;
-		for (let component = 0; component < skillMatrix.length; component++) {
+		for (var component = 0; component < skillMatrix.length; component++) {
 			if (skillMatrix[component][j] != undefined) {
 				l = true;
 				assembledTree = assembledTree.concat(skillMatrix[component][j]);
@@ -545,9 +545,9 @@ async function extractNames(skillArray){
 
 // creates an ordered tree from an array of skills.
 async function sortTree(skillArray){
-	let sortedArray = []; // output array
-	let skillMatrix = []; // 3d array, represents the components, the rows, and the elements of rows in the graph.
-	for (let i = 0; i < skillArray.length; i++) {
+	var sortedArray = []; // output array
+	var skillMatrix = []; // 3d array, represents the components, the rows, and the elements of rows in the graph.
+	for (var i = 0; i < skillArray.length; i++) {
 		await insertSkill(skillArray[i], skillMatrix);
 	}
 	sortedArray = await assembleTree(skillMatrix);
@@ -556,14 +556,14 @@ async function sortTree(skillArray){
 }
 
 async function sortAndAddTreeToUser(treeToSort, user){
-	let skills = await Skill.find({
+	var skills = await Skill.find({
 		name: treeToSort.skillNames,
 	}, function (err, skills) {
 		if (err) throw err;
 		return skills;
 	});
 
-	let sn = await sortTree(skills);
+	var sn = await sortTree(skills);
 	user.trees.push({
 		name: treeToSort.name,
 		focusArea: treeToSort.focusArea,
@@ -582,9 +582,9 @@ async function sortAndAddTreeToUser(treeToSort, user){
 }
 
 protectedRoute.post('/newtraining', async function(req, res) {
-    let data = req.body;
+    var data = req.body;
 
-    let user = await findUser(req.decoded.username);
+    var user = await findUser(req.decoded.username);
 
 	if (!user) {
 		res.json({
@@ -592,7 +592,7 @@ protectedRoute.post('/newtraining', async function(req, res) {
 			message: 'User not found.'
 		});
 	} else if (user.skills.find(obj => obj.name == data.skillName) != undefined) {
-        for (let i = 0; i < data.trainings.length; ++i) {
+        for (var i = 0; i < data.trainings.length; ++i) {
             user.skills.find(obj => obj.name == data.skillName).trainings.push({
                 name: data.trainings[i].name,
                 level: data.trainings[i].level,
@@ -606,8 +606,8 @@ protectedRoute.post('/newtraining', async function(req, res) {
 
 		user.save(function (err) {if (err) throw err;});
 
-		for (let i = 0; i < data.trainings.length; ++i) {
-			let apprTraining = new ApprovableTraining({
+		for (var i = 0; i < data.trainings.length; ++i) {
+			var apprTraining = new ApprovableTraining({
 				username: user.username,
 				skillName: data.skillName,
 				name: data.trainings[i].name,
@@ -635,9 +635,9 @@ protectedRoute.post('/newtraining', async function(req, res) {
 
 // Creates a skill from the data the user added.
 protectedRoute.post('/newskill', async function(req, res) {
-    let data = req.body;
+    var data = req.body;
 
-    let user = await findUser(req.decoded.username);
+    var user = await findUser(req.decoded.username);
 
 	if (!user) {
 		res.json({
@@ -645,10 +645,10 @@ protectedRoute.post('/newskill', async function(req, res) {
 			message: 'User not found.'
 		});
 	} else if (user.skills.find(obj => obj.name == data.name) == undefined) {
-        let parentNames = [];
-        for (let i = 0; i < data.parents.length; ++i) {
+        var parentNames = [];
+        for (var i = 0; i < data.parents.length; ++i) {
             if (user.skills.find(obj => obj.name == data.parents[i].name) == undefined) { // add parent skill to user if not already there
-                let parent = await findSkillByName(data.parents[i].name);
+                var parent = await findSkillByName(data.parents[i].name);
                 user.skills.push(parent);
             }
             // add new skill as child of parent skill
@@ -671,14 +671,14 @@ protectedRoute.post('/newskill', async function(req, res) {
 	      	trainings: data.trainings
 	      });
 
-        /*for (let i = 0; i < data.children.length; ++i) {
+        /*for (var i = 0; i < data.children.length; ++i) {
             user.skills.find(obj => obj.name == data.children[i].name).parents.push(data.name);
         }*/
 
         user.save(function (err) {if (err) throw err;});
 
-		for (let i = 0; i < data.parents.length; ++i) {
-			let apprParent = await ApprovableSkill.find({
+		for (var i = 0; i < data.parents.length; ++i) {
+			var apprParent = await ApprovableSkill.find({
 				name: data.parents[i].name
 			}, function (err, skill) {
 				if (err) throw err;
@@ -691,7 +691,7 @@ protectedRoute.post('/newskill', async function(req, res) {
 			}
 		}
 
-		let apprSkill = new ApprovableSkill({
+		var apprSkill = new ApprovableSkill({
 			username: user.username,
 			name: data.name,
 			description: data.description,
@@ -720,8 +720,8 @@ protectedRoute.post('/newskill', async function(req, res) {
 
 // creates a new tree only for the user.
 protectedRoute.post('/newtree', async function (req, res) {
-	let data = req.body;
-    let user = await findUser(req.decoded.username);
+	var data = req.body;
+    var user = await findUser(req.decoded.username);
 	if (!user) {
 		res.json({
 			success: false,
@@ -729,7 +729,7 @@ protectedRoute.post('/newtree', async function (req, res) {
 		});
 	}
 	else if (user.trees.find(obj => obj.name == data.name) == undefined) {
-		let sn = await sortTree(data.skills);
+		var sn = await sortTree(data.skills);
 		user.trees.push({
 				name: data.name,
 				focusArea: data.focusArea,
@@ -747,7 +747,7 @@ protectedRoute.post('/newtree', async function (req, res) {
 
 		user.save(function (err) {if (err) throw err;});
 
-		let tree = new ApprovableTree({
+		var tree = new ApprovableTree({
 			name: data.name,
 			username: user.username,
 			focusArea: data.focusArea,
@@ -771,8 +771,8 @@ protectedRoute.post('/newtree', async function (req, res) {
 
 // creates a new tree only for the user.
 protectedRoute.post('/editmytree', async function (req, res) {
-    let data = req.body;
-    let user = await findUser(req.decoded.username);
+    var data = req.body;
+    var user = await findUser(req.decoded.username);
 
     if (!user) {
         res.json({
@@ -780,7 +780,7 @@ protectedRoute.post('/editmytree', async function (req, res) {
             message: 'User not found.'
         });
     } else if (user.trees.find(obj => obj.name == data.name) != undefined) {
-        let sn = await sortTree(data.skills);
+        var sn = await sortTree(data.skills);
         user.trees = user.trees.filter(obj => obj.name != data.name);
         user.trees.push({
 			name: data.name,
@@ -810,8 +810,8 @@ protectedRoute.post('/editmytree', async function (req, res) {
 });
 
 protectedRoute.post('/editmyskill', async function (req, res) {
-	let data = req.body;
-    let user = await findUser(req.decoded.username);
+	var data = req.body;
+    var user = await findUser(req.decoded.username);
 
     if (!user) {
         res.json({
@@ -819,17 +819,17 @@ protectedRoute.post('/editmyskill', async function (req, res) {
             message: 'User not found.'
         });
     } else if (user.skills.find(obj => obj.name == data.name) != undefined) {
-		let skill = (user.skills.find(obj => obj.name == data.name));
+		var skill = (user.skills.find(obj => obj.name == data.name));
 
-		for (let i = 0; i < skill.parents.length; ++i) user.skills.find(obj => obj.name == skill.parents[i]).children = user.skills.find(obj => obj.name == skill.parents[i]).children.filter(obj => obj.name != skill.name);
-		for (let i = 0; i < skill.children.length; ++i) {
+		for (var i = 0; i < skill.parents.length; ++i) user.skills.find(obj => obj.name == skill.parents[i]).children = user.skills.find(obj => obj.name == skill.parents[i]).children.filter(obj => obj.name != skill.name);
+		for (var i = 0; i < skill.children.length; ++i) {
 			if (user.skills.find(obj => obj.name == skill.children[i].name) != undefined) user.skills.find(obj => obj.name == skill.children[i].name).parents = user.skills.find(obj => obj.name == skill.children[i].name).parents.filter(obj => obj != skill.name);
 		}
 
-		let parentNames = [];
-        for (let i = 0; i < data.parents.length; ++i) {
+		var parentNames = [];
+        for (var i = 0; i < data.parents.length; ++i) {
             if (user.skills.find(obj => obj.name == data.parents[i].name) == undefined) { // add parent skill to user if not already there
-                let parent = await findSkillByName(data.parents[i].name);
+                var parent = await findSkillByName(data.parents[i].name);
                 user.skills.push(parent);
             }
             // add new skill as child of parent skill
@@ -838,21 +838,21 @@ protectedRoute.post('/editmyskill', async function (req, res) {
             parentNames.push(data.parents[i].name);
         }
 
-		for (let i = 0; i < data.children.length; ++i) {
+		for (var i = 0; i < data.children.length; ++i) {
             if (user.skills.find(obj => obj.name == data.children[i].name) == undefined) { // add parent skill to user if not already there
-                let child = await findSkillByName(data.child[i].name);
+                var child = await findSkillByName(data.child[i].name);
                 user.skills.push(child);
             }
             // add new skill as child of parent skill
             user.skills.find(obj => obj.name == data.children[i].name).parents.push(data.name);
 
-			let trees = user.trees.filter(obj => obj.skillNames.find(obj => obj == data.children[i].name) != undefined);
-			for (let j = 0; j < trees.length; ++j) {
-				let skillList = trees[j].skillNames;
+			var trees = user.trees.filter(obj => obj.skillNames.find(obj => obj == data.children[i].name) != undefined);
+			for (var j = 0; j < trees.length; ++j) {
+				var skillList = trees[j].skillNames;
 				if (skillList.find(obj => obj == data.name) == undefined) skillList.push(data.name);
-				let skillsToSort = [];
-				for (let k = 0; k < skillList.length; ++k) skillsToSort = user.skills.filter(obj => skillList.find(obj2 => obj2 == obj.name) != undefined);
-				let sn = await sortTree(skillsToSort);
+				var skillsToSort = [];
+				for (var k = 0; k < skillList.length; ++k) skillsToSort = user.skills.filter(obj => skillList.find(obj2 => obj2 == obj.name) != undefined);
+				var sn = await sortTree(skillsToSort);
 				user.trees.find(obj => obj.name == trees[j].name).skillNames = sn;
 			}
         }
@@ -885,8 +885,8 @@ protectedRoute.post('/editmyskill', async function (req, res) {
 });
 
 protectedRoute.post('/deletemytree', async function (req, res) {
-    let data = req.body;
-    let user = await findUser(req.decoded.username);
+    var data = req.body;
+    var user = await findUser(req.decoded.username);
 
     if (!user) {
         res.json({
@@ -910,8 +910,8 @@ protectedRoute.post('/deletemytree', async function (req, res) {
 
 // Search for trees to add while typing
 protectedRoute.post('/gettree', async function (req, res) {
-		let data = req.body;
-		let foundTree = await Tree.findOne({
+		var data = req.body;
+		var foundTree = await Tree.findOne({
 					"name": data.name
 			}, function (err, tree) {
 					if (err) throw err;
@@ -922,9 +922,9 @@ protectedRoute.post('/gettree', async function (req, res) {
 
 // add skill to user tree
 protectedRoute.post('/addskilltotree', async function(req, res) {
-    let data = req.body;
+    var data = req.body;
 
-    let user = await findUser(req.decoded.username);
+    var user = await findUser(req.decoded.username);
 
 	if (!user) {
 		res.json({
@@ -960,9 +960,9 @@ protectedRoute.post('/skilldata', function(req, res) {
 
 // sets the user data aquired from the first login
 protectedRoute.post('/firstlogindata', async function (req, res) {
-	let data = req.body;
+	var data = req.body;
 
-	let user = await findUser(req.decoded.username);
+	var user = await findUser(req.decoded.username);
 
 	if (!user) {
 		res.json({
@@ -973,7 +973,7 @@ protectedRoute.post('/firstlogindata', async function (req, res) {
 		user.focusArea.name = data.focusArea;
 		user.mainTree = data.mainTree;
 
-		let mainTree = await Tree.findOne({
+		var mainTree = await Tree.findOne({
 			name: user.mainTree,
 		}, function (err, tree) {
 			if (err) throw err;
@@ -990,9 +990,9 @@ protectedRoute.post('/firstlogindata', async function (req, res) {
 
 // submits all changes made by the user to the skills.
 protectedRoute.post('/submitall', async function (req, res) {
-	let data = req.body;
+	var data = req.body;
 
-    let user = await findUser(req.decoded.username);
+    var user = await findUser(req.decoded.username);
 
 	if (!user) {
 		res.json({
@@ -1000,16 +1000,16 @@ protectedRoute.post('/submitall', async function (req, res) {
 			message: 'User not found.'
 		});
 	} else {
-		for (let i = 0; i < data.length; ++i) user.skills[i].achievedPoint = data[i].achievedPoint;
+		for (var i = 0; i < data.length; ++i) user.skills[i].achievedPoint = data[i].achievedPoint;
 
 		if (user.willingToTeach) {
-			let globalSkills = await Skill.find({}, function(err, skills) {
+			var globalSkills = await Skill.find({}, function(err, skills) {
 		        if (err) throw err;
 				return skills;
 		    });
 
 			data.forEach(function (userSkill) {
-                let globalSkill = globalSkills.find(obj => obj.name == userSkill.name);
+                var globalSkill = globalSkills.find(obj => obj.name == userSkill.name);
                 if (globalSkill != undefined) {
                     if (userSkill.achievedPoint > 0) {
                         if (globalSkill.offers.find(obj => obj.username == user.username) == undefined) {
@@ -1042,30 +1042,30 @@ protectedRoute.post('/submitall', async function (req, res) {
 // searches a userskill
 protectedRoute.post('/searchUserSkillByName', async function (req, res) {
 
-	let user = await findUser(req.decoded.username);
+	var user = await findUser(req.decoded.username);
 
-	let skill = user.skills.find(obj => obj.name == req.body.name);
+	var skill = user.skills.find(obj => obj.name == req.body.name);
 
 	res.json(skill);
 });
 
 /*protectedRoute.post('/parentTableData', async function (req, res) {
 
-	let user = await findUser(req.decoded.username);
+	var user = await findUser(req.decoded.username);
 
 
-	let parents = [];
+	var parents = [];
 	req.body.parents.forEach(function(parentname){
 
 		//find the parent, each of them in the foreach 1 by 1
-		let parent = user.skills.find(obj => obj.name == parentname);
+		var parent = user.skills.find(obj => obj.name == parentname);
 
 		//find the child in the parent for minpoint and recommended
-		let child = parent.children.find(obj => obj.name == req.body.name );
+		var child = parent.children.find(obj => obj.name == req.body.name );
 
 
 		//build the json file we need
-		let name_minpoint_required = {
+		var name_minpoint_required = {
 			name: parent.name,
 			minPoint: child.minPoint,
 			recommended: child.recommended
@@ -1081,12 +1081,12 @@ protectedRoute.post('/searchUserSkillByName', async function (req, res) {
 //API call for request onclick
 protectedRoute.post('/request', async function (req, res){
 
-	let user = await await findUser(req.decoded.username);
+	var user = await await findUser(req.decoded.username);
 
-	let skill = await findSkillByName(req.body.name);
+	var skill = await findSkillByName(req.body.name);
 
 	if (skill !== undefined) {
-		let userskill = user.skills.find(obj => obj.name == skill.name);
+		var userskill = user.skills.find(obj => obj.name == skill.name);
 
 		if(req.body.requestType == "beginner")
 		{
@@ -1175,8 +1175,8 @@ protectedRoute.post('/request', async function (req, res){
 });
 
 protectedRoute.post('/endorse', async function (req, res) {
-  let data = req.body;
-  let user = await findUser(data.username);
+  var data = req.body;
+  var user = await findUser(data.username);
   if (!user) {
     res.json({
       success: false,
@@ -1196,8 +1196,8 @@ protectedRoute.post('/endorse', async function (req, res) {
 });
 
 protectedRoute.post('/newpassword', async function (req, res) {
-  let data = req.body;
-  let user = await findUser(req.decoded.username);
+  var data = req.body;
+  var user = await findUser(req.decoded.username);
   if (!user) {
     res.json({
       success: false,
@@ -1223,8 +1223,8 @@ protectedRoute.post('/newpassword', async function (req, res) {
 
 
 protectedRoute.post('/newplace', async function (req, res) {
-  let data = req.body;
-  let user = await findUser(req.decoded.username);
+  var data = req.body;
+  var user = await findUser(req.decoded.username);
   if (!user) {
     res.json({
       success: false,
@@ -1242,8 +1242,8 @@ protectedRoute.post('/newplace', async function (req, res) {
 
 
 protectedRoute.post('/newemail', async function (req, res) {
-  let data = req.body;
-  let user = await findUser(req.decoded.username);
+  var data = req.body;
+  var user = await findUser(req.decoded.username);
   if (!user) {
     res.json({
       success: false,
@@ -1262,11 +1262,11 @@ protectedRoute.post('/newemail', async function (req, res) {
 /*
 *   ADMIN
 */
-let adminRoute = express.Router();
+var adminRoute = express.Router();
 app.use('/admin', adminRoute);
 
 adminRoute.use(function(req, res, next) {
-    let token = req.get('x-access-token');
+    var token = req.get('x-access-token');
 
     // decode token
     if (token) {
@@ -1302,14 +1302,14 @@ adminRoute.use(express.json());
 
 //Approve a skill thats sent in the body as skillforaproval to the api
 adminRoute.post('/approveskill', async function (req, res)  {
-	let skillforapproval = req.body;
-	let approvecollection = await ApprovableSkill.find( {} , async function(err, approvecollection) {
+	var skillforapproval = req.body;
+	var approvecollection = await ApprovableSkill.find( {} , async function(err, approvecollection) {
 		if(err) throw err;
 		else return approvecollection;
 	});
 
 	//Look for the skill in the database, if already exists
-	let globalskill = undefined;
+	var globalskill = undefined;
 	globalskill = await findSkillByName(skillforaproval.name);
 
 	//Check if skill is already in the database or not
@@ -1354,16 +1354,16 @@ adminRoute.post('/approveskill', async function (req, res)  {
 
 		console.log(approvecollection);
 		console.log("----------");
-		let dependency = [];
+		var dependency = [];
 		await getDependency(approvecollection, skillforapproval, dependency);
 
 		console.log(dependency);
 
-		let lastdependency = dependency[dependency.length-1];
+		var lastdependency = dependency[dependency.length-1];
 
-		for(let i=0;i<dependency.length;i++)
+		for(var i=0;i<dependency.length;i++)
 		{
-			let globalskill = await findSkillByName(dependency[i].name);
+			var globalskill = await findSkillByName(dependency[i].name);
 			if(globalskill !== null)
 			{
 				res.json({
@@ -1404,9 +1404,9 @@ adminRoute.post('/approveskill', async function (req, res)  {
 			}
 		}
 
-		for(let i=0; i<lastdependency.parents.length; i++)
+		for(var i=0; i<lastdependency.parents.length; i++)
 		{
-			let lastdependencyParent =  await Skill.find( { name : lastdependency.parents[i] } , async function(err, lastdependencyParent){
+			var lastdependencyParent =  await Skill.find( { name : lastdependency.parents[i] } , async function(err, lastdependencyParent){
 				if(err) throw err;
 				else return lastdependencyParent;
 			});
@@ -1428,16 +1428,16 @@ adminRoute.post('/approveskill', async function (req, res)  {
 });
 
 adminRoute.post('/edittree', async function (req, res) {
-    let data = req.body;
+    var data = req.body;
 
-    let globalTree = await Tree.findOne({
+    var globalTree = await Tree.findOne({
                 "name": data.name
         }, function (err, tree) {
                 if (err) throw err;
         return tree;
     });
 
-    let sn = await sortTree(data.skills);
+    var sn = await sortTree(data.skills);
     globalTree.focusArea = data.focusArea;
 	globalTree.description = data.description;
     globalTree.skillNames = sn;
@@ -1462,20 +1462,20 @@ adminRoute.post('/edittree', async function (req, res) {
 });
 
 adminRoute.post('/editskill', async function (req, res) {
-	let data = req.body;
+	var data = req.body;
 
-	let skill = await findSkillByName(data.name);
+	var skill = await findSkillByName(data.name);
 
-	for (let i = 0; i < skill.parents.length; ++i) {
-		let parent = await findSkillByName(skill.parents[i]);
+	for (var i = 0; i < skill.parents.length; ++i) {
+		var parent = await findSkillByName(skill.parents[i]);
 
 		parent.children = parent.children.filter(obj => obj.name != skill.name);
 
 		parent.save(function (err) {if (err) throw err;});
 	}
 
-	for (let i = 0; i < skill.children.length; ++i) {
-		let child = await findSkillByName(skill.children[i].name);
+	for (var i = 0; i < skill.children.length; ++i) {
+		var child = await findSkillByName(skill.children[i].name);
 
 		child.parents = child.parents.filter(obj => obj != skill.name);
 
@@ -1502,17 +1502,17 @@ adminRoute.post('/editskill', async function (req, res) {
 
         users.map(async function (user)  {
 			if (user.skills.find(obj => obj.name == data.name) != undefined) {
-				let userSkill = (user.skills.find(obj => obj.name == data.name));
+				var userSkill = (user.skills.find(obj => obj.name == data.name));
 
-				for (let i = 0; i < userSkill.parents.length; ++i) user.skills.find(obj => obj.name == userSkill.parents[i]).children = user.skills.find(obj => obj.name == userSkill.parents[i]).children.filter(obj => obj.name != userSkill.name);
-				for (let i = 0; i < userSkill.children.length; ++i) {
+				for (var i = 0; i < userSkill.parents.length; ++i) user.skills.find(obj => obj.name == userSkill.parents[i]).children = user.skills.find(obj => obj.name == userSkill.parents[i]).children.filter(obj => obj.name != userSkill.name);
+				for (var i = 0; i < userSkill.children.length; ++i) {
 					if (user.skills.find(obj => obj.name == userSkill.children[i].name) != undefined) user.skills.find(obj => obj.name == userSkill.children[i].name).parents = user.skills.find(obj => obj.name == userSkill.children[i].name).parents.filter(obj => obj != userSkill.name);
 				}
 
-				let parentNames = [];
-		        for (let i = 0; i < data.parents.length; ++i) {
+				var parentNames = [];
+		        for (var i = 0; i < data.parents.length; ++i) {
 		            if (user.skills.find(obj => obj.name == data.parents[i].name) == undefined) { // add parent skill to user if not already there
-		                let parent = await findSkillByName(data.parents[i].name);
+		                var parent = await findSkillByName(data.parents[i].name);
 		                user.skills.push(parent);
 		            }
 		            // add new skill as child of parent skill
@@ -1521,21 +1521,21 @@ adminRoute.post('/editskill', async function (req, res) {
 		            parentNames.push(data.parents[i].name);
 		        }
 
-				for (let i = 0; i < data.children.length; ++i) {
+				for (var i = 0; i < data.children.length; ++i) {
 		            if (user.skills.find(obj => obj.name == data.children[i].name) == undefined) { // add parent skill to user if not already there
-		                let child = await findSkillByName(data.children[i].name);
+		                var child = await findSkillByName(data.children[i].name);
 		                user.skills.push(child);
 		            }
 		            // add new skill as child of parent skill
 		            user.skills.find(obj => obj.name == data.children[i].name).parents.push(data.name);
 
-					let trees = user.trees.filter(obj => obj.skillNames.find(obj => obj == data.children[i].name) != undefined);
-					for (let j = 0; j < trees.length; ++j) {
-						let skillList = trees[j].skillNames;
+					var trees = user.trees.filter(obj => obj.skillNames.find(obj => obj == data.children[i].name) != undefined);
+					for (var j = 0; j < trees.length; ++j) {
+						var skillList = trees[j].skillNames;
 						if (skillList.find(obj => obj == data.name) == undefined) skillList.push(data.name);
-						let skillsToSort = [];
-						for (let k = 0; k < skillList.length; ++k) skillsToSort = user.skills.filter(obj => skillList.find(obj2 => obj2 == obj.name) != undefined);
-						let sn = await sortTree(skillsToSort);
+						var skillsToSort = [];
+						for (var k = 0; k < skillList.length; ++k) skillsToSort = user.skills.filter(obj => skillList.find(obj2 => obj2 == obj.name) != undefined);
+						var sn = await sortTree(skillsToSort);
 						user.trees.find(obj => obj.name == trees[j].name).skillNames = sn;
 					}
 		        }
@@ -1566,9 +1566,9 @@ adminRoute.post('/editskill', async function (req, res) {
 
 // approves a tree.
 adminRoute.post('/approvetree', async function (req, res) {
-    let data = req.body;
+    var data = req.body;
 
-    let globalTree = await Tree.findOne({
+    var globalTree = await Tree.findOne({
         name: data.name
     }, function(err, tree) {
         if (err) throw err;
@@ -1576,7 +1576,7 @@ adminRoute.post('/approvetree', async function (req, res) {
     });
 
     if (globalTree == undefined) {
-        let tree = await ApprovableTree.findOne({
+        var tree = await ApprovableTree.findOne({
             username: data.username,
             name: data.name
         }, function(err, tree) {
@@ -1584,7 +1584,7 @@ adminRoute.post('/approvetree', async function (req, res) {
             return tree;
         });
 
-        let newTree = new Tree({
+        var newTree = new Tree({
             name: tree.name,
             focusArea: tree.focusArea,
 			description: tree.description,
@@ -1600,12 +1600,12 @@ adminRoute.post('/approvetree', async function (req, res) {
 });
 
 adminRoute.post('/approvetraining', async function (req, res) {
-	let data = req.body;
+	var data = req.body;
 
-    let globalSkill = await findSkillByName(data.skillName);
+    var globalSkill = await findSkillByName(data.skillName);
 
     if (globalSkill.trainings.find(obj => obj.name == data.name) == undefined) {
-        let training = await ApprovableTraining.findOne({
+        var training = await ApprovableTraining.findOne({
             username: data.username,
             skillName: data.skillName,
             name: data.name
@@ -1712,7 +1712,7 @@ adminRoute.get('/testAdmin', async function (req,res){
 
 // returns the user data of the username provided
 async function findUser(unm) {
-	let user = await User.findOne({
+	var user = await User.findOne({
 		username: unm,
 	}, function (err, user) {
 		if (err) throw err;
@@ -1723,7 +1723,7 @@ async function findUser(unm) {
 
 // returns the skill data of the skillname provided
 async function findSkillByName(qname){
-	let skillToReturn = await Skill.findOne({
+	var skillToReturn = await Skill.findOne({
 		"name": qname
 	}, function (err, parent) {
 		if (err) throw err;

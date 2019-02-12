@@ -16,11 +16,11 @@
   <script src = "pixi/pixi-layers.js"></script>
   <script type="text/javascript">
   document.addEventListener('DOMContentLoaded', function() {
-    let isIE = /*@cc_on!@*/false || !!document.documentMode;
-    let isEdge = !isIE && !!window.StyleMedia;
+    var isIE = /*@cc_on!@*/false || !!document.documentMode;
+    var isEdge = !isIE && !!window.StyleMedia;
     if(isIE || isEdge){
-      let block_to_insert ;
-      let container_block ;
+      var block_to_insert ;
+      var container_block ;
 
       block_to_insert = document.createElement( 'div' );
       block_to_insert.innerHTML = '<div class="unsupportedBrowserAlertDIV alert alert-danger" role="alert"><p style="text-align:center;"<a href="#" class="alert-link">You are using an unsupported browser. Please use Mozilla Firefox or Google Chrome.</a></p></div>' ;
@@ -977,6 +977,7 @@
   <script src = "classes/link.js"></script>
   <script src = "classes/itemcontainer.js"></script>
   <script src = "classes/tree.js"></script>
+  <script src = "src/helper.js"></script>
   <script src = "src/search.js"></script>
   <script src = "src/init.js"></script>
   <script src = "src/display.js"></script>

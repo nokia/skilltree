@@ -11,17 +11,17 @@ class Tree {
             .on('pointerupoutside', this.onDragEnd)
             .on('pointermove', this.onDragMove);
 
-        let skillGroup = new PIXI.display.Group(0, true);
-        let skillLayer = new PIXI.display.Layer(skillGroup);
+        var skillGroup = new PIXI.display.Group(0, true);
+        var skillLayer = new PIXI.display.Layer(skillGroup);
         skillLayer.group.enableSort = true;
         app.stage.addChild(skillLayer);
 
-        let level = 0;
-        let tmpChildren = [];
-        let n = 1;
-        let levelLength = [];
+        var level = 0;
+        var tmpChildren = [];
+        var n = 1;
+        var levelLength = [];
 
-        for(let i = 0; i < this.skills.length; i++){
+        for(var i = 0; i < this.skills.length; i++){
           if(tmpChildren.includes(this.skills[i].name)){
             level += 1;
             tmpChildren = [];
@@ -31,13 +31,13 @@ class Tree {
           else { levelLength[level] = n;}
           this.skills[i].level = level;
           this.skills[i].place = n;
-          for (let j = 0; j < this.skills[i].children.length; ++j){
+          for (var j = 0; j < this.skills[i].children.length; ++j){
             tmpChildren.push(this.skills[i].children[j].name);
           }
           n++;
         }
 
-        for (let i = 0; i < this.skills.length; i++) {
+        for (var i = 0; i < this.skills.length; i++) {
             this.skills[i].itemcontainer = new ItemContainer(app, this.skills, this.skills[i].name, owner);
 
             this.skills[i].itemcontainer.container.position.x = (this.skills[i].place - 1) * 100 - (levelLength[this.skills[i].level] * 100) / 2;
@@ -51,17 +51,17 @@ class Tree {
     }
 
     drawConnectionLines() {
-        let connectionGroup = new PIXI.display.Group(-1, false);
+        var connectionGroup = new PIXI.display.Group(-1, false);
 
-        for (let j = 0; j < this.skills.length; j++) {
+        for (var j = 0; j < this.skills.length; j++) {
             if (this.skills[j].children !== undefined) {
-                for (let k = 0; k < this.skills[j].children.length; k++) {
-                    let child = this.skills.find(obj => obj.name == this.skills[j].children[k].name);
+                for (var k = 0; k < this.skills[j].children.length; k++) {
+                    var child = this.skills.find(obj => obj.name == this.skills[j].children[k].name);
                     if (child != undefined) {
-                        let minPoint = this.skills[j].children[k].minPoint;
+                        var minPoint = this.skills[j].children[k].minPoint;
 
                         // Draw the line
-                        let connection = new PIXI.Graphics();
+                        var connection = new PIXI.Graphics();
                         connection.lineStyle(4, 0x000000);
                         connection.moveTo(this.skills[j].itemcontainer.container.x + this.skills[j].itemcontainer.skillborder.width / 2, this.skills[j].itemcontainer.container.position.y + this.skills[j].itemcontainer.skillborder.height - 8);
                         connection.lineTo(child.itemcontainer.container.position.x + child.itemcontainer.skillborder.width / 2, child.itemcontainer.container.position.y + 5);
