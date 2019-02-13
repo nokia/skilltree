@@ -530,21 +530,23 @@ class ItemContainer {
               //Empty the table
               offerTable.innerHTML = "";
 
-              offerTable.appendChild(createTableRow(["Name",
+              offerTable.appendChild( createTableRow( "Name",
               "Location",
               "Day",
               "Time",
-              "Level"]));
+              "Level",
+              "divTableHead") );
               //Filling the table
               for(var i=0; i<globalskill.offers.length; i++ )
               {
                 if(true) //TODO, only higher level offers should appear
                 {
-                  offerTable.appendChild(createTableRow([globalskill.offers[i].username,
+                  offerTable.appendChild( createTableRow( globalskill.offers[i].username,
                     globalskill.offers[i].location,
                     globalskill.offers[i].teachingDay,
                     globalskill.offers[i].teachingTime,
-                    globalskill.offers[i].achievedPoint]));
+                    globalskill.offers[i].achievedPoint,
+                    "divTableCell") );
                   }
                 }
 
@@ -563,7 +565,9 @@ class ItemContainer {
                       if(requestforrequests.response !== undefined)
                       {
                         alert(requestforrequests.response.message);
+
                         beginnerCount.innerHTML = (requestforrequests.response.sumRequest);
+
                       }
                     }
                   }
@@ -650,16 +654,54 @@ class ItemContainer {
         var requestTable = document.getElementById('requestTableBody');
 
 
-        function createTableRow(createTableData)
+        function createTableRow( data1, data2, data3, data4, data5, classname )
         {
             //Creating an offer tablerow
-            let row = document.createElement('tr');
-            for (var i = 0; i < createTableData.length; i++) {
-              let col = document.createElement('td');
-              col.innerHTML = createTableData[i];
-              row.appendChild(col);
+            var Row = document.createElement('div');
+            Row.className = "divTableRow";
+
+
+            if(data1 !== undefined)
+            {
+            var Column1 = document.createElement('div');
+            Column1.className = classname;
+            Column1.innerHTML = data1;
+            Row.appendChild(Column1);
             }
-            return row;
+
+            if(data2 !== undefined)
+            {
+            var Column2 = document.createElement('div');
+            Column2.className = classname;
+            Column2.innerHTML = data2;
+            Row.appendChild(Column2);
+            }
+
+            if(data3 !== undefined)
+            {
+            var Column3 = document.createElement('div');
+            Column3.className = classname;
+            Column3.innerHTML = data3;
+            Row.appendChild(Column3);
+            }
+
+            if(data4 !== undefined)
+            {
+            var Column4 = document.createElement('div');
+            Column4.className = classname;
+            Column4.innerHTML = data4;
+            Row.appendChild(Column4);
+            }
+
+            if(data5 !== undefined)
+            {
+            var Column5 = document.createElement('div');
+            Column5.className = classname;
+            Column5.innerHTML = data5;
+            Row.appendChild(Column5);
+            }
+
+            return Row;
         }
 
         header.innerText = this.skill.name;
