@@ -19,14 +19,10 @@ class ItemContainer {
         //Creating images
         this.skillicon = new PIXI.Sprite(PIXI.loader.resources[this.skill.skillIcon].texture); //100x100
         this.skillborder = new PIXI.Sprite(PIXI.loader.resources["pictures/skillborder.png"].texture); //116x116
-//      this.skillborder_maxpoint = new PIXI.Sprite(PIXI.loader.resources["pictures/skillborder_maxpoint.png"].texture); //116x116
 
         //setting border variables
         this.skillborder.levelinfo = new PIXI.Text(this.skill.achievedPoint + "/" + this.skill.maxPoint);
         this.skillborder.levelinfo.scale.set(.5);
-
-//      this.skillborder_maxpoint.levelinfo = new PIXI.Text(this.skill.achievedPoint + "/" + this.skill.maxPoint);
-//      this.skillborder_maxpoint.levelinfo.scale.set(.5);
 
         if (this.skill.endorsement != undefined && this.skill.endorsement.length > 0) {
             this.skillborder.endorsement = new PIXI.Text("+" + this.skill.endorsement.length);
@@ -190,36 +186,6 @@ class ItemContainer {
                         });
         this.detailsForeground.addChild(this.btn1Container);
 
-        /*
-        var btn2 = new PIXI.Sprite(btnG.generateTexture());
-
-        var txt2 = new PIXI.Text("REQUEST", {fontSize: 14, fill: 0x000000});
-        txt2.anchor.set(0.5, 0.5);
-        txt2.position.set(35, 13);
-
-        var btn2Container = new PIXI.Container();
-        btn2Container.addChild(btn2, txt2);
-        btn2Container.position.set(detailsWidth - detailsMargin - 20 - btn2Container.width, description.position.y + description.height + 10);
-        btn2Container.interactive = true;
-        btn2Container.buttonMode = true;
-        btn2Container.on('pointerover', function () {
-            btn2.texture = btnGHover.generateTexture();
-            app.renderer.render(app.stage);
-        });
-        btn2Container.on('pointerout', function () {
-            btn2.texture = btnG.generateTexture();
-            app.renderer.render(app.stage);
-        });
-        detailsForeground.addChild(btn2Container);
-        */
-        /*// Temporary link
-        if (skillName == 0) {
-            var link = new Link("Nokia website", "https://nokia.com", {fontSize: 12, fill: 0x0000ff}, true);
-            link.position.set(detailsMargin, btn1Container.position.y + btn1Container.height + 7);
-            detailsForeground.addChild(link);
-        }
-        //*/
-
         this.detailsBackground = new PIXI.Graphics();
         this.detailsBackground.beginFill(0xffffff);
         this.detailsBackground.drawRoundedRect(0, 0, detailsWidth, this.detailsForeground.height + this.detailsMargin * 2, 4);
@@ -290,41 +256,42 @@ class ItemContainer {
 
     // Increases skill level, if it hits max skill level, it resets the filter, and adds green glow to it (filter)
     onClick(event) {
+        var this = this.parentObj;
         if (!event.drag) {
-            if (this.parentObj.self) {
-                var children = this.parentObj.skill.children;
+            if (this.self) {
+                var children = this.skill.children;
 
                 // Increase skill level
-                if (this.parentObj.skill.achievedPoint < this.parentObj.skill.maxPoint) {
+                if (this.skill.achievedPoint < this.skill.maxPoint) {
                     change = true;
                     document.getElementById('submitBtn').innerText = "Save";
                     document.getElementById('submitBtn').href = "";
-                    this.parentObj.skill.achievedPoint++;
-                    this.levelinfo.text = (this.parentObj.skill.achievedPoint + "/" + this.parentObj.skill.maxPoint);
+                    this.skill.achievedPoint++;
+                    this.levelinfo.text = (this.skill.achievedPoint + "/" + this.skill.maxPoint);
 
-                    this.parentObj.curlvlDesc.text = "Current level: " + this.parentObj.readMoreSplit(this.parentObj.skill.pointDescription[this.parentObj.skill.achievedPoint - 1]);
-                    if (this.parentObj.skill.achievedPoint == 1) this.parentObj.curlvlDesc.enabled = true;
+                    this.curlvlDesc.text = "Current level: " + this.readMoreSplit(this.skill.pointDescription[this.skill.achievedPoint - 1]);
+                    if (this.skill.achievedPoint == 1) this.curlvlDesc.enabled = true;
 
-                    if (this.parentObj.skill.achievedPoint < this.parentObj.skill.maxPoint) this.parentObj.nextlvlDesc.text = "Next level: " + this.parentObj.readMoreSplit(this.parentObj.skill.pointDescription[this.parentObj.skill.achievedPoint]);
+                    if (this.skill.achievedPoint < this.skill.maxPoint) this.nextlvlDesc.text = "Next level: " + this.readMoreSplit(this.skill.pointDescription[this.skill.achievedPoint]);
                     else  {
-                        this.parentObj.nextlvlDesc.text = "";
-                        this.parentObj.nextlvlDesc.enabled = false;
+                        this.nextlvlDesc.text = "";
+                        this.nextlvlDesc.enabled = false;
                     }
 
-                    this.parentObj.nextlvlDesc.position.y = this.parentObj.curlvlDesc.position.y + this.parentObj.curlvlDesc.height + 5;
+                    this.nextlvlDesc.position.y = this.curlvlDesc.position.y + this.curlvlDesc.height + 5;
 
-                    this.parentObj.btnPosY = this.parentObj.description.position.y + this.parentObj.description.height + 10;
-                    if (this.parentObj.nextlvlDesc.enabled) this.parentObj.btnPosY = this.parentObj.nextlvlDesc.position.y + this.parentObj.nextlvlDesc.height + 15;
-                    else if (this.parentObj.curlvlDesc.enabled) this.parentObj.btnPosY = this.parentObj.curlvlDesc.position.y + this.parentObj.curlvlDesc.height + 15;
+                    this.btnPosY = this.description.position.y + this.description.height + 10;
+                    if (this.nextlvlDesc.enabled) this.btnPosY = this.nextlvlDesc.position.y + this.nextlvlDesc.height + 15;
+                    else if (this.curlvlDesc.enabled) this.btnPosY = this.curlvlDesc.position.y + this.curlvlDesc.height + 15;
 
-                    if (this.parentObj.btnEndorseContainer != undefined) this.parentObj.btnEndorseContainer.position.y = this.parentObj.btnPosY;
-                    this.parentObj.btnInfoContainer.position.y = this.parentObj.btnPosY;
-                    this.parentObj.btn1Container.position.y = this.parentObj.btnPosY;
+                    if (this.btnEndorseContainer != undefined) this.btnEndorseContainer.position.y = this.btnPosY;
+                    this.btnInfoContainer.position.y = this.btnPosY;
+                    this.btn1Container.position.y = this.btnPosY;
 
-                    this.parentObj.detailsBackground.height = this.parentObj.detailsForeground.height + this.parentObj.detailsMargin * 2;
+                    this.detailsBackground.height = this.detailsForeground.height + this.detailsMargin * 2;
                 }
-                this.parentObj.app.renderer.render(this.parentObj.app.stage);
-                this.parentObj.refreshAvaliability();
+                this.app.renderer.render(this.app.stage);
+                this.refreshAvaliability();
             }
         }
     }
@@ -749,10 +716,6 @@ class ItemContainer {
         }
 
         modal.style.display = "block";
-    }
-
-    addBeginnerRequest() {
-        //console.log("clicked");
     }
 
     // endorses the skill of an other user. this runs on the "endorse" click.
