@@ -1203,3 +1203,17 @@ function saveEmail () {
         });
     } else showBottomAlert('danger', "Incorrect data!");
 }
+
+function saveHelp () {
+    var email = document.getElementById("help");
+
+    if (email.value != '') {
+        request('POST', '/protected/newhelp', {
+            help: help.checked,
+        }, function () {
+            if (this.readyState == 4 && this.status == 200) {
+                if (this.response.success) showBottomAlert('success', "Email changed successfully!");
+            }
+        });
+    } else showBottomAlert('danger', "Incorrect data!");
+}
