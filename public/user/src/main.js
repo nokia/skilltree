@@ -286,116 +286,116 @@ function createSkill () {
 
 // opens skill editor, user can edit (only) her/his own skills
 function editMySkill () {
-    document.getElementById('newSkillForm').reset();
+  document.getElementById('newSkillForm').reset();
 
-    var modal = document.getElementById("newSkillModal");
-    modal.style.display = "block";
+  var modal = document.getElementById("newSkillModal");
+  modal.style.display = "block";
 
-    var span = document.getElementById("closeSkillModal");
+  var span = document.getElementById("closeSkillModal");
 
-    span.onclick = function() {
-        modal.style.display = "none";
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  document.getElementById("loadSkill").style.display = "block";
+  document.getElementById("newSkillModalTitle").innerText = "Edit your skill";
+  document.getElementById("childrenDiv").style.display = "block";
+
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+      document.getElementById("newSkillModalTitle").innerText = "Create your own skill";
+    }
+  }
+
+  var catSelect = document.getElementById("newSkillCat");
+  catSelect.innerHTML = "";
+  for (var i = 0; i < data.categories.length; ++i) {
+    var option = document.createElement("option");
+    option.text = option.value = data.categories[i].name;
+    catSelect.add(option);
+  }
+
+  var skillName = document.getElementById("newSkillName");
+  skillName.setAttribute('list', 'skillSearchResult');
+  skillName.onkeyup = function() {searchSkillsByName(this, false)};
+
+  var loadSkill = document.getElementById("loadSkill");
+  loadSkill.onclick = function(){
+    //request for the skill to load data from
+    skillName = document.getElementById('newSkillName').value;
+
+    if (data.skills.find(obj => obj.name == skillName) !== undefined) {
+      var skill = data.skills.find(obj => obj.name == skillName);
+
+      loadSkillToEditor(skill, false);
+    }
+  }
+
+  //get the save skill button, write the onclick function
+  var save = document.getElementById("saveSkillBtn");
+  save.onclick = function () {
+    var pointsTable = document.getElementById('pointsTable');
+    var pointsNum = pointsTable.rows.length - 1;
+    var pointDescription = [];
+    for (i = 1; i < pointsNum + 1; ++i) pointDescription.push(pointsTable.rows[i].cells[1].children[0].value);
+
+    var parentsTable = document.getElementById('parentsTable');
+    var parents = [];
+    for (i = 1; i < parentsTable.rows.length; ++i) {
+      parents.push({
+        name: parentsTable.rows[i].cells[0].children[0].value,
+        minPoint: parentsTable.rows[i].cells[1].children[0].value,
+        recommended: !parentsTable.rows[i].cells[2].children[0].checked
+      });
     }
 
-    document.getElementById("loadSkill").style.display = "block";
-    document.getElementById("newSkillModalTitle").innerText = "Edit your skill";
-    document.getElementById("childrenDiv").style.display = "block";
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-            document.getElementById("newSkillModalTitle").innerText = "Create your own skill";
-        }
+    var childrenTable = document.getElementById('childrenTable');
+    var children = [];
+    for (i = 1; i < childrenTable.rows.length; ++i) {
+      children.push({
+        name: childrenTable.rows[i].cells[0].children[0].value,
+        minPoint: childrenTable.rows[i].cells[1].children[0].value,
+        recommended: !childrenTable.rows[i].cells[2].children[0].checked
+      });
     }
 
-    var catSelect = document.getElementById("newSkillCat");
-    catSelect.innerHTML = "";
-    for (var i = 0; i < data.categories.length; ++i) {
-        var option = document.createElement("option");
-        option.text = option.value = data.categories[i].name;
-        catSelect.add(option);
+    var trainingsTable = document.getElementById('trainingsTable');
+    var trainings = [];
+    for (i = 1; i < trainingsTable.rows.length; ++i) {
+      trainings.push({
+        name: trainingsTable.rows[i].cells[0].children[0].value,
+        level: trainingsTable.rows[i].cells[1].children[0].value,
+        shortDescription: trainingsTable.rows[i].cells[2].children[0].value,
+        URL: trainingsTable.rows[i].cells[3].children[0].value,
+        goal: trainingsTable.rows[i].cells[4].children[0].value,
+        length: trainingsTable.rows[i].cells[5].children[0].value,
+        language: trainingsTable.rows[i].cells[6].children[0].value
+      });
     }
 
-    var skillName = document.getElementById("newSkillName");
-    skillName.setAttribute('list', 'skillSearchResult');
-    skillName.onkeyup = function() {searchSkillsByName(this, false)};
-
-    var loadSkill = document.getElementById("loadSkill");
-    loadSkill.onclick = function(){
-        //request for the skill to load data from
-        skillName = document.getElementById('newSkillName').value;
-
-        if (data.skills.find(obj => obj.name == skillName) !== undefined) {
-            var skill = data.skills.find(obj => obj.name == skillName);
-
-            loadSkillToEditor(skill, false);
-        }
-    }
-
-    //get the save skill button, write the onclick function
-    var save = document.getElementById("saveSkillBtn");
-    save.onclick = function () {
-        var pointsTable = document.getElementById('pointsTable');
-        var pointsNum = pointsTable.rows.length - 1;
-        var pointDescription = [];
-        for (i = 1; i < pointsNum + 1; ++i) pointDescription.push(pointsTable.rows[i].cells[1].children[0].value);
-
-        var parentsTable = document.getElementById('parentsTable');
-        var parents = [];
-        for (i = 1; i < parentsTable.rows.length; ++i) {
-            parents.push({
-                name: parentsTable.rows[i].cells[0].children[0].value,
-                minPoint: parentsTable.rows[i].cells[1].children[0].value,
-                recommended: !parentsTable.rows[i].cells[2].children[0].checked
-            });
-        }
-
-        var childrenTable = document.getElementById('childrenTable');
-        var children = [];
-        for (i = 1; i < childrenTable.rows.length; ++i) {
-            children.push({
-                name: childrenTable.rows[i].cells[0].children[0].value,
-                minPoint: childrenTable.rows[i].cells[1].children[0].value,
-                recommended: !childrenTable.rows[i].cells[2].children[0].checked
-            });
-        }
-
-        var trainingsTable = document.getElementById('trainingsTable');
-        var trainings = [];
-        for (i = 1; i < trainingsTable.rows.length; ++i) {
-            trainings.push({
-                name: trainingsTable.rows[i].cells[0].children[0].value,
-                level: trainingsTable.rows[i].cells[1].children[0].value,
-                shortDescription: trainingsTable.rows[i].cells[2].children[0].value,
-                URL: trainingsTable.rows[i].cells[3].children[0].value,
-                goal: trainingsTable.rows[i].cells[4].children[0].value,
-                length: trainingsTable.rows[i].cells[5].children[0].value,
-                language: trainingsTable.rows[i].cells[6].children[0].value
-            });
-        }
-
-        var skillData = {
-            name: document.getElementById('newSkillName').value,
-            description: document.getElementById('newSkillDesc').value,
-            skillIcon: document.getElementById('newSkillIcon').value,
-            descriptionWikipediaURL: document.getElementById('newSkillWiki').value,
-            categoryName: catSelect.value,
-            maxPoint: pointsNum,
-            pointDescription: pointDescription,
-            parents: parents,
-            children: children,
-            trainings: trainings
-        };
-
-        request('POST', '/protected/editmyskill', skillData, function () {
-            if (this.readyState == 4 && this.status == 200) {
-                if (this.response.success) {
-                    modal.style.display = "none";
-                    window.open("/user/", "_self");
-                }
-            }
-        });
+    var skillData = {
+      name: document.getElementById('newSkillName').value,
+      description: document.getElementById('newSkillDesc').value,
+      skillIcon: document.getElementById('newSkillIcon').value,
+      descriptionWikipediaURL: document.getElementById('newSkillWiki').value,
+      categoryName: catSelect.value,
+      maxPoint: pointsNum,
+      pointDescription: pointDescription,
+      parents: parents,
+      children: children,
+      trainings: trainings
     };
+
+    request('POST', '/protected/editmyskill', skillData, function () {
+      if (this.readyState == 4 && this.status == 200) {
+        if (this.response.success) {
+          modal.style.display = "none";
+          window.open("/user/", "_self");
+        }
+      }
+    });
+  };
 }
 
 // opens skill editor, user can edit (only) her/his own skills
