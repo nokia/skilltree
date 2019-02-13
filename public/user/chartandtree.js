@@ -1205,9 +1205,9 @@ function saveEmail () {
 }
 
 function saveHelp () {
-    var email = document.getElementById("help");
+    var help = document.getElementById("help");
 
-    if (email.value != '') {
+    if (help) {
         request('POST', '/protected/newhelp', {
             help: help.checked,
         }, function () {
