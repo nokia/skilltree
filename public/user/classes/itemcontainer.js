@@ -723,6 +723,8 @@ class ItemContainer {
 
     // endorses the skill of an other user. this runs on the "endorse" click.
     endorse () {
+        var that = this.parentObj;
+
         var req = new XMLHttpRequest();
         req.open('POST', '/protected/endorse', true);
         req.setRequestHeader('Content-type', 'application/json');
@@ -736,8 +738,8 @@ class ItemContainer {
         };
 
         var data = {
-            skillName: this.parentObj.skill.name,
-            username: this.parentObj.username
+            skillName: that.skill.name,
+            username: that.username
         };
 
         req.send(JSON.stringify(data));
