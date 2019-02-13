@@ -39,3 +39,19 @@ function hideAlert (event) {
 }
 
 document.body.addEventListener('click', hideAlert);
+
+document.addEventListener('DOMContentLoaded', function() {
+  var isIE = /*@cc_on!@*/false || !!document.documentMode;
+  var isEdge = !isIE && !!window.StyleMedia;
+  if (isIE || isEdge) {
+	  showBottomAlert("You are using an unsupported browser. Please use Mozilla Firefox or Google Chrome.");
+	/*var block_to_insert ;
+	var container_block ;
+
+	block_to_insert = document.createElement( 'div' );
+	block_to_insert.innerHTML = '<div class="unsupportedBrowserAlertDIV alert alert-danger" role="alert"><p style="text-align:center;"<a href="#" class="alert-link">You are using an unsupported browser. Please use Mozilla Firefox or Google Chrome.</a></p></div>' ;
+
+	container_block = document.getElementById( 'unsupportedBrowserAlert' );
+	container_block.appendChild( block_to_insert );*/
+  }
+}, false);
