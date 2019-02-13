@@ -1175,24 +1175,28 @@ protectedRoute.post('/request', async function (req, res){
 });
 
 protectedRoute.post('/endorse', async function (req, res) {
-  var data = req.body;
-  var user = await findUser(data.username);
-  if (!user) {
-    res.json({
-      success: false,
-      message: 'User not found.'
-    });
-  } else {
-    if (user.skills.find(obj => obj.name == data.skillName).endorsement == undefined) user.skills.find(obj => obj.name == data.skillName).endorsement = [];
-    if (user.skills.find(obj => obj.name == data.skillName).endorsement.find(obj => obj == req.decoded.username) == undefined) {
-      user.skills.find(obj => obj.name == data.skillName).endorsement.push(req.decoded.username);
+	var data = req.body;
+	var user = await findUser(data.username);
+	if (!user) {
+		res.json({
+			success: false,
+			message: 'User not found.'
+		});
+	} else {
+		if (user.skills.find(obj => obj.name == data.skillName).endorsement == undefined) user.skills.find(obj => obj.name == data.skillName).endorsement = [];
+		if (user.skills.find(obj => obj.name == data.skillName).endorsement.find(obj => obj == req.decoded.username) == undefined) {
+			user.skills.find(obj => obj.name == data.skillName).endorsement.push(req.decoded.username);
 			user.save(function (err) {if (err) throw err;});
 
-      res.json({
-  			success: true
-  		});
-    }
-  }
+			res.json({
+				success: true
+			});
+		} else {
+			res.json({
+				success: false
+			});
+		}
+	}
 });
 
 protectedRoute.post('/newpassword', async function (req, res) {
