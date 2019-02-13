@@ -530,11 +530,11 @@ class ItemContainer {
               //Empty the table
               offerTable.innerHTML = "";
 
-              offerTable.appendChild(createTableRow(["Name",
-              "Location",
-              "Day",
-              "Time",
-              "Level"]));
+              offerTable.appendChild(createTableRow(["<b>Name</b>",
+              "<b>Location</b>",
+              "<b>Day</b>",
+              "<b>Time</b>",
+              "<b>Level</b>"]));
               //Filling the table
               for(var i=0; i<globalskill.offers.length; i++ )
               {
