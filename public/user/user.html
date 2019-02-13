@@ -94,7 +94,7 @@
     </nav>
     <!-- end of navbar -->
 
-    <!-- start of advanced search -->
+    <!-- start of advanced search card -->
     <div class="collapse float-right hide-on-click" id="advSearch">
         <div class="card">
             <div class="card-body">
@@ -370,7 +370,7 @@
 
 <canvas id = "pixiCanvas" style = "visibility: hidden;" class = "hide"></canvas>
 
-<!-- creator -->
+<!-- tree creator/editor -->
 <div id = "creator" style = "display: none;" class = "hide clear">
     <form id = "newTreeForm" class = "needs-validation" onsubmit = "return false" novalidate>
         <div class="card">
@@ -440,7 +440,7 @@
 </div>
 <!-- end of creator -->
 
-<!-- start of modal -->
+<!-- search modal -->
 <div class="modal" id="searchModal">
     <div class="modal-content">
         <div class="modal-header">
@@ -461,7 +461,7 @@
 </div>
 <!-- end of modal -->
 
-<!-- start of modal -->
+<!-- new skill creation / skill edit -->
 <div id = "newSkillModal" class = "modal clear" class="pt-4">
     <div class = "modal-content">
         <div class="modal-header">
@@ -658,36 +658,10 @@
                                     </div>
                                 </div>
                             </div>
-
                             <!-- end of 4-tab -->
-
-
-
-
-
                         </div>
                     </div>
                 </div>
-
-                <!--<h5>Children:</h5>
-                <table id = "childrenTable" border = "1">
-                <tr>
-                <td>Child</td>
-                <td>Min point</td>
-                <td>Required</td>
-                <td>Delete</td>
-            </tr>
-            <tr>
-            <td><input size=30 type="text" id = "child" list = "skillSearchResult" onkeypress="searchSkillByName()" required></td>
-            <td><input size=10 type="text" id = "minPoint" required></td>
-            <td><input size=50 type="checkbox" id = "required"></td>
-            <td><input type="button" value="Delete" onclick="deleteRow('childrenTable', this)"></td>
-        </tr>
-    </table>
-    <input type="button" value="Add child" onclick="addRow('childrenTable')"><br>-->
-
-
-
 </form>
 </div>
 </div>
