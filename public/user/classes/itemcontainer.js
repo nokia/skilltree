@@ -298,42 +298,43 @@ class ItemContainer {
 
     // Decreases skill level
     onRightClick() {
-        if (this.parentObj.self) {
-            var children = this.parentObj.skill.children;
+        var that = this.parentObj;
+        if (that.self) {
+            var children = that.skill.children;
 
             // Decrease skill level
-            if(this.parentObj.skill.achievedPoint > 0)
+            if(that.skill.achievedPoint > 0)
             {
                 change = true;
                 document.getElementById('submitBtn').innerText = "Save";
                 document.getElementById('submitBtn').href = "";
-                this.parentObj.skill.achievedPoint--;
-                this.levelinfo.text = (this.parentObj.skill.achievedPoint + "/" + this.parentObj.skill.maxPoint);
+                that.skill.achievedPoint--;
+                that.skillborder.levelinfo.text = (that.skill.achievedPoint + "/" + that.skill.maxPoint);
 
-                if (this.parentObj.skill.achievedPoint > 0) this.parentObj.curlvlDesc.text = "Current level: " + this.parentObj.readMoreSplit(this.parentObj.skill.pointDescription[this.parentObj.skill.achievedPoint - 1]);
+                if (that.skill.achievedPoint > 0) that.curlvlDesc.text = "Current level: " + that.readMoreSplit(that.skill.pointDescription[that.skill.achievedPoint - 1]);
                 else {
-                    this.parentObj.curlvlDesc.text = "";
-                    this.parentObj.curlvlDesc.enabled = false;
+                    that.curlvlDesc.text = "";
+                    that.curlvlDesc.enabled = false;
                 }
 
-                this.parentObj.nextlvlDesc.text = "Next level: " + this.parentObj.readMoreSplit(this.parentObj.skill.pointDescription[this.parentObj.skill.achievedPoint]);
-                if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint - 1) this.parentObj.nextlvlDesc.enabled = true;
+                that.nextlvlDesc.text = "Next level: " + that.readMoreSplit(that.skill.pointDescription[that.skill.achievedPoint]);
+                if (that.skill.achievedPoint == that.skill.maxPoint - 1) that.nextlvlDesc.enabled = true;
 
-                if (this.parentObj.curlvlDesc.enabled) this.parentObj.nextlvlDesc.position.y = this.parentObj.curlvlDesc.position.y + this.parentObj.curlvlDesc.height + 5;
-                else this.parentObj.nextlvlDesc.position.y = this.parentObj.curlvlDesc.position.y;
+                if (that.curlvlDesc.enabled) that.nextlvlDesc.position.y = that.curlvlDesc.position.y + that.curlvlDesc.height + 5;
+                else that.nextlvlDesc.position.y = that.curlvlDesc.position.y;
 
-                this.parentObj.btnPosY = this.parentObj.description.position.y + this.parentObj.description.height + 10;
-                if (this.parentObj.nextlvlDesc.enabled) this.parentObj.btnPosY = this.parentObj.nextlvlDesc.position.y + this.parentObj.nextlvlDesc.height + 15;
-                else if (this.parentObj.curlvlDesc.enabled) this.parentObj.btnPosY = this.parentObj.curlvlDesc.position.y + this.parentObj.curlvlDesc.height + 15;
+                that.btnPosY = that.description.position.y + that.description.height + 10;
+                if (that.nextlvlDesc.enabled) that.btnPosY = that.nextlvlDesc.position.y + that.nextlvlDesc.height + 15;
+                else if (that.curlvlDesc.enabled) that.btnPosY = that.curlvlDesc.position.y + that.curlvlDesc.height + 15;
 
-                if (this.parentObj.btnEndorseContainer != undefined) this.parentObj.btnEndorseContainer.position.y = this.parentObj.btnPosY;
-                this.parentObj.btnInfoContainer.position.y = this.parentObj.btnPosY;
-                this.parentObj.btn1Container.position.y = this.parentObj.btnPosY;
+                if (that.btnEndorseContainer != undefined) that.btnEndorseContainer.position.y = that.btnPosY;
+                that.btnInfoContainer.position.y = that.btnPosY;
+                that.btn1Container.position.y = that.btnPosY;
 
-                this.parentObj.detailsBackground.height = this.parentObj.detailsForeground.height + this.parentObj.detailsMargin * 2;
+                that.detailsBackground.height = that.detailsForeground.height + that.detailsMargin * 2;
             }
-            this.parentObj.app.renderer.render(this.parentObj.app.stage);
-            this.parentObj.refreshAvaliability();
+            that.app.renderer.render(that.app.stage);
+            that.refreshAvaliability();
         }
     }
 
@@ -375,8 +376,9 @@ class ItemContainer {
 
     // Adds hover animation to the skill, and shows the details box
     onButtonOver() {
-        var skillborder = this.parentObj.skillborder;
-        var details = this.parentObj.details;
+        var that = this.parentObj;
+        var skillborder = that.skillborder;
+        var details = that.details;
         var container = this;
 
         // Brings up hovered container
@@ -406,13 +408,13 @@ class ItemContainer {
         var rightOfDetails = details.getGlobalPosition().x + details.width;
         if (rightOfDetails > this.parentObj.app.width) details.position.x = -details.width;*/
 
-        this.parentObj.app.renderer.render(this.parentObj.app.stage);
+        that.app.renderer.render(that.app.stage);
 
-        if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint || this.parentObj.skill.disabled) return;
+        if (that.skill.achievedPoint == that.skill.maxPoint || that.skill.disabled) return;
 
-        this.parentObj.setFilter(this.parentObj, hoverFilter, this.parentObj.skillborder.filters[1]);
+        that.setFilter(that, hoverFilter, that.skillborder.filters[1]);
 
-        this.parentObj.app.renderer.render(this.parentObj.app.stage);
+        that.app.renderer.render(that.app.stage);
     }
 
     // removes filters (this wrechs the green filter too) of the skill and removes the details box.
