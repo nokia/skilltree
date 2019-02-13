@@ -1259,7 +1259,7 @@ protectedRoute.post('/newemail', async function (req, res) {
   }
 });
 
-protectedRoute.post('/newemail', async function (req, res) {
+protectedRoute.post('/newhelp', async function (req, res) {
   var data = req.body;
   var user = await findUser(req.decoded.username);
   if (!user) {
