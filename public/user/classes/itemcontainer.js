@@ -267,7 +267,7 @@ class ItemContainer {
                     document.getElementById('submitBtn').innerText = "Save";
                     document.getElementById('submitBtn').href = "";
                     that.skill.achievedPoint++;
-                    that.levelinfo.text = (that.skill.achievedPoint + "/" + that.skill.maxPoint);
+                    that.skillborder.levelinfo.text = (that.skill.achievedPoint + "/" + that.skill.maxPoint);
 
                     that.curlvlDesc.text = "Current level: " + that.readMoreSplit(that.skill.pointDescription[that.skill.achievedPoint - 1]);
                     if (that.skill.achievedPoint == 1) that.curlvlDesc.enabled = true;
