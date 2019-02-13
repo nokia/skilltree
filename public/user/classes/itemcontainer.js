@@ -419,20 +419,21 @@ class ItemContainer {
 
     // removes filters (this wrechs the green filter too) of the skill and removes the details box.
     onButtonOut() {
-        var skillborder = this.parentObj.skillborder;
-        var details = this.parentObj.details;
+        var that = this.parentObj;
+        var skillborder = that.skillborder;
+        var details = that.details;
         var container = this;
 
         container.removeChild(details);
         container.zOrder = 4;
 
-        this.parentObj.app.renderer.render(this.parentObj.app.stage);
+        that.app.renderer.render(that.app.stage);
 
-        if (this.parentObj.skill.achievedPoint == this.parentObj.skill.maxPoint || this.parentObj.skill.disabled) return;
+        if (that.skill.achievedPoint == that.skill.maxPoint || that.skill.disabled) return;
 
-        this.parentObj.setFilter(this.parentObj, nullFilter, this.parentObj.skillborder.filters[1]);
+        that.setFilter(that, nullFilter, that.skillborder.filters[1]);
 
-        this.parentObj.app.renderer.render(this.parentObj.app.stage);
+        that.app.renderer.render(that.app.stage);
     }
 
     // enables the access to this skill (click and hover)
