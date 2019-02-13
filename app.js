@@ -32,7 +32,7 @@ app.use(morgan('dev'));
 // serving static files and opening login.html
 app.use(express.static('./public'));
 app.get('/', (req, res) => res.sendFile('login.html', { root: path.join(__dirname, './public') }));
-app.get('/user', (req, res) => res.sendFile('chartandtree.html', { root: path.join(__dirname, './public/user') }));
+app.get('/user', (req, res) => res.sendFile('user.html', { root: path.join(__dirname, './public/user') }));
 
 app.get('/apitest', async function(req,res) {
 	res.json({
