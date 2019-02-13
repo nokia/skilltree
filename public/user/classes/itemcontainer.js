@@ -256,42 +256,42 @@ class ItemContainer {
 
     // Increases skill level, if it hits max skill level, it resets the filter, and adds green glow to it (filter)
     onClick(event) {
-        this = this.parentObj;
+        var that = this.parentObj; // that is the class
         if (!event.drag) {
-            if (this.self) {
-                var children = this.skill.children;
+            if (that.self) {
+                var children = that.skill.children;
 
                 // Increase skill level
-                if (this.skill.achievedPoint < this.skill.maxPoint) {
+                if (that.skill.achievedPoint < that.skill.maxPoint) {
                     change = true;
                     document.getElementById('submitBtn').innerText = "Save";
                     document.getElementById('submitBtn').href = "";
-                    this.skill.achievedPoint++;
-                    this.levelinfo.text = (this.skill.achievedPoint + "/" + this.skill.maxPoint);
+                    that.skill.achievedPoint++;
+                    that.levelinfo.text = (that.skill.achievedPoint + "/" + that.skill.maxPoint);
 
-                    this.curlvlDesc.text = "Current level: " + this.readMoreSplit(this.skill.pointDescription[this.skill.achievedPoint - 1]);
-                    if (this.skill.achievedPoint == 1) this.curlvlDesc.enabled = true;
+                    that.curlvlDesc.text = "Current level: " + that.readMoreSplit(that.skill.pointDescription[that.skill.achievedPoint - 1]);
+                    if (that.skill.achievedPoint == 1) that.curlvlDesc.enabled = true;
 
-                    if (this.skill.achievedPoint < this.skill.maxPoint) this.nextlvlDesc.text = "Next level: " + this.readMoreSplit(this.skill.pointDescription[this.skill.achievedPoint]);
+                    if (that.skill.achievedPoint < that.skill.maxPoint) that.nextlvlDesc.text = "Next level: " + that.readMoreSplit(that.skill.pointDescription[that.skill.achievedPoint]);
                     else  {
-                        this.nextlvlDesc.text = "";
-                        this.nextlvlDesc.enabled = false;
+                        that.nextlvlDesc.text = "";
+                        that.nextlvlDesc.enabled = false;
                     }
 
-                    this.nextlvlDesc.position.y = this.curlvlDesc.position.y + this.curlvlDesc.height + 5;
+                    that.nextlvlDesc.position.y = that.curlvlDesc.position.y + that.curlvlDesc.height + 5;
 
-                    this.btnPosY = this.description.position.y + this.description.height + 10;
-                    if (this.nextlvlDesc.enabled) this.btnPosY = this.nextlvlDesc.position.y + this.nextlvlDesc.height + 15;
-                    else if (this.curlvlDesc.enabled) this.btnPosY = this.curlvlDesc.position.y + this.curlvlDesc.height + 15;
+                    that.btnPosY = that.description.position.y + that.description.height + 10;
+                    if (that.nextlvlDesc.enabled) that.btnPosY = that.nextlvlDesc.position.y + that.nextlvlDesc.height + 15;
+                    else if (that.curlvlDesc.enabled) that.btnPosY = that.curlvlDesc.position.y + that.curlvlDesc.height + 15;
 
-                    if (this.btnEndorseContainer != undefined) this.btnEndorseContainer.position.y = this.btnPosY;
-                    this.btnInfoContainer.position.y = this.btnPosY;
-                    this.btn1Container.position.y = this.btnPosY;
+                    if (that.btnEndorseContainer != undefined) that.btnEndorseContainer.position.y = that.btnPosY;
+                    that.btnInfoContainer.position.y = that.btnPosY;
+                    that.btn1Container.position.y = that.btnPosY;
 
-                    this.detailsBackground.height = this.detailsForeground.height + this.detailsMargin * 2;
+                    that.detailsBackground.height = that.detailsForeground.height + that.detailsMargin * 2;
                 }
-                this.app.renderer.render(this.app.stage);
-                this.refreshAvaliability();
+                that.app.renderer.render(that.app.stage);
+                that.refreshAvaliability();
             }
         }
     }
