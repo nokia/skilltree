@@ -256,7 +256,7 @@ class ItemContainer {
 
     // Increases skill level, if it hits max skill level, it resets the filter, and adds green glow to it (filter)
     onClick(event) {
-        var this = this.parentObj;
+        this = this.parentObj;
         if (!event.drag) {
             if (this.self) {
                 var children = this.skill.children;
