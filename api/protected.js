@@ -1,4 +1,4 @@
-module.exports = function(app){
+module.exports = function (protectedRoute) {
     protectedRoute.use(function(req, res, next) {
         var token = req.get('x-access-token');
 
