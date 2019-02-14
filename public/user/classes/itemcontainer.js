@@ -182,7 +182,7 @@ class ItemContainer {
                         app.renderer.render(app.stage);
                         })
                 .on('click', function () {
-                        this.parentObj.toggleSkillDetailsPage();
+                        this.parentObj.toggleSkillOffersPage();
                         });
         this.detailsForeground.addChild(this.btn1Container);
 
@@ -464,7 +464,7 @@ class ItemContainer {
     }
 
     // this is the toggler for the details box
-    toggleSkillDetailsPage(){
+    toggleSkillOffersPage(){
         var modal = document.getElementById('skillpage');
         var header = document.getElementById('skillnameHeader');
         var span = document.getElementById("closeORModal");
