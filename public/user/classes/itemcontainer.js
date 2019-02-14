@@ -604,9 +604,9 @@ class ItemContainer {
                     })
                   );
                 }
-                //Display the tables Window if all table has been loaded
-                displayWindow();
 
+                //Display the tables Window if all table has been loaded
+                modal.style.display = "block";
               }
             }
           }
@@ -642,9 +642,6 @@ class ItemContainer {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
-        }
-        function displayWindow(){
-            modal.style.display = "block";
         }
     }
 
