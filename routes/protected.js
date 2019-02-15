@@ -1,4 +1,11 @@
-module.exports = function (protectedRoute) {
+const express = require('express');
+const bodyParser  = require('body-parser');
+const mongoose    = require('mongoose');
+
+module.exports = function (app) {
+    var protectedRoute = express.Router();
+    app.use('/protected', protectedRoute);
+
     protectedRoute.use(function(req, res, next) {
         var token = req.get('x-access-token');
 
@@ -7,7 +14,7 @@ module.exports = function (protectedRoute) {
             // verifies secret and checks exp
             jwt.verify(token, app.get('superSecret'), function(err, decoded) {
                 if (err) {
-                    return res.sendFile('login.html', { root: path.join(__dirname, './public') });
+                    return res.sendFile('login.html', { root: path.join(__dirname, '../public') });
                 } else {
                     req.decoded = decoded;
                     next();
@@ -15,7 +22,7 @@ module.exports = function (protectedRoute) {
             });
 
         } else {
-            return res.sendFile('login.html', { root: path.join(__dirname, './public') });
+            return res.sendFile('login.html', { root: path.join(__dirname, '../public') });
         }
     });
 
