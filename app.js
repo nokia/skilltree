@@ -140,34 +140,9 @@ app.post('/auth', function(req, res) {
     });
 });
 
-
 require('./routes')(app);
 
-
-
 ///////////////// END of DELETE SECTION
-
-// returns the user data of the username provided
-async function findUser(unm) {
-	var user = await User.findOne({
-		username: unm,
-	}, function (err, user) {
-		if (err) throw err;
-		return user;
-	});
-	return user;
-}
-
-// returns the skill data of the skillname provided
-async function findSkillByName(qname){
-	var skillToReturn = await Skill.findOne({
-		"name": qname
-	}, function (err, parent) {
-		if (err) throw err;
-		return skillToReturn;
-	});
-	return skillToReturn;
-}
 
 module.exports = app;
 
