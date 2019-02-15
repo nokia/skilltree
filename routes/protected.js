@@ -3,7 +3,7 @@ const bodyParser  = require('body-parser');
 const mongoose    = require('mongoose');
 const jwt    = require('jsonwebtoken');
 
-const User   = require('./models/usermodel');
+const User   = require('../models/usermodel');
 
 module.exports = function (app) {
     var protectedRoute = express.Router();
