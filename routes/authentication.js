@@ -106,4 +106,14 @@ module.exports = function (app) {
             }
         });
     });
+
+    async function findUser(unm) {
+    	var user = await User.findOne({
+    		username: unm,
+    	}, function (err, user) {
+    		if (err) throw err;
+    		return user;
+    	});
+    	return user;
+    }
 }
