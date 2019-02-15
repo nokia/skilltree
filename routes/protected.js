@@ -1147,4 +1147,15 @@ module.exports = function (app) {
     	  });
       }
     });
+
+    // returns the user data of the username provided
+    async function findUser(unm) {
+    	var user = await User.findOne({
+    		username: unm,
+    	}, function (err, user) {
+    		if (err) throw err;
+    		return user;
+    	});
+    	return user;
+    }
 }
