@@ -5,6 +5,7 @@ const jwt    = require('jsonwebtoken');
 const Category   = require('../models/categorymodel');
 const User   = require('../models/usermodel'); // get our mongoose model
 const Tree = require('../models/treemodel');
+const pbkdf2 = require('../pbkdf2');
 
 module.exports = function (app) {
     app.post('/registration', async function(req, res) {
