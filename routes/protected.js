@@ -7,6 +7,7 @@ const ApprovableTree = require('../models/treesforapprovemodel');
 const ApprovableSkill = require('../models/skillsforapprovemodel');
 const ApprovableTraining = require('../models/trainingsforapprovemodel');
 const Tree = require('../models/treemodel');
+const Skill = require('../models/skillmodel');
 
 module.exports = function (app) {
     var protectedRoute = express.Router();
