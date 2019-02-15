@@ -4,6 +4,7 @@ const mongoose    = require('mongoose');
 const jwt    = require('jsonwebtoken');
 
 const User   = require('../models/usermodel');
+const ApprovableTree = require('../models/treesforapprovemodel');
 
 module.exports = function (app) {
     var protectedRoute = express.Router();
