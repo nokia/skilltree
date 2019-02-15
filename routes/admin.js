@@ -4,6 +4,11 @@ const mongoose    = require('mongoose');
 const jwt    = require('jsonwebtoken');
 
 const User   = require('../models/usermodel');
+const Tree = require('../models/treemodel');
+const ApprovableTree = require('../models/treesforapprovemodel')
+const Skill = require('../models/skillmodel');
+const ApprovableSkill = require('../models/skillsforapprovemodel');
+const ApprovableTraining = require('../models/trainingsforapprovemodel');
 
 module.exports = function (app) {
     /*
