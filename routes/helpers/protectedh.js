@@ -125,8 +125,6 @@ async function sortAndAddTreeToUser(treeToSort, user){
     return;
 }
 
-module.exports = {
-    getDependency: getDependency,
-    sortTree: sortTree,
-    sortAndAddTreeToUser: sortAndAddTreeToUser
-};
+exports.getDependency = getDependency;
+exports.sortTree = sortTree;
+exports.sortAndAddTreeToUser = sortAndAddTreeToUser;
