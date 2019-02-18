@@ -469,4 +469,16 @@ module.exports = function (app) {
     	});
     	return skillToReturn;
     }
+
+    // creates an ordered tree from an array of skills.
+    async function sortTree(skillArray){
+        var sortedArray = []; // output array
+        var skillMatrix = []; // 3d array, represents the components, the rows, and the elements of rows in the graph.
+        for (var i = 0; i < skillArray.length; i++) {
+            await insertSkill(skillArray[i], skillMatrix);
+        }
+        sortedArray = await assembleTree(skillMatrix);
+        skillArray = await extractNames(sortedArray);
+        return skillArray;
+    }
 }
