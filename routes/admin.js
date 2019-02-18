@@ -9,8 +9,6 @@ const Skill = require('../models/skillmodel');
 const ApprovableSkill = require('../models/skillsforapprovemodel');
 const ApprovableTraining = require('../models/trainingsforapprovemodel');
 
-const helpers = require('./helpers/adminh');
-
 module.exports = function (app) {
     /*
     *   ADMIN
@@ -63,7 +61,7 @@ module.exports = function (app) {
 
     	//Look for the skill in the database, if already exists
     	var globalskill = undefined;
-    	globalskill = await helpers.findSkillByName(skillforaproval.name);
+    	globalskill = await findSkillByName(skillforaproval.name);
 
     	//Check if skill is already in the database or not
     	if(globalskill !== null )
@@ -116,7 +114,7 @@ module.exports = function (app) {
 
     		for(var i=0;i<dependency.length;i++)
     		{
-    			var globalskill = await helpers.findSkillByName(dependency[i].name);
+    			var globalskill = await findSkillByName(dependency[i].name);
     			if(globalskill !== null)
     			{
     				res.json({
@@ -217,10 +215,10 @@ module.exports = function (app) {
     adminRoute.post('/editskill', async function (req, res) {
     	var data = req.body;
 
-    	var skill = await helpers.findSkillByName(data.name);
+    	var skill = await findSkillByName(data.name);
 
     	for (var i = 0; i < skill.parents.length; ++i) {
-    		var parent = await helpers.findSkillByName(skill.parents[i]);
+    		var parent = await findSkillByName(skill.parents[i]);
 
     		parent.children = parent.children.filter(obj => obj.name != skill.name);
 
@@ -228,7 +226,7 @@ module.exports = function (app) {
     	}
 
     	for (var i = 0; i < skill.children.length; ++i) {
-    		var child = await helpers.findSkillByName(skill.children[i].name);
+    		var child = await findSkillByName(skill.children[i].name);
 
     		child.parents = child.parents.filter(obj => obj != skill.name);
 
@@ -265,7 +263,7 @@ module.exports = function (app) {
     				var parentNames = [];
     		        for (var i = 0; i < data.parents.length; ++i) {
     		            if (user.skills.find(obj => obj.name == data.parents[i].name) == undefined) { // add parent skill to user if not already there
-    		                var parent = await helpers.findSkillByName(data.parents[i].name);
+    		                var parent = await findSkillByName(data.parents[i].name);
     		                user.skills.push(parent);
     		            }
     		            // add new skill as child of parent skill
@@ -276,7 +274,7 @@ module.exports = function (app) {
 
     				for (var i = 0; i < data.children.length; ++i) {
     		            if (user.skills.find(obj => obj.name == data.children[i].name) == undefined) { // add parent skill to user if not already there
-    		                var child = await helpers.findSkillByName(data.children[i].name);
+    		                var child = await findSkillByName(data.children[i].name);
     		                user.skills.push(child);
     		            }
     		            // add new skill as child of parent skill
@@ -355,7 +353,7 @@ module.exports = function (app) {
     adminRoute.post('/approvetraining', async function (req, res) {
     	var data = req.body;
 
-        var globalSkill = await helpers.findSkillByName(data.skillName);
+        var globalSkill = await findSkillByName(data.skillName);
 
         if (globalSkill.trainings.find(obj => obj.name == data.name) == undefined) {
             var training = await ApprovableTraining.findOne({
@@ -460,4 +458,15 @@ module.exports = function (app) {
     		success: true
     	});
     });
+
+    // returns the skill data of the skillname provided
+    async function findSkillByName(qname){
+    	var skillToReturn = await Skill.findOne({
+    		"name": qname
+    	}, function (err, parent) {
+    		if (err) throw err;
+    		return skillToReturn;
+    	});
+    	return skillToReturn;
+    }
 }
