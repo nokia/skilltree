@@ -539,4 +539,9 @@ module.exports = function (app) {
         }
         return assembledTree;
     }
+
+    // gets the skillnames of a skillarray.
+    async function extractNames(skillArray){
+        return skillArray.map(obj => obj.name);
+    }
 }
