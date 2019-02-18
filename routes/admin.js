@@ -522,4 +522,21 @@ module.exports = function (app) {
         // this inits the first element of every component
         return;
     }
+
+    async function assembleTree(skillMatrix){
+        var assembledTree = [];
+        var l = true;
+        var j = 0;
+        while (l) {
+            l = false;
+            for (var component = 0; component < skillMatrix.length; component++) {
+                if (skillMatrix[component][j] != undefined) {
+                    l = true;
+                    assembledTree = assembledTree.concat(skillMatrix[component][j]);
+                }
+            }
+            j++;
+        }
+        return assembledTree;
+    }
 }
