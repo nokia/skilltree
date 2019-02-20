@@ -128,3 +128,5 @@ async function sortAndAddTreeToUser(treeToSort, user){
 exports.getDependency = getDependency;
 exports.sortTree = sortTree;
 exports.sortAndAddTreeToUser = sortAndAddTreeToUser;
+exports.findSkillByName = findSkillByName;
+exports.sortTree = sortTree;

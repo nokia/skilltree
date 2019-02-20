@@ -9,6 +9,8 @@ const Skill = require('../models/skillmodel');
 const ApprovableSkill = require('../models/skillsforapprovemodel');
 const ApprovableTraining = require('../models/trainingsforapprovemodel');
 
+const helpers = require('./helpers/protectedh');
+
 module.exports = function (app) {
     /*
     *   ADMIN
@@ -61,7 +63,7 @@ module.exports = function (app) {
 
     	//Look for the skill in the database, if already exists
     	var globalskill = undefined;
-    	globalskill = await findSkillByName(skillforaproval.name);
+    	globalskill = await helpers.findSkillByName(skillforaproval.name);
 
     	//Check if skill is already in the database or not
     	if(globalskill !== null )
@@ -114,7 +116,7 @@ module.exports = function (app) {
 
     		for(var i=0;i<dependency.length;i++)
     		{
-    			var globalskill = await findSkillByName(dependency[i].name);
+    			var globalskill = await helpers.findSkillByName(dependency[i].name);
     			if(globalskill !== null)
     			{
     				res.json({
@@ -188,7 +190,7 @@ module.exports = function (app) {
             return tree;
         });
 
-        var sn = await sortTree(data.skills);
+        var sn = await helpers.sortTree(data.skills);
         globalTree.focusArea = data.focusArea;
     	globalTree.description = data.description;
         globalTree.skillNames = sn;
@@ -215,10 +217,10 @@ module.exports = function (app) {
     adminRoute.post('/editskill', async function (req, res) {
     	var data = req.body;
 
-    	var skill = await findSkillByName(data.name);
+    	var skill = await helpers.findSkillByName(data.name);
 
     	for (var i = 0; i < skill.parents.length; ++i) {
-    		var parent = await findSkillByName(skill.parents[i]);
+    		var parent = await helpers.findSkillByName(skill.parents[i]);
 
     		parent.children = parent.children.filter(obj => obj.name != skill.name);
 
@@ -226,7 +228,7 @@ module.exports = function (app) {
     	}
 
     	for (var i = 0; i < skill.children.length; ++i) {
-    		var child = await findSkillByName(skill.children[i].name);
+    		var child = await helpers.findSkillByName(skill.children[i].name);
 
     		child.parents = child.parents.filter(obj => obj != skill.name);
 
@@ -263,7 +265,7 @@ module.exports = function (app) {
     				var parentNames = [];
     		        for (var i = 0; i < data.parents.length; ++i) {
     		            if (user.skills.find(obj => obj.name == data.parents[i].name) == undefined) { // add parent skill to user if not already there
-    		                var parent = await findSkillByName(data.parents[i].name);
+    		                var parent = await helpers.findSkillByName(data.parents[i].name);
     		                user.skills.push(parent);
     		            }
     		            // add new skill as child of parent skill
@@ -274,7 +276,7 @@ module.exports = function (app) {
 
     				for (var i = 0; i < data.children.length; ++i) {
     		            if (user.skills.find(obj => obj.name == data.children[i].name) == undefined) { // add parent skill to user if not already there
-    		                var child = await findSkillByName(data.children[i].name);
+    		                var child = await helpers.findSkillByName(data.children[i].name);
     		                user.skills.push(child);
     		            }
     		            // add new skill as child of parent skill
@@ -286,7 +288,7 @@ module.exports = function (app) {
     						if (skillList.find(obj => obj == data.name) == undefined) skillList.push(data.name);
     						var skillsToSort = [];
     						for (var k = 0; k < skillList.length; ++k) skillsToSort = user.skills.filter(obj => skillList.find(obj2 => obj2 == obj.name) != undefined);
-    						var sn = await sortTree(skillsToSort);
+    						var sn = await helpers.sortTree(skillsToSort);
     						user.trees.find(obj => obj.name == trees[j].name).skillNames = sn;
     					}
     		        }
@@ -353,7 +355,7 @@ module.exports = function (app) {
     adminRoute.post('/approvetraining', async function (req, res) {
     	var data = req.body;
 
-        var globalSkill = await findSkillByName(data.skillName);
+        var globalSkill = await helpers.findSkillByName(data.skillName);
 
         if (globalSkill.trainings.find(obj => obj.name == data.name) == undefined) {
             var training = await ApprovableTraining.findOne({
@@ -458,90 +460,4 @@ module.exports = function (app) {
     		success: true
     	});
     });
-
-    // returns the skill data of the skillname provided
-    async function findSkillByName(qname){
-    	var skillToReturn = await Skill.findOne({
-    		"name": qname
-    	}, function (err, parent) {
-    		if (err) throw err;
-    		return skillToReturn;
-    	});
-    	return skillToReturn;
-    }
-
-    // creates an ordered tree from an array of skills.
-    async function sortTree(skillArray){
-        var sortedArray = []; // output array
-        var skillMatrix = []; // 3d array, represents the components, the rows, and the elements of rows in the graph.
-        for (var i = 0; i < skillArray.length; i++) {
-            await insertSkill(skillArray[i], skillMatrix);
-        }
-        sortedArray = await assembleTree(skillMatrix);
-        skillArray = await extractNames(sortedArray);
-        return skillArray;
-    }
-
-    async function insertSkill(skillToInsert, skillMatrix) {
-        for (var component = 0; component < skillMatrix.length; component++) {
-            for (var child = 0; child < skillToInsert.children.length; child++) {
-                for (var row = 0; row < skillMatrix[component].length; row++) {
-                    if ((skillMatrix[component][row].map(obj => obj.name)).includes(skillToInsert.children[child].name)) {
-                        if (row == 0) {
-                            await addRowToComponent(skillMatrix, component);
-                            skillMatrix[component][0].push(skillToInsert);
-                            // console.log(skillToInsert.name + " added to root(skills child found in tree)"); // for debugging reasons
-                            // this checks if the row found was the root level.
-                            // if yes, it adds another row to the top, and inserts the skill there.
-                            return;
-                        }
-                        else {
-                            skillMatrix[component][row - 1].push(skillToInsert);
-                            // console.log(skillToInsert.name + " added to the row above(skills child found in tree)"); // for debugging reasons
-                            // if no, it inserts the skill to the row above.
-                            return;
-                        }
-                    }
-                }
-            }
-            for (var par = 0; par < skillToInsert.parents.length; par++) {
-                for (var row = 0; row < skillMatrix[component].length; row++) {
-                    if ((skillMatrix[component][row].map(obj => obj.name)).includes(skillToInsert.parents[par])) {
-                        if (skillMatrix[component][row + 1] == undefined) skillMatrix[component].push([]);
-                        skillMatrix[component][row + 1].push(skillToInsert);
-                        // console.log(skillToInsert.name + " added to the row below(skills parent found in tree.)"); // for debugging reasons
-                        // this checks if the skill has any parents in any row in any component,
-                        // if yes, then it inserts the skill to the row below.
-                        return;
-                    }
-                }
-            }
-        }
-        skillMatrix.push([[skillToInsert]]);
-        // console.log(skillToInsert.name + " added to a new component."); // for debugging reasons
-        // this inits the first element of every component
-        return;
-    }
-
-    async function assembleTree(skillMatrix){
-        var assembledTree = [];
-        var l = true;
-        var j = 0;
-        while (l) {
-            l = false;
-            for (var component = 0; component < skillMatrix.length; component++) {
-                if (skillMatrix[component][j] != undefined) {
-                    l = true;
-                    assembledTree = assembledTree.concat(skillMatrix[component][j]);
-                }
-            }
-            j++;
-        }
-        return assembledTree;
-    }
-
-    // gets the skillnames of a skillarray.
-    async function extractNames(skillArray){
-        return skillArray.map(obj => obj.name);
-    }
 }
