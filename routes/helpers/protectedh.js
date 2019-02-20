@@ -1,3 +1,5 @@
+const Skill = require('../models/skillmodel');
+
 // recursive function for dependency determinating
 async function getDependency (userSkills, skill, dependency) {
     var parents = [];
