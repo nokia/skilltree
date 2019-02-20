@@ -9,7 +9,7 @@ const Skill = require('../models/skillmodel');
 const ApprovableSkill = require('../models/skillsforapprovemodel');
 const ApprovableTraining = require('../models/trainingsforapprovemodel');
 
-const helpers = require('./helpers/protectedh');
+const helpers = require('./helpers');
 
 module.exports = function (app) {
     /*

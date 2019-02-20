@@ -9,7 +9,7 @@ const ApprovableTraining = require('../models/trainingsforapprovemodel');
 const Tree = require('../models/treemodel');
 const Skill = require('../models/skillmodel');
 
-const helpers = require('./helpers/protectedh');
+const helpers = require('./helpers');
 
 module.exports = function (app) {
     var protectedRoute = express.Router();
