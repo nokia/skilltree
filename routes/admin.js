@@ -9,7 +9,7 @@ const Skill = require('../models/skillmodel');
 const ApprovableSkill = require('../models/skillsforapprovemodel');
 const ApprovableTraining = require('../models/trainingsforapprovemodel');
 
-//const helpers = require('./helpers/protectedh');
+const helpers = require('./helpers/protectedh');
 
 module.exports = function (app) {
     /*
@@ -190,7 +190,7 @@ module.exports = function (app) {
             return tree;
         });
 
-        var sn = await helpers.sortTree(data.skills);
+        var sn = await sortTree(data.skills);
         globalTree.focusArea = data.focusArea;
     	globalTree.description = data.description;
         globalTree.skillNames = sn;
@@ -288,7 +288,7 @@ module.exports = function (app) {
     						if (skillList.find(obj => obj == data.name) == undefined) skillList.push(data.name);
     						var skillsToSort = [];
     						for (var k = 0; k < skillList.length; ++k) skillsToSort = user.skills.filter(obj => skillList.find(obj2 => obj2 == obj.name) != undefined);
-    						var sn = await helpers.sortTree(skillsToSort);
+    						var sn = await sortTree(skillsToSort);
     						user.trees.find(obj => obj.name == trees[j].name).skillNames = sn;
     					}
     		        }
