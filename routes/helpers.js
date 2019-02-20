@@ -139,9 +139,19 @@ async function findSkillByName(qname){
     return skillToReturn;
 }
 
+async function findUser(unm) {
+    var user = await User.findOne({
+        username: unm,
+    }, function (err, user) {
+        if (err) throw err;
+        return user;
+    });
+    return user;
+}
 
 exports.getDependency = getDependency;
 exports.sortTree = sortTree;
 exports.sortAndAddTreeToUser = sortAndAddTreeToUser;
 exports.findSkillByName = findSkillByName;
 exports.sortTree = sortTree;
+exports.findUser = findUser;

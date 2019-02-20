@@ -144,7 +144,7 @@ module.exports = function (app) {
     protectedRoute.post('/searchSkillsByName', async function (req, res) {
     		var data = req.body;
 
-            var user = await findUser(req.decoded.username);
+            var user = await helpers.findUser(req.decoded.username);
 
             user = user.toObject();
             var foundUserSkills = user.skills.filter(obj => obj.name.match(new RegExp(".*" + data.value + ".*", "i")) != null);
@@ -170,7 +170,7 @@ module.exports = function (app) {
     protectedRoute.post('/searchUserSkillsByName', async function (req, res) {
     		var data = req.body;
 
-            var user = await findUser(req.decoded.username);
+            var user = await helpers.findUser(req.decoded.username);
 
             user = user.toObject();
             var foundUserSkills = user.skills.filter(obj => obj.name.match(new RegExp(".*" + data.value + ".*", "i")) != null);
@@ -261,7 +261,7 @@ module.exports = function (app) {
     // Adds a public tree to the current user.
     protectedRoute.post('/addTreeToUser', async function (req, res){
     	var data = req.body;
-    	var user = await findUser(req.decoded.username);
+    	var user = await helpers.findUser(req.decoded.username);
     	var tree = await Tree.findOne({"name": data.value},  function (err, tree) {
     		if (err) throw err;
     		return tree;
@@ -293,7 +293,7 @@ module.exports = function (app) {
     protectedRoute.post('/getskill', async function (req, res) {
     	var data = req.body;
 
-        var user = await findUser(req.decoded.username);
+        var user = await helpers.findUser(req.decoded.username);
 
     	if (!user) {
     		res.json({
@@ -326,7 +326,7 @@ module.exports = function (app) {
     protectedRoute.post('/newtraining', async function(req, res) {
         var data = req.body;
 
-        var user = await findUser(req.decoded.username);
+        var user = await helpers.findUser(req.decoded.username);
 
     	if (!user) {
     		res.json({
@@ -379,7 +379,7 @@ module.exports = function (app) {
     protectedRoute.post('/newskill', async function(req, res) {
         var data = req.body;
 
-        var user = await findUser(req.decoded.username);
+        var user = await helpers.findUser(req.decoded.username);
 
     	if (!user) {
     		res.json({
@@ -463,7 +463,7 @@ module.exports = function (app) {
     // creates a new tree only for the user.
     protectedRoute.post('/newtree', async function (req, res) {
     	var data = req.body;
-        var user = await findUser(req.decoded.username);
+        var user = await helpers.findUser(req.decoded.username);
     	if (!user) {
     		res.json({
     			success: false,
@@ -514,7 +514,7 @@ module.exports = function (app) {
     // creates a new tree only for the user.
     protectedRoute.post('/editmytree', async function (req, res) {
         var data = req.body;
-        var user = await findUser(req.decoded.username);
+        var user = await helpers.findUser(req.decoded.username);
 
         if (!user) {
             res.json({
@@ -553,7 +553,7 @@ module.exports = function (app) {
 
     protectedRoute.post('/editmyskill', async function (req, res) {
     	var data = req.body;
-        var user = await findUser(req.decoded.username);
+        var user = await helpers.findUser(req.decoded.username);
 
         if (!user) {
             res.json({
@@ -628,7 +628,7 @@ module.exports = function (app) {
 
     protectedRoute.post('/deletemytree', async function (req, res) {
         var data = req.body;
-        var user = await findUser(req.decoded.username);
+        var user = await helpers.findUser(req.decoded.username);
 
         if (!user) {
             res.json({
@@ -666,7 +666,7 @@ module.exports = function (app) {
     protectedRoute.post('/addskilltotree', async function(req, res) {
         var data = req.body;
 
-        var user = await findUser(req.decoded.username);
+        var user = await helpers.findUser(req.decoded.username);
 
     	if (!user) {
     		res.json({
@@ -704,7 +704,7 @@ module.exports = function (app) {
     protectedRoute.post('/firstlogindata', async function (req, res) {
     	var data = req.body;
 
-    	var user = await findUser(req.decoded.username);
+    	var user = await helpers.findUser(req.decoded.username);
 
     	if (!user) {
     		res.json({
@@ -734,7 +734,7 @@ module.exports = function (app) {
     protectedRoute.post('/submitall', async function (req, res) {
     	var data = req.body;
 
-        var user = await findUser(req.decoded.username);
+        var user = await helpers.findUser(req.decoded.username);
 
     	if (!user) {
     		res.json({
@@ -784,7 +784,7 @@ module.exports = function (app) {
     // searches a userskill
     protectedRoute.post('/searchUserSkillByName', async function (req, res) {
 
-    	var user = await findUser(req.decoded.username);
+    	var user = await helpers.findUser(req.decoded.username);
 
     	var skill = user.skills.find(obj => obj.name == req.body.name);
 
@@ -793,7 +793,7 @@ module.exports = function (app) {
 
     /*protectedRoute.post('/parentTableData', async function (req, res) {
 
-    	var user = await findUser(req.decoded.username);
+    	var user = await helpers.findUser(req.decoded.username);
 
 
     	var parents = [];
@@ -823,7 +823,7 @@ module.exports = function (app) {
     //API call for request onclick
     protectedRoute.post('/request', async function (req, res){
 
-    	var user = await await findUser(req.decoded.username);
+    	var user = await await helpers.findUser(req.decoded.username);
 
     	var skill = await findSkillByName(req.body.name);
 
@@ -918,7 +918,7 @@ module.exports = function (app) {
 
     protectedRoute.post('/endorse', async function (req, res) {
     	var data = req.body;
-    	var user = await findUser(data.username);
+    	var user = await helpers.findUser(data.username);
     	if (!user) {
     		res.json({
     			success: false,
@@ -943,7 +943,7 @@ module.exports = function (app) {
 
     protectedRoute.post('/newpassword', async function (req, res) {
       var data = req.body;
-      var user = await findUser(req.decoded.username);
+      var user = await helpers.findUser(req.decoded.username);
       if (!user) {
         res.json({
           success: false,
@@ -970,7 +970,7 @@ module.exports = function (app) {
 
     protectedRoute.post('/newplace', async function (req, res) {
       var data = req.body;
-      var user = await findUser(req.decoded.username);
+      var user = await helpers.findUser(req.decoded.username);
       if (!user) {
         res.json({
           success: false,
@@ -989,7 +989,7 @@ module.exports = function (app) {
 
     protectedRoute.post('/newemail', async function (req, res) {
       var data = req.body;
-      var user = await findUser(req.decoded.username);
+      var user = await helpers.findUser(req.decoded.username);
       if (!user) {
         res.json({
           success: false,
@@ -1007,7 +1007,7 @@ module.exports = function (app) {
 
     protectedRoute.post('/newhelp', async function (req, res) {
       var data = req.body;
-      var user = await findUser(req.decoded.username);
+      var user = await helpers.findUser(req.decoded.username);
       if (!user) {
         res.json({
           success: false,
@@ -1022,15 +1022,4 @@ module.exports = function (app) {
     	  });
       }
     });
-
-    // returns the user data of the username provided
-    async function findUser(unm) {
-    	var user = await User.findOne({
-    		username: unm,
-    	}, function (err, user) {
-    		if (err) throw err;
-    		return user;
-    	});
-    	return user;
-    }
 }

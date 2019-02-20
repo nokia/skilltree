@@ -7,10 +7,12 @@ const User   = require('../models/usermodel'); // get our mongoose model
 const Tree = require('../models/treemodel');
 const pbkdf2 = require('../pbkdf2');
 
+const helpers = require('./helpers');
+
 module.exports = function (app) {
     app.post('/registration', async function(req, res) {
     	// search for username in db
-        var user = await findUser(req.body.username);
+        var user = await helpers.findUser(req.body.username);
 
     	if (!user) { // if new user
     		var hashData = pbkdf2.hashPassword(req.body.password);
@@ -106,14 +108,4 @@ module.exports = function (app) {
             }
         });
     });
-
-    async function findUser(unm) {
-    	var user = await User.findOne({
-    		username: unm,
-    	}, function (err, user) {
-    		if (err) throw err;
-    		return user;
-    	});
-    	return user;
-    }
 }
