@@ -1,3 +1,7 @@
+/*
+*   Routes for admin things (login needed, admin attribute in token)
+*/
+
 const express = require('express');
 const mongoose    = require('mongoose');
 const jwt    = require('jsonwebtoken');

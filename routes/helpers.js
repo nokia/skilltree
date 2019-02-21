@@ -1,3 +1,7 @@
+/*
+*   Helper functions for the api routes
+*/
+
 const Skill = require('../models/skillmodel');
 
 // recursive function for dependency determinating

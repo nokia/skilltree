@@ -1,3 +1,7 @@
+/*
+*   Routes that needs token (logged in user) but admin rights not
+*/
+
 const express = require('express');
 const mongoose    = require('mongoose');
 const jwt    = require('jsonwebtoken');

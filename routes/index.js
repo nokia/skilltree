@@ -1,3 +1,7 @@
+/*
+*   Scans the routes directory and automatically adds the routes
+*/
+
 var fs = require('fs');
 
 module.exports = function (app){
