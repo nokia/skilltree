@@ -3,6 +3,7 @@
 */
 
 const Skill = require('../models/skillmodel');
+const User   = require('./models/usermodel');
 
 // recursive function for dependency determinating
 async function getDependency (userSkills, skill, dependency) {
