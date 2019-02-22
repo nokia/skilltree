@@ -102,7 +102,7 @@ class ItemContainer {
         if (!this.self && this.skill.endorsement.find(obj => obj == payload.username) == undefined) showEndorseBtn = true;
 
         var btnInfoPosX = 0;
-        var btn1PosX = 0;
+        var btnOffersPosX = 0;
         if (showEndorseBtn) {
             var btnEndorse = new PIXI.Sprite(btnG.generateTexture());
 
@@ -140,35 +140,20 @@ class ItemContainer {
         if (!showEndorseBtn) btnInfoPosX = (detailsWidth - this.btnInfoContainer.width) / 4;
         else btnInfoPosX = 10;
         this.btnInfoContainer.position.set(btnInfoPosX, this.btnPosY);
-        this.btnInfoContainer.interactive = true;
-        this.btnInfoContainer.buttonMode = true;
-        this.btnInfoContainer.parentObj = this;
-        this.btnInfoContainer
-                .on('pointerover', function () {
-                        btnInfo.texture = btnGHover.generateTexture();
-                        app.renderer.render(app.stage);
-                        })
-                .on('pointerout', function () {
-                        btnInfo.texture = btnG.generateTexture();
-                        app.renderer.render(app.stage);
-                        })
-                .on('click', function () {
-                        this.parentObj.toggleSkillInfoPage();
-                        });
         this.detailsForeground.addChild(this.btnInfoContainer);
 
-        var btn1 = new PIXI.Sprite(btnG.generateTexture());
+        var btnOffers = new PIXI.Sprite(btnG.generateTexture());
 
-        var txt1 = new PIXI.Text("OFFERS", {fontSize: 14, fill: 0x000000});
-        txt1.anchor.set(0.5, 0.5);
-        txt1.position.set(35,13);
+        var txtOffers = new PIXI.Text("OFFERS", {fontSize: 14, fill: 0x000000});
+        txtOffers.anchor.set(0.5, 0.5);
+        txtOffers.position.set(35,13);
 
-        this.btn1Container = new PIXI.Container();
-        this.btn1Container.addChild(btn1, txt1);
-        if (this.self) btn1PosX = (detailsWidth - this.btn1Container.width) * .75;
-        else btn1PosX = (detailsWidth - this.btn1Container.width) / 2;
-        this.btn1Container.position.set(btn1PosX, this.btnPosY);
-        this.detailsForeground.addChild(this.btn1Container);
+        this.btnOffersContainer = new PIXI.Container();
+        this.btnOffersContainer.addChild(btnOffers, txtOffers);
+        if (this.self) btnOffersPosX = (detailsWidth - this.btnOffersContainer.width) * .75;
+        else btnOffersPosX = (detailsWidth - this.btnOffersContainer.width) / 2;
+        this.btnOffersContainer.position.set(btnOffersPosX, this.btnPosY);
+        this.detailsForeground.addChild(this.btnOffersContainer);
 
         this.detailsBackground = new PIXI.Graphics();
         this.detailsBackground.beginFill(0xffffff);
@@ -209,16 +194,31 @@ class ItemContainer {
         }
 
         //Adding events
-        this.btn1Container.interactive = true;
-        this.btn1Container.buttonMode = true;
-        this.btn1Container.parentObj = this;
-        this.btn1Container
+        this.btnInfoContainer.interactive = true;
+        this.btnInfoContainer.buttonMode = true;
+        this.btnInfoContainer.parentObj = this;
+        this.btnInfoContainer
                 .on('pointerover', function () {
-                        btn1.texture = btnGHover.generateTexture();
+                        btnInfo.texture = btnGHover.generateTexture();
                         app.renderer.render(app.stage);
                         })
                 .on('pointerout', function () {
-                        btn1.texture = btnG.generateTexture();
+                        btnInfo.texture = btnG.generateTexture();
+                        app.renderer.render(app.stage);
+                        })
+                .on('click', function () {
+                        this.parentObj.toggleSkillInfoPage();
+                        });
+        this.btnOffersContainer.interactive = true;
+        this.btnOffersContainer.buttonMode = true;
+        this.btnOffersContainer.parentObj = this;
+        this.btnOffersContainer
+                .on('pointerover', function () {
+                        btnOffers.texture = btnGHover.generateTexture();
+                        app.renderer.render(app.stage);
+                        })
+                .on('pointerout', function () {
+                        btnOffers.texture = btnG.generateTexture();
                         app.renderer.render(app.stage);
                         })
                 .on('click', function () {
@@ -285,7 +285,7 @@ class ItemContainer {
 
                     if (that.btnEndorseContainer != undefined) that.btnEndorseContainer.position.y = that.btnPosY;
                     that.btnInfoContainer.position.y = that.btnPosY;
-                    that.btn1Container.position.y = that.btnPosY;
+                    that.btnOffersContainer.position.y = that.btnPosY;
 
                     that.detailsBackground.height = that.detailsForeground.height + that.detailsMargin * 2;
                 }
@@ -328,7 +328,7 @@ class ItemContainer {
 
                 if (that.btnEndorseContainer != undefined) that.btnEndorseContainer.position.y = that.btnPosY;
                 that.btnInfoContainer.position.y = that.btnPosY;
-                that.btn1Container.position.y = that.btnPosY;
+                that.btnOffersContainer.position.y = that.btnPosY;
 
                 that.detailsBackground.height = that.detailsForeground.height + that.detailsMargin * 2;
             }
@@ -742,11 +742,11 @@ class ItemContainer {
     }
 
     readMoreSplit (text, long = false) {
-        var wordCount = 15;
-        if (long) wordCount = 25;
+        var spaceCount = 15;
+        if (long) spaceCount = 25;
 
-        if (text.split(" ", wordCount) != undefined) {
-            var index = text.split(" ", wordCount).join(" ").length;
+        if (text.split(" ", spaceCount) != undefined) {
+            var index = text.split(" ", spaceCount).join(" ").length;
             text = text.substring(0, index) + "...";
         }
 
