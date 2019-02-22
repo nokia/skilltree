@@ -168,21 +168,6 @@ class ItemContainer {
         if (this.self) btn1PosX = (detailsWidth - this.btn1Container.width) * .75;
         else btn1PosX = (detailsWidth - this.btn1Container.width) / 2;
         this.btn1Container.position.set(btn1PosX, this.btnPosY);
-        this.btn1Container.interactive = true;
-        this.btn1Container.buttonMode = true;
-        this.btn1Container.parentObj = this;
-        this.btn1Container
-                .on('pointerover', function () {
-                        btn1.texture = btnGHover.generateTexture();
-                        app.renderer.render(app.stage);
-                        })
-                .on('pointerout', function () {
-                        btn1.texture = btnG.generateTexture();
-                        app.renderer.render(app.stage);
-                        })
-                .on('click', function () {
-                        this.parentObj.toggleSkillOffersPage();
-                        });
         this.detailsForeground.addChild(this.btn1Container);
 
         this.detailsBackground = new PIXI.Graphics();
@@ -224,6 +209,21 @@ class ItemContainer {
         }
 
         //Adding events
+        this.btn1Container.interactive = true;
+        this.btn1Container.buttonMode = true;
+        this.btn1Container.parentObj = this;
+        this.btn1Container
+                .on('pointerover', function () {
+                        btn1.texture = btnGHover.generateTexture();
+                        app.renderer.render(app.stage);
+                        })
+                .on('pointerout', function () {
+                        btn1.texture = btnG.generateTexture();
+                        app.renderer.render(app.stage);
+                        })
+                .on('click', function () {
+                        this.parentObj.toggleSkillOffersPage();
+                        });
         this.skillborder.interactive = true;
         this.skillborder.buttonMode = true;
         this.skillborder.parentObj = this;
@@ -741,9 +741,12 @@ class ItemContainer {
         req.send(JSON.stringify(data));
     }
 
-    readMoreSplit (text) {
-        if (text.split(" ", 15) != undefined) {
-            var index = text.split(" ", 15).join(" ").length;
+    readMoreSplit (text, long = false) {
+        var wordCount = 15;
+        if (long) wordCount = 25;
+
+        if (text.split(" ", wordCount) != undefined) {
+            var index = text.split(" ", wordCount).join(" ").length;
             text = text.substring(0, index) + "...";
         }
 
