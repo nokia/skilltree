@@ -20,10 +20,11 @@ class ItemContainer {
         this.skillicon = new PIXI.Sprite(PIXI.loader.resources[this.skill.skillIcon].texture); //100x100
         this.skillborder = new PIXI.Sprite(PIXI.loader.resources["pictures/skillborder.png"].texture); //116x116
 
-        //setting border variables
+        //Level info
         this.skillborder.levelinfo = new PIXI.Text(this.skill.achievedPoint + "/" + this.skill.maxPoint);
         this.skillborder.levelinfo.scale.set(.5);
 
+        // Endorse points
         if (this.skill.endorsement != undefined && this.skill.endorsement.length > 0) {
             this.skillborder.endorsement = new PIXI.Text("+" + this.skill.endorsement.length);
             this.skillborder.endorsement.scale.set(.5);
@@ -37,19 +38,25 @@ class ItemContainer {
         var nameFontSize = 20;
         var descriptionFontSize = 12;
 
+        // whole details (foreground and backg)
         this.details = new PIXI.Container();
 
+        // container for texts, buttons
         this.detailsForeground = new PIXI.Container();
+
+        // name of the skill
         var name = new PIXI.Text(this.skill.name, {fontSize: nameFontSize, fill: 0x000000});
-        name.position.set(10, 10);
+        name.position.set(this.detailsMargin, this.detailsMargin);
         this.detailsForeground.addChild(name);
 
-        var skillDescShortened = this.readMoreSplit(this.skill.description);
+        // description of the skill (shortened)
+        var skillDescShortened = this.readMoreSplit(this.skill.description, true);
         this.description = new PIXI.Text(skillDescShortened, {fontSize: descriptionFontSize, fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - this.detailsMargin * 2 });
         this.description.position.set(this.detailsMargin, this.detailsMargin * 2 + nameFontSize);
         this.detailsForeground.addChild(this.description);
         this.detailsForeground.zOrder = 1;
 
+        // description of the current level (shortened)
         this.curlvlDesc = new PIXI.Text("", {fontSize: descriptionFontSize, fontStyle: 'italic', fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - this.detailsMargin * 2});
         this.curlvlDesc.enabled = false;
         if (this.skill.achievedPoint > 0) {
@@ -63,6 +70,7 @@ class ItemContainer {
         this.curlvlDesc.click = function () {this.parentObj.toggleSkillInfoPage()};
         this.detailsForeground.addChild(this.curlvlDesc);
 
+        // description of the next level (shortened)
         this.nextlvlDesc = new PIXI.Text("", {fontSize: descriptionFontSize, fontStyle: 'italic', fill: 0x000000, wordWrap: true, wordWrapWidth: detailsWidth - this.detailsMargin * 2});
         this.nextlvlDesc.enabled = false;
         if (this.skill.achievedPoint < this.skill.maxPoint) {
