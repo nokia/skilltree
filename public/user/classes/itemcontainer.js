@@ -158,7 +158,7 @@ class ItemContainer {
 
         this.btnOffersContainer = new PIXI.Container();
         this.btnOffersContainer.addChild(btnOffers, txtOffers);
-        if (this.self) btnOffersPosX = (detailsWidth - this.btnOffersContainer.width) * .75;
+        if (!showEndorseBtn) btnOffersPosX = (detailsWidth - this.btnOffersContainer.width) * .75;
         else btnOffersPosX = (detailsWidth - this.btnOffersContainer.width) / 2;
         this.btnOffersContainer.position.set(btnOffersPosX, this.btnPosY);
         this.detailsForeground.addChild(this.btnOffersContainer);
