@@ -736,8 +736,8 @@ class ItemContainer {
         req.responseType = "json";
         req.onreadystatechange = function () {
             if(this.readyState == 4 && this.status == 200) {
-              if(this.response.success) {ShowBottomAlert('success', "Skill endorsed.");}
-              else {ShowBottomAlert('warning', "Skill was already endorsed.");}
+              if(this.response.success) {this.showBottomAlert('success', "Skill endorsed.");}
+              else {this.showBottomAlert('warning', "Skill was already endorsed.");}
             }
         };
 
@@ -759,5 +759,15 @@ class ItemContainer {
         }
 
         return text;
+    }
+
+    // showing bootstrap alert line (every type except danger closes itself after 3 seconds)
+    showBottomAlert (type, msg) { // type: success, danger, warning, ...
+        document.getElementById('bottomAlert').className = 'alert alert-dismissible alert-' + type;
+    	document.getElementById('bottomAlertMsg').innerText = msg;
+
+    	$('#bottomAlert').show();
+
+        if (type != 'danger') setTimeout(function () {$('#bottomAlert').hide();}, 3000);
     }
 }
