@@ -736,8 +736,8 @@ class ItemContainer {
         req.responseType = "json";
         req.onreadystatechange = function () {
             if(this.readyState == 4 && this.status == 200) {
-              if(this.response.success) {this.showBottomAlert('success', "Skill endorsed.");}
-              else {this.showBottomAlert('warning', "Skill was already endorsed.");}
+              if(this.response.success) {that.showBottomAlert('success', "Skill endorsed.");}
+              else {that.showBottomAlert('warning', "Skill was already endorsed.");}
             }
         };
 
