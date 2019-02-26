@@ -935,6 +935,7 @@ module.exports = function (app) {
     			user.save(function (err) {if (err) throw err;});
 
     			res.json({
+                    endorsement: user.skills.find(obj => obj.name == data.skillName).endorsement,
     				success: true
     			});
     		} else {

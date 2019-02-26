@@ -25,12 +25,13 @@ class ItemContainer {
         this.skillborder.levelinfo.scale.set(.5);
 
         // Endorse points
-        if (this.skill.endorsement != undefined && this.skill.endorsement.length > 0) {
+        if (this.skill.endorsement != undefined && this.skill.endorsement.length > 0)
             this.skillborder.endorsement = new PIXI.Text("+" + this.skill.endorsement.length);
-            this.skillborder.endorsement.scale.set(.5);
-            this.skillborder.endorsement.position.set(10, 50);
-            this.skillborder.endorsement.style.fill = 0xFFFFFF;
-        }
+        else this.skillborder.endorsement = new PIXI.Text("");
+
+        this.skillborder.endorsement.scale.set(.5);
+        this.skillborder.endorsement.position.set(10, 50);
+        this.skillborder.endorsement.style.fill = 0xFFFFFF;
 
         // Creating details page
         var detailsWidth = 300;
@@ -736,7 +737,14 @@ class ItemContainer {
         req.responseType = "json";
         req.onreadystatechange = function () {
             if(this.readyState == 4 && this.status == 200) {
-              if(this.response.success) {that.showBottomAlert('success', "Skill endorsed.");}
+              if (this.response.success) {
+                  that.showBottomAlert('success', "Skill endorsed.");
+
+                  that.skill.endorsement = this.response.endorsement;
+
+                  if (that.skillborder.endorsement != unde)
+                  that.skillborder.endorsement.text = "+" + this.skill.endorsement.length;
+              }
               else {that.showBottomAlert('warning', "Skill was already endorsed.");}
             }
         };
