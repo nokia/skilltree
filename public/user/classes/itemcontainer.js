@@ -742,6 +742,7 @@ class ItemContainer {
 
                   that.skill.endorsement = this.response.endorsement;
                   that.skillborder.endorsement.text = "+" + that.skill.endorsement.length;
+                  that.app.renderer.render(that.app.stage);
               }
               else {that.showBottomAlert('warning', "Skill was already endorsed.");}
             }
