@@ -1,13 +1,3 @@
-  // a quick note on filters: filters will have 2 element, the 0th element is
-  // reserved for hover animations, the 1st element is reserved for more permanent
-  // effect, eg. green glowfilters for maxed out skills. Keep in mind that .filters
-  // should NEVER be nulled, only modified. If you want to empty a slot, apply
-  // nullFilter there, it does nothing, it's kind of a placeholder filter.
-  var nullFilter = new PIXI.filters.AlphaFilter(1);
-  var maxPointFilter = new PIXI.filters.GlowFilter(8,3,2, 0x007F0E, 1);
-  var notNullPointFilter = new PIXI.filters.GlowFilter(8,3,2, 0xCCAA00, 1);
-  var hoverFilter = new PIXI.filters.GlowFilter(8,3,2, 0xFFBF00, 1);
-
 class ItemContainer {
     constructor(app, skills, skillName, owner) {
         this.app = app;
@@ -15,6 +5,11 @@ class ItemContainer {
         this.skill = skills.find(obj => obj.name == skillName);
         this.self = owner.self;
         this.username = owner.username;
+
+        this.nullFilter = new PIXI.filters.AlphaFilter(1);
+        this.maxPointFilter = new PIXI.filters.GlowFilter(8,3,2, 0x007F0E, 1);
+        this.notNullPointFilter = new PIXI.filters.GlowFilter(8,3,2, 0xCCAA00, 1);
+        this.hoverFilter = new PIXI.filters.GlowFilter(8,3,2, 0xFFBF00, 1);
 
         //Creating images
         this.skillicon = new PIXI.Sprite(PIXI.loader.resources[this.skill.skillIcon].texture); //100x100
@@ -90,6 +85,7 @@ class ItemContainer {
         if (this.nextlvlDesc.enabled) this.btnPosY = this.nextlvlDesc.position.y + this.nextlvlDesc.height + 15;
         else if (this.curlvlDesc.enabled) this.btnPosY = this.curlvlDesc.position.y + this.curlvlDesc.height + 15;
 
+        // style for the buttons
         var btnG = new PIXI.Graphics();
         btnG.lineStyle(1, 0x888888);
         btnG.beginFill(0x44cc44);
@@ -107,6 +103,7 @@ class ItemContainer {
         var base64 = base64Url.replace('-', '+').replace('_', '/');
         var payload = JSON.parse(window.atob(base64));
 
+        // checks if endorsement btn should be shown
         var showEndorseBtn = false;
         if (!this.self && this.skill.endorsement.find(obj => obj == payload.username) == undefined) showEndorseBtn = true;
 
@@ -138,12 +135,15 @@ class ItemContainer {
             this.detailsForeground.addChild(this.btnEndorseContainer);
         }
 
+        // create info btn base
         var btnInfo = new PIXI.Sprite(btnG.generateTexture());
 
+        // create info btn text
         var txtInfo = new PIXI.Text("INFO", {fontSize: 14, fill: 0x000000});
         txtInfo.anchor.set(0.5, 0.5);
         txtInfo.position.set(35,13);
 
+        // info btn container (base and text), set position
         this.btnInfoContainer = new PIXI.Container();
         this.btnInfoContainer.addChild(btnInfo, txtInfo);
         if (!showEndorseBtn) btnInfoPosX = (detailsWidth - this.btnInfoContainer.width) / 4;
@@ -164,6 +164,7 @@ class ItemContainer {
         this.btnOffersContainer.position.set(btnOffersPosX, this.btnPosY);
         this.detailsForeground.addChild(this.btnOffersContainer);
 
+        // create background for details (a rounded rect with auto height)
         this.detailsBackground = new PIXI.Graphics();
         this.detailsBackground.beginFill(0xffffff);
         this.detailsBackground.drawRoundedRect(0, 0, detailsWidth, this.detailsForeground.height + this.detailsMargin * 2, 4);
@@ -195,11 +196,11 @@ class ItemContainer {
         this.details.position.set(74, 0);
 
         if (this.skill.achievedPoint == this.skill.maxPoint) {
-          this.setFilter(this, nullFilter, maxPointFilter);
+          this.setFilter(this, this.nullFilter, this.maxPointFilter);
         } else if (this.skill.achievedPoint > 0){
-          this.setFilter(this, nullFilter, notNullPointFilter);
+          this.setFilter(this, this.nullFilter, this.notNullPointFilter);
         } else{
-          this.setFilter(this, nullFilter, nullFilter);
+          this.setFilter(this, this.nullFilter, this.nullFilter);
         }
 
         //Adding events
@@ -252,13 +253,14 @@ class ItemContainer {
       target.skillborder.filters = [filter1, filter2];
     }
 
+    // change skill filters after level change
     checkPoints(target){
       if (target.skill.achievedPoint == target.skill.maxPoint) {
-        target.setFilter(target, nullFilter, maxPointFilter);
-      } else if (this.skill.achievedPoint > 0) {
-        target.setFilter(target, target.skillborder.filters[0], notNullPointFilter);
+        target.setFilter(target, target.nullFilter, target.maxPointFilter);
+      } else if (target.skill.achievedPoint > 0) {
+        target.setFilter(target, target.skillborder.filters[0], target.notNullPointFilter);
       } else{
-        target.setFilter(target, target.skillborder.filters[0], nullFilter);
+        target.setFilter(target, target.skillborder.filters[0], target.nullFilter);
       }
     }
 
@@ -368,7 +370,7 @@ class ItemContainer {
                     else {
                         this.skills[i].itemcontainer.skillicon.filters = null;
                         this.skills[i].itemcontainer.skillborder.levelinfo.filters = null;
-                        this.setFilter(this.skills[i].itemcontainer, nullFilter, this.skills[i].itemcontainer.skillborder.filters[1]);
+                        this.setFilter(this.skills[i].itemcontainer, this.nullFilter, this.skills[i].itemcontainer.skillborder.filters[1]);
                         if (this.skills[i].itemcontainer.skillborder.endorsement != undefined) this.skills[i].itemcontainer.skillborder.endorsement.filters = null;
                         this.skills[i].itemcontainer.container.interactive = true;
                         this.skills[i].itemcontainer.skillborder.interactive = true;
@@ -393,34 +395,11 @@ class ItemContainer {
         container.addChild(details);
         container.zOrder = 2;
 
-        /*if (details.savedPosY != undefined) details.position.y = details.savedPosY;
-
-        if (details.canvas != undefined) console.log(details.canvas.h);
-        console.log(document.getElementById("pixiCanvas").height);
-        if (details.savedPosY == undefined || details.canvasHeight != document.getElementById("pixiCanvas").height) {
-            details.canvasHeight = document.getElementById("pixiCanvas").height;
-
-            var bottomOfDetails = details.getGlobalPosition().y + details.height;
-
-            if (bottomOfDetails > document.getElementById("pixiCanvas").height) {
-                details.position.y = -(bottomOfDetails - document.getElementById("pixiCanvas").height + 10);
-                if (details.getGlobalPosition().y < 10) details.position.y += 10 - details.getGlobalPosition().y;
-                details.savedPosY = details.position.y;
-            }
-        }
-
-
-        //if (bottomOfDetails > height) details.position.y = (details.initPos.y - details.getGlobalPosition().y) - (bottomOfDetails - this.parentObj.app.height + 10);
-        //if (details.getGlobalPosition().y < 10) details.position.y = 10;
-
-        var rightOfDetails = details.getGlobalPosition().x + details.width;
-        if (rightOfDetails > this.parentObj.app.width) details.position.x = -details.width;*/
-
         that.app.renderer.render(that.app.stage);
 
         if (that.skill.achievedPoint == that.skill.maxPoint || that.skill.disabled) return;
 
-        that.setFilter(that, hoverFilter, that.skillborder.filters[1]);
+        that.setFilter(that, that.hoverFilter, that.skillborder.filters[1]);
 
         that.app.renderer.render(that.app.stage);
     }
@@ -439,14 +418,14 @@ class ItemContainer {
 
         if (that.skill.achievedPoint == that.skill.maxPoint || that.skill.disabled) return;
 
-        that.setFilter(that, nullFilter, that.skillborder.filters[1]);
+        that.setFilter(that, that.nullFilter, that.skillborder.filters[1]);
 
         that.app.renderer.render(that.app.stage);
     }
 
     // enables the access to this skill (click and hover)
     enable () {
-        this.skillborder.filters = [nullFilter, this.skillborder.filters[1]];
+        this.skillborder.filters = [this.nullFilter, this.skillborder.filters[1]];
         this.skillicon.filters = null;
         this.skillborder.levelinfo.filters = null;
         if (this.skillborder.endorsement != undefined) this.skillborder.endorsement.filters = null;
@@ -756,6 +735,7 @@ class ItemContainer {
         req.send(JSON.stringify(data));
     }
 
+    // shortening texts (skill desc, level desc) and adding '...'
     readMoreSplit (text, long = false) {
         var spaceCount = 15;
         if (long) spaceCount = 25;
